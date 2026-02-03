@@ -1,0 +1,115 @@
+{
+  "version": "1.0",
+  "audit_date": "2025-11-14",
+  "total_critical": 9,
+  "findings": [
+    {
+      "id": 1,
+      "wcag": "1.1.1",
+      "title": "All screens",
+      "screen": "Various screens",
+      "description": "**All screens:** Increasing text size does not work for all content, the application is inconsistent. E.g. texts like 'Not addressed to you' or field labels like 'Consignment number...' are not increased in size. The same is true e.g. for the max. weight and sizes in the 'Create letter code' process. Especially in the ePost section, a lot of text is not increased, irrespective of the OS setting.",
+      "file_pattern": "*ViewController*",
+      "code_pattern": null,
+      "fix_template": "add_form_label",
+      "priority": 1,
+      "estimated_effort_minutes": 15
+    },
+    {
+      "id": 2,
+      "wcag": "2.1.1",
+      "title": "ePost",
+      "screen": "Homescreen > ePost",
+      "description": "**ePost:** There are interactive UI components, which cannot be reached using the screen reader, i.e. the menus indicated with three dots on the letter tiles.",
+      "file_pattern": "*HomeViewController*",
+      "code_pattern": null,
+      "fix_template": "other_manual",
+      "priority": 1,
+      "estimated_effort_minutes": 15
+    },
+    {
+      "id": 3,
+      "wcag": "2.1.1",
+      "title": "ePost",
+      "screen": "Homescreen > ePost > (specific letter)",
+      "description": "**ePost:** The navigation bar at the bottom of the view of a specific letter cannot be used with the screen reader. It is only output as one swipe stop ('Navigation content') without a role and the five buttons cannot be reached (e.g. back, delete, save, etc.).",
+      "file_pattern": "*HomeViewController*",
+      "code_pattern": null,
+      "fix_template": "add_button_label",
+      "priority": 1,
+      "estimated_effort_minutes": 15
+    },
+    {
+      "id": 4,
+      "wcag": "2.1.1",
+      "title": "ePost",
+      "screen": "Homescreen > ePost > (specific letter)",
+      "description": "**ePost:** The content view of a letter is mostly inaccessible, there are a lot of accessibility problems in there: a) relevant text content cannot be reached, e.g. the yellow header region (Post logo, date, 'Total digital! Abonniere...') is skipped when swiping (and unreachable also to touch exploration on screen); b) buttons like 'Jetzt bestellen' are output uninformatively as 'image' and have no role (while being interactive); c) there are no correct headings on screen, only visual ones; d) decorative images are repeatedly output as 'image' (requiring many separate swipes, only hearing 'image, image, image...'). e) the two buttons at the right side of the screen (maximise view, check for a QR code) cannot be reached. \nIn addition, the behaviour of VoiceOver was inconsistent during the test in the letter a) across devices and b) across repeated steps of opening the same letter on the same device. As VoiceOver otherwise is very reliable, this seems to indicate that the code might be confusing for assistive technologies, possibly not adhering to the respective code specs or standards, so the VoiceOver interpretation of this content and its behaviour become unstable and inconsistent.",
+      "file_pattern": "*HomeViewController*",
+      "code_pattern": "infoIcon|InfoIcon|infoButton",
+      "fix_template": "add_button_label",
+      "priority": 1,
+      "estimated_effort_minutes": 15
+    },
+    {
+      "id": 5,
+      "wcag": "2.1.1",
+      "title": "ePost",
+      "screen": "Homescreen > ePost > Archive",
+      "description": "**ePost:** There are various dialogs in the ePost section for which the VoiceOver focus is not positioned in the dialog upon opening. This is the case e.g. for 'Delivery date' in the archive tab, more options in 'Meine Dateien', etc. The focus ends on the visual heading 'ePost' at the top of the page and users don't know whether anything has happened.",
+      "file_pattern": "*HomeViewController*",
+      "code_pattern": "live|Live",
+      "fix_template": "add_modal_focus_trap",
+      "priority": 1,
+      "estimated_effort_minutes": 15
+    },
+    {
+      "id": 6,
+      "wcag": "1.3.1",
+      "title": "ePost",
+      "screen": "Homescreen > ePost > Archive",
+      "description": "**ePost:** The folder buttons are not labelled in an understandable way, the one under 'My company folders' is output uninformatively by VoiceOver as 'dot options button more'.",
+      "file_pattern": "*HomeViewController*",
+      "code_pattern": "infoIcon|InfoIcon|infoButton",
+      "fix_template": "add_button_label",
+      "priority": 1,
+      "estimated_effort_minutes": 15
+    },
+    {
+      "id": 7,
+      "wcag": "1.1.1",
+      "title": "ePost",
+      "screen": "Homescreen > ePost",
+      "description": "**ePost:** The UI elements for letters do not have a correct role as buttons.",
+      "file_pattern": "*HomeViewController*",
+      "code_pattern": null,
+      "fix_template": "add_button_label",
+      "priority": 1,
+      "estimated_effort_minutes": 15
+    },
+    {
+      "id": 8,
+      "wcag": "1.1.1",
+      "title": "ePost",
+      "screen": "Homescreen > ePost > Archive",
+      "description": "**ePost:** The control 'Last used' and the button with an arrow next to it are both inaccessible, they have no role, no state and one of them no label.",
+      "file_pattern": "*HomeViewController*",
+      "code_pattern": null,
+      "fix_template": "add_button_label",
+      "priority": 1,
+      "estimated_effort_minutes": 15
+    },
+    {
+      "id": 9,
+      "wcag": "1.1.1",
+      "title": "ePost",
+      "screen": "Homescreen > ePost",
+      "description": "**ePost:** The tabs at the bottom of the screen are not accessible. They have no correct role or state, the labels are incorrect (e.g. for the first one 'epost ic 40x40'). In addition, they cannot all be reached using swipe (only the active one can).",
+      "file_pattern": "*HomeViewController*",
+      "code_pattern": null,
+      "fix_template": "other_manual",
+      "priority": 1,
+      "estimated_effort_minutes": 15
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+@architect
+
+**Task:** Identify and fix all visual headings in this file to be properly marked for VoiceOver navigation.
+
+**Context:** Headings enable VoiceOver users to navigate efficiently. All visual titles must be marked with `.header` trait and appropriate heading levels.
+
+**Instructions:**
+1. Identify all `UILabel` instances that serve as visual headings/titles
+2. Check against `.cursor/rules/a11y-headings.mdc`:
+   - Does it have `.header` trait?
+   - Is heading level set appropriately (H1 for main title, H2 for sections, etc.)?
+   - Does label match visible text?
+3. For each heading found:
+   - Determine appropriate heading level (1-6)
+   - Provide exact code to add `.header` trait
+   - Show how to set heading level (iOS 13+)
+
+**Output Format:**
+- List each heading with its current state and proposed level
+- Show exact Swift code changes
+- Use before/after code blocks
+- Explain heading hierarchy if multiple headings exist
+
+**Example Output:**
+```swift
+// Heading: "Settings" (line 23)
+// Current: Missing .header trait
+// Level: 1 (main screen title)
+// Fix:
+settingsTitleLabel.accessibilityTraits = .header
+settingsTitleLabel.setHeadingLevel(1) // iOS 13+
+```
+
+**Note:** One H1 per screen, maintain logical hierarchy (H1 → H2 → H3, don't skip levels).
+

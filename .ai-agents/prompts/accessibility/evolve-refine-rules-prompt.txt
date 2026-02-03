@@ -1,0 +1,136 @@
+You are an assistant maintaining the accessibility rulebook for iOS VoiceOver compliance.
+
+**Task:** Refine and improve the accessibility rule files based on audit findings.
+
+**Context:**
+- We just ran an accessibility audit and received a JSON report with violation details
+- The audit report is available in the current context (JSON format)
+- Rule files live under `.cursor/rules/a11y-*.mdc`
+- Rules must be clear, actionable, and easy for agents (@architect, @auditor, @fixer) to follow
+
+**Instructions:**
+1. **Analyze the audit report:**
+   - Load the JSON audit report from the current context
+   - Group violations by `type` (button, heading, form, image, focus, color, etc.)
+   - Identify recurring violation patterns
+   - Count frequency of each violation type
+   - Note any violations with unclear or missing `message` descriptions
+
+2. **Review existing rule files:**
+   - Read the relevant `.cursor/rules/a11y-*.mdc` files
+   - Map violation types to rule files:
+     - `button` → `a11y-buttons.mdc`
+     - `heading` → `a11y-headings.mdc`
+     - `form` → `a11y-forms.mdc`
+     - `image` → `a11y-images.mdc`
+     - `focus` → `a11y-focus.mdc`
+     - `color` → `a11y-colors-contrast.mdc`
+     - Other → `a11y-core.mdc` or create new rule file if needed
+
+3. **Identify gaps:**
+   - Find violation types that are not clearly covered in existing rules
+   - Identify rules that are ambiguous or missing examples
+   - Note patterns where agents might misinterpret requirements
+   - Flag violations that could be prevented with clearer rules
+
+4. **Propose specific improvements:**
+   - For each gap identified, propose exact markdown to add/modify
+   - Quote the exact text to add, including line numbers or section names
+   - Provide Swift code examples where helpful
+   - Reference WCAG criteria explicitly
+   - Link to related rule sections instead of duplicating content
+
+**Output Format:**
+Provide a structured analysis with:
+
+```markdown
+## Audit Analysis Summary
+- Total violations: X
+- Most common violation types: [type1: count1, type2: count2, ...]
+- Violations by WCAG criterion: [1.1.1: count, 4.1.2: count, ...]
+
+## Rule Gaps Identified
+1. **[Violation Type]**: Description of gap
+   - Frequency: X occurrences
+   - Current rule coverage: [brief description or "missing"]
+   - Impact: Why this gap matters
+
+## Proposed Rule Improvements
+
+### File: `.cursor/rules/a11y-[topic].mdc`
+**Section:** [Section name or "New section: [name]"]
+
+**Current content (if modifying):**
+```markdown
+[Quote existing content]
+```
+
+**Proposed addition/modification:**
+```markdown
+[Exact markdown to add/modify]
+```
+
+**Rationale:** [Why this change helps prevent violations]
+
+### [Repeat for each improvement]
+```
+
+**Constraints:**
+- Keep rule files concise (under 300 lines each)
+- Don't duplicate content; use cross-references instead
+- Add concrete Swift examples, not just descriptions
+- Maintain existing file structure (Purpose, TOC, Related Documents)
+- Preserve markdown formatting standards
+- Focus on actionable, agent-friendly rules
+
+**Example Output Structure:**
+```markdown
+## Audit Analysis Summary
+- Total violations: 12
+- Most common violation types: [button: 5, image: 4, heading: 3]
+- Violations by WCAG criterion: [4.1.2: 8, 1.1.1: 4]
+
+## Rule Gaps Identified
+1. **Icon-only buttons without labels**: Missing explicit guidance on detecting icon-only buttons
+   - Frequency: 5 occurrences
+   - Current rule coverage: Mentions icon buttons but doesn't specify detection criteria
+   - Impact: Agents may miss icon-only buttons that have no visible text
+
+## Proposed Rule Improvements
+
+### File: `.cursor/rules/a11y-buttons.mdc`
+**Section:** Icon-Only Buttons
+
+**Current content:**
+```markdown
+### Icon-Only Buttons
+Icon buttons must have descriptive accessibility labels.
+```
+
+**Proposed addition:**
+```markdown
+### Icon-Only Buttons
+Icon buttons must have descriptive accessibility labels.
+
+**Detection criteria:**
+- Button has no visible text (`titleLabel?.text == nil` or empty)
+- Button uses `setImage()` or `setBackgroundImage()` with no title
+- Button has `imageView` but no `titleLabel` text
+
+**Required fix:**
+```swift
+iconButton.accessibilityLabel = "Descriptive label"
+iconButton.accessibilityTraits = .button
+iconButton.isAccessibilityElement = true
+```
+```
+
+**Rationale:** Explicit detection criteria help agents identify icon-only buttons reliably, preventing missed violations.
+```
+
+**Important:**
+- Only propose changes that directly address audit findings
+- Prioritize high-frequency violations
+- Ensure proposed rules are testable and actionable
+- Maintain consistency with existing rule file style
+

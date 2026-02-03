@@ -1,0 +1,56 @@
+@fixer
+
+**Task:** Fix a specific accessibility finding by ID from the known findings database.
+
+**Context:** I want to fix finding ID {FINDING_ID} from `.agent-knowledge/epost-known-findings.json`. This is a surgical fix targeting one specific issue.
+
+**Instructions:**
+1. Load the finding object with `id = {FINDING_ID}` from `.agent-knowledge/epost-known-findings.json`
+2. Use `file_pattern` (glob pattern) to locate the relevant Swift file(s)
+3. Use `code_pattern` (regex or string) to locate the specific code element within the file
+4. Apply the appropriate fix template from the rulebook:
+   - `add_button_label`: Ensure button has `isAccessibilityElement = true`, `accessibilityTraits = .button`, and clear `accessibilityLabel`
+   - `add_heading_trait`: Add `.header` trait and set appropriate heading level
+   - `add_form_label`: Ensure form field has associated label via `accessibilityLabel` or `accessibilityIdentifier`
+   - `make_image_decorative`: Set `isAccessibilityElement = false` for decorative images
+   - `add_modal_focus_trap`: Set `accessibilityViewIsModal = true` and manage focus with `UIAccessibility.post()`
+   - `add_status_announcement`: Add `UIAccessibility.post(notification: .announcement)` for status changes
+   - `other_manual`: Review manually and propose fix based on WCAG rules
+5. Create a minimal patch (unified diff format) for the Swift file
+6. Return status and diff
+
+**Output Format:**
+Output a JSON object with the following structure:
+
+```json
+{
+  "finding_id": 3,
+  "file": "path/to/file.swift",
+  "status": "SUCCESS",
+  "diff": "--- a/path/to/file.swift\n+++ b/path/to/file.swift\n@@ -42,6 +42,8 @@\n mapButton.accessibilityLabel = \"Show map\"\n mapButton.accessibilityTraits = .button\n mapButton.isAccessibilityElement = true",
+  "explanation": "Added accessibilityLabel to mapButton as it was missing"
+}
+```
+
+**Status Values:**
+- `SUCCESS`: Fix applied successfully, diff is ready to apply
+- `NEEDS_REVIEW`: Location or fix uncertain, manual review required
+- `FAILED`: Could not locate code or apply fix
+
+**Field Definitions:**
+- `finding_id`: The ID of the finding being fixed
+- `file`: Relative path to the Swift file (from repo root)
+- `status`: One of "SUCCESS", "NEEDS_REVIEW", "FAILED"
+- `diff`: Unified diff format (starting with `--- a/...` and `+++ b/...`)
+- `explanation`: Brief explanation of the fix (required if status is NEEDS_REVIEW or FAILED)
+
+**Constraints:**
+- Do NOT refactor unrelated code
+- Make minimal, surgical changes only
+- If file_pattern matches multiple files, fix all matches
+- If code_pattern is ambiguous, return `NEEDS_REVIEW` with explanation
+- If fix_template is `other_manual`, propose fix based on WCAG rules from `a11y-*.mdc`
+
+**Example Usage:**
+Replace `{FINDING_ID}` with the actual ID number (e.g., "3") when using this prompt.
+
