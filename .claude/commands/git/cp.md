@@ -1,6 +1,6 @@
 ---
 title: Git Push (alias)
-description: Alias for /git:push
+description: ⭑.ᐟ Alias for /git:push
 agent: epost-git-manager
 ---
 

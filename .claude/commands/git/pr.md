@@ -1,6 +1,6 @@
 ---
 title: Git Pull Request Command
-description: 👉👉👉 - Create GitHub pull request from current branch
+description: ⭑.ᐟ Create GitHub pull request from current branch
 agent: epost-git-manager
 argument-hint: 👉👉👉
 ---
