@@ -1,6 +1,6 @@
 ---
 title: Android Cook
-description: Implement Android features with Kotlin and Jetpack Compose
+description: ⭑.ᐟ Implement Android features with Kotlin and Jetpack Compose
 agent: epost-android-developer
 argument-hint: [plan file or feature description]
 allowed-tools:
@@ -20,6 +20,7 @@ Implement Android features from plans or descriptions. Supports Kotlin, Jetpack 
 **⚠️ SKELETON COMMAND**: This command uses a skeleton agent. Populate android-implementer with real patterns before use.
 
 ## Usage
+
 ```
 /android:cook [plan file or description]
 /android:cook plans/240122-auth.md
@@ -49,15 +50,19 @@ Implement Android features from plans or descriptions. Supports Kotlin, Jetpack 
 ## Android Implementation Complete
 
 ### Files Created: X
+
 - `Path/To/File.kt` - Description
 
 ### Architecture
+
 - Pattern: MVVM
 - UI Framework: Jetpack Compose
 
 ### Build Verification
+
 - Status: ✅ Success / ❌ Failed
 ```
 
 ---
-*[android:cook] is a ClaudeKit command (SKELETON)*
+
+_[android:cook] is a ClaudeKit command (SKELETON)_

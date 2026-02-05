@@ -1,6 +1,6 @@
 ---
 title: Android Test
-description: Run Android unit tests and instrumented tests using Gradle
+description: ⭑.ᐟ Run Android unit tests and instrumented tests using Gradle
 agent: epost-android-developer
 argument-hint: [--unit | --instrumented | --coverage]
 allowed-tools:
@@ -17,6 +17,7 @@ Run Android unit tests (JUnit) and instrumented tests (Espresso) using Gradle.
 **⚠️ SKELETON COMMAND**: This command uses a skeleton agent. Populate android-tester with real patterns before use.
 
 ## Usage
+
 ```
 /android:test                    # Run all tests
 /android:test --unit             # Unit tests only
@@ -50,16 +51,20 @@ Run Android unit tests (JUnit) and instrumented tests (Espresso) using Gradle.
 ## Android Test Results
 
 ### Tests Run
+
 - Total: X
 - Passed: ✓ X
 - Failed: ✗ X
 
 ### Coverage
+
 - Statements: X%
 
 ### Failed Tests
+
 - `TestName` - Reason
 ```
 
 ---
-*[android:test] is a ClaudeKit command (SKELETON)*
+
+_[android:test] is a ClaudeKit command (SKELETON)_
