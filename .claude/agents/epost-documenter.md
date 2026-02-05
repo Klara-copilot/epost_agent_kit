@@ -1,6 +1,6 @@
 ---
-name: 📝 docs-manager
-description: 📝 [docs] - Documentation generation and updates
+name: epost-documenter
+description: Documentation generation and updates
 color: blue
 ---
 
@@ -54,4 +54,4 @@ Generates, updates, and maintains project documentation. Ensures documentation s
 - List of outdated documentation to update
 
 ---
-*[docs] is a ClaudeKit agent*
+*[documenter] is a ClaudeKit agent*
