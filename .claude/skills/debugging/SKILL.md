@@ -99,8 +99,48 @@ logger.info('User action', {
 - Missing await
 - Callback hell
 
+## Defense-in-Depth Patterns
+
+### Validation Layers
+1. Input validation (reject invalid early)
+2. Business logic validation (enforce invariants)
+3. Output validation (verify results before return)
+
+### Error Handling Strategy
+- **Catch**: Only where you can handle meaningfully
+- **Transform**: Convert to domain-specific errors
+- **Log**: Include context (not just message)
+- **Propagate**: Let upstream handle if you can't
+
+### Assertion vs Exception
+- Assertions: Programmer errors (should never happen)
+- Exceptions: Runtime problems (can happen legitimately)
+
+## Root Cause Tracing
+
+### The 5-Step Method
+1. **Observe**: What exactly is wrong?
+2. **Question**: Why is this happening?
+3. **Hypothesis**: What could cause this?
+4. **Isolate**: Test each hypothesis
+5. **Verify**: Confirm root cause and fix
+
+### Binary Search for Root Cause
+- Cut code/config in half
+- Does symptom persist? Keep smaller half, discard larger
+- Repeat until isolated to single cause
+
+## Verification Checklist
+- [ ] Symptom reproduced consistently
+- [ ] Root cause identified and documented
+- [ ] Fix applied and tested
+- [ ] No new issues introduced
+- [ ] Edge cases considered
+- [ ] Similar issues checked elsewhere in codebase
+
 ## Tools
-- Browser DevTools
-- Node debugger
-- Console logging
-- Source maps
+- Browser DevTools (breakpoints, profiling)
+- Node debugger (--inspect)
+- Console logging (structured)
+- Source maps (correct line numbers)
+- Test suite (regression testing)

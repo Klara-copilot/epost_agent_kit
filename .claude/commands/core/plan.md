@@ -18,13 +18,15 @@ Create detailed implementation plans before coding.
 ## Your Process
 
 1. Parse the feature request
-2. Spawn 3 researcher agents:
-   - Best practices research
-   - Existing codebase analysis
-   - Dependencies check
-3. Aggregate findings
-4. Create detailed plan
-5. Save to plans/ directory
+2. Spawn 3 researcher agents in parallel:
+   - Best practices research (latest patterns and standards)
+   - Existing codebase analysis (architecture, dependencies)
+   - Dependencies check (compatibility, versions)
+3. Aggregate findings and identify key insights
+4. Create detailed plan with YAML frontmatter
+5. Define file ownership (phase-XX-name.md format)
+6. Identify success criteria
+7. Save to plans/ directory with proper structure
 
 ## Plan Template
 

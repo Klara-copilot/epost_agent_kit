@@ -33,12 +33,14 @@ Implement features - the main development command.
 
 ## Implementation Steps
 
-1. Install dependencies (if needed)
-2. Create files in order
-3. Modify existing files
-4. Write tests
-5. Update documentation
-6. Verify it works
+1. Validate file ownership (if plan provided)
+2. Check phase dependencies are complete
+3. Install dependencies (if needed)
+4. Create files in order (follow plan sequencing)
+5. Modify existing files (only owned files)
+6. Write comprehensive tests
+7. Update documentation
+8. Verify compilation and functionality
 
 ## Rules
 

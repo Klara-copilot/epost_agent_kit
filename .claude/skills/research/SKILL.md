@@ -84,9 +84,67 @@ User asks for research, best practices, comparison.
 [Any limitations or concerns]
 ```
 
+## Advanced Techniques
+
+### Query Fan-Out
+- Ask multiple related questions in parallel
+- "What is X?" + "How to use X?" + "Best practices for X?"
+- Reduces total research time
+
+### Source Validation
+- Cross-reference claims across 3+ sources
+- Check if multiple sources cite same research
+- Look for contradictions and note them
+- Verify dates (prefer sources <2 years old)
+
+### Technology Trend Identification
+- Check GitHub stars and recent activity
+- Review recent changelog/updates
+- Look at community sentiment in forums
+- Note if project is actively maintained
+- Watch for deprecation notices
+
+### Code Example Validation
+- Test examples in isolated environment
+- Verify version matches your target
+- Check example handles error cases
+- Look for performance implications
+
+## Research Output Template
+
+```markdown
+# Research: [Topic]
+
+## Question
+[What you were researching]
+
+## Summary
+[2-3 sentence overview]
+
+## Key Findings
+- [Finding 1] - sources: [Source A, Source B]
+- [Finding 2] - sources: [Source C]
+
+## Sources Reviewed
+- [Source 1](url) - [Date] - [key takeaway]
+- [Source 2](url) - [Date] - [key takeaway]
+
+## Recommendations
+[Based on research and cross-validation]
+
+## Confidence Level
+[High/Medium/Low] - based on source consistency
+
+## Caveats
+[Limitations, version-specific info, or conflicting opinions]
+```
+
 ## Best Practices
 - Prioritize official docs
-- Check publication dates
+- Check publication dates (prefer <2 years)
 - Verify code examples work
-- Note version-specific info
-- Cite sources clearly
+- Note version-specific info clearly
+- Cite sources with URLs and dates
+- Cross-validate findings
+- Document contradictions
+- Track confidence level per finding

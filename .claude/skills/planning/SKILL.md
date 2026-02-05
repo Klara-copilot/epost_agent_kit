@@ -77,9 +77,46 @@ User uses /plan, asks for implementation plan.
 - [Criteria 2]
 ```
 
+## Mental Models
+
+### Decomposition
+- Start with user value, work backward to code
+- Identify system boundaries
+- Use tree structure (parent → child tasks)
+- Estimate leaves, sum parents
+
+### 80/20 Principle
+- Identify 20% of work that delivers 80% of value
+- Sequence high-value tasks first
+- Defer "nice to have" to future phases
+
+### Risk Management
+- High-risk tasks early (reduce timeline risk)
+- External dependencies first (reduce blocking)
+- Unknown work before known (reduce surprise)
+
+## Plan File Format
+
+### Naming Convention
+Use pattern from hooks: `YYYYMMDD-HHMM-descriptive-name/`
+
+### Phase File Structure
+Each phase file should include:
+- **Overview**: Priority, status, description
+- **Key Insights**: Important findings from research
+- **Requirements**: Functional and non-functional
+- **Architecture**: System design and data flow
+- **Implementation Steps**: Detailed, numbered instructions
+- **Todo List**: Checkbox tracking
+- **Success Criteria**: Definition of done
+- **Risk Assessment**: Potential issues and mitigations
+
 ## Best Practices
 - Be specific about files to create/modify
 - Include database migrations if needed
 - Note breaking changes
 - Consider testing strategy
 - Think about documentation updates
+- Create YAML frontmatter with metadata
+- Link phases with dependencies clearly
+- Estimate conservatively, track actuals

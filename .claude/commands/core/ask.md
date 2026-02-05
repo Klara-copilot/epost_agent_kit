@@ -20,12 +20,14 @@ Get answers about your codebase.
 ## Your Process
 
 1. Parse the question
-2. Search for relevant files:
-   - Use grep for keywords
-   - Use glob for patterns
-   - Read likely files
-3. Analyze code
-4. Formulate answer
+2. Activate docs-seeker skill for documentation lookup
+3. Search for relevant files:
+   - Use Grep tool for keyword search
+   - Use Glob tool for file patterns
+   - Read documentation first
+4. Analyze code and architecture
+5. Cross-reference with latest docs
+6. Formulate comprehensive answer
 
 ## Answer Format
 

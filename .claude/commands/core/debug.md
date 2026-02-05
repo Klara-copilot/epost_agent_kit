@@ -16,14 +16,19 @@ Find and explain root causes of issues.
 ```
 
 ## Your Process
-1. Understand the symptom
-2. Gather context:
-   - Recent changes
-   - Error messages
-   - Stack traces
-3. Investigate code
-4. Identify root cause
-5. Suggest fix
+1. Use scout first to locate relevant files: `/scout [keywords]`
+2. Understand the symptom
+3. Gather context:
+   - Recent changes (git log)
+   - Error messages and stack traces
+   - Relevant logs
+4. Investigate code using scout results
+5. Use specialized tools as needed:
+   - psql for database issues
+   - gh for GitHub-related issues
+   - docs-seeker for documentation
+6. Identify root cause
+7. Suggest targeted fix with code snippets
 
 ## Debug Framework
 1. Reproduce the issue

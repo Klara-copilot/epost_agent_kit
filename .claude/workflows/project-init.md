@@ -7,30 +7,43 @@ User wants to start a new project.
 
 ### 1. Bootstrap
 **Command**: `/bootstrap [project description]`
-**Agent**: implementer
+**Agent**: epost-implementer (enhanced)
 **Output**: New project structure
 
-The developer agent:
+The implementer agent:
 - Asks for project type
 - Recommends tech stack
 - Creates project structure
 - Generates initial files
 - Sets up configuration
 
-### 2. Initial Commit
+### 2. Initial Documentation
+**Agent**: epost-documenter (enhanced)
+**Output**: Initial documentation suite
+
+The documenter agent:
+- Creates docs/codebase-summary.md (via repomix)
+- Creates docs/code-standards.md
+- Creates docs/system-architecture.md
+- Sets up development-roadmap.md
+- Initializes project-changelog.md
+
+### 3. Initial Commit
 **Command**: `/git:cm`
-**Agent**: git-manager
-**Output**: First commit
+**Agent**: epost-git-manager
+**Output**: First commit with docs
 
 ## Flow Diagram
 ```mermaid
 graph LR
     A[New Project] --> B[/bootstrap command]
-    B --> C[implementer]
-    C --> D[Project created]
-    D --> E[/git:cm command]
-    E --> F[git-manager]
-    F --> G[Initial commit]
+    B --> C[epost-implementer]
+    C --> D[Project structure created]
+    D --> E[epost-documenter]
+    E --> E1[Initial docs created]
+    E1 --> F[/git:cm command]
+    F --> G[epost-git-manager]
+    G --> H[Initial commit]
 ```
 
 ## Tech Stack Recommendations

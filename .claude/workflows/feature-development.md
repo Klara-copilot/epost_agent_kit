@@ -7,50 +7,64 @@ User wants to add a new feature.
 
 ### 1. Plan Creation
 **Command**: `/plan [feature description]`
-**Agent**: architect
-**Output**: `plans/YYMMDD-feature.md`
+**Agent**: epost-architect (enhanced)
+**Output**: `plans/YYMMDD-feature.md` with YAML frontmatter
 
 The architect agent:
-- Spawns 3 researchers in parallel
-- Analyzes existing codebase
-- Creates detailed implementation plan
+- Spawns 3 researchers in parallel (best practices, codebase analysis, dependencies)
+- Analyzes existing codebase and architecture
+- Creates detailed implementation plan with file ownership
+- Defines success criteria
 
 ### 2. Implementation
 **Command**: `/cook plans/YYMMDD-feature.md`
-**Agent**: implementer
-**Output**: Working feature
+**Agent**: epost-implementer (enhanced)
+**Output**: Working feature with tests
 
-The developer agent:
+The implementer agent:
+- Validates file ownership and phase dependencies
 - Follows the plan precisely
-- Creates/modifies files
-- Writes tests
+- Creates/modifies files in correct order
+- Writes comprehensive tests
 - Updates documentation
 
 ### 3. Testing
 **Command**: `/test`
-**Agent**: tester
-**Output**: Test results
+**Agent**: epost-tester (enhanced)
+**Output**: Test results with coverage
 
 The tester agent:
-- Runs test suite
-- Analyzes coverage
-- Reports any failures
+- Runs multi-framework test suite
+- Analyzes code coverage
+- Reports failures with root cause analysis
+- Validates performance requirements
 
 ### 4. Code Review
-**Agent**: reviewer
+**Command**: `/review`
+**Agent**: epost-reviewer (enhanced)
 **Output**: Security and quality report
 
 The reviewer agent:
-- Checks for security issues
-- Analyzes performance
-- Validates code quality
+- Checks code quality and security
+- Analyzes performance implications
+- Verifies plan completion
+- Validates documentation updates
 
-### 5. Commit
+### 5. Documentation
+**Agent**: epost-documenter (enhanced)
+**Output**: Updated docs
+
+The documenter agent:
+- Updates relevant documentation
+- Maintains roadmap and changelog
+- Ensures API documentation is current
+
+### 6. Commit
 **Command**: `/git:cm`
-**Agent**: git-manager
+**Agent**: epost-git-manager
 **Output**: Clean git commit
 
-The git agent:
+The git-manager agent:
 - Analyzes changes
 - Generates conventional commit message
 - Stages and commits
@@ -60,18 +74,21 @@ The git agent:
 ```mermaid
 graph LR
     A[User Request] --> B[/plan command]
-    B --> C[architect agent]
-    C --> D[Plan created]
+    B --> C[epost-architect]
+    C --> C1[3 researchers in parallel]
+    C1 --> D[Plan created with file ownership]
     D --> E[/cook command]
-    E --> F[implementer]
+    E --> F[epost-implementer]
     F --> G[/test command]
-    G --> H[tester agent]
+    G --> H[epost-tester]
     H --> I{Tests pass?}
     I -->|No| F
-    I -->|Yes| J[reviewer]
-    J --> K[/git:cm command]
-    K --> L[git-manager]
-    L --> M[Committed]
+    I -->|Yes| J[/review command]
+    J --> K[epost-reviewer]
+    K --> L[epost-documenter]
+    L --> M[/git:cm command]
+    M --> N[epost-git-manager]
+    N --> O[Committed]
 ```
 
 ## Estimated Time
