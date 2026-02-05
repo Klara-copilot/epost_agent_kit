@@ -1,6 +1,6 @@
 ---
 title: Fix Hard
-description: 👉👉👉 - Complex bug fixes requiring investigation
+description: ⭑.ᐟ Complex bug fixes requiring investigation
 agent: epost-debugger
 argumentHint: "[description]"
 ---

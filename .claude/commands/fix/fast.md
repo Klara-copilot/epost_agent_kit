@@ -1,6 +1,6 @@
 ---
 title: Fix Fast Command
-description: Quick fixes for simple bugs
+description: ⭑.ᐟ Quick fixes for simple bugs
 agent: epost-debugger
 argument-hint: [bug description]
 ---

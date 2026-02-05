@@ -1,6 +1,6 @@
 ---
 title: Fix Test
-description: 👉👉👉 - Fix failing tests
+description: ⭑.ᐟ Fix failing tests
 agent: epost-tester
 argumentHint: "[test or description]"
 ---
