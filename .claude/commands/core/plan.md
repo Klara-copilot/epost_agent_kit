@@ -1,7 +1,7 @@
 ---
 title: Plan Command
 description: 👉👉👉 - Create detailed implementation plans
-agent: planner
+agent: epost-architect
 argument-hint: 👉👉👉 [feature description]
 ---
 
@@ -25,7 +25,7 @@ Create detailed implementation plans before coding.
 5. Save to plans/ directory
 
 ## Plan Template
-See planner.md agent for template
+See architect.md agent for template
 
 ## Completion
 Report:

@@ -1,7 +1,7 @@
 ---
 title: Design Fast
 description: 👉👉👉 - Quick UI design implementation
-agent: ui-designer
+agent: epost-implementer
 argumentHint: "[description]"
 ---
 

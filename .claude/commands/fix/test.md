@@ -1,7 +1,7 @@
 ---
 title: Fix Test
 description: 👉👉👉 - Fix failing tests
-agent: tester
+agent: epost-tester
 argumentHint: "[test or description]"
 ---
 

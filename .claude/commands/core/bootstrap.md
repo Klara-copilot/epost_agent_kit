@@ -1,7 +1,7 @@
 ---
 title: Bootstrap Command
 description: 👉👉👉 - Initialize a new project from scratch
-agent: fullstack-developer
+agent: epost-implementer
 argument-hint: 👉👉👉 [project description]
 ---
 

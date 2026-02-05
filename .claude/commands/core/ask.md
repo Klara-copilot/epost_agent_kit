@@ -1,7 +1,7 @@
 ---
 title: Ask Command
 description: 👉👉👉 - Ask questions about the codebase
-agent: researcher
+agent: epost-researcher
 argument-hint: 👉👉👉 [question about codebase]
 ---
 

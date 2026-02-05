@@ -1,7 +1,7 @@
 ---
 title: iOS Debug
 description: 👉👉👉 - Debug iOS crashes, concurrency issues, SwiftUI state problems, and performance issues
-agent: ios-developer
+agent: epost-ios-developer
 argument-hint: 👉👉👉 [issue description or error log]
 allowed-tools:
   - Read

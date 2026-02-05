@@ -1,7 +1,7 @@
 ---
 title: Cook Command
 description: ✨ - Implement features from plans or descriptions
-agent: fullstack-developer
+agent: epost-implementer
 argument-hint: ✨ [feature description or path/to/plan.md]
 ---
 

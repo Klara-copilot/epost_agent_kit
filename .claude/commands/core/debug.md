@@ -1,7 +1,7 @@
 ---
 title: Debug Command
 description: 👉👉👉 - Investigate and diagnose issues
-agent: debugger
+agent: epost-debugger
 argument-hint: 👉👉👉 [issue description or error log]
 ---
 

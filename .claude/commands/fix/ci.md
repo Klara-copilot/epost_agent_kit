@@ -1,7 +1,7 @@
 ---
 title: Fix CI
 description: 👉👉👉 - Fix CI/CD pipeline failures
-agent: debugger
+agent: epost-debugger
 argumentHint: "[job or error]"
 ---
 

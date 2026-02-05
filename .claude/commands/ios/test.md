@@ -1,7 +1,7 @@
 ---
 title: iOS Test
 description: 👉👉👉 - Run iOS unit tests and UI tests using xcodebuild or XcodeBuildMCP
-agent: ios-developer
+agent: epost-ios-developer
 argument-hint: 👉👉👉 [--unit | --ui | --coverage | test-target]
 allowed-tools:
   - Read

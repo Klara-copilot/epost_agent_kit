@@ -1,7 +1,7 @@
 ---
 title: Git Commit Command
 description: 👉👉👉 - Stage and commit with conventional commits
-agent: git-manager
+agent: epost-git-manager
 argument-hint: 👉👉👉
 ---
 

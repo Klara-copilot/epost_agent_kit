@@ -1,8 +1,8 @@
 ---
 title: Fix Fast Command
-description: 👉👉👉 - Quick fixes for simple bugs
-agent: debugger, fullstack-developer
-argument-hint: 👉👉👉 [bug description]
+description: Quick fixes for simple bugs
+agent: epost-debugger
+argument-hint: [bug description]
 ---
 
 # Fix Fast Command
@@ -17,7 +17,7 @@ Quick fixes for simple, obvious bugs.
 
 ## Your Process
 1. Diagnose the issue (debugger)
-2. Apply the fix (fullstack-developer)
+2. Apply the fix (implementer)
 3. Verify it works
 4. Add test if needed
 
