@@ -1,6 +1,6 @@
 ---
 slug: web:test
-description: ⚡⚡ Run and write web tests using Vitest, Playwright, React Testing Library. Direct web testing.
+description: ⭑.ᐟ Run and write web tests using Vitest, Playwright, React Testing Library. Direct web testing.
 agent: epost-web-developer
 ---
 
