@@ -14,6 +14,17 @@ Empower developers with AI assistance that follows them across their entire deve
 
 Build the foundational infrastructure that makes multi-platform agent distribution seamless, maintainable, and scalable.
 
+## Current Capabilities
+
+**15 Agents**, **17 Skills**, **30 Commands**, **6 Hooks** providing:
+- Parent-child delegation architecture for orchestration across platforms
+- Multi-platform workflow automation (web, iOS, Android)
+- Comprehensive task routing and project management
+- Advanced debugging, code review, and security analysis
+- Code generation and testing automation
+- Git workflow automation with pre-commit security checks
+- Knowledge management through skills and agent specialization
+
 ## Key Features
 
 ### 1. Multi-Platform Agent Architecture
@@ -113,17 +124,25 @@ npx epost-kit validate
 
 ### Global Agents (9 total)
 
-| Agent | Responsibility | Delegates To |
-|-------|---|---|
-| **orchestrator** | Top-level router, project manager | All other agents |
-| **architect** | Design, planning, research | Implementer (if platform-specific) |
-| **implementer** | Feature implementation | web/impl, ios/impl, android/impl |
-| **reviewer** | Code review, performance | web/tester, ios/tester, etc. |
-| **researcher** | Multi-source research | None (executes directly) |
-| **debugger** | Debugging coordination | web/debugger, ios/simulator, etc. |
-| **tester** | Test orchestration | web/tester, ios/tester, etc. |
-| **documenter** | Cross-platform docs | None (executes directly) |
-| **git-manager** | Git operations | None (executes directly) |
+| Agent | Model | Responsibility | Delegates To |
+|-------|-------|---|---|
+| **orchestrator** | haiku | Top-level router, project manager | All other agents |
+| **architect** | opus | Design, planning, research | Implementer (if platform-specific) |
+| **implementer** | sonnet | Feature implementation | web/impl, ios/impl, android/impl |
+| **reviewer** | sonnet | Code review, security, performance | All platforms |
+| **researcher** | haiku | Multi-source research | None (WebSearch, WebFetch) |
+| **debugger** | sonnet | Debugging coordination | All platforms + database-admin |
+| **tester** | haiku | Test orchestration | web/tester, ios/tester, etc. |
+| **documenter** | haiku | Cross-platform docs | None (codebase analysis) |
+| **git-manager** | haiku | Git operations & versioning | None (git commands) |
+
+### Specialized Agents (3 total)
+
+| Agent | Model | Responsibility |
+|-------|-------|---|
+| **scout** | haiku | Codebase search & file discovery |
+| **brainstormer** | haiku | Problem-solving & design evaluation |
+| **database-admin** | sonnet | Database optimization & schema design |
 
 ### Platform Agents (3 platforms)
 
@@ -144,11 +163,18 @@ npx epost-kit validate
 ## Documentation
 
 ### 📚 Core Documentation
-- **[Project Overview & PDR](./docs/project-overview-pdr.md)** - Vision, requirements, and product development requirements
-- **[Codebase Summary](./docs/codebase-summary.md)** - High-level overview of project structure, technologies, and components
-- **[Code Standards](./docs/code-standards.md)** - Coding standards, naming conventions, and best practices
-- **[System Architecture](./docs/system-architecture.md)** - Detailed architecture documentation, component interactions, and data flow
-- **[Project Roadmap](./docs/project-roadmap.md)** - Implementation phases and timeline
+- **[Project Overview & PDR](./project-overview-pdr.md)** - Vision, requirements, and product development requirements
+- **[Codebase Summary](./codebase-summary.md)** - High-level overview of project structure, technologies, and components
+- **[Code Standards](./code-standards.md)** - Coding standards, naming conventions, and best practices
+- **[System Architecture](./system-architecture.md)** - Detailed architecture documentation, component interactions, and data flow
+- **[Project Roadmap](./project-roadmap.md)** - Implementation phases and timeline
+- **[Agent Inventory](./agent-inventory.md)** - Quick reference for all 15 agents and their responsibilities
+
+### 📖 Reference & Guides
+- **[CLI Reference](./cli-reference.md)** - Complete command catalog with usage examples
+- **[Deployment Guide](./deployment-guide.md)** - Installation and configuration for production
+- **[Troubleshooting Guide](./troubleshooting-guide.md)** - Common issues and solutions
+- **[Glossary](./glossary.md)** - Project-specific terminology and definitions
 
 ## Implementation Phases
 
@@ -261,35 +287,50 @@ npx epost-kit validate
 - **Playwright**: Cross-platform E2E testing
 - **Manual IDE Testing**: Claude Code, Cursor, Copilot
 
-## Quick Start (Coming Soon)
+## Quick Start
 
-When the project is ready:
+### For Claude Code Users
 
-1. **Install epost-kit CLI**:
-   ```bash
-   npm install -g epost-kit
-   ```
-
-2. **Clone the repository**:
+1. **Clone or fork the repository**:
    ```bash
    git clone https://github.com/Klara-copilot/epost_agent_kit.git
    cd epost_agent_kit
    ```
 
-3. **Install agent kit**:
-   ```bash
-   npx epost-kit install
+2. **Open in Claude Code**:
+   - Use Claude Code to open the project directory
+   - Agents and skills are automatically discovered
+
+3. **Try a command**:
+   ```
+   /plan Build a REST API for user management
    ```
 
-4. **List all components**:
+### For Developers
+
+1. **Review the architecture**:
+   - Start with [System Architecture](./system-architecture.md)
+   - Review [Agent Inventory](./agent-inventory.md)
+
+2. **Understand the workflow**:
+   - Read [Project Roadmap](./project-roadmap.md)
+   - Check [Code Standards](./code-standards.md)
+
+3. **Set up development**:
    ```bash
-   npx epost-kit list
+   npm install
+   npm run lint
+   npm test
    ```
+
+4. **Deploy to other platforms**:
+   - See [Deployment Guide](./deployment-guide.md) for Cursor and GitHub Copilot setup
 
 ## Project Status
 
-**Current Phase**: Planning & Architecture
-**Status**: Phase 0 - Dependencies & Audit
+**Current Phase**: Active Development
+**Status**: Planning Phase Complete - Implementation Ready
+**Components**: 15 agents ✓ | 17 skills ✓ | 30 commands ✓ | 6 hooks ✓
 **Last Updated**: 2026-02-05
 
 ## Contributing
