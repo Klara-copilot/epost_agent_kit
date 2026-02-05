@@ -1,6 +1,6 @@
 ---
 title: Docs Update
-description: 👉👉👉 - Update existing documentation
+description: ⭑.ᐟ Update existing documentation
 agent: epost-documenter
 argumentHint: "[what to update]"
 ---

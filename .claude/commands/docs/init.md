@@ -1,6 +1,6 @@
 ---
 title: Initialize Documentation
-description: 📚 - Scan codebase and generate comprehensive documentation
+description: ⭑.ᐟ Scan codebase and generate comprehensive documentation
 agent: epost-architect
 argument-hint: 📚 [scan entire codebase and create docs/]
 ---
