@@ -21,7 +21,7 @@ The debugger agent:
 **Complex bugs**: `/fix:hard [issue]`
 
 ### 3. Fix Implementation
-**Agent**: fullstack-developer
+**Agent**: implementer
 **Output**: Fixed code
 
 The developer agent:
@@ -46,7 +46,7 @@ graph LR
     B --> C[debugger agent]
     C --> D[Root cause found]
     D --> E[/fix:fast or /fix:hard]
-    E --> F[fullstack-developer]
+    E --> F[implementer]
     F --> G[/test command]
     G --> H[tester agent]
     H --> I[/git:cm command]

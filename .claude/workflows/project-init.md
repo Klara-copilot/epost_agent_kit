@@ -7,7 +7,7 @@ User wants to start a new project.
 
 ### 1. Bootstrap
 **Command**: `/bootstrap [project description]`
-**Agent**: fullstack-developer
+**Agent**: implementer
 **Output**: New project structure
 
 The developer agent:
@@ -26,7 +26,7 @@ The developer agent:
 ```mermaid
 graph LR
     A[New Project] --> B[/bootstrap command]
-    B --> C[fullstack-developer]
+    B --> C[implementer]
     C --> D[Project created]
     D --> E[/git:cm command]
     E --> F[git-manager]

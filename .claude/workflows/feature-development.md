@@ -7,17 +7,17 @@ User wants to add a new feature.
 
 ### 1. Plan Creation
 **Command**: `/plan [feature description]`
-**Agent**: planner
+**Agent**: architect
 **Output**: `plans/YYMMDD-feature.md`
 
-The planner agent:
+The architect agent:
 - Spawns 3 researchers in parallel
 - Analyzes existing codebase
 - Creates detailed implementation plan
 
 ### 2. Implementation
 **Command**: `/cook plans/YYMMDD-feature.md`
-**Agent**: fullstack-developer
+**Agent**: implementer
 **Output**: Working feature
 
 The developer agent:
@@ -37,7 +37,7 @@ The tester agent:
 - Reports any failures
 
 ### 4. Code Review
-**Agent**: code-reviewer
+**Agent**: reviewer
 **Output**: Security and quality report
 
 The reviewer agent:
@@ -60,15 +60,15 @@ The git agent:
 ```mermaid
 graph LR
     A[User Request] --> B[/plan command]
-    B --> C[planner agent]
+    B --> C[architect agent]
     C --> D[Plan created]
     D --> E[/cook command]
-    E --> F[fullstack-developer]
+    E --> F[implementer]
     F --> G[/test command]
     G --> H[tester agent]
     H --> I{Tests pass?}
     I -->|No| F
-    I -->|Yes| J[code-reviewer]
+    I -->|Yes| J[reviewer]
     J --> K[/git:cm command]
     K --> L[git-manager]
     L --> M[Committed]
