@@ -1,6 +1,6 @@
 ---
 title: Test Command
-description: 👉👉👉 - Run test suite and analyze coverage
+description: ⭑.ᐟ Run test suite and analyze coverage
 agent: epost-tester
 argument-hint: 👉👉👉 [optional test file path]
 ---

@@ -1,6 +1,6 @@
 ---
 title: Debug Command
-description: 👉👉👉 - Investigate and diagnose issues
+description: ⭑.ᐟ Investigate and diagnose issues
 agent: epost-debugger
 argument-hint: 👉👉👉 [issue description or error log]
 ---

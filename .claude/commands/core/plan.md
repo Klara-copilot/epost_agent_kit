@@ -1,8 +1,8 @@
 ---
 title: Plan Command
-description: 👉👉👉 - Create detailed implementation plans
+description: ⭑.ᐟ Create detailed implementation plans
 agent: epost-architect
-argument-hint: 👉👉👉 [feature description]
+argument-hint: [feature description]
 ---
 
 # Plan Command
@@ -10,11 +10,13 @@ argument-hint: 👉👉👉 [feature description]
 Create detailed implementation plans before coding.
 
 ## Usage
+
 ```
 /plan [feature description]
 ```
 
 ## Your Process
+
 1. Parse the feature request
 2. Spawn 3 researcher agents:
    - Best practices research
@@ -25,10 +27,13 @@ Create detailed implementation plans before coding.
 5. Save to plans/ directory
 
 ## Plan Template
+
 See architect.md agent for template
 
 ## Completion
+
 Report:
+
 - Plan created: plans/[filename].md
 - Summary of research
 - Implementation steps count

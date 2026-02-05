@@ -1,8 +1,8 @@
 ---
 title: Bootstrap Command
-description: 👉👉👉 - Initialize a new project from scratch
+description: ⭑.ᐟ Initialize a new project from scratch
 agent: epost-implementer
-argument-hint: 👉👉👉 [project description]
+argument-hint: [project description]
 ---
 
 # Bootstrap Command
@@ -10,11 +10,13 @@ argument-hint: 👉👉👉 [project description]
 Initialize a new project with best practices.
 
 ## Usage
+
 ```
 /bootstrap [project description]
 ```
 
 ## Your Process
+
 1. Ask for project type if not specified
 2. Recommend tech stack based on requirements
 3. Create project structure
@@ -22,6 +24,7 @@ Initialize a new project with best practices.
 5. Generate initial files
 
 ## Project Structure to Create
+
 - README.md
 - .gitignore
 - package.json (if applicable)
@@ -29,13 +32,16 @@ Initialize a new project with best practices.
 - Basic configuration files
 
 ## Tech Stack Recommendations
+
 - Web app: Next.js + shadcn-ui
 - API: Node.js + Express/Fastify
 - Library: TypeScript
 - Mobile: React Native
 
 ## Completion
+
 Report:
+
 - Project type
 - Tech stack chosen
 - Files created

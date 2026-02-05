@@ -1,8 +1,8 @@
 ---
 title: Ask Command
-description: 👉👉👉 - Ask questions about the codebase
+description: ⭑.ᐟ Ask questions about the codebase
 agent: epost-researcher
-argument-hint: 👉👉👉 [question about codebase]
+argument-hint: [question about codebase]
 ---
 
 # Ask Command
@@ -10,6 +10,7 @@ argument-hint: 👉👉👉 [question about codebase]
 Get answers about your codebase.
 
 ## Usage
+
 ```
 /ask [question]
 /ask how does [feature] work?
@@ -17,6 +18,7 @@ Get answers about your codebase.
 ```
 
 ## Your Process
+
 1. Parse the question
 2. Search for relevant files:
    - Use grep for keywords
@@ -26,12 +28,14 @@ Get answers about your codebase.
 4. Formulate answer
 
 ## Answer Format
+
 - Direct answer
 - Relevant files with paths
 - Code examples if helpful
 - Line numbers for reference
 
 ## Common Questions
+
 - How does X work?
 - Where is Y used?
 - What's the architecture of Z?
