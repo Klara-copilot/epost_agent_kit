@@ -7,7 +7,7 @@
 
 ## Overview
 - **Priority**: P1
-- **Status**: pending
+- **Status**: completed
 - **Effort**: 3h
 - **Description**: Create web platform agents (`web/implementer`, `web/tester`, `web/designer`), reorganize web-related skills under `skills/web/`, and create web-specific commands.
 
@@ -159,20 +159,20 @@ mv .claude/skills/better-auth .claude/skills/web/better-auth
 
 ## Todo List
 
-- [ ] Create `.claude/agents/web/` directory
-- [ ] Create web/implementer.md
-- [ ] Create web/tester.md
-- [ ] Create web/designer.md (from ui-designer.md)
-- [ ] Move nextjs skill to web/nextjs
-- [ ] Move frontend-development skill to web/frontend-development
-- [ ] Move backend-development skill to web/backend-development
-- [ ] Move shadcn-ui skill to web/shadcn-ui
-- [ ] Move better-auth skill to web/better-auth
-- [ ] Create web/cook.md command
-- [ ] Create web/test.md command
-- [ ] Update global implementer.md delegation targets
-- [ ] Update global tester.md delegation targets
-- [ ] Verify all references intact
+- [x] Create `.claude/agents/web/` directory
+- [x] Create web/implementer.md
+- [x] Create web/tester.md
+- [x] Create web/designer.md (from ui-designer.md)
+- [x] Move nextjs skill to web/nextjs
+- [x] Move frontend-development skill to web/frontend-development
+- [x] Move backend-development skill to web/backend-development
+- [x] Move shadcn-ui skill to web/shadcn-ui
+- [x] Move better-auth skill to web/better-auth
+- [x] Create web/cook.md command
+- [x] Create web/test.md command
+- [x] Update global implementer.md delegation targets
+- [x] Update global tester.md delegation targets
+- [x] Verify all references intact
 
 ## Success Criteria
 
