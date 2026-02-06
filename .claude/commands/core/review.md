@@ -38,6 +38,32 @@ Comprehensive code review for quality assurance.
 
 4. Generate comprehensive report
 
+## Structured Review Cycle (Max 3 Iterations)
+
+**Iteration Flow:**
+
+1. **Analyze & Report** (Cycle X/3)
+   - Categorize findings: Critical, High, Medium, Low
+   - Display clear, actionable findings
+   - Show severity labels (BLOCKING, SHOULD FIX, SUGGESTIONS, INFORMATIONAL)
+
+2. **User Decision Gate**
+   Present options via AskUserQuestion:
+   - "Fix critical issues" → Implement critical fixes, re-run tests, re-review
+   - "Fix all issues" → Implement all findings, re-run tests, re-review
+   - "Approve as-is" → Proceed to commit (bypass remaining cycles)
+   - "Abort" → Stop workflow immediately
+
+3. **Re-review After Fixes**
+   - Run tests to verify fixes
+   - Perform incremental review on modified areas
+   - Compare with previous cycle findings
+   - Increment cycle count
+
+4. **Final Approval**
+   - After 3 cycles: require explicit user approval
+   - Cannot proceed without approval or abort decision
+
 ## Output
 
 - Code quality assessment
