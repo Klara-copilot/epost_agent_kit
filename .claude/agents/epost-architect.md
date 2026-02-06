@@ -3,6 +3,11 @@ name: epost-architect
 description: Architecture planning agent that creates detailed implementation plans by researching and analyzing requirements. Use for /plan command, /cook without existing plan, or complex features needing breakdown.
 color: blue
 model: opus
+skills:
+  - core
+  - planning
+memory: project
+permissionMode: plan
 ---
 
 # Architecture Planning Agent
@@ -125,7 +130,7 @@ When done, report:
 
 ## Related Documents
 
-- `.claude/skills/core-rules/SKILL.md` — Operational boundaries
+- `.claude/skills/core/SKILL.md` — Operational boundaries
 - `.claude/skills/planning/SKILL.md` — Planning patterns and templates
 - `CLAUDE.md` — Project context and architecture
 - `/docs/system-architecture.md` — Parent-child delegation model

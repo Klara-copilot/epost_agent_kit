@@ -5,6 +5,7 @@ keywords: [ios, swift, swiftui, uikit, xcode, iphone, ipad, mobile]
 platforms: [ios]
 triggers: [".swift", ".xcodeproj", ".xcworkspace", "ios", "iphone", "ipad"]
 agent-affinity: [epost-ios-developer, epost-implementer, epost-tester]
+user-invocable: false
 ---
 
 # iOS Development Skill

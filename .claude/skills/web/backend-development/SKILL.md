@@ -5,6 +5,7 @@ keywords: [backend, api, rest, node, express, server, endpoints, validation]
 platforms: [web]
 triggers: ["api", "backend", "server", "endpoint", "route.ts"]
 agent-affinity: [epost-web-developer, epost-implementer]
+user-invocable: false
 ---
 
 # Backend Development Skill

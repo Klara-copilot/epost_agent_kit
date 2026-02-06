@@ -5,6 +5,9 @@ keywords: [plan, planning, requirements, tasks, estimation, roadmap]
 platforms: [all]
 triggers: ["/plan", "create plan", "implementation plan"]
 agent-affinity: [epost-architect, epost-orchestrator]
+user-invocable: false
+context: fork
+agent: epost-architect
 ---
 
 # Planning Skill

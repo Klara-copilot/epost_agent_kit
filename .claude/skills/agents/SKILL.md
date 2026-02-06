@@ -69,49 +69,69 @@ Skills support nested directories. Claude Code auto-discovers `SKILL.md` files a
 
 ```
 .claude/
-├── agents/                           # 12 specialized agents
-│   ├── epost-orchestrator.md
-│   ├── epost-architect.md
-│   ├── epost-implementer.md
-│   ├── epost-reviewer.md
-│   ├── epost-debugger.md
-│   ├── epost-tester.md
-│   ├── epost-researcher.md
-│   ├── epost-documenter.md
-│   ├── epost-git-manager.md
-│   ├── epost-web-developer.md
-│   ├── epost-ios-developer.md
-│   └── epost-android-developer.md
-├── commands/                         # Slash commands (28)
-│   ├── core/                         # Global commands
-│   ├── web/                          # Web platform
-│   ├── ios/                          # iOS platform
-│   ├── android/                      # Android platform (SKELETON)
-│   ├── fix/                          # Bug fix commands
-│   ├── git/                          # Git workflow
-│   ├── docs/                         # Documentation
-│   └── design/                       # UI design
-├── skills/                           # Domain knowledge (14 skills)
+├── agents/                           # 19 specialized agents
+│   ├── epost-orchestrator.md         # Task router & project manager
+│   ├── epost-architect.md            # Architecture planning
+│   ├── epost-implementer.md          # Code implementation
+│   ├── epost-reviewer.md             # Code review
+│   ├── epost-debugger.md             # Root cause debugging
+│   ├── epost-tester.md               # Test orchestration
+│   ├── epost-researcher.md           # Technology research
+│   ├── epost-documenter.md           # Documentation management
+│   ├── epost-git-manager.md          # Git workflow automation
+│   ├── epost-web-developer.md        # Web platform specialist
+│   ├── epost-ios-developer.md        # iOS platform specialist
+│   ├── epost-android-developer.md    # Android platform specialist
+│   ├── epost-scout.md                # Codebase exploration
+│   ├── epost-brainstormer.md         # Creative ideation
+│   ├── epost-database-admin.md       # Database specialist
+│   ├── epost-ui-ux-designer.md       # UI/UX design
+│   ├── epost-copywriter.md           # Marketing copy
+│   ├── epost-journal-writer.md       # Technical journals
+│   └── epost-mcp-manager.md          # MCP integration
+├── commands/                         # Slash commands (37)
+│   ├── core/                         # Global: cook, plan, debug, test, review, scout, ask, brainstorm, bootstrap
+│   ├── web/                          # Web: cook, test
+│   ├── ios/                          # iOS: cook, test, debug, simulator
+│   ├── android/                      # Android: cook, test
+│   ├── fix/                          # Bug fixes: fast, hard, test, ci, ui
+│   ├── git/                          # Git: commit, push, pr, cm, cp
+│   ├── docs/                         # Docs: component, init, update
+│   ├── design/                       # Design: fast
+│   └── plan/                         # Planning: fast, hard, parallel
+├── skills/                           # Domain knowledge (22 skills)
 │   ├── agents/                       # Ecosystem hub
 │   │   ├── SKILL.md                  # This file
 │   │   └── claude/                   # Claude Code-specific
 │   │       ├── agent-development/    # Agent creation guide
 │   │       └── skill-development/    # Skill creation guide
 │   ├── core/                         # Operational rules (4 aspects)
-│   ├── web/                          # Web skills (5)
-│   │   ├── klara-theme/              # klara-theme pipeline (5 aspects)
-│   ├── ios/                          # iOS skills (1 + 3 aspects)
-│   ├── android/                      # Android skills (SKELETON)
-│   ├── planning/                     # Planning methodology
-│   ├── debugging/                    # Debug methodology
-│   ├── research/                     # Research methodology
+│   ├── web/                          # Web skills
+│   │   ├── nextjs/                   # Next.js patterns
+│   │   ├── frontend-development/     # React/frontend patterns
+│   │   ├── backend-development/      # Node.js/API patterns
+│   │   ├── figma-integration/        # Figma MCP + extraction procedure
+│   │   └── klara-theme/              # klara-theme pipeline (5 aspects)
+│   ├── ios/                          # iOS skills
+│   │   └── ios-development/          # Swift/SwiftUI patterns
+│   ├── android/                      # Android skills
+│   │   └── android-development/      # Kotlin/Compose patterns
+│   ├── planning/                     # Planning methodology (context: fork)
+│   ├── debugging/                    # Debug methodology (context: fork)
+│   ├── research/                     # Research methodology (context: fork)
 │   ├── databases/                    # Database patterns
-│   └── docker/                       # Container patterns
+│   ├── docker/                       # Container patterns
+│   ├── code-review/                  # Code quality assessment
+│   ├── docs-seeker/                  # Documentation lookup (Context7)
+│   ├── error-recovery/               # Error handling patterns
+│   ├── problem-solving/              # Root cause analysis
+│   ├── repomix/                      # Codebase summaries
+│   └── sequential-thinking/          # Step-by-step analysis
 ├── workflows/                        # Reference docs (NOT auto-discovered)
 │   ├── feature-development.md
 │   ├── bug-fixing.md
 │   └── project-init.md
-├── output-styles/                    # Response formatting (2 styles)
+├── output-styles/                    # Response formatting (5 styles)
 └── settings.json                     # Hooks, permissions, env vars
 ```
 

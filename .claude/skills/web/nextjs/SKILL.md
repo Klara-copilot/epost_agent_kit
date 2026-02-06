@@ -5,6 +5,7 @@ keywords: [nextjs, next, app-router, server-components, server-actions, routing]
 platforms: [web]
 triggers: ["next.js", "nextjs", "app router", "server component"]
 agent-affinity: [epost-web-developer, epost-implementer]
+user-invocable: false
 ---
 
 # Next.js Skill

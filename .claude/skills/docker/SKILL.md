@@ -5,6 +5,7 @@ keywords: [docker, container, dockerfile, compose, deployment, devops]
 platforms: [all]
 triggers: ["Dockerfile", "docker-compose.yml", "container", "docker"]
 agent-affinity: [epost-implementer, epost-architect]
+user-invocable: false
 ---
 
 # Docker Skill
