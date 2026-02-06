@@ -289,9 +289,10 @@ function buildPathsSection({ reportsPath, plansPath, docsPath, docsMaxLoc = 800 
  * @param {string} params.validationMode - Validation mode
  * @param {number} params.validationMin - Min questions
  * @param {number} params.validationMax - Max questions
+ * @param {string|null} [params.setActivePlanScript] - Path to set-active-plan.cjs script
  * @returns {string[]} Lines for plan context section
  */
-function buildPlanContextSection({ planLine, reportsPath, gitBranch, validationMode, validationMin, validationMax }) {
+function buildPlanContextSection({ planLine, reportsPath, gitBranch, validationMode, validationMin, validationMax, setActivePlanScript }) {
   const lines = [
     `## Plan Context`,
     planLine,
@@ -303,6 +304,14 @@ function buildPlanContextSection({ planLine, reportsPath, gitBranch, validationM
   }
 
   lines.push(`- Validation: mode=${validationMode}, questions=${validationMin}-${validationMax}`);
+
+  // Add set-active-plan reference when no active plan exists
+  // Check if plan is "none" by looking at the resolved plan status
+  const hasActivePlan = planLine.startsWith('- Plan: plans/') || planLine.includes('Suggested:');
+  if (setActivePlanScript && !hasActivePlan) {
+    lines.push(`- Set active: \`node ${setActivePlanScript} {plan-dir}\``);
+  }
+
   lines.push(``);
 
   return lines;
@@ -352,6 +361,7 @@ function buildReminder(params) {
     validationMode,
     validationMin,
     validationMax,
+    setActivePlanScript,
     staticEnv
   } = params;
 
@@ -361,7 +371,7 @@ function buildReminder(params) {
     ...buildRulesSection({ devRulesPath, catalogScript, skillsVenv }),
     ...buildModularizationSection(),
     ...buildPathsSection({ reportsPath, plansPath, docsPath, docsMaxLoc }),
-    ...buildPlanContextSection({ planLine, reportsPath, gitBranch, validationMode, validationMin, validationMax }),
+    ...buildPlanContextSection({ planLine, reportsPath, gitBranch, validationMode, validationMin, validationMax, setActivePlanScript }),
     ...buildNamingSection({ reportsPath, plansPath, namePattern })
   ];
 }
@@ -389,6 +399,7 @@ function buildReminderContext({ sessionId, config, staticEnv, configDirName = '.
   const devRulesPath = resolveRulesPath('development-rules.md', configDirName);
   const catalogScript = resolveScriptPath('generate_catalogs.py', configDirName);
   const skillsVenv = resolveSkillsVenv(configDirName);
+  const setActivePlanScript = resolveScriptPath('set-active-plan.cjs', configDirName);
 
   // Build plan context
   const planCtx = buildPlanContext(sessionId, cfg);
@@ -416,6 +427,7 @@ function buildReminderContext({ sessionId, config, staticEnv, configDirName = '.
     validationMode: planCtx.validationMode,
     validationMin: planCtx.validationMin,
     validationMax: planCtx.validationMax,
+    setActivePlanScript,
     staticEnv
   };
 
@@ -430,7 +442,7 @@ function buildReminderContext({ sessionId, config, staticEnv, configDirName = '.
       rules: buildRulesSection({ devRulesPath, catalogScript, skillsVenv }),
       modularization: buildModularizationSection(),
       paths: buildPathsSection({ reportsPath: params.reportsPath, plansPath: params.plansPath, docsPath: params.docsPath, docsMaxLoc: params.docsMaxLoc }),
-      planContext: buildPlanContextSection(planCtx),
+      planContext: buildPlanContextSection({ ...planCtx, setActivePlanScript }),
       naming: buildNamingSection({ reportsPath: params.reportsPath, plansPath: params.plansPath, namePattern: params.namePattern })
     }
   };

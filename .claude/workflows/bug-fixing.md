@@ -5,53 +5,82 @@ User reports a bug or issue.
 
 ## Steps
 
-### 1. Investigation
+### 1. Code Search
+**Command**: `/scout [search query]`
+**Agent**: epost-scout
+**Output**: List of relevant files
+
+The scout agent:
+- Searches codebase for related files
+- Uses grep and glob patterns
+- Prioritizes files by relevance
+- Provides context snippets
+
+### 2. Investigation
 **Command**: `/debug [issue description]`
-**Agent**: debugger
-**Output**: Root cause analysis
+**Agent**: epost-debugger (enhanced)
+**Output**: Root cause analysis with file locations
 
 The debugger agent:
-- Gathers context (logs, errors)
-- Reproduces the issue
+- Uses scout results for file context
+- Gathers debug info (logs, errors, stack traces)
+- Reproduces the issue (uses psql, gh, docs-seeker)
 - Identifies root cause
-- Suggests fix
-
-### 2. Fix Selection
-**Simple bugs**: `/fix:fast [issue]`
-**Complex bugs**: `/fix:hard [issue]`
+- Suggests targeted fix
 
 ### 3. Fix Implementation
-**Agent**: implementer
-**Output**: Fixed code
+**Agent**: epost-implementer (enhanced)
+**Output**: Fixed code with regression test
 
-The developer agent:
+The implementer agent:
 - Applies the fix
-- Writes test to prevent regression
-- Updates docs if needed
+- Writes regression test
+- Updates related docs
 
 ### 4. Verification
 **Command**: `/test`
-**Agent**: tester
-**Output**: Test results
+**Agent**: epost-tester (enhanced)
+**Output**: Test results including regression tests
 
-### 5. Commit
+The tester agent:
+- Runs full test suite
+- Validates regression tests pass
+- Checks fix doesn't introduce new failures
+
+### 5. Code Review
+**Command**: `/review`
+**Agent**: epost-reviewer (enhanced)
+**Output**: Fix quality verification
+
+The reviewer agent:
+- Verifies fix correctness
+- Checks for edge cases
+- Validates test coverage
+
+### 6. Commit
 **Command**: `/git:cm`
-**Agent**: git-manager
+**Agent**: epost-git-manager
 **Output**: Commit with `fix:` type
 
 ## Flow Diagram
 ```mermaid
 graph LR
-    A[Bug Report] --> B[/debug command]
-    B --> C[debugger agent]
-    C --> D[Root cause found]
-    D --> E[/fix:fast or /fix:hard]
-    E --> F[implementer]
-    F --> G[/test command]
-    G --> H[tester agent]
-    H --> I[/git:cm command]
-    I --> J[git-manager]
-    J --> K[Fixed and committed]
+    A[Bug Report] --> B[/scout command]
+    B --> C[epost-scout]
+    C --> D[Relevant files found]
+    D --> E[/debug command]
+    E --> F[epost-debugger]
+    F --> G[Root cause identified]
+    G --> H[epost-implementer]
+    H --> I[/test command]
+    I --> J[epost-tester]
+    J --> K[Tests pass?]
+    K -->|No| H
+    K -->|Yes| L[/review command]
+    L --> M[epost-reviewer]
+    M --> N[/git:cm command]
+    N --> O[epost-git-manager]
+    O --> P[Fixed and committed]
 ```
 
 ## Bug Categories

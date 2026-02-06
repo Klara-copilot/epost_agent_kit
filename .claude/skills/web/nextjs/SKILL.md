@@ -1,13 +1,16 @@
 ---
 name: nextjs
-description: Next.js 14 App Router patterns and best practices. Use when working with Next.js pages, routing, data fetching, or server components.
-user-invocable: false
+description: Next.js 15 App Router with Server Components, Server Actions, and routing patterns
+keywords: [nextjs, next, app-router, server-components, server-actions, routing]
+platforms: [web]
+triggers: ["next.js", "nextjs", "app router", "server component"]
+agent-affinity: [epost-web-developer, epost-implementer]
 ---
 
 # Next.js Skill
 
 ## Purpose
-Next.js 14 App Router expertise.
+Next.js 15 App Router expertise.
 
 ## When Active
 User mentions Next.js, App Router, Server Components.
@@ -91,6 +94,6 @@ export async function GET() {
 ```
 
 ## Dependencies
-- Next.js 14
-- React 18
+- Next.js 15+
+- React 19+
 - TypeScript

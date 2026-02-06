@@ -1,7 +1,10 @@
 ---
 name: docker
-description: Containerization patterns for development and deployment. Use when working with Dockerfiles, Docker Compose, or container orchestration.
-user-invocable: false
+description: Containerization for development and deployment with Docker and Docker Compose
+keywords: [docker, container, dockerfile, compose, deployment, devops]
+platforms: [all]
+triggers: ["Dockerfile", "docker-compose.yml", "container", "docker"]
+agent-affinity: [epost-implementer, epost-architect]
 ---
 
 # Docker Skill

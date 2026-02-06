@@ -16,11 +16,12 @@ Run tests and analyze coverage.
 ```
 
 ## Your Process
-1. Identify test framework (Jest for web, XCTest for iOS, JUnit for Android, pytest, etc.)
-2. Run the test suite
-3. Parse results
-4. Calculate coverage
-5. Report findings
+1. Identify test framework (Jest, Vitest, Pytest, Go test, etc.)
+2. Detect platform (Node, Python, Go, etc.)
+3. Run the appropriate test suite
+4. Parse results and handle platform-specific output
+5. Calculate code coverage
+6. Report findings with severity
 
 ## Output
 - Total tests run

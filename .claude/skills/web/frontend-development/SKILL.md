@@ -1,7 +1,10 @@
 ---
 name: frontend-development
-description: React 18 and Next.js frontend patterns. Use when building React components, managing state, or implementing UI features.
-user-invocable: false
+description: React/Next.js frontend patterns, hooks, state management, and performance optimization
+keywords: [react, frontend, ui, hooks, components, state, typescript]
+platforms: [web]
+triggers: [".tsx", ".jsx", "react", "frontend", "ui component"]
+agent-affinity: [epost-web-developer, epost-implementer, epost-ui-ux-designer]
 ---
 
 # Frontend Development Skill
@@ -27,8 +30,8 @@ User mentions React, frontend, UI components, hooks.
 - Slot pattern
 
 ### State Management
-- Redux Toolkit + Redux Persist for global state
-- Context API for local state sharing
+- Context API for global state
+- Zustand for client state
 - Server state with React Query
 - Form state with react-hook-form
 
