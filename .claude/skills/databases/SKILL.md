@@ -5,6 +5,7 @@ keywords: [database, sql, postgres, mysql, sqlite, migrations, schema, orm, pris
 platforms: [all]
 triggers: [".sql", "database", "postgres", "mysql", "prisma", "drizzle", "migration"]
 agent-affinity: [epost-database-admin, epost-implementer, epost-architect]
+user-invocable: false
 ---
 
 # Databases Skill

@@ -5,6 +5,9 @@ keywords: [debug, error, bug, troubleshoot, root-cause, stack-trace, logging]
 platforms: [all]
 triggers: ["/debug", "error", "bug", "crash", "exception"]
 agent-affinity: [epost-debugger, epost-implementer]
+user-invocable: false
+context: fork
+agent: epost-debugger
 ---
 
 # Debugging Skill

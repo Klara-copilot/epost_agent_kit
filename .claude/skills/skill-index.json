@@ -1,19 +1,8 @@
 {
   "generated": "2026-02-06T10:21:37.434Z",
   "version": "1.0.0",
-  "count": 25,
+  "count": 22,
   "skills": [
-    {
-      "name": "Agent Development",
-      "description": "This skill should be used when the user asks to \"create an agent\", \"add an agent\", \"write a subagent\", \"agent frontmatter\", \"when to use description\", \"agent examples\", \"agent tools\", \"agent colors\", \"autonomous agent\", or needs guidance on agent structure, system prompts, triggering conditions, or agent development best practices for Claude Code plugins.",
-      "keywords": [],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [],
-      "path": "agent-development/SKILL.md"
-    },
     {
       "name": "Agent Development",
       "description": "This skill should be used when the user asks to \"create an agent\", \"add an agent\", \"write a subagent\", \"agent frontmatter\", \"when to use description\", \"agent examples\", \"agent tools\", \"agent colors\", \"autonomous agent\", or needs guidance on agent structure, system prompts, triggering conditions, or agent development best practices for Claude Code plugins.",
@@ -128,17 +117,6 @@
       "triggers": [],
       "agent-affinity": [],
       "path": "core/SKILL.md"
-    },
-    {
-      "name": "core-rules",
-      "description": "Operational boundaries, safety rules, and documentation standards. Active for all agent operations, file modifications, and architectural decisions.",
-      "keywords": [],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [],
-      "path": "core-rules/SKILL.md"
     },
     {
       "name": "databases",
@@ -533,17 +511,6 @@
       "triggers": [],
       "agent-affinity": [],
       "path": "agents/claude/skill-development/SKILL.md"
-    },
-    {
-      "name": "Skill Development",
-      "description": "This skill should be used when the user wants to \"create a skill\", \"add a skill to plugin\", \"write a new skill\", \"improve skill description\", \"organize skill content\", or needs guidance on skill structure, progressive disclosure, or skill development best practices for Claude Code plugins.",
-      "keywords": [],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [],
-      "path": "skill-development/SKILL.md"
     }
   ]
 }

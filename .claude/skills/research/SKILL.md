@@ -5,6 +5,9 @@ keywords: [research, investigation, documentation, sources, validation, best-pra
 platforms: [all]
 triggers: ["/research", "research", "best practices", "how to"]
 agent-affinity: [epost-researcher, epost-architect]
+user-invocable: false
+context: fork
+agent: Explore
 ---
 
 # Research Skill

@@ -5,6 +5,7 @@ keywords: [react, frontend, ui, hooks, components, state, typescript]
 platforms: [web]
 triggers: [".tsx", ".jsx", "react", "frontend", "ui component"]
 agent-affinity: [epost-web-developer, epost-implementer, epost-ui-ux-designer]
+user-invocable: false
 ---
 
 # Frontend Development Skill

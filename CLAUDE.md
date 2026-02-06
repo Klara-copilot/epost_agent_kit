@@ -50,8 +50,8 @@ The repository uses Claude Code's agent system configured in `.claude/`.
   - **Platform**: web-developer, ios-developer, android-developer
   - **Specialized**: scout, brainstormer, database-admin, ui-ux-designer, copywriter, journal-writer, mcp-manager
 - **Commands**: `.claude/commands/` — Slash commands (`/plan`, `/cook`, `/test`, `/debug`, `/git:commit`, `/docs:component`, etc.)
-- **Skills**: `.claude/skills/` — Passive knowledge (core-rules, web, iOS, Android, planning, debugging, research, databases, docker, figma-integration)
-- **Workflows**: `.claude/workflows/` — Multi-step orchestration (feature development, bug fixing, klara-theme UI pipeline)
+- **Skills**: `.claude/skills/` — Passive knowledge (core, web, iOS, Android, planning, debugging, research, databases, docker, figma-integration, klara-theme)
+- **Workflows**: `.claude/workflows/` — Reference orchestration docs (feature development, bug fixing)
 
 ### Web Tech Stack
 - **Framework**: Next.js 14 (App Router)
@@ -63,7 +63,7 @@ The repository uses Claude Code's agent system configured in `.claude/`.
 - **State**: Redux Toolkit + Redux Persist
 
 ### klara-theme Integration
-- **Workflows**: `.claude/workflows/web/klara-theme/` — Figma-to-code pipeline (plan-feature, implement-component, audit-ui, fix-findings, extract-figma, document-component)
+- **Skill**: `.claude/skills/web/klara-theme/` — Figma-to-code pipeline (plan-feature, implement-component, audit-ui, fix-findings, document-component)
 - **Figma Skill**: `.claude/skills/web/figma-integration/` — Figma MCP tool patterns, design token mapping
 - **Command**: `/docs:component <key>` — Document klara-theme components from Figma
 
@@ -107,7 +107,7 @@ Currently included: klara-theme (web). Future: iOS/Android UI libs in their resp
 - Conservative defaults: safety over speed, clarity over cleverness
 
 ### Core Rules
-See `.claude/skills/core-rules/SKILL.md` for operational boundaries:
+See `.claude/skills/core/SKILL.md` for operational boundaries:
 - Decision boundaries (autonomous vs approval actions)
 - Environment safety (pre-execution checks)
 - Context7 usage (secondary reasoning aid rules)
@@ -115,9 +115,9 @@ See `.claude/skills/core-rules/SKILL.md` for operational boundaries:
 
 ## Related Documents
 
-- `.claude/skills/core-rules/SKILL.md` — Operational rules and boundaries
+- `.claude/skills/core/SKILL.md` — Operational rules and boundaries
 - `.claude/skills/web/figma-integration/SKILL.md` — Figma MCP integration
-- `.claude/workflows/web/klara-theme/` — klara-theme workflows
+- `.claude/skills/web/klara-theme/SKILL.md` — klara-theme Figma-to-code pipeline
 - `/docs/system-architecture.md` — System architecture and delegation model
 - `/docs/project-roadmap.md` — Development phases and milestones
 - `/docs/code-standards.md` — Coding conventions
