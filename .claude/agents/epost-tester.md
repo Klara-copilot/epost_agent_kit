@@ -93,11 +93,35 @@ When assigned a platform-specific task:
 
 ## Coverage Requirements
 
-- Minimum 80% code coverage
+- Minimum 80% code coverage (enforced automatically)
 - All public functions/APIs tested
 - All error paths covered
 - Edge cases validated
 - Happy path and error scenarios both tested
+
+## Coverage Enforcement
+
+After running tests, automatically enforce coverage thresholds:
+
+1. **Run Coverage Gate**
+   ```bash
+   node .claude/scripts/check-coverage.cjs
+   ```
+
+2. **Enforcement Rules**
+   - If coverage < 80%: HALT pipeline, report gap
+   - If line coverage < 85%: WARN (target for core logic)
+   - Exit code 1 triggers pipeline failure
+
+3. **No Bypass**
+   - Never use fake data or mocks to inflate coverage
+   - Never ignore failing coverage checks
+   - All tests must represent real functionality
+
+4. **Configuration**
+   - Default threshold: 80% (configurable via COVERAGE_THRESHOLD env var)
+   - Core logic threshold: 85% (via CORE_COVERAGE_THRESHOLD env var)
+   - Supports LCOV and JSON coverage formats
 
 ## Quality Standards
 

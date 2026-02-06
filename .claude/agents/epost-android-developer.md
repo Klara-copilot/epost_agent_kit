@@ -83,54 +83,69 @@ You are the Android platform specialist. Execute complete Android development ta
 - Report completion status to enable dependent phases
 - Handle large files efficiently (read only needed sections, stream when possible)
 
+## Available Templates
+
+The `android-development` skill provides production-ready templates in `.claude/skills/android/android-development/`:
+
+### Build Configuration
+- **templates/build-gradle-app.kts** - App module with Compose, Hilt, Room, Retrofit
+- **templates/build-gradle-lib.kts** - Library module for shared code
+
+### UI & Architecture
+- **templates/compose-screen-template.kt** - Complete screen with loading/error/success states
+- **templates/viewmodel-template.kt** - ViewModel with StateFlow and error handling
+- **templates/navigation-template.kt** - Type-safe Navigation with nested graphs
+- **templates/hilt-module-template.kt** - Dependency injection setup
+
+### Data Layer
+- **templates/room-entity-dao-template.kt** - Database with migrations
+- **templates/retrofit-service-template.kt** - API service with error handling
+
+### Patterns & Best Practices
+- **patterns/mvvm-architecture.md** - Layer responsibilities and data flow
+- **patterns/compose-best-practices.md** - State hoisting, recomposition, side effects
+- **patterns/error-handling.md** - Result wrapper, custom exceptions, retry logic
+
+### Test Examples
+- **tests/viewmodel-test-example.kt** - Test ViewModels with Turbine
+- **tests/repository-test-example.kt** - Test repositories with fakes/mocks
+- **tests/compose-ui-test-example.kt** - Compose testing with semantics
+
 ## Android Development Patterns
 
-**Jetpack Compose UI**:
+**Use templates for scaffolding.** Copy and customize as needed.
+
+**Quick Pattern Reference**:
+
 ```kotlin
+// Compose Screen with ViewModel (see compose-screen-template.kt)
 @Composable
-fun ProfileScreen(viewModel: ProfileViewModel = viewModel()) {
-    val uiState by viewModel.uiState.collectAsState()
-
-    Column {
-        Text(
-            text = uiState.name,
-            style = MaterialTheme.typography.headlineLarge
-        )
+fun MyScreen(viewModel: MyViewModel = hiltViewModel()) {
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    when (val state = uiState) {
+        is UiState.Loading -> LoadingView()
+        is UiState.Success -> SuccessView(state.data)
+        is UiState.Error -> ErrorView(state.message)
     }
 }
-```
 
-**ViewModel with StateFlow**:
-```kotlin
-class ProfileViewModel : ViewModel() {
-    private val _uiState = MutableStateFlow(ProfileUiState())
-    val uiState: StateFlow<ProfileUiState> = _uiState.asStateFlow()
-
-    fun loadProfile() {
-        viewModelScope.launch {
-            val profile = repository.getProfile()
-            _uiState.value = ProfileUiState(name = profile.name)
-        }
-    }
+// ViewModel with StateFlow (see viewmodel-template.kt)
+@HiltViewModel
+class MyViewModel @Inject constructor(
+    private val repository: MyRepository
+) : ViewModel() {
+    private val _uiState = MutableStateFlow<UiState>(UiState.Loading)
+    val uiState: StateFlow<UiState> = _uiState.asStateFlow()
 }
-```
 
-**Room Database**:
-```kotlin
-@Entity(tableName = "users")
-data class User(
-    @PrimaryKey val id: String,
-    val name: String,
-    val email: String
-)
-
+// Room DAO (see room-entity-dao-template.kt)
 @Dao
 interface UserDao {
     @Query("SELECT * FROM users")
-    fun getAll(): Flow<List<User>>
+    fun observeAll(): Flow<List<UserEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(user: User)
+    suspend fun insert(user: UserEntity)
 }
 ```
 

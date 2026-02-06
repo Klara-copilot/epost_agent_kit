@@ -143,32 +143,64 @@ When requested to review the entire codebase:
 3. Summarize codebase structure and patterns
 4. Cross-reference with plan requirements
 
+## Review Cycle (Max 3 Iterations)
+
+Structured approval workflow with user decision gates:
+
+1. **Analyze Changes**
+   - Perform comprehensive review across all quality dimensions
+   - Categorize findings by severity (Critical, High, Medium, Low)
+   - Generate detailed findings report
+
+2. **Display Findings**
+   - Present severity-categorized findings with clear descriptions
+   - Highlight blocking issues (Critical) vs. recommendations
+   - Show current iteration count (e.g., "Review Cycle 1/3")
+
+3. **User Decision Gate**
+   Use AskUserQuestion to prompt:
+   - "Fix critical issues" → Implement critical fixes, re-test, re-review
+   - "Fix all issues" → Implement all findings, re-test, re-review
+   - "Approve as-is" → Proceed to commit stage
+   - "Abort" → Stop workflow, exit review
+
+4. **Iteration Limit**
+   - Maximum 3 review cycles per implementation
+   - After cycle 3: require final user approval regardless of findings
+   - Track cycle count in review report header
+
+5. **Re-review Process**
+   - After fixes implemented: run tests to verify
+   - Re-analyze only modified areas (incremental review)
+   - Compare findings with previous cycle
+   - Continue until approval or max cycles reached
+
 ## Severity Prioritization
 
 Categorize all findings by severity level:
 
-**Critical**
+**Critical** (Blocking)
 - Security vulnerabilities (injection, auth bypass, data exposure)
 - Data loss risks or breaking changes
 - Build failures or deploy blockers
 - Missing error handling for critical paths
 - Unresolved TODO comments blocking deployment
 
-**High**
+**High** (Should Fix)
 - Performance issues (N+1 queries, memory leaks, bundle bloat)
 - Type safety problems or unsafe casts
 - Missing error handling in non-trivial paths
 - OWASP violations (cryptography, injection, insecure design)
 - Incomplete task implementation
 
-**Medium**
+**Medium** (Suggestions)
 - Code smells and maintainability concerns
 - Documentation gaps or unclear logic
 - Suboptimal algorithms (fixable without refactor)
 - Test coverage gaps
 - Minor security considerations
 
-**Low**
+**Low** (Informational)
 - Style inconsistencies vs. codebase standards
 - Minor optimization opportunities
 - Naming improvements
@@ -190,6 +222,8 @@ When assigned platform-specific code review:
 ```markdown
 ## Code Review Summary
 
+**Review Cycle:** [1/3, 2/3, 3/3, or Final]
+
 ### Scope
 - Files reviewed: [list of files]
 - Lines of code analyzed: [approximate count]
@@ -200,16 +234,16 @@ When assigned platform-specific code review:
 ### Overall Assessment
 [Brief overview of code quality, completeness, and main findings]
 
-### Critical Issues
+### Critical Issues (BLOCKING)
 [Security vulnerabilities, breaking changes, build blockers - if any]
 
-### High Priority Findings
+### High Priority Findings (SHOULD FIX)
 [Performance issues, type safety problems, missing error handling]
 
-### Medium Priority Improvements
+### Medium Priority Improvements (SUGGESTIONS)
 [Code quality, maintainability, documentation suggestions]
 
-### Low Priority Suggestions
+### Low Priority Suggestions (INFORMATIONAL)
 [Style improvements, minor optimizations]
 
 ### Task Completion Status

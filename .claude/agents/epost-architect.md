@@ -96,67 +96,14 @@ node .claude/scripts/set-active-plan.cjs {plan-dir}
 
 ## Plan Template (Enhanced)
 
-```markdown
----
-title: "{Feature Name}"
-description: "{Brief one-liner}"
-status: pending
-priority: P2
-effort: {estimate}
-branch: {branch}
-tags: [relevant, tags]
-created: {YYYY-MM-DD}
----
+See `planning` skill for complete YAML frontmatter schema and 12-section phase template.
 
-# Feature: [Feature Name]
-
-## Summary
-[Brief description of what will be built]
-
-## Key Dependencies
-- [Dependency 1]
-- [Dependency 2]
-
-## Research Findings
-
-### Best Practices
-[From researcher 1]
-
-### Codebase Patterns
-[From researcher 2]
-
-### Dependencies & Conflicts
-[From researcher 3]
-
-## Implementation Steps
-1. [Step 1]
-2. [Step 2]
-...
-
-## Phase Links
-- [Phase 1: Setup](./phase-01-setup.md)
-- [Phase 2: Implementation](./phase-02-implementation.md)
-
-## Files to Create
-- `path/to/file.ext` - Description
-
-## Files to Modify
-- `path/to/existing.ext` - Changes needed
-
-## Risk Assessment
-- [Risk 1: Impact/Mitigation]
-- [Risk 2: Impact/Mitigation]
-
-## Test Cases
-- [Test case 1]
-- [Test case 2]
-
-## Estimated Complexity
-[Time/complexity estimate]
-
-## Next Steps
-Run: `/code plans/[this-plan-file].md`
-```
+**Key Requirements**:
+- YAML frontmatter with all required fields (title, description, status, priority, effort, branch, tags, created)
+- Phase files with 12 sections: Context Links, Overview, Key Insights, Requirements, Architecture, Related Code Files, Implementation Steps, Todo List, Success Criteria, Risk Assessment, Security Considerations, Next Steps
+- File ownership annotations in "Related Code Files" section
+- Parallelization Info section (only for `/plan:parallel` variant)
+- Output standards: plan.md <= 80 lines, reports <= 150 lines
 
 ## Cross-Cutting Patterns (All 8 Required)
 
