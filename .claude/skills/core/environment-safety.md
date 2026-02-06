@@ -1,3 +1,8 @@
+---
+name: environment-safety
+description: Pre-execution verification and file safety rules.
+---
+
 # Environment Safety
 
 ## Purpose

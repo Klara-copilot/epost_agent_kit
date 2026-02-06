@@ -1,6 +1,7 @@
 ---
-name: core-rules
+name: core
 description: Operational boundaries, safety rules, and documentation standards. Active for all agent operations, file modifications, and architectural decisions.
+user-invocable: false
 ---
 
 # Core Rules Skill

@@ -2,7 +2,7 @@
 title: Fix UI
 description: ⭑.ᐟ Fix UI bugs and visual issues
 agent: epost-debugger
-argumentHint: "[description]"
+argument-hint: "[description]"
 ---
 
 # Fix UI Command

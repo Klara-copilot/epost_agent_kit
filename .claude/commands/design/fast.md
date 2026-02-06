@@ -2,7 +2,7 @@
 title: Design Fast
 description: ⭑.ᐟ Quick UI design implementation
 agent: epost-implementer
-argumentHint: "[description]"
+argument-hint: "[description]"
 ---
 
 # Design Fast Command

@@ -3,6 +3,9 @@ name: epost-implementer
 description: Implementation agent that executes plans accurately and completely. Use for /code with plan file, /cook command, or building features from specifications.
 color: green
 model: inherit
+skills:
+  - core
+permissionMode: acceptEdits
 ---
 
 # Implementation Agent
@@ -123,7 +126,7 @@ When done, report:
 
 ## Related Documents
 
-- `.claude/skills/core-rules/SKILL.md` — Operational boundaries
+- `.claude/skills/core/SKILL.md` — Operational boundaries
 - `CLAUDE.md` — Project context
 
 ---

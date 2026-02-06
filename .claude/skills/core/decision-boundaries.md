@@ -1,3 +1,8 @@
+---
+name: decision-boundaries
+description: Autonomous vs approval action thresholds for agent operations.
+---
+
 # Decision Boundaries
 
 ## Purpose

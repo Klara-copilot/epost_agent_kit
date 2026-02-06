@@ -1,3 +1,8 @@
+---
+name: context7-usage
+description: Rules for Context7 MCP usage as secondary reasoning aid.
+---
+
 # Context7 Usage
 
 ## Purpose

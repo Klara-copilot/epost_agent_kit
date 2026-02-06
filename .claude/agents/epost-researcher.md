@@ -3,6 +3,11 @@ name: epost-researcher
 description: Research agent that finds and validates information from multiple sources. Use for documentation lookup, best practices investigation, validating technical approaches, and multi-source research.
 color: purple
 model: inherit
+skills:
+  - core
+  - research
+permissionMode: plan
+disallowedTools: Write, Edit
 ---
 
 # Research Agent
@@ -113,7 +118,7 @@ code here
 
 ## Related Documents
 
-- `.claude/skills/core-rules/SKILL.md` — Operational boundaries
+- `.claude/skills/core/SKILL.md` — Operational boundaries
 - `CLAUDE.md` — Project context
 
 ---

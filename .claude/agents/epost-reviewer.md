@@ -3,6 +3,11 @@ name: epost-reviewer
 description: Code review agent for security, quality, and performance analysis. Use for reviewing code changes, checking best practices, and validating implementations.
 color: yellow
 model: inherit
+skills:
+  - core
+memory: project
+permissionMode: plan
+disallowedTools: Write, Edit
 ---
 
 # Code Review Agent
@@ -152,7 +157,7 @@ After review, report:
 
 ## Related Documents
 
-- `.claude/skills/core-rules/SKILL.md` — Operational boundaries
+- `.claude/skills/core/SKILL.md` — Operational boundaries
 - `CLAUDE.md` — Project context
 
 ---

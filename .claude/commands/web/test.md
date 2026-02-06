@@ -1,4 +1,5 @@
 ---
+title: Web Test
 slug: web:test
 description: ⭑.ᐟ Run and write web tests using Jest, Playwright, React Testing Library. Direct web testing.
 agent: epost-web-developer

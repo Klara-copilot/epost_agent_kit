@@ -1,12 +1,16 @@
-# klara-theme: Implement Component
+---
+name: implement-component
+description: Implementing a klara-theme component or layout from plan artifacts. Covers pre-check, code implementation, Storybook stories, exports, and verification.
+---
 
-## Trigger
-Implementing a klara-theme component or layout from an existing plan.
+# Implement Component
 
 ## Context
+
 Read `libs/klara-theme/CLAUDE.md` for component patterns, naming conventions, design tokens, and Storybook standards.
 
 ## Inputs (required)
+
 - `libs/klara-theme/.ai-agents/ui/<feature>/component-inventory.json`
 - `libs/klara-theme/.ai-agents/ui/<feature>/variants-mapping.json`
 - `libs/klara-theme/.ai-agents/ui/<feature>/tokens-mapping.json`
@@ -16,6 +20,7 @@ Read `libs/klara-theme/CLAUDE.md` for component patterns, naming conventions, de
 ## Steps
 
 ### 1. Pre-Implementation Check
+
 - Read all plan artifacts
 - Query Web RAG for existing implementations to avoid duplication:
   - `@web-rag-system get_rag_status`
@@ -23,6 +28,7 @@ Read `libs/klara-theme/CLAUDE.md` for component patterns, naming conventions, de
 - Review existing component patterns in codebase
 
 ### 2. Implement Component
+
 Write code to:
 - `libs/klara-theme/src/lib/components/<component-name>/**` (for components)
 - `libs/klara-theme/src/lib/layouts/<layout-name>/**` (for layouts)
@@ -34,6 +40,7 @@ Follow conventions from `libs/klara-theme/CLAUDE.md`:
 - TypeScript strict mode
 
 ### 3. Write Storybook Stories
+
 Create `*.stories.tsx` covering:
 - **Default** — base render
 - **Sizes** — all size variants
@@ -43,16 +50,19 @@ Create `*.stories.tsx` covering:
 Follow Storybook conventions from `libs/klara-theme/CLAUDE.md`.
 
 ### 4. Export Component
+
 - Add exports to the component's `index.ts`
 - Update `libs/klara-theme/src/index.ts` if needed
 
 ### 5. Verify
+
 - Run `nx lint klara-theme`
 - Run `nx test klara-theme`
 - Run `npm run storybook-theme-build` to verify stories compile
 - Fix any issues before completion
 
 ## Success Criteria
+
 - Component matches plan artifacts
 - All variants implemented per variants-mapping
 - Design tokens used (no hardcoded values)
@@ -61,4 +71,5 @@ Follow Storybook conventions from `libs/klara-theme/CLAUDE.md`.
 - Storybook builds successfully
 
 ## Next Step
-Run audit-ui workflow to compare implementation against plan and design.
+
+Run `audit-ui` aspect to compare implementation against plan and design.

@@ -1,6 +1,7 @@
 ---
 name: backend-development
 description: Node.js and Next.js API route patterns. Use when building APIs, handling requests, or implementing server-side logic.
+user-invocable: false
 ---
 
 # Backend Development Skill

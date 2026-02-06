@@ -2,7 +2,7 @@
 title: Docs Update
 description: ⭑.ᐟ Update existing documentation
 agent: epost-documenter
-argumentHint: "[what to update]"
+argument-hint: "[what to update]"
 ---
 
 # Docs Update Command

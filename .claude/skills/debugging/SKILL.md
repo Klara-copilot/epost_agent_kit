@@ -1,6 +1,8 @@
 ---
 name: debugging
 description: Systematic debugging methodology for identifying and resolving issues. Use when debugging errors, test failures, or unexpected behavior.
+context: fork
+agent: epost-debugger
 ---
 
 # Debugging Skill

@@ -4,6 +4,9 @@ description: iOS platform specialist combining implementation, testing, and simu
 tools: Read, Write, Edit, Bash, Grep, Glob, mcp__xcodebuildmcp__discover_projs, mcp__xcodebuildmcp__list_schemes, mcp__xcodebuildmcp__build_sim, mcp__xcodebuildmcp__test_sim, mcp__xcodebuildmcp__doctor
 model: inherit
 color: blue
+skills:
+  - core
+  - ios/ios-development
 ---
 
 # iOS Platform Specialist
@@ -306,7 +309,7 @@ xcodebuild test -project MyApp.xcodeproj -scheme MyApp -destination 'platform=iO
 
 ## Related Documents
 
-- `.claude/skills/core-rules/SKILL.md` — Operational boundaries
+- `.claude/skills/core/SKILL.md` — Operational boundaries
 - `.claude/skills/ios/ios-development/SKILL.md` — iOS development patterns
 - `CLAUDE.md` — Project context
 

@@ -4,6 +4,19 @@ description: Web platform specialist combining implementation, testing, and desi
 tools: Read, Write, Edit, Bash, Grep, Glob
 model: inherit
 color: green
+skills:
+  - core
+  - web/nextjs
+  - web/frontend-development
+  - web/backend-development
+  - web/klara-theme
+memory: project
+hooks:
+  PostToolUse:
+    - matcher: "Write|Edit"
+      hooks:
+        - type: command
+          command: "npx prettier --write \"$(jq -r '.tool_input.file_path')\" 2>/dev/null || true"
 ---
 
 # Web Platform Specialist
@@ -141,9 +154,10 @@ You are the web platform specialist. Your job is to execute complete web develop
 ### 5. Component Documentation (klara-theme)
 
 When delegated documentation tasks from epost-documenter:
-- Activate skill: `web/figma-integration`
-- Follow: `.claude/workflows/web/klara-theme/document-component.md`
-- For Figma extraction: `.claude/workflows/web/klara-theme/extract-figma.md`
+- Activate skill: `web/figma-integration` (MCP tools + token mapping)
+- Activate skill: `web/klara-theme` (pipeline knowledge)
+- Follow: `web/klara-theme/document-component.md` aspect for documentation
+- For Figma extraction: `web/figma-integration/extraction-procedure.md` aspect
 - Validate against: `libs/klara-theme/figma-data/schema/`
 - Update: `libs/klara-theme/figma-data/manifest.json`
 
@@ -320,9 +334,9 @@ test("user can login", async ({ page }) => {
 
 ## Related Documents
 
-- `.claude/skills/core-rules/SKILL.md` — Operational boundaries
+- `.claude/skills/core/SKILL.md` — Operational boundaries
 - `.claude/skills/web/figma-integration/SKILL.md` — Figma MCP integration
-- `.claude/workflows/web/klara-theme/` — klara-theme workflows
+- `.claude/skills/web/klara-theme/SKILL.md` — klara-theme pipeline skill
 - `CLAUDE.md` — Project context
 
 ---

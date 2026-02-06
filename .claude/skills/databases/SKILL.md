@@ -1,6 +1,7 @@
 ---
 name: databases
 description: Database design, query optimization, and ORM patterns. Use when working with SQL, schema design, migrations, or database queries.
+user-invocable: false
 ---
 
 # Databases Skill

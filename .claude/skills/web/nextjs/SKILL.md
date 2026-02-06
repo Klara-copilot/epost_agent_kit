@@ -1,6 +1,7 @@
 ---
 name: nextjs
 description: Next.js 14 App Router patterns and best practices. Use when working with Next.js pages, routing, data fetching, or server components.
+user-invocable: false
 ---
 
 # Next.js Skill

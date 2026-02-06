@@ -1,6 +1,7 @@
 ---
 name: frontend-development
 description: React 18 and Next.js frontend patterns. Use when building React components, managing state, or implementing UI features.
+user-invocable: false
 ---
 
 # Frontend Development Skill

@@ -28,8 +28,8 @@ The repository uses Claude Code's agent system configured in `.claude/`.
 ### Configuration
 - **Agents**: `.claude/agents/` — 12 specialized agents (orchestrator, architect, implementer, reviewer, debugger, tester, researcher, documenter, git-manager, web-developer, ios-developer, android-developer)
 - **Commands**: `.claude/commands/` — Slash commands (`/plan`, `/cook`, `/test`, `/debug`, `/git:commit`, `/docs:component`, etc.)
-- **Skills**: `.claude/skills/` — Passive knowledge (core-rules, web, iOS, Android, planning, debugging, research, databases, docker, figma-integration)
-- **Workflows**: `.claude/workflows/` — Multi-step orchestration (feature development, bug fixing, klara-theme UI pipeline)
+- **Skills**: `.claude/skills/` — Passive knowledge (core, agents, web, iOS, Android, planning, debugging, research, databases, docker, figma-integration, klara-theme)
+- **Workflows**: `.claude/workflows/` — Reference documentation (feature development, bug fixing flow diagrams)
 
 ### Web Tech Stack
 - **Framework**: Next.js 14 (App Router)
@@ -41,8 +41,8 @@ The repository uses Claude Code's agent system configured in `.claude/`.
 - **State**: Redux Toolkit + Redux Persist
 
 ### klara-theme Integration
-- **Workflows**: `.claude/workflows/web/klara-theme/` — Figma-to-code pipeline (plan-feature, implement-component, audit-ui, fix-findings, extract-figma, document-component)
-- **Figma Skill**: `.claude/skills/web/figma-integration/` — Figma MCP tool patterns, design token mapping
+- **klara-theme Skill**: `.claude/skills/web/klara-theme/` — Figma-to-code pipeline (plan-feature, implement-component, audit-ui, fix-findings, document-component)
+- **Figma Skill**: `.claude/skills/web/figma-integration/` — Figma MCP tool patterns, design token mapping, extraction procedure
 - **Command**: `/docs:component <key>` — Document klara-theme components from Figma
 
 ## Naming Conventions
@@ -53,7 +53,7 @@ The repository uses Claude Code's agent system configured in `.claude/`.
 | **Platform agents** | `epost-<platform>-developer.md` | `epost-web-developer` |
 | **Commands** | `<category>/<action>.md` | `web/cook.md`, `fix/fast.md` |
 | **Skills** | `<category>/<domain>/SKILL.md` | `web/nextjs/SKILL.md` |
-| **Workflows** | `<scope>.md` or `<platform>/<lib>/<name>.md` | `web/klara-theme/plan-feature.md` |
+| **Workflows** | `<scope>.md` (reference only) | `feature-development.md` |
 
 - Global agents delegate to platform agents by actual name (e.g., `epost-web-developer`)
 - Skills use YAML frontmatter (`name`, `description`). Sub-skills: `SKILL.md` (index) + aspect files.
@@ -62,7 +62,7 @@ The repository uses Claude Code's agent system configured in `.claude/`.
 
 Each platform's UI library follows:
 1. `CLAUDE.md` in the library root — component patterns, tokens, conventions
-2. Workflows in `.claude/workflows/<platform>/<lib>/` — development pipeline
+2. Skills in `.claude/skills/web/<lib>/` — development pipeline (plan, implement, audit, fix, document)
 3. Per-feature outputs in `libs/<lib>/.ai-agents/ui/<feature>/`
 
 Currently included: klara-theme (web). Future: iOS/Android UI libs in their respective repos.
@@ -80,7 +80,7 @@ Currently included: klara-theme (web). Future: iOS/Android UI libs in their resp
 - Conservative defaults: safety over speed, clarity over cleverness
 
 ### Core Rules
-See `.claude/skills/core-rules/SKILL.md` for operational boundaries:
+See `.claude/skills/core/SKILL.md` for operational boundaries:
 - Decision boundaries (autonomous vs approval actions)
 - Environment safety (pre-execution checks)
 - Context7 usage (secondary reasoning aid rules)
@@ -88,6 +88,7 @@ See `.claude/skills/core-rules/SKILL.md` for operational boundaries:
 
 ## Related Documents
 
-- `.claude/skills/core-rules/SKILL.md` — Operational rules and boundaries
+- `.claude/skills/core/SKILL.md` — Operational rules and boundaries
+- `.claude/skills/agents/SKILL.md` — Ecosystem structure and component reference
 - `.claude/skills/web/figma-integration/SKILL.md` — Figma MCP integration
-- `.claude/workflows/web/klara-theme/` — klara-theme workflows
+- `.claude/skills/web/klara-theme/SKILL.md` — klara-theme pipeline skill

@@ -4,6 +4,8 @@ description: Git workflow automation agent. Use for /git commands, commit messag
 tools: Read, Write, Edit, Bash, Grep, Glob
 model: inherit
 color: purple
+skills:
+  - core
 ---
 
 # Git Manager Agent
@@ -233,7 +235,7 @@ This agent integrates with:
 
 ## Related Documents
 
-- `.claude/skills/core-rules/SKILL.md` — Operational boundaries
+- `.claude/skills/core/SKILL.md` — Operational boundaries
 - `CLAUDE.md` — Project context
 
 ---

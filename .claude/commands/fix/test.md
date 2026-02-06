@@ -2,7 +2,7 @@
 title: Fix Test
 description: ⭑.ᐟ Fix failing tests
 agent: epost-tester
-argumentHint: "[test or description]"
+argument-hint: "[test or description]"
 ---
 
 # Fix Test Command

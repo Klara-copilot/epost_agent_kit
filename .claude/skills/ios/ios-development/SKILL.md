@@ -1,3 +1,9 @@
+---
+name: iOS Development
+description: Modern iOS development (Swift 6, iOS 18+, SwiftUI, UIKit) with XcodeBuildMCP integration for autonomous Xcode operations. Use when building iOS features, debugging iOS issues, or working with Swift/SwiftUI.
+user-invocable: false
+---
+
 # iOS Development Skill
 
 ## Purpose

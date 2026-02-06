@@ -4,6 +4,9 @@ description: Top-level task router and project manager. Routes tasks to appropri
 tools: Read, Glob, Grep, Bash
 model: inherit
 color: green
+skills:
+  - core
+  - agents
 ---
 
 # Orchestrator Agent
@@ -107,7 +110,7 @@ When platform detected:
 
 ## Related Documents
 
-- `.claude/skills/core-rules/SKILL.md` — Operational boundaries
+- `.claude/skills/core/SKILL.md` — Operational boundaries
 - `CLAUDE.md` — Project context
 
 ---

@@ -4,6 +4,9 @@ description: Android platform specialist combining implementation and testing. E
 tools: Read, Write, Edit, Bash, Grep, Glob
 model: inherit
 color: green
+skills:
+  - core
+  - android/android-development
 ---
 
 # Android Platform Specialist
@@ -268,7 +271,7 @@ class LoginActivityTest {
 
 ## Related Documents
 
-- `.claude/skills/core-rules/SKILL.md` — Operational boundaries
+- `.claude/skills/core/SKILL.md` — Operational boundaries
 - `CLAUDE.md` — Project context
 
 ---

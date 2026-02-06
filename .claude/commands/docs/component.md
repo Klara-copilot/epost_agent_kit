@@ -1,8 +1,8 @@
 ---
 title: Document Component
-description: Document a klara-theme component (Figma data + prop mapping)
+description: ⭑.ᐟ Document a klara-theme component (Figma data + prop mapping)
 agent: epost-documenter
-argumentHint: "<componentKey> [nodeId]"
+argument-hint: "<componentKey> [nodeId]"
 ---
 
 # /docs:component
@@ -43,8 +43,8 @@ Document a klara-theme component by extracting Figma data and creating prop mapp
 3. **Delegate**: Delegates to `epost-web-developer` with:
    - `componentKey`: The component to document
    - `workflow`: `document-component`
-4. **Execute**: Web developer follows `.claude/workflows/web/klara-theme/document-component.md`:
-   - Extract Figma data via `extract-figma.md`
+4. **Execute**: Web developer follows `web/klara-theme/document-component.md` skill aspect:
+   - Extract Figma data via `web/figma-integration/extraction-procedure.md`
    - Cross-reference with codebase
    - Write `<componentKey>.figma.json`
    - Write `<componentKey>.mapping.json`
@@ -59,7 +59,7 @@ Document a klara-theme component by extracting Figma data and creating prop mapp
 
 ## Related
 
-- Workflow: `.claude/workflows/web/klara-theme/document-component.md`
-- Extraction: `.claude/workflows/web/klara-theme/extract-figma.md`
+- Skill: `.claude/skills/web/klara-theme/document-component.md`
+- Extraction: `.claude/skills/web/figma-integration/extraction-procedure.md`
 - Manifest: `libs/klara-theme/figma-data/manifest.json`
 - Schemas: `libs/klara-theme/figma-data/schema/`

@@ -1,6 +1,7 @@
 ---
 name: docker
 description: Containerization patterns for development and deployment. Use when working with Dockerfiles, Docker Compose, or container orchestration.
+user-invocable: false
 ---
 
 # Docker Skill

@@ -3,6 +3,9 @@ name: epost-documenter
 description: Documentation orchestrator that generates, updates, and maintains project documentation. Delegates to platform agents for library-specific documentation (klara-theme, iOS, Android).
 color: blue
 model: inherit
+skills:
+  - core
+  - web/figma-integration
 ---
 
 # Documentation Orchestrator Agent
@@ -48,8 +51,8 @@ When documenting klara-theme components:
    - `workflow`: `document-component`
 
 2. **Web developer activates**:
-   - Skill: `web/figma-integration`
-   - Workflow: `.claude/workflows/web/klara-theme/document-component.md`
+   - Skill: `web/figma-integration` (MCP tools + token mapping)
+   - Skill: `web/klara-theme` (pipeline: `document-component.md` aspect)
 
 3. **Output**:
    - `libs/klara-theme/figma-data/components/<key>.figma.json`
@@ -115,7 +118,7 @@ When documenting klara-theme components:
 
 ## Related Documents
 
-- `.claude/skills/core-rules/SKILL.md` — Operational boundaries
+- `.claude/skills/core/SKILL.md` — Operational boundaries
 - `CLAUDE.md` — Project context
 
 ---

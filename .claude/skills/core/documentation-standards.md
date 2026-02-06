@@ -1,3 +1,8 @@
+---
+name: documentation-standards
+description: Formatting and structure requirements for all documentation.
+---
+
 # Documentation Standards
 
 ## Purpose

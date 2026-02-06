@@ -21,6 +21,27 @@
           }
         ]
       }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Verify all requested tasks are complete. If any remain unfinished, respond with {\"ok\": false, \"reason\": \"remaining work description\"}."
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'Reminder: This is epost_agent_kit. Use epost agents for all tasks. Check CLAUDE.md for conventions.'"
+          }
+        ]
+      }
     ]
   },
   "permissions": {

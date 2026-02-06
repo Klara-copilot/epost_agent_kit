@@ -1,6 +1,7 @@
 ---
 name: android-development
 description: Android development patterns with Kotlin and Jetpack Compose. Use when building Android features, UI components, or platform-specific functionality.
+user-invocable: false
 ---
 
 # Android Development Skill

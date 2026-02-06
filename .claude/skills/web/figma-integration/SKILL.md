@@ -1,6 +1,7 @@
 ---
 name: figma-integration
 description: Figma MCP tool patterns, design token mapping, and visual validation for klara-theme components. Use when extracting Figma data, documenting components from Figma, mapping design tokens, or comparing implementation to Figma designs.
+user-invocable: false
 ---
 
 # Figma Integration Skill
@@ -98,12 +99,16 @@ If differences found, categorize as:
 - **Bug**: Implementation error, needs fix
 - **Enhancement**: Design improvement not yet implemented
 
+## Aspect Files
+
+| Aspect | Purpose |
+|--------|---------|
+| `extraction-procedure.md` | Step-by-step Figma data extraction with anti-truncation handling |
+
 ## Related Resources
 
 - **klara-theme docs**: `libs/klara-theme/CLAUDE.md`
-- **Workflows**: `.claude/workflows/web/klara-theme/`
-  - `extract-figma.md` — Figma data extraction procedure
-  - `document-component.md` — Component documentation workflow
+- **klara-theme skill**: `.claude/skills/web/klara-theme/` — Component pipeline (plan, implement, audit, fix, document)
 - **Schemas**: `libs/klara-theme/figma-data/schema/`
   - `component-data.schema.json` — Figma component data structure
   - `component-mapping.schema.json` — Prop mapping structure

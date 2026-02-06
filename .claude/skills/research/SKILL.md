@@ -1,6 +1,8 @@
 ---
 name: research
 description: Multi-source information gathering and validation. Use for documentation lookup, best practices research, or comparative analysis.
+context: fork
+agent: Explore
 ---
 
 # Research Skill

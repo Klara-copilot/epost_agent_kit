@@ -2,7 +2,7 @@
 title: Fix Hard
 description: ⭑.ᐟ Complex bug fixes requiring investigation
 agent: epost-debugger
-argumentHint: "[description]"
+argument-hint: "[description]"
 ---
 
 # Fix Hard Command

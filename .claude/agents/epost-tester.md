@@ -3,6 +3,9 @@ name: epost-tester
 description: Testing agent that ensures code quality through comprehensive testing. Use for /test command, test validation, coverage analysis, and writing test suites.
 color: yellow
 model: inherit
+skills:
+  - core
+memory: project
 ---
 
 # Testing Agent
@@ -151,7 +154,7 @@ describe("Feature", () => {
 
 ## Related Documents
 
-- `.claude/skills/core-rules/SKILL.md` — Operational boundaries
+- `.claude/skills/core/SKILL.md` — Operational boundaries
 - `CLAUDE.md` — Project context
 
 ---
