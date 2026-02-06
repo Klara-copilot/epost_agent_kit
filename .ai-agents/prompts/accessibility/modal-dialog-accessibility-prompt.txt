@@ -1,0 +1,62 @@
+@architect
+
+**Task:** Ensure this modal dialog has proper focus management for VoiceOver accessibility.
+
+**Context:** I'm implementing a modal dialog/popup in this file. Modal dialogs must trap focus and announce properly to VoiceOver users.
+
+**Instructions:**
+1. Review the modal presentation code in this file
+2. Check against `.cursor/rules/a11y-focus.mdc` for:
+   - Focus moves into dialog when presented
+   - `accessibilityViewIsModal` is set on the modal view
+   - Focus returns to triggering element when dismissed
+   - Screen change is announced
+3. Provide complete Swift code snippets for:
+   - Modal presentation with focus management
+   - Setting `accessibilityViewIsModal`
+   - Dismissal with focus return
+   - Using `UIAccessibility.post()` for announcements
+
+**Output Format:**
+- Show complete code blocks for presentation and dismissal
+- Include all necessary `UIAccessibility` calls
+- Provide before/after comparisons
+- Reference specific patterns from a11y-focus.mdc
+
+**Example Output:**
+```swift
+// Modal Presentation (in presenting view controller)
+func presentModal() {
+    let modalVC = ModalViewController()
+    present(modalVC, animated: true) {
+        // Set modal accessibility
+        modalVC.view.accessibilityViewIsModal = true
+        
+        // Focus first element
+        UIAccessibility.post(
+            notification: .screenChanged,
+            argument: modalVC.firstElement
+        )
+        
+        // Announce modal
+        UIAccessibility.post(
+            notification: .announcement,
+            argument: "Modal dialog opened"
+        )
+    }
+}
+
+// Modal Dismissal (in modal view controller)
+func dismissModal() {
+    dismiss(animated: true) {
+        // Return focus to triggering element
+        UIAccessibility.post(
+            notification: .screenChanged,
+            argument: self.presentingViewController?.triggeringButton
+        )
+    }
+}
+```
+
+**Critical:** Ensure dismiss button is always accessible to prevent focus traps.
+

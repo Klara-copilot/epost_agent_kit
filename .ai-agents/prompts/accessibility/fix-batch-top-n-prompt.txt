@@ -1,0 +1,67 @@
+@fixer
+
+**Task:** Batch-fix the top N priority findings from the known findings database.
+
+**Context:** I want to fix multiple high-priority accessibility issues at once. Process the top {N} findings with `priority = 1` that are not yet fixed.
+
+**Instructions:**
+1. Load `.agent-knowledge/epost-known-findings.json`
+2. Filter findings where:
+   - `priority = 1` (highest priority)
+   - `status` field is missing or not equal to "fixed" (treat missing as not fixed)
+3. Sort by `priority` (ascending) and `id` (ascending)
+4. Take the top {N} findings
+5. For each finding:
+   - Use `file_pattern` to locate Swift file(s)
+   - Use `code_pattern` to locate specific code element
+   - Apply appropriate `fix_template` from rulebook:
+     - `add_button_label`: Add `accessibilityLabel`, `accessibilityTraits = .button`, `isAccessibilityElement = true`
+     - `add_heading_trait`: Add `.header` trait and heading level
+     - `add_form_label`: Add form label association
+     - `make_image_decorative`: Set `isAccessibilityElement = false`
+     - `add_modal_focus_trap`: Set `accessibilityViewIsModal` and focus management
+     - `add_status_announcement`: Add `UIAccessibility.post()` announcements
+     - `other_manual`: Propose fix based on WCAG rules
+   - Generate unified diff for the file
+   - Determine status (SUCCESS, NEEDS_REVIEW, FAILED)
+6. **Do NOT apply patches automatically** - only show diffs for manual review
+
+**Output Format:**
+Output a JSON array with one object per finding:
+
+```json
+[
+  {
+    "finding_id": 3,
+    "file": "path/to/file.swift",
+    "status": "SUCCESS",
+    "diff": "--- a/path/to/file.swift\n+++ b/path/to/file.swift\n@@ -42,6 +42,8 @@\n mapButton.accessibilityLabel = \"Show map\"\n mapButton.accessibilityTraits = .button\n mapButton.isAccessibilityElement = true"
+  },
+  {
+    "finding_id": 4,
+    "file": "path/to/other.swift",
+    "status": "NEEDS_REVIEW",
+    "diff": "",
+    "explanation": "Could not locate infoIcon button - may be in different file"
+  }
+]
+```
+
+**Field Definitions:**
+- `finding_id`: ID from epost-known-findings.json
+- `file`: Relative path to Swift file (from repo root)
+- `status`: One of "SUCCESS", "NEEDS_REVIEW", "FAILED"
+- `diff`: Unified diff format (empty string if status is FAILED)
+- `explanation`: Required if status is NEEDS_REVIEW or FAILED
+
+**Constraints:**
+- Process findings in order (priority 1, then by ID)
+- Make minimal, surgical changes only
+- Do NOT refactor unrelated code
+- If multiple files match `file_pattern`, fix all matches
+- If `code_pattern` is ambiguous, return `NEEDS_REVIEW`
+- If fix cannot be determined, return `NEEDS_REVIEW` with explanation
+
+**Example Usage:**
+Replace `{N}` with the number of findings to process (e.g., "5" for top 5 findings).
+

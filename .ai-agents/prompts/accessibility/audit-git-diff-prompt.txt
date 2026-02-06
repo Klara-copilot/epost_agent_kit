@@ -1,0 +1,65 @@
+@auditor
+
+**Task:** Run an accessibility audit on all Swift files changed in the current Git diff.
+
+**Context:** I want to check if my recent code changes introduce any accessibility violations before committing or creating a pull request.
+
+**Knowledge Sources:**
+- Accessibility rules: `.cursor/rules/a11y-*.mdc` (WCAG 2.1 AA compliance rules for iOS)
+- Known findings: `.agent-knowledge/epost-known-findings.json` (mapping of known issues)
+
+**Instructions:**
+1. Get the current Git diff (all changed Swift files)
+2. For each changed Swift file:
+   - Scan for accessibility violations using rules from `a11y-*.mdc`
+   - Check against known findings in `epost-known-findings.json` to identify matching issues
+   - Classify each violation by:
+     - Type (button, heading, form, image, focus, color, etc.)
+     - WCAG criterion (e.g., "1.1.1", "4.1.2")
+     - Severity (critical, high, medium, low)
+     - Finding ID if it matches a known finding
+3. Determine if PR should be blocked:
+   - Block if critical violations exist
+   - Block if high-severity violations introduce new accessibility regressions
+   - Do not block for low-severity or pre-existing issues
+
+**Output Format:**
+Output ONLY valid JSON, no prose explanation. Use this exact structure:
+
+```json
+{
+  "total_violations": 0,
+  "critical": 0,
+  "violations": [
+    {
+      "file": "path/to/file.swift",
+      "line": 45,
+      "type": "button",
+      "wcag": "4.1.2",
+      "severity": "critical",
+      "message": "Button missing accessibilityLabel",
+      "finding_id": 3
+    }
+  ],
+  "should_block_pr": false
+}
+```
+
+**Field Definitions:**
+- `total_violations`: Total count of all violations found
+- `critical`: Count of critical-severity violations
+- `violations`: Array of violation objects
+  - `file`: Relative path from repo root
+  - `line`: Line number where violation occurs
+  - `type`: One of: "button", "heading", "form", "image", "focus", "color", "other"
+  - `wcag`: WCAG criterion code (e.g., "1.1.1", "4.1.2")
+  - `severity`: One of: "critical", "high", "medium", "low"
+  - `message`: Brief description of the violation
+  - `finding_id`: ID from epost-known-findings.json if matched, null otherwise
+- `should_block_pr`: Boolean indicating if PR should be blocked
+
+**Important:**
+- Only output JSON, no markdown, no explanations
+- If no violations found, return empty violations array
+- Match violations to known findings when file_pattern and code_pattern match
+
