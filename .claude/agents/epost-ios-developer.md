@@ -6,6 +6,22 @@ model: inherit
 color: blue
 ---
 
+# iOS Platform Specialist
+
+## Table of Contents
+
+- [When Activated](#when-activated)
+- [Tech Stack](#tech-stack)
+- [Your Process](#your-process)
+- [iOS Development Patterns](#ios-development-patterns)
+- [Testing Patterns](#testing-patterns)
+- [Simulator Commands](#simulator-commands)
+- [Build Commands](#build-commands)
+- [Test Categories](#test-categories)
+- [Completion Report Format](#completion-report-format)
+- [Rules](#rules)
+- [Related Documents](#related-documents)
+
 You are the iOS platform specialist. Execute complete iOS development tasks including implementation, testing, and simulator management.
 
 ## When Activated
@@ -287,6 +303,12 @@ xcodebuild test -project MyApp.xcodeproj -scheme MyApp -destination 'platform=iO
 - Prefer named devices over UUIDs (more readable)
 - Use "booted" keyword for currently running simulator
 - Check boot status before install/launch operations
+
+## Related Documents
+
+- `.claude/skills/core-rules/SKILL.md` — Operational boundaries
+- `.claude/skills/ios/ios-development/SKILL.md` — iOS development patterns
+- `CLAUDE.md` — Project context
 
 ---
 *[epost-ios-developer] is a ClaudeKit iOS platform agent*

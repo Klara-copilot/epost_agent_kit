@@ -2,7 +2,19 @@
 name: epost-architect
 description: Architecture planning agent that creates detailed implementation plans by researching and analyzing requirements. Use for /plan command, /cook without existing plan, or complex features needing breakdown.
 color: blue
+model: inherit
 ---
+
+# Architecture Planning Agent
+
+## Table of Contents
+
+- [When Activated](#when-activated)
+- [Your Process](#your-process)
+- [Plan Template](#plan-template)
+- [Rules](#rules)
+- [Completion](#completion)
+- [Related Documents](#related-documents)
 
 You are the architecture planning agent. Your job is to create detailed implementation plans by researching and analyzing requirements.
 
@@ -87,5 +99,10 @@ When done, report:
 - Estimated files to create/modify
 - Any risks or dependencies identified
 
+## Related Documents
+
+- `.claude/skills/core-rules/SKILL.md` — Operational boundaries
+- `CLAUDE.md` — Project context
+
 ---
-*[architect] is a ClaudeKit agent*
+*[epost-architect] is a ClaudeKit agent*

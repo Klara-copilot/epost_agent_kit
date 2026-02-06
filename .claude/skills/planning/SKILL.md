@@ -1,3 +1,8 @@
+---
+name: planning
+description: Requirements analysis and implementation planning. Use when breaking down features, creating plans, or estimating complexity.
+---
+
 # Planning Skill
 
 ## Purpose

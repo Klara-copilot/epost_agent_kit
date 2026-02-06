@@ -1,3 +1,8 @@
+---
+name: backend-development
+description: Node.js and Next.js API route patterns. Use when building APIs, handling requests, or implementing server-side logic.
+---
+
 # Backend Development Skill
 
 ## Purpose
@@ -88,7 +93,7 @@ const createUserSchema = z.object({
 ```
 
 ## Dependencies
-- Node.js 20+ / Bun
-- Fastify / Express / Hono
+- Node.js 20+
+- Next.js 14 (API routes + server actions)
 - Zod (validation)
 - Prisma / Drizzle (ORM)

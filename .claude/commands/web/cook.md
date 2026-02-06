@@ -11,24 +11,24 @@ Implement the web platform feature described by the user.
 1. Read and understand the feature requirements
 2. Verify Next.js project structure and dependencies
 3. Activate relevant skills: web/nextjs, web/frontend-development, web/backend-development
-4. Implement the feature following Next.js 15 App Router conventions
+4. Implement the feature following Next.js 14 App Router conventions
 5. Run build and lint to verify quality
 6. Report completion with file changes
 
 ## Tech Stack
 
-- Next.js 15+ (App Router)
-- React 19+
+- Next.js 14 (App Router)
+- React 18
 - TypeScript 5+
-- Tailwind CSS 4+
-- shadcn/ui components
-- Better Auth (if auth needed)
+- Tailwind CSS + SCSS
+- klara-theme or shadcn/ui components
+- Redux Toolkit + Redux Persist (state)
 
 ## Quality Checks
 
 - TypeScript strict mode compliance
-- Build successful (`npm run build` or `bun run build`)
-- Lint passing (`npm run lint` or `bun run lint`)
+- Build successful (`npm run build`)
+- Lint passing (`npm run lint`)
 - Responsive design (mobile-first)
 - Accessibility (WCAG AA)
 

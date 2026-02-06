@@ -16,7 +16,7 @@ Run tests and analyze coverage.
 ```
 
 ## Your Process
-1. Identify test framework (Jest, Vitest, pytest, etc.)
+1. Identify test framework (Jest for web, XCTest for iOS, JUnit for Android, pytest, etc.)
 2. Run the test suite
 3. Parse results
 4. Calculate coverage

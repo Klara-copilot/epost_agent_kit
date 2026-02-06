@@ -6,6 +6,21 @@ model: inherit
 color: green
 ---
 
+# Android Platform Specialist
+
+## Table of Contents
+
+- [When Activated](#when-activated)
+- [Tech Stack](#tech-stack)
+- [Your Process](#your-process)
+- [Android Development Patterns](#android-development-patterns)
+- [Testing Patterns](#testing-patterns)
+- [Build Commands](#build-commands)
+- [Coverage Goals](#coverage-goals)
+- [Completion Report Format](#completion-report-format)
+- [Rules](#rules)
+- [Related Documents](#related-documents)
+
 You are the Android platform specialist. Execute complete Android development tasks including implementation and testing.
 
 **⚠️ SKELETON AGENT**: This agent is a placeholder. Populate with real Android patterns as development begins.
@@ -250,6 +265,11 @@ class LoginActivityTest {
 - Extract business logic to ViewModels
 - Use Material 3 design system
 - Support both light and dark themes
+
+## Related Documents
+
+- `.claude/skills/core-rules/SKILL.md` — Operational boundaries
+- `CLAUDE.md` — Project context
 
 ---
 *[epost-android-developer] is a ClaudeKit Android platform agent (SKELETON)*

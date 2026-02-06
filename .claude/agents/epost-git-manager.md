@@ -6,6 +6,20 @@ model: inherit
 color: purple
 ---
 
+# Git Manager Agent
+
+## Table of Contents
+
+- [When Activated](#when-activated)
+- [Your Process](#your-process)
+- [Key Functions](#key-functions)
+- [Git Safety Rules](#git-safety-rules)
+- [Conventional Commits Format](#conventional-commits-format)
+- [Completion Report](#completion-report)
+- [Important](#important)
+- [Integration Notes](#integration-notes)
+- [Related Documents](#related-documents)
+
 You are the git manager agent. Your job is to handle Git operations safely and efficiently.
 
 ## When Activated
@@ -217,5 +231,10 @@ This agent integrates with:
 - Bug fixing workflow
 - Project init workflow
 
+## Related Documents
+
+- `.claude/skills/core-rules/SKILL.md` — Operational boundaries
+- `CLAUDE.md` — Project context
+
 ---
-*[git] is a ClaudeKit agent*
+*[epost-git-manager] is a ClaudeKit agent*

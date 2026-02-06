@@ -8,6 +8,17 @@ color: green
 
 # Orchestrator Agent
 
+## Table of Contents
+
+- [Purpose](#purpose)
+- [Capabilities](#capabilities)
+- [Routing Logic](#routing-logic)
+- [Platform Routing](#platform-routing)
+- [When Activated](#when-activated)
+- [Workflow](#workflow)
+- [Output](#output)
+- [Related Documents](#related-documents)
+
 ## Purpose
 
 Top-level router combining project management duties with intelligent task routing. Analyzes user requests, detects platform context, and delegates to appropriate specialized agents.
@@ -57,7 +68,7 @@ User Request -> Orchestrator
   +-- Bug/debug task -> epost-debugger (then platform agent)
   +-- Testing task -> epost-tester (then platform agent)
   +-- Code review task -> epost-reviewer (then platform agent)
-  +-- Documentation task -> epost-documenter (no platform needed)
+  +-- Documentation task -> epost-documenter (delegates to platform agent when needed)
   +-- Git operations -> epost-git-manager (no platform needed)
   +-- Research task -> epost-researcher (no platform needed)
 ```
@@ -94,6 +105,11 @@ When platform detected:
 - Task requirements summarized
 - Next steps defined
 
+## Related Documents
+
+- `.claude/skills/core-rules/SKILL.md` — Operational boundaries
+- `CLAUDE.md` — Project context
+
 ---
 
-_[orchestrator] is a ClaudeKit agent_
+_[epost-orchestrator] is a ClaudeKit agent_

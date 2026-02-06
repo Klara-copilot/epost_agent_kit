@@ -1,3 +1,8 @@
+---
+name: frontend-development
+description: React 18 and Next.js frontend patterns. Use when building React components, managing state, or implementing UI features.
+---
+
 # Frontend Development Skill
 
 ## Purpose
@@ -21,8 +26,8 @@ User mentions React, frontend, UI components, hooks.
 - Slot pattern
 
 ### State Management
-- Context API for global state
-- Zustand for client state
+- Redux Toolkit + Redux Persist for global state
+- Context API for local state sharing
 - Server state with React Query
 - Form state with react-hook-form
 

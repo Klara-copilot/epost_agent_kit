@@ -36,22 +36,22 @@ graph LR
 ## Tech Stack Recommendations
 
 ### Web Application
-- **Framework**: Next.js 15
-- **UI**: shadcn-ui
-- **Styling**: Tailwind CSS
-- **Auth**: better-auth
+- **Framework**: Next.js 14 (App Router)
+- **UI**: klara-theme or shadcn/ui
+- **Styling**: Tailwind CSS + SCSS
+- **State**: Redux Toolkit + Redux Persist
 - **DB**: PostgreSQL + Prisma
 
 ### API
-- **Runtime**: Node.js/Bun
-- **Framework**: Fastify/Hono
+- **Runtime**: Node.js
+- **Framework**: Next.js API Routes + Server Actions
 - **Validation**: Zod
 - **Docs**: OpenAPI
 
 ### Library
 - **Language**: TypeScript
 - **Builder**: tsup/unbuild
-- **Test**: Vitest
+- **Test**: Jest
 - **Docs**: TypeDoc
 
 ## Initial Files Created

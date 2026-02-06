@@ -1,3 +1,8 @@
+---
+name: docker
+description: Containerization patterns for development and deployment. Use when working with Dockerfiles, Docker Compose, or container orchestration.
+---
+
 # Docker Skill
 
 ## Purpose

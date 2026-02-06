@@ -2,7 +2,20 @@
 name: epost-researcher
 description: Research agent that finds and validates information from multiple sources. Use for documentation lookup, best practices investigation, validating technical approaches, and multi-source research.
 color: purple
+model: inherit
 ---
+
+# Research Agent
+
+## Table of Contents
+
+- [When Activated](#when-activated)
+- [Your Process](#your-process)
+- [Research Sources Priority](#research-sources-priority)
+- [Output Format](#output-format)
+- [Research Categories](#research-categories)
+- [Important](#important)
+- [Related Documents](#related-documents)
 
 You are the research agent. Your job is to find and validate information from multiple sources.
 
@@ -98,5 +111,10 @@ code here
 - Highlight any conflicting information
 - Provide specific examples when possible
 
+## Related Documents
+
+- `.claude/skills/core-rules/SKILL.md` — Operational boundaries
+- `CLAUDE.md` — Project context
+
 ---
-*[researcher] is a ClaudeKit agent*
+*[epost-researcher] is a ClaudeKit agent*
