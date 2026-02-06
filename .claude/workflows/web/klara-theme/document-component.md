@@ -6,6 +6,10 @@ Creating or updating component-data documentation for a klara-theme component.
 ## Context
 Read `libs/klara-theme/CLAUDE.md` for component patterns and documentation conventions.
 
+## Prerequisites
+- Verify `libs/klara-theme/` exists in the consuming project (this path is not part of epost_agent_kit itself)
+- If path missing, inform user: "klara-theme workflows require a project with libs/klara-theme/ directory"
+
 ## Inputs (required)
 - Component key: `<componentKey>`
 - Figma componentSet nodeId (if available)

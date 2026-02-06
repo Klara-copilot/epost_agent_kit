@@ -6,6 +6,10 @@ Auditing a klara-theme component implementation against its plan and Figma desig
 ## Context
 Read `libs/klara-theme/CLAUDE.md` for component patterns and conventions.
 
+## Prerequisites
+- Verify `libs/klara-theme/` exists in the consuming project (this path is not part of epost_agent_kit itself)
+- If path missing, inform user: "klara-theme workflows require a project with libs/klara-theme/ directory"
+
 ## Inputs (required)
 - `libs/klara-theme/.ai-agents/ui/<feature>/component-inventory.json`
 - `libs/klara-theme/.ai-agents/ui/<feature>/variants-mapping.json`

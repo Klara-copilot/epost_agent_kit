@@ -89,6 +89,11 @@ Each platform's UI library follows:
 
 Currently included: klara-theme (web). Future: iOS/Android UI libs in their respective repos.
 
+> **Note on `libs/` paths**: The `libs/<lib>/` paths referenced in workflows and documentation
+> resolve in the **consuming project** after epost_agent_kit is installed (e.g., an Nx monorepo
+> with `libs/klara-theme/`). This repository does not ship a `libs/` directory — it provides
+> the agent configuration, skills, and workflow templates that operate on those paths at runtime.
+
 ## Guidelines
 
 ### Decision Authority

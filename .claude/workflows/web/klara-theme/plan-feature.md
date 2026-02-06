@@ -6,6 +6,10 @@ Planning a new klara-theme UI feature (component, layout, or pattern).
 ## Context
 Read `libs/klara-theme/CLAUDE.md` for component patterns, design tokens, and conventions.
 
+## Prerequisites
+- Verify `libs/klara-theme/` exists in the consuming project (this path is not part of epost_agent_kit itself)
+- If path missing, inform user: "klara-theme workflows require a project with libs/klara-theme/ directory"
+
 ## Inputs (required)
 - `libs/klara-theme/.ai-agents/ui/<feature>/requirements.md`
 - `libs/klara-theme/.ai-agents/ui/<feature>/figma_refs.md`

@@ -6,6 +6,10 @@ Extracting design data from Figma for a klara-theme component or feature.
 ## Context
 Read `libs/klara-theme/CLAUDE.md` (Figma Integration section) for MCP configuration and extraction patterns.
 
+## Prerequisites
+- Verify `libs/klara-theme/` exists in the consuming project (this path is not part of epost_agent_kit itself)
+- If path missing, inform user: "klara-theme workflows require a project with libs/klara-theme/ directory"
+
 ## Inputs
 - **Component-level** (when called by document-component workflow):
   - Component key: `<componentKey>`
