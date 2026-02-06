@@ -229,18 +229,27 @@ describe('State Management Scripts - Phase 04', () => {
         const planPath = createTestPlan('no-session-plan');
         const scriptPath = path.join(__dirname, '..', 'set-active-plan.cjs');
 
-        // Test without setting CK_SESSION_ID in env at all
-        // Use shell command to unset the variable and redirect stderr to stdout
-        const output = execSync(`unset CK_SESSION_ID && node "${scriptPath}" "${planPath}" 2>&1`, {
-          cwd: process.cwd(),
-          encoding: 'utf8',
-          shell: '/bin/bash'
-        });
+        // Test without setting CK_SESSION_ID - script exits with code 1
+        let result;
+        try {
+          execSync(`unset CK_SESSION_ID && node "${scriptPath}" "${planPath}" 2>&1`, {
+            cwd: process.cwd(),
+            encoding: 'utf8',
+            shell: '/bin/bash'
+          });
+          result = { success: true, output: '' };
+        } catch (error) {
+          result = {
+            success: false,
+            output: error.stdout || error.message,
+            code: error.status
+          };
+        }
 
-        // When CK_SESSION_ID is not set, warning should appear in output
-        assert(output.includes('Warning'), `Expected 'Warning' in output but got:\n${output}`);
-        assert(output.includes('Plan state may not persist') || output.includes('not persist'),
-               'Warning should mention persistence issue');
+        // Script should fail without session ID
+        assert.strictEqual(result.success, false, 'Should fail without session ID');
+        assert(result.output.includes('Warning'), `Expected 'Warning' in output but got:\n${result.output}`);
+        assert(result.output.includes('not persist'), 'Should mention persistence issue');
       });
 
       it('T10: existing session state is preserved with update', () => {
