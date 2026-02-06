@@ -293,6 +293,83 @@ EOF
 
 Keep output concise (<1k chars). No explanations of what you did.
 
+## Interactive Confirmations
+
+**CRITICAL**: Confirm before destructive operations using AskUserQuestion tool.
+
+### Destructive Operations Requiring Confirmation
+
+| Operation | Detection Pattern | Confirmation Required |
+|-----------|------------------|----------------------|
+| Force push | `--force`, `-f` flag | Yes |
+| Force push to main/master | `--force` + branch is main/master | ALWAYS BLOCK |
+| Branch deletion | `git branch -D`, `-d` | Yes |
+| Hard reset | `git reset --hard` | Yes |
+| Clean untracked | `git clean -f` | Yes |
+| Rebase | `git rebase` (interactive or not) | Yes if not simple fast-forward |
+
+### Confirmation Pattern
+
+**Template**:
+```
+⚠️  DESTRUCTIVE OPERATION DETECTED
+
+Operation: [operation name]
+Impact: [what will be affected]
+Branch: [branch name]
+Files: [affected files or "N files"]
+
+Options:
+1. Proceed - Execute operation
+2. Cancel - Abort safely
+3. Details - Show what will change
+
+What would you like to do?
+```
+
+**Example - Force Push**:
+```
+⚠️  DESTRUCTIVE OPERATION DETECTED
+
+Operation: Force push
+Impact: Rewrite history on remote branch
+Branch: feature/auth-refactor
+Commits: 3 local commits will replace 5 remote commits
+
+This will:
+- Remove 5 commits from remote
+- Replace with 3 new commits
+- Affect anyone who pulled this branch
+
+Options:
+1. Proceed - Force push (IRREVERSIBLE)
+2. Cancel - Abort and use regular push
+3. Details - Show commit differences
+
+What would you like to do?
+```
+
+**Implementation**:
+Use AskUserQuestion tool with options. On "Details", show:
+```bash
+git log origin/branch..HEAD --oneline  # Local commits
+git log HEAD..origin/branch --oneline  # Remote commits to be lost
+```
+
+### Force Push Protection
+
+**NEVER allow force push to main/master**:
+```bash
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+if [[ "$BRANCH" == "main" || "$BRANCH" == "master" ]] && [[ "$*" =~ --force|-f ]]; then
+  echo "❌ BLOCKED: Force push to $BRANCH is not allowed"
+  echo "Use a pull request workflow instead"
+  exit 1
+fi
+```
+
+**For other branches**: Always confirm with user before executing.
+
 ## Error Handling
 
 | Error              | Response                                      | Action                                   |
@@ -303,6 +380,7 @@ Keep output concise (<1k chars). No explanations of what you did.
 | Merge conflicts    | "❌ Conflicts in: [files]"                     | Suggest `git status` → manual resolution |
 | Push rejected      | "⚠ Push rejected (out of sync)"               | Suggest `git pull --rebase`              |
 | Gemini unavailable | Create message yourself                       | Silent fallback, no error shown          |
+| Destructive op without confirm | "❌ Confirmation required" | Block execution, show confirmation prompt |
 
 ## Token Optimization Strategy
 
