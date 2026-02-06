@@ -1,3 +1,12 @@
+---
+name: docker
+description: Containerization for development and deployment with Docker and Docker Compose
+keywords: [docker, container, dockerfile, compose, deployment, devops]
+platforms: [all]
+triggers: ["Dockerfile", "docker-compose.yml", "container", "docker"]
+agent-affinity: [epost-implementer, epost-architect]
+---
+
 # Docker Skill
 
 ## Purpose

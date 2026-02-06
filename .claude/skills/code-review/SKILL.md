@@ -1,3 +1,12 @@
+---
+name: code-review
+description: Comprehensive code quality assessment and verification with systematic review process
+keywords: [review, code-quality, security, performance, testing, verification]
+platforms: [all]
+triggers: ["/review", "code review", "review code"]
+agent-affinity: [epost-reviewer, epost-implementer]
+---
+
 # Code Review Skill
 
 ## Purpose

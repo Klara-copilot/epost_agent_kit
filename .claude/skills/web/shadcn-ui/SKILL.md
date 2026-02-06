@@ -1,3 +1,12 @@
+---
+name: shadcn-ui
+description: Radix UI + Tailwind component patterns with accessibility and theming
+keywords: [shadcn, shadcn-ui, radix, tailwind, components, accessible, ui]
+platforms: [web]
+triggers: ["shadcn", "radix", "shadcn-ui", "accessible component"]
+agent-affinity: [epost-web-developer, epost-ui-ux-designer]
+---
+
 # shadcn-ui Skill
 
 ## Purpose

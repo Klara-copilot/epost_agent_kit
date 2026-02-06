@@ -1,3 +1,12 @@
+---
+name: databases
+description: Database design, SQL queries, migrations, and data modeling across PostgreSQL, MySQL, SQLite
+keywords: [database, sql, postgres, mysql, sqlite, migrations, schema, orm, prisma, drizzle]
+platforms: [all]
+triggers: [".sql", "database", "postgres", "mysql", "prisma", "drizzle", "migration"]
+agent-affinity: [epost-database-admin, epost-implementer, epost-architect]
+---
+
 # Databases Skill
 
 ## Purpose

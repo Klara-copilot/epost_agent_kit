@@ -1,3 +1,12 @@
+---
+name: sequential-thinking
+description: Structured step-by-step analysis for complex problems and debugging
+keywords: [sequential, thinking, analysis, step-by-step, reasoning, logic]
+platforms: [all]
+triggers: ["complex problem", "step by step", "analyze"]
+agent-affinity: [epost-debugger, epost-architect, epost-implementer]
+---
+
 # Sequential Thinking Skill
 
 ## Purpose

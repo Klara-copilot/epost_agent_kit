@@ -1,3 +1,12 @@
+---
+name: backend-development
+description: Node.js backend patterns with REST APIs, error handling, and authentication
+keywords: [backend, api, rest, node, express, server, endpoints, validation]
+platforms: [web]
+triggers: ["api", "backend", "server", "endpoint", "route.ts"]
+agent-affinity: [epost-web-developer, epost-implementer]
+---
+
 # Backend Development Skill
 
 ## Purpose

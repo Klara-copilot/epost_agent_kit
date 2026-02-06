@@ -1,3 +1,12 @@
+---
+name: better-auth
+description: Authentication implementation with better-auth library for OAuth and session management
+keywords: [auth, authentication, oauth, better-auth, login, session, jwt]
+platforms: [web]
+triggers: ["auth", "login", "oauth", "better-auth", "authentication"]
+agent-affinity: [epost-web-developer, epost-implementer]
+---
+
 # Better Auth Skill
 
 ## Purpose

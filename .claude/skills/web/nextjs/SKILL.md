@@ -1,3 +1,12 @@
+---
+name: nextjs
+description: Next.js 15 App Router with Server Components, Server Actions, and routing patterns
+keywords: [nextjs, next, app-router, server-components, server-actions, routing]
+platforms: [web]
+triggers: ["next.js", "nextjs", "app router", "server component"]
+agent-affinity: [epost-web-developer, epost-implementer]
+---
+
 # Next.js Skill
 
 ## Purpose

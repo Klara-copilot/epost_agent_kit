@@ -1,3 +1,12 @@
+---
+name: debugging
+description: Systematic debugging methodology with root cause analysis and fix validation
+keywords: [debug, error, bug, troubleshoot, root-cause, stack-trace, logging]
+platforms: [all]
+triggers: ["/debug", "error", "bug", "crash", "exception"]
+agent-affinity: [epost-debugger, epost-implementer]
+---
+
 # Debugging Skill
 
 ## Purpose
