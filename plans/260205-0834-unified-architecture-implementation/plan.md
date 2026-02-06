@@ -1,12 +1,13 @@
 ---
 title: "Unified Architecture Implementation"
 description: "Restructure agent kit into parent-child delegation + npx epost-kit CLI distribution"
-status: pending
+status: in-progress
 priority: P1
 effort: 32h
 branch: master
 tags: [architecture, cli, multi-platform, agents]
 created: 2026-02-05
+updated: 2026-02-06
 ---
 
 # Unified Architecture Implementation
@@ -50,18 +51,19 @@ Global (orchestrate)          Platform (execute)
 
 ## Phases
 
-| # | Phase | File | Effort | Status |
-|---|-------|------|--------|--------|
-| 0 | Dependencies & Audit | [phase-00](phase-00-dependencies-audit.md) | 1h | pending |
-| 1 | Rules Foundation | [phase-01](phase-01-rules-foundation.md) | 2h | pending |
-| 2 | Global Agents Restructuring | [phase-02](phase-02-global-agents.md) | 4h | pending |
-| 3 | Web Platform Agents | [phase-03](phase-03-web-platform-agents.md) | 3h | pending |
-| 4 | Functional Verification | [phase-04](phase-04-functional-verification.md) | 2h | pending |
-| 5 | iOS Platform Agents | [phase-05](phase-05-ios-platform-agents.md) | 3h | pending |
-| 6 | Android Platform Agents | [phase-06](phase-06-android-platform-agents.md) | 2h | pending |
-| 7 | CLI Build | [phase-07](phase-07-cli-build.md) | 8h | pending |
-| 8 | Platform Sync | [phase-08](phase-08-platform-sync.md) | 4h | pending |
-| 9 | E2E Verification | [phase-09](phase-09-e2e-verification.md) | 3h | pending |
+| # | Phase | File | Effort | Status | Progress |
+|---|-------|------|--------|--------|----------|
+| 0 | Dependencies & Audit | [phase-00](phase-00-dependencies-audit.md) | 1h | pending | 0% |
+| 1 | Rules Foundation | [phase-01](phase-01-rules-foundation.md) | 2h | pending | 0% |
+| 2 | Global Agents Restructuring | [phase-02](phase-02-global-agents.md) | 4h | pending | 0% |
+| 3 | Parallel Planning Variant | [phase-03-parallel.md](phase-03-web-platform-agents.md) | 1h | complete | 100% ✓ |
+| 3.5 | Web Platform Agents | [phase-03-web.md](phase-03-web-platform-agents.md) | 3h | pending | 0% |
+| 4 | Session State + Verification | [phase-04](phase-04-functional-verification.md) | 3h | complete | 100% ✓ |
+| 5 | iOS Platform Agents | [phase-05](phase-05-ios-platform-agents.md) | 3h | pending | 0% |
+| 6 | Android Platform Agents | [phase-06](phase-06-android-platform-agents.md) | 2h | pending | 0% |
+| 7 | CLI Build | [phase-07](phase-07-cli-build.md) | 8h | pending | 0% |
+| 8 | Platform Sync | [phase-08](phase-08-platform-sync.md) | 4h | pending | 0% |
+| 9 | E2E Verification | [phase-09](phase-09-e2e-verification.md) | 3h | pending | 0% |
 
 ## Key Design Decisions
 

@@ -44,34 +44,34 @@ Layer 2: npx epost-kit install                           → Full ecosystem (age
 
 ## Cross-Platform Conversion Table
 
-| Source Component | Claude Code | Cursor | Copilot |
-|-----------------|-------------|--------|---------|
-| **Agent** (`agents/*.txt`) | `.claude/agents/*.md` (YAML: name, description, tools, model, color, hooks) | `AGENTS.md` (combined, hierarchical) | `.github/agents/*.agent.md` (YAML: name, description, tools, model, target, handoffs) |
-| **Rule** (`rules/*.md`) | `CLAUDE.md` sections | `.cursor/rules/*.mdc` (preserve frontmatter) | `.github/instructions/*.instructions.md` (applyTo conversion) |
-| **Workflow** (`workflows/*.yaml`) | `.claude/skills/*/SKILL.md` (preferred) or `.claude/commands/*.md` | `.cursor/commands/*.md` (slash cmds) | `.github/prompts/*.prompt.md` or `.github/workflows/*.yml` (CI) |
-| **Skill** (`skills/*/SKILL.md`) | `.claude/skills/*/SKILL.md` (native, = slash command) | `.cursor/commands/*.md` (converted) | `.github/prompts/*.prompt.md` (converted) |
-| **Knowledge** (`.agent-knowledge/`) | Referenced in CLAUDE.md | `@file` references in rules | Referenced in instructions |
-| **Chat Mode** | Subagent (via `.claude/agents/*.md`) | Rules + AGENTS.md | `.github/agents/*.agent.md` (chatmodes deprecated) |
-| **Open standard files** | AGENTS.md, CLAUDE.md | AGENTS.md | AGENTS.md, CLAUDE.md, GEMINI.md |
+| Source Component                    | Claude Code                                                                 | Cursor                                       | Copilot                                                                               |
+| ----------------------------------- | --------------------------------------------------------------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------- |
+| **Agent** (`agents/*.txt`)          | `.claude/agents/*.md` (YAML: name, description, tools, model, color, hooks) | `AGENTS.md` (combined, hierarchical)         | `.github/agents/*.agent.md` (YAML: name, description, tools, model, target, handoffs) |
+| **Rule** (`rules/*.md`)             | `CLAUDE.md` sections                                                        | `.cursor/rules/*.mdc` (preserve frontmatter) | `.github/instructions/*.instructions.md` (applyTo conversion)                         |
+| **Workflow** (`workflows/*.yaml`)   | `.claude/skills/*/SKILL.md` (preferred) or `.claude/commands/*.md`          | `.cursor/commands/*.md` (slash cmds)         | `.github/prompts/*.prompt.md` or `.github/workflows/*.yml` (CI)                       |
+| **Skill** (`skills/*/SKILL.md`)     | `.claude/skills/*/SKILL.md` (native, = slash command)                       | `.cursor/commands/*.md` (converted)          | `.github/prompts/*.prompt.md` (converted)                                             |
+| **Knowledge** (`.agent-knowledge/`) | Referenced in CLAUDE.md                                                     | `@file` references in rules                  | Referenced in instructions                                                            |
+| **Chat Mode**                       | Subagent (via `.claude/agents/*.md`)                                        | Rules + AGENTS.md                            | `.github/agents/*.agent.md` (chatmodes deprecated)                                    |
+| **Open standard files**             | AGENTS.md, CLAUDE.md                                                        | AGENTS.md                                    | AGENTS.md, CLAUDE.md, GEMINI.md                                                       |
 
 ---
 
 ## Agent Renaming Map
 
-| Current File | Action | New File | Role Change |
-|---|---|---|---|
-| `planner.md` | RENAME | `architect.md` | Design/planning orchestrator |
-| `fullstack-developer.md` | RENAME | `implementer.md` | Delegator → platform implementers |
-| `code-reviewer.md` | RENAME | `reviewer.md` | Delegator → platform reviewers |
-| `docs-manager.md` | RENAME | `documenter.md` | Keep global (docs are cross-platform) |
-| `researcher.md` | KEEP | `researcher.md` | Already global |
-| `debugger.md` | KEEP | `debugger.md` | Delegator → platform debuggers |
-| `tester.md` | KEEP | `tester.md` | Delegator → platform testers |
-| `git-manager.md` | KEEP | `git-manager.md` | Already global |
-| `project-manager.md` | MERGE | → `orchestrator.md` | PM responsibilities absorbed |
-| `performance-analyst.md` | MERGE | → `reviewer.md` | Perf analysis part of review |
-| `ui-designer.md` | MOVE | → `web/designer.md` | Platform-specific |
-| (new) | CREATE | `orchestrator.md` | Top-level router + PM duties |
+| Current File             | Action | New File            | Role Change                           |
+| ------------------------ | ------ | ------------------- | ------------------------------------- |
+| `planner.md`             | RENAME | `architect.md`      | Design/planning orchestrator          |
+| `fullstack-developer.md` | RENAME | `implementer.md`    | Delegator → platform implementers     |
+| `code-reviewer.md`       | RENAME | `reviewer.md`       | Delegator → platform reviewers        |
+| `docs-manager.md`        | RENAME | `documenter.md`     | Keep global (docs are cross-platform) |
+| `researcher.md`          | KEEP   | `researcher.md`     | Already global                        |
+| `debugger.md`            | KEEP   | `debugger.md`       | Delegator → platform debuggers        |
+| `tester.md`              | KEEP   | `tester.md`         | Delegator → platform testers          |
+| `git-manager.md`         | KEEP   | `git-manager.md`    | Already global                        |
+| `project-manager.md`     | MERGE  | → `orchestrator.md` | PM responsibilities absorbed          |
+| `performance-analyst.md` | MERGE  | → `reviewer.md`     | Perf analysis part of review          |
+| `ui-designer.md`         | MOVE   | → `web/designer.md` | Platform-specific                     |
+| (new)                    | CREATE | `orchestrator.md`   | Top-level router + PM duties          |
 
 ---
 
@@ -163,12 +163,12 @@ AGENTS.md                        # Agent definitions (hierarchical)
 
 Create `.claude/rules/` governance files.
 
-| File | Source |
-|---|---|
-| `primary-workflow.md` | Adapt from claudekit-main, add platform routing |
-| `development-rules.md` | Adapt from claudekit-main |
-| `orchestration-protocol.md` | Add parent→child delegation protocol |
-| `documentation-management.md` | Adapt from claudekit-main |
+| File                          | Source                                          |
+| ----------------------------- | ----------------------------------------------- |
+| `primary-workflow.md`         | Adapt from claudekit-main, add platform routing |
+| `development-rules.md`        | Adapt from claudekit-main                       |
+| `orchestration-protocol.md`   | Add parent→child delegation protocol            |
+| `documentation-management.md` | Adapt from claudekit-main                       |
 
 ### Phase 2: Agent Restructuring
 
@@ -192,27 +192,27 @@ Create web/, ios/, android/ platform agent directories with specialized agents.
 
 Build `npx epost-kit` with the following components:
 
-| File | Purpose |
-|---|---|
-| `package.json` | npm package def — `epost-kit` CLI |
-| `src/index.ts` | Entry point — commander CLI |
-| `src/commands/install.ts` | Discovery → filter → copy to targets |
-| `src/commands/list.ts` | List components by platform |
-| `src/commands/create.ts` | Scaffold new components from templates |
-| `src/commands/validate.ts` | Validate SKILL.md spec compliance |
-| `src/core/discovery.ts` | Scan repo by convention |
-| `src/core/installer.ts` | Copy assets to target workspace paths |
-| `src/core/resolver.ts` | Resolve cross-component dependencies |
-| `src/core/targets.ts` | Target path definitions per platform |
-| `src/core/lock.ts` | Track installed components |
+| File                       | Purpose                                |
+| -------------------------- | -------------------------------------- |
+| `package.json`             | npm package def — `epost-kit` CLI      |
+| `src/index.ts`             | Entry point — commander CLI            |
+| `src/commands/install.ts`  | Discovery → filter → copy to targets   |
+| `src/commands/list.ts`     | List components by platform            |
+| `src/commands/create.ts`   | Scaffold new components from templates |
+| `src/commands/validate.ts` | Validate SKILL.md spec compliance      |
+| `src/core/discovery.ts`    | Scan repo by convention                |
+| `src/core/installer.ts`    | Copy assets to target workspace paths  |
+| `src/core/resolver.ts`     | Resolve cross-component dependencies   |
+| `src/core/targets.ts`      | Target path definitions per platform   |
+| `src/core/lock.ts`         | Track installed components             |
 
 #### `targets.ts` Mapping (reflects full conversion table)
 
-| Target | Agents | Rules | Commands/Skills | Workflows |
-|---|---|---|---|---|
-| Claude Code | `.claude/agents/*.md` | `CLAUDE.md` sections | `.claude/skills/*/SKILL.md` | `.claude/commands/*.md` |
-| Cursor | `AGENTS.md` | `.cursor/rules/*.mdc` | `.cursor/commands/*.md` | `.cursor/rules/commands.mdc` |
-| Copilot | `.github/agents/*.agent.md` | `.github/instructions/*.instructions.md` | `.github/prompts/*.prompt.md` | `.github/workflows/*.yml` |
+| Target      | Agents                      | Rules                                    | Commands/Skills               | Workflows                    |
+| ----------- | --------------------------- | ---------------------------------------- | ----------------------------- | ---------------------------- |
+| Claude Code | `.claude/agents/*.md`       | `CLAUDE.md` sections                     | `.claude/skills/*/SKILL.md`   | `.claude/commands/*.md`      |
+| Cursor      | `AGENTS.md`                 | `.cursor/rules/*.mdc`                    | `.cursor/commands/*.md`       | `.cursor/rules/commands.mdc` |
+| Copilot     | `.github/agents/*.agent.md` | `.github/instructions/*.instructions.md` | `.github/prompts/*.prompt.md` | `.github/workflows/*.yml`    |
 
 #### CLI Interface
 
@@ -229,6 +229,7 @@ npx epost-kit validate                          # Validate spec compliance
 ### Phase 6: Platform Sync
 
 Convert and deploy to all targets:
+
 - Agents → Claude subagents / Cursor AGENTS.md / Copilot agents
 - Rules → CLAUDE.md / Cursor .mdc / Copilot instructions
 - Commands/Skills → Claude SKILL.md / Cursor commands / Copilot prompt files
@@ -257,6 +258,7 @@ End-to-end testing across all targets.
 ## Verification Checklist
 
 ### Agent Restructuring
+
 1. All global agents exist and reference delegation to platform agents
 2. All platform agents exist with platform-specific expertise
 3. `/core:cook` detects platform and delegates correctly
@@ -266,6 +268,7 @@ End-to-end testing across all targets.
 7. Global external skills installed: `skill-creator` and `find-skills` present in `.claude/skills/`
 
 ### Distribution CLI
+
 7. `npm run build` compiles without errors
 8. `npx epost-kit list` shows all components grouped by platform
 9. `npx epost-kit install --platform web --target claude` copies correct files
@@ -275,6 +278,7 @@ End-to-end testing across all targets.
 13. `npx epost-kit validate` reports spec compliance
 
 ### Platform Sync
+
 14. Open in Cursor — AGENTS.md readable, rules applied, commands available
 15. Copilot agents valid with correct frontmatter (name, description, tools, model, target, handoffs)
 16. Claude Code subagents valid with correct frontmatter (name, description, tools, model, color, hooks)
