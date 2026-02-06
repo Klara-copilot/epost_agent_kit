@@ -745,6 +745,122 @@ Before committing code:
 
 ---
 
+## Quality Gates & Enforcement (Phase 5 - v1.1.0)
+
+### Coverage Requirements
+
+**Minimum Thresholds**:
+- **Overall Coverage**: 80% minimum
+- **Core Logic**: 85% minimum
+- **Critical Paths**: 95% minimum
+- **Test Execution**: 100% pass rate required
+
+**Verification Script**: `.claude/scripts/check-coverage.cjs`
+```bash
+node .claude/scripts/check-coverage.cjs [--threshold 80]
+```
+
+**Failure Remediation**:
+1. Identify uncovered lines
+2. Write additional test cases
+3. Document why untestable (if applicable)
+4. Re-run verification
+
+### Security Scanning
+
+**Automated Checks**:
+- Hardcoded credentials detection
+- Sensitive data exposure (API keys, passwords, tokens)
+- Vulnerability scanning (dependencies)
+- OWASP Top 10 compliance verification
+
+**Verification Script**: `.claude/scripts/scan-secrets.cjs`
+```bash
+node .claude/scripts/scan-secrets.cjs [--pattern <regex>]
+```
+
+**Detectable Patterns**:
+- `PRIVATE_KEY`, `API_KEY`, `SECRET` (case-insensitive)
+- AWS credentials, JWT tokens, OAuth tokens
+- Database connection strings
+- Email addresses in non-comment contexts
+
+**Failure Resolution**:
+1. Move secrets to `.env` or environment variables
+2. Update `.gitignore` if applicable
+3. Document credential setup in README
+4. Re-run security scan
+
+### Code Review Cycle
+
+**Mandatory Review Steps**:
+1. **Automated Checks**: Coverage + security gates pass
+2. **Peer Review**: Minimum 1 reviewer approval
+3. **Integration Verification**: All tests pass in CI
+4. **Documentation**: Updated docs match implementation
+
+**Review Tracking**:
+- Track review cycles in commit history
+- Note reviewer approvals and feedback
+- Document deviations from standards
+
+### Quality Scripts
+
+**Available Quality Tools**:
+
+1. **check-coverage.cjs** - Verify test coverage
+   - Input: Coverage report threshold
+   - Output: Pass/fail with remediation steps
+   - Exit: 0 (pass) or 1 (fail)
+
+2. **scan-secrets.cjs** - Detect sensitive data
+   - Input: File patterns to scan
+   - Output: Found secrets with locations
+   - Exit: 0 (none found) or 1 (secrets detected)
+
+3. **generate-skill-index.cjs** - Build skill metadata
+   - Input: Skill directory paths
+   - Output: `skill-index.json` with metadata
+   - Exit: 0 (success) or 1 (error)
+
+### CI/CD Integration
+
+**Pre-Commit Hooks**:
+```bash
+# Run quality gates before allowing commit
+npm run quality:check
+  ├─ TypeScript compilation
+  ├─ ESLint validation
+  ├─ Test execution
+  ├─ Coverage verification
+  └─ Security scanning
+```
+
+**GitHub Actions** (if applicable):
+- Automated coverage reporting
+- Security scanning on PRs
+- Requirement enforcement before merge
+
+### Performance Metrics
+
+**Agent Execution Profiling**:
+- Track execution time per task
+- Monitor token usage
+- Log decision chains for analysis
+- Profile async operations
+
+**Output**:
+```
+Task: Implement authentication
+├─ Analysis: 2.3s (850 tokens)
+├─ Planning: 1.1s (420 tokens)
+├─ Implementation: 8.5s (3200 tokens)
+├─ Review: 1.2s (380 tokens)
+└─ Total: 13.1s (4850 tokens)
+```
+
+---
+
 ## Related Standards
 
 See also:
@@ -755,6 +871,6 @@ See also:
 
 ---
 
-**Last Updated**: 2026-02-05
+**Last Updated**: 2026-02-06
 **Owner**: Phuong Doan
-**Status**: Active
+**Status**: Active (v1.1.0 with quality gates)

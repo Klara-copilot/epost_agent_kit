@@ -1,6 +1,6 @@
 # Agent Inventory
 
-Complete reference of all 15 agents in epost_agent_kit with their responsibilities, models, and delegation patterns.
+Complete reference of all 19 agents in epost_agent_kit with their responsibilities, models, and delegation patterns.
 
 ## Global Agents (9)
 
@@ -16,13 +16,17 @@ Complete reference of all 15 agents in epost_agent_kit with their responsibiliti
 | epost-documenter | haiku | Documentation management, updates, generation | (none) |
 | epost-git-manager | inherit | Git operations, commits, branch management | (none) |
 
-## Specialized Agents (3)
+## Specialized Agents (7)
 
 | Agent | Model | Purpose | Delegates To |
 |-------|-------|---------|-------------|
 | epost-scout | haiku | Codebase file search, pattern matching | (none) |
 | epost-brainstormer | sonnet | Solution evaluation, design alternatives | epost-architect, epost-researcher |
 | epost-database-admin | sonnet | Database optimization, schema design | (none) |
+| epost-ui-ux-designer | sonnet | UI/UX design, wireframing, design systems | epost-researcher |
+| epost-copywriter | haiku | Content generation, marketing copy, docstrings | (none) |
+| epost-journal-writer | haiku | Development journal entries, progress tracking | (none) |
+| epost-mcp-manager | haiku | MCP integration, tool discovery, server management | (none) |
 
 ## Platform Agents (3)
 
@@ -61,6 +65,14 @@ Complete reference of all 15 agents in epost_agent_kit with their responsibiliti
 **epost-brainstormer**: Evaluates alternative solutions, explores design options, validates against requirements.
 
 **epost-database-admin**: Optimizes database schemas, analyzes query performance, recommends indexing strategies.
+
+**epost-ui-ux-designer**: Creates interface designs, wireframes, design systems. Conducts user research, accessibility audits, and generates design assets using ai-multimodal skills.
+
+**epost-copywriter**: Generates high-converting content for marketing materials, social media, landing pages, emails, and technical documentation.
+
+**epost-journal-writer**: Documents development challenges, failures, and setbacks with emotional authenticity. Creates sprint retrospectives and progress tracking entries.
+
+**epost-mcp-manager**: Manages MCP server integrations, discovers tools/prompts/resources, executes MCP capabilities while keeping main context clean.
 
 ### Supporting Operations
 
@@ -117,8 +129,8 @@ User → Orchestrator → Architect (design) → Brainstormer (alternatives)
 
 ## Model Distribution
 
-- **Haiku (Fast, Economical)**: orchestrator, tester, researcher, documenter, scout (5 agents)
-- **Sonnet (Balanced)**: implementer, reviewer, debugger, brainstormer, database-admin, web-developer, ios-developer, android-developer (8 agents)
+- **Haiku (Fast, Economical)**: orchestrator, tester, researcher, documenter, scout, copywriter, journal-writer, mcp-manager (8 agents)
+- **Sonnet (Balanced)**: implementer, reviewer, debugger, brainstormer, database-admin, web-developer, ios-developer, android-developer, ui-ux-designer (9 agents)
 - **Opus (Powerful)**: architect (1 agent)
 - **Inherit**: git-manager (1 agent)
 
@@ -135,5 +147,5 @@ All agents include:
 ---
 
 **Created by**: Phuong Doan
-**Last Updated**: 2026-02-05
-**Version**: 1.0
+**Last Updated**: 2026-02-06
+**Version**: 1.1
