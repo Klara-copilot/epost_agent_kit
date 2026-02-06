@@ -18,13 +18,27 @@
     "typecheck": "tsc --noEmit",
     "prepublishOnly": "npm run typecheck && npm run lint && npm run test && npm run build"
   },
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": "./dist/index.js",
+    "./cli": "./dist/cli.js"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "keywords": [
     "cli",
     "agent-kit",
     "claude-code",
     "github-copilot",
     "cursor",
-    "developer-tools"
+    "developer-tools",
+    "ai-agents",
+    "code-generation"
   ],
   "author": "Phuong Doan",
   "license": "MIT",
@@ -39,6 +53,7 @@
     "commander": "^12.1.0",
     "cosmiconfig": "^9.0.0",
     "execa": "^9.5.2",
+    "minimatch": "^10.1.2",
     "ora": "^8.1.1",
     "picocolors": "^1.1.1",
     "zod": "^3.24.1"
@@ -47,7 +62,9 @@
     "@types/node": "^22.10.5",
     "@typescript-eslint/eslint-plugin": "^8.20.0",
     "@typescript-eslint/parser": "^8.20.0",
+    "@vitest/coverage-v8": "^2.1.9",
     "eslint": "^9.18.0",
+    "globals": "^15.15.0",
     "typescript": "^5.7.3",
     "vitest": "^2.1.8"
   }
