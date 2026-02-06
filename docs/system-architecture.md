@@ -599,6 +599,190 @@ Context:
 
 ---
 
+## Session State Management (Phase 04)
+
+### Overview
+
+Session state management enables persistence of plan context across IDE sessions and multiple Claude Code invocations. This is critical for the `/plan` → `/cook` → `/test` → `/review` workflow where work spans multiple sessions.
+
+### Architecture
+
+**State Storage**:
+- Location: `/tmp/ck-session-{sessionId}.json` (OS temp directory)
+- Format: JSON with timestamp, source metadata, and active plan path
+- Lifecycle: Created on first use, persists until IDE session ends
+- Access: Via `CK_SESSION_ID` environment variable (set by Claude Code automatically)
+
+**State Structure**:
+```json
+{
+  "activePlan": "/path/to/plans/260206-0003-feature",
+  "timestamp": 1707212345678,
+  "source": "set-active-plan",
+  "sessionOrigin": "/path/to/project",
+  "customField": "value"
+}
+```
+
+### Scripts (Phase 04 Deliverables)
+
+#### set-active-plan.cjs
+
+Writes plan path to session state with validation.
+
+**File**: `.claude/scripts/set-active-plan.cjs` (65 LOC)
+**Signature**: `node set-active-plan.cjs <plan-directory>`
+**Exit Codes**: `0` (success), `1` (error)
+
+**Features**:
+- Path resolution: Converts relative paths to absolute using `path.resolve()`
+- Path normalization: Removes trailing slashes, validates existence
+- Session integration: Uses `readSessionState()` and `writeSessionState()` from `ck-config-utils.cjs`
+- Directory validation: Ensures path is a directory (not file)
+- Atomic writes: Uses temp file + rename to prevent corruption
+- Graceful degradation: Works without `CK_SESSION_ID` but warns persistence won't work
+
+**Validation**:
+```javascript
+// Example: Set plan with validation
+node set-active-plan.cjs plans/260206-0003-my-feature
+// Output:
+// ✓ Active plan set: /absolute/path/to/plans/260206-0003-my-feature
+// Session: claude-code-session-xxx
+```
+
+**Error Handling**:
+```javascript
+// Missing argument → Usage message + exit 1
+// Nonexistent directory → "does not exist" error + exit 1
+// File instead of directory → "not a directory" error + exit 1
+// Write failure → "/tmp permissions" error + exit 1
+```
+
+#### get-active-plan.cjs
+
+Reads and returns current active plan path.
+
+**File**: `.claude/scripts/get-active-plan.cjs` (29 LOC)
+**Signature**: `node get-active-plan.cjs`
+**Output**: Plan path or `"none"` string
+**Exit Code**: Always `0`
+
+**Features**:
+- Safe reads: Handles missing/corrupted session files gracefully
+- Default fallback: Returns `"none"` instead of null/error
+- No side effects: Read-only operation
+
+**Usage**:
+```bash
+# Typical usage in hooks/scripts
+ACTIVE_PLAN=$(node .claude/scripts/get-active-plan.cjs)
+if [ "$ACTIVE_PLAN" != "none" ]; then
+  echo "Resuming plan: $ACTIVE_PLAN"
+fi
+```
+
+### Integration Points
+
+**Config Utils** (`.claude/hooks/lib/ck-config-utils.cjs`):
+- `readSessionState(sessionId)` - Read session JSON from /tmp
+- `writeSessionState(sessionId, state)` - Write session JSON atomically
+- `normalizePath(path)` - Normalize paths (trim, remove trailing slashes)
+
+**Resolution Strategy** (`resolvePlanPath()` in config utils):
+- **Order**: `['session', 'branch']`
+- **Session** (explicit): Reads `activePlan` from state written by `set-active-plan.cjs`
+- **Branch** (suggested): Falls back to git branch pattern matching if no session state
+- **mostRecent** (removed): No longer cascades to "most recent" to prevent stale plan activation
+
+### Test Coverage (Phase 04)
+
+**Test Suite**: `.claude/scripts/__tests__/state-management.test.cjs` (454 lines)
+**Test Runner**: Node.js native `node:test` framework
+**Command**: `node --test .claude/scripts/__tests__/state-management.test.cjs`
+
+**Test Categories** (24 tests total):
+
+1. **Basic Functionality** (T1-T2):
+   - Setting valid plan directory
+   - Session state file creation with correct fields
+
+2. **Error Handling** (T3-T5):
+   - Missing arguments show usage message
+   - Nonexistent directory returns error
+   - File instead of directory returns error
+
+3. **Path Resolution** (T6-T8):
+   - Relative paths convert to absolute
+   - Absolute paths used as-is
+   - Trailing slashes normalized
+
+4. **Session Management** (T9-T10):
+   - Warning when `CK_SESSION_ID` not set
+   - Existing state preserved on update
+
+5. **Get Script** (T11-T14):
+   - Returns correct plan path
+   - Returns "none" when no session
+   - Returns "none" when no active plan set
+   - Handles corrupted session files gracefully
+
+6. **Integration** (T15-T20):
+   - Set/get end-to-end cycle
+   - Multiple updates work correctly
+   - Session file in /tmp with correct naming
+   - Valid JSON output
+   - Corruption recovery
+   - Overwrite corrupted session safely
+
+7. **Edge Cases** (T21-T24):
+   - Paths with spaces handled correctly
+   - Very long paths (100+ chars) work
+   - All required fields present
+   - Unicode characters in paths (Chinese, Cyrillic, Greek)
+
+### Security Considerations
+
+**Temp File Safety**:
+- Atomic writes: Write to temp file first, then rename (prevents partial writes)
+- File permissions: Created with OS-default umask (typically 0600 on Unix)
+- No sensitive data: Only stores plan paths, not credentials
+
+**Path Validation**:
+- Null byte filtering (via `normalizePath()`)
+- Directory existence check (prevents arbitrary path storage)
+- Platform-specific path handling (Windows/Unix differences)
+
+**Session ID Isolation**:
+- Each session gets unique `/tmp/ck-session-{uuid}.json` file
+- Session IDs are random (not predictable)
+- Old sessions cleaned up when IDE session ends
+
+### Usage Workflow
+
+**Typical Flow**:
+```
+1. User: /plan Build user profile feature
+   → Architect creates plan in plans/260206-0003-profile/
+   → Hook runs: node set-active-plan.cjs plans/260206-0003-profile/
+   → Session state now has activePlan set
+
+2. User: /cook
+   → get-active-plan.cjs returns plans/260206-0003-profile/
+   → Implementer reads from that plan
+   → Implementation proceeds with plan context
+
+3. User: /test
+   → Maintains plan context from session state
+   → Tests run against plan deliverables
+
+4. User: /review
+   → Maintains plan context
+   → Review checks all phase deliverables
+```
+
+---
+
 ## Safety & Security
 
 ### Tool Restrictions
@@ -653,6 +837,6 @@ Platform agents inherit tool access but can specialize:
 
 ---
 
-**Last Updated**: 2026-02-05
+**Last Updated**: 2026-02-06
 **Architecture Owner**: Phuong Doan
-**Status**: Design Phase
+**Status**: Design Phase + Phase 04 Session State Management Complete

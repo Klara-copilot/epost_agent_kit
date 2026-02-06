@@ -643,6 +643,65 @@ Update documentation to reflect code changes.
 
 ---
 
+## Internal Scripts (Session Management)
+
+### set-active-plan
+
+Writes plan path to session state for cross-session persistence.
+
+**Location**: `.claude/scripts/set-active-plan.cjs`
+**Usage**: `node .claude/scripts/set-active-plan.cjs <plan-directory>`
+**Environment**: Requires `CK_SESSION_ID` (set automatically in Claude Code)
+
+**Exit Codes**:
+- `0`: Success
+- `1`: Error (missing argument, invalid path, write failure)
+
+**Examples**:
+```bash
+# Absolute path
+node .claude/scripts/set-active-plan.cjs /Users/ddphuong/Projects/agent-kit/epost_agent_kit/plans/260206-0003-my-feature
+
+# Relative path (resolved from cwd)
+node .claude/scripts/set-active-plan.cjs plans/260206-0003-my-feature
+```
+
+**Behavior**:
+- Creates/updates `/tmp/ck-session-{sessionId}.json`
+- Validates directory exists
+- Normalizes paths (removes trailing slashes)
+- Preserves existing session state (merge operation)
+- Warns if `CK_SESSION_ID` not set (state won't persist)
+
+---
+
+### get-active-plan
+
+Reads and prints current active plan path from session state.
+
+**Location**: `.claude/scripts/get-active-plan.cjs`
+**Usage**: `node .claude/scripts/get-active-plan.cjs`
+**Returns**: Plan path or `"none"`
+
+**Examples**:
+```bash
+# Get active plan
+node .claude/scripts/get-active-plan.cjs
+# Output: /Users/ddphuong/Projects/agent-kit/epost_agent_kit/plans/260206-0003-my-feature
+
+# No active plan or no session
+node .claude/scripts/get-active-plan.cjs
+# Output: none
+```
+
+**Behavior**:
+- Returns `"none"` if no session ID
+- Returns `"none"` if no active plan set
+- Gracefully handles corrupted session files (returns `"none"`)
+- Exit code always `0`
+
+---
+
 ## Troubleshooting Commands
 
 ### Debug Commands
@@ -665,6 +724,6 @@ npm run typecheck
 ---
 
 **Created by**: Phuong Doan
-**Last Updated**: 2026-02-05
-**Total Commands**: 30
-**Version**: 0.1.0
+**Last Updated**: 2026-02-06
+**Total Commands**: 30 (+ 2 internal scripts)
+**Version**: 0.2.0
