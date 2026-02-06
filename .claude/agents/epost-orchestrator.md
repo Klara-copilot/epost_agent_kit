@@ -171,6 +171,11 @@ When platform detected:
 - `.claude/skills/core/SKILL.md` — Operational boundaries
 - `CLAUDE.md` — Project context
 
+## Related Documents
+
+- `.claude/skills/core-rules/SKILL.md` — Operational boundaries
+- `CLAUDE.md` — Project context
+
 ---
 
 _[epost-orchestrator] is a ClaudeKit agent_
