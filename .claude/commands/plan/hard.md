@@ -83,6 +83,7 @@ Sections:
 5. Integration Points
 6. Potential Conflicts/Blockers
 7. Code Standards Compliance
+8. Gap Analysis (if applicable: when R1 recommends patterns/libraries not found in codebase, document the gap and propose adaptation strategy)
 """
 )
 WAIT for completion
@@ -95,6 +96,7 @@ Synthesize from both researchers:
 - recommended_libraries (R1 validated by R2 dependencies)
 - existing_patterns (R2 matched to R1 best practices)
 - integration_strategy (R1 approaches fit R2 modules)
+- gap_analysis (R2 gaps identified: missing patterns, adaptation strategies)
 - risks_and_mitigations (combined)
 
 ### 6. Read Documentation Context

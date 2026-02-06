@@ -8,7 +8,7 @@
 
 ## Overview
 
-epost_agent_kit provides 30 commands organized into 8 categories. Commands are invoked using the `/` prefix and automatically routed to specialized agents based on platform context.
+epost_agent_kit provides 31 commands organized into 8 categories. Commands are invoked using the `/` prefix and automatically routed to specialized agents based on platform context.
 
 ---
 
@@ -127,10 +127,10 @@ Root cause analysis and debugging.
 
 ### /plan [feature]
 
-Create detailed implementation plan with file ownership.
+Create implementation plan with intelligent routing to appropriate variant.
 
+**Router**: Auto-routes to `/plan:fast`, `/plan:hard`, or `/plan:parallel` based on complexity analysis
 **Agent**: `epost-architect`
-**Parallelization**: Spawns 3 researcher agents in parallel
 
 **Examples**:
 ```
@@ -139,10 +139,125 @@ Create detailed implementation plan with file ownership.
 /plan Migrate database schema v1 to v2
 ```
 
+**Routing Logic**:
+- Simple tasks (typos, logging, config) → `/plan:fast`
+- Moderate tasks (single feature) → `/plan:hard`
+- Complex tasks (multi-module, parallel work) → `/plan:parallel`
+
 **Output**:
 - File: `plans/YYMMDD-HHMM-{slug}/plan.md`
-- Sections: YAML frontmatter, research findings, phases, file ownership
-- Effort estimate and complexity
+- YAML frontmatter with metadata
+- Phase files with 12-section structure
+- File ownership tracking (parallel variant only)
+
+---
+
+### /plan:fast [feature]
+
+Create quick plan without research phase.
+
+**Agent**: `epost-architect`
+**Research**: None (codebase analysis only)
+
+**Use When**:
+- Simple bug fixes or config changes
+- Well-understood patterns from existing code
+- No external research needed
+
+**Examples**:
+```
+/plan:fast Add logging to user service
+/plan:fast Fix typo in login button text
+/plan:fast Update API endpoint URL
+```
+
+**Output**: Plan in `plans/` with codebase-based implementation steps
+
+---
+
+### /plan:hard [feature]
+
+Create deep plan with sequential research.
+
+**Agent**: `epost-architect`
+**Research**: 2 sequential researchers (patterns → dependencies)
+
+**Use When**:
+- New patterns or unfamiliar tech
+- Significant architecture decisions
+- Need best practices research
+
+**Examples**:
+```
+/plan:hard Implement OAuth2 authentication system
+/plan:hard Build real-time WebSocket notification system
+/plan:hard Migrate from REST to GraphQL
+```
+
+**Output**: Plan with research reports, comprehensive analysis, risk assessment
+
+---
+
+### /plan:parallel [feature]
+
+Create parallel-ready plan with file ownership matrix.
+
+**Agent**: `epost-architect`
+**Research**: 2 sequential researchers + parallelization analysis
+
+**Use When**:
+- Multi-module features (API + DB + UI)
+- Work can be split across multiple agents
+- Need dependency graph for coordination
+
+**Examples**:
+```
+/plan:parallel Build dashboard with API, database, and UI components
+/plan:parallel Implement user management with admin panel and API
+```
+
+**Output**: Plan with:
+- File ownership matrix (exclusive/shared files)
+- Dependency graph (blocking relationships)
+- Execution batches (parallel vs sequential phases)
+- Parallelization Info in each phase file
+
+---
+
+### /plan:validate [optional: plan-path]
+
+**Status**: Planned (command file not yet implemented)
+
+Validates plan structure, completeness, and adherence to standards.
+
+**Agent**: `epost-architect` or `epost-reviewer`
+
+**When to Use**:
+- After creating/editing a plan to catch issues early
+- Before executing implementation with `/code`
+- For quality assurance in CI/CD pipelines
+- To validate YAML frontmatter and phase file structure
+
+**Configuration** (via session-init hook):
+- `CK_VALIDATION_MODE`: `prompt` (interactive), `strict` (auto-fail), or `off`
+- `CK_VALIDATION_MIN_QUESTIONS`: Minimum validation checks (3-8)
+
+**Example**:
+```bash
+/plan:validate plans/260206-1325-splash-pattern-action-items/
+```
+
+**Validates**:
+- YAML frontmatter: title, description, status, priority, effort, tags, created
+- Phase files: 12 required sections (Overview, Requirements, Architecture, etc.)
+- File paths: verify all referenced files exist
+- Cross-references: check links between plan.md and phase files
+- Naming conventions: kebab-case, descriptive slugs
+
+**Output**: Validation report with:
+- Pass/Fail status per check
+- Line numbers for issues found
+- Recommendations for fixes
 
 ---
 
@@ -714,6 +829,7 @@ node .claude/scripts/get-active-plan.cjs
 
 ### Validation Commands
 ```
+/plan:validate [plan-path]
 npm run validate:agents
 npm run validate:commands
 npm run validate:hooks
@@ -725,5 +841,5 @@ npm run typecheck
 
 **Created by**: Phuong Doan
 **Last Updated**: 2026-02-06
-**Total Commands**: 30 (+ 2 internal scripts)
+**Total Commands**: 31 (+ 2 internal scripts)
 **Version**: 0.2.0
