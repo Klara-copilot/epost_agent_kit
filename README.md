@@ -61,7 +61,8 @@ User Request → Orchestrator → Global Agent → Platform Agent → Execute
 
 **Global Agents** (orchestrate workflows):
 - `orchestrator` - Task router and project manager
-- `architect` - Design and planning
+- `architect` - System design and research orchestration
+- `planner` - Plan creation specialist (delegated from architect)
 - `implementer` - Delegates to platform implementers
 - `reviewer` - Code review and performance analysis
 - `researcher` - Multi-source research and validation
@@ -88,9 +89,9 @@ User Request → Orchestrator → Global Agent → Platform Agent → Execute
 
 **Current Phase**: Agent Enhancement (Phase 2)
 
-**Progress**: Phase 2 Completed (Global Agents Enhancement)
+**Progress**: Phase 2 Completed (Global Agents Enhancement + Planner Agent)
 
-**Agents**: 15 agents (12 enhanced + 3 new: orchestrator, architect, implementer)
+**Agents**: 20 agents (10 global + 10 specialized)
 
 **Key Milestones**:
 - Phase 0: Dependencies & Audit (✓ Completed)

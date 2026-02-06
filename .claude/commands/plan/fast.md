@@ -1,7 +1,7 @@
 ---
 title: "Plan: Fast"
 description: "Quick plan from codebase analysis only, no research"
-agent: epost-architect
+agent: epost-planner
 argument-hint: [enhanced planning prompt from router]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Plan: Hard"
 description: "Deep plan with sequential research and comprehensive analysis"
-agent: epost-architect
+agent: epost-planner
 argument-hint: [enhanced planning prompt from router]
 ---
 

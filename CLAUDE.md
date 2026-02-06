@@ -17,14 +17,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 **epost_agent_kit** — A comprehensive multi-platform agent kit framework providing specialized Claude Code agents for web, iOS, and Android development. Distributes across Claude Code, Cursor, and GitHub Copilot with klara-theme integration for Figma-to-code workflows.
 
 **Current Capabilities**:
-- **19 Agents**: 9 global agents (orchestrator, architect, implementer, reviewer, researcher, debugger, tester, documenter, git-manager) + 10 specialized agents (scout, brainstormer, database-admin, web-developer, ios-developer, android-developer, ui-ux-designer, copywriter, journal-writer, mcp-manager)
+- **20 Agents**: 10 global agents (orchestrator, architect, planner, implementer, reviewer, researcher, debugger, tester, documenter, git-manager) + 10 specialized agents (scout, brainstormer, database-admin, web-developer, ios-developer, android-developer, ui-ux-designer, copywriter, journal-writer, mcp-manager)
 - **17+ Skills**: Core skills including code-review, sequential-thinking, docs-seeker, problem-solving, repomix, and platform-specific skills (android-development, ios-development, backend-development, frontend-development, nextjs, figma-integration)
 - **Multi-Platform Support**: Distributes across Claude Code, Cursor, and GitHub Copilot
 - **Parent-Child Delegation**: Global agents orchestrate; platform agents execute
 
 **Key Features**:
 - Task routing and project management via orchestrator
-- Architecture design and planning coordination
+- Architecture design and research orchestration via architect
+- Detailed plan creation via planner (delegated from architect)
 - Splash pattern planning with `/plan:fast`, `/plan:hard`, `/plan:parallel` variants
 - Active plan state management with session persistence
 - Multi-platform implementation delegation (web, iOS, Android)
@@ -45,8 +46,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 The repository uses Claude Code's agent system configured in `.claude/`.
 
 ### Configuration
-- **Agents**: `.claude/agents/` — 19 specialized agents across global and platform-specific roles
-  - **Global**: orchestrator, architect, implementer, reviewer, debugger, tester, researcher, documenter, git-manager
+- **Agents**: `.claude/agents/` — 20 specialized agents across global and platform-specific roles
+  - **Global**: orchestrator, architect, planner, implementer, reviewer, debugger, tester, researcher, documenter, git-manager
   - **Platform**: web-developer, ios-developer, android-developer
   - **Specialized**: scout, brainstormer, database-admin, ui-ux-designer, copywriter, journal-writer, mcp-manager
 - **Commands**: `.claude/commands/` — Slash commands (`/plan`, `/cook`, `/test`, `/debug`, `/git:commit`, `/docs:component`, etc.)
