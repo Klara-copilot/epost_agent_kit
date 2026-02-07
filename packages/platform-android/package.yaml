@@ -1,0 +1,28 @@
+name: platform-android
+version: "1.0.0"
+description: "Android platform: Kotlin, Jetpack Compose, Room, Hilt"
+layer: 1
+platforms: [android]
+
+dependencies:
+  - core
+
+recommends:
+  - ui-ux
+
+provides:
+  agents:
+    - epost-android-developer
+  skills:
+    - android/android-development
+  commands:
+    - android/cook
+    - android/test
+
+files:
+  agents/: agents/
+  skills/: skills/
+  commands/: commands/android/
+
+settings_strategy: merge
+claude_snippet: CLAUDE.snippet.md

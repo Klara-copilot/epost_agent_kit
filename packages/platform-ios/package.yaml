@@ -1,0 +1,38 @@
+name: platform-ios
+version: "1.0.0"
+description: "iOS platform: Swift 6, SwiftUI, UIKit, XCTest"
+layer: 1
+platforms: [ios]
+
+dependencies:
+  - core
+
+recommends:
+  - ui-ux
+
+provides:
+  agents:
+    - epost-ios-developer
+    - epost-a11y-specialist
+  skills:
+    - ios/ios-development
+    - ios/ios-accessibility
+  commands:
+    - ios/cook
+    - ios/test
+    - ios/debug
+    - ios/simulator
+    - ios/a11y/audit
+    - ios/a11y/fix
+    - ios/a11y/fix-batch
+    - ios/a11y/review-buttons
+    - ios/a11y/review-headings
+    - ios/a11y/review-modals
+
+files:
+  agents/: agents/
+  skills/: skills/
+  commands/: commands/ios/
+
+settings_strategy: merge
+claude_snippet: CLAUDE.snippet.md
