@@ -57,12 +57,15 @@ export function generateMetadata(
   cliVersion: string,
   target: 'claude' | 'cursor' | 'github-copilot',
   kitVersion: string,
-  files: Record<string, FileOwnership>
+  files: Record<string, FileOwnership>,
+  options?: { profile?: string; installedPackages?: string[] }
 ): Metadata {
   return {
     cliVersion,
     target,
     kitVersion,
+    profile: options?.profile,
+    installedPackages: options?.installedPackages,
     installedAt: new Date().toISOString(),
     files
   };

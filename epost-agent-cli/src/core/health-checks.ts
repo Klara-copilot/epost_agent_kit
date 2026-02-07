@@ -9,6 +9,7 @@ import { join, dirname } from 'node:path';
 import { platform } from 'node:os';
 import { execa } from 'execa';
 import { logger } from './logger.js';
+import { METADATA_FILE } from '../constants.js';
 
 export type CheckStatus = 'pass' | 'warn' | 'fail';
 
@@ -21,7 +22,7 @@ export interface CheckResult {
 
 const MIN_NODE_VERSION = 18;
 const isWindows = platform() === 'win32';
-const REQUIRED_DIRS = ['agents', 'commands', 'skills', 'prompts'];
+const REQUIRED_DIRS = ['agents', 'commands', 'skills'];
 
 export async function checkNodeVersion(): Promise<CheckResult> {
   const version = process.versions.node;
@@ -87,11 +88,11 @@ export async function checkClaudeDir(cwd: string): Promise<CheckResult> {
 }
 
 export async function checkMetadata(cwd: string): Promise<CheckResult> {
-  const path = join(cwd, '.claude', 'metadata.json');
+  const path = join(cwd, METADATA_FILE);
 
   try {
     const data = JSON.parse(await readFile(path, 'utf-8'));
-    const missing = ['kitId', 'version', 'installedAt'].filter((k) => !data[k]);
+    const missing = ['cliVersion', 'kitVersion', 'installedAt'].filter((k) => !data[k]);
 
     return missing.length === 0
       ? { status: 'pass', message: 'metadata.json valid', fixable: false }

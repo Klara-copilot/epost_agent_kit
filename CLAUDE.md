@@ -1,20 +1,12 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Claude Code when working with code in this repository.
 
-## Table of Contents
 
-- [Project Overview](#project-overview)
-- [Repository](#repository)
-- [Claude Code Agent System](#claude-code-agent-system)
-- [Naming Conventions](#naming-conventions)
-- [UI Library Pattern](#ui-library-pattern)
-- [Guidelines](#guidelines)
-- [Related Documents](#related-documents)
+## Project: epost_agent_kit
 
-## Project Overview
 
-**epost_agent_kit** — A comprehensive multi-platform agent kit framework providing specialized Claude Code agents for web, iOS, and Android development. Distributes across Claude Code, Cursor, and GitHub Copilot with klara-theme integration for Figma-to-code workflows.
+## Installed Profile: `full`
 
 **Current Capabilities**:
 - **20 Agents**: 10 global agents (orchestrator, architect, planner, implementer, reviewer, researcher, debugger, tester, documenter, git-manager) + 10 specialized agents (scout, brainstormer, database-admin, web-developer, ios-developer, android-developer, ui-ux-designer, copywriter, journal-writer, mcp-manager)
@@ -34,16 +26,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Test orchestration and execution
 - Documentation management and generation
 - klara-theme Figma-to-code workflow integration
+**Packages**: core, platform-web, platform-ios, platform-android, platform-backend, ui-ux, arch-cloud, domain-b2b, domain-b2c, meta-kit-design
 
-## Repository
+**Installed by**: epost-kit v0.1.0 on 2026-02-07
 
-- **Remote**: git@github.com:Klara-copilot/epost_agent_kit.git
-- **Primary branch**: master
-- **Documentation**: See `/docs` directory for architecture, roadmap, and standards
+---
 
 ## Claude Code Agent System
-
-The repository uses Claude Code's agent system configured in `.claude/`.
 
 ### Configuration
 - **Agents**: `.claude/agents/` — 20 specialized agents across global and platform-specific roles
@@ -54,7 +43,14 @@ The repository uses Claude Code's agent system configured in `.claude/`.
 - **Skills**: `.claude/skills/` — Passive knowledge (core, web, iOS, Android, planning, debugging, research, databases, docker, figma-integration, klara-theme)
 - **Workflows**: `.claude/workflows/` — Reference orchestration docs (feature development, bug fixing)
 
-### Web Tech Stack
+
+
+---
+
+
+## Web Platform
+
+### Tech Stack
 - **Framework**: Next.js 14 (App Router)
 - **UI Library**: React 18
 - **Language**: TypeScript 5+
@@ -63,37 +59,192 @@ The repository uses Claude Code's agent system configured in `.claude/`.
 - **Testing**: Jest + React Testing Library, Playwright
 - **State**: Redux Toolkit + Redux Persist
 
-### klara-theme Integration
-- **Skill**: `.claude/skills/web/klara-theme/` — Figma-to-code pipeline (plan-feature, implement-component, audit-ui, fix-findings, document-component)
-- **Figma Skill**: `.claude/skills/web/figma-integration/` — Figma MCP tool patterns, design token mapping
-- **Command**: `/docs:component <key>` — Document klara-theme components from Figma
+### Commands
+- `/web:cook` — Implement web features (Next.js, React, TypeScript)
+- `/web:test` — Run web tests (Jest, Playwright, RTL)
 
-## Naming Conventions
+### Agent
+- `epost-web-developer` — Web platform specialist for Next.js development
 
-| Element | Pattern | Example |
-|---------|---------|---------|
-| **Agents** | `epost-<role>.md` | `epost-architect`, `epost-tester` |
-| **Platform agents** | `epost-<platform>-developer.md` | `epost-web-developer` |
-| **Commands** | `<category>/<action>.md` | `web/cook.md`, `fix/fast.md` |
-| **Skills** | `<category>/<domain>/SKILL.md` | `web/nextjs/SKILL.md` |
-| **Workflows** | `<scope>.md` or `<platform>/<lib>/<name>.md` | `web/klara-theme/plan-feature.md` |
+---
 
-- Global agents delegate to platform agents by actual name (e.g., `epost-web-developer`)
-- Skills use YAML frontmatter (`name`, `description`). Sub-skills: `SKILL.md` (index) + aspect files.
 
-## UI Library Pattern
+## iOS Platform
 
-Each platform's UI library follows:
-1. `CLAUDE.md` in the library root — component patterns, tokens, conventions
-2. Workflows in `.claude/workflows/<platform>/<lib>/` — development pipeline
-3. Per-feature outputs in `libs/<lib>/.ai-agents/ui/<feature>/`
+### Tech Stack
+- **Language**: Swift 6
+- **UI**: SwiftUI + UIKit
+- **Minimum Target**: iOS 18+
+- **Testing**: XCTest, XCUITest
+- **Build**: Xcode, XcodeBuildMCP
 
-Currently included: klara-theme (web). Future: iOS/Android UI libs in their respective repos.
+### Commands
+- `/ios:cook` — Implement iOS features (Swift, SwiftUI)
+- `/ios:test` — Run iOS unit and UI tests
+- `/ios:debug` — Debug crashes, concurrency, SwiftUI state
+- `/ios:simulator` — Manage iOS simulators
 
-> **Note on `libs/` paths**: The `libs/<lib>/` paths referenced in workflows and documentation
-> resolve in the **consuming project** after epost_agent_kit is installed (e.g., an Nx monorepo
-> with `libs/klara-theme/`). This repository does not ship a `libs/` directory — it provides
-> the agent configuration, skills, and workflow templates that operate on those paths at runtime.
+### Agent
+- `epost-ios-developer` — iOS platform specialist
+
+---
+
+
+## Android Platform
+
+### Tech Stack
+- **Language**: Kotlin
+- **UI**: Jetpack Compose
+- **Architecture**: MVVM, Hilt DI
+- **Database**: Room
+- **Networking**: Retrofit
+- **Testing**: JUnit, Espresso, Compose UI Testing
+- **Build**: Gradle (Kotlin DSL)
+
+### Commands
+- `/android:cook` — Implement Android features (Kotlin, Compose)
+- `/android:test` — Run Android unit and instrumented tests
+
+### Agent
+- `epost-android-developer` — Android platform specialist
+
+---
+
+
+## Backend Platform
+
+### Tech Stack
+- **Language**: Java 8
+- **Platform**: Jakarta EE 8 / WildFly 26.1
+- **REST**: JAX-RS via RESTEasy
+- **CDI/EJB**: Jakarta CDI + EJB
+- **ORM**: Hibernate 5.6
+- **Databases**: PostgreSQL + MongoDB
+- **Build**: Maven
+- **Microprofile**: Eclipse MicroProfile 4.1
+- **Testing**: JUnit 4, Mockito, PowerMock, Arquillian
+- **Coverage**: JaCoCo
+- **Quality**: SonarQube
+- **Artifacts**: GCP Artifact Registry
+
+### Conventions
+- WAR packaging deployed to WildFly
+- `@Inject`, `@EJB`, `@Path` annotations (Jakarta EE, not Spring)
+- `persistence.xml` for JPA configuration
+- Maven profiles for SonarQube analysis
+
+### Commands
+- `/backend:cook` — Implement backend features (Java EE, WildFly)
+- `/backend:test` — Run Maven tests (unit + integration via Arquillian)
+
+### Agent
+- `epost-backend-developer` — Java EE backend specialist
+
+---
+
+
+## UI/UX Design System (MUJI)
+
+### Agent
+- `epost-muji` — MUJI UI library agent with two flows: library development (Figma-to-code pipeline) and consumer guidance (component knowledge, integration patterns)
+
+### Design System Ownership
+MUJI team owns UI component libraries across all platforms:
+
+| Library | Platform | Source |
+|---------|----------|--------|
+| klara-theme | Web (React) | Storybook, Figma |
+| ios-theme | iOS (SwiftUI) | Figma |
+| android-theme | Android (Compose) | Figma |
+
+### Consumer Guidance
+- Component API reference (props, variants, code examples)
+- Design system guidelines (tokens, spacing, colors, typography)
+- Integration patterns (theme provider, composition, state management)
+- Audit consumer UI implementations against the design system
+- Contributing components back to the MUJI team
+
+### Library Development
+- `/docs:component <key>` — Document klara-theme components from Figma
+- `/design:fast` — Quick UI design implementation
+- Figma-to-code pipeline: plan-feature → implement-component → audit-ui → fix-findings → document-component
+- Figma MCP integration for design token extraction
+
+### Skills
+- `muji/klara-theme`, `muji/ios-theme`, `muji/android-theme` — Platform component knowledge
+- `muji/figma-variables` — Design token architecture (semantic → component → raw)
+- `web/klara-theme` — Component development pipeline
+- `web/figma-integration` — Figma MCP tool patterns
+
+---
+
+
+## Cloud Architecture
+
+### Infrastructure
+- **Cloud Provider**: Google Cloud Platform (GCP)
+- **Artifacts**: GCP Artifact Registry (Maven)
+- **CI/CD**: Cloud Build
+- **Infrastructure as Code**: Terraform
+
+### Agent
+- `epost-database-admin` — Database specialist for queries, performance, schema design
+
+---
+
+
+## B2B Domain
+
+### Business Modules
+The web monorepo contains these B2B modules serving company users:
+
+| Module | Description |
+|--------|-------------|
+| Monitoring | System monitoring and alerting |
+| Communities | Community management features |
+| Inbox | Unified inbox for messages |
+| Smart Send | Intelligent message routing and delivery |
+| Composer | Content composition tools |
+| Archive | Document archival and retrieval |
+| Contacts | Contact management |
+| Organization | Organization structure and settings |
+
+### Conventions
+- Each module has its own feature area within the Next.js monorepo
+- Shared components and utilities across modules
+- Module-specific state management per feature area
+
+---
+
+
+## B2C Domain
+
+### Consumer App
+The B2C domain covers the ePost consumer mobile application, available on iOS and Android.
+
+### Conventions
+- Separate native apps per platform (iOS: Swift/SwiftUI, Android: Kotlin/Compose)
+- Backend APIs serving mobile clients (Java EE on WildFly)
+- Shared business logic patterns across platforms where applicable
+
+---
+
+
+## Kit Design Tools
+
+### Agents
+- `epost-scout` — Codebase exploration and file discovery
+- `epost-brainstormer` — Creative ideation and problem-solving
+- `epost-journal-writer` — Technical journal for development challenges
+- `epost-mcp-manager` — MCP server integration management
+
+### Skills
+- `agents/claude/agent-development/` — Agent creation and maintenance patterns
+- `agents/claude/skill-development/` — Skill authoring and frontmatter conventions
+
+---
+
+
 
 ## Guidelines
 
@@ -108,17 +259,8 @@ Currently included: klara-theme (web). Future: iOS/Android UI libs in their resp
 - Conservative defaults: safety over speed, clarity over cleverness
 
 ### Core Rules
-See `.claude/skills/core/SKILL.md` for operational boundaries:
-- Decision boundaries (autonomous vs approval actions)
-- Environment safety (pre-execution checks)
-- Context7 usage (secondary reasoning aid rules)
-- Documentation standards (formatting, TOC, size limits)
+See `.claude/skills/core/SKILL.md` for operational boundaries.
 
 ## Related Documents
-
 - `.claude/skills/core/SKILL.md` — Operational rules and boundaries
-- `.claude/skills/web/figma-integration/SKILL.md` — Figma MCP integration
-- `.claude/skills/web/klara-theme/SKILL.md` — klara-theme Figma-to-code pipeline
-- `/docs/system-architecture.md` — System architecture and delegation model
-- `/docs/project-roadmap.md` — Development phases and milestones
-- `/docs/code-standards.md` — Coding conventions
+
