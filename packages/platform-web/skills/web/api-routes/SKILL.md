@@ -1,20 +1,20 @@
 ---
-name: backend-development
-description: Node.js backend patterns with REST APIs, error handling, and authentication
-keywords: [backend, api, rest, node, express, server, endpoints, validation]
+name: api-routes
+description: Next.js API routes and Node.js backend patterns for the web monorepo
+keywords: [api, rest, node, express, server, endpoints, validation, route]
 platforms: [web]
-triggers: ["api", "backend", "server", "endpoint", "route.ts"]
+triggers: ["route.ts", "api/", "server action", "endpoint"]
 agent-affinity: [epost-web-developer, epost-implementer]
 user-invocable: false
 ---
 
-# Backend Development Skill
+# Web API Routes Skill
 
 ## Purpose
-Node.js backend patterns and best practices.
+Next.js API route handlers and Node.js backend patterns for the web monorepo.
 
 ## When Active
-User mentions API, backend, server, endpoints.
+User works on API routes, server actions, or web backend endpoints.
 
 ## Expertise
 

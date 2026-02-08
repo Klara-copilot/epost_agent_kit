@@ -5,7 +5,7 @@
  */
 
 import { join, resolve, basename } from "node:path";
-import { readFile, readdir, copyFile, mkdir, rm } from "node:fs/promises";
+import { readFile, writeFile, readdir, copyFile, mkdir, rm } from "node:fs/promises";
 import { select, confirm, checkbox } from "@inquirer/prompts";
 import ora from "ora";
 import { logger } from "../core/logger.js";
@@ -370,11 +370,17 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
 
       // Directory copy
       if (await dirExists(srcPath)) {
+        // Snapshot existing files before copy to avoid overwriting prior package attribution
+        const existingFiles = await dirExists(destPath)
+          ? new Set(await scanDirFiles(destPath))
+          : new Set<string>();
+
         await safeCopyDir(srcPath, destPath);
 
-        // Track all files in copied directory
-        const copiedFiles = await scanDirFiles(destPath);
-        for (const file of copiedFiles) {
+        // Track only NEW files from this package (not files from prior packages)
+        const allFilesNow = await scanDirFiles(destPath);
+        for (const file of allFilesNow) {
+          if (existingFiles.has(file)) continue;
           const relativePath = join(installDirName, destSubDir, file);
           const fullPath = join(destPath, file);
           const checksum = await hashFile(fullPath);
@@ -413,9 +419,45 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
     totalCommands += manifest.provides.commands.length;
   }
 
+  // Recount from actual installed files for accuracy
+  const agentsDir = join(installDir, "agents");
+  const commandsDir = join(installDir, "commands");
+  if (await dirExists(agentsDir)) {
+    const agentFiles = (await scanDirFiles(agentsDir)).filter((f) => f.endsWith(".md"));
+    totalAgents = agentFiles.length;
+  }
+  if (await dirExists(commandsDir)) {
+    const commandFiles = (await scanDirFiles(commandsDir)).filter((f) => f.endsWith(".md"));
+    totalCommands = commandFiles.length;
+  }
+
   installSpinner.succeed(`Installed ${resolved.packages.length} packages`);
 
-  // Step 15: Merge settings
+  // Step 15: Regenerate skill-index.json from installed skills
+  const skillIndexSpinner = ora("Generating skill index...").start();
+  const skillsDir = join(installDir, "skills");
+  if (await dirExists(skillsDir)) {
+    const skillIndex = await generateSkillIndex(skillsDir);
+    const skillIndexPath = join(skillsDir, "skill-index.json");
+    await writeFile(skillIndexPath, JSON.stringify(skillIndex, null, 2), "utf-8");
+    // Track the generated file
+    const skillIndexRelPath = join(installDirName, "skills", "skill-index.json");
+    const skillIndexChecksum = await hashFile(skillIndexPath);
+    allFiles[skillIndexRelPath] = {
+      path: skillIndexRelPath,
+      checksum: skillIndexChecksum,
+      installedAt: new Date().toISOString(),
+      version: "1.0.0",
+      modified: false,
+      package: "core",
+    };
+    totalSkills = skillIndex.count;
+    skillIndexSpinner.succeed(`Skill index generated: ${skillIndex.count} skills`);
+  } else {
+    skillIndexSpinner.warn("No skills directory found");
+  }
+
+  // Step 16: Merge settings
   const settingsSpinner = ora("Merging settings...").start();
   const settingsOutput = join(installDir, "settings.json");
   const { sources: settingsSources } = await mergeAndWriteSettings(
@@ -503,6 +545,128 @@ async function scanDirFiles(dir: string, prefix = ""): Promise<string[]> {
     // Directory doesn't exist
   }
   return files;
+}
+
+// ─── Utility: generate skill-index.json from installed SKILL.md files ───
+
+interface SkillIndexEntry {
+  name: string;
+  description: string;
+  keywords: string[];
+  platforms: string[];
+  triggers: string[];
+  "agent-affinity": string[];
+  path: string;
+}
+
+async function generateSkillIndex(
+  skillsDir: string,
+): Promise<{ generated: string; version: string; count: number; skills: SkillIndexEntry[] }> {
+  const skillFiles = await findSkillFiles(skillsDir);
+  const skills: SkillIndexEntry[] = [];
+
+  for (const filePath of skillFiles) {
+    try {
+      const content = await readFile(filePath, "utf-8");
+      const metadata = extractSkillFrontmatter(content);
+      if (!metadata || !metadata.name) continue;
+
+      const relativePath = filePath.substring(skillsDir.length + 1); // strip skillsDir prefix + /
+      const asStr = (v: string | string[] | undefined, fallback: string) =>
+        typeof v === "string" ? v : fallback;
+      const asArr = (v: string | string[] | undefined, fallback: string[]) =>
+        Array.isArray(v) ? v : fallback;
+      skills.push({
+        name: asStr(metadata.name, ""),
+        description: asStr(metadata.description, ""),
+        keywords: asArr(metadata.keywords, []),
+        platforms: asArr(metadata.platforms, ["all"]),
+        triggers: asArr(metadata.triggers, []),
+        "agent-affinity": asArr(metadata["agent-affinity"], []),
+        path: relativePath,
+      });
+    } catch {
+      // Skip files that can't be read
+    }
+  }
+
+  skills.sort((a, b) => a.name.localeCompare(b.name));
+
+  return {
+    generated: new Date().toISOString(),
+    version: "1.0.0",
+    count: skills.length,
+    skills,
+  };
+}
+
+async function findSkillFiles(dir: string): Promise<string[]> {
+  const results: string[] = [];
+  try {
+    const entries = await readdir(dir, { withFileTypes: true });
+    for (const entry of entries) {
+      const fullPath = join(dir, entry.name);
+      if (entry.isDirectory()) {
+        results.push(...(await findSkillFiles(fullPath)));
+      } else if (entry.name === "SKILL.md") {
+        results.push(fullPath);
+      }
+    }
+  } catch {
+    // Directory doesn't exist
+  }
+  return results;
+}
+
+function extractSkillFrontmatter(content: string): Record<string, string | string[]> | null {
+  const match = content.match(/^---\s*\n([\s\S]*?)\n---/);
+  if (!match) return null;
+
+  const metadata: Record<string, string | string[]> = {};
+  const lines = match[1].split("\n");
+  let currentKey: string | null = null;
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed) continue;
+
+    if (trimmed.startsWith("-") && currentKey) {
+      const value = trimmed.substring(1).trim();
+      if (!Array.isArray(metadata[currentKey])) metadata[currentKey] = [];
+      (metadata[currentKey] as string[]).push(value);
+      continue;
+    }
+
+    const colonIndex = trimmed.indexOf(":");
+    if (colonIndex === -1) continue;
+
+    const key = trimmed.substring(0, colonIndex).trim();
+    let value = trimmed.substring(colonIndex + 1).trim();
+
+    // Remove quotes
+    if (
+      (value.startsWith('"') && value.endsWith('"')) ||
+      (value.startsWith("'") && value.endsWith("'"))
+    ) {
+      value = value.substring(1, value.length - 1);
+    }
+
+    // Inline array [a, b, c]
+    if (value.startsWith("[") && value.endsWith("]")) {
+      const items = value
+        .substring(1, value.length - 1)
+        .split(",")
+        .map((item) => item.trim().replace(/^["']|["']$/g, ""))
+        .filter((item) => item);
+      metadata[key] = items;
+    } else if (value) {
+      metadata[key] = value;
+    } else {
+      currentKey = key;
+    }
+  }
+
+  return metadata;
 }
 
 // ─── Legacy Kit-Based Installation ───

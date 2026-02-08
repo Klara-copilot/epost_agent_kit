@@ -16,7 +16,7 @@ provides:
   skills:
     - web/nextjs
     - web/frontend-development
-    - web/backend-development
+    - web/api-routes
     - docker
   commands:
     - web/cook

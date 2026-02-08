@@ -1,6 +1,6 @@
 name: meta-kit-design
 version: "1.0.0"
-description: "Kit designer tools: agent/skill development, MCP management, brainstorming"
+description: "Kit designer tools: agent/skill development, MCP management, codebase exploration"
 layer: 2
 platforms: [all]
 
@@ -10,8 +10,6 @@ dependencies:
 provides:
   agents:
     - epost-scout
-    - epost-brainstormer
-    - epost-journal-writer
     - epost-mcp-manager
   skills:
     - agents/claude/agent-development

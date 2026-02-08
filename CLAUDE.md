@@ -29,7 +29,7 @@ This file provides guidance to Claude Code when working with code in this reposi
 
 **Packages**: core, platform-web, platform-ios, platform-android, platform-backend, ui-ux, arch-cloud, domain-b2b, domain-b2c, meta-kit-design
 
-**Installed by**: epost-kit v0.1.0 on 2026-02-07
+**Installed by**: epost-kit v0.1.0 on 2026-02-08
 
 ---
 
@@ -56,6 +56,7 @@ This file provides guidance to Claude Code when working with code in this reposi
 - **Styling**: TailwindCSS + PostCSS
 - **Testing**: Jest, Playwright, React Testing Library
 - **State**: Redux Toolkit + Redux Persist
+- **Containerization**: Docker + Docker Compose
 
 ### Commands
 
@@ -84,10 +85,17 @@ This file provides guidance to Claude Code when working with code in this reposi
 - `/ios:test` — Run iOS unit and UI tests
 - `/ios:debug` — Debug crashes, concurrency, SwiftUI state
 - `/ios:simulator` — Manage iOS simulators
+- `/ios:a11y:audit` — Audit staged Swift changes for accessibility
+- `/ios:a11y:fix` — Fix a specific accessibility finding
+- `/ios:a11y:fix-batch` — Fix top N accessibility findings
+- `/ios:a11y:review-buttons` — Review buttons for WCAG compliance
+- `/ios:a11y:review-headings` — Review heading structure
+- `/ios:a11y:review-modals` — Review modal focus management
 
-### Agent
+### Agents
 
 - `epost-ios-developer` — iOS platform specialist
+- `epost-a11y-specialist` — iOS accessibility auditing and fixing (WCAG 2.1 AA)
 
 ---
 
@@ -246,8 +254,6 @@ The B2C domain covers the ePost consumer mobile application, available on iOS an
 ### Agents
 
 - `epost-scout` — Codebase exploration and file discovery
-- `epost-brainstormer` — Creative ideation and problem-solving
-- `epost-journal-writer` — Technical journal for development challenges
 - `epost-mcp-manager` — MCP server integration management
 
 ### Skills

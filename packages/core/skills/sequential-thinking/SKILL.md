@@ -71,3 +71,8 @@ Conclusion: [Accept/Reject/Uncertain]
 - Challenge assumptions explicitly
 - Consider multiple root causes
 - Document your reasoning trail
+
+### Related Skills
+- `debugging` — Systematic debugging methodology
+- `problem-solving` — Root cause analysis techniques
+- `planning` — Implementation planning and task breakdown

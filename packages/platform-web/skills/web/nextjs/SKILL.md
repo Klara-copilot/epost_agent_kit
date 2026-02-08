@@ -1,6 +1,6 @@
 ---
 name: nextjs
-description: Next.js 15 App Router with Server Components, Server Actions, and routing patterns
+description: Next.js 14 App Router with Server Components, Server Actions, and routing patterns
 keywords: [nextjs, next, app-router, server-components, server-actions, routing]
 platforms: [web]
 triggers: ["next.js", "nextjs", "app router", "server component"]
@@ -11,7 +11,7 @@ user-invocable: false
 # Next.js Skill
 
 ## Purpose
-Next.js 15 App Router expertise.
+Next.js 14 App Router expertise.
 
 ## When Active
 User mentions Next.js, App Router, Server Components.
@@ -95,6 +95,6 @@ export async function GET() {
 ```
 
 ## Dependencies
-- Next.js 15+
-- React 19+
+- Next.js 14+
+- React 18+
 - TypeScript

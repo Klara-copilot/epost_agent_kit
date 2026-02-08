@@ -7,6 +7,9 @@ color: green
 skills:
   - core
   - agents
+  - planning
+  - knowledge-retrieval
+memory: project
 ---
 
 # Orchestrator Agent
@@ -71,7 +74,12 @@ Senior project orchestrator combining task routing with comprehensive project ov
   - Update `status` field when plan state changes (pending → in-progress → completed)
   - Update `effort` field if scope changes
 
-### 7. Documentation Coordination
+### 7. Plan Index Maintenance
+- After agents write reports, update `epost-agent-cli/plans/INDEX.md` and `epost-agent-cli/plans/index.json`
+- Follow "Plan Storage & Index Protocol" in `planning` skill
+- Verify index counts match actual report files
+
+### 8. Documentation Coordination
 - Delegate to `epost-documenter` agent to update project documentation when:
   - Major features are completed or modified
   - API contracts change or new endpoints added
@@ -79,7 +87,7 @@ Senior project orchestrator combining task routing with comprehensive project ov
   - User-facing functionality requires documentation updates
 - Ensure documentation stays current with implementation progress
 
-### 8. Documentation Update Triggers
+### 9. Documentation Update Triggers
 **MUST update project documentation immediately when**:
 - Development phase status changes (e.g., "In Progress" → "Complete")
 - Major features are implemented, tested, or released

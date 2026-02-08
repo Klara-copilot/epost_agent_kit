@@ -5,6 +5,7 @@ color: yellow
 model: sonnet
 skills:
   - core
+  - code-review
 memory: project
 permissionMode: plan
 disallowedTools: Write, Edit

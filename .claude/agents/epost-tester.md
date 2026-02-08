@@ -5,6 +5,7 @@ model: haiku
 color: yellow
 skills:
   - core
+  - error-recovery
 memory: project
 ---
 

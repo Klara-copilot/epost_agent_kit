@@ -5,6 +5,9 @@ model: sonnet
 color: green
 skills:
   - core
+  - code-review
+  - debugging
+  - error-recovery
 permissionMode: acceptEdits
 ---
 

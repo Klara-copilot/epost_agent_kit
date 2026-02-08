@@ -4,7 +4,7 @@ profiles:
     display_name: "Web B2B Developer (frontend)"
     teams: [miracle, titan, helios, hacka, kepler]
     packages: [core, platform-web, domain-b2b, ui-ux]
-    optional: [meta-kit-design]
+    optional: [meta-kit-design, rag-web]
 
   web-b2b-backend:
     display_name: "Web B2B Developer (backend)"
@@ -16,14 +16,14 @@ profiles:
     display_name: "Web B2B Developer (fullstack)"
     teams: [miracle, titan, helios, hacka, kepler]
     packages: [core, platform-web, platform-backend, domain-b2b, ui-ux]
-    optional: [meta-kit-design]
+    optional: [meta-kit-design, rag-web]
 
   # ─── Mobile Teams (B2C) ───
   ios-b2c:
     display_name: "iOS App Developer"
     teams: [optimus]
     packages: [core, platform-ios, domain-b2c, ui-ux]
-    optional: [meta-kit-design]
+    optional: [meta-kit-design, rag-ios]
 
   android-b2c:
     display_name: "Android App Developer"
@@ -35,7 +35,7 @@ profiles:
     display_name: "Mobile Developer (iOS + Android)"
     teams: [optimus]
     packages: [core, platform-ios, platform-android, domain-b2c, ui-ux]
-    optional: [meta-kit-design]
+    optional: [meta-kit-design, rag-ios]
 
   mobile-b2c-backend:
     display_name: "Mobile Backend Developer"
@@ -48,13 +48,13 @@ profiles:
     display_name: "Web UI Library Developer"
     teams: [muji]
     packages: [core, platform-web, ui-ux]
-    optional: [meta-kit-design]
+    optional: [meta-kit-design, rag-web]
 
   ios-ui-lib:
     display_name: "iOS UI Library Developer"
     teams: [muji]
     packages: [core, platform-ios, ui-ux]
-    optional: [meta-kit-design]
+    optional: [meta-kit-design, rag-ios]
 
   android-ui-lib:
     display_name: "Android UI Library Developer"
@@ -87,6 +87,8 @@ profiles:
       - domain-b2b
       - domain-b2c
       - meta-kit-design
+      - rag-web
+      - rag-ios
 
 auto_detect:
   rules:
