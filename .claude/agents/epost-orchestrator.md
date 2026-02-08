@@ -7,6 +7,7 @@ color: green
 skills:
   - core
   - agents
+  - planning
 ---
 
 # Orchestrator Agent

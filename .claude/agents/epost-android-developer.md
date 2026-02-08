@@ -4,9 +4,7 @@ description: Android platform specialist combining implementation and testing. E
 tools: Read, Write, Edit, Bash, Grep, Glob
 model: sonnet
 color: green
-skills:
-  - core
-  - android/android-development
+skills: [core, android/android-development]
 ---
 
 # Android Platform Specialist

@@ -1,0 +1,163 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-02-08",
+  "counts": {
+    "active": 0,
+    "completed": 15,
+    "archived": 0,
+    "total": 15
+  },
+  "plans": [
+    {
+      "id": "PLAN-0001",
+      "title": "Phase 01: Docs Completion",
+      "type": "report",
+      "status": "completed",
+      "created": "2026-02-06",
+      "authors": ["docs-manager"],
+      "tags": ["docs", "phase-01"],
+      "file": "reports/docs-manager-260206-1139-phase-01-docs-completion.md"
+    },
+    {
+      "id": "PLAN-0002",
+      "title": "Phase 05: Complex Commands",
+      "type": "implementation",
+      "status": "completed",
+      "created": "2026-02-06",
+      "authors": ["fullstack-developer"],
+      "tags": ["cli", "commands", "phase-05"],
+      "file": "reports/fullstack-developer-260206-1202-phase-05-complex-commands.md"
+    },
+    {
+      "id": "PLAN-0003",
+      "title": "Phase 07: Update & Uninstall",
+      "type": "implementation",
+      "status": "completed",
+      "created": "2026-02-06",
+      "authors": ["fullstack-developer"],
+      "tags": ["cli", "commands", "phase-07"],
+      "file": "reports/fullstack-developer-260206-1208-phase07-update-uninstall.md"
+    },
+    {
+      "id": "PLAN-0004",
+      "title": "Phase 08: Testing Suite",
+      "type": "implementation",
+      "status": "completed",
+      "created": "2026-02-06",
+      "authors": ["fullstack-developer"],
+      "tags": ["cli", "testing", "phase-08"],
+      "file": "reports/fullstack-developer-260206-1211-phase-08-testing-suite.md"
+    },
+    {
+      "id": "PLAN-0005",
+      "title": "Phase 09: Distribution",
+      "type": "implementation",
+      "status": "completed",
+      "created": "2026-02-06",
+      "authors": ["fullstack-developer"],
+      "tags": ["cli", "distribution", "phase-09"],
+      "file": "reports/fullstack-developer-260206-1224-phase09-distribution.md"
+    },
+    {
+      "id": "PLAN-0006",
+      "title": "Comprehensive Test Suite Report",
+      "type": "report",
+      "status": "completed",
+      "created": "2026-02-06",
+      "authors": ["tester"],
+      "tags": ["testing", "report"],
+      "file": "reports/tester-260206-1230-comprehensive-test-suite-report.md"
+    },
+    {
+      "id": "PLAN-0007",
+      "title": "Test Execution Summary",
+      "type": "report",
+      "status": "completed",
+      "created": "2026-02-06",
+      "authors": ["tester"],
+      "tags": ["testing", "report"],
+      "file": "reports/tester-260206-1230-execution-summary.md"
+    },
+    {
+      "id": "PLAN-0008",
+      "title": "Test Action Items",
+      "type": "report",
+      "status": "completed",
+      "created": "2026-02-06",
+      "authors": ["tester"],
+      "tags": ["testing", "action-items"],
+      "file": "reports/tester-260206-1230-action-items.md"
+    },
+    {
+      "id": "PLAN-0009",
+      "title": "Test Breakdown",
+      "type": "report",
+      "status": "completed",
+      "created": "2026-02-06",
+      "authors": ["tester"],
+      "tags": ["testing", "breakdown"],
+      "file": "reports/tester-260206-1230-test-breakdown.txt"
+    },
+    {
+      "id": "PLAN-0010",
+      "title": "CLI Code Review",
+      "type": "report",
+      "status": "completed",
+      "created": "2026-02-06",
+      "authors": ["code-reviewer"],
+      "tags": ["cli", "review"],
+      "file": "reports/code-reviewer-260206-1237-cli-review.md"
+    },
+    {
+      "id": "PLAN-0011",
+      "title": "Docs Final Summary",
+      "type": "report",
+      "status": "completed",
+      "created": "2026-02-06",
+      "authors": ["docs-manager"],
+      "tags": ["docs", "summary"],
+      "file": "reports/docs-manager-260206-1139-final-summary.md"
+    },
+    {
+      "id": "PLAN-0012",
+      "title": "Implementation Verification",
+      "type": "report",
+      "status": "completed",
+      "created": "2026-02-06",
+      "authors": ["verification"],
+      "tags": ["verification", "status"],
+      "file": "reports/verification-260206-1324-implementation-status.md"
+    },
+    {
+      "id": "PLAN-0013",
+      "title": "Remove Copywriter & UI-UX Designer",
+      "type": "design",
+      "status": "completed",
+      "created": "2026-02-07",
+      "authors": ["plan"],
+      "tags": ["agents", "cleanup"],
+      "file": "reports/plan-260207-2130-remove-copywriter-ui-ux-designer.md"
+    },
+    {
+      "id": "PLAN-0014",
+      "title": "Ecosystem Package Restructuring",
+      "type": "implementation",
+      "status": "completed",
+      "created": "2026-02-07",
+      "authors": ["ecosystem"],
+      "tags": ["ecosystem", "packages", "restructuring"],
+      "file": "reports/ecosystem-260207-2130-package-restructuring.md",
+      "relatedCommits": ["a936981", "d1453e6"]
+    },
+    {
+      "id": "PLAN-0015",
+      "title": "Changelog & Implementation Plans Tracking",
+      "type": "implementation",
+      "status": "completed",
+      "created": "2026-02-08",
+      "authors": ["epost-architect", "epost-implementer"],
+      "tags": ["changelog", "plans", "tracking", "docs"],
+      "file": "reports/plan-260208-1337-changelog-plans-tracking.md"
+    }
+  ]
+}

@@ -6,6 +6,7 @@ color: purple
 skills:
   - core
   - research
+  - docs-seeker
 permissionMode: plan
 disallowedTools: Write, Edit
 ---

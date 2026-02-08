@@ -8,6 +8,7 @@
 - **UI Components**: shadcn/ui or klara-theme
 - **Testing**: Jest + React Testing Library, Playwright
 - **State**: Redux Toolkit + Redux Persist
+- **Containerization**: Docker + Docker Compose
 
 ### Commands
 - `/web:cook` — Implement web features (Next.js, React, TypeScript)
