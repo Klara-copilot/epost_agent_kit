@@ -3,9 +3,9 @@
   "updated": "2026-02-08",
   "counts": {
     "active": 0,
-    "completed": 15,
+    "completed": 18,
     "archived": 0,
-    "total": 15
+    "total": 18
   },
   "plans": [
     {
@@ -158,6 +158,36 @@
       "authors": ["epost-architect", "epost-implementer"],
       "tags": ["changelog", "plans", "tracking", "docs"],
       "file": "reports/plan-260208-1337-changelog-plans-tracking.md"
+    },
+    {
+      "id": "PLAN-0016",
+      "title": "CLI Terminal UI Improvements",
+      "type": "implementation",
+      "status": "completed",
+      "created": "2026-02-08",
+      "authors": ["epost-architect"],
+      "tags": ["cli", "ui", "ux", "onboarding", "branding"],
+      "file": "completed/plan-260208-1442-cli-terminal-ui-improvements.md"
+    },
+    {
+      "id": "PLAN-0017",
+      "title": "Agent & Skill Ecosystem for CLI",
+      "type": "implementation",
+      "status": "completed",
+      "created": "2026-02-08",
+      "authors": ["epost-architect", "epost-implementer"],
+      "tags": ["agents", "skills", "cli", "commands", "ecosystem"],
+      "file": "completed/plan-260208-1610-agent-skill-cli-ecosystem.md"
+    },
+    {
+      "id": "PLAN-0018",
+      "title": "Dedicated CLI Developer Agent",
+      "type": "implementation",
+      "status": "completed",
+      "created": "2026-02-08",
+      "authors": ["epost-implementer"],
+      "tags": ["agents", "cli", "platform-agent"],
+      "file": "completed/plan-260208-1625-cli-developer-agent.md"
     }
   ]
 }

@@ -45,6 +45,7 @@ program
   .option("--exclude <list>", "Comma-separated packages to exclude")
   .option("--fresh", "Fresh install (ignore existing files)", false)
   .option("--dry-run", "Preview changes without applying", false)
+  .option("--dir <path>", "Target project directory")
   .action(async (opts) => {
     const { runInit } = await import("./commands/init.js");
     await runInit({ ...program.opts(), ...opts });
@@ -90,6 +91,7 @@ program
 program
   .command("uninstall")
   .description("Remove installed kit from project")
+  .option("--dir <path>", "Target project directory")
   .option("--keep-custom", "Keep user-modified files", false)
   .option("--force", "Force removal without confirmation", false)
   .action(async (opts) => {
@@ -156,6 +158,7 @@ packageCmd
 program
   .command("onboard")
   .description("Guided first-time setup wizard for new developers")
+  .option("--dir <path>", "Target project directory")
   .action(async (opts) => {
     const { runOnboard } = await import("./commands/onboard.js");
     await runOnboard({ ...program.opts(), ...opts });

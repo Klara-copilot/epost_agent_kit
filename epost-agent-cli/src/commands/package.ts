@@ -14,6 +14,11 @@ import {
   loadAllManifests,
   loadPackageManifest,
 } from "../core/package-resolver.js";
+import {
+  heading,
+  layerDiagram,
+  type PackageManifestSummary,
+} from "../core/ui.js";
 import type {
   PackageListOptions,
   PackageAddOptions,
@@ -47,7 +52,8 @@ export async function runPackageList(_opts: PackageListOptions): Promise<void> {
   const metadata = await readMetadata(process.cwd());
   const installedPackages = new Set(metadata?.installedPackages || []);
 
-  logger.info(`\nAvailable packages (${manifests.size}):\n`);
+  console.log(heading(`Available Packages (${manifests.size})`));
+  console.log("");
 
   // Sort by layer, then name
   const sorted = [...manifests.entries()].sort(([, a], [, b]) => {
@@ -55,25 +61,28 @@ export async function runPackageList(_opts: PackageListOptions): Promise<void> {
     return a.name.localeCompare(b.name);
   });
 
+  // Build package summaries
+  const summaries: PackageManifestSummary[] = [];
   for (const [name, manifest] of sorted) {
     const installed = installedPackages.has(name);
-    const marker = installed ? "✓" : " ";
-    const agents = manifest.provides.agents.length;
-    const skills = manifest.provides.skills.length;
-    const commands = manifest.provides.commands.length;
-
-    logger.info(`  [${marker}] Layer ${manifest.layer}: ${name}`);
-    logger.info(`      ${manifest.description}`);
-    logger.info(
-      `      ${agents}A ${skills}S ${commands}C | platforms: ${manifest.platforms.join(", ")}`,
-    );
-    if (manifest.dependencies.length > 0) {
-      logger.info(`      requires: ${manifest.dependencies.join(", ")}`);
-    }
-    logger.info("");
+    const summary: PackageManifestSummary = {
+      name,
+      description: manifest.description,
+      layer: manifest.layer,
+      installed,
+      agents: manifest.provides.agents.length,
+      skills: manifest.provides.skills.length,
+      commands: manifest.provides.commands.length,
+      platforms: manifest.platforms,
+      dependencies: manifest.dependencies,
+    };
+    summaries.push(summary);
   }
 
+  console.log(layerDiagram(summaries));
+
   if (installedPackages.size > 0) {
+    console.log("");
     logger.info(`Installed: ${[...installedPackages].join(", ")}`);
   }
 }

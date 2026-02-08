@@ -1,7 +1,7 @@
 {
-  "generated": "2026-02-08T04:42:44.007Z",
+  "generated": "2026-02-08T09:42:31.936Z",
   "version": "1.0.0",
-  "count": 31,
+  "count": 36,
   "skills": [
     {
       "name": "agent-development",
@@ -113,6 +113,17 @@
       "triggers": [],
       "agent-affinity": [],
       "path": "backend/javaee/SKILL.md"
+    },
+    {
+      "name": "cli-development",
+      "description": "This skill should be used when working on \"epost-kit CLI\", \"epost-agent-cli\", \"CLI commands\", \"terminal UI\", \"cli-table3\", \"Commander\", \"inquirer prompts\", \"CLI onboarding\", \"CLI branding\", or any TypeScript code in the epost-agent-cli directory.",
+      "keywords": [],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [],
+      "agent-affinity": [],
+      "path": "cli/SKILL.md"
     },
     {
       "name": "code-review",
@@ -387,6 +398,94 @@
       "path": "web/klara-theme/SKILL.md"
     },
     {
+      "name": "knowledge-base",
+      "description": "Project knowledge management — ADRs, learned patterns, debug findings, decision history. Use when agents need to persist knowledge for future sessions.",
+      "keywords": [
+        "knowledge",
+        "adr",
+        "decision",
+        "pattern",
+        "learning",
+        "memory",
+        "persist",
+        "capture"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "ADR",
+        "decision record",
+        "learned pattern",
+        "save finding"
+      ],
+      "agent-affinity": [
+        "epost-architect",
+        "epost-debugger",
+        "epost-documenter",
+        "epost-implementer"
+      ],
+      "path": "knowledge-base/SKILL.md"
+    },
+    {
+      "name": "knowledge-capture",
+      "description": "Post-task knowledge capture workflow — persist debug findings, implementation patterns, research results, review conventions to .knowledge/ directory.",
+      "keywords": [
+        "capture",
+        "learn",
+        "persist",
+        "record",
+        "post-mortem",
+        "retrospective"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "capture learnings",
+        "save pattern",
+        "record finding",
+        "what did we learn"
+      ],
+      "agent-affinity": [
+        "epost-debugger",
+        "epost-implementer",
+        "epost-researcher",
+        "epost-reviewer",
+        "epost-architect"
+      ],
+      "path": "knowledge-capture/SKILL.md"
+    },
+    {
+      "name": "knowledge-retrieval",
+      "description": "Internal-first knowledge retrieval before acting. Searches project knowledge, skills, RAG systems, ADRs before external sources.",
+      "keywords": [
+        "retrieve",
+        "search",
+        "knowledge",
+        "context",
+        "rag",
+        "lookup",
+        "prior-art"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "what do we know about",
+        "check knowledge",
+        "prior art",
+        "previous decision"
+      ],
+      "agent-affinity": [
+        "epost-architect",
+        "epost-implementer",
+        "epost-debugger",
+        "epost-researcher"
+      ],
+      "path": "knowledge-retrieval/SKILL.md"
+    },
+    {
       "name": "knowledge/android-theme",
       "description": "Android theme UI library: Compose components and design tokens",
       "keywords": [],
@@ -496,6 +595,33 @@
         "epost-architect"
       ],
       "path": "problem-solving/SKILL.md"
+    },
+    {
+      "name": "rag/web-rag",
+      "description": "Web codebase RAG — vector search for klara-theme components, design tokens, Next.js patterns. Use before implementing web UI features, searching component APIs, or finding existing patterns.",
+      "keywords": [
+        "rag",
+        "vector-search",
+        "klara-theme",
+        "web",
+        "components",
+        "design-tokens"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "triggers": [
+        "search components",
+        "find component",
+        "klara-theme",
+        "design token"
+      ],
+      "agent-affinity": [
+        "epost-web-developer",
+        "epost-muji",
+        "epost-implementer"
+      ],
+      "path": "rag/web-rag/SKILL.md"
     },
     {
       "name": "repomix",

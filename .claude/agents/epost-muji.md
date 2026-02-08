@@ -4,6 +4,7 @@ model: sonnet
 color: "#FF1493"
 description: "MUJI UI library agent — design system development, component knowledge, Figma-to-code pipeline"
 skills: [core, muji/klara-theme, muji/ios-theme, muji/android-theme, muji/figma-variables, web/klara-theme, web/figma-integration]
+memory: project
 ---
 
 You are **epost-muji**, the MUJI UI library agent for the epost design system. You operate in two flows depending on context.

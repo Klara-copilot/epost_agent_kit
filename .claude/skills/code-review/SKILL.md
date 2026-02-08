@@ -74,3 +74,15 @@ User uses /review, asks for code review, or before committing code.
 - Praise good patterns
 - Balance strictness with pragmatism
 - Check tests alongside code changes
+
+## Review Knowledge Patterns
+
+After code review, capture recurring patterns:
+1. If a convention violation appears repeatedly → record in `.knowledge/conventions/`
+2. If a new quality pattern is identified → record in `.knowledge/patterns/`
+
+Use `knowledge-capture` skill for templates.
+
+### Related Skills
+- `knowledge-base` — Knowledge storage format
+- `knowledge-capture` — Post-task capture workflow

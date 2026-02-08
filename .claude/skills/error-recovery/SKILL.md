@@ -224,3 +224,8 @@ try {
 
 - [AWS Architecture Blog: Exponential Backoff](https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/)
 - [Martin Fowler: Circuit Breaker](https://martinfowler.com/bliki/CircuitBreaker.html)
+
+### Related Skills
+- `debugging` — Systematic debugging methodology
+- `problem-solving` — Root cause analysis techniques
+- `knowledge-capture` — Persist error patterns and recovery strategies

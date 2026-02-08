@@ -27,7 +27,7 @@ This file provides guidance to Claude Code when working with code in this reposi
 - Documentation management and generation
 - klara-theme Figma-to-code workflow integration
 
-**Packages**: core, platform-web, platform-ios, platform-android, platform-backend, ui-ux, arch-cloud, domain-b2b, domain-b2c, meta-kit-design
+**Packages**: core, platform-web, platform-ios, platform-android, platform-backend, ui-ux, arch-cloud, domain-b2b, domain-b2c, meta-kit-design, rag-web
 
 **Installed by**: epost-kit v0.1.0 on 2026-02-08
 
@@ -37,10 +37,10 @@ This file provides guidance to Claude Code when working with code in this reposi
 
 ### Configuration
 
-- **Agents**: `.claude/agents/` — 20 specialized agents across global and platform-specific roles
+- **Agents**: `.claude/agents/` — 21 specialized agents across global and platform-specific roles
   - **Global**: orchestrator, architect, planner, implementer, reviewer, debugger, tester, researcher, documenter, git-manager
   - **Platform**: web-developer, ios-developer, android-developer
-  - **Specialized**: scout, brainstormer, database-admin, ui-ux-designer, copywriter, journal-writer, mcp-manager
+  - **Specialized**: scout, brainstormer, database-admin, ui-ux-designer, copywriter, journal-writer, mcp-manager, a11y-specialist
 - **Commands**: `.claude/commands/` — Slash commands (`/plan`, `/cook`, `/test`, `/debug`, `/git:commit`, `/docs:component`, etc.)
 - **Skills**: `.claude/skills/` — Passive knowledge (core, web, iOS, Android, planning, debugging, research, databases, docker, figma-integration, klara-theme)
 
@@ -260,6 +260,22 @@ The B2C domain covers the ePost consumer mobile application, available on iOS an
 
 - `agents/claude/agent-development/` — Agent creation and maintenance patterns
 - `agents/claude/skill-development/` — Skill authoring and frontmatter conventions
+
+---
+
+## Web RAG System
+
+### Connection
+
+- **Server**: `epost_web_theme_rag` (port 2636)
+- **MCP Tools**: `query_rag`, `get_rag_status`, `sanitize_text`
+- **Target**: klara-theme components, Next.js codebase (`luz_next`)
+
+### Usage
+
+- Query before implementing UI components
+- Search design tokens, component patterns, existing implementations
+- Filter by: component, topic (design-system, ui, state-management), category, file_type
 
 ---
 

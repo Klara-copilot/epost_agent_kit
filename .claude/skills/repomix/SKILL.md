@@ -61,3 +61,7 @@ Create `.repomixignore` to exclude files (same syntax as .gitignore).
 - Use with .repomixignore for large monorepos
 - Reference summary in documentation
 - Cross-check with actual repo structure
+
+### Related Skills
+- `knowledge-retrieval` — Internal-first knowledge search protocol
+- `docs-seeker` — External documentation lookup (Context7, WebSearch)

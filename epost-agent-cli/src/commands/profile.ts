@@ -12,6 +12,7 @@ import {
   getProfileInfo,
   findProfilesByTeam,
 } from "../core/profile-loader.js";
+import { heading, table, keyValue } from "../core/ui.js";
 import type {
   ProfileListOptions,
   ProfileShowOptions,
@@ -49,22 +50,19 @@ export async function runProfileList(opts: ProfileListOptions): Promise<void> {
     return;
   }
 
-  logger.info(`\nAvailable profiles (${items.length}):\n`);
+  console.log(heading(`Available Profiles (${items.length})`));
+  console.log("");
 
-  for (const profile of items) {
+  const rows = items.map((profile) => {
     const pkgCount = profile.packages.length;
     const optCount = profile.optional.length;
-    const teams =
-      profile.teams.length > 0 ? ` [${profile.teams.join(", ")}]` : "";
+    const teams = profile.teams.length > 0 ? profile.teams.join(", ") : "—";
+    const packages = `${pkgCount}${optCount > 0 ? ` (+${optCount} opt)` : ""}`;
 
-    logger.info(`  ${profile.name}`);
-    logger.info(`    ${profile.displayName}${teams}`);
-    logger.info(
-      `    Packages: ${pkgCount}${optCount > 0 ? ` (+${optCount} optional)` : ""}`,
-    );
-    logger.info(`    ${profile.packages.join(", ")}`);
-    logger.info("");
-  }
+    return [profile.name, profile.displayName, teams, packages];
+  });
+
+  console.log(table(["Profile", "Display Name", "Teams", "Packages"], rows));
 }
 
 export async function runProfileShow(opts: ProfileShowOptions): Promise<void> {
@@ -89,12 +87,22 @@ export async function runProfileShow(opts: ProfileShowOptions): Promise<void> {
     manifests = null;
   }
 
-  logger.info(`\nProfile: ${info.name}`);
-  logger.info(`Display Name: ${info.displayName}`);
+  console.log(heading(`Profile: ${info.name}`));
+  console.log("");
+
+  const metadata: Array<[string, string]> = [
+    ["Display Name", info.displayName],
+  ];
+
   if (info.teams.length > 0) {
-    logger.info(`Teams: ${info.teams.join(", ")}`);
+    metadata.push(["Teams", info.teams.join(", ")]);
   }
-  logger.info(`\nPackages (${info.packages.length}):`);
+
+  console.log(keyValue(metadata));
+  console.log("");
+
+  logger.info(`Packages (${info.packages.length}):`);
+  console.log("");
 
   let totalAgents = 0,
     totalSkills = 0,
@@ -117,12 +125,14 @@ export async function runProfileShow(opts: ProfileShowOptions): Promise<void> {
   }
 
   if (info.optional.length > 0) {
-    logger.info(`\nOptional packages: ${info.optional.join(", ")}`);
+    console.log("");
+    logger.info(`Optional packages: ${info.optional.join(", ")}`);
   }
 
   if (manifests) {
+    console.log("");
     logger.info(
-      `\nTotal: ${totalAgents} agents, ${totalSkills} skills, ${totalCommands} commands`,
+      `Total: ${totalAgents} agents, ${totalSkills} skills, ${totalCommands} commands`,
     );
   }
 }

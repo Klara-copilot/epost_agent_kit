@@ -22,6 +22,15 @@ interface UninstallPlan {
 }
 
 export async function runUninstall(opts: UninstallOptions): Promise<void> {
+  // Support --dir option for targeting a specific project
+  if (opts.dir) {
+    const targetPath = resolve(opts.dir);
+    if (!(await dirExists(targetPath))) {
+      throw new Error(`Directory not found: ${targetPath}`);
+    }
+    process.chdir(targetPath);
+  }
+
   const projectDir = resolve(process.cwd());
 
   // Step 1: Read metadata
@@ -30,7 +39,8 @@ export async function runUninstall(opts: UninstallOptions): Promise<void> {
     throw new Error('No epost-kit installation found (missing metadata)');
   }
 
-  logger.info(`Found installation: ${pc.cyan(metadata.target)} kit`);
+  const targetLabel = metadata.target === "claude" ? "Claude Code" : metadata.target === "cursor" ? "Cursor" : "GitHub Copilot";
+  logger.info(`Found installation: ${pc.cyan("epost-kit")} (${targetLabel})`);
   logger.info(`Installed version: ${pc.cyan(metadata.kitVersion)}`);
   logger.info('');
 

@@ -177,6 +177,8 @@ describe("Feature", () => {
 
 Use the naming pattern from the `## Naming` section injected by hooks. The pattern includes full path and computed date.
 
+**After writing report**: Update plan index per `planning` skill's "Plan Storage & Index Protocol" — append to `epost-agent-cli/plans/INDEX.md` and `epost-agent-cli/plans/index.json`.
+
 **IMPORTANT**: Sacrifice grammar for the sake of concision when writing reports.
 
 **IMPORTANT**: In reports, list any unresolved questions at the end, if any.
