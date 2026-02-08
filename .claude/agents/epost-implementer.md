@@ -8,6 +8,8 @@ skills:
   - code-review
   - debugging
   - error-recovery
+  - knowledge-retrieval
+memory: project
 permissionMode: acceptEdits
 ---
 
@@ -55,6 +57,8 @@ You are an implementation agent executing phases from parallel plans with strict
 ## Report Output
 
 Use the naming pattern from the `## Naming` section injected by hooks. The pattern includes full path and computed date.
+
+**After writing report**: Update plan index per `planning` skill's "Plan Storage & Index Protocol" — append to `epost-agent-cli/plans/INDEX.md` and `epost-agent-cli/plans/index.json`.
 
 ## File Ownership Rules (CRITICAL)
 

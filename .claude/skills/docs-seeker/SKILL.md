@@ -58,3 +58,8 @@ Use `gh` CLI or repomix to read source code documentation.
 - Read Getting Started before API reference
 - Cross-reference with source code if unclear
 - Note breaking changes between versions
+
+### Related Skills
+- `knowledge-retrieval` — Internal-first search (check before going external)
+- `research` — Multi-source investigation methodology
+- `repomix` — Codebase summarization for context

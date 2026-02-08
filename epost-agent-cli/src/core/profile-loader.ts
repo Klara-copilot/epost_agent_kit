@@ -2,8 +2,10 @@
  * Profile loader: auto-detection, listing, and profile info
  */
 
-import { join } from "node:path";
+import { join, resolve, dirname } from "node:path";
 import { readdir } from "node:fs/promises";
+import { fileURLToPath } from "node:url";
+import { Separator } from "@inquirer/prompts";
 import { logger } from "./logger.js";
 import { fileExists, dirExists, safeReadFile } from "./file-system.js";
 import {
@@ -253,4 +255,89 @@ export function findProfilesByTeam(
   return listProfiles(profiles).filter((p) =>
     p.teams.includes(teamName.toLowerCase()),
   );
+}
+
+// ─── Kit Root Resolution ───
+
+const __profile_loader_dir = dirname(fileURLToPath(import.meta.url));
+
+/**
+ * Find the epost_agent_kit repo root by searching:
+ * 1. cwd (running from kit repo root)
+ * 2. cwd/.. (running from epost-agent-cli/)
+ * 3. Relative to CLI source (src/core/ → epost-agent-cli/ → kit root)
+ * 4. Relative to CLI dist (dist/ → epost-agent-cli/ → kit root)
+ */
+export async function findKitRoot(): Promise<string | null> {
+  const candidates = [
+    process.cwd(),
+    resolve(process.cwd(), ".."),
+    resolve(__profile_loader_dir, "..", ".."),
+    resolve(__profile_loader_dir, "..", "..", ".."),
+  ];
+
+  for (const dir of candidates) {
+    if (
+      (await fileExists(join(dir, "profiles", "profiles.yaml"))) &&
+      (await dirExists(join(dir, "packages")))
+    ) {
+      return dir;
+    }
+  }
+  return null;
+}
+
+// ─── Team Ordering ───
+
+const TEAM_ORDER = [
+  { group: "Feature Teams", teams: ["helios", "miracle", "titan", "hacka", "kepler"] },
+  { group: "Mobile", teams: ["optimus"] },
+  { group: "Specialist", teams: ["future", "muji"] },
+];
+
+/**
+ * Return team choices in curated order with Separator dividers.
+ * Only includes teams that actually exist in the profiles config.
+ */
+export function getOrderedTeamChoices(
+  profiles: ProfilesConfig,
+): Array<Separator | { name: string; value: string }> {
+  const existingTeams = new Set<string>();
+  for (const p of Object.values(profiles.profiles)) {
+    for (const t of p.teams || []) existingTeams.add(t);
+  }
+
+  const choices: Array<Separator | { name: string; value: string }> = [];
+
+  for (const group of TEAM_ORDER) {
+    const groupTeams = group.teams.filter((t) => existingTeams.has(t));
+    if (groupTeams.length === 0) continue;
+
+    if (choices.length > 0) choices.push(new Separator());
+
+    for (const t of groupTeams) {
+      choices.push({
+        name: t.charAt(0).toUpperCase() + t.slice(1),
+        value: t,
+      });
+      existingTeams.delete(t);
+    }
+  }
+
+  // Any remaining teams not in TEAM_ORDER
+  if (existingTeams.size > 0) {
+    choices.push(new Separator());
+    for (const t of existingTeams) {
+      choices.push({
+        name: t.charAt(0).toUpperCase() + t.slice(1),
+        value: t,
+      });
+    }
+  }
+
+  // Always add "Others" at the end
+  choices.push(new Separator());
+  choices.push({ name: "Others / I'm exploring", value: "__other__" });
+
+  return choices;
 }

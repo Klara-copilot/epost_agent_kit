@@ -27,6 +27,9 @@ _No active plans._
 | PLAN-0013 | Remove Copywriter & UI-UX Designer | plan | 2026-02-07 | [reports/plan-260207-2130-remove-copywriter-ui-ux-designer.md](reports/plan-260207-2130-remove-copywriter-ui-ux-designer.md) |
 | PLAN-0014 | Ecosystem Package Restructuring | ecosystem | 2026-02-07 | [reports/ecosystem-260207-2130-package-restructuring.md](reports/ecosystem-260207-2130-package-restructuring.md) |
 | PLAN-0015 | Changelog & Implementation Plans Tracking | epost-architect | 2026-02-08 | [reports/plan-260208-1337-changelog-plans-tracking.md](reports/plan-260208-1337-changelog-plans-tracking.md) |
+| PLAN-0016 | CLI Terminal UI Improvements | epost-architect | 2026-02-08 | [completed/plan-260208-1442-cli-terminal-ui-improvements.md](completed/plan-260208-1442-cli-terminal-ui-improvements.md) |
+| PLAN-0017 | Agent & Skill Ecosystem for CLI | epost-architect, epost-implementer | 2026-02-08 | [completed/plan-260208-1610-agent-skill-cli-ecosystem.md](completed/plan-260208-1610-agent-skill-cli-ecosystem.md) |
+| PLAN-0018 | Dedicated CLI Developer Agent | epost-implementer | 2026-02-08 | [completed/plan-260208-1625-cli-developer-agent.md](completed/plan-260208-1625-cli-developer-agent.md) |
 
 ## Archived
 
