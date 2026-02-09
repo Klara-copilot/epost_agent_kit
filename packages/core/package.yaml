@@ -1,0 +1,75 @@
+name: core
+version: "1.0.0"
+description: "Core layer: global agents, skills, commands, hooks, scripts, output styles"
+layer: 0
+platforms: [all]
+
+dependencies: []
+
+provides:
+  agents:
+    - epost-orchestrator
+    - epost-architect
+    - epost-implementer
+    - epost-reviewer
+    - epost-debugger
+    - epost-tester
+    - epost-researcher
+    - epost-documenter
+    - epost-git-manager
+    - epost-brainstormer
+    - epost-journal-writer
+  skills:
+    - core
+    - code-review
+    - debugging
+    - planning
+    - problem-solving
+    - error-recovery
+    - repomix
+    - docs-seeker
+    - sequential-thinking
+    - research
+    - knowledge-base
+    - knowledge-retrieval
+    - knowledge-capture
+  commands:
+    - core/ask
+    - core/bootstrap
+    - core/brainstorm
+    - core/cook
+    - core/cook/auto
+    - core/cook/auto/fast
+    - core/cook/auto/parallel
+    - core/debug
+    - core/plan
+    - core/review
+    - core/scout
+    - core/test
+    - plan/fast
+    - plan/hard
+    - plan/parallel
+    - fix/ci
+    - fix/fast
+    - fix/hard
+    - fix/test
+    - fix/ui
+    - git/cm
+    - git/commit
+    - git/cp
+    - git/pr
+    - git/push
+    - docs/init
+    - docs/update
+
+files:
+  agents/: agents/
+  skills/: skills/
+  commands/: commands/
+  hooks/: hooks/
+  scripts/: scripts/
+  output-styles/: output-styles/
+  workflows/: workflows/
+  settings.json: settings.json
+
+settings_strategy: base

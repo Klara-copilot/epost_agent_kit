@@ -1,0 +1,24 @@
+name: meta-kit-design
+version: "1.0.0"
+description: "Kit designer tools: agent/skill development, MCP management, codebase exploration"
+layer: 2
+platforms: [all]
+
+dependencies:
+  - core
+
+provides:
+  agents:
+    - epost-scout
+    - epost-mcp-manager
+  skills:
+    - agents/claude/agent-development
+    - agents/claude/skill-development
+    - agents/mental-model
+
+files:
+  agents/: agents/
+  skills/: skills/
+
+settings_strategy: skip
+claude_snippet: CLAUDE.snippet.md

@@ -4,9 +4,7 @@ description: iOS platform specialist combining implementation, testing, and simu
 tools: Read, Write, Edit, Bash, Grep, Glob, mcp__xcodebuildmcp__discover_projs, mcp__xcodebuildmcp__list_schemes, mcp__xcodebuildmcp__build_sim, mcp__xcodebuildmcp__test_sim, mcp__xcodebuildmcp__doctor
 model: sonnet
 color: blue
-skills:
-  - core
-  - ios/ios-development
+skills: [core, ios/ios-development]
 ---
 
 # iOS Platform Specialist
@@ -327,10 +325,27 @@ Use the naming pattern from the `## Naming` section injected by hooks.
 - Use "booted" keyword for currently running simulator
 - Check boot status before install/launch operations
 
+## Accessibility
+
+Delegate iOS accessibility tasks to the unified accessibility agent:
+
+| Task | Agent | Command |
+|------|-------|---------|
+| Real-time a11y guidance | `epost-a11y-specialist` | (automatic during coding) |
+| Batch audit (pre-commit/PR) | `epost-a11y-specialist` | `/ios:a11y:audit` |
+| Fix specific finding | `epost-a11y-specialist` | `/ios:a11y:fix <id>` |
+| Fix top N findings | `epost-a11y-specialist` | `/ios:a11y:fix-batch <n>` |
+| Review buttons | `epost-a11y-specialist` | `/ios:a11y:review-buttons <file>` |
+| Review headings | `epost-a11y-specialist` | `/ios:a11y:review-headings <file>` |
+| Review modals | `epost-a11y-specialist` | `/ios:a11y:review-modals <file>` |
+
+When a developer asks about accessibility, VoiceOver, or WCAG, route to `epost-a11y-specialist`.
+
 ## Related Documents
 
 - `.claude/skills/core/SKILL.md` — Operational boundaries
 - `.claude/skills/ios/ios-development/SKILL.md` — iOS development patterns
+- `.claude/skills/ios/ios-accessibility/SKILL.md` — WCAG 2.1 AA accessibility rules
 - `CLAUDE.md` — Project context
 
 ---

@@ -1,0 +1,104 @@
+{
+  "cliVersion": "0.1.0",
+  "target": "claude",
+  "kitVersion": "1.0.0",
+  "profile": "web-ui-lib",
+  "installedPackages": [
+    "core",
+    "platform-web",
+    "ui-ux",
+    "meta-kit-design",
+    "rag-web"
+  ],
+  "installedAt": "2026-02-08T09:42:31.959Z",
+  "files": {
+    ".claude/skills/knowledge-base/SKILL.md": {
+      "path": ".claude/skills/knowledge-base/SKILL.md",
+      "checksum": "5a574e412f87a575799ee578c8b5834da416ae2107f0e1fc06853cd03c8058e4",
+      "installedAt": "2026-02-08T09:42:31.505Z",
+      "version": "1.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/knowledge-base/references/adr-patterns.md": {
+      "path": ".claude/skills/knowledge-base/references/adr-patterns.md",
+      "checksum": "aec584daa39281ea619a7bd692914c7e0490700b18c9dca8e5ebe6738ff6f3fe",
+      "installedAt": "2026-02-08T09:42:31.506Z",
+      "version": "1.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/knowledge-base/references/knowledge-capture-guide.md": {
+      "path": ".claude/skills/knowledge-base/references/knowledge-capture-guide.md",
+      "checksum": "9bcc02b568e48f92703a6ed7f9b42c371f2d4c76d7391b1f6a4fd25853261a36",
+      "installedAt": "2026-02-08T09:42:31.507Z",
+      "version": "1.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/knowledge-base/references/sidecar-format-spec.md": {
+      "path": ".claude/skills/knowledge-base/references/sidecar-format-spec.md",
+      "checksum": "48f495e694529c859ee4787b3dde7a2fdb8d343385987c94ed1287dcd12c897b",
+      "installedAt": "2026-02-08T09:42:31.507Z",
+      "version": "1.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/knowledge-capture/SKILL.md": {
+      "path": ".claude/skills/knowledge-capture/SKILL.md",
+      "checksum": "2a3abd82790f450098d5a0e7dd6db5c9ca1c758de4d7a7aedc3afe6b14fcd0b3",
+      "installedAt": "2026-02-08T09:42:31.508Z",
+      "version": "1.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/knowledge-retrieval/SKILL.md": {
+      "path": ".claude/skills/knowledge-retrieval/SKILL.md",
+      "checksum": "9535fcce717e97f7a35dbcf41d48b3a2c3a5c611fc7d4727bb060bd61dd966cf",
+      "installedAt": "2026-02-08T09:42:31.509Z",
+      "version": "1.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/knowledge-retrieval/references/priority-matrix.md": {
+      "path": ".claude/skills/knowledge-retrieval/references/priority-matrix.md",
+      "checksum": "7e34b87606e04c471b0b8fd3964dbdac995688893aead07675d58dc5e756ba47",
+      "installedAt": "2026-02-08T09:42:31.510Z",
+      "version": "1.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/knowledge-retrieval/references/search-strategy.md": {
+      "path": ".claude/skills/knowledge-retrieval/references/search-strategy.md",
+      "checksum": "8f22b357dd8595ad0fd3777537fd17113d3752992cd5b03a75725483e0766035",
+      "installedAt": "2026-02-08T09:42:31.510Z",
+      "version": "1.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/rag/web-rag/SKILL.md": {
+      "path": ".claude/skills/rag/web-rag/SKILL.md",
+      "checksum": "0cd7e67bc385e0cbe154979be2750446e95111a27ee82b4f0e39ef8d52b72e5c",
+      "installedAt": "2026-02-08T09:42:31.875Z",
+      "version": "1.0.0",
+      "modified": false,
+      "package": "rag-web"
+    },
+    ".claude/skills/rag/web-rag/references/query-patterns.md": {
+      "path": ".claude/skills/rag/web-rag/references/query-patterns.md",
+      "checksum": "720b199d259d2bb15ab426efbdfb0af970b833a4a8f49f0799deb78931d2e382",
+      "installedAt": "2026-02-08T09:42:31.889Z",
+      "version": "1.0.0",
+      "modified": false,
+      "package": "rag-web"
+    },
+    ".claude/skills/skill-index.json": {
+      "path": ".claude/skills/skill-index.json",
+      "checksum": "aa01192c4ddf5841662fb8dbe5e8dc79e5832fc52b84d24c9fa35045cd433b0b",
+      "installedAt": "2026-02-08T09:42:31.945Z",
+      "version": "1.0.0",
+      "modified": false,
+      "package": "core"
+    }
+  }
+}

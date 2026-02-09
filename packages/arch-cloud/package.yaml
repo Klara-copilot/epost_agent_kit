@@ -1,0 +1,21 @@
+name: arch-cloud
+version: "1.0.0"
+description: "Cloud architecture: GCP, infrastructure, Terraform patterns"
+layer: 2
+platforms: [cloud]
+
+dependencies:
+  - core
+
+provides:
+  agents:
+    - epost-database-admin
+  skills:
+    - arch/cloud
+
+files:
+  agents/: agents/
+  skills/: skills/
+
+settings_strategy: skip
+claude_snippet: CLAUDE.snippet.md

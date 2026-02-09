@@ -5,6 +5,12 @@
 
 import pc from 'picocolors';
 import ora, { type Ora } from 'ora';
+import {
+  stepHeader,
+  heading as uiHeading,
+  box as uiBox,
+  type BoxOptions,
+} from './ui.js';
 
 const isVerbose = process.env.EPOST_KIT_VERBOSE === 'true';
 const noColor = process.env.NO_COLOR !== undefined;
@@ -38,5 +44,17 @@ export const logger = {
       color: noColor ? undefined : 'cyan',
       spinner: 'dots',
     });
+  },
+
+  step(current: number, total: number, label: string): void {
+    console.log(stepHeader(current, total, label));
+  },
+
+  heading(text: string): void {
+    console.log(uiHeading(text));
+  },
+
+  box(content: string, opts?: BoxOptions): void {
+    console.log(uiBox(content, opts));
   },
 };
