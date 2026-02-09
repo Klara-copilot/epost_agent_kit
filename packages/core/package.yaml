@@ -17,6 +17,8 @@ provides:
     - epost-researcher
     - epost-documenter
     - epost-git-manager
+    - epost-brainstormer
+    - epost-journal-writer
   skills:
     - core
     - code-review
@@ -28,7 +30,9 @@ provides:
     - docs-seeker
     - sequential-thinking
     - research
-    - databases
+    - knowledge-base
+    - knowledge-retrieval
+    - knowledge-capture
   commands:
     - core/ask
     - core/bootstrap

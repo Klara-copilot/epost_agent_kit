@@ -160,3 +160,26 @@ User asks for research, best practices, comparison.
 - Cross-validate findings
 - Document contradictions
 - Track confidence level per finding
+
+## Knowledge-First Research
+
+Before external research, check internal knowledge:
+1. Search `.knowledge/` for prior research on the topic
+2. Check skill aspect files for existing domain knowledge
+3. Search agent memory for related past sessions
+4. Only proceed to external sources if internal knowledge is insufficient
+
+Use `knowledge-retrieval` skill for the full priority chain.
+
+## Post-Research Capture
+
+After completing significant research, persist key findings:
+1. Cache findings in `.knowledge/findings/`
+2. Record technology decisions in `.knowledge/decisions/`
+
+Use `knowledge-capture` skill for templates.
+
+### Related Skills
+- `knowledge-retrieval` — Internal-first search protocol
+- `knowledge-capture` — Post-task capture workflow
+- `docs-seeker` — External documentation search (Context7, WebSearch)

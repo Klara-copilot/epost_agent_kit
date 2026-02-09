@@ -8,8 +8,7 @@ skills:
   - core
   - web/nextjs
   - web/frontend-development
-  - web/backend-development
-  - web/klara-theme
+  - web/api-routes
 memory: project
 hooks:
   PostToolUse:

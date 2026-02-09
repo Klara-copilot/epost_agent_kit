@@ -2,8 +2,6 @@
 
 ### Agents
 - `epost-scout` — Codebase exploration and file discovery
-- `epost-brainstormer` — Creative ideation and problem-solving
-- `epost-journal-writer` — Technical journal for development challenges
 - `epost-mcp-manager` — MCP server integration management
 
 ### Skills

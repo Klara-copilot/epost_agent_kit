@@ -190,3 +190,55 @@ For `/plan:parallel` only, add after Overview:
 - Estimate conservatively, track actuals
 - Mark file ownership for parallel execution safety
 - Use Parallelization Info section only for `/plan:parallel` variant
+
+## Plan Storage & Index Protocol
+
+After creating or completing a plan/report, follow these steps:
+
+### 1. Save to lifecycle directory
+Choose directory based on plan status:
+
+| Status | Directory | When |
+|--------|-----------|------|
+| Draft/Active | `epost-agent-cli/plans/active/` | Plan work in progress |
+| Completed | `epost-agent-cli/plans/completed/` | All tasks done, verified |
+| Archived | `epost-agent-cli/plans/archived/` | Superseded or obsolete |
+
+Use hooks-injected naming: `{agent}-{YYMMDD}-{HHMM}-{slug}.md`
+
+> **Legacy**: `epost-agent-cli/plans/reports/` contains pre-existing reports (PLAN-0001 through PLAN-0015). Do not add new files there.
+
+### 2. Update INDEX.md
+Append a row to `epost-agent-cli/plans/INDEX.md` under the matching status section (Active or Completed):
+```markdown
+| PLAN-NNNN | Title | agent-name | YYYY-MM-DD | [completed/filename.md](completed/filename.md) |
+```
+
+### 3. Update index.json
+Append entry to `epost-agent-cli/plans/index.json`:
+- Increment the matching count (`counts.active` or `counts.completed`) and `counts.total`
+- Add plan object to `plans` array with: id, title, type, status, created, authors, tags, file
+
+### 4. Status transitions
+When a plan changes status, move the file and update both index files:
+- `active/` → `completed/`: Plan finished successfully
+- `active/` → `archived/`: Plan superseded or cancelled
+- `completed/` → `archived/`: No longer relevant
+
+See `epost-agent-cli/plans/PLAN_FORMAT.md` for standardized frontmatter template.
+See `epost-agent-cli/plans/PLAN_TRACKING_FLOW.md` for visual flow diagrams.
+
+## Knowledge-Informed Planning
+
+Before creating a plan, consult the knowledge base:
+1. Search `.knowledge/adrs/` for related architectural decisions
+2. Check `.knowledge/patterns/` for established code patterns
+3. Review `.knowledge/findings/` for known pitfalls
+
+Use `knowledge-retrieval` skill for the full search protocol.
+
+After completing a significant plan, record architectural decisions as ADRs using the `knowledge-base` skill.
+
+### Related Skills
+- `knowledge-retrieval` — Internal-first search protocol
+- `knowledge-base` — ADR and decision storage

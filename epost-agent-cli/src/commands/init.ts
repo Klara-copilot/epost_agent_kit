@@ -4,12 +4,29 @@
  * Supports both legacy kit-based and new package-based installation
  */
 
-import { join, resolve, basename } from "node:path";
-import { readFile, readdir, copyFile, mkdir, rm } from "node:fs/promises";
+import { join, resolve, basename, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+import {
+  readFile,
+  writeFile,
+  readdir,
+  copyFile,
+  mkdir,
+  rm,
+} from "node:fs/promises";
 import { select, confirm, checkbox } from "@inquirer/prompts";
 import ora from "ora";
+import pc from "picocolors";
 import { logger } from "../core/logger.js";
 import { fileExists, dirExists, safeCopyDir } from "../core/file-system.js";
+import {
+  box,
+  keyValue,
+  nextSteps,
+  packageTable,
+  indent,
+  PackageManifestSummary,
+} from "../core/ui.js";
 import {
   readMetadata,
   writeMetadata,
@@ -47,22 +64,23 @@ function usePackageMode(opts: InitOptions): boolean {
   return !!(opts.profile || opts.packages);
 }
 
+const __init_dir = dirname(fileURLToPath(import.meta.url));
+
 /**
- * Find the kit repo's packages directory (search up from CLI location)
+ * Find the kit repo's packages directory (search up from CLI location + binary path)
  */
 async function findKitPackagesDir(): Promise<string | null> {
-  // When installed globally or via npx, look for packages/ relative to CLI
   const possiblePaths = [
     join(process.cwd(), "packages"),
     join(process.cwd(), "..", "packages"),
-    // When running from epost-agent-cli/
-    join(process.cwd(), "..", "packages"),
+    // Relative to CLI binary (npm link: dist/commands/ → epost-agent-cli → kit root)
+    join(__init_dir, "..", "..", "packages"),
+    join(__init_dir, "..", "..", "..", "packages"),
   ];
 
   for (const p of possiblePaths) {
     const resolved = resolve(p);
     if (await dirExists(resolved)) {
-      // Verify it's actually our packages dir by checking for core/package.yaml
       if (await fileExists(join(resolved, "core", "package.yaml"))) {
         return resolved;
       }
@@ -73,12 +91,15 @@ async function findKitPackagesDir(): Promise<string | null> {
 }
 
 /**
- * Find the profiles.yaml file
+ * Find the profiles.yaml file (cwd + binary-relative paths)
  */
 async function findProfilesPath(projectDir: string): Promise<string | null> {
   const possiblePaths = [
     join(projectDir, "profiles", "profiles.yaml"),
     join(projectDir, "..", "profiles", "profiles.yaml"),
+    // Relative to CLI binary (npm link)
+    join(__init_dir, "..", "..", "profiles", "profiles.yaml"),
+    join(__init_dir, "..", "..", "..", "profiles", "profiles.yaml"),
   ];
 
   for (const p of possiblePaths) {
@@ -92,12 +113,15 @@ async function findProfilesPath(projectDir: string): Promise<string | null> {
 }
 
 /**
- * Find the templates directory
+ * Find the templates directory (cwd + binary-relative paths)
  */
 async function findTemplatesDir(projectDir: string): Promise<string | null> {
   const possiblePaths = [
     join(projectDir, "templates"),
     join(projectDir, "..", "templates"),
+    // Relative to CLI binary (npm link)
+    join(__init_dir, "..", "..", "templates"),
+    join(__init_dir, "..", "..", "..", "templates"),
   ];
 
   for (const p of possiblePaths) {
@@ -113,6 +137,15 @@ async function findTemplatesDir(projectDir: string): Promise<string | null> {
 // ─── Package-Based Installation ───
 
 async function runPackageInit(opts: InitOptions): Promise<void> {
+  // Support --dir to install into a different directory
+  if (opts.dir) {
+    const targetPath = resolve(opts.dir);
+    if (!(await dirExists(targetPath))) {
+      throw new Error(`Directory not found: ${targetPath}`);
+    }
+    process.chdir(targetPath);
+  }
+
   const projectDir = resolve(process.cwd());
   const projectName = basename(projectDir);
 
@@ -153,6 +186,7 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
   let profileName = opts.profile;
 
   if (!profileName && !packagesList) {
+    logger.step(1, 7, "Detecting project type");
     // Try auto-detect
     const profiles = await loadProfiles(profilesPath);
     const detected = await detectProjectProfile(projectDir, profiles);
@@ -185,6 +219,7 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
   }
 
   // Step 6: Resolve packages
+  logger.step(2, 7, "Resolving packages");
   const spinner = ora("Resolving packages...").start();
   const resolved = await resolvePackages({
     packagesDir,
@@ -221,6 +256,7 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
   }
 
   // Step 8: Show optional packages
+  logger.step(3, 7, "Selecting options");
   if (resolved.optional.length > 0 && !opts.yes) {
     const selectedOptional = await checkbox({
       message: "Select optional packages to include:",
@@ -270,25 +306,33 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
   // Step 10: Load manifests for install
   const manifests = await loadAllManifests(packagesDir);
 
+  // Build summary for display
+  const pkgSummaries: PackageManifestSummary[] = resolved.packages
+    .map((name) => {
+      const m = manifests.get(name);
+      return m
+        ? {
+            name,
+            layer: m.layer,
+            agents: m.provides.agents.length,
+            skills: m.provides.skills.length,
+            commands: m.provides.commands.length,
+          }
+        : null;
+    })
+    .filter((s): s is PackageManifestSummary => s !== null);
+
   // Step 11: Dry-run preview
   if (opts.dryRun) {
-    logger.info("\nDry-run mode — no changes will be made\n");
-    logger.info(`Profile: ${profileName || "(explicit packages)"}`);
-    logger.info(`Target: ${target} (${installDirName}/)`);
-    logger.info(`Packages (${resolved.packages.length}):`);
-    for (const pkg of resolved.packages) {
-      const manifest = manifests.get(pkg);
-      if (manifest) {
-        const agents = manifest.provides.agents.length;
-        const skills = manifest.provides.skills.length;
-        const commands = manifest.provides.commands.length;
-        logger.info(
-          `  Layer ${manifest.layer}: ${pkg} — ${agents}A ${skills}S ${commands}C`,
-        );
-      } else {
-        logger.info(`  ${pkg} (manifest not found)`);
-      }
-    }
+    const summaryContent = [
+      `Profile: ${profileName || "(explicit packages)"}`,
+      `Target:  ${target} (${installDirName}/)`,
+      `Packages: ${resolved.packages.length}`,
+    ].join("\n");
+    console.log(box(summaryContent, { title: "Dry Run Preview" }));
+
+    console.log(indent(packageTable(pkgSummaries), 2));
+    console.log("\n  No changes made (dry-run mode).\n");
     return;
   }
 
@@ -306,12 +350,14 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
 
   // Step 13: Create backup if updating
   if (isUpdate) {
+    logger.step(4, 7, "Creating backup");
     const backupSpinner = ora("Creating backup...").start();
     await createBackup(projectDir, "pre-update");
     backupSpinner.succeed("Backup created");
   }
 
   // Step 14: Install packages
+  logger.step(5, 7, "Installing packages");
   const installSpinner = ora("Installing packages...").start();
   await mkdir(installDir, { recursive: true });
 
@@ -370,11 +416,17 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
 
       // Directory copy
       if (await dirExists(srcPath)) {
+        // Snapshot existing files before copy to avoid overwriting prior package attribution
+        const existingFiles = (await dirExists(destPath))
+          ? new Set(await scanDirFiles(destPath))
+          : new Set<string>();
+
         await safeCopyDir(srcPath, destPath);
 
-        // Track all files in copied directory
-        const copiedFiles = await scanDirFiles(destPath);
-        for (const file of copiedFiles) {
+        // Track only NEW files from this package (not files from prior packages)
+        const allFilesNow = await scanDirFiles(destPath);
+        for (const file of allFilesNow) {
+          if (existingFiles.has(file)) continue;
           const relativePath = join(installDirName, destSubDir, file);
           const fullPath = join(destPath, file);
           const checksum = await hashFile(fullPath);
@@ -413,9 +465,79 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
     totalCommands += manifest.provides.commands.length;
   }
 
+  // Recount from actual installed files for accuracy
+  const agentsDir = join(installDir, "agents");
+  const commandsDir = join(installDir, "commands");
+  if (await dirExists(agentsDir)) {
+    const agentFiles = (await scanDirFiles(agentsDir)).filter((f) =>
+      f.endsWith(".md"),
+    );
+    totalAgents = agentFiles.length;
+  }
+  if (await dirExists(commandsDir)) {
+    const commandFiles = (await scanDirFiles(commandsDir)).filter((f) =>
+      f.endsWith(".md"),
+    );
+    totalCommands = commandFiles.length;
+  }
+
   installSpinner.succeed(`Installed ${resolved.packages.length} packages`);
 
-  // Step 15: Merge settings
+  // Show per-package details
+  for (const pkgName of resolved.packages) {
+    const m = manifests.get(pkgName);
+    if (m) {
+      const parts: string[] = [];
+      if (m.provides.agents.length > 0)
+        parts.push(
+          `${m.provides.agents.length} agent${m.provides.agents.length !== 1 ? "s" : ""}`,
+        );
+      if (m.provides.skills.length > 0)
+        parts.push(
+          `${m.provides.skills.length} skill${m.provides.skills.length !== 1 ? "s" : ""}`,
+        );
+      const detail = parts.length > 0 ? parts.join(", ") : "config";
+      const dots = ".".repeat(Math.max(1, 22 - pkgName.length));
+      console.log(`    ${pc.green("✓")} ${pkgName} ${pc.dim(dots)} ${detail}`);
+    }
+  }
+
+  // Step 15: Regenerate skill-index.json from installed skills
+  logger.step(6, 7, "Generating configuration");
+  const skillIndexSpinner = ora("Generating skill index...").start();
+  const skillsDir = join(installDir, "skills");
+  if (await dirExists(skillsDir)) {
+    const skillIndex = await generateSkillIndex(skillsDir);
+    const skillIndexPath = join(skillsDir, "skill-index.json");
+    await writeFile(
+      skillIndexPath,
+      JSON.stringify(skillIndex, null, 2),
+      "utf-8",
+    );
+    // Track the generated file
+    const skillIndexRelPath = join(
+      installDirName,
+      "skills",
+      "skill-index.json",
+    );
+    const skillIndexChecksum = await hashFile(skillIndexPath);
+    allFiles[skillIndexRelPath] = {
+      path: skillIndexRelPath,
+      checksum: skillIndexChecksum,
+      installedAt: new Date().toISOString(),
+      version: "1.0.0",
+      modified: false,
+      package: "core",
+    };
+    totalSkills = skillIndex.count;
+    skillIndexSpinner.succeed(
+      `Skill index generated: ${skillIndex.count} skills`,
+    );
+  } else {
+    skillIndexSpinner.warn("No skills directory found");
+  }
+
+  // Step 16: Merge settings
   const settingsSpinner = ora("Merging settings...").start();
   const settingsOutput = join(installDir, "settings.json");
   const { sources: settingsSources } = await mergeAndWriteSettings(
@@ -461,6 +583,7 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
   claudeSpinner.succeed("CLAUDE.md generated");
 
   // Step 17: Update metadata
+  logger.step(7, 7, "Finalizing");
   const metaSpinner = ora("Updating metadata...").start();
   const newMetadata = generateMetadata("0.1.0", target, "1.0.0", allFiles, {
     profile: profileName,
@@ -470,17 +593,31 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
   metaSpinner.succeed("Metadata updated");
 
   // Step 18: Success summary
-  logger.info("\n✓ Installation complete!");
-  logger.info(`\nSummary:`);
-  if (profileName) {
-    logger.info(`  Profile: ${profileName}`);
-  }
-  logger.info(`  Packages: ${resolved.packages.length}`);
-  logger.info(`  Agents: ${totalAgents}`);
-  logger.info(`  Skills: ${totalSkills}`);
-  logger.info(`  Commands: ${totalCommands}`);
-  logger.info(`  Settings sources: ${settingsSources.join(", ") || "none"}`);
-  logger.info(`  CLAUDE.md snippets: ${snippets.length}`);
+  console.log("\n");
+  const summaryPairs: Array<[string, string]> = [];
+  if (profileName) summaryPairs.push(["Profile", profileName]);
+  summaryPairs.push([
+    "Target",
+    `${target === "claude" ? "Claude Code" : target === "cursor" ? "Cursor" : "GitHub Copilot"} (${installDirName}/)`,
+  ]);
+  summaryPairs.push(["Packages", `${resolved.packages.length}`]);
+  summaryPairs.push(["Agents", `${totalAgents}`]);
+  summaryPairs.push(["Skills", `${totalSkills}`]);
+  summaryPairs.push(["Commands", `${totalCommands}`]);
+  console.log(
+    box(keyValue(summaryPairs, { indent: 0 }), {
+      title: "Installation Complete",
+    }),
+  );
+
+  console.log(
+    nextSteps([
+      { cmd: "/plan:fast <feature>", desc: "Plan a feature" },
+      { cmd: "/core:cook <task>", desc: "Build a feature" },
+      { cmd: "/core:review", desc: "Review changes" },
+      { cmd: "epost-kit doctor", desc: "Check health" },
+    ]),
+  );
 }
 
 // ─── Utility: scan directory for relative file paths ───
@@ -503,6 +640,133 @@ async function scanDirFiles(dir: string, prefix = ""): Promise<string[]> {
     // Directory doesn't exist
   }
   return files;
+}
+
+// ─── Utility: generate skill-index.json from installed SKILL.md files ───
+
+interface SkillIndexEntry {
+  name: string;
+  description: string;
+  keywords: string[];
+  platforms: string[];
+  triggers: string[];
+  "agent-affinity": string[];
+  path: string;
+}
+
+async function generateSkillIndex(skillsDir: string): Promise<{
+  generated: string;
+  version: string;
+  count: number;
+  skills: SkillIndexEntry[];
+}> {
+  const skillFiles = await findSkillFiles(skillsDir);
+  const skills: SkillIndexEntry[] = [];
+
+  for (const filePath of skillFiles) {
+    try {
+      const content = await readFile(filePath, "utf-8");
+      const metadata = extractSkillFrontmatter(content);
+      if (!metadata || !metadata.name) continue;
+
+      const relativePath = filePath.substring(skillsDir.length + 1); // strip skillsDir prefix + /
+      const asStr = (v: string | string[] | undefined, fallback: string) =>
+        typeof v === "string" ? v : fallback;
+      const asArr = (v: string | string[] | undefined, fallback: string[]) =>
+        Array.isArray(v) ? v : fallback;
+      skills.push({
+        name: asStr(metadata.name, ""),
+        description: asStr(metadata.description, ""),
+        keywords: asArr(metadata.keywords, []),
+        platforms: asArr(metadata.platforms, ["all"]),
+        triggers: asArr(metadata.triggers, []),
+        "agent-affinity": asArr(metadata["agent-affinity"], []),
+        path: relativePath,
+      });
+    } catch {
+      // Skip files that can't be read
+    }
+  }
+
+  skills.sort((a, b) => a.name.localeCompare(b.name));
+
+  return {
+    generated: new Date().toISOString(),
+    version: "1.0.0",
+    count: skills.length,
+    skills,
+  };
+}
+
+async function findSkillFiles(dir: string): Promise<string[]> {
+  const results: string[] = [];
+  try {
+    const entries = await readdir(dir, { withFileTypes: true });
+    for (const entry of entries) {
+      const fullPath = join(dir, entry.name);
+      if (entry.isDirectory()) {
+        results.push(...(await findSkillFiles(fullPath)));
+      } else if (entry.name === "SKILL.md") {
+        results.push(fullPath);
+      }
+    }
+  } catch {
+    // Directory doesn't exist
+  }
+  return results;
+}
+
+function extractSkillFrontmatter(
+  content: string,
+): Record<string, string | string[]> | null {
+  const match = content.match(/^---\s*\n([\s\S]*?)\n---/);
+  if (!match) return null;
+
+  const metadata: Record<string, string | string[]> = {};
+  const lines = match[1].split("\n");
+  let currentKey: string | null = null;
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed) continue;
+
+    if (trimmed.startsWith("-") && currentKey) {
+      const value = trimmed.substring(1).trim();
+      if (!Array.isArray(metadata[currentKey])) metadata[currentKey] = [];
+      (metadata[currentKey] as string[]).push(value);
+      continue;
+    }
+
+    const colonIndex = trimmed.indexOf(":");
+    if (colonIndex === -1) continue;
+
+    const key = trimmed.substring(0, colonIndex).trim();
+    let value = trimmed.substring(colonIndex + 1).trim();
+
+    // Remove quotes
+    if (
+      (value.startsWith('"') && value.endsWith('"')) ||
+      (value.startsWith("'") && value.endsWith("'"))
+    ) {
+      value = value.substring(1, value.length - 1);
+    }
+
+    // Inline array [a, b, c]
+    if (value.startsWith("[") && value.endsWith("]")) {
+      const items = value
+        .substring(1, value.length - 1)
+        .split(",")
+        .map((item) => item.trim().replace(/^["']|["']$/g, ""))
+        .filter((item) => item);
+      metadata[key] = items;
+    } else if (value) {
+      metadata[key] = value;
+    } else {
+      currentKey = key;
+    }
+  }
+
+  return metadata;
 }
 
 // ─── Legacy Kit-Based Installation ───

@@ -64,3 +64,9 @@ Fix: [Address root, not symptom]
 - Consider environmental factors
 - Document the problem-solving path
 - Share what you learned with team
+
+### Related Skills
+- `debugging` — Systematic debugging methodology
+- `error-recovery` — Error handling and recovery patterns
+- `knowledge-capture` — Persist root cause findings
+- `sequential-thinking` — Structured step-by-step reasoning

@@ -1,5 +1,5 @@
 ---
-name: knowledge/klara-theme
+name: muji/klara-theme
 description: "klara-theme web UI library: React components, design tokens, theming"
 user-invocable: false
 ---

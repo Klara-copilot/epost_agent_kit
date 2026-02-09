@@ -156,3 +156,18 @@ logger.info('User action', {
 - Console logging (structured)
 - Source maps (correct line numbers)
 - Test suite (regression testing)
+
+## Post-Debug Knowledge Capture
+
+After resolving a significant bug, persist the learning:
+1. If root cause was non-obvious → write to `.knowledge/findings/`
+2. If a new debugging pattern emerged → write to `.knowledge/patterns/`
+3. If an architectural decision was made during fixing → write to `.knowledge/adrs/`
+
+Use `knowledge-capture` skill for templates and the `knowledge-base` skill for storage format.
+
+### Related Skills
+- `knowledge-base` — Knowledge storage format and `.knowledge/` directory
+- `knowledge-capture` — Post-task capture workflow
+- `problem-solving` — Root cause analysis techniques
+- `error-recovery` — Error handling and recovery patterns

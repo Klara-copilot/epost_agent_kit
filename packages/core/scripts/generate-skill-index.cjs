@@ -9,7 +9,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const SKILLS_DIR = path.join(__dirname, '../skills');
+const SKILLS_DIR = process.argv[2] || path.join(__dirname, '../skills');
 const OUTPUT_FILE = path.join(SKILLS_DIR, 'skill-index.json');
 
 /**

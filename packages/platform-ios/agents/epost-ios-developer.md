@@ -4,10 +4,8 @@ description: iOS platform specialist combining implementation, testing, and simu
 tools: Read, Write, Edit, Bash, Grep, Glob, mcp__xcodebuildmcp__discover_projs, mcp__xcodebuildmcp__list_schemes, mcp__xcodebuildmcp__build_sim, mcp__xcodebuildmcp__test_sim, mcp__xcodebuildmcp__doctor
 model: sonnet
 color: blue
-skills:
-  - core
-  - ios/ios-development
-  - ios/ios-accessibility
+skills: [core, ios/ios-development]
+memory: project
 ---
 
 # iOS Platform Specialist

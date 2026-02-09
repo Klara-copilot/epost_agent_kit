@@ -6,6 +6,7 @@ model: opus
 skills:
   - core
   - planning
+  - knowledge-retrieval
 memory: project
 permissionMode: plan
 ---
@@ -127,6 +128,8 @@ When done, report:
 - Platform implications identified
 - Any risks or dependencies identified
 - Cross-cutting patterns applied
+
+**After writing report**: Update plan index per `planning` skill's "Plan Storage & Index Protocol" — append to `epost-agent-cli/plans/INDEX.md` and `epost-agent-cli/plans/index.json`.
 
 ## Related Documents
 

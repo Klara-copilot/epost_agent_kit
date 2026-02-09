@@ -3,24 +3,10 @@
  * Verify installation and environment health
  */
 
-import pc from 'picocolors';
-import { runAllChecks, type CheckResult, type CheckStatus } from '../core/health-checks.js';
-import { logger } from '../core/logger.js';
-import type { DoctorOptions } from '../types/command-options.js';
-
-/**
- * Get status icon and color for display
- */
-function formatStatus(status: CheckStatus): string {
-  switch (status) {
-    case 'pass':
-      return pc.green('[PASS]');
-    case 'warn':
-      return pc.yellow('[WARN]');
-    case 'fail':
-      return pc.red('[FAIL]');
-  }
-}
+import { runAllChecks, type CheckResult } from "../core/health-checks.js";
+import { logger } from "../core/logger.js";
+import { heading, checkResult, checkSummary } from "../core/ui.js";
+import type { DoctorOptions } from "../types/command-options.js";
 
 /**
  * Generate JSON report of all check results
@@ -30,9 +16,9 @@ function generateReport(results: CheckResult[]): string {
     timestamp: new Date().toISOString(),
     summary: {
       total: results.length,
-      passed: results.filter((r) => r.status === 'pass').length,
-      warnings: results.filter((r) => r.status === 'warn').length,
-      failures: results.filter((r) => r.status === 'fail').length,
+      passed: results.filter((r) => r.status === "pass").length,
+      warnings: results.filter((r) => r.status === "warn").length,
+      failures: results.filter((r) => r.status === "fail").length,
     },
     checks: results.map((r) => ({
       status: r.status,
@@ -48,8 +34,8 @@ function generateReport(results: CheckResult[]): string {
  * Determine exit code based on worst result
  */
 function getExitCode(results: CheckResult[]): number {
-  const hasFailures = results.some((r) => r.status === 'fail');
-  const hasWarnings = results.some((r) => r.status === 'warn');
+  const hasFailures = results.some((r) => r.status === "fail");
+  const hasWarnings = results.some((r) => r.status === "warn");
 
   if (hasFailures) return 1; // Failure
   if (hasWarnings) return 2; // Warnings
@@ -62,7 +48,7 @@ export async function runDoctor(opts: DoctorOptions): Promise<void> {
   const shouldReport = opts.report ?? false;
 
   // Run all health checks
-  const spinner = logger.spinner('Running health checks...');
+  const spinner = logger.spinner("Running health checks...");
   spinner.start();
 
   const results = await runAllChecks(cwd);
@@ -75,41 +61,31 @@ export async function runDoctor(opts: DoctorOptions): Promise<void> {
   }
 
   // Display results
-  console.log('');
-  console.log(pc.bold('Health Check Results:'));
-  console.log('');
+  console.log(heading("Health Check Results"));
+  console.log("");
 
   for (const result of results) {
-    const statusText = formatStatus(result.status);
-    console.log(`${statusText} ${result.message}`);
+    console.log(checkResult(result.status, result.message));
   }
 
-  console.log('');
+  console.log("");
 
   // Summary
-  const passed = results.filter((r) => r.status === 'pass').length;
-  const warnings = results.filter((r) => r.status === 'warn').length;
-  const failures = results.filter((r) => r.status === 'fail').length;
+  const passed = results.filter((r) => r.status === "pass").length;
+  const warnings = results.filter((r) => r.status === "warn").length;
+  const failures = results.filter((r) => r.status === "fail").length;
 
-  console.log(pc.bold('Summary:'));
-  console.log(`  ${pc.green('✓')} ${passed} passed`);
-  if (warnings > 0) {
-    console.log(`  ${pc.yellow('⚠')} ${warnings} warnings`);
-  }
-  if (failures > 0) {
-    console.log(`  ${pc.red('✗')} ${failures} failures`);
-  }
-  console.log('');
+  console.log(checkSummary(passed, warnings, failures));
 
   // Auto-fix if requested
   if (shouldFix) {
     const fixable = results.filter((r) => r.fixable && r.fix);
 
     if (fixable.length === 0) {
-      logger.info('No fixable issues found.');
+      logger.info("No fixable issues found.");
     } else {
       logger.info(`Attempting to fix ${fixable.length} issue(s)...`);
-      console.log('');
+      console.log("");
 
       for (const result of fixable) {
         try {
@@ -121,11 +97,13 @@ export async function runDoctor(opts: DoctorOptions): Promise<void> {
         }
       }
 
-      console.log('');
-      logger.info('Re-run doctor to verify fixes.');
+      console.log("");
+      logger.info("Re-run doctor to verify fixes.");
     }
   } else if (results.some((r) => r.fixable)) {
-    logger.info('Some issues can be auto-fixed. Run with --fix to attempt repairs.');
+    logger.info(
+      "Some issues can be auto-fixed. Run with --fix to attempt repairs.",
+    );
   }
 
   process.exit(getExitCode(results));
