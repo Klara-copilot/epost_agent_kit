@@ -15,15 +15,35 @@ epost_agent_kit is an architecture and distribution framework that enables:
 
 ### Installation
 
-#### From npm (Recommended)
+#### Quick Install (Recommended)
+
+One-line installation via curl:
 
 ```bash
-# Add this kit to your Claude Code project
-npx epost-kit install
+curl -fsSL https://raw.githubusercontent.com/Klara-copilot/epost-agent-kit/main/install.sh | bash
+```
 
-# Or target a specific platform
-npx epost-kit install --target cursor
-npx epost-kit install --target copilot
+#### Alternative Methods
+
+**Via npm:**
+```bash
+npm install -g epost-kit
+```
+
+**Via npx (no install):**
+```bash
+npx epost-kit install
+```
+
+#### Requirements
+
+- Node.js >=18.0.0
+- npm
+
+#### Verify Installation
+
+```bash
+epost-kit --version    # Should output: 0.1.0
 ```
 
 #### Local Development Installation
@@ -46,15 +66,6 @@ powershell -ExecutionPolicy Bypass -File install.ps1
 ```cmd
 REM From epost-agent-kit\ root directory
 install.cmd
-```
-
-Requirements:
-- Node.js >=18.0.0
-- npm
-
-After installation, verify with:
-```bash
-npx epost-kit --version  # Should output: 0.1.0
 ```
 
 ### Basic Usage
