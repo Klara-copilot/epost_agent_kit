@@ -1,22 +1,54 @@
 # Installation Guide
 
+> **📢 Private Repository Notice**
+>
+> This repository is currently private. The one-line curl installation method requires a public repository and will be available in future releases. For now, please use npm installation.
+
 ## Quick Install
 
-The fastest way to install epost-kit is via our installation script:
+The fastest way to install epost-kit:
 
+**Via npm (Recommended):**
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Klara-copilot/epost-agent-kit/main/install.sh | bash
+npm install -g epost-kit
 ```
 
-This script will:
-1. Check Node.js version (requires 18+)
-2. Verify npm is installed
-3. Install epost-kit globally via npm
-4. Verify the installation
+**Via npx (No Installation Required):**
+```bash
+npx epost-kit install
+```
 
 ## Installation Methods
 
-### Method 1: Curl Script (Recommended)
+### Method 1: npm Global Install (Recommended)
+
+**Pros:**
+- Standard npm workflow
+- Familiar to npm users
+- Works with private repositories
+- Easy to update and manage
+
+**Command:**
+```bash
+npm install -g epost-kit
+```
+
+### Method 2: npx (No Install Required)
+
+**Pros:**
+- No global installation needed
+- Always uses latest version
+- Works with private repositories
+- Clean, no system pollution
+
+**Command:**
+```bash
+npx epost-kit install
+```
+
+### Method 3: Curl Script (Coming Soon - Public Repo Only)
+
+> **Note:** This method requires the repository to be public. It will be available in future releases.
 
 **Pros:**
 - One command installation
@@ -24,32 +56,17 @@ This script will:
 - Error handling and helpful messages
 - Works on macOS, Linux, and Windows (Git Bash/WSL)
 
-**Command:**
+**Command (when available):**
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Klara-copilot/epost-agent-kit/main/install.sh | bash
+# This will work when repository becomes public
+curl -fsSL https://raw.githubusercontent.com/Klara-copilot/epost_agent_kit/main/install.sh | bash
 ```
 
-### Method 2: npm Global Install
-
-**Pros:**
-- Standard npm workflow
-- Familiar to npm users
-
-**Command:**
-```bash
-npm install -g epost-kit
-```
-
-### Method 3: npx (No Install)
-
-**Pros:**
-- No global installation
-- Always uses latest version
-
-**Command:**
-```bash
-npx epost-kit install
-```
+**What the script will do:**
+1. Check Node.js version (requires 18+)
+2. Verify npm is installed
+3. Install epost-kit globally via npm
+4. Verify the installation
 
 ## Requirements
 
@@ -194,16 +211,22 @@ This installs from local source with `npm link` for development.
 
 ## Security
 
-The installation script is hosted on GitHub and served over HTTPS. You can:
+The installation script is hosted on GitHub and served over HTTPS.
+
+> **Note**: Currently, the repository is private. The curl commands below will work when the repository becomes public. For now, npm installation is the recommended secure method.
+
+**When repository is public, you can:**
 
 1. **Inspect before running:**
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Klara-copilot/epost-agent-kit/main/install.sh
+# Available when repository is public
+curl -fsSL https://raw.githubusercontent.com/Klara-copilot/epost_agent_kit/main/install.sh
 ```
 
 2. **Download and verify:**
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Klara-copilot/epost-agent-kit/main/install.sh -o install.sh
+# Available when repository is public
+curl -fsSL https://raw.githubusercontent.com/Klara-copilot/epost_agent_kit/main/install.sh -o install.sh
 # Review install.sh
 bash install.sh
 ```

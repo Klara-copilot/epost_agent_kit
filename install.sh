@@ -4,11 +4,15 @@
 # ============================================================================
 # This script installs epost-kit CLI globally via npm.
 #
-# Usage:
-#   curl -fsSL https://raw.githubusercontent.com/Klara-copilot/epost-agent-kit/main/install.sh | bash
+# NOTE: This script is currently available for local testing only.
+#       Curl installation will work when the repository becomes public.
 #
-# Or local execution:
-#   ./install.sh
+# Usage:
+#   Local execution:
+#     ./install.sh
+#
+#   Future (when repository is public):
+#     curl -fsSL https://raw.githubusercontent.com/Klara-copilot/epost_agent_kit/main/install.sh | bash
 #
 # Requirements:
 #   - Node.js >=18.0.0

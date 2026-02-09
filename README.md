@@ -15,22 +15,16 @@ epost_agent_kit is an architecture and distribution framework that enables:
 
 ### Installation
 
-#### Quick Install (Recommended)
+> **📢 Note**: Repository is currently private. One-line curl installation will be available when repository becomes public.
 
-One-line installation via curl:
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/Klara-copilot/epost-agent-kit/main/install.sh | bash
-```
-
-#### Alternative Methods
+#### Recommended Installation
 
 **Via npm:**
 ```bash
 npm install -g epost-kit
 ```
 
-**Via npx (no install):**
+**Via npx (no installation required):**
 ```bash
 npx epost-kit install
 ```
@@ -44,6 +38,14 @@ npx epost-kit install
 
 ```bash
 epost-kit --version    # Should output: 0.1.0
+```
+
+#### Coming Soon: One-Line Installation
+
+When the repository becomes public, you'll be able to install with:
+```bash
+# Available when repository is public
+curl -fsSL https://raw.githubusercontent.com/Klara-copilot/epost_agent_kit/main/install.sh | bash
 ```
 
 #### Local Development Installation
