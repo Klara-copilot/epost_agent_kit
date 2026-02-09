@@ -6,7 +6,36 @@
 
 ## Installation
 
-### From Source
+### Local Development Installation
+
+**macOS:**
+```bash
+# From epost-agent-kit/ root directory
+./install-macos.sh
+```
+
+**Windows PowerShell:**
+```powershell
+# From epost-agent-kit\ root directory
+powershell -ExecutionPolicy Bypass -File install.ps1
+```
+
+**Windows CMD:**
+```cmd
+REM From epost-agent-kit\ root directory
+install.cmd
+```
+
+Requirements:
+- Node.js >=18.0.0
+- npm
+
+After installation, verify with:
+```bash
+npx epost-kit --version  # Should output: 0.1.0
+```
+
+### From Source (Manual)
 
 ```bash
 # Navigate to project

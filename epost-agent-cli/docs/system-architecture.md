@@ -1,487 +1,508 @@
-# epost-kit CLI - System Architecture
+# System Architecture
 
-**Version**: 0.1.0
-**Phase**: 01 - Project Setup
-**Status**: Foundation Complete
-**Last Updated**: 2026-02-06
+## High-Level Overview
 
-## Architecture Overview
-
-epost-kit is a **distribution CLI** that enables seamless installation of the epost-agent-kit framework across multiple IDE platforms (Claude Code, Cursor, GitHub Copilot).
-
-### Design Principles
-
-1. **Single Source of Truth**: One CLI, three IDE targets
-2. **Non-Destructive**: Never overwrites user files without tracking
-3. **Reversible**: Track all changes via metadata
-4. **Safe Defaults**: Protected patterns prevent accidents
-
-## High-Level Architecture
+epost-kit is a **package-based CLI distribution system** for AI agent frameworks. It orchestrates the installation, configuration, and management of agent kits across multiple IDEs (Claude Code, Cursor, GitHub Copilot).
 
 ```
-┌─────────────────────────────────────────────────────┐
-│  User (Terminal)                                    │
-│  $ epost-kit install --target claude                │
-└──────────────────┬──────────────────────────────────┘
-                   │
-                   ▼
-┌─────────────────────────────────────────────────────┐
-│  CLI Handler (Commander.js)                         │
-│  - Parse arguments                                  │
-│  - Resolve options                                  │
-│  - Route to command handler                         │
-└──────────────────┬──────────────────────────────────┘
-                   │
-                   ▼
-┌─────────────────────────────────────────────────────┐
-│  Command Layer (Phase 03+)                          │
-│  - install: Copy kit files to target IDE            │
-│  - list: Show installed components                  │
-│  - update: Sync with newer versions                 │
-│  - create: Generate new agents/skills               │
-└──────────────────┬──────────────────────────────────┘
-                   │
-                   ▼
-┌─────────────────────────────────────────────────────┐
-│  Core Services (Phase 02+)                          │
-│  - ConfigLoader: Load .epostrc, epost.config.*      │
-│  - FileManager: Safe file operations                │
-│  - GitHubClient: Fetch releases, assets             │
-│  - MetadataManager: Track installed files           │
-└──────────────────┬──────────────────────────────────┘
-                   │
-                   ▼
-┌─────────────────────────────────────────────────────┐
-│  File System                                        │
-│  - .epostrc config                                  │
-│  - Project files                                    │
-│  - .epost-metadata.json                             │
-└─────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────┐
+│                     CLI Entry Point                          │
+│                      (cli.ts)                                │
+│  ┌──────────────────────────────────────────────────────┐   │
+│  │  Commander.js: new, init, doctor, versions, update,  │   │
+│  │                uninstall, profile, package, onboard  │   │
+│  └──────────────────────────────────────────────────────┘   │
+└─────────────────────┬───────────────────────────────────────┘
+                      │
+                      ▼
+┌─────────────────────────────────────────────────────────────┐
+│                   Command Handlers                           │
+│                    (commands/)                               │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐   │
+│  │   init   │  │   new    │  │  doctor  │  │ onboard  │   │
+│  └────┬─────┘  └────┬─────┘  └────┬─────┘  └────┬─────┘   │
+│       │             │              │              │          │
+│  ┌────┴─────┐  ┌───┴──────┐  ┌───┴──────┐  ┌───┴──────┐   │
+│  │ profile  │  │ package  │  │ versions │  │   dev    │   │
+│  └──────────┘  └──────────┘  └──────────┘  └──────────┘   │
+└─────────────────────┬───────────────────────────────────────┘
+                      │
+                      ▼
+┌─────────────────────────────────────────────────────────────┐
+│                    Core Business Logic                       │
+│                       (core/)                                │
+│  ┌─────────────────────────────────────────────────────┐   │
+│  │  Profile System                                      │   │
+│  │  - profile-loader: auto-detect, list, show          │   │
+│  │  - package-resolver: dependency resolution          │   │
+│  │  - settings-merger: 3-layer merge (base+pkg+prof)   │   │
+│  └─────────────────────────────────────────────────────┘   │
+│  ┌─────────────────────────────────────────────────────┐   │
+│  │  File Operations                                     │   │
+│  │  - ownership: track installed files                 │   │
+│  │  - checksum: verify file integrity                  │   │
+│  │  - smart-merge: conflict resolution                 │   │
+│  │  - file-system: safe file operations                │   │
+│  └─────────────────────────────────────────────────────┘   │
+│  ┌─────────────────────────────────────────────────────┐   │
+│  │  External Services                                   │   │
+│  │  - github-client: fetch releases, tags              │   │
+│  │  - self-update: CLI self-update mechanism           │   │
+│  └─────────────────────────────────────────────────────┘   │
+│  ┌─────────────────────────────────────────────────────┐   │
+│  │  Utilities                                           │   │
+│  │  - logger: centralized logging                      │   │
+│  │  - ui: terminal UI helpers (ora, inquirer)          │   │
+│  │  - template-manager: template rendering             │   │
+│  │  - backup-manager: backup/restore files             │   │
+│  │  - config-loader: cosmiconfig integration           │   │
+│  │  - health-checks: installation verification         │   │
+│  └─────────────────────────────────────────────────────┘   │
+└─────────────────────┬───────────────────────────────────────┘
+                      │
+                      ▼
+┌─────────────────────────────────────────────────────────────┐
+│                  File System Targets                         │
+│  ┌─────────────┐  ┌──────────────┐  ┌──────────────┐       │
+│  │  .claude/   │  │  .cursor/    │  │  .github/    │       │
+│  │  (Claude    │  │  (Cursor     │  │  (Copilot    │       │
+│  │   Code)     │  │   IDE)       │  │   IDE)       │       │
+│  └─────────────┘  └──────────────┘  └──────────────┘       │
+│  + .epost-metadata.json (ownership tracking)                │
+│  + .epost-config.json (user config)                         │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-## Module Organization
+## Core Modules
 
-### Current (Phase 01)
+### 1. Profile System
 
-```
-src/
-├── cli.ts                  # Entry point - Command definition
-├── constants.ts            # App-wide constants
-└── types/
-    └── index.ts            # TypeScript interfaces
+**Purpose**: Map developer roles to package sets
 
-dist/                       # Compiled output
-└── cli.js                  # Binary entry point
-```
+#### profile-loader.ts
+- **Auto-detection**: Scan project for package.json, .xcodeproj, build.gradle
+- **Listing**: Display available profiles with descriptions
+- **Confidence**: High/medium/low based on matched detection rules
+- **Key functions**:
+  - `detectProjectProfile()`: Auto-detect from project structure
+  - `listProfiles()`: Get all available profiles
+  - `getProfile()`: Load specific profile by name
 
-### Phase 02 (Core Utilities)
-
-```
-src/
-├── cli.ts                  # (existing)
-├── constants.ts            # (existing)
-├── types/
-│   ├── index.ts            # (existing)
-│   ├── config.ts           # Config-specific types
-│   └── commands.ts         # Command-specific types
-└── utils/
-    ├── config-loader.ts    # Cosmiconfig integration
-    ├── file-manager.ts     # Safe file operations
-    ├── github-client.ts    # GitHub API wrapper
-    └── metadata-manager.ts # Installation tracking
-```
-
-### Phase 03 (Commands)
-
-```
-src/
-├── (previous structure)
-└── commands/
-    ├── install.ts          # Install components
-    ├── list.ts             # List installed
-    ├── update.ts           # Update components
-    └── create.ts           # Create new agent/skill
-```
-
-## Component Details
-
-### 1. CLI Entry Point (`src/cli.ts`)
-
-**Purpose**: Main command router
-
-**Responsibilities**:
-- Initialize Commander program
-- Register top-level options (--version, --help)
-- Parse process arguments
-- Delegate to command handlers
-
-**Dependencies**: Commander.js, fs
-
-**Current Features**:
-- Version from package.json
-- Help information
-
-**Future (Phase 03)**:
-- Command registration
-- Global option parsing
-- Error handling
-
-### 2. Type System (`src/types/index.ts`)
-
-**Purpose**: Shared type definitions
-
-**Key Types**:
-
-#### EpostConfig
-User configuration from `.epostrc` or `epost.config.*`
-
+**Example Detection Rule**:
 ```typescript
-interface EpostConfig {
-  repository?: string;              // GitHub repo URL
-  target?: 'claude' | 'cursor' | 'github-copilot';
-  installDir?: string;              // Override default
-  protectedPatterns?: string[];     // Additional protected files
+{
+  match: {
+    files: ['package.json'],
+    dependencies: ['next', 'react']
+  },
+  suggest: 'web-b2b' // Suggests Web B2B profile
 }
 ```
 
-#### FileOwnership
-Tracks installed files in metadata
+#### package-resolver.ts
+- **Dependency Resolution**: Topological sort of package dependencies
+- **Circular Detection**: Detect and report circular dependencies
+- **Layer System**: Enforce package layer constraints (0=core, 1=platform, etc.)
+- **Key functions**:
+  - `resolvePackages()`: Resolve profile → package list
+  - `validateDependencies()`: Check for circular deps
+  - `topologicalSort()`: Sort packages by dependencies
 
+**Package Layers**:
+- Layer 0: `core` (foundation)
+- Layer 1: `platform-*` (web, iOS, Android)
+- Layer 2: `domain-*` (b2b, b2c)
+- Layer 3: `ui-ux`, `arch-*`, specialized packages
+
+#### settings-merger.ts
+- **3-Layer Merge**: base → packages → profile
+- **Strategies**: base (replace), merge (deep merge), skip
+- **Deep Merge**: Handles nested objects and arrays
+- **Key functions**:
+  - `mergeSettings()`: Merge base + package + profile settings
+  - `applyStrategy()`: Apply merge strategy per package
+
+**Merge Example**:
 ```typescript
-interface FileOwnership {
-  path: string;                 // Relative path
-  checksum: string;             // SHA256 (LF normalized)
-  installedAt: string;          // ISO 8601 timestamp
-  version: string;              // Source version
-  modified: boolean;            // Modification flag
-}
+// Base settings
+{ agents: ['orchestrator'], skills: ['core'] }
+
+// Package 1 settings (merge)
+{ agents: ['web-developer'], skills: ['web'] }
+
+// Result after merge
+{ agents: ['orchestrator', 'web-developer'], skills: ['core', 'web'] }
 ```
 
-#### Metadata
-Metadata structure (`.epost-metadata.json`)
+### 2. File Operations
 
-```typescript
-interface Metadata {
-  cliVersion: string;           // CLI version used
-  target: string;               // IDE target
-  kitVersion: string;           // Kit version installed
-  installedAt: string;          // Installation timestamp
-  updatedAt?: string;           // Last update timestamp
-  files: Record<string, FileOwnership>;  // Tracked files
-}
-```
+#### ownership.ts
+- **Metadata Tracking**: Store installed file paths and checksums
+- **Modification Detection**: Detect user-modified files
+- **Ownership Transfer**: Track file ownership (kit vs user)
+- **Key functions**:
+  - `loadMetadata()`: Load .epost-metadata.json
+  - `saveMetadata()`: Save ownership tracking
+  - `isModified()`: Check if file was user-modified
 
-#### CommandOptions
-Common CLI options
-
-```typescript
-interface CommandOptions {
-  verbose?: boolean;            // Verbose logging
-  yes?: boolean;                // Skip prompts (CI mode)
-  dryRun?: boolean;             // Simulate only
-}
-```
-
-### 3. Constants (`src/constants.ts`)
-
-**Purpose**: Application constants
-
-**Key Constants**:
-
-| Constant | Value | Purpose |
-|----------|-------|---------|
-| APP_NAME | 'epost-kit' | CLI program name |
-| GITHUB_ORG | 'Klara-copilot' | Default org |
-| GITHUB_REPO | 'epost_agent_kit' | Default repo |
-| METADATA_FILE | '.epost-metadata.json' | Tracking file |
-| IDE_TARGETS | { CLAUDE: '.claude', ... } | Install directories |
-| PROTECTED_FILE_PATTERNS | ['.git/**', ...] | Never-modify patterns |
-| CONFIG_FILE_NAMES | ['.epostrc', ...] | Config search order |
-
-## Data Flow
-
-### Installation Flow (Phase 03)
-
-```
-User Input
-  │
-  ├─ Parse arguments (--target claude, --dry-run)
-  │
-  ▼
-Load Configuration
-  ├─ Search cosmiconfig files (.epostrc, epost.config.js)
-  ├─ Merge with CLI defaults
-  ├─ Validate schema (zod)
-  │
-  ▼
-Fetch Kit Components
-  ├─ Query GitHub API for latest release
-  ├─ Download asset metadata
-  │
-  ▼
-Plan Installation
-  ├─ Determine target IDE (.claude, .cursor, .github)
-  ├─ Check file existence
-  ├─ Detect conflicts/modifications
-  │
-  ▼
-Execute Installation
-  ├─ Copy files (or --dry-run simulation)
-  ├─ Update .epost-metadata.json
-  │
-  ▼
-Report Results
-  ├─ List installed files
-  ├─ Show summary
-```
-
-### Update Flow (Phase 03)
-
-```
-Check Latest
-  │
-  ├─ Query GitHub for newer version
-  │
-  ▼
-Compare Metadata
-  ├─ Check .epost-metadata.json
-  ├─ Identify changed files
-  │
-  ▼
-Show Changeset
-  ├─ List new files
-  ├─ List modified files
-  ├─ List removed files
-  │
-  ▼
-Confirm Update
-  ├─ Interactive prompt or --yes
-  │
-  ▼
-Execute Update
-  ├─ Apply changes
-  ├─ Update metadata timestamps
-```
-
-## Dependency Graph
-
-```
-Commander.js (CLI parsing)
-  │
-  ├─ @inquirer/prompts (Interactive input)
-  ├─ cosmiconfig (Config discovery)
-  ├─ execa (Shell commands)
-  ├─ ora (Progress spinners)
-  ├─ picocolors (Terminal colors)
-  └─ zod (Schema validation)
-
-fs/path (Node.js builtins)
-
-@types/node (Type definitions)
-```
-
-## Configuration Discovery
-
-Uses **cosmiconfig** for flexible config loading:
-
-```
-Project Root
-  │
-  ├─ .epostrc
-  ├─ .epostrc.json
-  ├─ .epostrc.yaml / .epostrc.yml
-  ├─ epost.config.js
-  ├─ epost.config.cjs
-  ├─ epost.config.mjs
-  │
-  └─ (searches in order, uses first found)
-
-Home Directory (~/)
-  └─ .epostrc / epost.config.js (future global config)
-```
-
-## Installation Tracking
-
-### Metadata System
-
-Files tracked in `.epost-metadata.json`:
-
+**Metadata Structure**:
 ```json
 {
-  "cliVersion": "0.1.0",
-  "target": "claude",
-  "kitVersion": "1.0.0",
-  "installedAt": "2026-02-06T11:39:00Z",
-  "updatedAt": "2026-02-06T11:39:00Z",
+  "version": "1.0",
+  "installedAt": "2025-01-15T10:30:00Z",
   "files": {
-    ".claude/agents/orchestrator.md": {
-      "path": ".claude/agents/orchestrator.md",
-      "checksum": "sha256...",
-      "installedAt": "2026-02-06T11:39:00Z",
-      "version": "1.0.0",
-      "modified": false
+    ".claude/agents/orchestrator.ts": {
+      "checksum": "abc123...",
+      "source": "kit",
+      "modifiedAt": null
     }
   }
 }
 ```
 
-**Purposes**:
-- Track CLI version (detect upgrade needs)
-- Identify user modifications
-- Enable safe updates/rollbacks
-- Prevent corruption of manual changes
+#### checksum.ts
+- **SHA-256 Hashing**: Generate file checksums
+- **Integrity Verification**: Verify files match expected checksums
+- **Key functions**:
+  - `calculateChecksum()`: Generate SHA-256 hash
+  - `verifyChecksum()`: Compare file against expected hash
 
-## Error Handling Strategy
+#### smart-merge.ts
+- **Conflict Resolution**: Merge kit updates with user modifications
+- **Strategies**: keep (local), overwrite (incoming), merge (smart)
+- **Merge Algorithm**: Preserve user content blocks, update kit content
+- **Key functions**:
+  - `mergeFiles()`: Smart merge two file versions
+  - `detectConflicts()`: Find conflicting sections
 
-### Error Categories
+**Merge Strategies**:
+1. **Keep**: Preserve local file, ignore incoming
+2. **Overwrite**: Use incoming file, discard local
+3. **Merge**: Combine both (preserve user content, update kit content)
 
-1. **ConfigError**: Invalid or missing config
-2. **FileError**: File system operation failed
-3. **GitHubError**: API request failed
-4. **ValidationError**: Input doesn't match schema
+#### file-system.ts
+- **Safe Operations**: Existence checks before read/write
+- **Error Handling**: Graceful handling of ENOENT, EACCES
+- **Key functions**:
+  - `fileExists()`: Check file existence
+  - `dirExists()`: Check directory existence
+  - `safeReadFile()`: Read file with error handling
+  - `safeWriteFile()`: Write file with error handling
 
-### Error Recovery
+### 3. External Services
 
+#### github-client.ts
+- **GitHub API Integration**: Fetch releases, tags
+- **Rate Limiting**: Respect GitHub API rate limits
+- **Authentication**: Optional GitHub token for higher limits
+- **Key functions**:
+  - `fetchReleases()`: Get all releases
+  - `fetchLatestRelease()`: Get latest stable release
+  - `downloadAsset()`: Download release asset
+
+**API Endpoints Used**:
+- `GET /repos/Klara-copilot/epost_agent_kit/releases`
+- `GET /repos/Klara-copilot/epost_agent_kit/releases/latest`
+- `GET /repos/Klara-copilot/epost_agent_kit/releases/tags/{tag}`
+
+#### self-update.ts
+- **Self-Update Mechanism**: Update CLI tool itself
+- **Version Comparison**: Semver comparison for updates
+- **Backup**: Backup current version before update
+- **Key functions**:
+  - `checkForUpdates()`: Compare local vs remote version
+  - `performUpdate()`: Download and install update
+
+### 4. Utilities
+
+#### logger.ts
+- **Centralized Logging**: Consistent log format
+- **Log Levels**: info, success, warn, error, debug
+- **Verbosity Control**: --verbose flag for debug logs
+- **Key functions**:
+  - `logger.info()`: Informational messages
+  - `logger.success()`: Success messages (green ✓)
+  - `logger.warn()`: Warnings (yellow ⚠)
+  - `logger.error()`: Errors (red ✗)
+  - `logger.debug()`: Debug messages (only with --verbose)
+
+#### ui.ts
+- **Terminal UI**: Spinners (ora), tables (cli-table3), prompts (inquirer)
+- **Progress Indicators**: Show progress during long operations
+- **Interactive Prompts**: Select, input, confirm
+- **Key components**:
+  - `spinner()`: Create ora spinner
+  - `table()`: Create cli-table3 table
+  - `select()`: Inquirer select prompt
+  - `confirm()`: Inquirer confirm prompt
+
+#### template-manager.ts
+- **Template Rendering**: Replace placeholders in templates
+- **Variables**: project name, profile, packages, date
+- **Key functions**:
+  - `renderTemplate()`: Replace {{var}} with values
+  - `loadTemplate()`: Load template from file
+
+#### claude-md-generator.ts
+- **CLAUDE.md Generation**: Generate IDE config from packages
+- **Multi-Layer**: Merge package snippets + profile snippet
+- **Deduplication**: Remove duplicate sections
+- **Key functions**:
+  - `generateClaudeMd()`: Generate complete CLAUDE.md content
+  - `mergeSnippets()`: Merge snippets from multiple packages
+
+**Generated Structure**:
+```markdown
+# CLAUDE.md
+
+## Project: {project_name}
+## Installed Profile: {profile_name}
+
+### Packages
+- core: Core agents and skills
+- platform-web: Web development tools
+
+### Commands
+/web:cook, /web:test, /profile:list
+
+### Agents
+- orchestrator, web-developer, tester
+
+[Package-specific snippets merged here]
+```
+
+## Data Flow
+
+### Command: `init` (Initialize Existing Project)
+
+```
+1. Parse CLI Args
+   ├─ Read opts: kit, profile, packages, fresh, dry-run, dir
+   └─ Set defaults: dir = cwd, verbose from global opts
+
+2. Load Config
+   ├─ Cosmiconfig search: .epostrc, epost.config.js, etc.
+   └─ Merge CLI opts + config file
+
+3. Profile Resolution
+   ├─ If --profile given → use it
+   ├─ Else → Auto-detect project type
+   │   ├─ Check package.json (web project?)
+   │   ├─ Check .xcodeproj (iOS project?)
+   │   ├─ Check build.gradle (Android project?)
+   │   └─ Return DetectionResult (profile, confidence, rules)
+   └─ If no match → Interactive selection (inquirer)
+
+4. Package Resolution
+   ├─ Load profile definition from profiles.json
+   ├─ Load package manifests (core, platform-*, etc.)
+   ├─ Resolve dependencies (topological sort)
+   ├─ Check for circular dependencies
+   └─ Return ordered package list
+
+5. Settings Merge
+   ├─ Load base settings (base-settings.json)
+   ├─ For each package:
+   │   ├─ Load package settings
+   │   ├─ Apply merge strategy (base/merge/skip)
+   │   └─ Deep merge into base
+   ├─ Load profile settings
+   └─ Return merged settings
+
+6. Conflict Detection
+   ├─ Load existing metadata (.epost-metadata.json)
+   ├─ For each file to install:
+   │   ├─ Check if exists locally
+   │   ├─ Compare checksums
+   │   ├─ Detect modification (user vs kit)
+   │   └─ Flag conflicts
+   └─ Return conflict list
+
+7. User Confirmation
+   ├─ If --dry-run → Show preview, exit
+   ├─ If conflicts:
+   │   ├─ Show conflict details
+   │   ├─ Ask strategy: keep/overwrite/merge
+   │   └─ Record choices
+   └─ If --yes → Skip confirmation
+
+8. File Installation
+   ├─ For each package (in dependency order):
+   │   ├─ For each file:
+   │   │   ├─ Check conflict strategy
+   │   │   ├─ Backup existing (if overwrite/merge)
+   │   │   ├─ Write file (keep/overwrite/merge)
+   │   │   ├─ Calculate checksum
+   │   │   └─ Update metadata
+   │   └─ Track installed files
+   └─ Save metadata
+
+9. CLAUDE.md Generation
+   ├─ Collect snippets from all packages
+   ├─ Merge snippets (deduplicate)
+   ├─ Render template with variables
+   └─ Write .claude/CLAUDE.md
+
+10. Health Check
+    ├─ Verify all files installed
+    ├─ Verify checksums match
+    ├─ Check IDE directories exist
+    └─ Report status
+
+11. Post-Install
+    ├─ Log success message
+    ├─ Show next steps
+    └─ Exit 0
+```
+
+### Command: `doctor` (Health Check)
+
+```
+1. Load Metadata
+   └─ Read .epost-metadata.json
+
+2. Check Installation
+   ├─ Verify metadata exists
+   ├─ Check installed files exist
+   ├─ Verify checksums match
+   └─ Detect user modifications
+
+3. Check Environment
+   ├─ Verify Node.js version >= 18
+   ├─ Check IDE directories (.claude, .cursor, .github)
+   └─ Check config file validity
+
+4. Check Updates
+   ├─ Fetch latest release from GitHub
+   ├─ Compare with installed version
+   └─ Report update availability
+
+5. Generate Report
+   ├─ ✓ Installation integrity
+   ├─ ✓ Environment checks
+   ├─ ✗ Issues found
+   └─ Fix suggestions
+
+6. Auto-Fix (if --fix)
+   ├─ Restore modified files to kit version
+   ├─ Update checksums
+   └─ Regenerate CLAUDE.md
+```
+
+## Key Patterns
+
+### 1. Commander.js Command Registration
 ```typescript
-try {
-  // Attempt operation
-} catch (error) {
-  if (error instanceof ConfigError) {
-    // Guide user to fix config
-  } else if (error instanceof FileError) {
-    // Check permissions, disk space
-  } else {
-    // Unknown error - log and exit
+program
+  .command('init')
+  .description('Initialize in existing project')
+  .option('--profile <name>', 'Developer profile')
+  .option('--dry-run', 'Preview changes')
+  .action(async (opts) => {
+    const { runInit } = await import('./commands/init.js');
+    await runInit({ ...program.opts(), ...opts });
+  });
+```
+
+### 2. Inquirer Interactive Prompts
+```typescript
+const profile = await select({
+  message: 'Select a developer profile:',
+  choices: profiles.map(p => ({
+    name: p.display_name,
+    value: p.name
+  }))
+});
+```
+
+### 3. Ownership Tracking
+```typescript
+// Save file ownership
+const metadata = {
+  version: '1.0',
+  files: {
+    [filePath]: {
+      checksum: await calculateChecksum(content),
+      source: 'kit',
+      modifiedAt: null
+    }
   }
+};
+await saveMetadata(metadata);
+```
+
+### 4. Topological Sort (Dependency Resolution)
+```typescript
+// Kahn's algorithm for dependency ordering
+function topologicalSort(packages: Package[]): Package[] {
+  const sorted: Package[] = [];
+  const noIncoming = packages.filter(p => p.dependencies.length === 0);
+  
+  while (noIncoming.length > 0) {
+    const pkg = noIncoming.shift()!;
+    sorted.push(pkg);
+    // Remove edges and update noIncoming
+  }
+  
+  return sorted;
 }
 ```
 
-## Security Model
+### 5. Deep Merge for Settings
+```typescript
+function deepMerge(base: any, incoming: any): any {
+  if (Array.isArray(base) && Array.isArray(incoming)) {
+    return [...new Set([...base, ...incoming])]; // Deduplicate
+  }
+  
+  if (isObject(base) && isObject(incoming)) {
+    const result = { ...base };
+    for (const key in incoming) {
+      result[key] = deepMerge(base[key], incoming[key]);
+    }
+    return result;
+  }
+  
+  return incoming; // Scalar: incoming wins
+}
+```
+
+### 6. Smart File Merge
+```typescript
+async function smartMerge(local: string, incoming: string): Promise<string> {
+  // Parse both files into sections
+  const localSections = parseSections(local);
+  const incomingSections = parseSections(incoming);
+  
+  // Preserve user sections, update kit sections
+  const merged = {
+    ...incomingSections, // Start with incoming
+    ...localSections.filter(s => s.source === 'user') // Add user sections
+  };
+  
+  return renderSections(merged);
+}
+```
+
+## Security Considerations
 
 ### Protected Files
+- `.env`, `.env.*` (environment variables)
+- `*.key`, `*.pem`, `*.p12`, `*.pfx` (secrets)
+- `.git/**` (git internal files)
+- `node_modules/**` (dependencies)
 
-Never modified by CLI:
+### Checksum Verification
+- SHA-256 hashes for all installed files
+- Detect tampering or corruption
+- Verify updates before applying
 
-```
-.git/**              # Repository metadata
-node_modules/**      # Dependencies
-.env, .env.*         # Secrets
-*.key, *.pem         # Cryptographic keys
-*.p12, *.pfx         # Certificate stores
-```
+### User Confirmation
+- Require confirmation before overwriting user files
+- Show diff for conflicts
+- Backup before destructive operations
 
-### File Validation
-
-- SHA256 checksum (LF-normalized)
-- Timestamp comparison
-- Modification detection flag
-- User confirmation required for modified files
-
-### Safe Operations
-
-- Dry-run mode (--dry-run)
-- Verbose logging (-v, --verbose)
-- Interactive confirmation (default)
-- CI mode (-y, --yes)
-
-## Performance Considerations
-
-### Current (Phase 01)
-
-- Minimal startup overhead
-- TypeScript compilation to ES2022
-
-### Future Optimizations (Phase 02+)
-
-- Cache GitHub API responses (1 hour TTL)
-- Lazy-load commands
-- Parallel file operations
-- Compression for large payloads
-
-## Testing Architecture
-
-### Test Pyramid
-
-```
-Unit Tests (80%)
-  - Type validation
-  - Config parsing
-  - File operations
-  - GitHub client mocking
-
-Integration Tests (15%)
-  - Config + File operations
-  - End-to-end command flow
-  - Metadata tracking
-
-E2E Tests (5%)
-  - Full CLI flow
-  - Real GitHub API (if public)
-  - File system side effects
-```
-
-### Test Organization
-
-```
-tests/
-├── unit/
-│   ├── config-loader.test.ts
-│   ├── file-manager.test.ts
-│   └── metadata.test.ts
-└── integration/
-    └── install-command.test.ts
-```
-
-## Deployment & Distribution
-
-### Binary Generation
-
-```
-npm run build           # TypeScript → JavaScript
-```
-
-Output: `dist/cli.js` with shebang
-
-### Distribution Methods
-
-1. **npm Package**
-   ```bash
-   npm install -g epost-kit
-   epost-kit --help
-   ```
-
-2. **Monorepo Distribution**
-   ```bash
-   npm install -w epost-agent-cli
-   npx epost-kit --help
-   ```
-
-3. **GitHub Releases**
-   - Assets: epost-kit-v0.1.0.tar.gz
-   - Checksums for verification
-
-## Future Architecture (Phases 02-04)
-
-### Phase 02: Core Utilities
-- Config loader with validation
-- Async file operations
-- GitHub API wrapper
-- Metadata manager
-
-### Phase 03: Commands
-- `install` - Deploy kit components
-- `list` - Show installed components
-- `update` - Sync with newer versions
-- `create` - Generate new agents/skills
-
-### Phase 04: Advanced Features
-- Multi-target installation
-- Conflict resolution
-- Rollback mechanism
-- Skill marketplace integration
-
----
-
-**Created by**: Phuong Doan
-**Architecture Approach**: Modular, type-safe, distribution-focused
-**Next**: Phase 02 - Core Utilities
+### GitHub API
+- Optional authentication token
+- Respect rate limits (60/hour unauthenticated, 5000/hour authenticated)
+- Validate release assets before download

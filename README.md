@@ -15,6 +15,8 @@ epost_agent_kit is an architecture and distribution framework that enables:
 
 ### Installation
 
+#### From npm (Recommended)
+
 ```bash
 # Add this kit to your Claude Code project
 npx epost-kit install
@@ -22,6 +24,37 @@ npx epost-kit install
 # Or target a specific platform
 npx epost-kit install --target cursor
 npx epost-kit install --target copilot
+```
+
+#### Local Development Installation
+
+For local development and testing:
+
+**macOS:**
+```bash
+# From epost-agent-kit/ root directory
+./install-macos.sh
+```
+
+**Windows PowerShell:**
+```powershell
+# From epost-agent-kit\ root directory
+powershell -ExecutionPolicy Bypass -File install.ps1
+```
+
+**Windows CMD:**
+```cmd
+REM From epost-agent-kit\ root directory
+install.cmd
+```
+
+Requirements:
+- Node.js >=18.0.0
+- npm
+
+After installation, verify with:
+```bash
+npx epost-kit --version  # Should output: 0.1.0
 ```
 
 ### Basic Usage

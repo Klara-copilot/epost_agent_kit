@@ -1,226 +1,60 @@
-# epost-kit CLI - Code Standards
-
-**Version**: 0.1.0
-**Status**: Phase 01 - Foundation
-**Last Updated**: 2026-02-06
-
-## Table of Contents
-
-1. [TypeScript Standards](#typescript-standards)
-2. [Naming Conventions](#naming-conventions)
-3. [File Organization](#file-organization)
-4. [Code Quality](#code-quality)
-5. [Error Handling](#error-handling)
-6. [Testing Standards](#testing-standards)
-7. [CLI Design](#cli-design)
-
-## TypeScript Standards
-
-### Compiler Settings
-
-```json
-{
-  "strict": true,
-  "target": "ES2022",
-  "module": "NodeNext",
-  "noUnusedLocals": true,
-  "noUnusedParameters": true,
-  "noImplicitReturns": true,
-  "forceConsistentCasingInFileNames": true
-}
-```
-
-### Key Principles
-
-- **Explicit Types**: Always provide return types for functions
-- **No `any`**: Use `unknown` with type guards or specific types
-- **Strict Null**: Handle null/undefined explicitly
-- **Module Safety**: Module resolution must be explicit
-
-### Type Definitions
-
-Place types in dedicated files:
-
-```typescript
-// src/types/index.ts
-export interface ConfigSchema {
-  // interface definition
-}
-
-// Usage in other modules
-import type { ConfigSchema } from './types';
-```
+# Code Standards
 
 ## Naming Conventions
 
-### Files & Directories
-
-- **kebab-case** for all file names
-- **Descriptive names**: Convey purpose immediately
-- **Max file size**: 200 lines (split when exceeded)
-
-Examples:
-```
-src/
-  cli.ts                    // Main CLI entry
-  constants.ts              // Constants only
-  config-loader.ts          # Future: config loading
-  github-api-client.ts      # Future: GitHub API
-  types/
-    index.ts                # Type exports only
-```
+### Files
+- **Pattern**: kebab-case with descriptive names
+- **Examples**: 
+  - `profile-loader.ts` (core module)
+  - `claude-md-generator.ts` (generator module)
+  - `init-command.test.ts` (test file)
+- **Rule**: Prefer long descriptive names over short ambiguous ones
 
 ### Variables & Functions
+- **Variables**: camelCase
+  - `const packageList = []`
+  - `const profileConfig = {}`
+- **Functions**: camelCase with verb prefix
+  - `async function detectProjectProfile()`
+  - `function resolvePackages()`
+- **Constants**: UPPER_SNAKE_CASE
+  - `export const APP_NAME = 'epost-kit'`
+  - `export const GITHUB_ORG = 'Klara-copilot'`
 
-- **camelCase** for functions and variables
-- **PascalCase** for interfaces, types, classes
-- **UPPER_SNAKE_CASE** for constants
+### Types & Interfaces
+- **Interfaces**: PascalCase with descriptive suffix
+  - `interface ProfileDefinition {}`
+  - `interface PackageManifest {}`
+  - `interface DetectionResult {}`
+- **Type Aliases**: PascalCase
+  - `type PackageStrategy = 'base' | 'merge' | 'skip'`
+  - `type ConfidenceLevel = 'high' | 'medium' | 'low'`
 
+### Classes
+- **Classes**: PascalCase
+  - `class ConfigError extends Error {}`
+  - `class TemplateManager {}`
+
+## Code Patterns Found
+
+### 1. ES Module Imports
 ```typescript
-// Variables & functions
-const appName = 'epost-kit';
-function loadConfig() { }
-const handleError = (err) => { };
+// Node.js built-ins with 'node:' prefix
+import { readFile } from 'node:fs/promises';
+import { join } from 'node:path';
 
-// Interfaces & types
-interface EpostConfig { }
-type CommandOption = 'verbose' | 'dryRun';
+// Third-party libraries
+import { Command } from '@commander-js/extra-typings';
+import { select, input } from '@inquirer/prompts';
 
-// Constants
-const MAX_RETRIES = 3;
-const DEFAULT_TIMEOUT = 5000;
+// Local modules with .js extension (for ESM)
+import { logger } from './logger.js';
+import { fileExists } from './file-system.js';
 ```
 
-### Command Names
-
-- **kebab-case** for CLI commands and options
-- Consistent across Commander.js definitions
-
+### 2. Error Handling
 ```typescript
-// ✓ Good
-.command('install-config')
-.option('--dry-run')
-.option('--target <ide>')
-
-// ✗ Avoid
-.command('installConfig')
-.option('--dryRun')
-```
-
-## File Organization
-
-### Module Structure
-
-```typescript
-// 1. Imports (grouped by type)
-import { Command } from 'commander';  // External
-import type { Config } from './types'; // Types
-import { loadConfig } from './utils';  // Internal
-
-// 2. Constants
-const MAX_RETRIES = 3;
-
-// 3. Type/Interface definitions (if not in types/)
-interface LocalState { }
-
-// 4. Main implementation
-export async function executeCommand() { }
-
-// 5. Helpers/Private functions
-function validateInput() { }
-```
-
-### Directory Rules
-
-- `src/`: Source code only
-- `src/types/`: Type definitions & interfaces
-- `src/commands/`: Command implementations (Phase 03+)
-- `src/utils/`: Utility functions (Phase 02+)
-- `tests/`: Test files mirroring src/ structure
-- `dist/`: Compiled output (generated)
-
-### Re-exports
-
-Create barrel exports for cleaner imports:
-
-```typescript
-// src/types/index.ts
-export type { EpostConfig, Metadata, FileOwnership } from './config';
-export type { CommandOptions } from './commands';
-
-// Usage
-import type { EpostConfig, CommandOptions } from './types';
-```
-
-## Code Quality
-
-### ESLint Rules
-
-```javascript
-{
-  '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
-  '@typescript-eslint/explicit-function-return-type': 'off',
-  '@typescript-eslint/no-explicit-any': 'warn',
-  'no-console': 'off',  // CLI apps need console
-  'prefer-const': 'error',
-  'no-var': 'error'
-}
-```
-
-### Function Return Types
-
-Always explicit (except for obvious cases):
-
-```typescript
-// ✓ Good
-function getVersion(): string {
-  return packageJson.version;
-}
-
-async function installKit(): Promise<void> {
-  // ...
-}
-
-// ✗ Avoid
-function getVersion() {  // Inferred type ok
-  return packageJson.version;
-}
-```
-
-### Comments
-
-- Document **why**, not **what**
-- Use JSDoc for public exports
-- Keep comments near code
-
-```typescript
-// ✓ Good
-/**
- * Load configuration from cosmiconfig search
- * Returns merged config with CLI defaults
- */
-export async function loadConfig(): Promise<EpostConfig> {
-  // First check home directory for global config
-  const globalConfig = await searchGlobalConfig();
-  return { ...defaults, ...globalConfig };
-}
-
-// ✗ Avoid
-function loadConfig() {  // No doc
-  // Get config
-  const cfg = getConfig();
-  return cfg;
-}
-```
-
-## Error Handling
-
-### Error Classes
-
-Create specific error types:
-
-```typescript
-// src/errors/index.ts
+// Custom error types
 export class ConfigError extends Error {
   constructor(message: string) {
     super(message);
@@ -228,201 +62,307 @@ export class ConfigError extends Error {
   }
 }
 
-export class FileError extends Error {
-  constructor(path: string, message: string) {
-    super(`File operation failed: ${path} - ${message}`);
-    this.name = 'FileError';
-  }
-}
-```
-
-### Error Handling Pattern
-
-```typescript
+// Try-catch with specific error handling
 try {
-  const config = await loadConfig();
-  return config;
+  const result = await someOperation();
+  return result;
 } catch (error) {
   if (error instanceof ConfigError) {
-    console.error(`Configuration error: ${error.message}`);
+    logger.error(`Config error: ${error.message}`);
+  }
+  throw error;
+}
+```
+
+### 3. Type-Safe Options
+```typescript
+// Commander.js with extra typings
+const program = new Command()
+  .name('epost-kit')
+  .option('--verbose', 'Enable verbose logging')
+  .option('--yes', 'Skip interactive prompts');
+
+// Type-safe option interfaces
+interface InitOptions {
+  kit?: string;
+  profile?: string;
+  packages?: string;
+  fresh?: boolean;
+  dryRun?: boolean;
+  dir?: string;
+  verbose?: boolean;
+  yes?: boolean;
+}
+```
+
+### 4. Async/Await Pattern
+```typescript
+// Async functions with proper error handling
+export async function runInit(opts: InitOptions): Promise<void> {
+  try {
+    const projectDir = opts.dir || process.cwd();
+    const profile = await detectOrSelectProfile(projectDir);
+    const packages = await resolvePackages(profile);
+    await installPackages(packages, projectDir);
+    logger.success('Installation complete');
+  } catch (error) {
+    logger.error(`Init failed: ${error.message}`);
     process.exit(1);
   }
-  throw error; // Re-throw unknown errors
 }
 ```
 
-### CLI Error Messages
-
-Use Ora spinners with proper error handling:
-
+### 5. File System Operations
 ```typescript
-import ora from 'ora';
-import pc from 'picocolors';
+// Safe file operations with existence checks
+export async function safeReadFile(filePath: string): Promise<string | null> {
+  try {
+    return await readFile(filePath, 'utf-8');
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
+      return null;
+    }
+    throw error;
+  }
+}
 
-const spinner = ora('Installing components...').start();
-
-try {
-  await installKit();
-  spinner.succeed('Installation complete');
-} catch (error) {
-  spinner.fail(`Installation failed: ${error.message}`);
-  process.exit(1);
+// Check file existence before operations
+if (await fileExists(targetPath)) {
+  const content = await safeReadFile(targetPath);
+  // process content
 }
 ```
 
-## Testing Standards
+### 6. Inquirer Prompts Pattern
+```typescript
+// Interactive prompts with validation
+const profile = await select({
+  message: 'Select a developer profile:',
+  choices: [
+    { name: 'Web B2B Developer', value: 'web-b2b' },
+    { name: 'iOS B2C Developer', value: 'ios-b2c' },
+    new Separator()
+  ]
+});
+
+const customInput = await input({
+  message: 'Enter project name:',
+  validate: (value) => value.length > 0 || 'Required'
+});
+```
+
+### 7. Logging Pattern
+```typescript
+// Centralized logger with levels
+import { logger } from './core/logger.js';
+
+logger.info('Starting installation...');
+logger.success('✓ Profile detected: web-b2b');
+logger.warn('Conflict detected in .claude/agents/orchestrator.ts');
+logger.error('Installation failed');
+logger.debug('[profile-loader] Checking package.json');
+```
+
+### 8. Type Guards
+```typescript
+// Type narrowing with type guards
+function isConfigError(error: unknown): error is ConfigError {
+  return error instanceof ConfigError;
+}
+
+if (isConfigError(error)) {
+  // error is typed as ConfigError here
+  logger.error(error.message);
+}
+```
+
+## Linting/Formatting
+
+### Tool
+- **ESLint 9** with flat config (eslint.config.js)
+- **TypeScript ESLint Plugin** (@typescript-eslint/eslint-plugin)
+
+### Configuration
+Located in `eslint.config.js`:
+
+```javascript
+export default [
+  eslint.configs.recommended,
+  {
+    files: ['src/**/*.ts', 'tests/**/*.ts'],
+    languageOptions: {
+      parser: tsparser,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module'
+      }
+    },
+    plugins: {
+      '@typescript-eslint': tseslint
+    },
+    rules: {
+      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+      '@typescript-eslint/explicit-function-return-type': 'off',
+      '@typescript-eslint/no-explicit-any': 'warn',
+      'no-console': 'off', // CLI needs console output
+      'prefer-const': 'error',
+      'no-var': 'error'
+    }
+  }
+];
+```
+
+### Key Rules
+- **No unused vars** (except `_` prefix for intentionally unused)
+- **Prefer const** over let
+- **No var** declarations (use const/let)
+- **No explicit any** (warning, not error)
+- **Console allowed** (CLI tool needs console output)
+- **No explicit return types** (TypeScript infers)
+
+### Commands
+```bash
+npm run lint       # Check linting errors
+npm run lint --fix # Auto-fix linting errors (if available)
+```
+
+## Testing Approach
+
+### Framework
+- **Vitest 2.1** (modern Vite-based test runner)
+- **Coverage**: @vitest/coverage-v8
 
 ### Test Structure
-
-```typescript
-// tests/unit/config.test.ts
-import { describe, it, expect, beforeEach } from 'vitest';
-import { loadConfig } from '../../src/config-loader';
-
-describe('Config Loader', () => {
-  beforeEach(() => {
-    // Setup
-  });
-
-  it('should load config from .epostrc', async () => {
-    // Arrange
-    // Act
-    const config = await loadConfig();
-    // Assert
-    expect(config).toBeDefined();
-  });
-
-  it('should handle missing config gracefully', async () => {
-    // Test error case
-  });
-});
 ```
-
-### Coverage Requirements
-
-- **Minimum**: 80% lines, functions, branches, statements
-- **Core Logic**: 85%+ coverage
-- **Utils**: 90%+ coverage
-- **CLI Commands**: 80%+ coverage
+tests/
+├── unit/                    # Unit tests for isolated modules
+│   ├── core/                # Core module tests
+│   │   ├── ownership.test.ts
+│   │   ├── checksum.test.ts
+│   │   ├── file-system.test.ts
+│   │   ├── package-manager.test.ts
+│   │   ├── smart-merge.test.ts
+│   │   └── ui.test.ts
+│   └── commands/            # Command tests
+│       └── versions.test.ts
+├── integration/             # Integration tests
+│   ├── init-command.test.ts
+│   ├── doctor-command.test.ts
+│   └── uninstall-command.test.ts
+├── fixtures/                # Test data
+│   ├── sample-metadata.json
+│   ├── corrupted-metadata.json
+│   └── github-releases.json
+└── helpers/                 # Test utilities
+    ├── temp-project.ts      # Temporary project setup
+    └── test-utils.ts        # Common test helpers
+```
 
 ### Test Patterns
-
 ```typescript
-// ✓ Unit test - isolated function
-it('should validate config schema', () => {
-  const valid = { repository: 'org/repo' };
-  expect(isValidConfig(valid)).toBe(true);
-});
+// Unit test example
+import { describe, it, expect } from 'vitest';
+import { calculateChecksum } from '../../src/core/checksum.js';
 
-// ✓ Integration test - with dependencies
-it('should load and merge configs', async () => {
-  const config = await loadConfig();
-  expect(config.repository).toBeDefined();
-});
-
-// ✗ Avoid - too high-level
-it('should work', () => {
-  expect(true).toBe(true);
-});
-```
-
-## CLI Design
-
-### Command Structure
-
-Commands follow this structure:
-
-```typescript
-import { Command } from '@commander-js/extra-typings';
-
-program
-  .command('install')
-  .description('Install epost-kit components')
-  .option('--target <ide>', 'Target IDE')
-  .option('--dry-run', 'Simulate without modifying files')
-  .option('-v, --verbose', 'Verbose output')
-  .action(async (options) => {
-    // Validate options
-    // Execute command
-    // Report results
+describe('checksum', () => {
+  it('should calculate SHA-256 checksum', async () => {
+    const content = 'test content';
+    const checksum = await calculateChecksum(content);
+    expect(checksum).toMatch(/^[a-f0-9]{64}$/);
   });
-```
-
-### Option Naming
-
-- **Boolean flags**: `--dry-run`, `--verbose`, `--force`
-- **Value options**: `--target <ide>`, `--dir <path>`
-- **Short options**: `-v` for common flags
-
-### Output Standards
-
-Use Ora spinners for progress:
-
-```typescript
-import ora from 'ora';
-import pc from 'picocolors';
-
-const spinner = ora('Processing...').start();
-
-try {
-  await doWork();
-  spinner.succeed(pc.green('Done'));
-} catch (error) {
-  spinner.fail(pc.red(`Error: ${error.message}`));
-}
-```
-
-### Exit Codes
-
-- `0`: Success
-- `1`: General error
-- `2`: CLI usage error
-- `130`: Ctrl+C (SIGINT)
-
-```typescript
-process.exit(0);  // Success
-process.exit(1);  // Error
-```
-
-## Configuration Validation
-
-Use Zod for runtime validation:
-
-```typescript
-import { z } from 'zod';
-
-const configSchema = z.object({
-  repository: z.string().url().optional(),
-  target: z.enum(['claude', 'cursor', 'github-copilot']).optional(),
-  installDir: z.string().optional(),
 });
 
-type EpostConfig = z.infer<typeof configSchema>;
+// Integration test with temp directory
+import { beforeEach, afterEach } from 'vitest';
+import { setupTempProject } from '../helpers/temp-project.js';
 
-export function validateConfig(data: unknown): EpostConfig {
-  return configSchema.parse(data);
+describe('init command', () => {
+  let tempDir: string;
+
+  beforeEach(async () => {
+    tempDir = await setupTempProject();
+  });
+
+  afterEach(async () => {
+    await cleanupTempProject(tempDir);
+  });
+
+  it('should initialize project', async () => {
+    await runInit({ dir: tempDir, yes: true });
+    // assertions
+  });
+});
+```
+
+### Coverage Target
+- **Goal**: >80% coverage for core modules
+- **Priority**: Core business logic (profile-loader, package-resolver, settings-merger)
+- **Command**: `npm test` (includes coverage report)
+
+### Test Commands
+```bash
+npm test              # Run all tests once
+npm run test:watch    # Watch mode for development
+npm run coverage      # Generate coverage report (if configured)
+```
+
+## TypeScript Configuration
+
+### Compiler Options
+```json
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2022"],
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true
+  }
 }
 ```
 
-## Pre-commit Checks
+### Key Settings
+- **Strict mode** enabled (all strict checks)
+- **NodeNext** module resolution for ESM
+- **ES2022** target for modern Node.js
+- **Declaration files** generated (d.ts)
+- **Source maps** for debugging
+- **No unused** locals/parameters
+- **No implicit returns** in functions
 
-Run before committing:
+## Code Quality Checklist
 
-```bash
-npm run typecheck   # Type safety
-npm run lint        # Code quality
-npm run test        # Unit tests
-npm run build       # Compilation
-```
+### Before Committing
+- [ ] Run `npm run typecheck` (no TypeScript errors)
+- [ ] Run `npm run lint` (no ESLint errors)
+- [ ] Run `npm test` (all tests pass)
+- [ ] Add tests for new functionality
+- [ ] Update documentation if APIs changed
+- [ ] Use descriptive commit messages
 
-Package.json includes `prepublishOnly` hook:
+### Code Review Focus
+- **Type safety**: Avoid `any`, use proper types
+- **Error handling**: All async operations have try-catch
+- **File operations**: Check existence before read/write
+- **Logging**: Use logger, not console.log
+- **Testing**: New code has unit tests
+- **Documentation**: Complex logic has comments
 
-```bash
-npm run prepublishOnly  # Full validation before publish
-```
-
----
-
-**Created by**: Phuong Doan
-**Last Updated**: 2026-02-06
-**Status**: Foundation Phase Complete
+### Performance Considerations
+- **Async operations**: Use Promise.all for parallel operations
+- **Large files**: Stream instead of reading entirely
+- **Caching**: Cache expensive computations (GitHub API calls)
+- **Early returns**: Exit functions early when possible
