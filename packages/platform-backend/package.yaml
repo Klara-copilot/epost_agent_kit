@@ -1,0 +1,26 @@
+name: platform-backend
+version: "1.0.0"
+description: "Backend platform: Java 8, Jakarta EE 8, WildFly 26, Hibernate, Maven"
+layer: 1
+platforms: [backend]
+
+dependencies:
+  - core
+
+provides:
+  agents:
+    - epost-backend-developer
+  skills:
+    - backend/javaee
+    - backend/databases
+  commands:
+    - backend/cook
+    - backend/test
+
+files:
+  agents/: agents/
+  skills/: skills/
+  commands/: commands/backend/
+
+settings_strategy: merge
+claude_snippet: CLAUDE.snippet.md

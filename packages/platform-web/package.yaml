@@ -1,0 +1,31 @@
+name: platform-web
+version: "1.0.0"
+description: "Web platform: Next.js 14, React 18, TypeScript, Tailwind CSS"
+layer: 1
+platforms: [web]
+
+dependencies:
+  - core
+
+recommends:
+  - ui-ux
+
+provides:
+  agents:
+    - epost-web-developer
+  skills:
+    - web/nextjs
+    - web/frontend-development
+    - web/backend-development
+    - docker
+  commands:
+    - web/cook
+    - web/test
+
+files:
+  agents/: agents/
+  skills/: skills/
+  commands/: commands/web/
+
+settings_strategy: merge
+claude_snippet: CLAUDE.snippet.md

@@ -1,0 +1,124 @@
+profiles:
+  # ─── Feature Teams (B2B Web) ───
+  web-b2b:
+    display_name: "Web B2B Developer (frontend)"
+    teams: [miracle, titan, helios, hacka, kepler]
+    packages: [core, platform-web, domain-b2b, ui-ux]
+    optional: [meta-kit-design]
+
+  web-b2b-backend:
+    display_name: "Web B2B Developer (backend)"
+    teams: [miracle, titan, helios, hacka, kepler]
+    packages: [core, platform-backend, domain-b2b]
+    optional: [meta-kit-design]
+
+  web-b2b-fullstack:
+    display_name: "Web B2B Developer (fullstack)"
+    teams: [miracle, titan, helios, hacka, kepler]
+    packages: [core, platform-web, platform-backend, domain-b2b, ui-ux]
+    optional: [meta-kit-design]
+
+  # ─── Mobile Teams (B2C) ───
+  ios-b2c:
+    display_name: "iOS App Developer"
+    teams: [optimus]
+    packages: [core, platform-ios, domain-b2c, ui-ux]
+    optional: [meta-kit-design]
+
+  android-b2c:
+    display_name: "Android App Developer"
+    teams: [optimus]
+    packages: [core, platform-android, domain-b2c, ui-ux]
+    optional: [meta-kit-design]
+
+  mobile-b2c:
+    display_name: "Mobile Developer (iOS + Android)"
+    teams: [optimus]
+    packages: [core, platform-ios, platform-android, domain-b2c, ui-ux]
+    optional: [meta-kit-design]
+
+  mobile-b2c-backend:
+    display_name: "Mobile Backend Developer"
+    teams: [optimus]
+    packages: [core, platform-backend, domain-b2c]
+    optional: [meta-kit-design]
+
+  # ─── UI Library Teams (MUJI) ───
+  web-ui-lib:
+    display_name: "Web UI Library Developer"
+    teams: [muji]
+    packages: [core, platform-web, ui-ux]
+    optional: [meta-kit-design]
+
+  ios-ui-lib:
+    display_name: "iOS UI Library Developer"
+    teams: [muji]
+    packages: [core, platform-ios, ui-ux]
+    optional: [meta-kit-design]
+
+  android-ui-lib:
+    display_name: "Android UI Library Developer"
+    teams: [muji]
+    packages: [core, platform-android, ui-ux]
+    optional: [meta-kit-design]
+
+  # ─── Architecture Teams ───
+  cloud-architect:
+    display_name: "Cloud Architect"
+    teams: [future, invisible]
+    packages: [core, arch-cloud, platform-backend]
+    optional: [meta-kit-design]
+
+  # ─── Kit Development ───
+  kit-designer:
+    display_name: "Kit Designer"
+    packages: [core, platform-web, platform-ios, platform-android, platform-backend, meta-kit-design]
+
+  full:
+    display_name: "Full Kit (everything)"
+    packages:
+      - core
+      - platform-web
+      - platform-ios
+      - platform-android
+      - platform-backend
+      - ui-ux
+      - arch-cloud
+      - domain-b2b
+      - domain-b2c
+      - meta-kit-design
+
+auto_detect:
+  rules:
+    - match:
+        files: ["next.config.*"]
+        dependencies: ["next"]
+      suggest: web-b2b
+
+    - match:
+        files: ["pom.xml"]
+        directories: ["src/main/java"]
+      suggest: web-b2b-backend
+
+    - match:
+        files: ["*.xcodeproj"]
+        directories: ["*Theme*", "*theme*"]
+      suggest: ios-ui-lib
+
+    - match:
+        files: ["*.xcodeproj"]
+      suggest: ios-b2c
+
+    - match:
+        files: ["build.gradle.kts"]
+        directories: ["*theme*"]
+      suggest: android-ui-lib
+
+    - match:
+        files: ["build.gradle.kts"]
+        directories: ["app/src/main/"]
+      suggest: android-b2c
+
+    - match:
+        files: ["*.tf", "cloudbuild.yaml"]
+      suggest: cloud-architect

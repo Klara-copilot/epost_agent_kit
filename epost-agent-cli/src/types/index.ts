@@ -30,6 +30,8 @@ export interface FileOwnership {
   version: string;
   /** Whether file was modified after installation */
   modified: boolean;
+  /** Which package owns this file */
+  package?: string;
 }
 
 /**
@@ -42,6 +44,10 @@ export interface Metadata {
   target: 'claude' | 'cursor' | 'github-copilot';
   /** Installed epost-agent-kit version */
   kitVersion: string;
+  /** Active profile (if installed via profile) */
+  profile?: string;
+  /** List of installed package names */
+  installedPackages?: string[];
   /** Installation timestamp */
   installedAt: string;
   /** Last update timestamp */

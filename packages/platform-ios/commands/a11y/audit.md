@@ -1,0 +1,42 @@
+---
+description: "Audit staged Swift changes for WCAG 2.1 AA accessibility violations"
+agent: epost-a11y-specialist
+---
+
+**Mode: Audit — Do NOT use Write or Edit tools. Output valid JSON only.**
+
+Audit all Swift files changed in the current Git diff for accessibility violations.
+
+## Instructions
+
+1. Get the current Git diff (all changed `.swift` files)
+2. For each changed Swift file, scan for accessibility violations using `ios/ios-accessibility/` skill rules
+3. Check against `.agent-knowledge/epost-known-findings.json` (if exists) to match known issues
+4. Classify each violation by type, WCAG criterion, severity, and finding ID
+5. Determine if PR should be blocked (critical violations = block)
+
+## Output
+
+Valid JSON only — no prose. Structure:
+
+```json
+{
+  "total_violations": 0,
+  "critical": 0,
+  "violations": [
+    {
+      "file": "path/to/file.swift",
+      "line": 45,
+      "type": "button",
+      "wcag": "4.1.2",
+      "severity": "critical",
+      "message": "Button missing accessibilityLabel",
+      "finding_id": null
+    }
+  ],
+  "should_block_pr": false
+}
+```
+
+Types: `button`, `heading`, `form`, `image`, `focus`, `color`, `other`
+Severity: `critical`, `high`, `medium`, `low`

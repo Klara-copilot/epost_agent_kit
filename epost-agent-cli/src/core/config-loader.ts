@@ -19,6 +19,19 @@ export const ConfigSchema = z.object({
   version: z.string().optional(),
   target: z.enum(['claude', 'cursor', 'github-copilot']).optional(),
   registry: z.string().url().optional(),
+  /** Profile name (e.g., "web-b2b", "ios-b2c") */
+  profile: z.string().optional(),
+  /** Explicit list of packages to install */
+  packages: z.array(z.string()).optional(),
+  /** Optional packages to include */
+  optional: z.array(z.string()).optional(),
+  /** Packages to exclude from installation */
+  exclude: z.array(z.string()).optional(),
+  /** Workspace configuration */
+  workspace: z.object({
+    root: z.string().optional(),
+    shared_claude_md: z.boolean().default(true),
+  }).optional(),
 });
 
 export type EpostConfig = z.infer<typeof ConfigSchema>;
@@ -57,6 +70,9 @@ export async function loadConfig(cwd?: string): Promise<EpostConfig> {
   }
   if (process.env.EPOST_KIT_REGISTRY) {
     config.registry = process.env.EPOST_KIT_REGISTRY;
+  }
+  if (process.env.EPOST_KIT_PROFILE) {
+    config.profile = process.env.EPOST_KIT_PROFILE;
   }
 
   // Validate merged config
