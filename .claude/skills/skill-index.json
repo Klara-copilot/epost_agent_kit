@@ -1,5 +1,5 @@
 {
-  "generated": "2026-02-08T09:42:31.936Z",
+  "generated": "2026-02-10T05:29:42.966Z",
   "version": "1.0.0",
   "count": 36,
   "skills": [
@@ -82,7 +82,7 @@
       "path": "web/api-routes/SKILL.md"
     },
     {
-      "name": "arch/cloud",
+      "name": "arch-cloud",
       "description": "GCP cloud infrastructure patterns: Terraform, Cloud Build, Cloud Run, GKE",
       "keywords": [],
       "platforms": [
@@ -90,10 +90,10 @@
       ],
       "triggers": [],
       "agent-affinity": [],
-      "path": "arch/cloud/SKILL.md"
+      "path": "arch-cloud/SKILL.md"
     },
     {
-      "name": "backend/databases",
+      "name": "backend-databases",
       "description": "PostgreSQL and MongoDB database patterns for epost backend",
       "keywords": [],
       "platforms": [
@@ -101,10 +101,10 @@
       ],
       "triggers": [],
       "agent-affinity": [],
-      "path": "backend/databases/SKILL.md"
+      "path": "backend-databases/SKILL.md"
     },
     {
-      "name": "backend/javaee",
+      "name": "backend-javaee",
       "description": "Jakarta EE 8 patterns: JAX-RS, CDI, EJB, JPA on WildFly 26.1",
       "keywords": [],
       "platforms": [
@@ -112,18 +112,7 @@
       ],
       "triggers": [],
       "agent-affinity": [],
-      "path": "backend/javaee/SKILL.md"
-    },
-    {
-      "name": "cli-development",
-      "description": "This skill should be used when working on \"epost-kit CLI\", \"epost-agent-cli\", \"CLI commands\", \"terminal UI\", \"cli-table3\", \"Commander\", \"inquirer prompts\", \"CLI onboarding\", \"CLI branding\", or any TypeScript code in the epost-agent-cli directory.",
-      "keywords": [],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [],
-      "path": "cli/SKILL.md"
+      "path": "backend-javaee/SKILL.md"
     },
     {
       "name": "code-review",
@@ -242,7 +231,7 @@
       "path": "docs-seeker/SKILL.md"
     },
     {
-      "name": "domain/b2b",
+      "name": "domain-b2b",
       "description": "epost B2B module patterns: monitoring, communities, inbox, smart-send, composer, archive, contacts, organization",
       "keywords": [],
       "platforms": [
@@ -250,10 +239,10 @@
       ],
       "triggers": [],
       "agent-affinity": [],
-      "path": "domain/b2b/SKILL.md"
+      "path": "domain-b2b/SKILL.md"
     },
     {
-      "name": "domain/b2c",
+      "name": "domain-b2c",
       "description": "epost B2C consumer app patterns: mail, documents, notifications",
       "keywords": [],
       "platforms": [
@@ -261,7 +250,7 @@
       ],
       "triggers": [],
       "agent-affinity": [],
-      "path": "domain/b2c/SKILL.md"
+      "path": "domain-b2c/SKILL.md"
     },
     {
       "name": "error-recovery",
@@ -486,7 +475,7 @@
       "path": "knowledge-retrieval/SKILL.md"
     },
     {
-      "name": "knowledge/android-theme",
+      "name": "muji-android-theme",
       "description": "Android theme UI library: Compose components and design tokens",
       "keywords": [],
       "platforms": [
@@ -494,10 +483,10 @@
       ],
       "triggers": [],
       "agent-affinity": [],
-      "path": "muji/android-theme/SKILL.md"
+      "path": "muji-android-theme/SKILL.md"
     },
     {
-      "name": "knowledge/ios-theme",
+      "name": "muji-ios-theme",
       "description": "iOS theme UI library: SwiftUI components and design tokens",
       "keywords": [],
       "platforms": [
@@ -505,10 +494,10 @@
       ],
       "triggers": [],
       "agent-affinity": [],
-      "path": "muji/ios-theme/SKILL.md"
+      "path": "muji-ios-theme/SKILL.md"
     },
     {
-      "name": "muji/klara-theme",
+      "name": "muji-klara-theme",
       "description": "klara-theme web UI library: React components, design tokens, theming",
       "keywords": [],
       "platforms": [
@@ -516,7 +505,7 @@
       ],
       "triggers": [],
       "agent-affinity": [],
-      "path": "muji/klara-theme/SKILL.md"
+      "path": "muji-klara-theme/SKILL.md"
     },
     {
       "name": "nextjs",
@@ -597,7 +586,36 @@
       "path": "problem-solving/SKILL.md"
     },
     {
-      "name": "rag/web-rag",
+      "name": "rag-ios-rag",
+      "description": "iOS codebase RAG — vector search for Swift app code, UIKit/SwiftUI components, design system patterns. Use before implementing iOS features, searching view patterns, or finding theme tokens.",
+      "keywords": [
+        "rag",
+        "vector-search",
+        "ios",
+        "swift",
+        "swiftui",
+        "uikit",
+        "design-system"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "search swift",
+        "find view",
+        "ios pattern",
+        "theme token"
+      ],
+      "agent-affinity": [
+        "epost-ios-developer",
+        "epost-a11y-specialist",
+        "epost-muji",
+        "epost-implementer"
+      ],
+      "path": "rag-ios-rag/SKILL.md"
+    },
+    {
+      "name": "rag-web-rag",
       "description": "Web codebase RAG — vector search for klara-theme components, design tokens, Next.js patterns. Use before implementing web UI features, searching component APIs, or finding existing patterns.",
       "keywords": [
         "rag",
@@ -621,7 +639,7 @@
         "epost-muji",
         "epost-implementer"
       ],
-      "path": "rag/web-rag/SKILL.md"
+      "path": "rag-web-rag/SKILL.md"
     },
     {
       "name": "repomix",

@@ -20,11 +20,11 @@ Each stage has a dedicated aspect file with detailed steps, inputs, outputs, and
 
 | Aspect | Purpose | Key Outputs |
 |--------|---------|-------------|
-| `plan-feature.md` | Plan a new UI feature from Figma designs | 6 JSON plan artifacts |
-| `implement-component.md` | Implement component from plan artifacts | Component code + Storybook stories |
-| `audit-ui.md` | Audit implementation against plan and Figma | `audit-report.json` |
-| `fix-findings.md` | Resolve audit findings | `PATCH.diff` or `fix-notes.json` |
-| `document-component.md` | Document component with Figma data | `.figma.json` + `.mapping.json` |
+| `references/plan-feature.md` | Plan a new UI feature from Figma designs | 6 JSON plan artifacts |
+| `references/implement-component.md` | Implement component from plan artifacts | Component code + Storybook stories |
+| `references/audit-ui.md` | Audit implementation against plan and Figma | `audit-report.json` |
+| `references/fix-findings.md` | Resolve audit findings | `PATCH.diff` or `fix-notes.json` |
+| `references/document-component.md` | Document component with Figma data | `.figma.json` + `.mapping.json` |
 
 ## Quick Reference
 

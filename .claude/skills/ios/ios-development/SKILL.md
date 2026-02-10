@@ -21,7 +21,7 @@ User mentions iOS, Swift, SwiftUI, UIKit, iPhone app, iPad app, or iOS-specific 
 This skill includes 3 specialized sub-skills for different iOS development aspects:
 
 ### 1. Development Patterns
-Reference: `skills/ios-development/development.md`
+Reference: `skills/ios-development/references/development.md`
 
 - Swift 6 concurrency (async/await, Sendable, Actors)
 - SwiftUI vs UIKit strategy
@@ -34,7 +34,7 @@ Reference: `skills/ios-development/development.md`
 - Debugging patterns
 
 ### 2. Build & Simulator Management
-Reference: `skills/ios-development/build.md`
+Reference: `skills/ios-development/references/build.md`
 
 - Xcode project configuration
 - Build settings and schemes
@@ -48,7 +48,7 @@ Reference: `skills/ios-development/build.md`
 - MCP tool patterns (discover_projs, list_schemes, build_sim, etc.)
 
 ### 3. Testing Strategies
-Reference: `skills/ios-development/tester.md`
+Reference: `skills/ios-development/references/tester.md`
 
 - XCTest patterns (unit tests)
 - XCUITest patterns (UI tests)

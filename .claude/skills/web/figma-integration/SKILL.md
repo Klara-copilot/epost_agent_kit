@@ -103,7 +103,7 @@ If differences found, categorize as:
 
 | Aspect | Purpose |
 |--------|---------|
-| `extraction-procedure.md` | Step-by-step Figma data extraction with anti-truncation handling |
+| `references/extraction-procedure.md` | Step-by-step Figma data extraction with anti-truncation handling |
 
 ## Related Resources
 
