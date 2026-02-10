@@ -136,14 +136,37 @@ To establish the skill's contents, analyze each concrete example to create a lis
 
 ### Step 3: Create Skill Structure
 
-For Claude Code plugins, create the skill directory structure:
+For Claude Code plugins, create the skill directory structure following **agentskills.io compliance**:
 
 ```bash
-mkdir -p plugin-name/skills/skill-name/{references,examples,scripts}
+mkdir -p plugin-name/skills/skill-name/references
 touch plugin-name/skills/skill-name/SKILL.md
 ```
 
-**Note:** Unlike the generic skill-creator which uses `init_skill.py`, plugin skills are created directly in the plugin's `skills/` directory with a simpler manual structure.
+**agentskills.io Compliance Requirements** (as of 2026-02-10):
+
+1. **SKILL.md location:** MUST be in skill root directory
+2. **Aspect files (.md):** MUST be in `references/` subdirectory, NEVER in skill root
+3. **Data files (.json):** MUST be in `assets/` subdirectory if present, NEVER in skill root
+4. **Executable scripts:** MUST be in `scripts/` subdirectory if present, NEVER in skill root
+5. **Name field:** MUST use lowercase with hyphens only (NO `/`, NO spaces, NO underscores)
+
+**Directory Structure:**
+```
+skill-name/
+├── SKILL.md              # Required: frontmatter + content (ONLY .md in root)
+├── references/           # .md aspect files (patterns, guides, docs)
+├── assets/               # .json schemas, templates, config (optional)
+└── scripts/              # Executable .sh/.py/.js utilities (optional)
+```
+
+**Critical Rules:**
+- ❌ NEVER place `.md` files (except SKILL.md) in skill root
+- ❌ NEVER use `/` in the `name:` field (use hyphens: `arch-cloud`, not `arch/cloud`)
+- ✅ Keep nested directory structure (e.g., `skills/muji/klara-theme/`)
+- ✅ Name field can differ from directory path
+
+**Note:** Unlike the generic skill-creator which uses `init_skill.py`, plugin skills are created directly in the plugin's `skills/` directory with this compliant structure.
 
 ### Step 4: Edit the Skill
 

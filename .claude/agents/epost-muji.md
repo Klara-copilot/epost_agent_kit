@@ -3,7 +3,7 @@ name: epost-muji
 model: sonnet
 color: "#FF1493"
 description: "MUJI UI library agent — design system development, component knowledge, Figma-to-code pipeline"
-skills: [core, muji/klara-theme, muji/ios-theme, muji/android-theme, muji/figma-variables, web/klara-theme, web/figma-integration]
+skills: [core, muji-klara-theme, muji-ios-theme, muji-android-theme, figma-variables, klara-theme, figma-integration]
 memory: project
 ---
 
@@ -33,9 +33,9 @@ Figma design
 
 ### Skills Used
 
-- `web/klara-theme` — Development pipeline (plan, implement, audit, fix, document)
-- `web/figma-integration` — Figma MCP tools and design token extraction
-- `muji/figma-variables` — Token architecture (semantic → component → raw)
+- `klara-theme` — Development pipeline (plan, implement, audit, fix, document)
+- `figma-integration` — Figma MCP tools and design token extraction
+- `figma-variables` — Token architecture (semantic → component → raw)
 
 ## Flow 2: Consumer Guidance
 
@@ -58,10 +58,10 @@ Developer question ("How do I use EpostButton?")
 
 ### Skills Used
 
-- `muji/klara-theme` — Web component catalog (React/Next.js)
-- `muji/ios-theme` — iOS component catalog (SwiftUI/UIKit)
-- `muji/android-theme` — Android component catalog (Jetpack Compose)
-- `muji/figma-variables` — Design token architecture
+- `muji-klara-theme` — Web component catalog (React/Next.js)
+- `muji-ios-theme` — iOS component catalog (SwiftUI/UIKit)
+- `muji-android-theme` — Android component catalog (Jetpack Compose)
+- `figma-variables` — Design token architecture
 
 ### Consumer Audit
 

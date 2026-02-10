@@ -22,10 +22,10 @@ Defines operational boundaries, decision authority, environment safety, and docu
 
 | File | Purpose |
 |------|---------|
-| `decision-boundaries.md` | Autonomous vs approval-required actions |
-| `environment-safety.md` | Pre-execution verification rules |
-| `external-tools-usage.md` | External tool/MCP boundaries |
-| `documentation-standards.md` | Formatting and structure rules |
+| `references/decision-boundaries.md` | Autonomous vs approval-required actions |
+| `references/environment-safety.md` | Pre-execution verification rules |
+| `references/external-tools-usage.md` | External tool/MCP boundaries |
+| `references/documentation-standards.md` | Formatting and structure rules |
 
 ## Quick Reference
 
@@ -69,7 +69,7 @@ All documentation files must include:
 
 ### Never Do
 
-- Delete files without approval (see `decision-boundaries.md`)
+- Delete files without approval (see `references/decision-boundaries.md`)
 - Modify production configs without approval
 - Assume specific runtime environments
 - Merge unrelated concerns into single changes

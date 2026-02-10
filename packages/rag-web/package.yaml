@@ -10,8 +10,7 @@ dependencies:
 
 provides:
   skills:
-    - rag/web-rag
-
+  - rag-web-rag
 files:
   skills/: skills/
 

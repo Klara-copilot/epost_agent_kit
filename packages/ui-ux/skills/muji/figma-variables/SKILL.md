@@ -14,8 +14,8 @@ Deep analysis of the Vien 2.0 Figma design system variables. Covers the 4-layer 
 
 | File | Coverage |
 |------|----------|
-| `variables-architecture.md` | Full architectural analysis: 5 external brand libraries, 4 layers, 42 collections, reference chain patterns |
-| `inconsistencies-improvements.md` | 8 inconsistencies, 6 structural complexities, 14 improvement recommendations |
+| `references/variables-architecture.md` | Full architectural analysis: 5 external brand libraries, 4 layers, 42 collections, reference chain patterns |
+| `references/inconsistencies-improvements.md` | 8 inconsistencies, 6 structural complexities, 14 improvement recommendations |
 | `figma-variables.json` | Raw 2.3 MB export of all Figma design variables (machine-readable) |
 
 ## Key Facts
