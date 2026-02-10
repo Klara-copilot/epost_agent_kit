@@ -9,8 +9,7 @@ dependencies:
 
 provides:
   skills:
-    - domain/b2b
-
+  - domain-b2b
 files:
   skills/: skills/
 

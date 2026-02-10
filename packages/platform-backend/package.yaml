@@ -11,8 +11,8 @@ provides:
   agents:
     - epost-backend-developer
   skills:
-    - backend/javaee
-    - backend/databases
+  - backend-javaee
+  - backend-databases
   commands:
     - backend/cook
     - backend/test

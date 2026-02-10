@@ -11,9 +11,9 @@ provides:
   agents:
     - epost-muji
   skills:
-    - muji/klara-theme
-    - muji/ios-theme
-    - muji/android-theme
+  - muji-klara-theme
+    - muji-ios-theme
+    - muji-android-theme
     - muji/figma-variables
     - web/klara-theme
     - web/figma-integration
