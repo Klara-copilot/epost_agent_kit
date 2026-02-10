@@ -22,7 +22,6 @@ import { fileExists, dirExists, safeCopyDir } from "../core/file-system.js";
 import {
   box,
   keyValue,
-  nextSteps,
   packageTable,
   indent,
   PackageManifestSummary,
@@ -149,7 +148,8 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
   const projectDir = resolve(process.cwd());
   const projectName = basename(projectDir);
 
-  // Step 1: Find packages directory
+  // ── Step 1/7: Find packages ──
+  logger.step(1, 7, "Locating packages");
   const packagesDir = await findKitPackagesDir();
   if (!packagesDir) {
     throw new Error(
@@ -158,17 +158,15 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
   }
   logger.debug(`Using packages from: ${packagesDir}`);
 
-  // Step 2: Find profiles
   const profilesPath = await findProfilesPath(projectDir);
   if (!profilesPath) {
     throw new Error("Cannot find profiles/profiles.yaml");
   }
 
-  // Step 3: Check for existing installation
   const metadata = await readMetadata(projectDir);
   const isUpdate = !!metadata && !opts.fresh;
 
-  // Step 4: Parse comma-separated options
+  // Parse comma-separated options
   const packagesList = opts.packages
     ?.split(",")
     .map((s) => s.trim())
@@ -182,11 +180,11 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
     .map((s) => s.trim())
     .filter(Boolean);
 
-  // Step 5: Resolve profile (auto-detect if not specified)
+  // ── Step 2/7: Detect profile ──
   let profileName = opts.profile;
 
   if (!profileName && !packagesList) {
-    logger.step(1, 7, "Detecting project type");
+    logger.step(2, 7, "Detecting project type");
     // Try auto-detect
     const profiles = await loadProfiles(profilesPath);
     const detected = await detectProjectProfile(projectDir, profiles);
@@ -218,8 +216,8 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
     }
   }
 
-  // Step 6: Resolve packages
-  logger.step(2, 7, "Resolving packages");
+  // ── Step 3/7: Resolve packages ──
+  logger.step(3, 7, "Resolving packages");
   const spinner = ora("Resolving packages...").start();
   const resolved = await resolvePackages({
     packagesDir,
@@ -233,7 +231,7 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
     `Resolved ${resolved.packages.length} packages: ${resolved.packages.join(", ")}`,
   );
 
-  // Step 7: Show recommendations
+  // Show recommendations
   if (resolved.recommended.length > 0 && !opts.yes) {
     logger.info(`\nRecommended packages: ${resolved.recommended.join(", ")}`);
     const addRecommended = await confirm({
@@ -255,8 +253,8 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
     }
   }
 
-  // Step 8: Show optional packages
-  logger.step(3, 7, "Selecting options");
+  // ── Step 4/7: Select options ──
+  logger.step(4, 7, "Selecting options");
   if (resolved.optional.length > 0 && !opts.yes) {
     const selectedOptional = await checkbox({
       message: "Select optional packages to include:",
@@ -279,7 +277,7 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
     }
   }
 
-  // Step 9: Select IDE target
+  // Select IDE target
   let target: "claude" | "cursor" | "github-copilot" =
     metadata?.target || "claude";
   if (!metadata && !opts.yes) {
@@ -303,7 +301,7 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
         : ".github";
   const installDir = join(projectDir, installDirName);
 
-  // Step 10: Load manifests for install
+  // Load manifests for install
   const manifests = await loadAllManifests(packagesDir);
 
   // Build summary for display
@@ -322,7 +320,7 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
     })
     .filter((s): s is PackageManifestSummary => s !== null);
 
-  // Step 11: Dry-run preview
+  // Dry-run preview
   if (opts.dryRun) {
     const summaryContent = [
       `Profile: ${profileName || "(explicit packages)"}`,
@@ -336,7 +334,7 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
     return;
   }
 
-  // Step 12: Confirm
+  // Confirm
   if (!opts.yes) {
     logger.info(
       `\nWill install ${resolved.packages.length} packages into ${installDirName}/`,
@@ -348,15 +346,15 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
     }
   }
 
-  // Step 13: Create backup if updating
+  // ── Step 5/7: Backup (if updating) ──
   if (isUpdate) {
-    logger.step(4, 7, "Creating backup");
+    logger.step(5, 7, "Creating backup");
     const backupSpinner = ora("Creating backup...").start();
     await createBackup(projectDir, "pre-update");
     backupSpinner.succeed("Backup created");
   }
 
-  // Step 14: Install packages
+  // ── Step 5/7: Install packages ──
   logger.step(5, 7, "Installing packages");
   const installSpinner = ora("Installing packages...").start();
   await mkdir(installDir, { recursive: true });
@@ -502,7 +500,7 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
     }
   }
 
-  // Step 15: Regenerate skill-index.json from installed skills
+  // ── Step 6/7: Generate configuration ──
   logger.step(6, 7, "Generating configuration");
   const skillIndexSpinner = ora("Generating skill index...").start();
   const skillsDir = join(installDir, "skills");
@@ -537,7 +535,7 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
     skillIndexSpinner.warn("No skills directory found");
   }
 
-  // Step 16: Merge settings
+  // Merge settings
   const settingsSpinner = ora("Merging settings...").start();
   const settingsOutput = join(installDir, "settings.json");
   const { sources: settingsSources } = await mergeAndWriteSettings(
@@ -548,7 +546,7 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
     `Settings merged from ${settingsSources.length} packages`,
   );
 
-  // Step 16: Generate CLAUDE.md
+  // Generate CLAUDE.md
   const claudeSpinner = ora("Generating CLAUDE.md...").start();
   const snippets = await collectSnippets(snippetPackages);
   const templatesDir = await findTemplatesDir(projectDir);
@@ -582,7 +580,7 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
   await generateClaudeMd(templatePath, claudeContext, snippets, claudeMdPath);
   claudeSpinner.succeed("CLAUDE.md generated");
 
-  // Step 17: Update metadata
+  // ── Step 7/7: Finalize ──
   logger.step(7, 7, "Finalizing");
   const metaSpinner = ora("Updating metadata...").start();
   const newMetadata = generateMetadata("0.1.0", target, "1.0.0", allFiles, {
@@ -592,7 +590,7 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
   await writeMetadata(projectDir, newMetadata);
   metaSpinner.succeed("Metadata updated");
 
-  // Step 18: Success summary
+  // Success summary
   console.log("\n");
   const summaryPairs: Array<[string, string]> = [];
   if (profileName) summaryPairs.push(["Profile", profileName]);
@@ -611,12 +609,10 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
   );
 
   console.log(
-    nextSteps([
-      { cmd: "/plan:fast <feature>", desc: "Plan a feature" },
-      { cmd: "/core:cook <task>", desc: "Build a feature" },
-      { cmd: "/core:review", desc: "Review changes" },
-      { cmd: "epost-kit doctor", desc: "Check health" },
-    ]),
+    box(
+      `Run ${pc.bold("claude")} to activate your AI assistant.\nType ${pc.bold("/")} to discover all available commands.`,
+      { title: "Ready" },
+    ),
   );
 }
 

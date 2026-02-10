@@ -33,44 +33,41 @@ export async function runUninstall(opts: UninstallOptions): Promise<void> {
 
   const projectDir = resolve(process.cwd());
 
-  // Step 1: Read metadata
+  // ── Step 1/4: Detect installation ──
+  logger.step(1, 4, "Detecting installation");
   const metadata = await readMetadata(projectDir);
   if (!metadata) {
     throw new Error('No epost-kit installation found (missing metadata)');
   }
 
   const targetLabel = metadata.target === "claude" ? "Claude Code" : metadata.target === "cursor" ? "Cursor" : "GitHub Copilot";
-  logger.info(`Found installation: ${pc.cyan("epost-kit")} (${targetLabel})`);
-  logger.info(`Installed version: ${pc.cyan(metadata.kitVersion)}`);
-  logger.info('');
+  logger.info(`  Found: ${pc.cyan("epost-kit")} (${targetLabel})`);
+  logger.info(`  Version: ${pc.cyan(metadata.kitVersion)}`);
 
-  // Step 2: Classify all tracked files
-  const spinner = ora('Analyzing files...').start();
+  // ── Step 2/4: Analyze files ──
+  logger.step(2, 4, "Analyzing files");
+  const spinner = ora('Classifying tracked files...').start();
   const plan = await createUninstallPlan(projectDir, metadata, opts);
   spinner.stop();
 
-  // Step 3: Show uninstall plan
-  logger.info(pc.bold('Uninstall Plan:'));
-  logger.info(`  Will remove:  ${pc.red(plan.toRemove.length.toString())} files (epost-owned)`);
+  logger.info(`  Will remove:   ${pc.red(plan.toRemove.length.toString())} files (epost-owned)`);
   logger.info(`  Will preserve: ${pc.yellow(plan.toPreserve.length.toString())} files (user-created)`);
   if (plan.modifiedFiles.length > 0) {
-    logger.info(`  Modified:     ${pc.yellow(plan.modifiedFiles.length.toString())} files (contains user changes)`);
+    logger.info(`  Modified:      ${pc.yellow(plan.modifiedFiles.length.toString())} files (contains user changes)`);
   }
-  logger.info('');
 
   // Show modified files warning
   if (plan.modifiedFiles.length > 0 && !opts.force) {
     logger.warn('Modified files will be preserved (use --force to remove):');
     for (const file of plan.modifiedFiles.slice(0, 5)) {
-      logger.info(`  ${pc.dim(file)}`);
+      logger.info(`    ${pc.dim(file)}`);
     }
     if (plan.modifiedFiles.length > 5) {
-      logger.info(`  ${pc.dim(`...and ${plan.modifiedFiles.length - 5} more`)}`);
+      logger.info(`    ${pc.dim(`...and ${plan.modifiedFiles.length - 5} more`)}`);
     }
-    logger.info('');
   }
 
-  // Step 4: Confirm unless --yes flag
+  // Confirm unless --yes flag
   if (!opts.yes) {
     const message = opts.force
       ? 'FORCE UNINSTALL: Remove all managed files including modified ones?'
@@ -87,34 +84,34 @@ export async function runUninstall(opts: UninstallOptions): Promise<void> {
     }
   }
 
-  // Step 5: Execute removal (skip if dry-run)
+  // ── Step 3/4: Remove files ──
+  logger.step(3, 4, "Removing files");
   let removed = 0;
   if (!opts.dryRun) {
     const removeSpinner = ora('Removing files...').start();
     removed = await executeUninstall(projectDir, plan);
-    removeSpinner.stop();
+    removeSpinner.succeed(`Removed ${removed} files`);
 
-    // Step 6: Clean up empty directories
+    // Clean up empty directories
     await cleanEmptyDirs(projectDir, metadata.target);
 
-    // Step 7: Remove metadata file last
+    // Remove metadata file last
     const metadataPath = join(projectDir, METADATA_FILE);
     if (await fileExists(metadataPath)) {
       await unlink(metadataPath);
     }
   } else {
-    logger.info('\nDry-run mode - no files removed');
+    logger.info('  Dry-run mode — no files removed');
+    logger.info(`  Would remove: ${pc.yellow(plan.toRemove.length.toString())} files`);
   }
 
-  // Step 8: Report results
+  // ── Step 4/4: Done ──
+  logger.step(4, 4, "Complete");
   if (!opts.dryRun) {
-    logger.success('Uninstall complete');
-    logger.info(`Removed: ${pc.green(removed.toString())} files`);
-  } else {
-    logger.info(`\nWould remove: ${pc.yellow(plan.toRemove.length.toString())} files`);
+    logger.success(`Removed: ${pc.green(removed.toString())} files`);
   }
   if (plan.toPreserve.length > 0) {
-    logger.info(`Preserved: ${pc.yellow(plan.toPreserve.length.toString())} user files`);
+    logger.info(`  Preserved: ${pc.yellow(plan.toPreserve.length.toString())} user files`);
   }
 }
 
