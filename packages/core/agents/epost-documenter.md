@@ -9,6 +9,7 @@ skills:
   - repomix
   - knowledge-base
   - knowledge-retrieval
+  - doc-coauthoring
 memory: project
 ---
 

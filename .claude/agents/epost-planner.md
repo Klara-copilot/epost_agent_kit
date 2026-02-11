@@ -6,6 +6,7 @@ model: opus
 skills:
   - core
   - planning
+  - doc-coauthoring
 memory: project
 permissionMode: plan
 ---
