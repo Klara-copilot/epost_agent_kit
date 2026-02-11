@@ -24,6 +24,7 @@ provides:
 files:
   agents/: agents/
   skills/: skills/
+  commands/: commands/
 
 settings_strategy: skip
 claude_snippet: CLAUDE.snippet.md
