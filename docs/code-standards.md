@@ -460,6 +460,14 @@ core/
 - **Error handling**: Graceful failures
 - **Documentation**: Complete examples
 
+### Command Development
+- **File format**: Markdown with optional YAML frontmatter
+- **Instruction-first**: Write commands as directives to Claude, not messages to users
+- **Organization**: Group related commands in subdirectories (e.g., `/generate-command:splash`)
+- **Patterns**: Use splash pattern for router + variants, simple pattern for standalone
+- **Dynamic features**: Support file references, bash execution, user questions
+- **Metadata**: Include name, description, argument-hint in frontmatter
+
 ## Quality Checklist
 
 Before committing:

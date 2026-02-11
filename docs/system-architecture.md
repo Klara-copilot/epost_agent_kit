@@ -393,6 +393,39 @@ description: Web platform specialist
 - **mobile-only**: Core + iOS + Android
 - **custom**: User-defined selection
 
+### 6. Kit Design Tools Module (meta-kit-design)
+
+**Purpose**: Tooling for creating and managing agents, skills, and commands
+
+**Key Files**:
+- `packages/meta-kit-design/skills/command-development/` - Command development skill
+- `.claude/commands/meta/generate-command.md` - Command generator router
+- `.claude/commands/generate-command/splash.md` - Splash pattern generator
+- `.claude/commands/generate-command/simple.md` - Simple command generator
+
+**Capabilities**:
+- **Agent Development**: Guidance on creating agents with proper structure
+- **Skill Development**: Patterns for frontmatter, organization, references
+- **Command Development**: Frameworks for both splash (router + variants) and simple patterns
+- **Codebase Exploration**: Multi-platform file discovery and analysis
+- **MCP Management**: Integration management for MCP servers
+
+**Agents Provided**:
+- `epost-scout` - Codebase exploration across platforms
+- `epost-mcp-manager` - MCP server lifecycle management
+
+**Commands Provided**:
+- `/meta:generate-command` - Interactive command generator router
+- `/generate-command:splash` - Creates splash pattern (router + variants)
+- `/generate-command:simple` - Creates standalone command
+- `/docs:component` - Documents klara-theme components from Figma
+
+**Skills Provided**:
+- `command-development` - Comprehensive command creation patterns (834 lines)
+- `agents/claude/agent-development` - Agent creation workflows
+- `agents/claude/skill-development` - Skill authoring conventions
+- `agents/mental-model` - Mental model development patterns
+
 ## Component Interactions
 
 ### CLI ↔ File System

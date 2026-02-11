@@ -11,10 +11,15 @@ provides:
   agents:
     - epost-scout
     - epost-mcp-manager
+  commands:
+    - meta/generate-command
+    - generate-command/splash
+    - generate-command/simple
   skills:
     - agents/claude/agent-development
     - agents/claude/skill-development
     - agents/mental-model
+    - command-development
 
 files:
   agents/: agents/
