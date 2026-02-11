@@ -1,5 +1,5 @@
 ---
-description: "Review all buttons in current file for WCAG 2.1 AA accessibility compliance"
+description: (ePost) "Review all buttons in current file for WCAG 2.1 AA accessibility compliance"
 agent: epost-a11y-specialist
 ---
 

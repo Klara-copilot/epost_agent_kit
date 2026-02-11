@@ -1,6 +1,6 @@
 ---
 title: Plan Two Approaches Command
-description: "⭑.ᐟ Research & create plan with 2 implementation approaches"
+description: (ePost) "⭑.ᐟ Research & create plan with 2 implementation approaches"
 agent: epost-architect
 argument-hint: [task]
 ---

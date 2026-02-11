@@ -1,6 +1,6 @@
 ---
 name: epost-orchestrator
-description: Top-level task router and project manager. Routes tasks to appropriate global agents, detects platform context, manages project structure, tracks progress across platforms, and coordinates implementation completion.
+description: (ePost) Top-level task router and project manager. Routes tasks to appropriate global agents, detects platform context, manages project structure, tracks progress across platforms, and coordinates implementation completion.
 tools: Read, Glob, Grep, Bash, Edit, Write
 model: haiku
 color: green

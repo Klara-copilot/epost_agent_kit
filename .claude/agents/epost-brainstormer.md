@@ -1,6 +1,6 @@
 ---
 name: epost-brainstormer
-description: Creative ideation and problem-solving for multi-platform epost
+description: (ePost) Creative ideation and problem-solving for multi-platform epost
 model: haiku
 color: purple
 memory: project

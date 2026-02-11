@@ -1,6 +1,6 @@
 ---
 name: epost-scout
-description: Multi-platform codebase exploration, pattern analysis, and file discovery for web, iOS, and Android projects
+description: (ePost) Multi-platform codebase exploration, pattern analysis, and file discovery for web, iOS, and Android projects
 model: haiku
 color: green
 ---

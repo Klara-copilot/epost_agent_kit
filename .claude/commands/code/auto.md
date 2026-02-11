@@ -1,6 +1,6 @@
 ---
 title: Code Auto Command
-description: ⭑.ᐟ Auto-execute plan with testing and review cycles
+description: (ePost) ⭑.ᐟ Auto-execute plan with testing and review cycles
 agent: epost-implementer
 argument-hint: [plan] [all-phases-yes-or-no]
 ---

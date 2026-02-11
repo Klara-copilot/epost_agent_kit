@@ -1,6 +1,6 @@
 ---
 title: Fix UI
-description: ⭑.ᐟ Fix UI bugs and visual issues
+description: (ePost) ⭑.ᐟ Fix UI bugs and visual issues
 agent: epost-debugger
 argument-hint: "[description]"
 ---

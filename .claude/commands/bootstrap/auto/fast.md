@@ -1,6 +1,6 @@
 ---
 title: Bootstrap Auto Fast Command
-description: ⭑.ᐟ Quickly bootstrap a new project automatically
+description: (ePost) ⭑.ᐟ Quickly bootstrap a new project automatically
 agent: epost-implementer
 argument-hint: [user-requirements]
 ---

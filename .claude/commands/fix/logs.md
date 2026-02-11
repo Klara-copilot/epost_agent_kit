@@ -1,6 +1,6 @@
 ---
 title: Fix Logs Command
-description: ⭑.ᐟ Analyze logs and fix issues
+description: (ePost) ⭑.ᐟ Analyze logs and fix issues
 agent: epost-debugger
 argument-hint: [issue]
 ---

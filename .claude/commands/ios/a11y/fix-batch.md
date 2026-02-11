@@ -1,5 +1,5 @@
 ---
-description: "Fix the top N priority accessibility findings in batch"
+description: (ePost) "Fix the top N priority accessibility findings in batch"
 agent: epost-a11y-specialist
 ---
 

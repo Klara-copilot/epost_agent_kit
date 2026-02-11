@@ -1,6 +1,6 @@
 ---
 name: epost-debugger
-description: Debugging agent that finds root causes and explains issues clearly. Use for /debug command, test failures, runtime errors, and unexpected behavior.
+description: (ePost) Debugging agent that finds root causes and explains issues clearly. Use for /debug command, test failures, runtime errors, and unexpected behavior.
 model: sonnet
 color: red
 skills:

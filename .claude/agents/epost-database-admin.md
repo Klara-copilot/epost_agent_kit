@@ -1,6 +1,6 @@
 ---
 name: epost-database-admin
-description: Database specialist for queries, performance optimization, schema design, indexing, and backup strategies. Use for DB performance issues, migrations, or schema optimization.
+description: (ePost) Database specialist for queries, performance optimization, schema design, indexing, and backup strategies. Use for DB performance issues, migrations, or schema optimization.
 model: sonnet
 color: red
 skills: [core, backend-databases]

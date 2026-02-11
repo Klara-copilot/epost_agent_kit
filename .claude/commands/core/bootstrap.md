@@ -1,6 +1,6 @@
 ---
 title: Bootstrap Command
-description: ⭑.ᐟ Initialize a new project from scratch
+description: (ePost) ⭑.ᐟ Initialize a new project from scratch
 agent: epost-implementer
 argument-hint: [project description]
 ---

@@ -1,6 +1,6 @@
 ---
 title: Content CRO Command
-description: "⭑.ᐟ Analyze content and optimize for conversion"
+description: (ePost) "⭑.ᐟ Analyze content and optimize for conversion"
 agent: epost-copywriter
 argument-hint: [issues]
 ---

@@ -1,5 +1,5 @@
 ---
-description: ⚡ No research. Scout, plan fast & implement
+description: (ePost) No research. Scout, plan fast & implement
 argument-hint: [tasks-or-prompt]
 ---
 

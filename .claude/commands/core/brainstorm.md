@@ -1,6 +1,6 @@
 ---
 title: Brainstorm Command
-description: ⭑.ᐟ Evaluate technical approaches before implementation
+description: (ePost) ⭑.ᐟ Evaluate technical approaches before implementation
 agent: epost-brainstormer
 argument-hint: 💡 [topic or technical decision]
 ---

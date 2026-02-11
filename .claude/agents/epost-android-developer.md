@@ -1,6 +1,6 @@
 ---
 name: epost-android-developer
-description: Android platform specialist combining implementation and testing. Executes Kotlin, Jetpack Compose development with JUnit and instrumentation testing.
+description: (ePost) Android platform specialist combining implementation and testing. Executes Kotlin, Jetpack Compose development with JUnit and instrumentation testing.
 tools: Read, Write, Edit, Bash, Grep, Glob
 model: sonnet
 color: green

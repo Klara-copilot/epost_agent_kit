@@ -1,6 +1,6 @@
 ---
 name: epost-journal-writer
-description: Brutally honest technical journal writer documenting development challenges, failures, and setbacks with emotional authenticity. Use when tests fail repeatedly, critical bugs emerge, implementations fail, or significant technical difficulties occur.
+description: (ePost) Brutally honest technical journal writer documenting development challenges, failures, and setbacks with emotional authenticity. Use when tests fail repeatedly, critical bugs emerge, implementations fail, or significant technical difficulties occur.
 color: cyan
 model: haiku
 ---

@@ -2,7 +2,7 @@
 name: epost-a11y-specialist
 model: sonnet
 color: "#E63946"
-description: Unified iOS accessibility agent. Provides real-time WCAG 2.1 AA guidance, batch auditing with structured JSON reports, and surgical fixes from known-findings database.
+description: (ePost) Unified iOS accessibility agent. Provides real-time WCAG 2.1 AA guidance, batch auditing with structured JSON reports, and surgical fixes from known-findings database.
 skills: [core, ios/ios-accessibility]
 permissionMode: default
 ---

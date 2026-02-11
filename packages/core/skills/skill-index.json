@@ -1,7 +1,7 @@
 {
-  "generated": "2026-02-10T05:29:42.726Z",
+  "generated": "2026-02-11T02:28:00.000Z",
   "version": "1.0.0",
-  "count": 13,
+  "count": 14,
   "skills": [
     {
       "name": "code-review",
@@ -66,6 +66,34 @@
         "epost-implementer"
       ],
       "path": "debugging/SKILL.md"
+    },
+    {
+      "name": "doc-coauthoring",
+      "description": "Guide users through a structured workflow for co-authoring documentation. Use when user wants to write documentation, proposals, technical specs, decision docs, or similar structured content.",
+      "keywords": [
+        "documentation",
+        "writing",
+        "proposal",
+        "spec",
+        "technical-writing",
+        "collaboration",
+        "prd",
+        "rfc"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "write doc",
+        "create proposal",
+        "draft spec",
+        "write documentation"
+      ],
+      "agent-affinity": [
+        "epost-documenter",
+        "epost-planner"
+      ],
+      "path": "doc-coauthoring/SKILL.md"
     },
     {
       "name": "docs-seeker",

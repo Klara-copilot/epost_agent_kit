@@ -1,6 +1,6 @@
 ---
 name: epost-documenter
-description: Senior technical documentation specialist managing developer documentation for complex epost projects across web, iOS, and Android platforms. Establishes standards, maintains synchronization with codebase changes, creates PDRs, and optimizes documentation for developer productivity.
+description: (ePost) Senior technical documentation specialist managing developer documentation for complex epost projects across web, iOS, and Android platforms. Establishes standards, maintains synchronization with codebase changes, creates PDRs, and optimizes documentation for developer productivity.
 model: haiku
 color: blue
 skills:
@@ -9,6 +9,7 @@ skills:
   - repomix
   - knowledge-base
   - knowledge-retrieval
+  - doc-coauthoring
 memory: project
 ---
 

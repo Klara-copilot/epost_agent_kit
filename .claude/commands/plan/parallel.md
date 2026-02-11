@@ -1,6 +1,6 @@
 ---
 title: "Plan: Parallel"
-description: "Dependency-aware plan with file ownership matrix for parallel execution"
+description: (ePost) "Dependency-aware plan with file ownership matrix for parallel execution"
 agent: epost-architect
 argument-hint: [enhanced planning prompt from router]
 ---

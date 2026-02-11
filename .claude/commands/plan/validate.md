@@ -1,6 +1,6 @@
 ---
 title: Plan Validate Command
-description: "⭑.ᐟ Validate plan with critical questions interview"
+description: (ePost) "⭑.ᐟ Validate plan with critical questions interview"
 agent: epost-architect
 argument-hint: [plan-path]
 ---

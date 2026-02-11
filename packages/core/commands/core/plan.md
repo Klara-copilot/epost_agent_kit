@@ -1,6 +1,6 @@
 ---
 title: Plan Command
-description: ⚡⚡⚡ Intelligent plan creation with prompt enhancement
+description: (ePost) Intelligent plan creation with prompt enhancement
 argument-hint: [feature description]
 ---
 

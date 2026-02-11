@@ -1,6 +1,6 @@
 ---
 name: epost-cli-developer
-description: CLI platform specialist combining implementation and testing for the epost-kit CLI tool. Executes TypeScript, Commander, @inquirer/prompts development with vitest testing. Use when working on epost-agent-cli code, CLI commands, terminal UI, kit onboarding, or CLI branding.
+description: (ePost) CLI platform specialist combining implementation and testing for the epost-kit CLI tool. Executes TypeScript, Commander, @inquirer/prompts development with vitest testing. Use when working on epost-agent-cli code, CLI commands, terminal UI, kit onboarding, or CLI branding.
 model: sonnet
 color: green
 skills:

@@ -1,6 +1,6 @@
 ---
 title: Cook Command
-description: ⭑.ᐟ Implement features from plans or descriptions
+description: (ePost) ⭑.ᐟ Implement features from plans or descriptions
 agent: epost-implementer
 argument-hint: ✨ [feature description or path/to/plan.md]
 ---

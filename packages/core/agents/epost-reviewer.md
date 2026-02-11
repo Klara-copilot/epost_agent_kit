@@ -1,6 +1,6 @@
 ---
 name: epost-reviewer
-description: Comprehensive code review agent for security, quality, and performance analysis. Reviews code changes, validates best practices, verifies task completion, and ensures builds succeed.
+description: (ePost) Comprehensive code review agent for security, quality, and performance analysis. Reviews code changes, validates best practices, verifies task completion, and ensures builds succeed.
 color: yellow
 model: sonnet
 skills:

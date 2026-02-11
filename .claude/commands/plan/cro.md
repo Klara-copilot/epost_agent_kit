@@ -1,6 +1,6 @@
 ---
 title: Plan CRO Command
-description: "⭑.ᐟ Create a CRO plan for given content"
+description: (ePost) "⭑.ᐟ Create a CRO plan for given content"
 agent: epost-architect
 argument-hint: [issues]
 ---
