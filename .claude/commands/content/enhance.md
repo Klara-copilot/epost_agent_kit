@@ -1,6 +1,6 @@
 ---
 title: Content Enhance Command
-description: "⭑.ᐟ Analyze current copy and enhance it"
+description: (ePost) "⭑.ᐟ Analyze current copy and enhance it"
 agent: epost-copywriter
 argument-hint: [issues]
 ---

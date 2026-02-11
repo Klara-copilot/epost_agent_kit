@@ -1,6 +1,6 @@
 ---
 title: "Plan: Hard"
-description: "Deep plan with sequential research and comprehensive analysis"
+description: (ePost) "Deep plan with sequential research and comprehensive analysis"
 agent: epost-planner
 argument-hint: [enhanced planning prompt from router]
 ---

@@ -1,5 +1,6 @@
 ---
 title: CLI Doctor
+description: (ePost) ⭑.ᐟ Debug issues in the epost-kit CLI tool
 agent: epost-cli-developer
 argument-hint: 🔍 [symptom or error]
 ---

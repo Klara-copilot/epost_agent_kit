@@ -1,5 +1,6 @@
 ---
 title: CLI Cook
+description: (ePost) ⭑.ᐟ Implement CLI features in the epost-agent-cli project
 agent: epost-cli-developer
 argument-hint: ✨ [CLI feature description]
 ---

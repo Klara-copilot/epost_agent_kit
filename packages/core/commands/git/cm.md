@@ -1,6 +1,6 @@
 ---
 title: Git Commit (alias)
-description: ⭑.ᐟ Alias for /git:commit
+description: (ePost) ⭑.ᐟ Alias for /git:commit
 agent: epost-git-manager
 ---
 

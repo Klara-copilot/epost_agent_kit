@@ -1,6 +1,6 @@
 ---
 title: Bootstrap Auto Parallel Command
-description: ⭑.ᐟ Bootstrap project with parallel execution
+description: (ePost) ⭑.ᐟ Bootstrap project with parallel execution
 agent: epost-implementer
 argument-hint: [user-requirements]
 ---

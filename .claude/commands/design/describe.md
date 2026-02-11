@@ -1,6 +1,6 @@
 ---
 title: Design Describe Command
-description: ⭑.ᐟ Describe a design from screenshot or video
+description: (ePost) ⭑.ᐟ Describe a design from screenshot or video
 agent: epost-ui-ux-designer
 argument-hint: [screenshot]
 ---

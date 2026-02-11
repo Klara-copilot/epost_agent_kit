@@ -1,6 +1,6 @@
 ---
 name: epost-web-developer
-description: Web platform specialist combining implementation, testing, and design. Executes Next.js, React, TypeScript development with comprehensive testing and UI/UX implementation.
+description: (ePost) Web platform specialist combining implementation, testing, and design. Executes Next.js, React, TypeScript development with comprehensive testing and UI/UX implementation.
 tools: Read, Write, Edit, Bash, Grep, Glob
 model: sonnet
 color: green

@@ -1,6 +1,6 @@
 ---
 title: Skill Optimize Auto Command
-description: ⭑.ᐟ Optimize an existing agent skill automatically
+description: (ePost) ⭑.ᐟ Optimize an existing agent skill automatically
 agent: epost-implementer
 argument-hint: [skill-name] [prompt]
 ---

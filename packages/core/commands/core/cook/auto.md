@@ -1,5 +1,5 @@
 ---
-description: ⚡⚡ Trust-based fast track implementation
+description: (ePost) Trust-based fast track implementation
 argument-hint: [tasks]
 ---
 

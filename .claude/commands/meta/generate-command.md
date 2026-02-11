@@ -1,5 +1,5 @@
 ---
-description: ⚙️ Generate new slash or simple commands interactively
+description: (ePost) ⚙️ Generate new slash or simple commands interactively
 argument-hint: [splash|simple]
 ---
 

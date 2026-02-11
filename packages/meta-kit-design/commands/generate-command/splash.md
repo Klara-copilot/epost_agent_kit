@@ -1,5 +1,5 @@
 ---
-description: Generate splash command with router and variants
+description: (ePost) Generate splash command with router and variants
 ---
 
 ## Your Mission

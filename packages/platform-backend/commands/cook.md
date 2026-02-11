@@ -1,5 +1,5 @@
 ---
-description: "Implement backend features with Jakarta EE patterns"
+description: (ePost) "Implement backend features with Jakarta EE patterns"
 agent: epost-backend-developer
 ---
 

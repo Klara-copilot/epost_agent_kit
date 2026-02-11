@@ -1,6 +1,6 @@
 ---
 title: iOS Cook
-description: ⭑.ᐟ Implement iOS features from plans or descriptions with Swift 6, iOS 18+, SwiftUI support
+description: (ePost) ⭑.ᐟ Implement iOS features from plans or descriptions with Swift 6, iOS 18+, SwiftUI support
 agent: epost-ios-developer
 argument-hint: 👉👉👉 [plan file or feature description]
 allowed-tools:

@@ -1,5 +1,5 @@
 ---
-description: "Audit staged Swift changes for WCAG 2.1 AA accessibility violations"
+description: (ePost) "Audit staged Swift changes for WCAG 2.1 AA accessibility violations"
 agent: epost-a11y-specialist
 ---
 

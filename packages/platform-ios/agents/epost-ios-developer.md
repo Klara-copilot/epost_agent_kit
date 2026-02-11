@@ -1,6 +1,6 @@
 ---
 name: epost-ios-developer
-description: iOS platform specialist combining implementation, testing, and simulator management. Executes Swift 6, SwiftUI, UIKit development with XCTest and simulator operations.
+description: (ePost) iOS platform specialist combining implementation, testing, and simulator management. Executes Swift 6, SwiftUI, UIKit development with XCTest and simulator operations.
 tools: Read, Write, Edit, Bash, Grep, Glob, mcp__xcodebuildmcp__discover_projs, mcp__xcodebuildmcp__list_schemes, mcp__xcodebuildmcp__build_sim, mcp__xcodebuildmcp__test_sim, mcp__xcodebuildmcp__doctor
 model: sonnet
 color: blue

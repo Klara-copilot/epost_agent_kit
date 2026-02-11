@@ -1,5 +1,5 @@
 ---
-description: "Fix a specific accessibility finding by ID from known-findings database"
+description: (ePost) "Fix a specific accessibility finding by ID from known-findings database"
 agent: epost-a11y-specialist
 ---
 

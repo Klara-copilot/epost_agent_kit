@@ -1,6 +1,6 @@
 ---
 title: Content Good Command
-description: "⭑.ᐟ Write good creative & smart copy"
+description: (ePost) "⭑.ᐟ Write good creative & smart copy"
 agent: epost-copywriter
 argument-hint: [user-request]
 ---

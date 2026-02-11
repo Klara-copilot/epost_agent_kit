@@ -1,6 +1,6 @@
 ---
 title: Review Codebase Parallel Command
-description: ⭑.ᐟ Ultrathink edge cases, then parallel verify with reviewers
+description: (ePost) ⭑.ᐟ Ultrathink edge cases, then parallel verify with reviewers
 agent: epost-reviewer
 argument-hint: [scope-or-prompt]
 ---

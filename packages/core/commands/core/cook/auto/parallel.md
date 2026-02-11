@@ -1,5 +1,5 @@
 ---
-description: ⚡⚡⚡ Plan parallel phases & execute with epost-implementer agents
+description: (ePost) Plan parallel phases & execute with epost-implementer agents
 argument-hint: [tasks]
 ---
 

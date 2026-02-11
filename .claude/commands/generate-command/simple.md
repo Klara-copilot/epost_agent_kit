@@ -1,5 +1,5 @@
 ---
-description: Generate simple standalone command
+description: (ePost) Generate simple standalone command
 ---
 
 ## Your Mission

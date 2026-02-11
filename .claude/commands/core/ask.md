@@ -1,6 +1,6 @@
 ---
 title: Ask Command
-description: ⭑.ᐟ Ask questions about the codebase
+description: (ePost) ⭑.ᐟ Ask questions about the codebase
 agent: epost-researcher
 argument-hint: [question about codebase]
 ---

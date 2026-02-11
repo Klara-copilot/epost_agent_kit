@@ -1,6 +1,6 @@
 ---
 title: Android Cook
-description: ⭑.ᐟ Implement Android features with Kotlin and Jetpack Compose
+description: (ePost) ⭑.ᐟ Implement Android features with Kotlin and Jetpack Compose
 agent: epost-android-developer
 argument-hint: [plan file or feature description]
 allowed-tools:

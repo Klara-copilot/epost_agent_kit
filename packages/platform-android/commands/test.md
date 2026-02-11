@@ -1,6 +1,6 @@
 ---
 title: Android Test
-description: ⭑.ᐟ Run Android unit tests and instrumented tests using Gradle
+description: (ePost) ⭑.ᐟ Run Android unit tests and instrumented tests using Gradle
 agent: epost-android-developer
 argument-hint: [--unit | --instrumented | --coverage]
 allowed-tools:

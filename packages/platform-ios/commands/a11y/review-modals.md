@@ -1,5 +1,5 @@
 ---
-description: "Review modal dialog focus management for VoiceOver accessibility"
+description: (ePost) "Review modal dialog focus management for VoiceOver accessibility"
 agent: epost-a11y-specialist
 ---
 

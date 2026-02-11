@@ -1,6 +1,6 @@
 ---
 title: Fix Types Command
-description: ⭑.ᐟ Fix TypeScript type errors
+description: (ePost) ⭑.ᐟ Fix TypeScript type errors
 agent: epost-debugger
 ---
 

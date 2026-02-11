@@ -1,6 +1,6 @@
 ---
 title: Review Command
-description: ⭑.ᐟ Review code changes for quality, security, and performance
+description: (ePost) ⭑.ᐟ Review code changes for quality, security, and performance
 agent: epost-reviewer
 argument-hint: ✨ [optional path/to/plan.md]
 ---

@@ -1,6 +1,6 @@
 ---
 title: Cook Auto Fast Command
-description: ⭑.ᐟ Scout, plan & implement without research
+description: (ePost) ⭑.ᐟ Scout, plan & implement without research
 agent: epost-implementer
 argument-hint: [tasks-or-prompt]
 ---

@@ -1,6 +1,6 @@
 ---
 title: Scout Command
-description: ⭑.ᐟ Search codebase for files related to a topic
+description: (ePost) ⭑.ᐟ Search codebase for files related to a topic
 agent: epost-scout
 argument-hint: 🔍 [search query or keywords]
 ---

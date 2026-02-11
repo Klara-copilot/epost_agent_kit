@@ -1,5 +1,6 @@
 ---
 title: CLI Test
+description: (ePost) ⭑.ᐟ Run and manage tests for the epost-kit CLI project
 agent: epost-cli-developer
 argument-hint: 🧪 [test scope or file]
 ---

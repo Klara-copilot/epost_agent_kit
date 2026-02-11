@@ -1,6 +1,6 @@
 ---
 title: Design Fast
-description: ⭑.ᐟ Quick UI design implementation
+description: (ePost) ⭑.ᐟ Quick UI design implementation
 agent: epost-implementer
 argument-hint: "[description]"
 ---

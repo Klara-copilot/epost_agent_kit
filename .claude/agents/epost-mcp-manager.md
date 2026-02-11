@@ -1,6 +1,6 @@
 ---
 name: epost-mcp-manager
-description: MCP (Model Context Protocol) integration specialist managing server integrations, tool discovery, and MCP capabilities. Use when working with MCP servers, discovering tools, filtering capabilities, or executing MCP tools programmatically.
+description: (ePost) MCP (Model Context Protocol) integration specialist managing server integrations, tool discovery, and MCP capabilities. Use when working with MCP servers, discovering tools, filtering capabilities, or executing MCP tools programmatically.
 color: orange
 model: haiku
 ---

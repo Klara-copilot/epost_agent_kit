@@ -1,5 +1,5 @@
 ---
-description: "Review heading structure for VoiceOver navigation compliance"
+description: (ePost) "Review heading structure for VoiceOver navigation compliance"
 agent: epost-a11y-specialist
 ---
 

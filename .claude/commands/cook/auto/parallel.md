@@ -1,6 +1,6 @@
 ---
 title: Cook Auto Parallel Command
-description: ⭑.ᐟ Plan parallel phases & execute with implementation agents
+description: (ePost) ⭑.ᐟ Plan parallel phases & execute with implementation agents
 agent: epost-implementer
 argument-hint: [tasks]
 ---

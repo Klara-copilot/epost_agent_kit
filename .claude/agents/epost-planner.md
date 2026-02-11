@@ -1,6 +1,6 @@
 ---
 name: epost-planner
-description: Plan creation specialist that analyzes requirements and creates detailed implementation plans with YAML frontmatter, phases, and task breakdown. Delegated to by epost-architect.
+description: (ePost) Plan creation specialist that analyzes requirements and creates detailed implementation plans with YAML frontmatter, phases, and task breakdown. Delegated to by epost-architect.
 color: blue
 model: opus
 skills:

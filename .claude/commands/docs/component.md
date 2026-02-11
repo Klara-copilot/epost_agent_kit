@@ -1,6 +1,6 @@
 ---
 title: Document Component
-description: ⭑.ᐟ Document a klara-theme component (Figma data + prop mapping)
+description: (ePost) ⭑.ᐟ Document a klara-theme component (Figma data + prop mapping)
 agent: epost-documenter
 argument-hint: "<componentKey> [nodeId]"
 ---

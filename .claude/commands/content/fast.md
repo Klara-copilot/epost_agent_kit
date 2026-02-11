@@ -1,6 +1,6 @@
 ---
 title: Content Fast Command
-description: "⭑.ᐟ Write creative & smart copy quickly"
+description: (ePost) "⭑.ᐟ Write creative & smart copy quickly"
 agent: epost-copywriter
 argument-hint: [user-request]
 ---
