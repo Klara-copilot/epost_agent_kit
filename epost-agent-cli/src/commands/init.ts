@@ -354,6 +354,17 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
     backupSpinner.succeed("Backup created");
   }
 
+  // On fresh install, remove stale generated directories to prevent accumulation
+  if (!isUpdate) {
+    for (const dir of ["agents", "skills", "commands"]) {
+      const dirPath = join(installDir, dir);
+      if (await dirExists(dirPath)) {
+        await rm(dirPath, { recursive: true });
+        logger.debug(`Cleaned stale directory: ${dir}`);
+      }
+    }
+  }
+
   // ── Step 5/7: Install packages ──
   logger.step(5, 7, "Installing packages");
   const installSpinner = ora("Installing packages...").start();
@@ -461,6 +472,48 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
     totalAgents += manifest.provides.agents.length;
     totalSkills += manifest.provides.skills.length;
     totalCommands += manifest.provides.commands.length;
+  }
+
+  // ── Filter advanced commands if user opted out ──
+  if (opts.advancedCommands === false) {
+    const commandsInstallDir = join(installDir, "commands");
+    if (await dirExists(commandsInstallDir)) {
+      // Advanced = variant/shortcut prefixes (every one has an /epost:* equivalent)
+      const advancedPrefixes = [
+        "fix",
+        "cook",
+        "bootstrap",
+        "plan",
+        "review",
+        "skill",
+        "meta",
+        "generate-command",
+      ];
+      const allCmdFiles = await scanDirFiles(commandsInstallDir);
+      let removedCount = 0;
+      for (const file of allCmdFiles) {
+        const prefix = file.split("/")[0];
+        if (advancedPrefixes.includes(prefix)) {
+          await rm(join(commandsInstallDir, file));
+          removedCount++;
+        }
+      }
+      // Clean empty directories
+      for (const prefix of advancedPrefixes) {
+        const dir = join(commandsInstallDir, prefix);
+        if (await dirExists(dir)) {
+          const remaining = await scanDirFiles(dir);
+          if (remaining.length === 0) {
+            await rm(dir, { recursive: true });
+          }
+        }
+      }
+      if (removedCount > 0) {
+        logger.debug(
+          `Removed ${removedCount} advanced command files (opt-out)`,
+        );
+      }
+    }
   }
 
   // Recount from actual installed files for accuracy

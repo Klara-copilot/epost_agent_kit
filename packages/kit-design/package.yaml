@@ -1,0 +1,37 @@
+name: kit-design
+version: "2.0.0"
+description: "Kit designer tools: agent/skill/command development, CLI"
+layer: 2
+platforms: [all]
+
+dependencies:
+  - core
+
+provides:
+  agents:
+    - epost-scout
+    - epost-cli-developer
+  skills:
+    - kit/agents
+    - kit/agents/agent-development
+    - kit/agents/skill-development
+    - kit/commands
+    - kit/cli
+  commands:
+    - meta/add-agent
+    - meta/add-skill
+    - meta/generate-command
+    - generate-command/simple
+    - generate-command/splash
+    - cli/cook
+    - cli/doctor
+    - cli/test
+    - skill/optimize
+
+files:
+  agents/: agents/
+  skills/: skills/
+  commands/: commands/
+
+settings_strategy: skip
+claude_snippet: CLAUDE.snippet.md

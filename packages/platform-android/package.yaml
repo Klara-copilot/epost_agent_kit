@@ -1,23 +1,22 @@
 name: platform-android
-version: "1.0.0"
-description: "Android platform: Kotlin, Jetpack Compose, Room, Hilt"
+version: "2.0.0"
+description: "Android: Kotlin, Jetpack Compose, Room, Hilt"
 layer: 1
 platforms: [android]
 
 dependencies:
   - core
 
-recommends:
-  - ui-ux
-
 provides:
   agents:
     - epost-android-developer
   skills:
-    - android/android-development
+    - android/development
+    - android/ui-lib
   commands:
     - android/cook
     - android/test
+    - android/debug
 
 files:
   agents/: agents/

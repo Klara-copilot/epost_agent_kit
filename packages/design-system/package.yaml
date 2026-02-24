@@ -1,0 +1,25 @@
+name: design-system
+version: "1.0.0"
+description: "Cross-platform design system agent, Figma integration, and UI library skills"
+layer: 2
+platforms: [all]
+
+dependencies:
+  - core
+
+provides:
+  agents:
+    - epost-muji
+  skills:
+    - web/figma
+    - web/figma-variables
+    - web/ui-lib
+    - web/ui-lib-dev
+  commands: []
+
+files:
+  agents/: agents/
+  skills/: skills/
+
+settings_strategy: skip
+claude_snippet: CLAUDE.snippet.md

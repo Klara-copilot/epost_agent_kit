@@ -106,6 +106,18 @@ export interface Profile {
 }
 
 /**
+ * A parse error or validation warning encountered while loading entities
+ */
+export interface ParseError {
+  filePath: string;
+  entityType: 'agent' | 'skill' | 'command' | 'package' | 'profile';
+  level: 'error' | 'warning';
+  message: string;
+  field?: string;
+  value?: unknown;
+}
+
+/**
  * Loaded data structure containing all entities
  */
 export interface LoadedData {
@@ -114,6 +126,7 @@ export interface LoadedData {
   commands: Command[];
   packages: Package[];
   profiles: Profile[];
+  parseErrors: ParseError[];
 }
 
 /**

@@ -1,6 +1,6 @@
 ---
 title: iOS Cook
-description: (ePost) ⭑.ᐟ Implement iOS features from plans or descriptions with Swift 6, iOS 18+, SwiftUI support
+description: (ePost) Implement iOS features from plans or descriptions with Swift 6, iOS 18+, SwiftUI support
 agent: epost-ios-developer
 argument-hint: 👉👉👉 [plan file or feature description]
 allowed-tools:
@@ -37,7 +37,7 @@ Implement iOS features from plans or descriptions. Supports Swift 6, iOS 18+, Sw
    - Identify UI framework (SwiftUI default, UIKit when needed)
 
 2. **Reference Development Skill**
-   - Use `skills/ios-development/development.md` for patterns
+   - Use `ios/development/references/development.md` for patterns
    - Determine architecture (MVVM vs TCA based on complexity)
 
 3. **Discover Project (MCP preferred)**

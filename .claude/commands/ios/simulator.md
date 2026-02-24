@@ -1,6 +1,6 @@
 ---
 title: iOS Simulator
-description: (ePost) ⭑.ᐟ List, boot, shutdown, and manage iOS simulators using XcodeBuildMCP or xcrun simctl
+description: (ePost) List, boot, shutdown, and manage iOS simulators using XcodeBuildMCP or xcrun simctl
 agent: epost-ios-developer
 argument-hint: 👉👉👉 [--list | --boot | --shutdown | --install | --launch | --screenshot]
 allowed-tools:
@@ -36,7 +36,7 @@ List, boot, shutdown, and manage iOS simulators using XcodeBuildMCP or xcrun sim
 ## Your Process
 
 1. **Reference Build Skill**
-   - Use `skills/ios-development/build.md` for simulator patterns
+   - Use `ios/development/references/build.md` for simulator patterns
 
 2. **Parse Action**
    - `--list`: List available simulators

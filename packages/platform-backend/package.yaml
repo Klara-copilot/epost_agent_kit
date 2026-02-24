@@ -1,6 +1,6 @@
 name: platform-backend
-version: "1.0.0"
-description: "Backend platform: Java 8, Jakarta EE 8, WildFly 26, Hibernate, Maven"
+version: "2.0.0"
+description: "Backend: Java 8, Jakarta EE 8, WildFly 26.1, Hibernate"
 layer: 1
 platforms: [backend]
 
@@ -11,11 +11,12 @@ provides:
   agents:
     - epost-backend-developer
   skills:
-  - backend-javaee
-  - backend-databases
+    - backend/javaee
+    - backend/databases
   commands:
     - backend/cook
     - backend/test
+    - backend/debug
 
 files:
   agents/: agents/

@@ -3,12 +3,7 @@ name: epost-implementer
 description: (ePost) Implementation agent executing plans accurately and completely from parallel phases. Handles backend (Node.js, APIs, databases), frontend (React, TypeScript), and infrastructure tasks. Use for /code with plan file, /cook command, or building features from specifications.
 model: sonnet
 color: green
-skills:
-  - core
-  - code-review
-  - debugging
-  - error-recovery
-  - knowledge-retrieval
+skills: [core, code-review, debugging, error-recovery, knowledge/retrieval]
 memory: project
 permissionMode: acceptEdits
 ---

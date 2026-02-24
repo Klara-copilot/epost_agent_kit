@@ -1,5 +1,5 @@
 ---
-name: nextjs
+name: web/nextjs
 description: Next.js 14 App Router with Server Components, Server Actions, and routing patterns
 keywords: [nextjs, next, app-router, server-components, server-actions, routing]
 platforms: [web]

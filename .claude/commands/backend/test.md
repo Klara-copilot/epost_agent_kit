@@ -1,5 +1,5 @@
 ---
-description: (ePost) "Run backend tests with Maven"
+description: (ePost) Run backend tests with Maven
 agent: epost-backend-developer
 ---
 

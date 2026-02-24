@@ -1,40 +1,21 @@
 {
-  "generated": "2026-02-11T02:28:00.000Z",
-  "version": "1.0.0",
-  "count": 14,
+  "generated": "2026-02-21T00:00:00.000Z",
+  "version": "2.0.0",
   "skills": [
     {
       "name": "code-review",
       "description": "Comprehensive code quality assessment and verification with systematic review process",
-      "keywords": [
-        "review",
-        "code-quality",
-        "security",
-        "performance",
-        "testing",
-        "verification"
-      ],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [
-        "/review",
-        "code review",
-        "review code"
-      ],
-      "agent-affinity": [
-        "epost-reviewer",
-        "epost-implementer"
-      ],
+      "keywords": ["review", "code-quality", "security", "performance", "testing", "verification"],
+      "platforms": ["all"],
+      "triggers": ["/review", "code review", "review code"],
+      "agent-affinity": ["epost-reviewer", "epost-implementer"],
       "path": "code-review/SKILL.md"
     },
     {
       "name": "core",
       "description": "Operational boundaries, safety rules, and documentation standards. Active for all agent operations, file modifications, and architectural decisions.",
       "keywords": [],
-      "platforms": [
-        "all"
-      ],
+      "platforms": ["all"],
       "triggers": [],
       "agent-affinity": [],
       "path": "core/SKILL.md"
@@ -42,333 +23,128 @@
     {
       "name": "debugging",
       "description": "Systematic debugging methodology with root cause analysis and fix validation",
-      "keywords": [
-        "debug",
-        "error",
-        "bug",
-        "troubleshoot",
-        "root-cause",
-        "stack-trace",
-        "logging"
-      ],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [
-        "/debug",
-        "error",
-        "bug",
-        "crash",
-        "exception"
-      ],
-      "agent-affinity": [
-        "epost-debugger",
-        "epost-implementer"
-      ],
+      "keywords": ["debug", "error", "bug", "troubleshoot", "root-cause", "stack-trace", "logging"],
+      "platforms": ["all"],
+      "triggers": ["/debug", "error", "bug", "crash", "exception"],
+      "agent-affinity": ["epost-debugger", "epost-implementer"],
       "path": "debugging/SKILL.md"
     },
     {
       "name": "doc-coauthoring",
-      "description": "Guide users through a structured workflow for co-authoring documentation. Use when user wants to write documentation, proposals, technical specs, decision docs, or similar structured content.",
-      "keywords": [
-        "documentation",
-        "writing",
-        "proposal",
-        "spec",
-        "technical-writing",
-        "collaboration",
-        "prd",
-        "rfc"
-      ],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [
-        "write doc",
-        "create proposal",
-        "draft spec",
-        "write documentation"
-      ],
-      "agent-affinity": [
-        "epost-documenter",
-        "epost-planner"
-      ],
+      "description": "Guide users through a structured workflow for co-authoring documentation.",
+      "keywords": ["documentation", "writing", "proposal", "spec", "technical-writing", "collaboration", "prd", "rfc"],
+      "platforms": ["all"],
+      "triggers": ["write doc", "create proposal", "draft spec", "write documentation"],
+      "agent-affinity": ["epost-documenter", "epost-architect"],
       "path": "doc-coauthoring/SKILL.md"
     },
     {
       "name": "docs-seeker",
       "description": "Finding and reading documentation for packages, libraries, and frameworks using Context7 and web search",
-      "keywords": [
-        "docs",
-        "documentation",
-        "search",
-        "context7",
-        "api-reference",
-        "library"
-      ],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [
-        "documentation",
-        "docs",
-        "api reference",
-        "how to use"
-      ],
-      "agent-affinity": [
-        "epost-researcher",
-        "epost-implementer"
-      ],
+      "keywords": ["docs", "documentation", "search", "context7", "api-reference", "library"],
+      "platforms": ["all"],
+      "triggers": ["documentation", "docs", "api reference", "how to use"],
+      "agent-affinity": ["epost-researcher", "epost-implementer"],
       "path": "docs-seeker/SKILL.md"
     },
     {
       "name": "error-recovery",
       "description": "Standardized patterns for handling transient errors, retries, and fallback strategies",
-      "keywords": [
-        "error",
-        "retry",
-        "fallback",
-        "circuit-breaker",
-        "backoff",
-        "resilience",
-        "failure",
-        "exponential",
-        "degradation"
-      ],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [
-        "error",
-        "exception",
-        "timeout",
-        "retry",
-        "fallback"
-      ],
-      "agent-affinity": [
-        "epost-implementer",
-        "epost-debugger",
-        "epost-tester"
-      ],
+      "keywords": ["error", "retry", "fallback", "circuit-breaker", "backoff", "resilience", "failure"],
+      "platforms": ["all"],
+      "triggers": ["error", "exception", "timeout", "retry", "fallback"],
+      "agent-affinity": ["epost-implementer", "epost-debugger", "epost-tester"],
       "path": "error-recovery/SKILL.md"
     },
     {
-      "name": "knowledge-base",
-      "description": "Project knowledge management — ADRs, learned patterns, debug findings, decision history. Use when agents need to persist knowledge for future sessions.",
-      "keywords": [
-        "knowledge",
-        "adr",
-        "decision",
-        "pattern",
-        "learning",
-        "memory",
-        "persist",
-        "capture"
-      ],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [
-        "ADR",
-        "decision record",
-        "learned pattern",
-        "save finding"
-      ],
-      "agent-affinity": [
-        "epost-architect",
-        "epost-debugger",
-        "epost-documenter",
-        "epost-implementer"
-      ],
-      "path": "knowledge-base/SKILL.md"
+      "name": "knowledge/base",
+      "description": "Project knowledge management — ADRs, learned patterns, debug findings, decision history.",
+      "keywords": ["knowledge", "adr", "decision", "pattern", "learning", "memory", "persist"],
+      "platforms": ["all"],
+      "triggers": ["ADR", "decision record", "learned pattern", "save finding"],
+      "agent-affinity": ["epost-architect", "epost-debugger", "epost-documenter", "epost-implementer"],
+      "path": "knowledge/base/SKILL.md"
     },
     {
-      "name": "knowledge-capture",
-      "description": "Post-task knowledge capture workflow — persist debug findings, implementation patterns, research results, review conventions to .knowledge/ directory.",
-      "keywords": [
-        "capture",
-        "learn",
-        "persist",
-        "record",
-        "post-mortem",
-        "retrospective"
-      ],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [
-        "capture learnings",
-        "save pattern",
-        "record finding",
-        "what did we learn"
-      ],
-      "agent-affinity": [
-        "epost-debugger",
-        "epost-implementer",
-        "epost-researcher",
-        "epost-reviewer",
-        "epost-architect"
-      ],
-      "path": "knowledge-capture/SKILL.md"
+      "name": "knowledge/capture",
+      "description": "Post-task knowledge capture workflow — persist findings, patterns, results to .knowledge/.",
+      "keywords": ["capture", "learn", "persist", "record", "post-mortem", "retrospective"],
+      "platforms": ["all"],
+      "triggers": ["capture learnings", "save pattern", "record finding", "what did we learn"],
+      "agent-affinity": ["epost-debugger", "epost-implementer", "epost-researcher", "epost-reviewer", "epost-architect"],
+      "path": "knowledge/capture/SKILL.md"
     },
     {
-      "name": "knowledge-retrieval",
-      "description": "Internal-first knowledge retrieval before acting. Searches project knowledge, skills, RAG systems, ADRs before external sources.",
-      "keywords": [
-        "retrieve",
-        "search",
-        "knowledge",
-        "context",
-        "rag",
-        "lookup",
-        "prior-art"
-      ],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [
-        "what do we know about",
-        "check knowledge",
-        "prior art",
-        "previous decision"
-      ],
-      "agent-affinity": [
-        "epost-architect",
-        "epost-implementer",
-        "epost-debugger",
-        "epost-researcher"
-      ],
-      "path": "knowledge-retrieval/SKILL.md"
+      "name": "knowledge/retrieval",
+      "description": "Internal-first knowledge retrieval before acting. Searches project knowledge, skills, RAG systems, ADRs.",
+      "keywords": ["retrieve", "search", "knowledge", "context", "rag", "lookup", "prior-art"],
+      "platforms": ["all"],
+      "triggers": ["what do we know about", "check knowledge", "prior art", "previous decision"],
+      "agent-affinity": ["epost-architect", "epost-implementer", "epost-debugger", "epost-researcher"],
+      "path": "knowledge/retrieval/SKILL.md"
     },
     {
       "name": "planning",
       "description": "Transform requirements into actionable plans with task breakdown and risk assessment",
-      "keywords": [
-        "plan",
-        "planning",
-        "requirements",
-        "tasks",
-        "estimation",
-        "roadmap"
-      ],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [
-        "/plan",
-        "create plan",
-        "implementation plan"
-      ],
-      "agent-affinity": [
-        "epost-architect",
-        "epost-orchestrator"
-      ],
+      "keywords": ["plan", "planning", "requirements", "tasks", "estimation", "roadmap"],
+      "platforms": ["all"],
+      "triggers": ["/plan", "create plan", "implementation plan"],
+      "agent-affinity": ["epost-architect", "epost-orchestrator"],
       "path": "planning/SKILL.md"
     },
     {
       "name": "problem-solving",
       "description": "Root cause analysis and complex problem resolution with systematic techniques",
-      "keywords": [
-        "problem-solving",
-        "root-cause",
-        "analysis",
-        "debugging",
-        "5-whys",
-        "bisection"
-      ],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [
-        "stuck",
-        "problem",
-        "root cause",
-        "why"
-      ],
-      "agent-affinity": [
-        "epost-debugger",
-        "epost-implementer",
-        "epost-architect"
-      ],
+      "keywords": ["problem-solving", "root-cause", "analysis", "debugging", "5-whys", "bisection"],
+      "platforms": ["all"],
+      "triggers": ["stuck", "problem", "root cause", "why"],
+      "agent-affinity": ["epost-debugger", "epost-implementer", "epost-architect"],
       "path": "problem-solving/SKILL.md"
     },
     {
       "name": "repomix",
       "description": "Generate comprehensive codebase summaries for analysis and understanding",
-      "keywords": [
-        "repomix",
-        "codebase",
-        "summary",
-        "analysis",
-        "repo",
-        "overview"
-      ],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [
-        "repomix",
-        "codebase summary",
-        "repo overview"
-      ],
-      "agent-affinity": [
-        "epost-scout",
-        "epost-researcher",
-        "epost-architect"
-      ],
+      "keywords": ["repomix", "codebase", "summary", "analysis", "repo", "overview"],
+      "platforms": ["all"],
+      "triggers": ["repomix", "codebase summary", "repo overview"],
+      "agent-affinity": ["epost-scout", "epost-researcher", "epost-architect"],
       "path": "repomix/SKILL.md"
     },
     {
       "name": "research",
       "description": "Multi-source information gathering and validation with cross-referencing",
-      "keywords": [
-        "research",
-        "investigation",
-        "documentation",
-        "sources",
-        "validation",
-        "best-practices"
-      ],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [
-        "/research",
-        "research",
-        "best practices",
-        "how to"
-      ],
-      "agent-affinity": [
-        "epost-researcher",
-        "epost-architect"
-      ],
+      "keywords": ["research", "investigation", "documentation", "sources", "validation", "best-practices"],
+      "platforms": ["all"],
+      "triggers": ["/research", "research", "best practices", "how to"],
+      "agent-affinity": ["epost-researcher", "epost-architect"],
       "path": "research/SKILL.md"
     },
     {
       "name": "sequential-thinking",
       "description": "Structured step-by-step analysis for complex problems and debugging",
-      "keywords": [
-        "sequential",
-        "thinking",
-        "analysis",
-        "step-by-step",
-        "reasoning",
-        "logic"
-      ],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [
-        "complex problem",
-        "step by step",
-        "analyze"
-      ],
-      "agent-affinity": [
-        "epost-debugger",
-        "epost-architect",
-        "epost-implementer"
-      ],
+      "keywords": ["sequential", "thinking", "analysis", "step-by-step", "reasoning", "logic"],
+      "platforms": ["all"],
+      "triggers": ["complex problem", "step by step", "analyze"],
+      "agent-affinity": ["epost-debugger", "epost-architect", "epost-implementer"],
       "path": "sequential-thinking/SKILL.md"
+    },
+    {
+      "name": "infra/cloud",
+      "description": "GCP cloud infrastructure patterns: Terraform, Cloud Build, Cloud Run, GKE",
+      "keywords": ["gcp", "terraform", "cloud-build", "cloud-run", "gke", "infrastructure"],
+      "platforms": ["all"],
+      "triggers": ["cloud", "gcp", "terraform", "infrastructure"],
+      "agent-affinity": ["epost-architect", "epost-implementer"],
+      "path": "infra/cloud/SKILL.md"
+    },
+    {
+      "name": "infra/docker",
+      "description": "Containerization for development and deployment with Docker and Docker Compose",
+      "keywords": ["docker", "container", "dockerfile", "compose", "devops"],
+      "platforms": ["all"],
+      "triggers": ["docker", "container", "dockerfile", "compose"],
+      "agent-affinity": ["epost-implementer", "epost-architect"],
+      "path": "infra/docker/SKILL.md"
     }
   ]
 }

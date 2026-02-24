@@ -1,42 +1,25 @@
 ---
-title: Fix Fast Command
-description: (ePost) ⭑.ᐟ Quick fixes for simple bugs
+title: "Fix: Fast"
+description: (ePost) Quick fix for simple issues
 agent: epost-debugger
-argument-hint: [bug description]
+argument-hint: [short issue description]
 ---
 
-# Fix Fast Command
+# Quick Fix
 
-Quick fixes for simple, obvious bugs.
+Direct fast fix — skip auto-detection, apply minimal fix immediately.
 
-## Usage
-```
-/fix:fast [bug description]
-/fix:fast typo in login button
-```
+<issue>$ARGUMENTS</issue>
 
-## Your Process
-1. Diagnose the issue (debugger)
-2. Apply the fix (implementer)
-3. Verify it works
-4. Add test if needed
+## Process
 
-## When to Use
-- Typos
-- Simple logic errors
-- Missing imports
-- Obvious bugs
-- Quick fixes (under 5 minutes)
+1. **Quick diagnosis** — identify the issue from description
+2. **Apply fix** — minimal correct change
+3. **Verify** — run relevant checks (typecheck, tests, build)
+4. **Add test** — if applicable, add a regression test
 
-## When NOT to Use
-- Complex issues (use /fix:hard)
-- Performance problems
-- Architecture changes
-- Security issues
+## Rules
 
-## Completion
-Report:
-- Issue found
-- Fix applied
-- Files changed
-- How to verify
+- Fix root causes, not symptoms
+- Keep changes minimal
+- Do not ignore failed tests or use fake data

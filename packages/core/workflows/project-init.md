@@ -29,7 +29,7 @@ The documenter agent:
 - Initializes project-changelog.md
 
 ### 3. Initial Commit
-**Command**: `/git:cm`
+**Command**: `/git:commit`
 **Agent**: epost-git-manager
 **Output**: First commit with docs
 
@@ -41,7 +41,7 @@ graph LR
     C --> D[Project structure created]
     D --> E[epost-documenter]
     E --> E1[Initial docs created]
-    E1 --> F[/git:cm command]
+    E1 --> F[/git:commit command]
     F --> G[epost-git-manager]
     G --> H[Initial commit]
 ```

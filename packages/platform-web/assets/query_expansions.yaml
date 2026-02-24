@@ -1,0 +1,772 @@
+# Query Expansion Configuration for Web RAG System
+# This file contains synonyms and component name mappings to improve query relevance
+
+# Component name mappings (aliases -> canonical component names)
+# These help recognize component names in queries even with variations
+component_mappings:
+  # Button variations
+  "btn": "button"
+  "button": "button"
+  "button-icon": "button-icon"
+  "icon-button": "button-icon"
+  "button-group": "button-group"
+  "button-bar": "button-bar"
+  "split-button": "split-button"
+  
+  # Form inputs
+  "input": "text-field"
+  "textfield": "text-field"
+  "text-input": "text-field"
+  "textarea": "textarea"
+  "text-area": "textarea"
+  "number-input": "input-number"
+  "numeric-input": "input-number"
+  "stepper": "number-stepper"
+  "number-stepper": "number-stepper"
+  
+  # Selection components
+  "select": "select"
+  "dropdown": "select"
+  "select-single": "select-single"
+  "select-items": "select-items"
+  "multiple-select": "multiple-select"
+  "multiselect": "multiple-select"
+  "autocomplete": "autocomplete"
+  "auto-complete": "autocomplete"
+  
+  # Date/time
+  "datepicker": "date-picker"
+  "date-picker": "date-picker"
+  "datepicker-range": "date-picker"
+  "date-range": "date-picker"
+  "date-filter": "date-filter-button"
+  "date-filter-button": "date-filter-button"
+  
+  # Navigation
+  "tabs": "tabs"
+  "tab": "tabs"
+  "breadcrumb": "breadcrumbs"
+  "breadcrumbs": "breadcrumbs"
+  "menu": "action-menu"
+  "action-menu": "action-menu"
+  "context-menu": "context-menu"
+  "popover": "popover"
+  "tooltip": "tooltip"
+  
+  # Data display
+  "table": "data-table"
+  "data-table": "data-table"
+  "datatable": "data-table"
+  "tree": "tree"
+  "tree-view": "tree"
+  "treeview": "tree"
+  "card": "card"
+  "badge": "badge"
+  "chip": "chip"
+  "chip-icon": "chip-icon"
+  "avatar": "avatar"
+  "avatar-group": "avatar-group"
+  "thumbnail": "thumbnail"
+  
+  # Feedback
+  "notification": "notification"
+  "notifications": "notification"
+  "system-notification": "system-notification"
+  "alert": "notification"
+  "toast": "notification"
+  "loader": "loader"
+  "loading": "loader"
+  "spinner": "loader"
+  "loader-icon": "loader-icon"
+  "progress-bar": "progress-bar"
+  "progress": "progress-bar"
+  "progress-ring": "progress-ring"
+  "skeleton": "skeleton-loading"
+  "skeleton-loading": "skeleton-loading"
+  
+  # Layout
+  "accordion": "accordion"
+  "accordion-panel": "accordion"
+  "dialog": "dialog"
+  "modal": "dialog"
+  "drawer": "dialog"
+  "stack": "stack-container"
+  "stack-container": "stack-container"
+  "column": "column"
+  "steps": "steps"
+  "wizard": "steps"
+  
+  # Forms
+  "form": "form"
+  "checkbox": "checkbox"
+  "check": "checkbox"
+  "radio": "radio"
+  "radio-button": "radio"
+  "toggle": "toggle"
+  "switch": "toggle"
+  "color-picker": "color-picker"
+  "colorpicker": "color-picker"
+  "file-upload": "file-upload"
+  "upload": "file-upload"
+  "image-upload": "image-upload"
+  "upload-panel": "upload-panel"
+  
+  # Filters
+  "filter": "filter-button"
+  "filter-button": "filter-button"
+  "filter-bar": "filter-bar"
+  "select-filter": "select-filter-button"
+  "select-filter-button": "select-filter-button"
+  "segmented-filter": "segmented-filter-button"
+  "segmented-filter-button": "segmented-filter-button"
+  "multiple-select-filter": "multiple-select-filter-button"
+  "multiple-select-filter-button": "multiple-select-filter-button"
+  
+  # Specialized
+  "text-editor": "text-editor"
+  "editor": "text-editor"
+  "rich-text": "text-editor"
+  "wysiwyg": "text-editor"
+  "quill": "text-editor"
+  "chat-tool": "chat-tool"
+  "chat": "chat-tool"
+  "email-composer": "email-composer"
+  "email": "email-composer"
+  "document-viewer": "document-viewer"
+  "pdf-viewer": "document-viewer"
+  "search-field": "search-field"
+  "search": "search-field"
+  "searchbox": "search-field"
+  
+  # Animation
+  "animation": "animation-box"
+  "animation-box": "animation-box"
+  "fade": "animation-box"
+  "slide": "animation-box"
+  "scale": "animation-box"
+  "rotate": "animation-box"
+  
+  # Other
+  "segmented-control": "segmented-control"
+  "segmented": "segmented-control"
+  "sort": "sort-button"
+  "sort-button": "sort-button"
+  "floating-action": "floating-action-bar"
+  "fab": "floating-action-bar"
+  "floating-action-bar": "floating-action-bar"
+  "feature-hint": "feature-hint"
+  "hint": "feature-hint"
+  "message-wrapper": "message-wrapper"
+  "message": "message-wrapper"
+  "inverse-wrapper": "inverse-wrapper"
+  "branded-wrapper": "branded-wrapper"
+  "corporate-logo": "corporate-logo"
+  "logo": "corporate-logo"
+  "ai-loader": "ai-loader"
+  "streamline-illustration": "streamline-illustration"
+  "illustration": "streamline-illustration"
+  "validation-handler": "validation-handler"
+  "validation": "validation-handler"
+
+  # CamelCase aliases for component recognition
+  "TextField": "text-field"
+  "DataTable": "data-table"
+  "DatePicker": "date-picker"
+  "ButtonIcon": "button-icon"
+  "ButtonGroup": "button-group"
+  "ActionMenu": "action-menu"
+  "ContextMenu": "context-menu"
+  "ProgressBar": "progress-bar"
+  "ProgressRing": "progress-ring"
+  "SkeletonLoading": "skeleton-loading"
+  "TextEditor": "text-editor"
+  "SearchField": "search-field"
+  "FileUpload": "file-upload"
+  "ImageUpload": "image-upload"
+  "ColorPicker": "color-picker"
+  "AnimationBox": "animation-box"
+  "FilterButton": "filter-button"
+  "FilterBar": "filter-bar"
+  "StackContainer": "stack-container"
+  "FloatingActionBar": "floating-action-bar"
+  "FeatureHint": "feature-hint"
+
+  # Missing components (discovered from klara-theme scan)
+  "date-picker-new": "date-picker-new"
+  "new-datepicker": "date-picker-new"
+  "resizable-box": "resizable-box"
+  "resizable": "resizable-box"
+  "resize": "resizable-box"
+  "scroll-panel": "scroll-panel"
+  "scrollable": "scroll-panel"
+
+  # Layouts
+  "action-bar": "action-bar"
+  "bottom-bar": "bottom-bar"
+  "header-bar": "header-bar"
+  "header": "header-bar"
+  "menu-sidebar": "menu-sidebar"
+  "sidebar": "menu-sidebar"
+  "right-sidebar": "right-sidebar"
+  "page-scroll-handler": "page-scroll-handler"
+
+  # Hooks
+  "extract-color": "extract-color"
+  "useextractcolor": "extract-color"
+  "theme-generator": "theme-generator"
+
+  # Contexts
+  "theme-provider": "theme-provider"
+  "themeprovider": "theme-provider"
+  "z-index-system": "z-index-system"
+  "zindex": "z-index-system"
+
+# Synonym groups
+# These expand queries with related terms to improve recall
+synonyms:
+  # Component-related
+  "component":
+    - "component"
+    - "widget"
+    - "element"
+    - "ui element"
+    - "ui component"
+  
+  # Styling
+  "style":
+    - "style"
+    - "styling"
+    - "css"
+    - "scss"
+    - "stylesheet"
+    - "theme"
+  
+  "color":
+    - "color"
+    - "colour"
+    - "theme color"
+    - "token"
+    - "color token"
+    - "palette"
+  
+  "theme":
+    - "theme"
+    - "theming"
+    - "design system"
+    - "design token"
+    - "token"
+  
+  # Functionality
+  "hook":
+    - "hook"
+    - "react hook"
+    - "custom hook"
+    - "hooks"
+    - "useState"
+    - "useEffect"
+    - "useRef"
+    - "useMemo"
+    - "useCallback"
+    - "useContext"
+    - "useReducer"
+  
+  "context":
+    - "context"
+    - "react context"
+    - "context provider"
+    - "provider"
+  
+  "layout":
+    - "layout"
+    - "container"
+    - "wrapper"
+    - "structure"
+  
+  # Actions
+  "click":
+    - "click"
+    - "onClick"
+    - "on click"
+    - "tap"
+    - "press"
+  
+  "change":
+    - "change"
+    - "onChange"
+    - "on change"
+    - "update"
+    - "modify"
+  
+  "submit":
+    - "submit"
+    - "onSubmit"
+    - "on submit"
+    - "save"
+    - "send"
+  
+  # States
+  "disabled":
+    - "disabled"
+    - "disable"
+    - "inactive"
+    - "not enabled"
+  
+  "enabled":
+    - "enabled"
+    - "enable"
+    - "active"
+    - "available"
+  
+  "loading":
+    - "loading"
+    - "load"
+    - "fetching"
+    - "pending"
+    - "spinner"
+  
+  # Sizes
+  "size":
+    - "size"
+    - "sizing"
+    - "dimension"
+    - "width"
+    - "height"
+  
+  "small":
+    - "small"
+    - "s"
+    - "sm"
+    - "tiny"
+  
+  "medium":
+    - "medium"
+    - "m"
+    - "md"
+    - "normal"
+    - "default"
+  
+  "large":
+    - "large"
+    - "l"
+    - "lg"
+    - "big"
+    - "huge"
+  
+  # Variants
+  "variant":
+    - "variant"
+    - "type"
+    - "kind"
+    - "style variant"
+    - "appearance"
+  
+  "primary":
+    - "primary"
+    - "main"
+    - "default"
+    - "standard"
+  
+  "secondary":
+    - "secondary"
+    - "secondary button"
+    - "outline"
+  
+  # Form validation
+  "validation":
+    - "validation"
+    - "validate"
+    - "validator"
+    - "error"
+    - "required"
+    - "invalid"
+    - "react-hook-form"
+    - "register"
+    - "validation-handler"
+  
+  "error":
+    - "error"
+    - "err"
+    - "failure"
+    - "invalid"
+    - "wrong"
+  
+  # Accessibility (expanded for comprehensive a11y coverage)
+  "accessibility":
+    - "accessibility"
+    - "a11y"
+    - "aria"
+    - "aria-label"
+    - "aria-labelledby"
+    - "aria-describedby"
+    - "screen reader"
+    - "sr-only"
+    - "keyboard navigation"
+    - "tabIndex"
+    - "role"
+    - "focus-visible"
+    - "focus trap"
+    - "skip-link"
+
+  "aria":
+    - "aria"
+    - "aria-label"
+    - "aria-labelledby"
+    - "aria-describedby"
+    - "accessibility"
+    - "role"
+    - "tabIndex"
+
+  # Animation (web-specific)
+  "animation":
+    - "animation"
+    - "animate"
+    - "transition"
+    - "css-transition"
+    - "@keyframes"
+    - "framer-motion"
+    - "spring"
+    - "ease-in"
+    - "ease-out"
+    - "transform"
+    - "opacity"
+    - "fadeIn"
+    - "fadeOut"
+    - "AnimationBox"
+
+  # State Management
+  "statemanagement":
+    - "state management"
+    - "redux"
+    - "useSelector"
+    - "useDispatch"
+    - "createSlice"
+    - "configureStore"
+    - "store"
+    - "slice"
+    - "zustand"
+    - "recoil"
+    - "jotai"
+
+  # Design Tokens (web-adapted)
+  "designtoken":
+    - "design token"
+    - "klara-theme"
+    - "scss variable"
+    - "css variable"
+    - "custom property"
+    - "ThemeProvider"
+    - "design system"
+    - "token"
+    - "brand"
+    - "color token"
+    - "typography token"
+    - "spacing token"
+
+  # Component Usage
+  "componentusage":
+    - "uses"
+    - "using"
+    - "import"
+    - "instantiate"
+    - "component"
+    - "dependency"
+    - "integration"
+    - "adopted"
+    - "implementation"
+
+  # Common patterns
+  "props":
+    - "props"
+    - "properties"
+    - "parameters"
+    - "attributes"
+  
+  "state":
+    - "state"
+    - "state management"
+    - "useState"
+    - "useReducer"
+    - "useSelector"
+    - "useDispatch"
+    - "redux"
+    - "store"
+    - "data"
+  
+  "event":
+    - "event"
+    - "events"
+    - "handler"
+    - "callback"
+    - "onEvent"
+
+  # ============================================
+  # Multi-word synonym keys (natural language)
+  # These match common query phrases directly
+  # ============================================
+
+  # Design tokens - multi-word variants
+  "design token":
+    - "design token"
+    - "klara-theme"
+    - "scss variable"
+    - "css variable"
+    - "custom property"
+    - "ThemeProvider"
+    - "design system"
+    - "token"
+    - "brand"
+    - "color token"
+    - "typography token"
+    - "spacing token"
+
+  "design tokens":
+    - "design token"
+    - "klara-theme"
+    - "scss variable"
+    - "css variable"
+    - "custom property"
+    - "ThemeProvider"
+    - "design system"
+    - "token"
+    - "brand"
+    - "color token"
+    - "typography token"
+    - "spacing token"
+
+  # State management - multi-word variant
+  "state management":
+    - "state management"
+    - "redux"
+    - "useSelector"
+    - "useDispatch"
+    - "createSlice"
+    - "configureStore"
+    - "store"
+    - "slice"
+    - "zustand"
+    - "recoil"
+    - "jotai"
+
+  # Component usage - multi-word variant
+  "component usage":
+    - "uses"
+    - "using"
+    - "import"
+    - "instantiate"
+    - "component"
+    - "dependency"
+    - "integration"
+    - "adopted"
+    - "implementation"
+
+  # Keyboard navigation
+  "keyboard navigation":
+    - "keyboard navigation"
+    - "tabIndex"
+    - "focus-visible"
+    - "focus trap"
+    - "skip-link"
+    - "aria"
+    - "accessibility"
+    - "a11y"
+    - "keyboard"
+    - "focusable"
+
+  "keyboard nav":
+    - "keyboard navigation"
+    - "tabIndex"
+    - "focus-visible"
+    - "focus trap"
+    - "aria"
+    - "accessibility"
+
+  # Spacing tokens
+  "spacing":
+    - "spacing"
+    - "spacing token"
+    - "gap"
+    - "margin"
+    - "padding"
+    - "design token"
+    - "size"
+
+  # Typography tokens
+  "typography":
+    - "typography"
+    - "typography token"
+    - "font"
+    - "font-size"
+    - "font-weight"
+    - "line-height"
+    - "text-style"
+    - "design token"
+
+  # Color tokens
+  "color token":
+    - "color token"
+    - "color"
+    - "colour"
+    - "palette"
+    - "design token"
+    - "scss variable"
+    - "css variable"
+    - "theme color"
+
+  # ARIA attributes
+  "aria label":
+    - "aria-label"
+    - "aria-labelledby"
+    - "aria-describedby"
+    - "accessibility"
+    - "a11y"
+    - "screen reader"
+
+  # klara-theme specific
+  "klara-theme":
+    - "klara-theme"
+    - "design token"
+    - "design system"
+    - "ThemeProvider"
+    - "scss variable"
+    - "brand"
+
+  # Dark mode / theming
+  "dark mode":
+    - "dark mode"
+    - "dark theme"
+    - "light mode"
+    - "light theme"
+    - "theme switching"
+    - "theme-provider"
+    - "ThemeProvider"
+    - "epost"
+    - "klara"
+    - "brand"
+
+  "dark theme":
+    - "dark mode"
+    - "dark theme"
+    - "light theme"
+    - "theme switching"
+    - "theme-provider"
+    - "ThemeProvider"
+
+  # Responsive / breakpoints
+  "responsive":
+    - "responsive"
+    - "breakpoint"
+    - "breakpoints"
+    - "media query"
+    - "mobile"
+    - "tablet"
+    - "desktop"
+    - "screen size"
+    - "viewport"
+
+  "breakpoint":
+    - "breakpoint"
+    - "breakpoints"
+    - "responsive"
+    - "media query"
+    - "mobile"
+    - "tablet"
+    - "desktop"
+
+  # Figma integration
+  "figma":
+    - "figma"
+    - "figma.json"
+    - "mapping"
+    - "mapping.json"
+    - "variant"
+    - "figma variant"
+    - "design handoff"
+
+  # Icons & assets
+  "icon":
+    - "icon"
+    - "icons"
+    - "streamline"
+    - "streamline-icon"
+    - "illustration"
+    - "asset"
+    - "image"
+    - "font"
+    - "svg"
+
+  # Z-index / stacking
+  "z-index":
+    - "z-index"
+    - "zindex"
+    - "z-index-system"
+    - "stacking"
+    - "layer"
+    - "overlay"
+
+  # Radix UI integration
+  "radix":
+    - "radix"
+    - "radix-ui"
+    - "@radix-ui"
+    - "primitives"
+    - "headless"
+    - "unstyled"
+
+  "radix ui":
+    - "radix"
+    - "radix-ui"
+    - "@radix-ui"
+    - "primitives"
+    - "headless component"
+
+  # Styling patterns
+  "styling":
+    - "styling"
+    - "style"
+    - "css"
+    - "scss"
+    - "tailwind"
+    - "className"
+    - "-styles.ts"
+
+  "styling patterns":
+    - "styling"
+    - "css"
+    - "scss"
+    - "tailwind"
+    - "className"
+    - "-styles.ts"
+    - "design token"
+
+  # Storybook / showcase
+  "storybook":
+    - "storybook"
+    - "stories"
+    - "story"
+    - "demo"
+    - "showcase"
+    - "example"
+
+  # Component library / overview queries
+  "component library":
+    - "component library"
+    - "design system"
+    - "component catalog"
+    - "components"
+    - "klara-theme"
+
+  "library":
+    - "library"
+    - "design system"
+    - "component library"
+    - "klara-theme"
+    - "package"
+
+  # Categories
+  "categories":
+    - "categories"
+    - "category"
+    - "types"
+    - "groups"
+    - "sections"
+

@@ -6,7 +6,7 @@
  */
 
 import { PATHS } from '../config';
-import { LoadedData, Agent, Skill, Command, Package } from '../types/entities';
+import { LoadedData, Agent, Skill, Command, Package, ParseError } from '../types/entities';
 import { agentParser } from '../parsers/AgentParser';
 import { skillParser } from '../parsers/SkillParser';
 import { commandParser } from '../parsers/CommandParser';
@@ -65,6 +65,7 @@ export class DataLoader {
       const allAgents: Agent[] = [];
       const allSkills: Skill[] = [];
       const allCommands: Command[] = [];
+      const allParseErrors: ParseError[] = [];
 
       for (const pkg of packages) {
         const pkgDir = pkg.path ? dirname(pkg.path) : join(PATHS.packages, pkg.name);
@@ -76,16 +77,18 @@ export class DataLoader {
 
         // Parse agents from this package
         if (existsSync(agentsDir)) {
-          const agents = agentParser.parseAll(agentsDir, pkgName);
+          const { agents, errors } = agentParser.parseAll(agentsDir, pkgName);
           allAgents.push(...agents);
-          logger.debug('loader', `Package ${pkgName}: ${agents.length} agents`);
+          allParseErrors.push(...errors);
+          logger.debug('loader', `Package ${pkgName}: ${agents.length} agents, ${errors.length} issues`);
         }
 
         // Parse skills from this package
         if (existsSync(skillsDir)) {
-          const skills = skillParser.parseAll(skillsDir, pkgName);
+          const { skills, errors } = skillParser.parseAll(skillsDir, pkgName);
           allSkills.push(...skills);
-          logger.debug('loader', `Package ${pkgName}: ${skills.length} skills`);
+          allParseErrors.push(...errors);
+          logger.debug('loader', `Package ${pkgName}: ${skills.length} skills, ${errors.length} issues`);
         }
 
         // Parse commands from this package
@@ -95,9 +98,10 @@ export class DataLoader {
         if (existsSync(commandsDir)) {
           const filesMapping = pkg.files?.['commands/'] || 'commands/';
           const commandPrefix = filesMapping.replace(/^commands\//, '');
-          const commands = commandParser.parseAll(commandsDir, pkgName, commandPrefix);
+          const { commands, errors } = commandParser.parseAll(commandsDir, pkgName, commandPrefix);
           allCommands.push(...commands);
-          logger.debug('loader', `Package ${pkgName}: ${commands.length} commands (prefix: "${commandPrefix}")`);
+          allParseErrors.push(...errors);
+          logger.debug('loader', `Package ${pkgName}: ${commands.length} commands (prefix: "${commandPrefix}"), ${errors.length} issues`);
         }
       }
 
@@ -109,6 +113,7 @@ export class DataLoader {
         commands: allCommands.length,
         packages: packages.length,
         profiles: profiles.length,
+        parseErrors: allParseErrors.length,
       });
 
       // Log details about loaded entities
@@ -126,6 +131,7 @@ export class DataLoader {
         commands: allCommands,
         packages,
         profiles,
+        parseErrors: allParseErrors,
       };
     } catch (error) {
       logger.error('loader', 'Failed to load agent system data', {

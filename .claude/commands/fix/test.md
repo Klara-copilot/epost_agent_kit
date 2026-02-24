@@ -1,37 +1,27 @@
 ---
-title: Fix Test
-description: (ePost) ⭑.ᐟ Fix failing tests
+title: "Fix: Test"
+description: (ePost) Fix failing tests
 agent: epost-tester
-argument-hint: "[test or description]"
+argument-hint: [test failure description]
 ---
 
-# Fix Test Command
+# Fix Failing Tests
 
-Diagnose and fix failing tests.
+Direct test fix — skip auto-detection, run test suite and fix failures.
 
-## Usage
-
-```
-/fix:test [test name or description]"
-```
-
-## Examples
-
-- `/fix:test User authentication tests failing`
-- `/fix:test Async test timing out`
-- `/fix:test Mock not working correctly`
+<issue>$ARGUMENTS</issue>
 
 ## Process
 
-1. Analyze failing test output
-2. Identify why test fails
-3. Check if test is valid or needs update
-4. Fix code or update test
-5. Ensure all tests pass
+1. **Run test suite** — execute relevant tests to identify failures
+2. **Analyze failures** — parse error output, identify root cause of each failure
+3. **Fix root cause** — fix the production code (not the test) unless the test is wrong
+4. **Re-run** — repeat until all tests pass (100% green gate)
 
-## Output
+## Rules
 
-- Fixed code or tests
-- Improved test coverage
-- Better test isolation
-- Updated test documentation
+- Fix root causes, not symptoms
+- Do not comment out or skip failing tests
+- Do not change test assertions to make them pass
+- Do not use fake data to bypass tests
+- If a test is genuinely wrong, explain why before changing it

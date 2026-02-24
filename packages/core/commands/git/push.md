@@ -1,6 +1,6 @@
 ---
 title: Git Push Command
-description: (ePost) ⭑.ᐟ Commit changes and push to remote
+description: (ePost) Commit changes and push to remote
 agent: epost-git-manager
 argument-hint: 👉👉👉
 ---

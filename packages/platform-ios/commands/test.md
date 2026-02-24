@@ -1,6 +1,6 @@
 ---
 title: iOS Test
-description: (ePost) ⭑.ᐟ Run iOS unit tests and UI tests using xcodebuild or XcodeBuildMCP
+description: (ePost) Run iOS unit tests and UI tests using xcodebuild or XcodeBuildMCP
 agent: epost-ios-developer
 argument-hint: 👉👉👉 [--unit | --ui | --coverage | test-target]
 allowed-tools:
@@ -33,7 +33,7 @@ Run iOS unit tests and UI tests using xcodebuild or XcodeBuildMCP. Provides cove
 ## Your Process
 
 1. **Reference Tester Skill**
-   - Use `skills/ios-development/tester.md` for testing patterns
+   - Use `ios/development/references/tester.md` for testing patterns
 
 2. **Discover Project (MCP preferred)**
    - Use `mcp__xcodebuildmcp__discover_projs` if available

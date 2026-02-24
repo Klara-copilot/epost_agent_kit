@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { LoadedData } from '@/lib/types/entities';
+import { LoadedData, ParseError } from '@/lib/types/entities';
 import Link from 'next/link';
 
 interface LogEntry {
@@ -15,6 +15,7 @@ interface LogEntry {
 interface ApiResponse {
   success: boolean;
   data?: LoadedData;
+  parseErrors?: ParseError[];
   stats?: {
     totalNodes: number;
     totalEdges: number;
@@ -29,9 +30,11 @@ export default function Home() {
   const [data, setData] = useState<LoadedData | null>(null);
   const [stats, setStats] = useState<ApiResponse['stats'] | null>(null);
   const [logs, setLogs] = useState<LogEntry[]>([]);
+  const [parseErrors, setParseErrors] = useState<ParseError[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [showLogs, setShowLogs] = useState(false);
+  const [showParseErrors, setShowParseErrors] = useState(false);
 
   useEffect(() => {
     const load = async () => {
@@ -46,6 +49,9 @@ export default function Home() {
         setData(result.data || null);
         setStats(result.stats || null);
         setLogs(result.logs || []);
+        const errors = result.parseErrors || result.data?.parseErrors || [];
+        setParseErrors(errors);
+        setShowParseErrors(errors.some(e => e.level === 'error'));
 
         console.log('Graph Statistics:', result.stats);
         console.log('Logs:', result.logs);
@@ -228,6 +234,15 @@ export default function Home() {
           />
         </div>
 
+        {/* Parse Issues Panel */}
+        {parseErrors.length > 0 && (
+          <ParseIssuesPanel
+            errors={parseErrors}
+            expanded={showParseErrors}
+            onToggle={() => setShowParseErrors(v => !v)}
+          />
+        )}
+
         {/* Debug Info */}
         <details className="mt-12">
           <summary className="cursor-pointer text-gray-500 hover:text-gray-300">
@@ -290,6 +305,94 @@ export default function Home() {
           </div>
         )}
       </div>
+    </div>
+  );
+}
+
+function ParseIssuesPanel({
+  errors,
+  expanded,
+  onToggle,
+}: {
+  errors: ParseError[];
+  expanded: boolean;
+  onToggle: () => void;
+}) {
+  const errorCount = errors.filter(e => e.level === 'error').length;
+  const warningCount = errors.filter(e => e.level === 'warning').length;
+
+  const groups: Record<string, ParseError[]> = {};
+  for (const e of errors) {
+    if (!groups[e.entityType]) groups[e.entityType] = [];
+    groups[e.entityType].push(e);
+  }
+
+  const title = [
+    errorCount > 0 && `${errorCount} error${errorCount !== 1 ? 's' : ''}`,
+    warningCount > 0 && `${warningCount} warning${warningCount !== 1 ? 's' : ''}`,
+  ]
+    .filter(Boolean)
+    .join(', ');
+
+  return (
+    <div className={`mt-8 rounded-lg border ${errorCount > 0 ? 'border-red-700 bg-red-950/20' : 'border-yellow-700 bg-yellow-950/10'}`}>
+      <button
+        onClick={onToggle}
+        className="w-full flex items-center justify-between px-5 py-4 text-left"
+      >
+        <div className="flex items-center gap-3">
+          <span className={`text-lg font-semibold ${errorCount > 0 ? 'text-red-400' : 'text-yellow-400'}`}>
+            Parse Issues
+          </span>
+          <span className={`text-sm px-2 py-0.5 rounded-full font-mono ${errorCount > 0 ? 'bg-red-900/50 text-red-300' : 'bg-yellow-900/50 text-yellow-300'}`}>
+            {title}
+          </span>
+        </div>
+        <span className="text-gray-500 text-sm">{expanded ? '▲ hide' : '▼ show'}</span>
+      </button>
+
+      {expanded && (
+        <div className="px-5 pb-5 space-y-4">
+          {Object.entries(groups).map(([entityType, items]) => (
+            <div key={entityType}>
+              <h3 className="text-xs uppercase tracking-widest text-gray-500 mb-2 font-semibold">
+                {entityType}s ({items.length})
+              </h3>
+              <div className="space-y-1 font-mono text-xs">
+                {items.map((e, idx) => {
+                  const shortPath = e.filePath.replace(/.*\/(packages|\.claude)\//, '$1/');
+                  return (
+                    <div
+                      key={idx}
+                      className={`flex gap-3 items-start p-2 rounded ${
+                        e.level === 'error' ? 'bg-red-900/20 text-red-300' : 'bg-yellow-900/10 text-yellow-200'
+                      }`}
+                    >
+                      <span className={`shrink-0 uppercase font-bold text-[10px] mt-0.5 px-1.5 py-0.5 rounded ${
+                        e.level === 'error' ? 'bg-red-700 text-white' : 'bg-yellow-700 text-white'
+                      }`}>
+                        {e.level === 'error' ? 'ERR' : 'WARN'}
+                      </span>
+                      <span className="shrink-0 text-gray-400 max-w-[260px] truncate" title={e.filePath}>
+                        {shortPath}
+                      </span>
+                      {e.field && (
+                        <span className="shrink-0 text-gray-500">
+                          <span className="text-gray-600">field:</span> <span className="text-cyan-400">{e.field}</span>
+                          {e.value !== undefined && (
+                            <span className="text-gray-500"> = <span className="text-orange-300">"{String(e.value)}"</span></span>
+                          )}
+                        </span>
+                      )}
+                      <span className="text-gray-300 flex-1">{e.message}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

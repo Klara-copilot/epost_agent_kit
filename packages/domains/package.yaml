@@ -1,0 +1,20 @@
+name: domains
+version: "1.0.0"
+description: "Business domain knowledge: B2B modules, B2C consumer patterns"
+layer: 2
+platforms: [all]
+
+dependencies:
+  - core
+
+provides:
+  agents: []
+  skills:
+    - domain/b2b
+    - domain/b2c
+
+files:
+  skills/: skills/
+
+settings_strategy: skip
+claude_snippet: CLAUDE.snippet.md

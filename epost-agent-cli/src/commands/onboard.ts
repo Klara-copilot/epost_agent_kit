@@ -59,8 +59,14 @@ export async function runOnboard(opts: OnboardOptions): Promise<void> {
   // ── Step 2/6: Role selection ──
   logger.step(2, 6, "Choose your role");
   let selectedProfile: string;
+  let skipPackageSelection = false;
 
-  if (teamChoice === "__other__") {
+  if (teamChoice === "__explore__") {
+    // Full profile — install everything, skip package selection
+    selectedProfile = "full";
+    skipPackageSelection = true;
+    logger.info("\nSelected: Full Kit (everything)");
+  } else if (teamChoice === "__other__") {
     const allProfiles = listProfiles(profiles);
     selectedProfile = await select({
       message: "Select a developer profile:",
@@ -114,27 +120,75 @@ export async function runOnboard(opts: OnboardOptions): Promise<void> {
 
   const info = getProfileInfo(selectedProfile, profiles);
 
-  // ── Step 3/6: Package selection (all packages, profile ones pre-checked) ──
+  // ── Multi-profile selection ──
+  // Allow combining multiple profiles (union of packages)
+  const selectedProfiles: string[] = [selectedProfile];
+  let combinedPackages = new Set(info?.packages || []);
+
+  if (!skipPackageSelection) {
+    let addMore = await confirm({
+      message: "Add another profile?",
+      default: false,
+    });
+    while (addMore) {
+      const allProfiles = listProfiles(profiles);
+      const availableProfiles = allProfiles.filter(
+        (p) => !selectedProfiles.includes(p.name),
+      );
+      if (availableProfiles.length === 0) break;
+
+      const additionalProfile = await select({
+        message: "Select additional profile:",
+        choices: availableProfiles.map((p) => ({
+          name: `${p.displayName} (${p.packages.join(", ")})`,
+          value: p.name,
+        })),
+      });
+      selectedProfiles.push(additionalProfile);
+      const additionalInfo = getProfileInfo(additionalProfile, profiles);
+      if (additionalInfo) {
+        for (const pkg of additionalInfo.packages) combinedPackages.add(pkg);
+      }
+      addMore = await confirm({
+        message: "Add another profile?",
+        default: false,
+      });
+    }
+  }
+
+  // ── Step 3/6: Package selection ──
   logger.step(3, 6, "Select packages");
 
   const allManifests = await loadAllManifests(packagesDir);
-  const profilePkgs = new Set(info?.packages || []);
+  let selected: string[];
 
-  const selected = await checkbox({
-    message: "Select packages to install:",
-    choices: [...allManifests.entries()]
-      .sort((a, b) => a[1].layer - b[1].layer)
-      .map(([name, m]) => ({
-        name: `${name} — ${m.description}`,
-        value: name,
-        checked: profilePkgs.has(name),
-      })),
-  });
+  if (skipPackageSelection) {
+    // Full Kit — include all packages, skip checkbox
+    selected = [...allManifests.keys()];
+    logger.info(`All ${selected.length} packages included (Full Kit)`);
+  } else {
+    selected = await checkbox({
+      message: "Select packages to install:",
+      choices: [...allManifests.entries()]
+        .sort((a, b) => a[1].layer - b[1].layer)
+        .map(([name, m]) => ({
+          name: `${name} — ${m.description}`,
+          value: name,
+          checked: combinedPackages.has(name),
+        })),
+    });
 
-  if (selected.length === 0) {
-    logger.info("No packages selected. Setup cancelled.");
-    return;
+    if (selected.length === 0) {
+      logger.info("No packages selected. Setup cancelled.");
+      return;
+    }
   }
+
+  // ── Advanced commands toggle ──
+  const includeAdvanced = await confirm({
+    message: "Enable advanced commands? (More control, more commands)",
+    default: false,
+  });
 
   // ── Step 4/6: Confirm ──
   logger.step(4, 6, "Confirm installation");
@@ -214,6 +268,7 @@ export async function runOnboard(opts: OnboardOptions): Promise<void> {
   await runInit({
     ...opts,
     packages: selected.join(","),
+    advancedCommands: includeAdvanced,
   });
 
   // Post-install success message

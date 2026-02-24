@@ -5,7 +5,7 @@
 
 import { readdirSync, statSync, existsSync } from 'fs';
 import { join, basename, dirname, relative } from 'path';
-import { Skill, Reference, ContextType, GitStatus } from '../types/entities';
+import { Skill, Reference, ContextType, GitStatus, ParseError } from '../types/entities';
 import { frontmatterParser } from './FrontmatterParser';
 import { logger } from '../utils/logger';
 
@@ -23,27 +23,63 @@ interface SkillFrontmatter {
   version?: string;
 }
 
+const VALID_CONTEXTS: ContextType[] = ['fork', 'inline'];
+
 export class SkillParser {
   /**
-   * Parse a single skill file
-   * @param filePath - Path to SKILL.md file
-   * @param baseDir - Base skills directory for calculating relative ID
-   * @param gitStatus - Git status of the file
-   * @returns Parsed Skill object
+   * Parse a single skill file and collect validation warnings
    */
-  parseFile(filePath: string, baseDir: string, packageName: string, gitStatus: GitStatus = 'clean'): Skill {
+  parseFile(
+    filePath: string,
+    baseDir: string,
+    packageName: string,
+    gitStatus: GitStatus = 'clean'
+  ): { skill: Skill; warnings: ParseError[] } {
     const parsed = frontmatterParser.parse<SkillFrontmatter>(filePath);
     const { frontmatter, body } = parsed;
+    const warnings: ParseError[] = [];
 
-    // Calculate relative path from baseDir to skill directory as ID
-    // Example: /path/to/skills/web/frontend-development/SKILL.md -> web/frontend-development
     const skillDir = dirname(filePath);
     const id = relative(baseDir, skillDir);
 
-    // Extract references from the skill directory
+    // Validate context
+    if (frontmatter.context && !VALID_CONTEXTS.includes(frontmatter.context)) {
+      warnings.push({
+        filePath,
+        entityType: 'skill',
+        level: 'warning',
+        field: 'context',
+        value: frontmatter.context,
+        message: `Invalid context '${frontmatter.context}' — must be one of: ${VALID_CONTEXTS.join(', ')}`,
+      });
+    }
+
+    // context: fork requires agent field
+    if (frontmatter.context === 'fork' && !frontmatter.agent) {
+      warnings.push({
+        filePath,
+        entityType: 'skill',
+        level: 'warning',
+        field: 'agent',
+        message: `context is 'fork' but 'agent' field is missing — skill won't know which agent to fork`,
+      });
+    }
+
+    // version is not a valid frontmatter field for skills
+    if (frontmatter.version !== undefined) {
+      warnings.push({
+        filePath,
+        entityType: 'skill',
+        level: 'warning',
+        field: 'version',
+        value: frontmatter.version,
+        message: `'version' is not a valid frontmatter field for skills`,
+      });
+    }
+
     const references = this.extractReferences(skillDir, frontmatter.name || id);
 
-    return {
+    const skill: Skill = {
       id,
       name: frontmatter.name || id,
       description: frontmatter.description || body.trim().split('\n')[0] || '',
@@ -55,20 +91,19 @@ export class SkillParser {
       platforms: frontmatter.platforms || [],
       triggers: frontmatter.triggers || [],
       agentAffinity: frontmatter['agent-affinity'] || [],
-      userInvocable: frontmatter['user-invocable'] !== false, // default true
+      userInvocable: frontmatter['user-invocable'] !== false,
       context: frontmatter.context,
       agent: frontmatter.agent,
       disableModelInvocation: frontmatter['disable-model-invocation'],
       version: frontmatter.version,
       references,
     };
+
+    return { skill, warnings };
   }
 
   /**
    * Extract reference files from skill directory
-   * @param skillDir - Path to skill directory
-   * @param skillName - Name of the skill
-   * @returns Array of reference files
    */
   private extractReferences(skillDir: string, skillName: string): Reference[] {
     const references: Reference[] = [];
@@ -77,10 +112,8 @@ export class SkillParser {
       const files = readdirSync(skillDir);
 
       for (const file of files) {
-        // Skip the main SKILL.md file
         if (file === 'SKILL.md') continue;
 
-        // Include .md and .txt files as references
         if (file.endsWith('.md') || file.endsWith('.txt')) {
           const filePath = join(skillDir, file);
           references.push({
@@ -99,8 +132,6 @@ export class SkillParser {
 
   /**
    * Recursively find all SKILL.md files in directory tree
-   * @param baseDir - Base skills directory
-   * @returns Array of SKILL.md file paths
    */
   private findSkillFiles(baseDir: string): string[] {
     const skillFiles: string[] = [];
@@ -113,12 +144,10 @@ export class SkillParser {
           const fullPath = join(dir, entry.name);
 
           if (entry.isDirectory()) {
-            // Check if this directory has a SKILL.md
             const skillFile = join(fullPath, 'SKILL.md');
             if (existsSync(skillFile)) {
               skillFiles.push(skillFile);
             }
-            // Recurse into subdirectory
             traverse(fullPath);
           }
         }
@@ -133,36 +162,45 @@ export class SkillParser {
 
   /**
    * Parse all skill files in a directory tree
-   * @param baseDir - Path to base skills directory
-   * @param gitStatusMap - Map of file paths to git status
-   * @returns Array of parsed Skill objects
    */
-  parseAll(baseDir: string, packageName: string, gitStatusMap?: Map<string, GitStatus>): Skill[] {
+  parseAll(
+    baseDir: string,
+    packageName: string,
+    gitStatusMap?: Map<string, GitStatus>
+  ): { skills: Skill[]; errors: ParseError[] } {
     const skillFiles = this.findSkillFiles(baseDir);
     logger.info('parser', `Found ${skillFiles.length} skill files in ${baseDir}`);
 
     const skills: Skill[] = [];
+    const errors: ParseError[] = [];
     let skipped = 0;
 
     for (const filePath of skillFiles) {
       try {
         const gitStatus = gitStatusMap?.get(filePath) || 'clean';
-        const skill = this.parseFile(filePath, baseDir, packageName, gitStatus);
+        const { skill, warnings } = this.parseFile(filePath, baseDir, packageName, gitStatus);
         skills.push(skill);
+        errors.push(...warnings);
         logger.debug('parser', `Parsed skill: ${skill.id}`, {
           name: skill.name,
           path: filePath,
+          warnings: warnings.length,
         });
       } catch (error) {
         skipped++;
-        logger.warn('parser', `Skipping invalid skill file: ${filePath}`, {
-          error: error instanceof Error ? error.message : String(error),
+        const message = error instanceof Error ? error.message : String(error);
+        logger.warn('parser', `Skipping invalid skill file: ${filePath}`, { error: message });
+        errors.push({
+          filePath,
+          entityType: 'skill',
+          level: 'error',
+          message: `Failed to parse: ${message}`,
         });
       }
     }
 
-    logger.info('parser', `Parsed ${skills.length} skills, skipped ${skipped}`);
-    return skills;
+    logger.info('parser', `Parsed ${skills.length} skills, skipped ${skipped}, ${errors.length} issues`);
+    return { skills, errors };
   }
 }
 

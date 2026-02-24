@@ -27,6 +27,7 @@ export async function GET() {
     return NextResponse.json({
       success: true,
       data,
+      parseErrors: data.parseErrors,
       graph: {
         nodes: nodesArray,
         edges: graph.edges,

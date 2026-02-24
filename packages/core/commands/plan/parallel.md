@@ -1,6 +1,6 @@
 ---
 title: "Plan: Parallel"
-description: (ePost) "Dependency-aware plan with file ownership matrix for parallel execution"
+description: (ePost) Dependency-aware plan with file ownership matrix for parallel execution
 agent: epost-architect
 argument-hint: [enhanced planning prompt from router]
 ---
@@ -17,7 +17,7 @@ Comprehensive planning with file ownership tracking and dependency graph for par
 
 ## Execution Steps
 
-### 1-4. Same as /plan:hard
+### 1-4. Same as /plan:deep
 Follow hard.md steps 1-4 exactly:
 - Parse enhanced prompt
 - Check codebase summary

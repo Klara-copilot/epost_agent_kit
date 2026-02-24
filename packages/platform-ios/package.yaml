@@ -1,22 +1,20 @@
 name: platform-ios
-version: "1.0.0"
-description: "iOS platform: Swift 6, SwiftUI, UIKit, XCTest"
+version: "2.0.0"
+description: "iOS: Swift 6, SwiftUI, UIKit, XCTest"
 layer: 1
 platforms: [ios]
 
 dependencies:
   - core
 
-recommends:
-  - ui-ux
-
 provides:
   agents:
     - epost-ios-developer
-    - epost-a11y-specialist
   skills:
-    - ios/ios-development
-    - ios/ios-accessibility
+    - ios/development
+    - ios/accessibility
+    - ios/ui-lib
+    - ios/rag
   commands:
     - ios/cook
     - ios/test
@@ -25,9 +23,7 @@ provides:
     - ios/a11y/audit
     - ios/a11y/fix
     - ios/a11y/fix-batch
-    - ios/a11y/review-buttons
-    - ios/a11y/review-headings
-    - ios/a11y/review-modals
+    - ios/a11y/review
 
 files:
   agents/: agents/

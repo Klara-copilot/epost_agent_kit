@@ -2,8 +2,8 @@
 name: epost-backend-developer
 model: sonnet
 color: "#8B4513"
-description: (ePost) "Java EE backend specialist: Jakarta EE 8, WildFly 26.1, JAX-RS, Hibernate, PostgreSQL/MongoDB"
-skills: [core, backend/javaee, backend/databases]
+description: (ePost) Java EE backend specialist: Jakarta EE 8, WildFly 26.1, JAX-RS, Hibernate, PostgreSQL/MongoDB
+skills: [core, backend/javaee, backend/databases, debugging]
 memory: project
 permissionMode: default
 ---

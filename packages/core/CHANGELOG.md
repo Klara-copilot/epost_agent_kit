@@ -76,9 +76,9 @@ Initial release.
 - Added `/core:brainstorm` — Evaluate technical approaches before implementation
 - Added `/core:bootstrap` — Initialize a new project from scratch
 - Added `/plan:fast` — Quick plan from codebase analysis only
-- Added `/plan:hard` — Deep plan with sequential research
+- Added `/plan:deep` — Deep plan with sequential research
 - Added `/plan:parallel` — Dependency-aware plan with file ownership matrix
-- Added `/fix:hard` — Complex bug fixes requiring investigation
+- Added `/fix:deep` — Complex bug fixes requiring investigation
 - Added `/fix:fast` — Quick fixes for simple bugs
 - Added `/fix:test` — Fix failing tests
 - Added `/fix:ci` — Fix CI/CD pipeline failures

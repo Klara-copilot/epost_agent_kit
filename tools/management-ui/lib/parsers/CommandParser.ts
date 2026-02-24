@@ -5,7 +5,7 @@
 
 import { readdirSync, statSync, existsSync } from 'fs';
 import { join, basename, relative } from 'path';
-import { Command, GitStatus } from '../types/entities';
+import { Command, GitStatus, ParseError } from '../types/entities';
 import { frontmatterParser } from './FrontmatterParser';
 import { logger } from '../utils/logger';
 
@@ -20,24 +20,34 @@ interface CommandFrontmatter {
 
 export class CommandParser {
   /**
-   * Parse a single command file
-   * @param filePath - Path to command .md file
-   * @param baseDir - Base commands directory for calculating relative ID
-   * @param gitStatus - Git status of the file
-   * @returns Parsed Command object
+   * Parse a single command file and collect validation warnings
    */
-  parseFile(filePath: string, baseDir: string, packageName: string, commandPrefix: string = '', gitStatus: GitStatus = 'clean'): Command {
+  parseFile(
+    filePath: string,
+    baseDir: string,
+    packageName: string,
+    commandPrefix: string = '',
+    gitStatus: GitStatus = 'clean'
+  ): { command: Command; warnings: ParseError[] } {
     const parsed = frontmatterParser.parse<CommandFrontmatter>(filePath);
     const { frontmatter, body } = parsed;
+    const warnings: ParseError[] = [];
 
-    // Generate ID from relative path (without .md extension), prefixed by the
-    // package's installation path to avoid collisions across packages.
-    // Example: prefix="android/", relPath="cook" → id="android/cook"
-    // Example: prefix="" (core), relPath="epost/cook" → id="epost/cook"
     const relPath = relative(baseDir, filePath).replace(/\.md$/, '');
     const id = commandPrefix ? `${commandPrefix}${relPath}` : relPath;
 
-    return {
+    // Validate agent field
+    if (!frontmatter.agent) {
+      warnings.push({
+        filePath,
+        entityType: 'command',
+        level: 'warning',
+        field: 'agent',
+        message: `Missing 'agent' field — command won't be routed to any agent`,
+      });
+    }
+
+    const command: Command = {
       id,
       name: frontmatter.name || id,
       title: frontmatter.title || frontmatter.name || id,
@@ -50,12 +60,12 @@ export class CommandParser {
       agent: frontmatter.agent || '',
       argumentHint: frontmatter['argument-hint'],
     };
+
+    return { command, warnings };
   }
 
   /**
    * Recursively find all .md command files in directory tree
-   * @param baseDir - Base commands directory
-   * @returns Array of command file paths
    */
   private findCommandFiles(baseDir: string): string[] {
     const commandFiles: string[] = [];
@@ -68,7 +78,6 @@ export class CommandParser {
           const fullPath = join(dir, entry.name);
 
           if (entry.isDirectory()) {
-            // Recurse into subdirectory
             traverse(fullPath);
           } else if (entry.isFile() && entry.name.endsWith('.md')) {
             commandFiles.push(fullPath);
@@ -85,39 +94,51 @@ export class CommandParser {
 
   /**
    * Parse all command files in a directory tree
-   * @param baseDir - Path to base commands directory
-   * @param gitStatusMap - Map of file paths to git status
-   * @returns Array of parsed Command objects
    */
-  parseAll(baseDir: string, packageName: string, commandPrefix: string = '', gitStatusMap?: Map<string, GitStatus>): Command[] {
+  parseAll(
+    baseDir: string,
+    packageName: string,
+    commandPrefix: string = '',
+    gitStatusMap?: Map<string, GitStatus>
+  ): { commands: Command[]; errors: ParseError[] } {
     if (!existsSync(baseDir)) {
       logger.warn('parser', `Commands directory not found: ${baseDir}`);
-      return [];
+      return { commands: [], errors: [] };
     }
 
     const commandFiles = this.findCommandFiles(baseDir);
     logger.info('parser', `Found ${commandFiles.length} command files in ${baseDir}`);
 
     const commands: Command[] = [];
+    const errors: ParseError[] = [];
     let skipped = 0;
+
     for (const filePath of commandFiles) {
       try {
         const gitStatus = gitStatusMap?.get(filePath) || 'clean';
-        const command = this.parseFile(filePath, baseDir, packageName, commandPrefix, gitStatus);
+        const { command, warnings } = this.parseFile(filePath, baseDir, packageName, commandPrefix, gitStatus);
         commands.push(command);
+        errors.push(...warnings);
         logger.debug('parser', `Parsed command: ${command.id}`, {
           name: command.name,
           agent: command.agent,
+          warnings: warnings.length,
         });
       } catch (error) {
         skipped++;
-        logger.warn('parser', `Skipping invalid command file ${filePath}`, {
-          error: error instanceof Error ? error.message : String(error),
+        const message = error instanceof Error ? error.message : String(error);
+        logger.warn('parser', `Skipping invalid command file ${filePath}`, { error: message });
+        errors.push({
+          filePath,
+          entityType: 'command',
+          level: 'error',
+          message: `Failed to parse: ${message}`,
         });
       }
     }
-    logger.info('parser', `Parsed ${commands.length} commands, skipped ${skipped}`);
-    return commands;
+
+    logger.info('parser', `Parsed ${commands.length} commands, skipped ${skipped}, ${errors.length} issues`);
+    return { commands, errors };
   }
 }
 

@@ -1,5 +1,5 @@
 ---
-description: (ePost) "Audit staged Swift changes for WCAG 2.1 AA accessibility violations"
+description: (ePost) Audit staged Swift changes for WCAG 2.1 AA accessibility violations
 agent: epost-a11y-specialist
 ---
 
@@ -10,7 +10,7 @@ Audit all Swift files changed in the current Git diff for accessibility violatio
 ## Instructions
 
 1. Get the current Git diff (all changed `.swift` files)
-2. For each changed Swift file, scan for accessibility violations using `ios/ios-accessibility/` skill rules
+2. For each changed Swift file, scan for accessibility violations using `ios/accessibility/` skill rules
 3. Check against `.agent-knowledge/epost-known-findings.json` (if exists) to match known issues
 4. Classify each violation by type, WCAG criterion, severity, and finding ID
 5. Determine if PR should be blocked (critical violations = block)

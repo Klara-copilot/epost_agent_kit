@@ -1,38 +1,27 @@
 ---
-title: Fix CI
-description: (ePost) ⭑.ᐟ Fix CI/CD pipeline failures
+title: "Fix: CI"
+description: (ePost) Fix CI pipeline failures
 agent: epost-debugger
-argument-hint: "[job or error]"
+argument-hint: [CI failure description or log URL]
 ---
 
-# Fix CI Command
+# Fix CI Pipeline Failures
 
-Diagnose and fix CI/CD pipeline failures.
+Direct CI fix — skip auto-detection, go straight to CI debugging.
 
-## Usage
-
-```
-/fix:ci [job name or error description]
-```
-
-## Examples
-
-- `/fix:ci Tests failing in GitHub Actions`
-- `/fix:ci Build error: module not found`
-- `/fix:ci Deployment failing with timeout`
+<issue>$ARGUMENTS</issue>
 
 ## Process
 
-1. Examine CI logs
-2. Identify failure point
-3. Reproduce locally if possible
-4. Fix the issue
-5. Verify with new run
-6. Update CI config if needed
+1. **Examine CI logs** — identify the failing step and error output
+2. **Identify failure point** — parse error messages, exit codes, build output
+3. **Reproduce locally** — run the same commands/tests that failed in CI
+4. **Fix** — apply the minimal correct fix
+5. **Verify** — re-run the failing command locally to confirm fix
+6. **Test** — run full test suite to catch regressions
 
-## Output
+## Rules
 
-- Fixed CI configuration
-- Updated dependencies
-- Fixed tests or code
-- Documentation for CI setup
+- Fix root causes, not symptoms
+- Do not disable or skip failing CI checks
+- If CI config needs changes, explain why

@@ -15,9 +15,7 @@
 - `/ios:a11y:audit` — Audit staged Swift changes for accessibility
 - `/ios:a11y:fix` — Fix a specific accessibility finding
 - `/ios:a11y:fix-batch` — Fix top N accessibility findings
-- `/ios:a11y:review-buttons` — Review buttons for WCAG compliance
-- `/ios:a11y:review-headings` — Review heading structure
-- `/ios:a11y:review-modals` — Review modal focus management
+- `/ios:a11y:review` — Review iOS accessibility (buttons/headings/modals/all)
 
 ### Agents
 - `epost-ios-developer` — iOS platform specialist

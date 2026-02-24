@@ -1,7 +1,7 @@
 ---
 title: "Plan: Fast"
-description: (ePost) "Quick plan from codebase analysis only, no research"
-agent: epost-planner
+description: (ePost) Quick plan from codebase analysis only, no research
+agent: epost-architect
 argument-hint: [enhanced planning prompt from router]
 ---
 
@@ -163,7 +163,7 @@ Next Steps:
 1. Review: cat {plan_path}/plan.md
 2. Start: /code {plan_path}
 
-Note: FAST plan (no research). For complex tasks use /plan:hard.
+Note: FAST plan (no research). For complex tasks use /plan:deep.
 ```
 
 ## Constraints

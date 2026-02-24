@@ -57,7 +57,7 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "~/.claude/statusline.cjs",
+    "command": "~/.claude/statusline.sh",
     "padding": 0
   }
 }

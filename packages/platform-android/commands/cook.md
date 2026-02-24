@@ -1,6 +1,6 @@
 ---
 title: Android Cook
-description: (ePost) ⭑.ᐟ Implement Android features with Kotlin and Jetpack Compose
+description: (ePost) Implement Android features with Kotlin and Jetpack Compose
 agent: epost-android-developer
 argument-hint: [plan file or feature description]
 allowed-tools:
@@ -27,7 +27,7 @@ Implement Android features from plans or descriptions. Supports Kotlin, Jetpack 
 
 ## Available Templates
 
-Reference templates in `.claude/skills/android/android-development/templates/`:
+Reference templates in `.claude/skills/android/development/assets/`:
 
 - **build-gradle-app.kts** - App module configuration
 - **compose-screen-template.kt** - Screen with loading/error/success
@@ -37,7 +37,7 @@ Reference templates in `.claude/skills/android/android-development/templates/`:
 - **navigation-template.kt** - Navigation setup
 - **hilt-module-template.kt** - DI configuration
 
-See patterns in `.claude/skills/android/android-development/patterns/`:
+See patterns in `.claude/skills/android/development/references/`:
 - **mvvm-architecture.md** - Layer responsibilities
 - **compose-best-practices.md** - State hoisting, recomposition
 - **error-handling.md** - Result wrapper, custom exceptions
@@ -56,7 +56,7 @@ See patterns in `.claude/skills/android/android-development/patterns/`:
    - Implement networking - use retrofit-service-template.kt
    - Add navigation - use navigation-template.kt
    - Setup DI - use hilt-module-template.kt
-   - Write JUnit tests - use test examples from tests/ directory
+   - Write JUnit tests - use test examples from scripts/ directory
 
 3. **Build Verification**
    - Run `./gradlew assembleDebug`

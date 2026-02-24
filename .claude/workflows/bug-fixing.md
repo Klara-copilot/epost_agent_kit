@@ -58,7 +58,7 @@ The reviewer agent:
 - Validates test coverage
 
 ### 6. Commit
-**Command**: `/git:cm`
+**Command**: `/git:commit`
 **Agent**: epost-git-manager
 **Output**: Commit with `fix:` type
 
@@ -78,20 +78,20 @@ graph LR
     K -->|No| H
     K -->|Yes| L[/review command]
     L --> M[epost-reviewer]
-    M --> N[/git:cm command]
+    M --> N[/git:commit command]
     N --> O[epost-git-manager]
     O --> P[Fixed and committed]
 ```
 
 ## Bug Categories
 
-### Simple Bugs (use /fix:fast)
+### Simple Bugs (use /epost:fix with short description)
 - Typos
 - Missing imports
 - Simple logic errors
 - Configuration issues
 
-### Complex Bugs (use /fix:hard)
+### Complex Bugs (use /epost:fix with detailed description)
 - Race conditions
 - Memory leaks
 - Performance issues

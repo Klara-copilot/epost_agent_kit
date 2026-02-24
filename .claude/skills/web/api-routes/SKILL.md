@@ -1,5 +1,5 @@
 ---
-name: api-routes
+name: web/api-routes
 description: Next.js API routes and Node.js backend patterns for the web monorepo
 keywords: [api, rest, node, express, server, endpoints, validation, route]
 platforms: [web]

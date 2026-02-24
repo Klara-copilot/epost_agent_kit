@@ -1,6 +1,6 @@
 ---
 title: Git Commit Command
-description: (ePost) ⭑.ᐟ Stage and commit with conventional commits
+description: (ePost) Stage and commit with conventional commits
 agent: epost-git-manager
 argument-hint: 👉👉👉
 ---

@@ -1,7 +1,7 @@
 ---
 title: Web Cook
 slug: web:cook
-description: (ePost) ⭑.ᐟ Implement web features directly using Next.js, React, TypeScript. Bypasses global routing.
+description: (ePost) Implement web features directly using Next.js, React, TypeScript. Bypasses global routing.
 agent: epost-web-developer
 ---
 

@@ -21,6 +21,7 @@ export interface InitOptions extends GlobalOptions {
   fresh?: boolean;
   dryRun?: boolean;
   dir?: string;
+  advancedCommands?: boolean;
 }
 
 export interface DoctorOptions extends GlobalOptions {
@@ -65,6 +66,7 @@ export interface PackageRemoveOptions extends GlobalOptions {
 
 export interface OnboardOptions extends GlobalOptions {
   dir?: string;
+  advancedCommands?: boolean;
 }
 
 export interface WorkspaceInitOptions extends GlobalOptions {

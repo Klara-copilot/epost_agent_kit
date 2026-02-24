@@ -43,6 +43,6 @@ When documenting architecture or modules:
 
 ## Cross-Reference Format
 When linking between documentation:
-- Use relative paths: `See .claude/skills/web/klara-theme/SKILL.md`
+- Use relative paths: `See .claude/skills/web/ui-lib-dev/SKILL.md`
 - Include section anchors when relevant: `See SKILL.md#token-mapping`
 - For skills/aspects: `skill/aspect-name.md` shorthand

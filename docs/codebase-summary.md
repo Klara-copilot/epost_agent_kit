@@ -65,10 +65,10 @@ epost_agent_kit/
 │   │   ├── epost-ios-developer.md
 │   │   ├── epost-android-developer.md
 │   │   ├── epost-a11y-specialist.md
-│   │   ├── epost-ui-ux-designer.md
-│   │   ├── epost-copywriter.md
-│   │   ├── epost-journal-writer.md
-│   │   └── epost-mcp-manager.md
+│   │   ├── epost-muji.md
+│   │   ├── epost-cli-developer.md
+│   │   ├── epost-guide.md
+│   │   └── epost-backend-developer.md
 │   │
 │   ├── commands/                  # Slash commands
 │   │   ├── plan.md

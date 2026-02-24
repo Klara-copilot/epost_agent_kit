@@ -4,7 +4,8 @@ description: (ePost) Android platform specialist combining implementation and te
 tools: Read, Write, Edit, Bash, Grep, Glob
 model: sonnet
 color: green
-skills: [core, android/android-development]
+skills: [core, android/development, debugging, docs-seeker]
+memory: project
 ---
 
 # Android Platform Specialist
@@ -101,31 +102,31 @@ You are the Android platform specialist. Execute complete Android development ta
 
 ## Available Templates
 
-The `android-development` skill provides production-ready templates in `.claude/skills/android/android-development/`:
+The `android-development` skill provides production-ready templates in `.claude/skills/android/development/`:
 
 ### Build Configuration
-- **templates/build-gradle-app.kts** - App module with Compose, Hilt, Room, Retrofit
-- **templates/build-gradle-lib.kts** - Library module for shared code
+- **assets/build-gradle-app.kts** - App module with Compose, Hilt, Room, Retrofit
+- **assets/build-gradle-lib.kts** - Library module for shared code
 
 ### UI & Architecture
-- **templates/compose-screen-template.kt** - Complete screen with loading/error/success states
-- **templates/viewmodel-template.kt** - ViewModel with StateFlow and error handling
-- **templates/navigation-template.kt** - Type-safe Navigation with nested graphs
-- **templates/hilt-module-template.kt** - Dependency injection setup
+- **assets/compose-screen-template.kt** - Complete screen with loading/error/success states
+- **assets/viewmodel-template.kt** - ViewModel with StateFlow and error handling
+- **assets/navigation-template.kt** - Type-safe Navigation with nested graphs
+- **assets/hilt-module-template.kt** - Dependency injection setup
 
 ### Data Layer
-- **templates/room-entity-dao-template.kt** - Database with migrations
-- **templates/retrofit-service-template.kt** - API service with error handling
+- **assets/room-entity-dao-template.kt** - Database with migrations
+- **assets/retrofit-service-template.kt** - API service with error handling
 
 ### Patterns & Best Practices
-- **patterns/mvvm-architecture.md** - Layer responsibilities and data flow
-- **patterns/compose-best-practices.md** - State hoisting, recomposition, side effects
-- **patterns/error-handling.md** - Result wrapper, custom exceptions, retry logic
+- **references/mvvm-architecture.md** - Layer responsibilities and data flow
+- **references/compose-best-practices.md** - State hoisting, recomposition, side effects
+- **references/error-handling.md** - Result wrapper, custom exceptions, retry logic
 
 ### Test Examples
-- **tests/viewmodel-test-example.kt** - Test ViewModels with Turbine
-- **tests/repository-test-example.kt** - Test repositories with fakes/mocks
-- **tests/compose-ui-test-example.kt** - Compose testing with semantics
+- **scripts/viewmodel-test-example.kt** - Test ViewModels with Turbine
+- **scripts/repository-test-example.kt** - Test repositories with fakes/mocks
+- **scripts/compose-ui-test-example.kt** - Compose testing with semantics
 
 ## Android Development Patterns
 

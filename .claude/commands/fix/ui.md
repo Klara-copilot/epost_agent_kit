@@ -1,37 +1,27 @@
 ---
-title: Fix UI
-description: (ePost) ⭑.ᐟ Fix UI bugs and visual issues
+title: "Fix: UI"
+description: (ePost) Fix UI/layout issues
 agent: epost-debugger
-argument-hint: "[description]"
+argument-hint: [UI issue description]
 ---
 
-# Fix UI Command
+# Fix UI/Layout Issues
 
-Fix visual bugs, layout issues, and UI problems.
+Direct UI fix — skip auto-detection, debug visual/layout problems.
 
-## Usage
-
-```
-/fix:ui [description of UI issue]
-```
-
-## Examples
-
-- `/fix:ui Button not aligning properly on mobile`
-- `/fix:ui Modal not closing on backdrop click`
-- `/fix:ui Text overflow in card component`
+<issue>$ARGUMENTS</issue>
 
 ## Process
 
-1. Reproduce the UI issue
-2. Identify root cause (CSS, component logic, etc.)
-3. Implement fix
-4. Test across browsers/devices
-5. Check accessibility impact
+1. **Reproduce** — identify the UI issue (screenshot, browser DevTools, description)
+2. **Identify root cause** — inspect CSS, component structure, state management
+3. **Fix** — apply the minimal correct fix (CSS, component logic, or layout)
+4. **Check a11y** — verify the fix doesn't break accessibility (contrast, focus, ARIA)
+5. **Cross-browser** — verify fix works across target browsers if applicable
 
-## Output
+## Rules
 
-- Fixed CSS/styling
-- Updated components
-- Responsive design fixes
-- Accessibility improvements
+- Fix root causes, not symptoms
+- Check accessibility impact of all UI changes
+- Prefer CSS fixes over JavaScript workarounds
+- Test responsive behavior if layout is affected

@@ -309,11 +309,14 @@ export function getOrderedTeamChoices(
 
   const choices: Array<Separator | { name: string; value: string }> = [];
 
+  // "Explore" option always first
+  choices.push({ name: "Full — I want to explore", value: "__explore__" });
+
   for (const group of TEAM_ORDER) {
     const groupTeams = group.teams.filter((t) => existingTeams.has(t));
     if (groupTeams.length === 0) continue;
 
-    if (choices.length > 0) choices.push(new Separator());
+    choices.push(new Separator());
 
     for (const t of groupTeams) {
       choices.push({
@@ -335,9 +338,9 @@ export function getOrderedTeamChoices(
     }
   }
 
-  // Always add "Others" at the end
+  // Add "Other" option at end for manual profile browsing
   choices.push(new Separator());
-  choices.push({ name: "Others / I'm exploring", value: "__other__" });
+  choices.push({ name: "Other — browse all profiles", value: "__other__" });
 
   return choices;
 }
