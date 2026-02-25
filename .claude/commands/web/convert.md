@@ -1,7 +1,7 @@
 ---
 title: Convert Command
 description: (ePost) Convert prototype/external code to system-consistent code
-agent: epost-implementer
+agent: epost-web-developer
 argument-hint: "[path/to/prototype or repo URL]"
 ---
 
