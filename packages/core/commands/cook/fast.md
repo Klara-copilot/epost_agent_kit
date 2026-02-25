@@ -13,22 +13,61 @@ Direct implementation — skip "Should I create a plan first?" question, impleme
 
 **IMPORTANT:** Analyze the skills catalog and activate the skills that are needed for the task.
 
-## Process
+## Step 1: Intent Classification
 
-1. **Parse** — extract feature requirements from description
-2. **Implement** — create/modify files directly (no plan creation)
-3. **Test** — write and run tests for new code
-4. **Verify** — run type checking and compilation
+Classify the feature before writing any code:
 
-## Quality Gates
+| Dimension | Value |
+|-----------|-------|
+| **Type** | feature / fix / refactor / docs |
+| **Scope** | single-file / multi-file / multi-module |
+| **Risk** | low / medium / high (schema changes, auth, public APIs) |
 
-1. **Type Check**: No compilation errors
-2. **Test Execution**: All relevant tests pass
-3. **Coverage Gate**: 80%+ coverage (`node .claude/scripts/check-coverage.cjs`)
-4. **Security Scan**: No secrets detected (`node .claude/scripts/scan-secrets.cjs`)
+**Guard rail**: If scope is multi-module (>5 files likely), pause and suggest `/cook:parallel` instead.
+
+## Step 2: Implement
+
+Create/modify files directly (no plan creation).
+
+- Report progress per file as you go
+- Follow YAGNI, KISS, DRY principles
+- Respect file ownership — don't modify files outside the feature scope
+
+## Step 3: Review Gate
+
+After implementation, run all checks before testing:
+
+1. **Type Check** — No compilation errors
+2. **Lint** — No lint violations
+3. **Security Scan** — No secrets detected (`node .claude/scripts/scan-secrets.cjs`)
+4. **Coverage Gate** — 80%+ coverage (`node .claude/scripts/check-coverage.cjs`)
+
+If any check fails → fix immediately before proceeding.
+
+## Step 4: Test
+
+Write and run tests for new code.
+
+- Unit tests for new functions/methods
+- Integration test if touching external boundaries (API, DB, auth)
+- All relevant tests must pass
+
+**Auto-escalation**: If tests fail twice with different fixes attempted → escalate to `epost-debugger` with the failing test output and relevant files. Do not attempt a third guess.
+
+## Step 5: Finalize
+
+1. **Docs update** — Update relevant docs if public API or behavior changed
+2. **Change summary** — Output a concise summary:
+   ```
+   Files changed: N
+   Tests added: N
+   Behavior change: [yes/no + 1 line description]
+   Follow-up tasks: [any new issues discovered]
+   ```
+3. **Commit offer** — Ask: "Commit? [Y/n]" → use `epost-git-manager` if yes
 
 ## Rules
 
 - Always write tests for new code
-- Update relevant docs
-- Report progress per file
+- Never skip the Review Gate (Step 3)
+- Never attempt the same fix more than twice — escalate instead

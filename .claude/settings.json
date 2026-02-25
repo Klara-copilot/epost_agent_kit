@@ -1,5 +1,52 @@
 {
+  "includeCoAuthoredBy": false,
   "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/session-init.cjs"
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/subagent-init.cjs"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/dev-rules-reminder.cjs"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash|Glob|Grep|Read|Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/scout-block.cjs"
+          },
+          {
+            "type": "command",
+            "command": "node .claude/hooks/privacy-block.cjs"
+          }
+        ]
+      }
+    ],
     "PostToolUse": [
       {
         "matcher": "Write|Edit",
@@ -26,19 +73,12 @@
       {
         "hooks": [
           {
+            "type": "command",
+            "command": "node .claude/hooks/notifications/notify.cjs 2>/dev/null || true"
+          },
+          {
             "type": "prompt",
             "prompt": "Verify all requested tasks are complete. If any remain unfinished, respond with {\"ok\": false, \"reason\": \"remaining work description\"}."
-          }
-        ]
-      }
-    ],
-    "SessionStart": [
-      {
-        "matcher": "compact",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "echo 'Reminder: This is epost_agent_kit. Use epost agents for all tasks. Check CLAUDE.md for conventions.'"
           }
         ]
       }
@@ -49,7 +89,9 @@
       "Bash(npm run lint:*)",
       "Bash(npm run build)",
       "Bash(npm run test:*)",
-      "mcp__xcodebuildmcp__*"
+      "mcp__xcodebuildmcp__*",
+      "Bash(node .claude/hooks/*)",
+      "Bash(node .claude/scripts/*)"
     ]
   },
   "env": {

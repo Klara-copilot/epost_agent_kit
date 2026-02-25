@@ -107,6 +107,19 @@ User Request -> Orchestrator
   +-- Project oversight -> epost-orchestrator (analysis & coordination)
 ```
 
+### Fast Paths (skip orchestrator when possible)
+
+When the user invokes a platform-prefixed command directly, the orchestrator is bypassed entirely — the hub routes straight to the platform agent:
+
+| Command | Direct Target | No orchestrator hop |
+|---------|--------------|---------------------|
+| `/web:cook`, `/web:test`, `/web:debug` | `epost-web-developer` | ✓ |
+| `/ios:cook`, `/ios:test`, `/ios:debug` | `epost-ios-developer` | ✓ |
+| `/android:cook`, `/android:test` | `epost-android-developer` | ✓ |
+| `/backend:cook`, `/backend:test` | `epost-backend-developer` | ✓ |
+
+**Single-platform detection**: When an incoming task clearly targets one platform (e.g., all modified files are `.swift`, or the request mentions `SwiftUI`), delegate immediately to the platform agent — do NOT initiate a full multi-platform context scan.
+
 ## Platform Routing
 
 When platform detected:

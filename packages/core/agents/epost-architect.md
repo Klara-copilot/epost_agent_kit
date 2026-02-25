@@ -3,7 +3,7 @@ name: epost-architect
 description: (ePost) Architecture planning agent that creates detailed implementation plans by researching and analyzing requirements. Use for /plan command, /cook without existing plan, or complex features needing breakdown.
 color: blue
 model: opus
-skills: [core, planning, doc-coauthoring, knowledge/retrieval]
+skills: [core, planning, doc-coauthoring, knowledge/retrieval, sequential-thinking]
 memory: project
 permissionMode: plan
 ---

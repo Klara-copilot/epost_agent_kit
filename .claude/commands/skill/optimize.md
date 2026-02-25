@@ -2,7 +2,7 @@
 title: Skill Optimize Command
 description: (ePost) Optimize an existing agent skill automatically
 agent: epost-implementer
-argument-hint: [skill-name] [prompt]
+argument-hint: "[skill-name] [prompt]"
 ---
 
 Think harder.

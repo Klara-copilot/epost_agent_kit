@@ -92,7 +92,20 @@ Collect all verification reports:
 - Ask: "Found N unhandled edge cases. Fix? [Y/n]"
 - **IF yes:** Dispatch `epost-debugger` with unhandled list
 
-### 6. Final Report
+### 6. Re-Review (1 pass only)
+
+After debugger fixes, run a single verification pass — do NOT re-run full discovery:
+- Re-dispatch one `epost-reviewer` agent with the original unhandled edge cases + fixed files
+- Task: confirm each was resolved (handled / still unhandled / introduced regression)
+
+**IF re-review passes** (all previously unhandled edge cases now handled):
+- Proceed to Final Report → offer commit
+
+**IF re-review fails** (still unhandled or regression):
+- Report remaining issues clearly
+- Stop — do NOT enter a third loop. Let the user decide next steps.
+
+### 7. Final Report
 
 - Summary of verification
 - Ask: "Commit? [Y/n]" → use `epost-git-manager`

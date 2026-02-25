@@ -72,5 +72,7 @@ files:
   output-styles/: output-styles/
   workflows/: workflows/
   settings.json: settings.json
+  .ck.json: .ck.json
+  .ckignore: .ckignore
 
 settings_strategy: base
