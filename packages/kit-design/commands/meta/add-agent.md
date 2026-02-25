@@ -1,7 +1,7 @@
 ---
 description: (ePost) ⚙️ Create a new agent definition
 agent: epost-implementer
-argument-hint: [agent-name] [description]
+argument-hint: "[agent-name] [description]"
 ---
 
 ## Your Mission

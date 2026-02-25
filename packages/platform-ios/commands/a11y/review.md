@@ -1,7 +1,7 @@
 ---
 description: (ePost) Review iOS accessibility for WCAG 2.1 AA compliance
 agent: epost-a11y-specialist
-argument-hint: [buttons|headings|modals] (optional)
+argument-hint: "[buttons|headings|modals] (optional)"
 ---
 
 Review iOS accessibility compliance. Auto-detects focus area from argument.

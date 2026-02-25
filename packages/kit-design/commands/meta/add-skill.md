@@ -1,7 +1,7 @@
 ---
 description: (ePost) ⚙️ Create a new skill definition
 agent: epost-implementer
-argument-hint: [skill-name] [description]
+argument-hint: "[skill-name] [description]"
 ---
 
 ## Your Mission

@@ -188,7 +188,6 @@ Also, delete any example files and directories not needed for the skill. Create 
 ---
 name: Skill Name
 description: This skill should be used when the user asks to "specific phrase 1", "specific phrase 2", "specific phrase 3". Include exact phrases users would say that should trigger this skill. Be concrete and specific.
-version: 0.1.0
 ---
 ```
 
@@ -203,6 +202,21 @@ description: Use this skill when working with hooks.  # Wrong person, vague
 description: Load when user needs hook help.  # Not third person
 description: Provides hook guidance.  # No trigger phrases
 ```
+
+**Valid frontmatter fields for skills:**
+- `name` (required)
+- `description` (required)
+- `user-invocable` — Boolean, default true
+- `context` — `fork` or `inline`
+- `agent` — Agent to handle the skill (used with `context: fork`)
+- `disable-model-invocation` — Boolean
+- `keywords` — Array of discovery keywords
+- `platforms` — Array of platform tags
+- `agent-affinity` — Array of preferred agent IDs
+- `triggers` — Array of trigger phrases
+
+**Invalid fields (NOT valid Claude Code skill frontmatter):**
+- ❌ `version` — Not a Claude Code frontmatter field. Do not include `version:` in skill frontmatter.
 
 To complete SKILL.md body, answer the following questions:
 

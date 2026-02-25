@@ -6,7 +6,7 @@
 export type GitStatus = 'staged' | 'modified' | 'untracked' | 'clean';
 export type ModelType = 'haiku' | 'sonnet' | 'opus';
 export type MemoryType = 'project' | 'session';
-export type PermissionMode = 'plan' | 'execute';
+export type PermissionMode = 'default' | 'acceptEdits' | 'plan' | 'bypassPermissions';
 export type ContextType = 'fork' | 'inline';
 
 /**

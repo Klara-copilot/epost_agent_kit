@@ -353,8 +353,28 @@ Output: [What to provide]
 | name | Yes | lowercase-hyphens | code-reviewer |
 | description | Yes | Text + examples | Use when... <example>... |
 | model | Yes | inherit/sonnet/opus/haiku | inherit |
-| color | Yes | Color name | blue |
+| color | Yes | Color name or hex | blue, "#8B4513" |
 | tools | No | Array of tool names | ["Read", "Grep"] |
+| skills | No | Bracket array of skill IDs | [core, debugging, code-review] |
+| memory | No | project or session | project |
+| permissionMode | No | default/acceptEdits/plan/bypassPermissions | default |
+| disallowedTools | No | Array of tool names | [Write, Edit] |
+
+### Ecosystem Fields (ePost Agent Kit)
+
+When creating agents for the ePost agent kit, these additional fields configure agent behavior:
+
+**`skills`** — Array of skill IDs the agent should load. Use bracket notation: `skills: [core, debugging]`. Most agents include `core` as the first skill. Read-only agents (researcher, reviewer) may omit implementation skills.
+
+**`memory`** — Controls agent memory scope. Use `project` for agents that need cross-session context. Use `session` for agents with ephemeral tasks.
+
+**`permissionMode`** — Controls what actions the agent can take without user confirmation:
+- `default` — Standard permission prompts (most agents)
+- `acceptEdits` — Auto-accept file edits (implementers, developers)
+- `plan` — Read-only exploration, no writes (architects, researchers, reviewers)
+- `bypassPermissions` — Full autonomy (use with caution)
+
+**`disallowedTools`** — Explicitly prevent agent from using specific tools. Useful for read-only agents: `disallowedTools: [Write, Edit]`.
 
 ### Best Practices
 

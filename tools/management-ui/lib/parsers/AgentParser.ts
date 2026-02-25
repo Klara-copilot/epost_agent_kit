@@ -22,7 +22,7 @@ interface AgentFrontmatter {
 }
 
 const VALID_MODELS: ModelType[] = ['haiku', 'sonnet', 'opus'];
-const VALID_PERMISSION_MODES: PermissionMode[] = ['plan', 'execute'];
+const VALID_PERMISSION_MODES: PermissionMode[] = ['default', 'acceptEdits', 'plan', 'bypassPermissions'];
 const VALID_MEMORY_TYPES: MemoryType[] = ['project', 'session'];
 
 export class AgentParser {

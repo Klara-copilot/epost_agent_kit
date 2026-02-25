@@ -14,7 +14,7 @@ interface CommandFrontmatter {
   title?: string;
   description?: string;
   slug?: string;
-  agent: string;
+  agent?: string;
   'argument-hint'?: string;
 }
 
@@ -35,17 +35,6 @@ export class CommandParser {
 
     const relPath = relative(baseDir, filePath).replace(/\.md$/, '');
     const id = commandPrefix ? `${commandPrefix}${relPath}` : relPath;
-
-    // Validate agent field
-    if (!frontmatter.agent) {
-      warnings.push({
-        filePath,
-        entityType: 'command',
-        level: 'warning',
-        field: 'agent',
-        message: `Missing 'agent' field — command won't be routed to any agent`,
-      });
-    }
 
     const command: Command = {
       id,

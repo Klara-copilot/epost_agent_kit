@@ -1,7 +1,6 @@
 ---
 name: kit/commands
 description: This skill should be used when the user asks to "create a slash command", "add a command", "write a custom command", "define command arguments", "use command frontmatter", "organize commands", "create command with file references", "interactive command", "use AskUserQuestion in command", or needs guidance on slash command structure, YAML frontmatter fields, dynamic arguments, bash execution in commands, user interaction patterns, or command development best practices for Claude Code.
-version: 0.2.0
 ---
 
 # Command Development for Claude Code
@@ -177,6 +176,22 @@ argument-hint: [pr-number] [priority] [assignee]
 - Helps users understand command arguments
 - Improves command discovery
 - Documents command interface
+
+### agent (optional)
+
+**Purpose:** Route command to a specific agent for execution
+**Type:** String (agent name)
+**Default:** None (command runs in current context)
+
+```yaml
+---
+agent: epost-web-developer
+---
+```
+
+**When to use:** Only when a command must always be handled by a specific agent.
+
+**Important:** Most commands do NOT need `agent:` in frontmatter. Commands that are skill-backed (using `context: fork` + `agent:` in the skill) or intent-routed (hub/router commands like `/epost`) are routed automatically by Claude Code. Only use `agent:` when direct agent routing is required.
 
 ### disable-model-invocation
 
