@@ -1,7 +1,8 @@
 # API Routes
 
 **Created by**: Phuong Doan
-**Last Updated**: 2026-02-09
+**Last Updated**: 2026-02-25
+**Version**: 0.1.0
 
 ## Overview
 
@@ -98,6 +99,8 @@ Agent commands follow a consistent pattern:
 | `/ios:simulator` | Manage simulators | `list`, `boot`, `shutdown` |
 | `/ios:a11y:audit` | Audit accessibility | `--staged` |
 | `/ios:a11y:fix` | Fix a11y issue | `<id>` |
+| `/ios:a11y:fix-batch` | Fix top N a11y issues | `<count>` |
+| `/ios:a11y:review` | Review iOS a11y | `--buttons`, `--headings`, `--all` |
 
 #### Android Platform
 | Command | Description | Arguments |
@@ -172,7 +175,7 @@ interface ResolutionResult {
 ---
 name: agent-name                      # Required: kebab-case
 description: Brief description        # Required: one-line
-model: sonnet|opus|haiku             # Optional: default sonnet
+model: sonnet|opus|haiku|sonnet-4|opus-4|claude-4-5  # Optional: default sonnet
 tools:                                # Optional: array
   - Read
   - Write
@@ -192,7 +195,7 @@ interface AgentInvocation {
   prompt: string;                     // User prompt
   context?: string[];                 // File paths for context
   temperature?: number;               // Override default
-  model?: 'sonnet' | 'opus' | 'haiku';
+  model?: 'sonnet' | 'opus' | 'haiku' | 'sonnet-4' | 'opus-4' | 'claude-4-5';
   background?: boolean;               // Run in background
 }
 
