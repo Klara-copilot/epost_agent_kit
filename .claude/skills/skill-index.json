@@ -3,6 +3,15 @@
   "version": "1.0.0",
   "skills": [
     {
+      "name": "android/accessibility",
+      "description": "WCAG 2.1 AA compliance rules for Android — TalkBack, contentDescription, Jetpack Compose semantics patterns",
+      "keywords": ["android", "accessibility", "talkback", "contentdescription", "compose-semantics", "wcag"],
+      "platforms": ["android"],
+      "triggers": [".kt", "contentDescription", "semantics", "TalkBack", "/android:a11y"],
+      "agent-affinity": ["epost-a11y-specialist", "epost-android-developer"],
+      "path": "android/accessibility/SKILL.md"
+    },
+    {
       "name": "android/development",
       "description": "Android development patterns with Kotlin and Jetpack Compose. Includes templates, patterns, and test examples for building production-ready Android apps.",
       "keywords": [

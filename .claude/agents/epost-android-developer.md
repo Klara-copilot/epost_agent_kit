@@ -317,9 +317,24 @@ class LoginActivityTest {
 - Verify large file handling in task requirements
 - Follow project code standards from `./docs/code-standards.md`
 
+## Accessibility
+
+Delegate Android accessibility tasks to the unified accessibility agent:
+
+| Task | Agent | Command |
+|------|-------|---------|
+| Real-time a11y guidance | `epost-a11y-specialist` | (automatic during coding) |
+| Batch audit (pre-commit/PR) | `epost-a11y-specialist` | `/android:a11y:audit` |
+| Fix specific finding | `epost-a11y-specialist` | `/android:a11y:fix <id>` |
+| Fix top N findings | `epost-a11y-specialist` | `/android:a11y:fix-batch <n>` |
+| Review accessibility | `epost-a11y-specialist` | `/android:a11y:review [buttons|headings|modals]` |
+
+When a developer asks about TalkBack, contentDescription, Compose semantics, or WCAG, route to `epost-a11y-specialist`.
+
 ## Related Documents
 
 - `.claude/skills/core/SKILL.md` — Operational boundaries
+- `.claude/skills/android/accessibility/SKILL.md` — Android accessibility rules
 - `CLAUDE.md` — Project context
 
 ---

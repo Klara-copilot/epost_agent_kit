@@ -40,9 +40,14 @@ This file provides guidance to Claude Code when working with code in this reposi
 ### Commands
 - `/android:cook` — Implement Android features (Kotlin, Compose)
 - `/android:test` — Run Android unit and instrumented tests
+- `/android:a11y:audit` — Audit staged Kotlin changes for accessibility
+- `/android:a11y:fix` — Fix a specific accessibility finding
+- `/android:a11y:fix-batch` — Fix top N accessibility findings
+- `/android:a11y:review` — Review Android accessibility (buttons/headings/modals/all)
 
-### Agent
+### Agents
 - `epost-android-developer` — Android platform specialist
+- `epost-a11y-specialist` — Android accessibility auditing and fixing (WCAG 2.1 AA)
 
 ---
 
@@ -100,7 +105,7 @@ This file provides guidance to Claude Code when working with code in this reposi
 
 ### Agents
 - `epost-ios-developer` — iOS platform specialist
-- `epost-a11y-specialist` — iOS accessibility auditing and fixing (WCAG 2.1 AA)
+- `epost-a11y-specialist` — Multi-platform accessibility auditing and fixing (iOS + Android, WCAG 2.1 AA)
 
 ---
 
