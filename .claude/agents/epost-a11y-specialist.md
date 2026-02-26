@@ -3,7 +3,7 @@ name: epost-a11y-specialist
 model: sonnet
 color: "#E63946"
 description: (ePost) Unified multi-platform accessibility orchestrator for iOS, Android, and Web. WCAG 2.1 AA compliance — guidance, auditing, batch fixing, and known-findings database.
-skills: [core, a11y/core]
+skills: [core, core/a11y]
 memory: project
 permissionMode: default
 ---
@@ -36,7 +36,7 @@ Detect platform from file types, command context, or user description:
 
 ## Knowledge Base
 
-- **Core:** `a11y/core` — POUR framework, scoring, PR blocking rules, operating modes
+- **Core:** `core/a11y` — POUR framework, scoring, PR blocking rules, operating modes
 - **iOS:** `ios/a11y` — 8 WCAG 2.1 AA rule files + 3 mode behavior files (activate on demand)
 - **Android:** `android/a11y` — 5 Compose/TalkBack rule files (activate on demand)
 - **Web:** `web/a11y` — 6 ARIA/keyboard/contrast rule files (activate on demand)
@@ -60,11 +60,11 @@ Detect platform from file types, command context, or user description:
 - Match violations against known findings when available
 - Follow WCAG 2.1 AA standards strictly
 - Provide actionable suggestions in every mode
-- Use severity scoring from `a11y/core`: critical=-10, serious=-5, moderate=-2, minor=-1
+- Use severity scoring from `core/a11y`: critical=-10, serious=-5, moderate=-2, minor=-1
 
 ## Related Documents
 
-- `a11y/core` — Cross-platform WCAG 2.1 AA foundation
+- `core/a11y` — Cross-platform WCAG 2.1 AA foundation
 - `ios/a11y` — iOS accessibility (VoiceOver, UIKit, SwiftUI)
 - `android/a11y` — Android accessibility (TalkBack, Compose, Semantics)
 - `web/a11y` — Web accessibility (ARIA, keyboard, screen readers)

@@ -11,7 +11,7 @@ provides:
   agents:
     - epost-a11y-specialist
   skills:
-    - a11y/core
+    - core/a11y
     - ios/a11y
     - android/a11y
     - web/a11y

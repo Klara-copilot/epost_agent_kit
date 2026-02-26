@@ -53,5 +53,5 @@ All interactive composables (buttons, checkboxes, icon buttons, clickable rows) 
 
 ## Related Documents
 
-- `a11y/core` — POUR framework, severity scoring, operating modes
+- `core/a11y` — POUR framework, severity scoring, operating modes
 - `ios/a11y` — iOS equivalent (VoiceOver, UIKit, SwiftUI)

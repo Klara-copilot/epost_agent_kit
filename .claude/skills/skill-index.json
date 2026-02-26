@@ -1,19 +1,8 @@
 {
-  "generated": "2026-02-26T09:16:55.830Z",
+  "generated": "2026-02-26T09:22:04.420Z",
   "version": "1.0.0",
   "count": 45,
   "skills": [
-    {
-      "name": "a11y/core",
-      "description": "WCAG 2.1 AA cross-platform accessibility foundation — POUR framework, severity scoring, known-findings database, and operating modes",
-      "keywords": [],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [],
-      "path": "a11y/core/SKILL.md"
-    },
     {
       "name": "android/a11y",
       "description": "WCAG 2.1 AA accessibility rules for Android — Compose + traditional Views/XML, TalkBack, contentDescription, touch targets, focus semantics, color contrast",
@@ -130,6 +119,17 @@
       "triggers": [],
       "agent-affinity": [],
       "path": "core/SKILL.md"
+    },
+    {
+      "name": "core/a11y",
+      "description": "WCAG 2.1 AA cross-platform accessibility foundation — POUR framework, severity scoring, known-findings database, and operating modes",
+      "keywords": [],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [],
+      "agent-affinity": [],
+      "path": "core/a11y/SKILL.md"
     },
     {
       "name": "debugging",

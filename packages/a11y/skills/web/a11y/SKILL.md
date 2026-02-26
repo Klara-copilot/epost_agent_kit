@@ -113,4 +113,4 @@ tabIndex={-1}  // Programmatic focus only, not in tab order
 
 - `ios/a11y` — iOS counterpart (VoiceOver, UIKit, SwiftUI)
 - `android/a11y` — Android counterpart (TalkBack, Compose, Semantics)
-- `a11y/core` — Platform-agnostic core principles (POUR, scoring)
+- `core/a11y` — Platform-agnostic core principles (POUR, scoring)
