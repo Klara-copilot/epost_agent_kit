@@ -40,7 +40,7 @@ Comprehensive WCAG 2.1 AA accessibility rules for iOS development. Covers VoiceO
 
 ## Known Findings
 
-See `core-a11y` skill for known-findings database documentation. Schema at `.claude/assets/known-findings-schema.json`.
+See `a11y` skill for known-findings database documentation. Schema at `.claude/assets/known-findings-schema.json`.
 
 ## Agents Using This Skill
 
