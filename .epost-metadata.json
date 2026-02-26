@@ -14,12 +14,12 @@
     "design-system",
     "domains"
   ],
-  "installedAt": "2026-02-26T08:32:19.901Z",
+  "installedAt": "2026-02-26T08:53:49.391Z",
   "files": {
     ".claude/agents/epost-architect.md": {
       "path": ".claude/agents/epost-architect.md",
       "checksum": "e3ac61e73a56a76c437c7b41572d78dcddfabf98c5a7480eed63221c3e454776",
-      "installedAt": "2026-02-26T08:32:18.353Z",
+      "installedAt": "2026-02-26T08:53:48.603Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -27,7 +27,7 @@
     ".claude/agents/epost-brainstormer.md": {
       "path": ".claude/agents/epost-brainstormer.md",
       "checksum": "6f436832209c29c44364468c7c0e81b07571266e1ed22570d2f067a6645ead3f",
-      "installedAt": "2026-02-26T08:32:18.354Z",
+      "installedAt": "2026-02-26T08:53:48.604Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -35,7 +35,7 @@
     ".claude/agents/epost-debugger.md": {
       "path": ".claude/agents/epost-debugger.md",
       "checksum": "0cc37d8775137a72fdeded8274deeee5ac6ec966732262f2c388cecdb6cead11",
-      "installedAt": "2026-02-26T08:32:18.354Z",
+      "installedAt": "2026-02-26T08:53:48.604Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -43,7 +43,7 @@
     ".claude/agents/epost-documenter.md": {
       "path": ".claude/agents/epost-documenter.md",
       "checksum": "589e5c5a9a4108b7dd139bdcfaf499aa3ddb8fa953ed64de2fa0552ecaa8ba31",
-      "installedAt": "2026-02-26T08:32:18.355Z",
+      "installedAt": "2026-02-26T08:53:48.604Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -51,7 +51,7 @@
     ".claude/agents/epost-git-manager.md": {
       "path": ".claude/agents/epost-git-manager.md",
       "checksum": "13e1b8a68bf5023020e39bbf282aa3abc45b9550a3149753923d15d520faf0e9",
-      "installedAt": "2026-02-26T08:32:18.355Z",
+      "installedAt": "2026-02-26T08:53:48.605Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -59,7 +59,7 @@
     ".claude/agents/epost-guide.md": {
       "path": ".claude/agents/epost-guide.md",
       "checksum": "fa4c543107069ee040bb71adcbb2b53b2343a4e9971f91582408fba3cf15fef7",
-      "installedAt": "2026-02-26T08:32:18.486Z",
+      "installedAt": "2026-02-26T08:53:48.605Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -67,7 +67,7 @@
     ".claude/agents/epost-implementer.md": {
       "path": ".claude/agents/epost-implementer.md",
       "checksum": "079cfb30ec98c7fab2476cadbec3e4a3970c8ecff56c0ce83c3ba868efb0398a",
-      "installedAt": "2026-02-26T08:32:18.486Z",
+      "installedAt": "2026-02-26T08:53:48.608Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -75,7 +75,7 @@
     ".claude/agents/epost-orchestrator.md": {
       "path": ".claude/agents/epost-orchestrator.md",
       "checksum": "f2dbe22e5582e5f11e42751d85ce73a04e059d90c299906bb2d6534c2920dc47",
-      "installedAt": "2026-02-26T08:32:18.487Z",
+      "installedAt": "2026-02-26T08:53:48.608Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -83,7 +83,7 @@
     ".claude/agents/epost-researcher.md": {
       "path": ".claude/agents/epost-researcher.md",
       "checksum": "49761a414745a473808cea22b8b7818a61869a2c9985842b98d66b1d0eb3cdd9",
-      "installedAt": "2026-02-26T08:32:18.487Z",
+      "installedAt": "2026-02-26T08:53:48.608Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -91,7 +91,7 @@
     ".claude/agents/epost-reviewer.md": {
       "path": ".claude/agents/epost-reviewer.md",
       "checksum": "575409781dcb7ccc1b1b11fb02331433054e6d6cc1d7351d48b372259dd471bf",
-      "installedAt": "2026-02-26T08:32:18.487Z",
+      "installedAt": "2026-02-26T08:53:48.609Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -99,7 +99,7 @@
     ".claude/agents/epost-scout.md": {
       "path": ".claude/agents/epost-scout.md",
       "checksum": "f5ffbec54095bcadc60d7ad98b28b1e8b35fc89efe37fe2aff9fed5aa94a3c93",
-      "installedAt": "2026-02-26T08:32:18.487Z",
+      "installedAt": "2026-02-26T08:53:48.609Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -107,7 +107,7 @@
     ".claude/agents/epost-tester.md": {
       "path": ".claude/agents/epost-tester.md",
       "checksum": "1c603f7f5bbef8153ff74131748d7723f43d5338cb558b1ab22ad8dae56f2b98",
-      "installedAt": "2026-02-26T08:32:18.487Z",
+      "installedAt": "2026-02-26T08:53:48.609Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -115,7 +115,7 @@
     ".claude/skills/code-review/SKILL.md": {
       "path": ".claude/skills/code-review/SKILL.md",
       "checksum": "2b3ccc265398593831bbb6002737d698935bb522be961f10f3eb76ae83e713ae",
-      "installedAt": "2026-02-26T08:32:18.511Z",
+      "installedAt": "2026-02-26T08:53:48.633Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -123,7 +123,7 @@
     ".claude/skills/core/SKILL.md": {
       "path": ".claude/skills/core/SKILL.md",
       "checksum": "5c802f7aaeefdf884b3a492c506750f9844d021681efc85c20dc32b9b7793083",
-      "installedAt": "2026-02-26T08:32:18.512Z",
+      "installedAt": "2026-02-26T08:53:48.633Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -131,7 +131,7 @@
     ".claude/skills/core/references/decision-boundaries.md": {
       "path": ".claude/skills/core/references/decision-boundaries.md",
       "checksum": "3903282c1dea9f4082236ea36324a1fbb9ad3df7c61acad10e169f8b3208dd70",
-      "installedAt": "2026-02-26T08:32:18.512Z",
+      "installedAt": "2026-02-26T08:53:48.633Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -139,7 +139,7 @@
     ".claude/skills/core/references/documentation-standards.md": {
       "path": ".claude/skills/core/references/documentation-standards.md",
       "checksum": "c6cab6676684154a0fb7c4d7825a837fdec8df48823378ac94438d4cb31e4539",
-      "installedAt": "2026-02-26T08:32:18.512Z",
+      "installedAt": "2026-02-26T08:53:48.633Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -147,7 +147,7 @@
     ".claude/skills/core/references/environment-safety.md": {
       "path": ".claude/skills/core/references/environment-safety.md",
       "checksum": "f4a688000841a0c5102e8ba1ec2e677eba1305531588ccd319b6ada570cc775f",
-      "installedAt": "2026-02-26T08:32:18.513Z",
+      "installedAt": "2026-02-26T08:53:48.633Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -155,7 +155,7 @@
     ".claude/skills/core/references/external-tools-usage.md": {
       "path": ".claude/skills/core/references/external-tools-usage.md",
       "checksum": "0a7a96c11940b25fdde18b8d02aca58dee658ccf969816f9735bf5f4e87d34f2",
-      "installedAt": "2026-02-26T08:32:18.513Z",
+      "installedAt": "2026-02-26T08:53:48.634Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -163,7 +163,7 @@
     ".claude/skills/debugging/SKILL.md": {
       "path": ".claude/skills/debugging/SKILL.md",
       "checksum": "f5619403583bd4fd6d8a044c864d85f30ebe10f008bb994aa67e8651a62371f7",
-      "installedAt": "2026-02-26T08:32:18.513Z",
+      "installedAt": "2026-02-26T08:53:48.634Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -171,7 +171,7 @@
     ".claude/skills/doc-coauthoring/SKILL.md": {
       "path": ".claude/skills/doc-coauthoring/SKILL.md",
       "checksum": "2e47d78846faeea4a56e9809c52700087a15a2155a3f293a3efbaded81398ef4",
-      "installedAt": "2026-02-26T08:32:18.513Z",
+      "installedAt": "2026-02-26T08:53:48.634Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -179,7 +179,7 @@
     ".claude/skills/docs-seeker/SKILL.md": {
       "path": ".claude/skills/docs-seeker/SKILL.md",
       "checksum": "19c38b0a2b189d94078180474fc02a6acee778e224d0566af67af409bc7c13e2",
-      "installedAt": "2026-02-26T08:32:18.513Z",
+      "installedAt": "2026-02-26T08:53:48.634Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -187,7 +187,7 @@
     ".claude/skills/error-recovery/SKILL.md": {
       "path": ".claude/skills/error-recovery/SKILL.md",
       "checksum": "51b501220f641a0b8415742559b514a1d5da9439a39fab307f1d9528ce77790c",
-      "installedAt": "2026-02-26T08:32:18.513Z",
+      "installedAt": "2026-02-26T08:53:48.634Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -195,7 +195,7 @@
     ".claude/skills/infra/cloud/SKILL.md": {
       "path": ".claude/skills/infra/cloud/SKILL.md",
       "checksum": "fd8cbdb0d2e77f7038f3aaff206377be010a838636bedd33632cf84082d6e2e9",
-      "installedAt": "2026-02-26T08:32:18.601Z",
+      "installedAt": "2026-02-26T08:53:48.634Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -203,7 +203,7 @@
     ".claude/skills/infra/cloud/references/gcp-patterns.md": {
       "path": ".claude/skills/infra/cloud/references/gcp-patterns.md",
       "checksum": "4b0a43664f5442c09c721a0a86d2f40843a3e0a567bcdacadf3c74eac29fed5c",
-      "installedAt": "2026-02-26T08:32:18.602Z",
+      "installedAt": "2026-02-26T08:53:48.634Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -211,7 +211,7 @@
     ".claude/skills/infra/docker/SKILL.md": {
       "path": ".claude/skills/infra/docker/SKILL.md",
       "checksum": "e2e1c0c158cfa4b0c0f4a0d2f909101e77341d817f518331a0ff10ef7f086445",
-      "installedAt": "2026-02-26T08:32:18.602Z",
+      "installedAt": "2026-02-26T08:53:48.635Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -219,7 +219,7 @@
     ".claude/skills/knowledge/base/SKILL.md": {
       "path": ".claude/skills/knowledge/base/SKILL.md",
       "checksum": "94dbdcd230e62574218df7ee63d6031ac2532cf6ced5d8620fd586b7ddd505c8",
-      "installedAt": "2026-02-26T08:32:18.602Z",
+      "installedAt": "2026-02-26T08:53:48.635Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -227,7 +227,7 @@
     ".claude/skills/knowledge/base/references/adr-patterns.md": {
       "path": ".claude/skills/knowledge/base/references/adr-patterns.md",
       "checksum": "aec584daa39281ea619a7bd692914c7e0490700b18c9dca8e5ebe6738ff6f3fe",
-      "installedAt": "2026-02-26T08:32:18.602Z",
+      "installedAt": "2026-02-26T08:53:48.635Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -235,7 +235,7 @@
     ".claude/skills/knowledge/base/references/knowledge-capture-guide.md": {
       "path": ".claude/skills/knowledge/base/references/knowledge-capture-guide.md",
       "checksum": "9bcc02b568e48f92703a6ed7f9b42c371f2d4c76d7391b1f6a4fd25853261a36",
-      "installedAt": "2026-02-26T08:32:18.602Z",
+      "installedAt": "2026-02-26T08:53:48.635Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -243,7 +243,7 @@
     ".claude/skills/knowledge/base/references/sidecar-format-spec.md": {
       "path": ".claude/skills/knowledge/base/references/sidecar-format-spec.md",
       "checksum": "48f495e694529c859ee4787b3dde7a2fdb8d343385987c94ed1287dcd12c897b",
-      "installedAt": "2026-02-26T08:32:18.602Z",
+      "installedAt": "2026-02-26T08:53:48.635Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -251,7 +251,7 @@
     ".claude/skills/knowledge/capture/SKILL.md": {
       "path": ".claude/skills/knowledge/capture/SKILL.md",
       "checksum": "472ffda77205346fa8899f93422453063577b4fb2192ea0b1e59abfce8536914",
-      "installedAt": "2026-02-26T08:32:18.603Z",
+      "installedAt": "2026-02-26T08:53:48.635Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -259,7 +259,7 @@
     ".claude/skills/knowledge/retrieval/SKILL.md": {
       "path": ".claude/skills/knowledge/retrieval/SKILL.md",
       "checksum": "d77ec777bf907a8a29cc98f09e999183a1921df092ca93df109ece0c531ea034",
-      "installedAt": "2026-02-26T08:32:18.603Z",
+      "installedAt": "2026-02-26T08:53:48.636Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -267,7 +267,7 @@
     ".claude/skills/knowledge/retrieval/references/priority-matrix.md": {
       "path": ".claude/skills/knowledge/retrieval/references/priority-matrix.md",
       "checksum": "cd88d59fb1fb4c82f880b264c840a685e05e5be987fc6d2749db2d87ba906bce",
-      "installedAt": "2026-02-26T08:32:18.603Z",
+      "installedAt": "2026-02-26T08:53:48.636Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -275,7 +275,7 @@
     ".claude/skills/knowledge/retrieval/references/search-strategy.md": {
       "path": ".claude/skills/knowledge/retrieval/references/search-strategy.md",
       "checksum": "c1d9ec465a8ce977bb803f8e5670c09ca46315f9883bbbe3b9e6ac60dce2dce0",
-      "installedAt": "2026-02-26T08:32:18.603Z",
+      "installedAt": "2026-02-26T08:53:48.636Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -283,7 +283,7 @@
     ".claude/skills/planning/SKILL.md": {
       "path": ".claude/skills/planning/SKILL.md",
       "checksum": "579c0a210136be57daa78846e26ee902adefe8dd24f38db04164d20dfd0409be",
-      "installedAt": "2026-02-26T08:32:18.603Z",
+      "installedAt": "2026-02-26T08:53:48.636Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -291,7 +291,7 @@
     ".claude/skills/problem-solving/SKILL.md": {
       "path": ".claude/skills/problem-solving/SKILL.md",
       "checksum": "b630c99bad77003f37d50f3f44536cac04bfc102b9a35c0695d01817ef332097",
-      "installedAt": "2026-02-26T08:32:18.603Z",
+      "installedAt": "2026-02-26T08:53:48.636Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -299,7 +299,7 @@
     ".claude/skills/repomix/SKILL.md": {
       "path": ".claude/skills/repomix/SKILL.md",
       "checksum": "daebaadf17e9c4b2167ee747926ece95d3bf656a1b60f8943f719045c97c208f",
-      "installedAt": "2026-02-26T08:32:18.603Z",
+      "installedAt": "2026-02-26T08:53:48.636Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -307,7 +307,7 @@
     ".claude/skills/research/SKILL.md": {
       "path": ".claude/skills/research/SKILL.md",
       "checksum": "0be592ae1c30200deedc3e15c95df406b5dd8f9f469df99a2ce84eed9309ef43",
-      "installedAt": "2026-02-26T08:32:18.604Z",
+      "installedAt": "2026-02-26T08:53:48.636Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -315,15 +315,15 @@
     ".claude/skills/sequential-thinking/SKILL.md": {
       "path": ".claude/skills/sequential-thinking/SKILL.md",
       "checksum": "6b57cc5476b113a25056033df07327ad7ca05d0f43f9b086ba783f5cbf5fe24e",
-      "installedAt": "2026-02-26T08:32:18.604Z",
+      "installedAt": "2026-02-26T08:53:48.637Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
     },
     ".claude/skills/skill-index.json": {
       "path": ".claude/skills/skill-index.json",
-      "checksum": "df6d514d36f74de77c184e7e0e41b24eb278a91f014e5ec51b2843da45d533ba",
-      "installedAt": "2026-02-26T08:32:19.894Z",
+      "checksum": "ea242bf0664e383911686d9a2ba32594020007bbd960b1cf2ccd25c0b529c61f",
+      "installedAt": "2026-02-26T08:53:49.387Z",
       "version": "1.0.0",
       "modified": false,
       "package": "core"
@@ -331,7 +331,7 @@
     ".claude/commands/.DS_Store": {
       "path": ".claude/commands/.DS_Store",
       "checksum": "f75ac63ebdca1e9a7584d631919d5e8212e77f38f2e9d7f429db447ecf8cb5d6",
-      "installedAt": "2026-02-26T08:32:18.623Z",
+      "installedAt": "2026-02-26T08:53:48.651Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -339,7 +339,7 @@
     ".claude/commands/bootstrap/fast.md": {
       "path": ".claude/commands/bootstrap/fast.md",
       "checksum": "944a4bb804842737ddb0617edcd6df3ba90728dd909fdb64e7641a81f799394e",
-      "installedAt": "2026-02-26T08:32:18.623Z",
+      "installedAt": "2026-02-26T08:53:48.651Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -347,7 +347,7 @@
     ".claude/commands/bootstrap/parallel.md": {
       "path": ".claude/commands/bootstrap/parallel.md",
       "checksum": "f09bbff87057d5ea8e66a42b21a46bde4ef5ec7626c8f571ea3ec73eea2d9e33",
-      "installedAt": "2026-02-26T08:32:18.623Z",
+      "installedAt": "2026-02-26T08:53:48.651Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -355,7 +355,7 @@
     ".claude/commands/cook/fast.md": {
       "path": ".claude/commands/cook/fast.md",
       "checksum": "b27fbf396412cdea059d3d5f0f821013bb830e6e5a48e8921559ebca0f6b63e8",
-      "installedAt": "2026-02-26T08:32:18.623Z",
+      "installedAt": "2026-02-26T08:53:48.651Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -363,7 +363,7 @@
     ".claude/commands/cook/parallel.md": {
       "path": ".claude/commands/cook/parallel.md",
       "checksum": "272b404a8f09789a9378122be81f3ab5849321f74607161f2dc3d0c84370a3dc",
-      "installedAt": "2026-02-26T08:32:18.623Z",
+      "installedAt": "2026-02-26T08:53:48.652Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -371,7 +371,7 @@
     ".claude/commands/docs/component.md": {
       "path": ".claude/commands/docs/component.md",
       "checksum": "7e71be5792462bad4382ab1efa4e530b88b0d2fa9c720f9afb8d9398371ef110",
-      "installedAt": "2026-02-26T08:32:18.624Z",
+      "installedAt": "2026-02-26T08:53:48.652Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -379,7 +379,7 @@
     ".claude/commands/docs/init.md": {
       "path": ".claude/commands/docs/init.md",
       "checksum": "83675c8dea0588d3e3a9df8652034baaafe7d046f2f5affc2b55ae3efae736f5",
-      "installedAt": "2026-02-26T08:32:18.624Z",
+      "installedAt": "2026-02-26T08:53:48.652Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -387,7 +387,7 @@
     ".claude/commands/docs/update.md": {
       "path": ".claude/commands/docs/update.md",
       "checksum": "79140ca58781c692f9c513c571b16704b35d165775de4ec50cd3b7fee6d51293",
-      "installedAt": "2026-02-26T08:32:18.624Z",
+      "installedAt": "2026-02-26T08:53:48.652Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -395,7 +395,7 @@
     ".claude/commands/epost.md": {
       "path": ".claude/commands/epost.md",
       "checksum": "eb650641e98b3e79337e910125b78aa2f3468c588dacb5ab66601c219d7cb8d2",
-      "installedAt": "2026-02-26T08:32:18.624Z",
+      "installedAt": "2026-02-26T08:53:48.652Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -403,7 +403,7 @@
     ".claude/commands/fix/ci.md": {
       "path": ".claude/commands/fix/ci.md",
       "checksum": "046b88dc9cbba1ed6f98e04021f5436fc791eb5d2f520b0ad4d9ebeeb5649be4",
-      "installedAt": "2026-02-26T08:32:18.624Z",
+      "installedAt": "2026-02-26T08:53:48.652Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -411,7 +411,7 @@
     ".claude/commands/fix/deep.md": {
       "path": ".claude/commands/fix/deep.md",
       "checksum": "bdaf2824988bef025e42b52b51631c7efae028bff91bb92ab4de09cf16f69650",
-      "installedAt": "2026-02-26T08:32:18.625Z",
+      "installedAt": "2026-02-26T08:53:48.652Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -419,7 +419,7 @@
     ".claude/commands/fix/fast.md": {
       "path": ".claude/commands/fix/fast.md",
       "checksum": "9b701aec7acdcdc4b2f86b39e7eca97ca510e2610232e9b68abdf74663dfca34",
-      "installedAt": "2026-02-26T08:32:18.625Z",
+      "installedAt": "2026-02-26T08:53:48.653Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -427,7 +427,7 @@
     ".claude/commands/fix/logs.md": {
       "path": ".claude/commands/fix/logs.md",
       "checksum": "e854408d69f12bb2f35124f838b8e743b73101b09ba7f97ab3500116fbf09cdc",
-      "installedAt": "2026-02-26T08:32:18.625Z",
+      "installedAt": "2026-02-26T08:53:48.653Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -435,7 +435,7 @@
     ".claude/commands/fix/test.md": {
       "path": ".claude/commands/fix/test.md",
       "checksum": "c144ea83c944b6b25802de9f29b0f22ae80cb3148c3f839d49c0f44458d6972c",
-      "installedAt": "2026-02-26T08:32:18.625Z",
+      "installedAt": "2026-02-26T08:53:48.653Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -443,7 +443,7 @@
     ".claude/commands/fix/types.md": {
       "path": ".claude/commands/fix/types.md",
       "checksum": "5e1cd0b58801ff790058481054988d82ce8f751f2b4d7236679184a509aea5e8",
-      "installedAt": "2026-02-26T08:32:18.625Z",
+      "installedAt": "2026-02-26T08:53:48.653Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -451,7 +451,7 @@
     ".claude/commands/fix/ui.md": {
       "path": ".claude/commands/fix/ui.md",
       "checksum": "6f8fbdb69fa1227cf11979bc3000c0b484011d20b8f847baec9b2b79e039c98b",
-      "installedAt": "2026-02-26T08:32:18.625Z",
+      "installedAt": "2026-02-26T08:53:48.824Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -459,7 +459,7 @@
     ".claude/commands/git/commit.md": {
       "path": ".claude/commands/git/commit.md",
       "checksum": "cf408688778ffd18f2012e56f992a4c88250b755a563be02eb3c71e9aeb320bf",
-      "installedAt": "2026-02-26T08:32:18.625Z",
+      "installedAt": "2026-02-26T08:53:48.824Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -467,7 +467,7 @@
     ".claude/commands/git/pr.md": {
       "path": ".claude/commands/git/pr.md",
       "checksum": "80f089bdefdfb929182d95784daac56ea963d325196b71aae71abb562b5f6734",
-      "installedAt": "2026-02-26T08:32:18.625Z",
+      "installedAt": "2026-02-26T08:53:48.825Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -475,7 +475,7 @@
     ".claude/commands/git/push.md": {
       "path": ".claude/commands/git/push.md",
       "checksum": "fd2aabf12a8e8cfed68690f038b91950a098278b3d21d19858fa9136ed74bf14",
-      "installedAt": "2026-02-26T08:32:18.625Z",
+      "installedAt": "2026-02-26T08:53:48.825Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -483,7 +483,7 @@
     ".claude/commands/plan/deep.md": {
       "path": ".claude/commands/plan/deep.md",
       "checksum": "fb533b64866dd1f5c0806e57e7c23410381e67b363ec32e2f030377c9a04230d",
-      "installedAt": "2026-02-26T08:32:18.626Z",
+      "installedAt": "2026-02-26T08:53:48.826Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -491,7 +491,7 @@
     ".claude/commands/plan/fast.md": {
       "path": ".claude/commands/plan/fast.md",
       "checksum": "0929262ea7adff64b60905557b9d9df4be2b8c66e08460214df7aae1169efa21",
-      "installedAt": "2026-02-26T08:32:18.626Z",
+      "installedAt": "2026-02-26T08:53:48.826Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -499,7 +499,7 @@
     ".claude/commands/plan/parallel.md": {
       "path": ".claude/commands/plan/parallel.md",
       "checksum": "1874f8b9c594dcdf9c7d1918f14dbeb6c51802be03679551fbc7064840146e84",
-      "installedAt": "2026-02-26T08:32:18.626Z",
+      "installedAt": "2026-02-26T08:53:48.827Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -507,7 +507,7 @@
     ".claude/commands/plan/validate.md": {
       "path": ".claude/commands/plan/validate.md",
       "checksum": "9a8c64544f2f1f1f442ab63981be16dae3f243952ec463302be7a8c88819b8a9",
-      "installedAt": "2026-02-26T08:32:18.626Z",
+      "installedAt": "2026-02-26T08:53:48.827Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -515,7 +515,7 @@
     ".claude/commands/review/code.md": {
       "path": ".claude/commands/review/code.md",
       "checksum": "d32cb7d9b2fa48a94393809552aacbf97c138440dba69d10bb4c0f83f219f2af",
-      "installedAt": "2026-02-26T08:32:18.626Z",
+      "installedAt": "2026-02-26T08:53:48.838Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -523,7 +523,7 @@
     ".claude/.ck.json": {
       "path": ".claude/.ck.json",
       "checksum": "1bf7f54a5921781a5cbed6f168f8d00fbdc7ac663d445fba86b217df8599e436",
-      "installedAt": "2026-02-26T08:32:18.880Z",
+      "installedAt": "2026-02-26T08:53:48.925Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -531,7 +531,7 @@
     ".claude/.ckignore": {
       "path": ".claude/.ckignore",
       "checksum": "dd2c75e3a0e5d16f65ed4a5a5bb6b4d05656be2c666c4e7d409c41c2781490e6",
-      "installedAt": "2026-02-26T08:32:18.882Z",
+      "installedAt": "2026-02-26T08:53:49.096Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -539,31 +539,31 @@
     ".claude/agents/epost-a11y-specialist.md": {
       "path": ".claude/agents/epost-a11y-specialist.md",
       "checksum": "b4a76501bfa6d455a64505e14a791d94974a2850c8e89ef63b518b58e72c14da",
-      "installedAt": "2026-02-26T08:32:18.885Z",
+      "installedAt": "2026-02-26T08:53:49.106Z",
       "version": "2.0.0",
       "modified": false,
       "package": "a11y"
     },
     ".claude/skills/.DS_Store": {
       "path": ".claude/skills/.DS_Store",
-      "checksum": "37047f691d1ade4fa48625a73b95fbe5eee7a99e0edd3e095066160187b485e2",
-      "installedAt": "2026-02-26T08:32:18.914Z",
+      "checksum": "166ff43fde685ed0b902b976010ec013ae11682ca6abf64cad7832b005d9204a",
+      "installedAt": "2026-02-26T08:53:49.149Z",
       "version": "2.0.0",
       "modified": false,
       "package": "a11y"
     },
     ".claude/skills/a11y/.DS_Store": {
       "path": ".claude/skills/a11y/.DS_Store",
-      "checksum": "6a803af68981dee43280cb1b389a450e15f35403d90b78cb409f77b357aa2c19",
-      "installedAt": "2026-02-26T08:32:18.914Z",
+      "checksum": "1de7b462e3ceefbbea1fd1a11352c0cf5ef5844e0b22f90b1fba585727fbef1a",
+      "installedAt": "2026-02-26T08:53:49.149Z",
       "version": "2.0.0",
       "modified": false,
       "package": "a11y"
     },
     ".claude/skills/a11y/android/.DS_Store": {
       "path": ".claude/skills/a11y/android/.DS_Store",
-      "checksum": "52454f08b20542031e909d02705cd37d4f55bc14f01896c9a9479100b7fe9f7b",
-      "installedAt": "2026-02-26T08:32:18.914Z",
+      "checksum": "7d38abb508cba40ebb05b7c4fd3fc949fa15fe46365aa1381d9ed0e570d02717",
+      "installedAt": "2026-02-26T08:53:49.149Z",
       "version": "2.0.0",
       "modified": false,
       "package": "a11y"
@@ -571,7 +571,7 @@
     ".claude/skills/a11y/android/SKILL.md": {
       "path": ".claude/skills/a11y/android/SKILL.md",
       "checksum": "7bf52c55699b3b00f92a261216622b239a2f8e61afeea16dd601b18dea2d3939",
-      "installedAt": "2026-02-26T08:32:18.915Z",
+      "installedAt": "2026-02-26T08:53:49.149Z",
       "version": "2.0.0",
       "modified": false,
       "package": "a11y"
@@ -579,7 +579,7 @@
     ".claude/skills/a11y/android/references/android-content-descriptions.md": {
       "path": ".claude/skills/a11y/android/references/android-content-descriptions.md",
       "checksum": "af1c255f66e0f2f1634905949a4fc7c9b14abd0540fb2ee5b3ee13705c91fd54",
-      "installedAt": "2026-02-26T08:32:18.915Z",
+      "installedAt": "2026-02-26T08:53:49.150Z",
       "version": "2.0.0",
       "modified": false,
       "package": "a11y"
@@ -587,7 +587,7 @@
     ".claude/skills/a11y/android/references/android-contrast.md": {
       "path": ".claude/skills/a11y/android/references/android-contrast.md",
       "checksum": "6135ca5c7c414b4b5fd6b87a3f99cabc0b3b6bcce970f421d365a8b4a10876e6",
-      "installedAt": "2026-02-26T08:32:18.915Z",
+      "installedAt": "2026-02-26T08:53:49.150Z",
       "version": "2.0.0",
       "modified": false,
       "package": "a11y"
@@ -595,7 +595,7 @@
     ".claude/skills/a11y/android/references/android-focus-semantics.md": {
       "path": ".claude/skills/a11y/android/references/android-focus-semantics.md",
       "checksum": "298ca77feac6a2fd5f66c6e0db78f23f71880c12e95db88841004437c212f15e",
-      "installedAt": "2026-02-26T08:32:18.915Z",
+      "installedAt": "2026-02-26T08:53:49.150Z",
       "version": "2.0.0",
       "modified": false,
       "package": "a11y"
@@ -603,7 +603,7 @@
     ".claude/skills/a11y/android/references/android-headings.md": {
       "path": ".claude/skills/a11y/android/references/android-headings.md",
       "checksum": "878d289b049a111351dc358ab85e04681bc285a5e69182df8fe320373e9e524c",
-      "installedAt": "2026-02-26T08:32:18.915Z",
+      "installedAt": "2026-02-26T08:53:49.150Z",
       "version": "2.0.0",
       "modified": false,
       "package": "a11y"
@@ -611,7 +611,7 @@
     ".claude/skills/a11y/android/references/android-touch-targets.md": {
       "path": ".claude/skills/a11y/android/references/android-touch-targets.md",
       "checksum": "75ff10f5a936ca32df286a666e6019ffb43513fc1990ae7285488d4e5abcb8f2",
-      "installedAt": "2026-02-26T08:32:18.916Z",
+      "installedAt": "2026-02-26T08:53:49.151Z",
       "version": "2.0.0",
       "modified": false,
       "package": "a11y"
@@ -619,7 +619,7 @@
     ".claude/skills/a11y/android/references/android-views-xml-a11y.md": {
       "path": ".claude/skills/a11y/android/references/android-views-xml-a11y.md",
       "checksum": "825b05ad949f6c4cd9fb72036ed0e4f00750967bd4c09cfc0715407bfbd44126",
-      "installedAt": "2026-02-26T08:32:18.916Z",
+      "installedAt": "2026-02-26T08:53:49.151Z",
       "version": "2.0.0",
       "modified": false,
       "package": "a11y"
@@ -627,7 +627,15 @@
     ".claude/skills/a11y/core/SKILL.md": {
       "path": ".claude/skills/a11y/core/SKILL.md",
       "checksum": "70dd82b8f0d16b7ff9685c1eda29eadaadbe632d719b8d297f202d8815901b4f",
-      "installedAt": "2026-02-26T08:32:18.916Z",
+      "installedAt": "2026-02-26T08:53:49.151Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "a11y"
+    },
+    ".claude/skills/a11y/ios/.DS_Store": {
+      "path": ".claude/skills/a11y/ios/.DS_Store",
+      "checksum": "7d38abb508cba40ebb05b7c4fd3fc949fa15fe46365aa1381d9ed0e570d02717",
+      "installedAt": "2026-02-26T08:53:49.151Z",
       "version": "2.0.0",
       "modified": false,
       "package": "a11y"
@@ -635,7 +643,7 @@
     ".claude/skills/a11y/ios/SKILL.md": {
       "path": ".claude/skills/a11y/ios/SKILL.md",
       "checksum": "ab468e819d7239f733823c9b792beb27c4adc99f1575099eb1d29045239ddf9c",
-      "installedAt": "2026-02-26T08:32:18.916Z",
+      "installedAt": "2026-02-26T08:53:49.151Z",
       "version": "2.0.0",
       "modified": false,
       "package": "a11y"
@@ -643,7 +651,7 @@
     ".claude/skills/a11y/ios/references/a11y-buttons.md": {
       "path": ".claude/skills/a11y/ios/references/a11y-buttons.md",
       "checksum": "d6ed7b24ce24cc686854989f083c6f819d609802d16b231ad8a90a5ebc581d88",
-      "installedAt": "2026-02-26T08:32:18.916Z",
+      "installedAt": "2026-02-26T08:53:49.152Z",
       "version": "2.0.0",
       "modified": false,
       "package": "a11y"
@@ -651,7 +659,7 @@
     ".claude/skills/a11y/ios/references/a11y-colors-contrast.md": {
       "path": ".claude/skills/a11y/ios/references/a11y-colors-contrast.md",
       "checksum": "d3e4c5c325292eae76628eb8c555ee567322813f81cabcb49fcdea20a2aab858",
-      "installedAt": "2026-02-26T08:32:18.917Z",
+      "installedAt": "2026-02-26T08:53:49.152Z",
       "version": "2.0.0",
       "modified": false,
       "package": "a11y"
@@ -659,7 +667,7 @@
     ".claude/skills/a11y/ios/references/a11y-core.md": {
       "path": ".claude/skills/a11y/ios/references/a11y-core.md",
       "checksum": "bd5e02e0c3a984d517cd05aa007612f658470dee14d4335423bfb96f2f7d53ca",
-      "installedAt": "2026-02-26T08:32:18.917Z",
+      "installedAt": "2026-02-26T08:53:49.152Z",
       "version": "2.0.0",
       "modified": false,
       "package": "a11y"
@@ -667,7 +675,7 @@
     ".claude/skills/a11y/ios/references/a11y-focus.md": {
       "path": ".claude/skills/a11y/ios/references/a11y-focus.md",
       "checksum": "f11001631cec79ab4015050d0dce5200a7a198a688e7541467a76e68786512fd",
-      "installedAt": "2026-02-26T08:32:18.917Z",
+      "installedAt": "2026-02-26T08:53:49.152Z",
       "version": "2.0.0",
       "modified": false,
       "package": "a11y"
@@ -675,7 +683,7 @@
     ".claude/skills/a11y/ios/references/a11y-forms.md": {
       "path": ".claude/skills/a11y/ios/references/a11y-forms.md",
       "checksum": "f920bfb8e567319ad2ad71429ff7d42469fac035ff0d4d269eeadba1a849b367",
-      "installedAt": "2026-02-26T08:32:18.917Z",
+      "installedAt": "2026-02-26T08:53:49.152Z",
       "version": "2.0.0",
       "modified": false,
       "package": "a11y"
@@ -683,7 +691,7 @@
     ".claude/skills/a11y/ios/references/a11y-headings.md": {
       "path": ".claude/skills/a11y/ios/references/a11y-headings.md",
       "checksum": "c364af7858ccf8e2ee987c5b796da590259cd1a01f52d6d99316ebb795bdb91f",
-      "installedAt": "2026-02-26T08:32:18.917Z",
+      "installedAt": "2026-02-26T08:53:49.153Z",
       "version": "2.0.0",
       "modified": false,
       "package": "a11y"
@@ -691,7 +699,7 @@
     ".claude/skills/a11y/ios/references/a11y-images.md": {
       "path": ".claude/skills/a11y/ios/references/a11y-images.md",
       "checksum": "068144674b5f8ee6040646eabe3ca0ba682ec662f9ff0fb732a0d06207068aaf",
-      "installedAt": "2026-02-26T08:32:18.917Z",
+      "installedAt": "2026-02-26T08:53:49.153Z",
       "version": "2.0.0",
       "modified": false,
       "package": "a11y"
@@ -699,7 +707,7 @@
     ".claude/skills/a11y/ios/references/a11y-mode-audit.md": {
       "path": ".claude/skills/a11y/ios/references/a11y-mode-audit.md",
       "checksum": "9ef162cb440e89afdf0e2eb11e71ceda3c228096e844ff35d080759368047ba3",
-      "installedAt": "2026-02-26T08:32:18.918Z",
+      "installedAt": "2026-02-26T08:53:49.153Z",
       "version": "2.0.0",
       "modified": false,
       "package": "a11y"
@@ -707,7 +715,7 @@
     ".claude/skills/a11y/ios/references/a11y-mode-fix.md": {
       "path": ".claude/skills/a11y/ios/references/a11y-mode-fix.md",
       "checksum": "1186d9c45429ae97472ef5aa378e0b701fcd7594585a60c6504edb85dd78f542",
-      "installedAt": "2026-02-26T08:32:18.918Z",
+      "installedAt": "2026-02-26T08:53:49.153Z",
       "version": "2.0.0",
       "modified": false,
       "package": "a11y"
@@ -715,7 +723,7 @@
     ".claude/skills/a11y/ios/references/a11y-mode-guidance.md": {
       "path": ".claude/skills/a11y/ios/references/a11y-mode-guidance.md",
       "checksum": "a923b4a787f46e491a36b07ff4574f45f6710fa9ba16e899ab67007b141bad8f",
-      "installedAt": "2026-02-26T08:32:18.918Z",
+      "installedAt": "2026-02-26T08:53:49.153Z",
       "version": "2.0.0",
       "modified": false,
       "package": "a11y"
@@ -723,7 +731,7 @@
     ".claude/skills/a11y/ios/references/a11y-testing.md": {
       "path": ".claude/skills/a11y/ios/references/a11y-testing.md",
       "checksum": "724c0ca0b4d20338e1d0e9d4845528b0284be845018efd7b5bba3789f6ce1122",
-      "installedAt": "2026-02-26T08:32:18.918Z",
+      "installedAt": "2026-02-26T08:53:49.153Z",
       "version": "2.0.0",
       "modified": false,
       "package": "a11y"
@@ -731,7 +739,7 @@
     ".claude/skills/a11y/web/SKILL.md": {
       "path": ".claude/skills/a11y/web/SKILL.md",
       "checksum": "418cbfaeb194cda261db17e7da516655316275c9a1d941054a51d82b5a8acc62",
-      "installedAt": "2026-02-26T08:32:18.918Z",
+      "installedAt": "2026-02-26T08:53:49.154Z",
       "version": "2.0.0",
       "modified": false,
       "package": "a11y"
@@ -739,7 +747,7 @@
     ".claude/skills/a11y/web/references/web-aria.md": {
       "path": ".claude/skills/a11y/web/references/web-aria.md",
       "checksum": "50ff154708f56a9299fa3851acf57583aef189563c0964e0908bdd73c269e938",
-      "installedAt": "2026-02-26T08:32:18.918Z",
+      "installedAt": "2026-02-26T08:53:49.154Z",
       "version": "2.0.0",
       "modified": false,
       "package": "a11y"
@@ -747,7 +755,7 @@
     ".claude/skills/a11y/web/references/web-contrast.md": {
       "path": ".claude/skills/a11y/web/references/web-contrast.md",
       "checksum": "7f96a5e147549a0420297fe59a4793fb21ba508f322e1aca1bea9ba1ec428d56",
-      "installedAt": "2026-02-26T08:32:18.918Z",
+      "installedAt": "2026-02-26T08:53:49.154Z",
       "version": "2.0.0",
       "modified": false,
       "package": "a11y"
@@ -755,7 +763,7 @@
     ".claude/skills/a11y/web/references/web-forms.md": {
       "path": ".claude/skills/a11y/web/references/web-forms.md",
       "checksum": "4e0c704b24c0ea6b85c295236082dab35e00c54fa9702e93a2fb61fc49053072",
-      "installedAt": "2026-02-26T08:32:18.919Z",
+      "installedAt": "2026-02-26T08:53:49.154Z",
       "version": "2.0.0",
       "modified": false,
       "package": "a11y"
@@ -763,7 +771,7 @@
     ".claude/skills/a11y/web/references/web-keyboard-focus.md": {
       "path": ".claude/skills/a11y/web/references/web-keyboard-focus.md",
       "checksum": "ae83de0631a28b00ff53fee3dc3ee217aa241f937cd04b3a9a4bb31056cae027",
-      "installedAt": "2026-02-26T08:32:18.919Z",
+      "installedAt": "2026-02-26T08:53:49.155Z",
       "version": "2.0.0",
       "modified": false,
       "package": "a11y"
@@ -771,7 +779,7 @@
     ".claude/skills/a11y/web/references/web-semantic-html.md": {
       "path": ".claude/skills/a11y/web/references/web-semantic-html.md",
       "checksum": "9d621df92ab99e54549f169e1843b1ddb5164c26c59b5fcc0fdebfc6147ce3f4",
-      "installedAt": "2026-02-26T08:32:18.919Z",
+      "installedAt": "2026-02-26T08:53:49.155Z",
       "version": "2.0.0",
       "modified": false,
       "package": "a11y"
@@ -779,47 +787,47 @@
     ".claude/skills/a11y/web/references/web-wcag-reference.md": {
       "path": ".claude/skills/a11y/web/references/web-wcag-reference.md",
       "checksum": "d5275748595c954783a6f0e3a354c428e301a9ce9aa523456ee2c166e748dd17",
-      "installedAt": "2026-02-26T08:32:18.919Z",
+      "installedAt": "2026-02-26T08:53:49.155Z",
       "version": "2.0.0",
       "modified": false,
       "package": "a11y"
     },
-    ".claude/commands/a11y/audit.md": {
-      "path": ".claude/commands/a11y/audit.md",
-      "checksum": "8357fe743830e6791683645aac951334a3a4adc718e66a2d408e573a1cb18c6a",
-      "installedAt": "2026-02-26T08:32:18.927Z",
-      "version": "2.0.0",
-      "modified": false,
-      "package": "a11y"
-    },
-    ".claude/commands/a11y/close.md": {
-      "path": ".claude/commands/a11y/close.md",
+    ".claude/commands/audit/a11y-close.md": {
+      "path": ".claude/commands/audit/a11y-close.md",
       "checksum": "3392be4384eef3143f0bc36a385fe8bc4498d9bb25eab9064e0d37451cd58021",
-      "installedAt": "2026-02-26T08:32:18.927Z",
+      "installedAt": "2026-02-26T08:53:49.160Z",
       "version": "2.0.0",
       "modified": false,
       "package": "a11y"
     },
-    ".claude/commands/a11y/fix-batch.md": {
-      "path": ".claude/commands/a11y/fix-batch.md",
-      "checksum": "4da05997b66a4a834fc500177b3389d0ec485f214ec1feaf945f2c81b4b20099",
-      "installedAt": "2026-02-26T08:32:18.927Z",
+    ".claude/commands/audit/a11y.md": {
+      "path": ".claude/commands/audit/a11y.md",
+      "checksum": "8357fe743830e6791683645aac951334a3a4adc718e66a2d408e573a1cb18c6a",
+      "installedAt": "2026-02-26T08:53:49.161Z",
       "version": "2.0.0",
       "modified": false,
       "package": "a11y"
     },
-    ".claude/commands/a11y/fix.md": {
-      "path": ".claude/commands/a11y/fix.md",
-      "checksum": "f54cfd3568634c2880eabfa33565e0ebde14bf13c8f690425810f82a518c2e93",
-      "installedAt": "2026-02-26T08:32:18.927Z",
+    ".claude/commands/fix/a11y-batch.md": {
+      "path": ".claude/commands/fix/a11y-batch.md",
+      "checksum": "6f33c4e41ab58497b36283a6642d840a1aacc88aaf1bd80c869b50358d7b6c7b",
+      "installedAt": "2026-02-26T08:53:49.161Z",
       "version": "2.0.0",
       "modified": false,
       "package": "a11y"
     },
-    ".claude/commands/a11y/review.md": {
-      "path": ".claude/commands/a11y/review.md",
+    ".claude/commands/fix/a11y.md": {
+      "path": ".claude/commands/fix/a11y.md",
+      "checksum": "e85e72bb7ac1bd09e7e563910585a6e90533949d2ff1f0717ba17566995ca0fb",
+      "installedAt": "2026-02-26T08:53:49.164Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "a11y"
+    },
+    ".claude/commands/review/a11y.md": {
+      "path": ".claude/commands/review/a11y.md",
       "checksum": "ad9b289f1afe503be28ce2170081e5b60d7eedaa24bb4ea199d8c8336b953d69",
-      "installedAt": "2026-02-26T08:32:18.927Z",
+      "installedAt": "2026-02-26T08:53:49.164Z",
       "version": "2.0.0",
       "modified": false,
       "package": "a11y"
@@ -827,7 +835,7 @@
     ".claude/agents/epost-web-developer.md": {
       "path": ".claude/agents/epost-web-developer.md",
       "checksum": "9c0d2ea9e5e3b2d4ee20116cc9039536df95f57976e764c889dc13767ed307f1",
-      "installedAt": "2026-02-26T08:32:18.934Z",
+      "installedAt": "2026-02-26T08:53:49.170Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-web"
@@ -835,7 +843,7 @@
     ".claude/skills/web/api-routes/SKILL.md": {
       "path": ".claude/skills/web/api-routes/SKILL.md",
       "checksum": "752a5dba59af9aff6da16765f6482530b1e8fbfec55016e494e9e16cfbeb75ec",
-      "installedAt": "2026-02-26T08:32:18.951Z",
+      "installedAt": "2026-02-26T08:53:49.187Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-web"
@@ -843,7 +851,7 @@
     ".claude/skills/web/frontend/SKILL.md": {
       "path": ".claude/skills/web/frontend/SKILL.md",
       "checksum": "1ffb0bcad94a3899c90fc9cea29b548388a0e2a49b0900d1718be14ec6b0f546",
-      "installedAt": "2026-02-26T08:32:18.951Z",
+      "installedAt": "2026-02-26T08:53:49.187Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-web"
@@ -851,7 +859,7 @@
     ".claude/skills/web/modules/SKILL.md": {
       "path": ".claude/skills/web/modules/SKILL.md",
       "checksum": "4133c69a287681eb65d6bdd87a0c1275e37d46f2c1dc0569c3178466868cef08",
-      "installedAt": "2026-02-26T08:32:18.952Z",
+      "installedAt": "2026-02-26T08:53:49.188Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-web"
@@ -859,7 +867,7 @@
     ".claude/skills/web/modules/references/api-binding.md": {
       "path": ".claude/skills/web/modules/references/api-binding.md",
       "checksum": "22cf50f6acf87a5f2f9947331a142b569b72c5976c619b0201440e63c2739167",
-      "installedAt": "2026-02-26T08:32:18.952Z",
+      "installedAt": "2026-02-26T08:53:49.188Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-web"
@@ -867,7 +875,7 @@
     ".claude/skills/web/modules/references/consistency-checklist.md": {
       "path": ".claude/skills/web/modules/references/consistency-checklist.md",
       "checksum": "37099b13bb7dc912f6669967b868d0a221e8f563eebde8afb705d529eef184e0",
-      "installedAt": "2026-02-26T08:32:18.952Z",
+      "installedAt": "2026-02-26T08:53:49.188Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-web"
@@ -875,7 +883,7 @@
     ".claude/skills/web/modules/references/module-scaffold.md": {
       "path": ".claude/skills/web/modules/references/module-scaffold.md",
       "checksum": "faacd1ccf9b8b6306e790d82bd559581e534c3a435957d720bfcfe1ab2f23f71",
-      "installedAt": "2026-02-26T08:32:18.952Z",
+      "installedAt": "2026-02-26T08:53:49.188Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-web"
@@ -883,7 +891,7 @@
     ".claude/skills/web/modules/references/routing.md": {
       "path": ".claude/skills/web/modules/references/routing.md",
       "checksum": "742a0fff20c75f4a403fcde7ea4df8544bf798be25c55a586751e2883b2c063d",
-      "installedAt": "2026-02-26T08:32:18.952Z",
+      "installedAt": "2026-02-26T08:53:49.188Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-web"
@@ -891,7 +899,7 @@
     ".claude/skills/web/modules/references/store-pattern.md": {
       "path": ".claude/skills/web/modules/references/store-pattern.md",
       "checksum": "713b1049a83478183052cdbe09ae21d63596f871f6c01e70ba03f0d3900334b1",
-      "installedAt": "2026-02-26T08:32:18.953Z",
+      "installedAt": "2026-02-26T08:53:49.188Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-web"
@@ -899,7 +907,7 @@
     ".claude/skills/web/nextjs/SKILL.md": {
       "path": ".claude/skills/web/nextjs/SKILL.md",
       "checksum": "437af67e9d255f8d058a83d0e69dabf5a1741ff80a1719cd4afc1ae0d08ba3d8",
-      "installedAt": "2026-02-26T08:32:18.953Z",
+      "installedAt": "2026-02-26T08:53:49.188Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-web"
@@ -907,7 +915,7 @@
     ".claude/skills/web/prototype/SKILL.md": {
       "path": ".claude/skills/web/prototype/SKILL.md",
       "checksum": "4d4ed01d56a3481e2a49b5ccab610023cbb5c6d44fe80006085292bce50b04d2",
-      "installedAt": "2026-02-26T08:32:18.953Z",
+      "installedAt": "2026-02-26T08:53:49.188Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-web"
@@ -915,7 +923,7 @@
     ".claude/skills/web/prototype/references/analysis-checklist.md": {
       "path": ".claude/skills/web/prototype/references/analysis-checklist.md",
       "checksum": "5e7521b1a657899a09cbe088a000974cfd7f97b13779777a4358d209237ccb3c",
-      "installedAt": "2026-02-26T08:32:18.953Z",
+      "installedAt": "2026-02-26T08:53:49.189Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-web"
@@ -923,7 +931,7 @@
     ".claude/skills/web/prototype/references/component-mapping.md": {
       "path": ".claude/skills/web/prototype/references/component-mapping.md",
       "checksum": "fdeb877eb5b2b495fe9bceb30e692d98c0dd396dab27975e4b2bf7ed442ea748",
-      "installedAt": "2026-02-26T08:32:18.953Z",
+      "installedAt": "2026-02-26T08:53:49.189Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-web"
@@ -931,7 +939,7 @@
     ".claude/skills/web/prototype/references/data-migration.md": {
       "path": ".claude/skills/web/prototype/references/data-migration.md",
       "checksum": "fca81189d4fb21ef9882fa44e3d38583dc938f75bb632bb406d6f0cd44708a6b",
-      "installedAt": "2026-02-26T08:32:18.953Z",
+      "installedAt": "2026-02-26T08:53:49.189Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-web"
@@ -939,7 +947,7 @@
     ".claude/skills/web/prototype/references/style-migration.md": {
       "path": ".claude/skills/web/prototype/references/style-migration.md",
       "checksum": "343678297b4a0ecd518773da0f27d2006a3694ef5637cd850c57282b82aa4391",
-      "installedAt": "2026-02-26T08:32:18.953Z",
+      "installedAt": "2026-02-26T08:53:49.189Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-web"
@@ -947,7 +955,7 @@
     ".claude/skills/web/prototype/references/token-mapping.md": {
       "path": ".claude/skills/web/prototype/references/token-mapping.md",
       "checksum": "5717efb0fa9a083dce2d2be7a6c6ed67df8d37f2bf472cc80704b8f0cd8dd41e",
-      "installedAt": "2026-02-26T08:32:18.953Z",
+      "installedAt": "2026-02-26T08:53:49.189Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-web"
@@ -955,7 +963,7 @@
     ".claude/skills/web/rag/SKILL.md": {
       "path": ".claude/skills/web/rag/SKILL.md",
       "checksum": "45d17c52c2ef5104945f69cd9e07dfb5d5009f07342cea237337d903e9913ae1",
-      "installedAt": "2026-02-26T08:32:18.954Z",
+      "installedAt": "2026-02-26T08:53:49.189Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-web"
@@ -963,7 +971,7 @@
     ".claude/skills/web/rag/references/query-patterns.md": {
       "path": ".claude/skills/web/rag/references/query-patterns.md",
       "checksum": "720b199d259d2bb15ab426efbdfb0af970b833a4a8f49f0799deb78931d2e382",
-      "installedAt": "2026-02-26T08:32:18.954Z",
+      "installedAt": "2026-02-26T08:53:49.189Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-web"
@@ -971,7 +979,7 @@
     ".claude/skills/web/rag/references/smart-query.md": {
       "path": ".claude/skills/web/rag/references/smart-query.md",
       "checksum": "435a7bb62a0ecbc6d1cbab01cf560eb8c31c31999e118ca21db0024e8b59345b",
-      "installedAt": "2026-02-26T08:32:18.954Z",
+      "installedAt": "2026-02-26T08:53:49.190Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-web"
@@ -979,7 +987,7 @@
     ".claude/commands/web/convert.md": {
       "path": ".claude/commands/web/convert.md",
       "checksum": "18cea50d12c19558c212fd0050e9974f4ada65f49c1ab70fac235f70cab3bbd0",
-      "installedAt": "2026-02-26T08:32:18.958Z",
+      "installedAt": "2026-02-26T08:53:49.194Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-web"
@@ -987,7 +995,7 @@
     ".claude/commands/web/cook.md": {
       "path": ".claude/commands/web/cook.md",
       "checksum": "91bd2128580e8045e1c0f2d70303595704a88757541cb7e8e0fde43e2dec0200",
-      "installedAt": "2026-02-26T08:32:18.958Z",
+      "installedAt": "2026-02-26T08:53:49.195Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-web"
@@ -995,7 +1003,7 @@
     ".claude/commands/web/debug.md": {
       "path": ".claude/commands/web/debug.md",
       "checksum": "6f02c10dacf0f1a4775a6d950764f7eaee0c1d0a31ce14f5b24a88cd59acafd4",
-      "installedAt": "2026-02-26T08:32:18.958Z",
+      "installedAt": "2026-02-26T08:53:49.197Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-web"
@@ -1003,7 +1011,7 @@
     ".claude/commands/web/new-module.md": {
       "path": ".claude/commands/web/new-module.md",
       "checksum": "0a67174e2137188a7ffbb838c8d2211901e80abb910d000474114f4b62da6b71",
-      "installedAt": "2026-02-26T08:32:18.958Z",
+      "installedAt": "2026-02-26T08:53:49.199Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-web"
@@ -1011,7 +1019,7 @@
     ".claude/commands/web/test.md": {
       "path": ".claude/commands/web/test.md",
       "checksum": "f89047dd8e89bf7b8a5320dca4e4da7d4799954f0ffec9a7268bc781731bd6c3",
-      "installedAt": "2026-02-26T08:32:18.959Z",
+      "installedAt": "2026-02-26T08:53:49.200Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-web"
@@ -1019,7 +1027,7 @@
     ".claude/agents/epost-ios-developer.md": {
       "path": ".claude/agents/epost-ios-developer.md",
       "checksum": "95349c137cbb19481ada1f108fc0e9eaee75f38bd6b00e13b093a1d1ce129a4a",
-      "installedAt": "2026-02-26T08:32:18.962Z",
+      "installedAt": "2026-02-26T08:53:49.203Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-ios"
@@ -1027,7 +1035,7 @@
     ".claude/skills/ios/development/SKILL.md": {
       "path": ".claude/skills/ios/development/SKILL.md",
       "checksum": "d939a0af5e55a900f9973bec70897458820ecf955535b840a6ef3869383227d7",
-      "installedAt": "2026-02-26T08:32:18.976Z",
+      "installedAt": "2026-02-26T08:53:49.217Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-ios"
@@ -1035,7 +1043,7 @@
     ".claude/skills/ios/development/references/build.md": {
       "path": ".claude/skills/ios/development/references/build.md",
       "checksum": "686cb677e07988ba59a697da51c06bb50f7b3c4ca53eb26ef2e3c1788318cc05",
-      "installedAt": "2026-02-26T08:32:19.143Z",
+      "installedAt": "2026-02-26T08:53:49.217Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-ios"
@@ -1043,7 +1051,7 @@
     ".claude/skills/ios/development/references/development.md": {
       "path": ".claude/skills/ios/development/references/development.md",
       "checksum": "5d0d83e34776ea535a4e46d0647781b1f767414586e441dcb5b57350d86ecf7d",
-      "installedAt": "2026-02-26T08:32:19.143Z",
+      "installedAt": "2026-02-26T08:53:49.221Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-ios"
@@ -1051,7 +1059,7 @@
     ".claude/skills/ios/development/references/tester.md": {
       "path": ".claude/skills/ios/development/references/tester.md",
       "checksum": "2e4f7ee0b739914f09421a70a5c3cd6ae8a39525ff2905960c17ef21b26320f8",
-      "installedAt": "2026-02-26T08:32:19.143Z",
+      "installedAt": "2026-02-26T08:53:49.221Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-ios"
@@ -1059,7 +1067,7 @@
     ".claude/skills/ios/rag/SKILL.md": {
       "path": ".claude/skills/ios/rag/SKILL.md",
       "checksum": "e23365f510da01eb24a108cb9582cab93330cfff0fe1042ea8d724e346e0b124",
-      "installedAt": "2026-02-26T08:32:19.144Z",
+      "installedAt": "2026-02-26T08:53:49.221Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-ios"
@@ -1067,7 +1075,7 @@
     ".claude/skills/ios/rag/references/query-patterns.md": {
       "path": ".claude/skills/ios/rag/references/query-patterns.md",
       "checksum": "02f5281168dd5aaa7365e1ca1a73e171f1ec3d054514d531b5a290e8e90206f7",
-      "installedAt": "2026-02-26T08:32:19.144Z",
+      "installedAt": "2026-02-26T08:53:49.222Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-ios"
@@ -1075,7 +1083,7 @@
     ".claude/skills/ios/ui-lib/SKILL.md": {
       "path": ".claude/skills/ios/ui-lib/SKILL.md",
       "checksum": "96e9d639c4c3e5a0a55b299189371641375976d75419774b86f2db90e0cd5fb6",
-      "installedAt": "2026-02-26T08:32:19.144Z",
+      "installedAt": "2026-02-26T08:53:49.222Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-ios"
@@ -1083,7 +1091,7 @@
     ".claude/skills/ios/ui-lib/references/components.md": {
       "path": ".claude/skills/ios/ui-lib/references/components.md",
       "checksum": "d1c8753dcf80a8dd43888ca60c28d5d382711e1b82214af565bac92c1d64ecff",
-      "installedAt": "2026-02-26T08:32:19.144Z",
+      "installedAt": "2026-02-26T08:53:49.222Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-ios"
@@ -1091,7 +1099,7 @@
     ".claude/skills/ios/ui-lib/references/design-system.md": {
       "path": ".claude/skills/ios/ui-lib/references/design-system.md",
       "checksum": "78cc63c363b67de22a6b87bb20b621344fbcb4185a9b2e10ef143aac36fcd9d0",
-      "installedAt": "2026-02-26T08:32:19.145Z",
+      "installedAt": "2026-02-26T08:53:49.222Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-ios"
@@ -1099,7 +1107,7 @@
     ".claude/commands/ios/.DS_Store": {
       "path": ".claude/commands/ios/.DS_Store",
       "checksum": "37047f691d1ade4fa48625a73b95fbe5eee7a99e0edd3e095066160187b485e2",
-      "installedAt": "2026-02-26T08:32:19.151Z",
+      "installedAt": "2026-02-26T08:53:49.226Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-ios"
@@ -1107,7 +1115,7 @@
     ".claude/commands/ios/cook.md": {
       "path": ".claude/commands/ios/cook.md",
       "checksum": "b2c1d7cfd061d88ed3f757538e1df41c8f7b6a3f74f156ec4927c2c3cf90a533",
-      "installedAt": "2026-02-26T08:32:19.154Z",
+      "installedAt": "2026-02-26T08:53:49.228Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-ios"
@@ -1115,7 +1123,7 @@
     ".claude/commands/ios/debug.md": {
       "path": ".claude/commands/ios/debug.md",
       "checksum": "3f1ece9c3044d7b5d9ef2d690ee255e5db6052539ad31c88561700a7d890689e",
-      "installedAt": "2026-02-26T08:32:19.159Z",
+      "installedAt": "2026-02-26T08:53:49.232Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-ios"
@@ -1123,7 +1131,7 @@
     ".claude/commands/ios/simulator.md": {
       "path": ".claude/commands/ios/simulator.md",
       "checksum": "541e1e854681dbb2df04a41a11336dfd460de6ccfa3ddb117cbf2829252870fe",
-      "installedAt": "2026-02-26T08:32:19.160Z",
+      "installedAt": "2026-02-26T08:53:49.232Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-ios"
@@ -1131,7 +1139,7 @@
     ".claude/commands/ios/test.md": {
       "path": ".claude/commands/ios/test.md",
       "checksum": "864ee91d66ca376f64d65083507d91a7088430e18af734f7aea713e378719171",
-      "installedAt": "2026-02-26T08:32:19.160Z",
+      "installedAt": "2026-02-26T08:53:49.232Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-ios"
@@ -1139,7 +1147,7 @@
     ".claude/agents/epost-android-developer.md": {
       "path": ".claude/agents/epost-android-developer.md",
       "checksum": "9dff6804cc99c64c72ea7353f51e7cdeb8f8d0645b958b271715d8ec1f314024",
-      "installedAt": "2026-02-26T08:32:19.166Z",
+      "installedAt": "2026-02-26T08:53:49.236Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-android"
@@ -1147,7 +1155,7 @@
     ".claude/skills/android/development/SKILL.md": {
       "path": ".claude/skills/android/development/SKILL.md",
       "checksum": "21cdc080535184e0415f12b3b96d0d2f046e3f8dfe1531c45c62480ae86ca747",
-      "installedAt": "2026-02-26T08:32:19.190Z",
+      "installedAt": "2026-02-26T08:53:49.254Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-android"
@@ -1155,7 +1163,7 @@
     ".claude/skills/android/development/assets/build-gradle-app.kts": {
       "path": ".claude/skills/android/development/assets/build-gradle-app.kts",
       "checksum": "3961319bbdcc7cbd46561a618b409fd684743b2499c5df842c65d4970b05da67",
-      "installedAt": "2026-02-26T08:32:19.190Z",
+      "installedAt": "2026-02-26T08:53:49.254Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-android"
@@ -1163,7 +1171,7 @@
     ".claude/skills/android/development/assets/build-gradle-lib.kts": {
       "path": ".claude/skills/android/development/assets/build-gradle-lib.kts",
       "checksum": "54f006a49a7934556fe9e90ec7a17f8683039f14dbe841cb9bd90145a5a1420c",
-      "installedAt": "2026-02-26T08:32:19.190Z",
+      "installedAt": "2026-02-26T08:53:49.254Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-android"
@@ -1171,7 +1179,7 @@
     ".claude/skills/android/development/assets/compose-screen-template.kt": {
       "path": ".claude/skills/android/development/assets/compose-screen-template.kt",
       "checksum": "490b6b846b51dc0a6a93bc03b00aa8a3f240cc9409190b1c18a950e228843670",
-      "installedAt": "2026-02-26T08:32:19.365Z",
+      "installedAt": "2026-02-26T08:53:49.254Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-android"
@@ -1179,7 +1187,7 @@
     ".claude/skills/android/development/assets/hilt-module-template.kt": {
       "path": ".claude/skills/android/development/assets/hilt-module-template.kt",
       "checksum": "0e8f2de8031e4920f149b47125cd8bd82fdd0d8cbfdebc424d3dff5986e12547",
-      "installedAt": "2026-02-26T08:32:19.366Z",
+      "installedAt": "2026-02-26T08:53:49.255Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-android"
@@ -1187,7 +1195,7 @@
     ".claude/skills/android/development/assets/navigation-template.kt": {
       "path": ".claude/skills/android/development/assets/navigation-template.kt",
       "checksum": "bb2acb5179add2646f2c879de91c3204abdfc3fb5db251d84c3252fc9b276297",
-      "installedAt": "2026-02-26T08:32:19.366Z",
+      "installedAt": "2026-02-26T08:53:49.255Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-android"
@@ -1195,7 +1203,7 @@
     ".claude/skills/android/development/assets/retrofit-service-template.kt": {
       "path": ".claude/skills/android/development/assets/retrofit-service-template.kt",
       "checksum": "e172895520a9f6f35df9e820301ab6b4a8e9f04c029ad1c4789727be4377972b",
-      "installedAt": "2026-02-26T08:32:19.366Z",
+      "installedAt": "2026-02-26T08:53:49.255Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-android"
@@ -1203,7 +1211,7 @@
     ".claude/skills/android/development/assets/room-entity-dao-template.kt": {
       "path": ".claude/skills/android/development/assets/room-entity-dao-template.kt",
       "checksum": "797f82a78d192794c0d91fe578ce6e9affff052e1fac97f628b038cd90bc24b0",
-      "installedAt": "2026-02-26T08:32:19.367Z",
+      "installedAt": "2026-02-26T08:53:49.255Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-android"
@@ -1211,7 +1219,7 @@
     ".claude/skills/android/development/assets/viewmodel-template.kt": {
       "path": ".claude/skills/android/development/assets/viewmodel-template.kt",
       "checksum": "f7216fc32375d5448957314f3056613d01aea9efcb128bae34c45bb2c7c78d6b",
-      "installedAt": "2026-02-26T08:32:19.367Z",
+      "installedAt": "2026-02-26T08:53:49.255Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-android"
@@ -1219,7 +1227,7 @@
     ".claude/skills/android/development/references/compose-best-practices.md": {
       "path": ".claude/skills/android/development/references/compose-best-practices.md",
       "checksum": "76310d075f71532c9215badddaf4c63f75b4380b92f0ba865458e5ad85f8c037",
-      "installedAt": "2026-02-26T08:32:19.368Z",
+      "installedAt": "2026-02-26T08:53:49.255Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-android"
@@ -1227,7 +1235,7 @@
     ".claude/skills/android/development/references/error-handling.md": {
       "path": ".claude/skills/android/development/references/error-handling.md",
       "checksum": "94f40478093f138e9f075a35a94b6f47a08dd636dd8a7cef23983f381ab22a75",
-      "installedAt": "2026-02-26T08:32:19.368Z",
+      "installedAt": "2026-02-26T08:53:49.255Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-android"
@@ -1235,7 +1243,7 @@
     ".claude/skills/android/development/references/mvvm-architecture.md": {
       "path": ".claude/skills/android/development/references/mvvm-architecture.md",
       "checksum": "2b311f43b8f009b2681384655cae053f0dc9b09bfbb6572f6d15cbbef9ab8642",
-      "installedAt": "2026-02-26T08:32:19.369Z",
+      "installedAt": "2026-02-26T08:53:49.256Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-android"
@@ -1243,7 +1251,7 @@
     ".claude/skills/android/development/scripts/compose-ui-test-example.kt": {
       "path": ".claude/skills/android/development/scripts/compose-ui-test-example.kt",
       "checksum": "66ede65b858a485f6ed23571d4c2567e43989d135d0546c3d1f755185ae842f4",
-      "installedAt": "2026-02-26T08:32:19.369Z",
+      "installedAt": "2026-02-26T08:53:49.256Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-android"
@@ -1251,7 +1259,7 @@
     ".claude/skills/android/development/scripts/repository-test-example.kt": {
       "path": ".claude/skills/android/development/scripts/repository-test-example.kt",
       "checksum": "2fbe9cafd02fc75a57390d571c6a578e602711d307a2fea1ca93ab45d376cf5e",
-      "installedAt": "2026-02-26T08:32:19.369Z",
+      "installedAt": "2026-02-26T08:53:49.259Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-android"
@@ -1259,7 +1267,7 @@
     ".claude/skills/android/development/scripts/viewmodel-test-example.kt": {
       "path": ".claude/skills/android/development/scripts/viewmodel-test-example.kt",
       "checksum": "05d3d18e0d7091a08c6b5f520d0fd170463cca571a25020cdc485d1f3a3f9830",
-      "installedAt": "2026-02-26T08:32:19.370Z",
+      "installedAt": "2026-02-26T08:53:49.259Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-android"
@@ -1267,7 +1275,7 @@
     ".claude/skills/android/ui-lib/SKILL.md": {
       "path": ".claude/skills/android/ui-lib/SKILL.md",
       "checksum": "bf7a36062dfdc75ca965ee92c6f2e862c3cd6cda75d5a30906cf42fe572738d2",
-      "installedAt": "2026-02-26T08:32:19.370Z",
+      "installedAt": "2026-02-26T08:53:49.260Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-android"
@@ -1275,7 +1283,7 @@
     ".claude/skills/android/ui-lib/references/components.md": {
       "path": ".claude/skills/android/ui-lib/references/components.md",
       "checksum": "72c80f055bc56e715bfea97d5333b7aa6b01633c0afcd9c9086be96c4ecd45b9",
-      "installedAt": "2026-02-26T08:32:19.370Z",
+      "installedAt": "2026-02-26T08:53:49.260Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-android"
@@ -1283,7 +1291,7 @@
     ".claude/skills/android/ui-lib/references/design-system.md": {
       "path": ".claude/skills/android/ui-lib/references/design-system.md",
       "checksum": "92d826ba45a7d7d1775d944db50b422b18140e7456e2d733cd3d1ada633f0b5f",
-      "installedAt": "2026-02-26T08:32:19.371Z",
+      "installedAt": "2026-02-26T08:53:49.260Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-android"
@@ -1291,7 +1299,7 @@
     ".claude/commands/android/cook.md": {
       "path": ".claude/commands/android/cook.md",
       "checksum": "bc79bf9714dd8f0a5c55da175c8173cc91fa227036a518f73d16c1dc64455950",
-      "installedAt": "2026-02-26T08:32:19.380Z",
+      "installedAt": "2026-02-26T08:53:49.263Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-android"
@@ -1299,7 +1307,7 @@
     ".claude/commands/android/debug.md": {
       "path": ".claude/commands/android/debug.md",
       "checksum": "62b7fdbcaab4849406dc04efa9da42b0d818c16e426a5aee179ec23b656599e5",
-      "installedAt": "2026-02-26T08:32:19.384Z",
+      "installedAt": "2026-02-26T08:53:49.265Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-android"
@@ -1307,7 +1315,7 @@
     ".claude/commands/android/test.md": {
       "path": ".claude/commands/android/test.md",
       "checksum": "d2cca09d8bc0c6a5d6c90d2e93c645c40f90cb18503f0283d999b1464e371efd",
-      "installedAt": "2026-02-26T08:32:19.384Z",
+      "installedAt": "2026-02-26T08:53:49.266Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-android"
@@ -1315,7 +1323,7 @@
     ".claude/agents/epost-backend-developer.md": {
       "path": ".claude/agents/epost-backend-developer.md",
       "checksum": "4816573079267c106053ef2565dcef703f189572690f996137e008e5668277fd",
-      "installedAt": "2026-02-26T08:32:19.387Z",
+      "installedAt": "2026-02-26T08:53:49.269Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-backend"
@@ -1323,7 +1331,7 @@
     ".claude/skills/backend/databases/SKILL.md": {
       "path": ".claude/skills/backend/databases/SKILL.md",
       "checksum": "f4c2667bead85d9a78231ab9e64a74c8f7670287cefc37ba9fce31d44a3baeca",
-      "installedAt": "2026-02-26T08:32:19.405Z",
+      "installedAt": "2026-02-26T08:53:49.279Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-backend"
@@ -1331,7 +1339,7 @@
     ".claude/skills/backend/javaee/SKILL.md": {
       "path": ".claude/skills/backend/javaee/SKILL.md",
       "checksum": "39092306779b4ed3cdca39a7982c90f3e45156f718236f26359595d7f7873eab",
-      "installedAt": "2026-02-26T08:32:19.406Z",
+      "installedAt": "2026-02-26T08:53:49.279Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-backend"
@@ -1339,7 +1347,7 @@
     ".claude/skills/backend/javaee/references/persistence-patterns.md": {
       "path": ".claude/skills/backend/javaee/references/persistence-patterns.md",
       "checksum": "8c0117065c60a50624ecf5142e44c954adbc0189a82fe217af2830f57a50fe24",
-      "installedAt": "2026-02-26T08:32:19.406Z",
+      "installedAt": "2026-02-26T08:53:49.279Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-backend"
@@ -1347,7 +1355,7 @@
     ".claude/skills/backend/javaee/references/rest-patterns.md": {
       "path": ".claude/skills/backend/javaee/references/rest-patterns.md",
       "checksum": "bb8c6a23992b837ea7cdb4a2aec5578505e15597aa50a5e603c02a16e84991f9",
-      "installedAt": "2026-02-26T08:32:19.412Z",
+      "installedAt": "2026-02-26T08:53:49.280Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-backend"
@@ -1355,7 +1363,7 @@
     ".claude/skills/backend/javaee/references/service-patterns.md": {
       "path": ".claude/skills/backend/javaee/references/service-patterns.md",
       "checksum": "d7449f09991e6b0183b8c28b7871418b818b95ea6daa2a4ba552d4aca26131c6",
-      "installedAt": "2026-02-26T08:32:19.412Z",
+      "installedAt": "2026-02-26T08:53:49.280Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-backend"
@@ -1363,7 +1371,7 @@
     ".claude/skills/backend/javaee/references/testing-patterns.md": {
       "path": ".claude/skills/backend/javaee/references/testing-patterns.md",
       "checksum": "184402b726228bc00a1feddd4695331122e84520cdca87308c024c763fbe1af4",
-      "installedAt": "2026-02-26T08:32:19.412Z",
+      "installedAt": "2026-02-26T08:53:49.280Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-backend"
@@ -1371,7 +1379,7 @@
     ".claude/commands/backend/cook.md": {
       "path": ".claude/commands/backend/cook.md",
       "checksum": "4bb98e8a6ab6875cc55745290fdf5136ac3317030804399bc906432904f331ce",
-      "installedAt": "2026-02-26T08:32:19.415Z",
+      "installedAt": "2026-02-26T08:53:49.283Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-backend"
@@ -1379,7 +1387,7 @@
     ".claude/commands/backend/debug.md": {
       "path": ".claude/commands/backend/debug.md",
       "checksum": "6a9b59ec4db04b4b9b190c4bd7fafa11d22317bc19c49fd156b5258b636d14b8",
-      "installedAt": "2026-02-26T08:32:19.416Z",
+      "installedAt": "2026-02-26T08:53:49.283Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-backend"
@@ -1387,7 +1395,7 @@
     ".claude/commands/backend/test.md": {
       "path": ".claude/commands/backend/test.md",
       "checksum": "5ef8070fa7aa7224522c50acd4630b68ac26d47783fd6dc79cc0adfc30955e06",
-      "installedAt": "2026-02-26T08:32:19.417Z",
+      "installedAt": "2026-02-26T08:53:49.284Z",
       "version": "2.0.0",
       "modified": false,
       "package": "platform-backend"
@@ -1395,7 +1403,7 @@
     ".claude/agents/epost-cli-developer.md": {
       "path": ".claude/agents/epost-cli-developer.md",
       "checksum": "46a0a8ece05cfc40aca48d39ff26110769a69457088ec259a7b51c60bf3d5888",
-      "installedAt": "2026-02-26T08:32:19.420Z",
+      "installedAt": "2026-02-26T08:53:49.289Z",
       "version": "1.1.0",
       "modified": false,
       "package": "kit"
@@ -1403,7 +1411,7 @@
     ".claude/agents/epost-kit-designer.md": {
       "path": ".claude/agents/epost-kit-designer.md",
       "checksum": "6113048df0bc4710ae07f3973aaae8c2062eeb103f4d0acba1ab38fd7f8b1877",
-      "installedAt": "2026-02-26T08:32:19.423Z",
+      "installedAt": "2026-02-26T08:53:49.289Z",
       "version": "1.1.0",
       "modified": false,
       "package": "kit"
@@ -1411,7 +1419,7 @@
     ".claude/skills/kit/agents/SKILL.md": {
       "path": ".claude/skills/kit/agents/SKILL.md",
       "checksum": "eeca839b7be0cbb083f74f90b654d2a6c699d1dafef0533c9335d0c8a67e4d9d",
-      "installedAt": "2026-02-26T08:32:19.442Z",
+      "installedAt": "2026-02-26T08:53:49.304Z",
       "version": "1.1.0",
       "modified": false,
       "package": "kit"
@@ -1419,7 +1427,7 @@
     ".claude/skills/kit/agents/agent-development/SKILL.md": {
       "path": ".claude/skills/kit/agents/agent-development/SKILL.md",
       "checksum": "7eb23dfaf78abb732c3499a4fa3f06ae86692a1d9ec0d918e5a7882931848463",
-      "installedAt": "2026-02-26T08:32:19.442Z",
+      "installedAt": "2026-02-26T08:53:49.304Z",
       "version": "1.1.0",
       "modified": false,
       "package": "kit"
@@ -1427,7 +1435,7 @@
     ".claude/skills/kit/agents/references/mental-model.md": {
       "path": ".claude/skills/kit/agents/references/mental-model.md",
       "checksum": "a2be42544109ba2c54dc3a36a54727c98fc0bc8d30d4b99a8b283087f3bf6dde",
-      "installedAt": "2026-02-26T08:32:19.443Z",
+      "installedAt": "2026-02-26T08:53:49.304Z",
       "version": "1.1.0",
       "modified": false,
       "package": "kit"
@@ -1435,7 +1443,7 @@
     ".claude/skills/kit/agents/skill-development/SKILL.md": {
       "path": ".claude/skills/kit/agents/skill-development/SKILL.md",
       "checksum": "6ec517456dfb9766597e46abf90a64600a1b6a9c6f2c86b2e1a61d59f3370a52",
-      "installedAt": "2026-02-26T08:32:19.443Z",
+      "installedAt": "2026-02-26T08:53:49.304Z",
       "version": "1.1.0",
       "modified": false,
       "package": "kit"
@@ -1443,7 +1451,7 @@
     ".claude/skills/kit/agents/skill-development/references/skill-eval.md": {
       "path": ".claude/skills/kit/agents/skill-development/references/skill-eval.md",
       "checksum": "1e9b4c92fc4f80f8a4296af83ebf924f174d2f9710def1eca1957b44e2a313ed",
-      "installedAt": "2026-02-26T08:32:19.443Z",
+      "installedAt": "2026-02-26T08:53:49.305Z",
       "version": "1.1.0",
       "modified": false,
       "package": "kit"
@@ -1451,7 +1459,7 @@
     ".claude/skills/kit/cli/SKILL.md": {
       "path": ".claude/skills/kit/cli/SKILL.md",
       "checksum": "ed26b690afc4d39a000c4ac0ae1521f1e7bd9b84b1fd982368d6476d7a56c8be",
-      "installedAt": "2026-02-26T08:32:19.443Z",
+      "installedAt": "2026-02-26T08:53:49.305Z",
       "version": "1.1.0",
       "modified": false,
       "package": "kit"
@@ -1459,7 +1467,7 @@
     ".claude/skills/kit/commands/SKILL.md": {
       "path": ".claude/skills/kit/commands/SKILL.md",
       "checksum": "c4dc7699dcd5c61581b2f9f46d6b2d12e25640cebcf84be89a5c150528ff0e25",
-      "installedAt": "2026-02-26T08:32:19.443Z",
+      "installedAt": "2026-02-26T08:53:49.305Z",
       "version": "1.1.0",
       "modified": false,
       "package": "kit"
@@ -1467,7 +1475,7 @@
     ".claude/skills/kit/hooks/SKILL.md": {
       "path": ".claude/skills/kit/hooks/SKILL.md",
       "checksum": "c9a391ddc3a6db5b0b0e801112f4797c9d3c688df4f40c18f070209619c2ffdd",
-      "installedAt": "2026-02-26T08:32:19.443Z",
+      "installedAt": "2026-02-26T08:53:49.305Z",
       "version": "1.1.0",
       "modified": false,
       "package": "kit"
@@ -1475,7 +1483,7 @@
     ".claude/skills/kit/hooks/references/hook-patterns.md": {
       "path": ".claude/skills/kit/hooks/references/hook-patterns.md",
       "checksum": "a8aa7dece235216834b37121af1f4d8002f9f6bc7e3527fcd74b84c1c96de89b",
-      "installedAt": "2026-02-26T08:32:19.449Z",
+      "installedAt": "2026-02-26T08:53:49.305Z",
       "version": "1.1.0",
       "modified": false,
       "package": "kit"
@@ -1483,7 +1491,7 @@
     ".claude/commands/add-command/simple.md": {
       "path": ".claude/commands/add-command/simple.md",
       "checksum": "64bae79b7944638122776fc672b773d36af6f6f78192ae653a9e3ff9d711f4a2",
-      "installedAt": "2026-02-26T08:32:19.459Z",
+      "installedAt": "2026-02-26T08:53:49.313Z",
       "version": "1.1.0",
       "modified": false,
       "package": "kit"
@@ -1491,7 +1499,7 @@
     ".claude/commands/add-command/splash.md": {
       "path": ".claude/commands/add-command/splash.md",
       "checksum": "700c0d031aa0f2fd286f7b6411f5fe76dce8e31c36e089e47c5f9b4088052dab",
-      "installedAt": "2026-02-26T08:32:19.459Z",
+      "installedAt": "2026-02-26T08:53:49.314Z",
       "version": "1.1.0",
       "modified": false,
       "package": "kit"
@@ -1499,7 +1507,7 @@
     ".claude/commands/cli/cook.md": {
       "path": ".claude/commands/cli/cook.md",
       "checksum": "b289145e373b5e4913d12cc48cb84593eda04260781a6998361e695dc92b2267",
-      "installedAt": "2026-02-26T08:32:19.459Z",
+      "installedAt": "2026-02-26T08:53:49.314Z",
       "version": "1.1.0",
       "modified": false,
       "package": "kit"
@@ -1507,7 +1515,7 @@
     ".claude/commands/cli/doctor.md": {
       "path": ".claude/commands/cli/doctor.md",
       "checksum": "b38bc7b3a8b9e4e269d970757300885a0d2a40989c58efc6b5741bbcbda59651",
-      "installedAt": "2026-02-26T08:32:19.459Z",
+      "installedAt": "2026-02-26T08:53:49.314Z",
       "version": "1.1.0",
       "modified": false,
       "package": "kit"
@@ -1515,7 +1523,7 @@
     ".claude/commands/cli/test.md": {
       "path": ".claude/commands/cli/test.md",
       "checksum": "57df843842d9e46e3c9505a01ae921b72e0fad8577207159dfebb07744a2c16e",
-      "installedAt": "2026-02-26T08:32:19.460Z",
+      "installedAt": "2026-02-26T08:53:49.314Z",
       "version": "1.1.0",
       "modified": false,
       "package": "kit"
@@ -1523,7 +1531,7 @@
     ".claude/commands/kit/add-agent.md": {
       "path": ".claude/commands/kit/add-agent.md",
       "checksum": "3001bb074b712ce3f28c32aa767044a589b54e5ae14dac1f86bcd99662b74851",
-      "installedAt": "2026-02-26T08:32:19.460Z",
+      "installedAt": "2026-02-26T08:53:49.316Z",
       "version": "1.1.0",
       "modified": false,
       "package": "kit"
@@ -1531,7 +1539,7 @@
     ".claude/commands/kit/add-command.md": {
       "path": ".claude/commands/kit/add-command.md",
       "checksum": "baa27b79122c19079ce6ac0a40e2a3578619f42b66c2bc098525cee5f1146a37",
-      "installedAt": "2026-02-26T08:32:19.460Z",
+      "installedAt": "2026-02-26T08:53:49.316Z",
       "version": "1.1.0",
       "modified": false,
       "package": "kit"
@@ -1539,7 +1547,7 @@
     ".claude/commands/kit/add-hook.md": {
       "path": ".claude/commands/kit/add-hook.md",
       "checksum": "e1065aab3381b2d9ddcf0dfa23271d22bd78816d7a44c38aed28fc317432296a",
-      "installedAt": "2026-02-26T08:32:19.463Z",
+      "installedAt": "2026-02-26T08:53:49.316Z",
       "version": "1.1.0",
       "modified": false,
       "package": "kit"
@@ -1547,7 +1555,7 @@
     ".claude/commands/kit/add-skill.md": {
       "path": ".claude/commands/kit/add-skill.md",
       "checksum": "da54cbe01b1b9c2a4d4b76805823e9166557a47928ef43c16080a7b7082807cb",
-      "installedAt": "2026-02-26T08:32:19.463Z",
+      "installedAt": "2026-02-26T08:53:49.317Z",
       "version": "1.1.0",
       "modified": false,
       "package": "kit"
@@ -1555,7 +1563,7 @@
     ".claude/commands/kit/optimize-skill.md": {
       "path": ".claude/commands/kit/optimize-skill.md",
       "checksum": "287fc935d30be6fb12582d021781d1694c2e3f2f0a7102f067004e02ff5a6a7c",
-      "installedAt": "2026-02-26T08:32:19.463Z",
+      "installedAt": "2026-02-26T08:53:49.317Z",
       "version": "1.1.0",
       "modified": false,
       "package": "kit"
@@ -1563,7 +1571,7 @@
     ".claude/agents/epost-muji.md": {
       "path": ".claude/agents/epost-muji.md",
       "checksum": "cfed01aa7ea109225655503cebeb90f88c27154be87b8566b70849befea6f4ed",
-      "installedAt": "2026-02-26T08:32:19.464Z",
+      "installedAt": "2026-02-26T08:53:49.319Z",
       "version": "1.0.0",
       "modified": false,
       "package": "design-system"
@@ -1571,7 +1579,7 @@
     ".claude/skills/web/figma/SKILL.md": {
       "path": ".claude/skills/web/figma/SKILL.md",
       "checksum": "b5003bd617892cd23548b0d0d46800da09f5670ec80f700b1289f65a6ea1638b",
-      "installedAt": "2026-02-26T08:32:19.491Z",
+      "installedAt": "2026-02-26T08:53:49.347Z",
       "version": "1.0.0",
       "modified": false,
       "package": "design-system"
@@ -1579,7 +1587,7 @@
     ".claude/skills/web/figma/references/extraction-procedure.md": {
       "path": ".claude/skills/web/figma/references/extraction-procedure.md",
       "checksum": "dc0d688fc21ccd2c5734acc35b103903e5cf8dedd17fc43ce0a8781c4c9ad9de",
-      "installedAt": "2026-02-26T08:32:19.656Z",
+      "installedAt": "2026-02-26T08:53:49.347Z",
       "version": "1.0.0",
       "modified": false,
       "package": "design-system"
@@ -1587,7 +1595,7 @@
     ".claude/skills/web/figma-variables/SKILL.md": {
       "path": ".claude/skills/web/figma-variables/SKILL.md",
       "checksum": "aad280dffee31c5c333970b23540052e8c8ee58f4a065ef16fcf7a2f142a2bd8",
-      "installedAt": "2026-02-26T08:32:19.656Z",
+      "installedAt": "2026-02-26T08:53:49.348Z",
       "version": "1.0.0",
       "modified": false,
       "package": "design-system"
@@ -1595,7 +1603,7 @@
     ".claude/skills/web/figma-variables/assets/figma-variables.json": {
       "path": ".claude/skills/web/figma-variables/assets/figma-variables.json",
       "checksum": "c59445a889dc4d05e5e980f3127e131b2d2956d74695d8a327a3048ab1cd5fae",
-      "installedAt": "2026-02-26T08:32:19.667Z",
+      "installedAt": "2026-02-26T08:53:49.354Z",
       "version": "1.0.0",
       "modified": false,
       "package": "design-system"
@@ -1603,7 +1611,7 @@
     ".claude/skills/web/figma-variables/references/inconsistencies-improvements.md": {
       "path": ".claude/skills/web/figma-variables/references/inconsistencies-improvements.md",
       "checksum": "d949ba312449dac0ca95dd1a1ee5c5c59eb1e9ea1fb1fa719562db73c255c2a3",
-      "installedAt": "2026-02-26T08:32:19.668Z",
+      "installedAt": "2026-02-26T08:53:49.354Z",
       "version": "1.0.0",
       "modified": false,
       "package": "design-system"
@@ -1611,7 +1619,7 @@
     ".claude/skills/web/figma-variables/references/variables-architecture.md": {
       "path": ".claude/skills/web/figma-variables/references/variables-architecture.md",
       "checksum": "fe77135ff21a9dd11deb8469ca2cc974e5c9945af36aab8eb2ee6f3adc0ee1e9",
-      "installedAt": "2026-02-26T08:32:19.668Z",
+      "installedAt": "2026-02-26T08:53:49.354Z",
       "version": "1.0.0",
       "modified": false,
       "package": "design-system"
@@ -1619,7 +1627,7 @@
     ".claude/skills/web/ui-lib/SKILL.md": {
       "path": ".claude/skills/web/ui-lib/SKILL.md",
       "checksum": "5bc88a494fde6fbb6d31f9f9d6c91fdb84b746abce974c6c71268d98c397acbb",
-      "installedAt": "2026-02-26T08:32:19.668Z",
+      "installedAt": "2026-02-26T08:53:49.354Z",
       "version": "1.0.0",
       "modified": false,
       "package": "design-system"
@@ -1627,7 +1635,7 @@
     ".claude/skills/web/ui-lib/references/components.md": {
       "path": ".claude/skills/web/ui-lib/references/components.md",
       "checksum": "0bd38850c47ac510202b6856499dce242da7e88f7051938e0c31beede8ff2cbd",
-      "installedAt": "2026-02-26T08:32:19.668Z",
+      "installedAt": "2026-02-26T08:53:49.354Z",
       "version": "1.0.0",
       "modified": false,
       "package": "design-system"
@@ -1635,7 +1643,7 @@
     ".claude/skills/web/ui-lib/references/contributing.md": {
       "path": ".claude/skills/web/ui-lib/references/contributing.md",
       "checksum": "215b69e733c44f0f392892864b430f909a000ea44f79ff8b27f15e1893b34b52",
-      "installedAt": "2026-02-26T08:32:19.669Z",
+      "installedAt": "2026-02-26T08:53:49.355Z",
       "version": "1.0.0",
       "modified": false,
       "package": "design-system"
@@ -1643,7 +1651,7 @@
     ".claude/skills/web/ui-lib/references/design-system.md": {
       "path": ".claude/skills/web/ui-lib/references/design-system.md",
       "checksum": "8d6933e0bb563ac00fb8b216f9b416ed05b04be3cb3f15cd28b9dc43f1435fc1",
-      "installedAt": "2026-02-26T08:32:19.669Z",
+      "installedAt": "2026-02-26T08:53:49.355Z",
       "version": "1.0.0",
       "modified": false,
       "package": "design-system"
@@ -1651,7 +1659,7 @@
     ".claude/skills/web/ui-lib/references/integration.md": {
       "path": ".claude/skills/web/ui-lib/references/integration.md",
       "checksum": "1cdb73f7604ad2114e84e52b0b862f2f637a9ec47eb28c6b3983542eb8f6d53c",
-      "installedAt": "2026-02-26T08:32:19.669Z",
+      "installedAt": "2026-02-26T08:53:49.355Z",
       "version": "1.0.0",
       "modified": false,
       "package": "design-system"
@@ -1659,7 +1667,7 @@
     ".claude/skills/web/ui-lib-dev/SKILL.md": {
       "path": ".claude/skills/web/ui-lib-dev/SKILL.md",
       "checksum": "f991e5addca4945c9996d311678f60c6bae137993320c823871d58c14cdb2741",
-      "installedAt": "2026-02-26T08:32:19.669Z",
+      "installedAt": "2026-02-26T08:53:49.355Z",
       "version": "1.0.0",
       "modified": false,
       "package": "design-system"
@@ -1667,7 +1675,7 @@
     ".claude/skills/web/ui-lib-dev/references/audit-ui.md": {
       "path": ".claude/skills/web/ui-lib-dev/references/audit-ui.md",
       "checksum": "44372d44eedc7e1dca8c1efd788e1dfa63cb7fbdbf9b693f15cbdf3785b6a571",
-      "installedAt": "2026-02-26T08:32:19.669Z",
+      "installedAt": "2026-02-26T08:53:49.355Z",
       "version": "1.0.0",
       "modified": false,
       "package": "design-system"
@@ -1675,7 +1683,7 @@
     ".claude/skills/web/ui-lib-dev/references/document-component.md": {
       "path": ".claude/skills/web/ui-lib-dev/references/document-component.md",
       "checksum": "40b959110809dd8f2943573e80d6b6bef1ff0a3a87651e7cc5078b2edece2d91",
-      "installedAt": "2026-02-26T08:32:19.670Z",
+      "installedAt": "2026-02-26T08:53:49.355Z",
       "version": "1.0.0",
       "modified": false,
       "package": "design-system"
@@ -1683,7 +1691,7 @@
     ".claude/skills/web/ui-lib-dev/references/fix-findings.md": {
       "path": ".claude/skills/web/ui-lib-dev/references/fix-findings.md",
       "checksum": "e31340788a3c4d5b930b5866ba36d9380037f461de100a616886cb70ca11a22e",
-      "installedAt": "2026-02-26T08:32:19.670Z",
+      "installedAt": "2026-02-26T08:53:49.355Z",
       "version": "1.0.0",
       "modified": false,
       "package": "design-system"
@@ -1691,7 +1699,7 @@
     ".claude/skills/web/ui-lib-dev/references/implement-component.md": {
       "path": ".claude/skills/web/ui-lib-dev/references/implement-component.md",
       "checksum": "e1cdd9f990642f5b9f6fa91f007a3c83cfd836be972826c4852579a864bdc4f6",
-      "installedAt": "2026-02-26T08:32:19.670Z",
+      "installedAt": "2026-02-26T08:53:49.356Z",
       "version": "1.0.0",
       "modified": false,
       "package": "design-system"
@@ -1699,7 +1707,7 @@
     ".claude/skills/web/ui-lib-dev/references/plan-feature.md": {
       "path": ".claude/skills/web/ui-lib-dev/references/plan-feature.md",
       "checksum": "af1cd74fc6054d4e58555ca74f084aeee353bee4e6625b10a3f7d8a50364fb43",
-      "installedAt": "2026-02-26T08:32:19.670Z",
+      "installedAt": "2026-02-26T08:53:49.356Z",
       "version": "1.0.0",
       "modified": false,
       "package": "design-system"
@@ -1707,7 +1715,7 @@
     ".claude/skills/domain/b2b/SKILL.md": {
       "path": ".claude/skills/domain/b2b/SKILL.md",
       "checksum": "eb69924d94aeed8da10e28d95ddc5278c00af4279a0d71a6ff1a95fb6dcf0bef",
-      "installedAt": "2026-02-26T08:32:19.700Z",
+      "installedAt": "2026-02-26T08:53:49.371Z",
       "version": "1.0.0",
       "modified": false,
       "package": "domains"
@@ -1715,7 +1723,7 @@
     ".claude/skills/domain/b2b/references/archive.md": {
       "path": ".claude/skills/domain/b2b/references/archive.md",
       "checksum": "4df900a29aefc1d1e44274b383a7d6fc5b2406e3d628c87df286288323ea7943",
-      "installedAt": "2026-02-26T08:32:19.700Z",
+      "installedAt": "2026-02-26T08:53:49.372Z",
       "version": "1.0.0",
       "modified": false,
       "package": "domains"
@@ -1723,7 +1731,7 @@
     ".claude/skills/domain/b2b/references/communities.md": {
       "path": ".claude/skills/domain/b2b/references/communities.md",
       "checksum": "64eac3902ad6d6ea1b809681fd3088f115be6ebfa259cd956ee2d2e362fad32f",
-      "installedAt": "2026-02-26T08:32:19.701Z",
+      "installedAt": "2026-02-26T08:53:49.372Z",
       "version": "1.0.0",
       "modified": false,
       "package": "domains"
@@ -1731,7 +1739,7 @@
     ".claude/skills/domain/b2b/references/composer.md": {
       "path": ".claude/skills/domain/b2b/references/composer.md",
       "checksum": "2840012c856319dedf292bc80b7540f24524c5d02ad9daa46e0f375424a2b6ea",
-      "installedAt": "2026-02-26T08:32:19.701Z",
+      "installedAt": "2026-02-26T08:53:49.372Z",
       "version": "1.0.0",
       "modified": false,
       "package": "domains"
@@ -1739,7 +1747,7 @@
     ".claude/skills/domain/b2b/references/contacts.md": {
       "path": ".claude/skills/domain/b2b/references/contacts.md",
       "checksum": "3aab86753a097816225a2e1e310aa5add337836dc737ba1b010ab85ca88d615c",
-      "installedAt": "2026-02-26T08:32:19.867Z",
+      "installedAt": "2026-02-26T08:53:49.372Z",
       "version": "1.0.0",
       "modified": false,
       "package": "domains"
@@ -1747,7 +1755,7 @@
     ".claude/skills/domain/b2b/references/module-template.md": {
       "path": ".claude/skills/domain/b2b/references/module-template.md",
       "checksum": "34e119cd09655f0ec8225365ac88638a6d57a2eb6079d28173f57fbf9f485498",
-      "installedAt": "2026-02-26T08:32:19.868Z",
+      "installedAt": "2026-02-26T08:53:49.372Z",
       "version": "1.0.0",
       "modified": false,
       "package": "domains"
@@ -1755,7 +1763,7 @@
     ".claude/skills/domain/b2b/references/monitoring.md": {
       "path": ".claude/skills/domain/b2b/references/monitoring.md",
       "checksum": "a9d7abd9dab533b44f305a4a3957a108b396488660270d49c369a4c472b29a76",
-      "installedAt": "2026-02-26T08:32:19.868Z",
+      "installedAt": "2026-02-26T08:53:49.372Z",
       "version": "1.0.0",
       "modified": false,
       "package": "domains"
@@ -1763,7 +1771,7 @@
     ".claude/skills/domain/b2b/references/organization.md": {
       "path": ".claude/skills/domain/b2b/references/organization.md",
       "checksum": "dc03abb80b662031837aaf92f5c1f25e28a527d133562c4ae75971e2d69947de",
-      "installedAt": "2026-02-26T08:32:19.868Z",
+      "installedAt": "2026-02-26T08:53:49.372Z",
       "version": "1.0.0",
       "modified": false,
       "package": "domains"
@@ -1771,7 +1779,7 @@
     ".claude/skills/domain/b2b/references/smart-letter.md": {
       "path": ".claude/skills/domain/b2b/references/smart-letter.md",
       "checksum": "4a6d34ac74d92c5115aa6ea61a699755204defc574bb390e8dad48df9f207ca9",
-      "installedAt": "2026-02-26T08:32:19.868Z",
+      "installedAt": "2026-02-26T08:53:49.372Z",
       "version": "1.0.0",
       "modified": false,
       "package": "domains"
@@ -1779,7 +1787,7 @@
     ".claude/skills/domain/b2b/references/smart-send.md": {
       "path": ".claude/skills/domain/b2b/references/smart-send.md",
       "checksum": "533364602bfec333f8e2d40cc371d26c568d2e5f73cccfeb2857147f169cee02",
-      "installedAt": "2026-02-26T08:32:19.869Z",
+      "installedAt": "2026-02-26T08:53:49.372Z",
       "version": "1.0.0",
       "modified": false,
       "package": "domains"
@@ -1787,7 +1795,7 @@
     ".claude/skills/domain/b2b/references/unified-inbox.md": {
       "path": ".claude/skills/domain/b2b/references/unified-inbox.md",
       "checksum": "8d6af83bade9aa0704abfe51a60dc3ad005b5dbb5824503502b1184c6deee685",
-      "installedAt": "2026-02-26T08:32:19.869Z",
+      "installedAt": "2026-02-26T08:53:49.373Z",
       "version": "1.0.0",
       "modified": false,
       "package": "domains"
@@ -1795,7 +1803,7 @@
     ".claude/skills/domain/b2c/SKILL.md": {
       "path": ".claude/skills/domain/b2c/SKILL.md",
       "checksum": "81f6f7172d456e15847bbda61e32fc520bbcd9d12cad2ee367592bbe4115e9cf",
-      "installedAt": "2026-02-26T08:32:19.869Z",
+      "installedAt": "2026-02-26T08:53:49.373Z",
       "version": "1.0.0",
       "modified": false,
       "package": "domains"
@@ -1803,7 +1811,7 @@
     ".claude/skills/domain/b2c/references/app-patterns.md": {
       "path": ".claude/skills/domain/b2c/references/app-patterns.md",
       "checksum": "a7cc988bdceb11181de48b34c44d80af1beb3a11d5ee518eb431809119d1568d",
-      "installedAt": "2026-02-26T08:32:19.870Z",
+      "installedAt": "2026-02-26T08:53:49.373Z",
       "version": "1.0.0",
       "modified": false,
       "package": "domains"

@@ -29,7 +29,7 @@ Batch-fix the top $ARGUMENTS priority findings from `.epost-data/a11y/known-find
    - Generate unified diff
    - Determine status (FIXED / NEEDS_REVIEW / SKIPPED)
 6. Show diffs for review — do NOT apply patches automatically
-7. After fixes are applied and verified, suggest running `/a11y:close <id>` for each
+7. After fixes are applied and verified, suggest running `/audit:a11y-close <id>` for each
 
 ## Output
 
