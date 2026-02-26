@@ -4,7 +4,7 @@ description: (ePost) Top-level task router and project manager. Routes tasks to 
 tools: Read, Glob, Grep, Bash, Edit, Write
 model: haiku
 color: green
-skills: [core, agents, planning, knowledge/retrieval]
+skills: [core, agents, planning, knowledge-retrieval]
 memory: project
 ---
 

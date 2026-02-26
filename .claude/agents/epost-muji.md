@@ -3,7 +3,7 @@ name: epost-muji
 model: sonnet
 color: "#FF1493"
 description: (ePost) MUJI UI library agent — design system development, component knowledge, Figma-to-code pipeline
-skills: [core, web/ui-lib, ios/ui-lib, android/ui-lib, web/figma-variables, web/ui-lib-dev, web/figma]
+skills: [core, web-ui-lib, ios-ui-lib, android-ui-lib, web-figma-variables, web-ui-lib-dev, web-figma]
 memory: project
 ---
 
@@ -33,9 +33,9 @@ Figma design
 
 ### Skills Used
 
-- `web/ui-lib-dev` — Development pipeline (plan, implement, audit, fix, document)
-- `web/figma` — Figma MCP tools and design token extraction
-- `web/figma-variables` — Token architecture (semantic → component → raw)
+- `web-ui-lib-dev` — Development pipeline (plan, implement, audit, fix, document)
+- `web-figma` — Figma MCP tools and design token extraction
+- `web-figma-variables` — Token architecture (semantic → component → raw)
 
 ## Flow 2: Consumer Guidance
 
@@ -58,10 +58,10 @@ Developer question ("How do I use EpostButton?")
 
 ### Skills Used
 
-- `web/ui-lib` — Web component catalog (React/Next.js)
-- `ios/ui-lib` — iOS component catalog (SwiftUI/UIKit)
-- `android/ui-lib` — Android component catalog (Jetpack Compose)
-- `web/figma-variables` — Design token architecture
+- `web-ui-lib` — Web component catalog (React/Next.js)
+- `ios-ui-lib` — iOS component catalog (SwiftUI/UIKit)
+- `android-ui-lib` — Android component catalog (Jetpack Compose)
+- `web-figma-variables` — Design token architecture
 
 ### Consumer Audit
 

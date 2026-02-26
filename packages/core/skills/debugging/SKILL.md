@@ -1,13 +1,15 @@
 ---
 name: debugging
 description: Systematic debugging methodology with root cause analysis and fix validation
-keywords: [debug, error, bug, troubleshoot, root-cause, stack-trace, logging]
-platforms: [all]
-triggers: ["/debug", "error", "bug", "crash", "exception"]
-agent-affinity: [epost-debugger, epost-implementer]
 user-invocable: false
 context: fork
 agent: epost-debugger
+
+metadata:
+  agent-affinity: "[epost-debugger, epost-implementer]"
+  keywords: "[debug, error, bug, troubleshoot, root-cause, stack-trace, logging]"
+  platforms: "[all]"
+  triggers: "["/debug", "error", "bug", "crash", "exception"]""
 ---
 
 # Debugging Skill

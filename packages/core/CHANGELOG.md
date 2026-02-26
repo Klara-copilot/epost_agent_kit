@@ -23,7 +23,7 @@ All notable changes to the `core` package will be documented in this file.
 ### Changed
 - Moved `epost-brainstormer` from meta-kit-design to core package
 - Moved `epost-journal-writer` from meta-kit-design to core package
-- Replaced `databases` skill with `backend/databases` (now in platform-backend)
+- Replaced `databases` skill with `backend-databases` (now in platform-backend)
 - Updated skill-index.json: 22 → 25 skills with knowledge entries
 - Renumbered orchestrator sections 7→8 (Documentation Coordination) and 8→9 (Documentation Update Triggers)
 

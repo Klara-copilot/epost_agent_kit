@@ -285,6 +285,7 @@ Indicate intention to fix these gaps.
 
 Loop back to refinement for problematic sections.
 
+"
 ---
 
 **If no access to sub-agents (e.g., claude.ai web interface):**
@@ -324,6 +325,7 @@ Ask what Reader Claude got wrong or struggled with. Indicate intention to fix th
 
 Loop back to refinement for any problematic sections.
 
+"
 ---
 
 ### Exit Condition (Both Approaches)

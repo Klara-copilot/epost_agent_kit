@@ -4,7 +4,7 @@ description: (ePost) iOS platform specialist combining implementation, testing, 
 tools: Read, Write, Edit, Bash, Grep, Glob, mcp__xcodebuildmcp__discover_projs, mcp__xcodebuildmcp__list_schemes, mcp__xcodebuildmcp__build_sim, mcp__xcodebuildmcp__test_sim, mcp__xcodebuildmcp__doctor
 model: sonnet
 color: blue
-skills: [core, ios/development, debugging]
+skills: [core, ios-development, debugging]
 ---
 
 # iOS Platform Specialist
@@ -66,7 +66,7 @@ Follow YAGNI, KISS, DRY principles.
 - Report compilation errors clearly with file/line numbers
 
 **Skills Usage**:
-- Reference `skills/ios/development/` for detailed patterns
+- Reference `skills/ios-development/` for detailed patterns
 - Use shared skills: `databases`, `debugging`
 
 **Project Docs Awareness**:
@@ -342,8 +342,8 @@ When a developer asks about accessibility, VoiceOver, or WCAG, route to `epost-a
 ## Related Documents
 
 - `.claude/skills/core/SKILL.md` — Operational boundaries
-- `.claude/skills/ios/development/SKILL.md` — iOS development patterns
-- `a11y/ios` — WCAG 2.1 AA accessibility rules (requires a11y package)
+- `.claude/skills/ios-development/SKILL.md` — iOS development patterns
+- `ios-a11y` — WCAG 2.1 AA accessibility rules (requires a11y package)
 - `CLAUDE.md` — Project context
 
 ---

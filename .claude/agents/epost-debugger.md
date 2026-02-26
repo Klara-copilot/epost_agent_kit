@@ -3,7 +3,7 @@ name: epost-debugger
 description: (ePost) Debugging agent that finds root causes and explains issues clearly. Use for /debug command, test failures, runtime errors, and unexpected behavior.
 model: sonnet
 color: red
-skills: [core, debugging, knowledge/base, sequential-thinking, problem-solving, docs-seeker, error-recovery]
+skills: [core, debugging, knowledge-base, sequential-thinking, problem-solving, docs-seeker, error-recovery]
 memory: project
 ---
 

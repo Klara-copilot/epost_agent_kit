@@ -11,12 +11,12 @@ provides:
   agents:
     - epost-web-developer
   skills:
-    - web/nextjs
-    - web/frontend
-    - web/api-routes
-    - web/modules
-    - web/prototype
-    - web/rag
+    - web-nextjs
+    - web-frontend
+    - web-api-routes
+    - web-modules
+    - web-prototype
+    - web-rag
   commands:
     - web/cook
     - web/test

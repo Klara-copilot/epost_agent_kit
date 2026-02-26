@@ -1,11 +1,19 @@
 'use client';
 
 import { useEffect, useState, useCallback, useMemo } from 'react';
-import { ReactFlowProvider } from 'reactflow';
+import { ReactFlowProvider, type Connection } from 'reactflow';
 import { LoadedData } from '@/lib/types/entities';
 import { GraphNode, Edge } from '@/lib/types/graph';
 import Link from 'next/link';
 import FlowCanvas from './_components/FlowCanvas';
+import DesignPanel from './_components/DesignPanel';
+
+export interface DesignEdge {
+  id: string;
+  source: string; // "agent:epost-web-developer"
+  target: string; // "skill:web/figma"
+  action: 'add' | 'remove';
+}
 
 interface ApiResponse {
   success: boolean;
@@ -41,6 +49,8 @@ export default function CanvasPage() {
   const [expandedSections, setExpandedSections] = useState<Set<string>>(
     new Set(['agents', 'skills', 'commands', 'packages'])
   );
+  const [designMode, setDesignMode] = useState(false);
+  const [designEdges, setDesignEdges] = useState<DesignEdge[]>([]);
 
   // Escape key exits focus mode
   useEffect(() => {
@@ -56,7 +66,7 @@ export default function CanvasPage() {
   const handleNodeSelect = useCallback((rfNodeId: string | null) => {
     if (!rfNodeId) {
       setSelectedNode(null);
-      setFocusedNodeId(null);
+      // Do NOT clear focusedNodeId — only the Exit button / Escape key should do that
       return;
     }
     if (!graph) return;
@@ -75,7 +85,60 @@ export default function CanvasPage() {
     if (node) setSelectedNode(node);
   }, [graph]);
 
+  const handleDesignModeToggle = useCallback(() => {
+    setDesignMode(v => !v);
+  }, []);
 
+  const handleConnect = useCallback((params: Connection) => {
+    const { source, target } = params;
+    if (!source || !target) return;
+    // Only allow agent→skill connections
+    const [sourceType] = source.split(':');
+    const [targetType] = target.split(':');
+    if (sourceType !== 'agent' || targetType !== 'skill') return;
+    // Don't duplicate existing graph edges
+    if (graph?.edges.some(e => e.source === source && e.target === target)) return;
+    setDesignEdges(prev => {
+      if (prev.some(e => e.source === source && e.target === target && e.action === 'add')) return prev;
+      return [...prev, { id: `design-add-${source}-${target}`, source, target, action: 'add' }];
+    });
+  }, [graph]);
+
+  const handleDesignEdgeRemove = useCallback((edgeId: string, source: string, target: string) => {
+    const isCustomAdd = designEdges.some(e => e.id === edgeId && e.action === 'add');
+    if (isCustomAdd) {
+      setDesignEdges(prev => prev.filter(e => e.id !== edgeId));
+    } else {
+      // Mark original edge as removed
+      setDesignEdges(prev => {
+        if (prev.some(e => e.source === source && e.target === target && e.action === 'remove')) return prev;
+        return [...prev, { id: `design-remove-${source}-${target}`, source, target, action: 'remove' }];
+      });
+    }
+  }, [designEdges]);
+
+  const handleClearDesign = useCallback(() => {
+    setDesignEdges([]);
+  }, []);
+
+  const handleExportDesign = useCallback(() => {
+    const byAgent: Record<string, { added: string[]; removed: string[] }> = {};
+    for (const edge of designEdges) {
+      const agentId = edge.source.replace('agent:', '');
+      const skillId = edge.target.replace('skill:', '');
+      if (!byAgent[agentId]) byAgent[agentId] = { added: [], removed: [] };
+      if (edge.action === 'add') byAgent[agentId].added.push(skillId);
+      else byAgent[agentId].removed.push(skillId);
+    }
+    const output = { version: '1.0', generated: new Date().toISOString(), changes: byAgent };
+    const blob = new Blob([JSON.stringify(output, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'canvas-design.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  }, [designEdges]);
 
   useEffect(() => {
     const load = async () => {
@@ -154,7 +217,7 @@ export default function CanvasPage() {
           </Link>
           <h1 className="text-xl font-bold">System Canvas</h1>
         </div>
-        <div className="flex items-center gap-4 text-sm" style={{ color: 'var(--text-tertiary)' }}>
+        <div className="flex items-center gap-3 text-sm" style={{ color: 'var(--text-tertiary)' }}>
           {focusedNodeId && (
             <button
               onClick={() => setFocusedNodeId(null)}
@@ -168,6 +231,17 @@ export default function CanvasPage() {
               Exit Focus (Esc)
             </button>
           )}
+          <button
+            onClick={handleDesignModeToggle}
+            className="text-xs font-medium px-3 py-1.5 rounded cursor-pointer transition-colors"
+            style={{
+              backgroundColor: designMode ? '#16a34a' : 'var(--bg-main)',
+              color: designMode ? '#fff' : 'var(--text-secondary)',
+              border: `1px solid ${designMode ? '#16a34a' : 'var(--border)'}`,
+            }}
+          >
+            ✏️ {designMode ? 'Design Mode ON' : 'Design Mode'}
+          </button>
           <span>{graph.nodes.length} nodes</span>
           <span>{graph.edges.length} edges</span>
         </div>
@@ -264,8 +338,19 @@ export default function CanvasPage() {
               focusedNodeId={focusedNodeId}
               onNodeSelect={handleNodeSelect}
               onNodeFocus={handleNodeFocus}
+              designMode={designMode}
+              designEdges={designEdges}
+              onConnect={handleConnect}
+              onDesignEdgeRemove={handleDesignEdgeRemove}
             />
           </ReactFlowProvider>
+          {designMode && (
+            <DesignPanel
+              designEdges={designEdges}
+              onExport={handleExportDesign}
+              onClear={handleClearDesign}
+            />
+          )}
         </div>
 
         {/* Right: Properties Panel */}

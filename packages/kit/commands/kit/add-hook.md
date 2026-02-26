@@ -8,7 +8,7 @@ argument-hint: "[hook-name] [event-type]"
 
 Create a new hook script and wire it into the settings.json hook configuration.
 
-**IMPORTANT:** Activate `kit/hooks` skill for hook patterns and best practices.
+**IMPORTANT:** Activate `kit-hooks` skill for hook patterns and best practices.
 
 ## Arguments
 

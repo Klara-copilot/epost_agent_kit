@@ -36,7 +36,7 @@ List, boot, shutdown, and manage iOS simulators using XcodeBuildMCP or xcrun sim
 ## Your Process
 
 1. **Reference Build Skill**
-   - Use `ios/development/references/build.md` for simulator patterns
+   - Use `ios-development/references/build.md` for simulator patterns
 
 2. **Parse Action**
    - `--list`: List available simulators

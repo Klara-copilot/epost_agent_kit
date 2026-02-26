@@ -30,11 +30,11 @@ Convert external prototypes, mockups, or inconsistent code into production-ready
 
 ## Skills Activated
 
-- `web/prototype-conversion` — Component and token mapping
+- `web-prototype-conversion` — Component and token mapping
 - `web/module-integration` — API binding and module patterns
-- `domain/b2b` — Target module knowledge
-- `web/ui-lib` — klara-theme component reference
-- `web/rag` — Search for existing implementations
+- `domain-b2b` — Target module knowledge
+- `web-ui-lib` — klara-theme component reference
+- `web-rag` — Search for existing implementations
 
 ## Quality Checks
 

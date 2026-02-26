@@ -37,7 +37,7 @@ Implement iOS features from plans or descriptions. Supports Swift 6, iOS 18+, Sw
    - Identify UI framework (SwiftUI default, UIKit when needed)
 
 2. **Reference Development Skill**
-   - Use `ios/development/references/development.md` for patterns
+   - Use `ios-development/references/development.md` for patterns
    - Determine architecture (MVVM vs TCA based on complexity)
 
 3. **Discover Project (MCP preferred)**

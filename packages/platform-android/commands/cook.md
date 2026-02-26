@@ -27,7 +27,7 @@ Implement Android features from plans or descriptions. Supports Kotlin, Jetpack 
 
 ## Available Templates
 
-Reference templates in `.claude/skills/android/development/assets/`:
+Reference templates in `.claude/skills/android-development/assets/`:
 
 - **build-gradle-app.kts** - App module configuration
 - **compose-screen-template.kt** - Screen with loading/error/success
@@ -37,7 +37,7 @@ Reference templates in `.claude/skills/android/development/assets/`:
 - **navigation-template.kt** - Navigation setup
 - **hilt-module-template.kt** - DI configuration
 
-See patterns in `.claude/skills/android/development/references/`:
+See patterns in `.claude/skills/android-development/references/`:
 - **mvvm-architecture.md** - Layer responsibilities
 - **compose-best-practices.md** - State hoisting, recomposition
 - **error-handling.md** - Result wrapper, custom exceptions

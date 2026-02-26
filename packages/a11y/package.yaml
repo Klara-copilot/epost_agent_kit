@@ -11,10 +11,10 @@ provides:
   agents:
     - epost-a11y-specialist
   skills:
-    - core/a11y
-    - ios/a11y
-    - android/a11y
-    - web/a11y
+    - core-a11y
+    - ios-a11y
+    - android-a11y
+    - web-a11y
   commands:
     - audit/a11y
     - audit/a11y-close

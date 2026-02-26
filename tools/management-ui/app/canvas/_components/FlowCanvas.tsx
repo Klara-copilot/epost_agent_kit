@@ -7,7 +7,10 @@ import ReactFlow, {
   BackgroundVariant,
   useReactFlow,
   ConnectionLineType,
+  MarkerType,
   type NodeMouseHandler,
+  type Connection,
+  type Edge as RFEdge,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 
@@ -16,6 +19,7 @@ import { FocusContext } from './FocusContext';
 import { applyDagreLayout } from '@/lib/layout/dagre';
 import { getConnectedNodeIds, getVisibleEdgeIds } from '@/lib/layout/focus';
 import type { GraphNode, Edge as GraphEdge } from '@/lib/types/graph';
+import type { DesignEdge } from '../page';
 
 const nodeTypes = {
   agent: AgentNode,
@@ -31,6 +35,10 @@ interface FlowCanvasProps {
   focusedNodeId: string | null;
   onNodeSelect: (nodeId: string | null) => void;
   onNodeFocus: (nodeId: string) => void;
+  designMode: boolean;
+  designEdges: DesignEdge[];
+  onConnect: (params: Connection) => void;
+  onDesignEdgeRemove: (edgeId: string, source: string, target: string) => void;
 }
 
 export default function FlowCanvas({
@@ -40,6 +48,10 @@ export default function FlowCanvas({
   focusedNodeId,
   onNodeSelect,
   onNodeFocus,
+  designMode,
+  designEdges,
+  onConnect,
+  onDesignEdgeRemove,
 }: FlowCanvasProps) {
   const [hoveredNodeId, setHoveredNodeId] = useState<string | null>(null);
   const { fitView } = useReactFlow();
@@ -74,6 +86,14 @@ export default function FlowCanvas({
     }
   }, [focusedNodeId, focusState, fitView, layoutNodes]);
 
+  // Build a set of edges marked as "removed" in design mode
+  const removedEdgeSources = useMemo(() => {
+    if (!designMode) return new Set<string>();
+    return new Set(
+      designEdges.filter(de => de.action === 'remove').map(de => `${de.source}-${de.target}`)
+    );
+  }, [designEdges, designMode]);
+
   // Nodes: apply selection only (focus opacity handled by FocusContext inside node components)
   const displayNodes = useMemo(() => {
     return layoutNodes.map((node) => {
@@ -85,9 +105,24 @@ export default function FlowCanvas({
     });
   }, [layoutNodes, selectedNodeId]);
 
-  // Edges: focus filtering + hover highlighting
+  // Edges: focus filtering + hover highlighting + design mode
   const displayEdges = useMemo(() => {
-    return layoutEdges.map((edge) => {
+    const baseEdges = layoutEdges.map((edge) => {
+      // Design mode: show removed edges in red/dimmed
+      const removedKey = `${edge.source}-${edge.target}`;
+      if (designMode && removedEdgeSources.has(removedKey)) {
+        return {
+          ...edge,
+          style: {
+            ...edge.style,
+            stroke: '#ef4444',
+            opacity: 0.35,
+            strokeDasharray: '4 4',
+          },
+          animated: false,
+        };
+      }
+
       // Focus mode: hide edges not in the chain
       const isVisible = focusState
         ? focusState.visibleEdges.has(edge.id)
@@ -131,7 +166,31 @@ export default function FlowCanvas({
 
       return edge;
     });
-  }, [layoutEdges, hoveredNodeId, focusState]);
+
+    // In design mode, append custom "add" edges in green
+    if (designMode) {
+      const addEdges: RFEdge[] = designEdges
+        .filter(de => de.action === 'add')
+        .map(de => ({
+          id: de.id,
+          source: de.source,
+          target: de.target,
+          type: 'smoothstep',
+          animated: true,
+          style: {
+            stroke: '#22c55e',
+            strokeWidth: 2,
+            strokeDasharray: '6 3',
+            opacity: 1,
+          },
+          markerEnd: { type: MarkerType.ArrowClosed, color: '#22c55e' },
+          data: { designAction: 'add' },
+        }));
+      return [...baseEdges, ...addEdges];
+    }
+
+    return baseEdges;
+  }, [layoutEdges, hoveredNodeId, focusState, designMode, designEdges, removedEdgeSources]);
 
   // Single click: select (+ re-focus if already in focus mode)
   const onNodeClick: NodeMouseHandler = useCallback(
@@ -164,6 +223,24 @@ export default function FlowCanvas({
     onNodeSelect(null);
   }, [onNodeSelect]);
 
+  // Design mode edge click: mark skill-dependency edges for removal
+  const onEdgeClick = useCallback(
+    (_event: React.MouseEvent, edge: RFEdge) => {
+      if (!designMode) return;
+      // Custom "add" edge → undo the add
+      if (edge.data?.designAction === 'add') {
+        onDesignEdgeRemove(edge.id, edge.source, edge.target);
+        return;
+      }
+      // Original skill-dependency edge → mark for removal
+      const graphEdge = graphEdges.find(e => e.id === edge.id);
+      if (graphEdge && graphEdge.type === 'skill-dependency') {
+        onDesignEdgeRemove(edge.id, edge.source, edge.target);
+      }
+    },
+    [designMode, graphEdges, onDesignEdgeRemove]
+  );
+
   const focusContextValue = useMemo(
     () => ({ visibleNodeIds: focusState?.visibleNodes ?? null }),
     [focusState]
@@ -181,12 +258,14 @@ export default function FlowCanvas({
         onNodeMouseEnter={onNodeMouseEnter}
         onNodeMouseLeave={onNodeMouseLeave}
         onPaneClick={onPaneClick}
+        onConnect={designMode ? onConnect : undefined}
+        onEdgeClick={designMode ? onEdgeClick : undefined}
         nodeTypes={nodeTypes}
         connectionLineType={ConnectionLineType.SmoothStep}
         fitView
         fitViewOptions={{ padding: 0.15 }}
         nodesDraggable={false}
-        nodesConnectable={false}
+        nodesConnectable={designMode}
         zoomOnDoubleClick={false}
         minZoom={0.1}
         maxZoom={2}

@@ -33,7 +33,7 @@ Debug iOS crashes, concurrency issues, SwiftUI state problems, and performance i
 ## Your Process
 
 1. **Reference Development Skill**
-   - Use `ios/development/references/development.md` for debugging patterns
+   - Use `ios-development/references/development.md` for debugging patterns
 
 2. **Understand the Symptom**
    - What error message or crash?

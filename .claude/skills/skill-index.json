@@ -1,10 +1,10 @@
 {
-  "generated": "2026-02-26T09:52:12.403Z",
+  "generated": "2026-02-26T10:16:23.652Z",
   "version": "1.0.0",
   "count": 45,
   "skills": [
     {
-      "name": "android/a11y",
+      "name": "android-a11y",
       "description": "WCAG 2.1 AA accessibility rules for Android — Compose + traditional Views/XML, TalkBack, contentDescription, touch targets, focus semantics, color contrast",
       "keywords": [],
       "platforms": [
@@ -12,10 +12,10 @@
       ],
       "triggers": [],
       "agent-affinity": [],
-      "path": "android/a11y/SKILL.md"
+      "path": "android-a11y/SKILL.md"
     },
     {
-      "name": "android/development",
+      "name": "android-development",
       "description": "Android development patterns with Kotlin and Jetpack Compose. Includes templates, patterns, and test examples for building production-ready Android apps.",
       "keywords": [
         "android",
@@ -29,21 +29,15 @@
       "platforms": [
         "android"
       ],
-      "triggers": [
-        ".kt",
-        ".kts",
-        "build.gradle",
-        "AndroidManifest.xml",
-        "android"
-      ],
+      "triggers": [],
       "agent-affinity": [
         "epost-android-developer",
         "epost-implementer"
       ],
-      "path": "android/development/SKILL.md"
+      "path": "android-development/SKILL.md"
     },
     {
-      "name": "android/ui-lib",
+      "name": "android-ui-lib",
       "description": "Android theme UI library: Compose components and design tokens",
       "keywords": [
         "ui-lib",
@@ -53,17 +47,17 @@
         "compose"
       ],
       "platforms": [
-        "android"
+        "all"
       ],
       "triggers": [],
       "agent-affinity": [
         "epost-muji",
         "epost-android-developer"
       ],
-      "path": "android/ui-lib/SKILL.md"
+      "path": "android-ui-lib/SKILL.md"
     },
     {
-      "name": "backend/databases",
+      "name": "backend-databases",
       "description": "PostgreSQL and MongoDB database patterns for epost backend",
       "keywords": [],
       "platforms": [
@@ -71,10 +65,10 @@
       ],
       "triggers": [],
       "agent-affinity": [],
-      "path": "backend/databases/SKILL.md"
+      "path": "backend-databases/SKILL.md"
     },
     {
-      "name": "backend/javaee",
+      "name": "backend-javaee",
       "description": "Jakarta EE 8 patterns: JAX-RS, CDI, EJB, JPA on WildFly 26.1",
       "keywords": [],
       "platforms": [
@@ -82,7 +76,7 @@
       ],
       "triggers": [],
       "agent-affinity": [],
-      "path": "backend/javaee/SKILL.md"
+      "path": "backend-javaee/SKILL.md"
     },
     {
       "name": "code-review",
@@ -98,11 +92,7 @@
       "platforms": [
         "all"
       ],
-      "triggers": [
-        "/review",
-        "code review",
-        "review code"
-      ],
+      "triggers": [],
       "agent-affinity": [
         "epost-reviewer",
         "epost-implementer"
@@ -121,7 +111,7 @@
       "path": "core/SKILL.md"
     },
     {
-      "name": "core/a11y",
+      "name": "core-a11y",
       "description": "WCAG 2.1 AA cross-platform accessibility foundation — POUR framework, severity scoring, known-findings database, and operating modes",
       "keywords": [],
       "platforms": [
@@ -129,7 +119,7 @@
       ],
       "triggers": [],
       "agent-affinity": [],
-      "path": "core/a11y/SKILL.md"
+      "path": "core-a11y/SKILL.md"
     },
     {
       "name": "debugging",
@@ -146,13 +136,7 @@
       "platforms": [
         "all"
       ],
-      "triggers": [
-        "/debug",
-        "error",
-        "bug",
-        "crash",
-        "exception"
-      ],
+      "triggers": [],
       "agent-affinity": [
         "epost-debugger",
         "epost-implementer"
@@ -184,12 +168,7 @@
       "platforms": [
         "all"
       ],
-      "triggers": [
-        "documentation",
-        "docs",
-        "api reference",
-        "how to use"
-      ],
+      "triggers": [],
       "agent-affinity": [
         "epost-researcher",
         "epost-implementer"
@@ -197,7 +176,7 @@
       "path": "docs-seeker/SKILL.md"
     },
     {
-      "name": "domain/b2b",
+      "name": "domain-b2b",
       "description": "Deep per-module knowledge: components, hooks, stores, APIs, data flows for each B2B module",
       "keywords": [
         "module",
@@ -214,22 +193,17 @@
       "platforms": [
         "web"
       ],
-      "triggers": [
-        "which module",
-        "module structure",
-        "explore module",
-        "understand module"
-      ],
+      "triggers": [],
       "agent-affinity": [
         "epost-web-developer",
         "epost-guide",
         "epost-implementer",
         "epost-scout"
       ],
-      "path": "domain/b2b/SKILL.md"
+      "path": "domain-b2b/SKILL.md"
     },
     {
-      "name": "domain/b2c",
+      "name": "domain-b2c",
       "description": "epost B2C consumer app patterns: mail, documents, notifications",
       "keywords": [],
       "platforms": [
@@ -237,7 +211,7 @@
       ],
       "triggers": [],
       "agent-affinity": [],
-      "path": "domain/b2c/SKILL.md"
+      "path": "domain-b2c/SKILL.md"
     },
     {
       "name": "error-recovery",
@@ -271,7 +245,7 @@
       "path": "error-recovery/SKILL.md"
     },
     {
-      "name": "infra/cloud",
+      "name": "infra-cloud",
       "description": "GCP cloud infrastructure patterns: Terraform, Cloud Build, Cloud Run, GKE",
       "keywords": [
         "gcp",
@@ -289,10 +263,10 @@
         "epost-architect",
         "epost-implementer"
       ],
-      "path": "infra/cloud/SKILL.md"
+      "path": "infra-cloud/SKILL.md"
     },
     {
-      "name": "infra/docker",
+      "name": "infra-docker",
       "description": "Containerization for development and deployment with Docker and Docker Compose",
       "keywords": [
         "docker",
@@ -305,20 +279,15 @@
       "platforms": [
         "all"
       ],
-      "triggers": [
-        "Dockerfile",
-        "docker-compose.yml",
-        "container",
-        "docker"
-      ],
+      "triggers": [],
       "agent-affinity": [
         "epost-implementer",
         "epost-architect"
       ],
-      "path": "infra/docker/SKILL.md"
+      "path": "infra-docker/SKILL.md"
     },
     {
-      "name": "ios/a11y",
+      "name": "ios-a11y",
       "description": "WCAG 2.1 AA accessibility rules for iOS — UIKit-primary (iOS 16+), VoiceOver, SwiftUI secondary (iOS 15+), fix templates",
       "keywords": [],
       "platforms": [
@@ -326,10 +295,10 @@
       ],
       "triggers": [],
       "agent-affinity": [],
-      "path": "ios/a11y/SKILL.md"
+      "path": "ios-a11y/SKILL.md"
     },
     {
-      "name": "ios/development",
+      "name": "ios-development",
       "description": "Modern iOS development with Swift 6, SwiftUI, UIKit, and XcodeBuildMCP integration",
       "keywords": [
         "ios",
@@ -344,23 +313,16 @@
       "platforms": [
         "ios"
       ],
-      "triggers": [
-        ".swift",
-        ".xcodeproj",
-        ".xcworkspace",
-        "ios",
-        "iphone",
-        "ipad"
-      ],
+      "triggers": [],
       "agent-affinity": [
         "epost-ios-developer",
         "epost-implementer",
         "epost-tester"
       ],
-      "path": "ios/development/SKILL.md"
+      "path": "ios-development/SKILL.md"
     },
     {
-      "name": "ios/rag",
+      "name": "ios-rag",
       "description": "iOS codebase RAG — vector search for Swift app code, UIKit/SwiftUI components, design system patterns. Use before implementing iOS features, searching view patterns, or finding theme tokens.",
       "keywords": [
         "rag",
@@ -374,22 +336,17 @@
       "platforms": [
         "all"
       ],
-      "triggers": [
-        "search swift",
-        "find view",
-        "ios pattern",
-        "theme token"
-      ],
+      "triggers": [],
       "agent-affinity": [
         "epost-ios-developer",
         "epost-a11y-specialist",
         "epost-muji",
         "epost-implementer"
       ],
-      "path": "ios/rag/SKILL.md"
+      "path": "ios-rag/SKILL.md"
     },
     {
-      "name": "ios/ui-lib",
+      "name": "ios-ui-lib",
       "description": "iOS theme UI library: SwiftUI components and design tokens",
       "keywords": [
         "ui-lib",
@@ -399,28 +356,17 @@
         "swiftui"
       ],
       "platforms": [
-        "ios"
+        "all"
       ],
       "triggers": [],
       "agent-affinity": [
         "epost-muji",
         "epost-ios-developer"
       ],
-      "path": "ios/ui-lib/SKILL.md"
+      "path": "ios-ui-lib/SKILL.md"
     },
     {
-      "name": "kit/agents",
-      "description": "Claude Code agent ecosystem structure, component reference, and development patterns. Use when creating or modifying agents, skills, commands, hooks, or planning ecosystem changes.",
-      "keywords": [],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [],
-      "path": "kit/agents/SKILL.md"
-    },
-    {
-      "name": "kit/agents/agent-development",
+      "name": "kit-agent-development",
       "description": "This skill should be used when the user asks to \"create an agent\", \"add an agent\", \"write a subagent\", \"agent frontmatter\", \"when to use description\", \"agent examples\", \"agent tools\", \"agent colors\", \"autonomous agent\", or needs guidance on agent structure, system prompts, triggering conditions, or agent development best practices for Claude Code plugins.",
       "keywords": [],
       "platforms": [
@@ -428,21 +374,21 @@
       ],
       "triggers": [],
       "agent-affinity": [],
-      "path": "kit/agents/agent-development/SKILL.md"
+      "path": "kit-agent-development/SKILL.md"
     },
     {
-      "name": "kit/agents/skill-development",
-      "description": "This skill should be used when the user wants to \"create a skill\", \"add a skill to plugin\", \"write a new skill\", \"improve skill description\", \"organize skill content\", or needs guidance on skill structure, progressive disclosure, or skill development best practices for Claude Code plugins.",
+      "name": "kit-agents",
+      "description": "Claude Code agent ecosystem structure, component reference, and development patterns. Use when creating or modifying agents, skills, commands, hooks, or planning ecosystem changes.",
       "keywords": [],
       "platforms": [
         "all"
       ],
       "triggers": [],
       "agent-affinity": [],
-      "path": "kit/agents/skill-development/SKILL.md"
+      "path": "kit-agents/SKILL.md"
     },
     {
-      "name": "kit/cli",
+      "name": "kit-cli",
       "description": "TypeScript CLI development patterns with Commander, @inquirer/prompts, and vitest testing for epost-kit",
       "keywords": [],
       "platforms": [
@@ -450,10 +396,10 @@
       ],
       "triggers": [],
       "agent-affinity": [],
-      "path": "kit/cli/SKILL.md"
+      "path": "kit-cli/SKILL.md"
     },
     {
-      "name": "kit/commands",
+      "name": "kit-commands",
       "description": "This skill should be used when the user asks to \"create a slash command\", \"add a command\", \"write a custom command\", \"define command arguments\", \"use command frontmatter\", \"organize commands\", \"create command with file references\", \"interactive command\", \"use AskUserQuestion in command\", or needs guidance on slash command structure, YAML frontmatter fields, dynamic arguments, bash execution in commands, user interaction patterns, or command development best practices for Claude Code.",
       "keywords": [],
       "platforms": [
@@ -461,10 +407,10 @@
       ],
       "triggers": [],
       "agent-affinity": [],
-      "path": "kit/commands/SKILL.md"
+      "path": "kit-commands/SKILL.md"
     },
     {
-      "name": "kit/hooks",
+      "name": "kit-hooks",
       "description": "This skill should be used when the user asks to \"create a hook\", \"add a hook\", \"write a PreToolUse hook\", \"implement a SessionStart hook\", \"block tool access\", \"validate tool use\", \"add automation on stop\", or mentions hook events (PreToolUse, PostToolUse, Stop, SubagentStop, SessionStart, SessionEnd, UserPromptSubmit, PreCompact, Notification). Provides guidance for creating hooks in the epost_agent_kit package system.",
       "keywords": [],
       "platforms": [
@@ -472,10 +418,21 @@
       ],
       "triggers": [],
       "agent-affinity": [],
-      "path": "kit/hooks/SKILL.md"
+      "path": "kit-hooks/SKILL.md"
     },
     {
-      "name": "knowledge/base",
+      "name": "kit-skill-development",
+      "description": "This skill should be used when the user wants to \"create a skill\", \"add a skill to plugin\", \"write a new skill\", \"improve skill description\", \"organize skill content\", or needs guidance on skill structure, progressive disclosure, or skill development best practices for Claude Code plugins.",
+      "keywords": [],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [],
+      "agent-affinity": [],
+      "path": "kit-skill-development/SKILL.md"
+    },
+    {
+      "name": "knowledge-base",
       "description": "Project knowledge management — ADRs, learned patterns, debug findings, decision history. Use when agents need to persist knowledge for future sessions.",
       "keywords": [
         "knowledge",
@@ -490,22 +447,17 @@
       "platforms": [
         "all"
       ],
-      "triggers": [
-        "ADR",
-        "decision record",
-        "learned pattern",
-        "save finding"
-      ],
+      "triggers": [],
       "agent-affinity": [
         "epost-architect",
         "epost-debugger",
         "epost-documenter",
         "epost-implementer"
       ],
-      "path": "knowledge/base/SKILL.md"
+      "path": "knowledge-base/SKILL.md"
     },
     {
-      "name": "knowledge/capture",
+      "name": "knowledge-capture",
       "description": "Post-task knowledge capture workflow — persist debug findings, implementation patterns, research results, review conventions to .knowledge/ directory.",
       "keywords": [
         "capture",
@@ -518,12 +470,7 @@
       "platforms": [
         "all"
       ],
-      "triggers": [
-        "capture learnings",
-        "save pattern",
-        "record finding",
-        "what did we learn"
-      ],
+      "triggers": [],
       "agent-affinity": [
         "epost-debugger",
         "epost-implementer",
@@ -531,10 +478,10 @@
         "epost-reviewer",
         "epost-architect"
       ],
-      "path": "knowledge/capture/SKILL.md"
+      "path": "knowledge-capture/SKILL.md"
     },
     {
-      "name": "knowledge/retrieval",
+      "name": "knowledge-retrieval",
       "description": "Internal-first knowledge retrieval before acting. Searches project knowledge, skills, RAG systems, ADRs before external sources.",
       "keywords": [
         "retrieve",
@@ -548,19 +495,14 @@
       "platforms": [
         "all"
       ],
-      "triggers": [
-        "what do we know about",
-        "check knowledge",
-        "prior art",
-        "previous decision"
-      ],
+      "triggers": [],
       "agent-affinity": [
         "epost-architect",
         "epost-implementer",
         "epost-debugger",
         "epost-researcher"
       ],
-      "path": "knowledge/retrieval/SKILL.md"
+      "path": "knowledge-retrieval/SKILL.md"
     },
     {
       "name": "planning",
@@ -576,11 +518,7 @@
       "platforms": [
         "all"
       ],
-      "triggers": [
-        "/plan",
-        "create plan",
-        "implementation plan"
-      ],
+      "triggers": [],
       "agent-affinity": [
         "epost-architect",
         "epost-orchestrator"
@@ -601,12 +539,7 @@
       "platforms": [
         "all"
       ],
-      "triggers": [
-        "stuck",
-        "problem",
-        "root cause",
-        "why"
-      ],
+      "triggers": [],
       "agent-affinity": [
         "epost-debugger",
         "epost-implementer",
@@ -628,11 +561,7 @@
       "platforms": [
         "all"
       ],
-      "triggers": [
-        "repomix",
-        "codebase summary",
-        "repo overview"
-      ],
+      "triggers": [],
       "agent-affinity": [
         "epost-scout",
         "epost-researcher",
@@ -654,12 +583,7 @@
       "platforms": [
         "all"
       ],
-      "triggers": [
-        "/research",
-        "research",
-        "best practices",
-        "how to"
-      ],
+      "triggers": [],
       "agent-affinity": [
         "epost-researcher",
         "epost-architect"
@@ -680,11 +604,7 @@
       "platforms": [
         "all"
       ],
-      "triggers": [
-        "complex problem",
-        "step by step",
-        "analyze"
-      ],
+      "triggers": [],
       "agent-affinity": [
         "epost-debugger",
         "epost-architect",
@@ -693,7 +613,7 @@
       "path": "sequential-thinking/SKILL.md"
     },
     {
-      "name": "web/a11y",
+      "name": "web-a11y",
       "description": "WCAG 2.1 AA accessibility rules for Web — ARIA, semantic HTML, keyboard navigation, focus management, color contrast, screen reader testing",
       "keywords": [],
       "platforms": [
@@ -701,10 +621,10 @@
       ],
       "triggers": [],
       "agent-affinity": [],
-      "path": "web/a11y/SKILL.md"
+      "path": "web-a11y/SKILL.md"
     },
     {
-      "name": "web/api-routes",
+      "name": "web-api-routes",
       "description": "Next.js API routes and Node.js backend patterns for the web monorepo",
       "keywords": [
         "api",
@@ -719,20 +639,15 @@
       "platforms": [
         "web"
       ],
-      "triggers": [
-        "route.ts",
-        "api/",
-        "server action",
-        "endpoint"
-      ],
+      "triggers": [],
       "agent-affinity": [
         "epost-web-developer",
         "epost-implementer"
       ],
-      "path": "web/api-routes/SKILL.md"
+      "path": "web-api-routes/SKILL.md"
     },
     {
-      "name": "web/figma",
+      "name": "web-figma",
       "description": "Figma MCP tool patterns, design token mapping, and visual validation for klara-theme components. Use when extracting Figma data, documenting components from Figma, mapping design tokens, or comparing implementation to Figma designs.",
       "keywords": [
         "figma",
@@ -742,17 +657,17 @@
         "figma-to-code"
       ],
       "platforms": [
-        "web"
+        "all"
       ],
       "triggers": [],
       "agent-affinity": [
         "epost-muji",
         "epost-web-developer"
       ],
-      "path": "web/figma/SKILL.md"
+      "path": "web-figma/SKILL.md"
     },
     {
-      "name": "web/figma-variables",
+      "name": "web-figma-variables",
       "description": "Vien 2.0 design system variable architecture — 1,059 variables across 42 collections with full reference chain analysis",
       "keywords": [
         "figma",
@@ -762,16 +677,16 @@
         "semantic"
       ],
       "platforms": [
-        "web"
+        "all"
       ],
       "triggers": [],
       "agent-affinity": [
         "epost-muji"
       ],
-      "path": "web/figma-variables/SKILL.md"
+      "path": "web-figma-variables/SKILL.md"
     },
     {
-      "name": "web/frontend",
+      "name": "web-frontend",
       "description": "React/Next.js frontend patterns, hooks, state management, and performance optimization",
       "keywords": [
         "react",
@@ -785,21 +700,15 @@
       "platforms": [
         "web"
       ],
-      "triggers": [
-        ".tsx",
-        ".jsx",
-        "react",
-        "frontend",
-        "ui component"
-      ],
+      "triggers": [],
       "agent-affinity": [
         "epost-web-developer",
         "epost-implementer"
       ],
-      "path": "web/frontend/SKILL.md"
+      "path": "web-frontend/SKILL.md"
     },
     {
-      "name": "web/modules",
+      "name": "web-modules",
       "description": "Patterns for integrating components into luz_next B2B modules with API binding, state management, and routing",
       "keywords": [
         "integrate",
@@ -814,22 +723,16 @@
       "platforms": [
         "web"
       ],
-      "triggers": [
-        "add to module",
-        "integrate into",
-        "create screen",
-        "add page",
-        "bind api"
-      ],
+      "triggers": [],
       "agent-affinity": [
         "epost-web-developer",
         "epost-implementer",
         "epost-guide"
       ],
-      "path": "web/modules/SKILL.md"
+      "path": "web-modules/SKILL.md"
     },
     {
-      "name": "web/nextjs",
+      "name": "web-nextjs",
       "description": "Next.js 14 App Router with Server Components, Server Actions, and routing patterns",
       "keywords": [
         "nextjs",
@@ -842,20 +745,15 @@
       "platforms": [
         "web"
       ],
-      "triggers": [
-        "next.js",
-        "nextjs",
-        "app router",
-        "server component"
-      ],
+      "triggers": [],
       "agent-affinity": [
         "epost-web-developer",
         "epost-implementer"
       ],
-      "path": "web/nextjs/SKILL.md"
+      "path": "web-nextjs/SKILL.md"
     },
     {
-      "name": "web/prototype",
+      "name": "web-prototype",
       "description": "Analyze external prototypes and convert to luz_next code with klara-theme, proper tokens, and module structure",
       "keywords": [
         "convert",
@@ -869,20 +767,16 @@
       "platforms": [
         "web"
       ],
-      "triggers": [
-        "/convert",
-        "convert to klara-theme",
-        "make it consistent"
-      ],
+      "triggers": [],
       "agent-affinity": [
         "epost-web-developer",
         "epost-implementer",
         "epost-guide"
       ],
-      "path": "web/prototype/SKILL.md"
+      "path": "web-prototype/SKILL.md"
     },
     {
-      "name": "web/rag",
+      "name": "web-rag",
       "description": "Web codebase RAG — vector search for klara-theme components, design tokens, Next.js patterns. Use before implementing web UI features, searching component APIs, or finding existing patterns.",
       "keywords": [
         "rag",
@@ -906,10 +800,10 @@
         "epost-muji",
         "epost-implementer"
       ],
-      "path": "web/rag/SKILL.md"
+      "path": "web-rag/SKILL.md"
     },
     {
-      "name": "web/ui-lib",
+      "name": "web-ui-lib",
       "description": "klara-theme web UI library: React components, design tokens, theming",
       "keywords": [
         "ui-lib",
@@ -918,17 +812,17 @@
         "integration"
       ],
       "platforms": [
-        "web"
+        "all"
       ],
       "triggers": [],
       "agent-affinity": [
         "epost-muji",
         "epost-web-developer"
       ],
-      "path": "web/ui-lib/SKILL.md"
+      "path": "web-ui-lib/SKILL.md"
     },
     {
-      "name": "web/ui-lib-dev",
+      "name": "web-ui-lib-dev",
       "description": "klara-theme UI component library patterns, Figma-to-code pipeline, and component documentation workflows. Use when working with klara-theme components, planning features, implementing components, auditing UI, or documenting components.",
       "keywords": [
         "klara-theme",
@@ -938,14 +832,14 @@
         "storybook"
       ],
       "platforms": [
-        "web"
+        "all"
       ],
       "triggers": [],
       "agent-affinity": [
         "epost-muji",
         "epost-web-developer"
       ],
-      "path": "web/ui-lib-dev/SKILL.md"
+      "path": "web-ui-lib-dev/SKILL.md"
     }
   ]
 }

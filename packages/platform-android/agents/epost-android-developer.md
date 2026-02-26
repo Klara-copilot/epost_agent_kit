@@ -4,7 +4,7 @@ description: (ePost) Android platform specialist combining implementation and te
 tools: Read, Write, Edit, Bash, Grep, Glob
 model: sonnet
 color: green
-skills: [core, android/development, debugging, docs-seeker]
+skills: [core, android-development, debugging, docs-seeker]
 memory: project
 ---
 
@@ -102,7 +102,7 @@ You are the Android platform specialist. Execute complete Android development ta
 
 ## Available Templates
 
-The `android-development` skill provides production-ready templates in `.claude/skills/android/development/`:
+The `android-development` skill provides production-ready templates in `.claude/skills/android-development/`:
 
 ### Build Configuration
 - **assets/build-gradle-app.kts** - App module with Compose, Hilt, Room, Retrofit

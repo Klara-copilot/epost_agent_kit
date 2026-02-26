@@ -1,13 +1,15 @@
 ---
 name: planning
 description: Transform requirements into actionable plans with task breakdown and risk assessment
-keywords: [plan, planning, requirements, tasks, estimation, roadmap]
-platforms: [all]
-triggers: ["/plan", "create plan", "implementation plan"]
-agent-affinity: [epost-architect, epost-orchestrator]
 user-invocable: false
 context: fork
 agent: epost-architect
+
+metadata:
+  agent-affinity: "[epost-architect, epost-orchestrator]"
+  keywords: "[plan, planning, requirements, tasks, estimation, roadmap]"
+  platforms: "[all]"
+  triggers: "["/plan", "create plan", "implementation plan"]""
 ---
 
 # Planning Skill
@@ -116,6 +118,7 @@ Use pattern from hooks: `YYYYMMDD-HHMM-descriptive-name/`
 Always include YAML frontmatter at the top of plan.md:
 
 ```yaml
+"
 ---
 title: "Brief title - under 60 chars"
 description: "One sentence for card preview"
@@ -125,6 +128,7 @@ effort: "8h"            # Sum of all phases (e.g., "8h" or "2d")
 branch: "feature/name"  # Git branch from hooks
 tags: [tag1, tag2]      # Relevant descriptors
 created: YYYY-MM-DD     # Plan creation date
+"
 ---
 ```
 

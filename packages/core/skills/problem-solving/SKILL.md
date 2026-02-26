@@ -1,10 +1,12 @@
 ---
 name: problem-solving
 description: Root cause analysis and complex problem resolution with systematic techniques
-keywords: [problem-solving, root-cause, analysis, debugging, 5-whys, bisection]
-platforms: [all]
-triggers: ["stuck", "problem", "root cause", "why"]
-agent-affinity: [epost-debugger, epost-implementer, epost-architect]
+
+metadata:
+  agent-affinity: "[epost-debugger, epost-implementer, epost-architect]"
+  keywords: "[problem-solving, root-cause, analysis, debugging, 5-whys, bisection]"
+  platforms: "[all]"
+  triggers: "["stuck", "problem", "root cause", "why"]""
 ---
 
 # Problem Solving Skill

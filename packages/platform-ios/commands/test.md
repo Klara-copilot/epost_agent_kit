@@ -33,7 +33,7 @@ Run iOS unit tests and UI tests using xcodebuild or XcodeBuildMCP. Provides cove
 ## Your Process
 
 1. **Reference Tester Skill**
-   - Use `ios/development/references/tester.md` for testing patterns
+   - Use `ios-development/references/tester.md` for testing patterns
 
 2. **Discover Project (MCP preferred)**
    - Use `mcp__xcodebuildmcp__discover_projs` if available

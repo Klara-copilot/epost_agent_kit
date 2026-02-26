@@ -10,9 +10,9 @@ Batch-fix the top $ARGUMENTS priority findings from `.epost-data/a11y/known-find
 
 ## Platform Detection
 
-- `.swift`, SwiftUI → iOS → use `ios/a11y` skill
-- `.kt`, Compose → Android → use `android/a11y` skill
-- `.tsx`, `.jsx`, HTML → Web → use `web/a11y` skill
+- `.swift`, SwiftUI → iOS → use `ios-a11y` skill
+- `.kt`, Compose → Android → use `android-a11y` skill
+- `.tsx`, `.jsx`, HTML → Web → use `web-a11y` skill
 - Group findings by `platform` field and apply appropriate skill per group
 
 ## Instructions

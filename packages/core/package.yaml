@@ -31,12 +31,12 @@ provides:
     - docs-seeker
     - sequential-thinking
     - research
-    - knowledge/base
-    - knowledge/retrieval
-    - knowledge/capture
+    - knowledge-base
+    - knowledge-retrieval
+    - knowledge-capture
     - doc-coauthoring
-    - infra/cloud
-    - infra/docker
+    - infra-cloud
+    - infra-docker
   commands:
     - epost
     - bootstrap/fast

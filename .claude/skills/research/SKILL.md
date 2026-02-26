@@ -1,13 +1,15 @@
 ---
 name: research
 description: Multi-source information gathering and validation with cross-referencing
-keywords: [research, investigation, documentation, sources, validation, best-practices]
-platforms: [all]
-triggers: ["/research", "research", "best practices", "how to"]
-agent-affinity: [epost-researcher, epost-architect]
 user-invocable: false
 context: fork
 agent: Explore
+
+metadata:
+  agent-affinity: "[epost-researcher, epost-architect]"
+  keywords: "[research, investigation, documentation, sources, validation, best-practices]"
+  platforms: "[all]"
+  triggers: "["/research", "research", "best practices", "how to"]""
 ---
 
 # Research Skill

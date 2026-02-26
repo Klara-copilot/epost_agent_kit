@@ -3,7 +3,7 @@ name: epost-guide
 description: (ePost) Natural language concierge for non-technical users. Translates business intent into agent workflows, provides guided wizards, and explains results in plain language.
 model: haiku
 color: "#FFB347"
-skills: [core, planning, knowledge/retrieval]
+skills: [core, planning, knowledge-retrieval]
 permissionMode: plan
 ---
 

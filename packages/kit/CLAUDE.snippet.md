@@ -11,11 +11,11 @@
 - `/kit:optimize-skill` — Optimize an existing skill
 
 ### Skills
-- `kit/agents` — Agent ecosystem reference and naming conventions
-- `kit/agents/agent-development` — Agent frontmatter, system prompts, triggering patterns
-- `kit/agents/skill-development` — Skill authoring, progressive disclosure, validation
-- `kit/commands` — Slash command structure, frontmatter, arguments
-- `kit/hooks` — Hook event types, I/O contract, creation workflow
+- `kit-agents` — Agent ecosystem reference and naming conventions
+- `kit-agent-development` — Agent frontmatter, system prompts, triggering patterns
+- `kit-skill-development` — Skill authoring, progressive disclosure, validation
+- `kit-commands` — Slash command structure, frontmatter, arguments
+- `kit-hooks` — Hook event types, I/O contract, creation workflow
 
 ## CLI Development Tools
 

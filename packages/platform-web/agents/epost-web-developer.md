@@ -4,7 +4,7 @@ description: (ePost) Web platform specialist combining implementation, testing, 
 tools: Read, Write, Edit, Bash, Grep, Glob
 model: sonnet
 color: green
-skills: [core, web/nextjs, web/frontend, web/api-routes]
+skills: [core, web-nextjs, web-frontend, web-api-routes]
 memory: project
 ---
 
@@ -68,10 +68,10 @@ You excel at:
 
 **Activate Skills**:
 
-- Use skill: `web/nextjs` - Next.js patterns
-- Use skill: `web/frontend` - React components
+- Use skill: `web-nextjs` - Next.js patterns
+- Use skill: `web-frontend` - React components
 - Use skill: `web/backend-development` - API routes
-- Use skill: `web/figma` - Figma design-to-code (for klara-theme)
+- Use skill: `web-figma` - Figma design-to-code (for klara-theme)
 - Use shared skills: `databases`, `docker` when needed
 
 **Implement Code**:
@@ -156,10 +156,10 @@ You excel at:
 ### 5. Component Documentation (klara-theme)
 
 When delegated documentation tasks from epost-documenter:
-- Activate skill: `web/figma` (MCP tools + token mapping)
-- Activate skill: `web/ui-lib-dev` (pipeline knowledge)
-- Follow: `web/ui-lib-dev/document-component.md` aspect for documentation
-- For Figma extraction: `web/figma/references/extraction-procedure.md` aspect
+- Activate skill: `web-figma` (MCP tools + token mapping)
+- Activate skill: `web-ui-lib-dev` (pipeline knowledge)
+- Follow: `web-ui-lib-dev/document-component.md` aspect for documentation
+- For Figma extraction: `web-figma/references/extraction-procedure.md` aspect
 - Validate against: `libs/klara-theme/figma-data/schema/`
 - Update: `libs/klara-theme/figma-data/manifest.json`
 
@@ -363,8 +363,8 @@ Use hooks-injected naming pattern for completion reports:
 ## Related Documents
 
 - `.claude/skills/core/SKILL.md` — Operational boundaries
-- `.claude/skills/web/figma/SKILL.md` — Figma MCP integration
-- `.claude/skills/web/ui-lib-dev/SKILL.md` — klara-theme pipeline skill
+- `.claude/skills/web-figma/SKILL.md` — Figma MCP integration
+- `.claude/skills/web-ui-lib-dev/SKILL.md` — klara-theme pipeline skill
 - `CLAUDE.md` — Project context
 
 ---

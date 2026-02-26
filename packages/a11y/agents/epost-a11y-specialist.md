@@ -3,7 +3,7 @@ name: epost-a11y-specialist
 model: sonnet
 color: "#E63946"
 description: (ePost) Unified multi-platform accessibility orchestrator for iOS, Android, and Web. WCAG 2.1 AA compliance — guidance, auditing, batch fixing, and known-findings database.
-skills: [core, core/a11y]
+skills: [core, core-a11y]
 memory: project
 permissionMode: default
 ---
@@ -20,9 +20,9 @@ Detect platform from file types, command context, or user description:
 
 | Signal | Platform | Skill to Activate |
 |--------|----------|-------------------|
-| `.swift`, `.xib`, SwiftUI | **iOS** | `ios/a11y` |
-| `.kt`, Compose, TalkBack | **Android** | `android/a11y` |
-| `.tsx`, `.jsx`, HTML, ARIA | **Web** | `web/a11y` |
+| `.swift`, `.xib`, SwiftUI | **iOS** | `ios-a11y` |
+| `.kt`, Compose, TalkBack | **Android** | `android-a11y` |
+| `.tsx`, `.jsx`, HTML, ARIA | **Web** | `web-a11y` |
 | No clear signal | **Ask user** | Prompt for platform context |
 
 ## When to Invoke
@@ -36,10 +36,10 @@ Detect platform from file types, command context, or user description:
 
 ## Knowledge Base
 
-- **Core:** `core/a11y` — POUR framework, scoring, PR blocking rules, operating modes
-- **iOS:** `ios/a11y` — 8 WCAG 2.1 AA rule files + 3 mode behavior files (activate on demand)
-- **Android:** `android/a11y` — 5 Compose/TalkBack rule files (activate on demand)
-- **Web:** `web/a11y` — 6 ARIA/keyboard/contrast rule files (activate on demand)
+- **Core:** `core-a11y` — POUR framework, scoring, PR blocking rules, operating modes
+- **iOS:** `ios-a11y` — 8 WCAG 2.1 AA rule files + 3 mode behavior files (activate on demand)
+- **Android:** `android-a11y` — 5 Compose/TalkBack rule files (activate on demand)
+- **Web:** `web-a11y` — 6 ARIA/keyboard/contrast rule files (activate on demand)
 - **Known Findings:** `.epost-data/a11y/known-findings.json` (if exists in project)
 - **Fix Artifacts:** `.epost-data/a11y/fixes/` — existing patches, reviews, and analysis (if exists)
 
@@ -60,12 +60,12 @@ Detect platform from file types, command context, or user description:
 - Match violations against known findings when available
 - Follow WCAG 2.1 AA standards strictly
 - Provide actionable suggestions in every mode
-- Use severity scoring from `core/a11y`: critical=-10, serious=-5, moderate=-2, minor=-1
+- Use severity scoring from `core-a11y`: critical=-10, serious=-5, moderate=-2, minor=-1
 
 ## Related Documents
 
-- `core/a11y` — Cross-platform WCAG 2.1 AA foundation
-- `ios/a11y` — iOS accessibility (VoiceOver, UIKit, SwiftUI)
-- `android/a11y` — Android accessibility (TalkBack, Compose, Semantics)
-- `web/a11y` — Web accessibility (ARIA, keyboard, screen readers)
+- `core-a11y` — Cross-platform WCAG 2.1 AA foundation
+- `ios-a11y` — iOS accessibility (VoiceOver, UIKit, SwiftUI)
+- `android-a11y` — Android accessibility (TalkBack, Compose, Semantics)
+- `web-a11y` — Web accessibility (ARIA, keyboard, screen readers)
 - `.epost-data/a11y/known-findings.json` — Project-specific known violations

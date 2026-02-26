@@ -39,10 +39,10 @@ This file provides guidance to Claude Code when working with code in this reposi
 - `/review:a11y` — Review accessibility compliance by focus area
 
 ### Skills
-- `core/a11y` — Cross-platform WCAG 2.1 AA foundation (POUR, scoring)
-- `ios/a11y` — iOS (VoiceOver, UIKit-primary, SwiftUI) *(extends ios/\*)*
-- `android/a11y` — Android (Compose, Views/XML, TalkBack) *(extends android/\*)*
-- `web/a11y` — Web (ARIA, keyboard, screen readers) *(extends web/\*)*
+- `core-a11y` — Cross-platform WCAG 2.1 AA foundation (POUR, scoring)
+- `ios-a11y` — iOS (VoiceOver, UIKit-primary, SwiftUI) *(extends ios/\*)*
+- `android-a11y` — Android (Compose, Views/XML, TalkBack) *(extends android/\*)*
+- `web-a11y` — Web (ARIA, keyboard, screen readers) *(extends web/\*)*
 
 ---
 
@@ -156,11 +156,11 @@ This file provides guidance to Claude Code when working with code in this reposi
 - `/kit:optimize-skill` — Optimize an existing skill
 
 ### Skills
-- `kit/agents` — Agent ecosystem reference and naming conventions
-- `kit/agents/agent-development` — Agent frontmatter, system prompts, triggering patterns
-- `kit/agents/skill-development` — Skill authoring, progressive disclosure, validation
-- `kit/commands` — Slash command structure, frontmatter, arguments
-- `kit/hooks` — Hook event types, I/O contract, creation workflow
+- `kit-agents` — Agent ecosystem reference and naming conventions
+- `kit-agent-development` — Agent frontmatter, system prompts, triggering patterns
+- `kit-skill-development` — Skill authoring, progressive disclosure, validation
+- `kit-commands` — Slash command structure, frontmatter, arguments
+- `kit-hooks` — Hook event types, I/O contract, creation workflow
 
 ## CLI Development Tools
 
@@ -181,10 +181,10 @@ This file provides guidance to Claude Code when working with code in this reposi
 - `epost-muji` — MUJI UI library agent for design system development, component knowledge, Figma-to-code pipeline
 
 ### Skills
-- `web/figma` — Figma MCP tool patterns and design token extraction
-- `web/figma-variables` — Vien 2.0 design system variable architecture (1,059 variables, 42 collections)
-- `web/ui-lib` — Web UI library component catalog (React/Next.js)
-- `web/ui-lib-dev` — klara-theme development pipeline (plan, implement, audit, fix, document)
+- `web-figma` — Figma MCP tool patterns and design token extraction
+- `web-figma-variables` — Vien 2.0 design system variable architecture (1,059 variables, 42 collections)
+- `web-ui-lib` — Web UI library component catalog (React/Next.js)
+- `web-ui-lib-dev` — klara-theme development pipeline (plan, implement, audit, fix, document)
 
 ---
 

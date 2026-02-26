@@ -11,9 +11,9 @@ provides:
   agents:
     - epost-ios-developer
   skills:
-    - ios/development
-    - ios/ui-lib
-    - ios/rag
+    - ios-development
+    - ios-ui-lib
+    - ios-rag
   commands:
     - ios/cook
     - ios/test

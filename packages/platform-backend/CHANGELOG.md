@@ -17,8 +17,8 @@ Initial release.
 
 ### Skills
 
-- Added `backend/javaee` — Jakarta EE 8, JAX-RS, CDI, EJB patterns
-- Added `backend/databases` — PostgreSQL, MongoDB, Hibernate ORM patterns
+- Added `backend-javaee` — Jakarta EE 8, JAX-RS, CDI, EJB patterns
+- Added `backend-databases` — PostgreSQL, MongoDB, Hibernate ORM patterns
 
 ### Commands
 

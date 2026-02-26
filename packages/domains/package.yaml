@@ -10,8 +10,8 @@ dependencies:
 provides:
   agents: []
   skills:
-    - domain/b2b
-    - domain/b2c
+    - domain-b2b
+    - domain-b2c
 
 files:
   skills/: skills/

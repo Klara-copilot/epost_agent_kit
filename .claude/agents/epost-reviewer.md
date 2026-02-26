@@ -3,7 +3,7 @@ name: epost-reviewer
 description: (ePost) Comprehensive code review agent for security, quality, and performance analysis. Reviews code changes, validates best practices, verifies task completion, and ensures builds succeed.
 color: yellow
 model: sonnet
-skills: [core, code-review, knowledge/retrieval, repomix]
+skills: [core, code-review, knowledge-retrieval, repomix]
 memory: project
 permissionMode: plan
 disallowedTools: Write, Edit

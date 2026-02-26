@@ -12,12 +12,12 @@ provides:
     - epost-kit-designer
     - epost-cli-developer
   skills:
-    - kit/agents
-    - kit/agents/agent-development
-    - kit/agents/skill-development
-    - kit/commands
-    - kit/hooks
-    - kit/cli
+    - kit-agents
+    - kit-agent-development
+    - kit-skill-development
+    - kit-commands
+    - kit-hooks
+    - kit-cli
   commands:
     - kit/add-agent
     - kit/add-skill

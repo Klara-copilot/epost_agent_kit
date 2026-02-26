@@ -1,10 +1,12 @@
 ---
 name: docs-seeker
 description: Finding and reading documentation for packages, libraries, and frameworks using Context7 and web search
-keywords: [docs, documentation, search, context7, api-reference, library]
-platforms: [all]
-triggers: ["documentation", "docs", "api reference", "how to use"]
-agent-affinity: [epost-researcher, epost-implementer]
+
+metadata:
+  agent-affinity: "[epost-researcher, epost-implementer]"
+  keywords: "[docs, documentation, search, context7, api-reference, library]"
+  platforms: "[all]"
+  triggers: "["documentation", "docs", "api reference", "how to use"]""
 ---
 
 # Documentation Seeker Skill

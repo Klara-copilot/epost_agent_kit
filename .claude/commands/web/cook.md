@@ -11,7 +11,7 @@ Implement the web platform feature described by the user.
 
 1. Read and understand the feature requirements
 2. Verify Next.js project structure and dependencies
-3. Activate relevant skills: web/nextjs, web/frontend-development, web/backend-development
+3. Activate relevant skills: web-nextjs, web-frontend-development, web/backend-development
 4. Implement the feature following Next.js 14 App Router conventions
 5. Run build and lint to verify quality
 6. Report completion with file changes

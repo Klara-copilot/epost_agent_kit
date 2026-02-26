@@ -27,8 +27,9 @@ MESSAGES=()
 SPEC_FIELDS=("name" "description" "license" "compatibility" "metadata" "allowed-tools")
 
 # epost-kit Claude Code runtime extensions — intentional, allowlisted (not warned)
-EPOST_EXTENSIONS=("user-invocable" "disable-model-invocation" "context" "agent"
-                  "keywords" "platforms" "triggers" "agent-affinity")
+# NOTE: keywords, platforms, triggers, agent-affinity are NOT listed here;
+#       they must live under metadata: per the agentskills.io spec.
+EPOST_EXTENSIONS=("user-invocable" "disable-model-invocation" "context" "agent")
 
 # ─── Helper: extract frontmatter (between first pair of ---) ─────────────────
 extract_frontmatter() {
@@ -79,6 +80,20 @@ fi
 if [ -n "$NAME" ] && [ ${#NAME} -gt 64 ]; then
   MESSAGES+=("ERROR: 'name' exceeds 64 characters (${#NAME} chars): $NAME")
   ERRORS=$((ERRORS + 1))
+fi
+
+# ─── name format validation ───────────────────────────────────────────────────
+if [ -n "$NAME" ]; then
+  # Must match: [a-z0-9] at start and end, [a-z0-9-] in between (or single char)
+  if ! echo "$NAME" | grep -qE '^[a-z0-9][a-z0-9-]*[a-z0-9]$|^[a-z0-9]$'; then
+    MESSAGES+=("ERROR: 'name' contains invalid characters. Only lowercase letters, numbers, hyphens allowed. No leading/trailing hyphens. Got: $NAME")
+    ERRORS=$((ERRORS + 1))
+  fi
+  # Check no consecutive hyphens
+  if echo "$NAME" | grep -q '\-\-'; then
+    MESSAGES+=("ERROR: 'name' contains consecutive hyphens (--): $NAME")
+    ERRORS=$((ERRORS + 1))
+  fi
 fi
 
 # ─── description max length (1024 chars) ─────────────────────────────────────
