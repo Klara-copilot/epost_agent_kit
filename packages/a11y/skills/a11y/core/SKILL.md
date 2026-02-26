@@ -59,10 +59,10 @@ If no signal, ask the user.
 
 | Mode | Trigger | Behavior |
 |------|---------|----------|
-| **Guidance** | `/a11y:review`, direct questions | Human-readable examples, no file writes |
-| **Audit** | `/a11y:audit` | JSON-only output, read-only (no Write/Edit) |
-| **Fix** | `/a11y:fix`, `/a11y:fix-batch` | JSON status + code edits, surgical changes only |
-| **Close** | `/a11y:close` | Update known-findings DB, JSON confirmation |
+| **Guidance** | `/review:a11y`, direct questions | Human-readable examples, no file writes |
+| **Audit** | `/audit:a11y` | JSON-only output, read-only (no Write/Edit) |
+| **Fix** | `/fix:a11y`, `/fix:a11y-batch` | JSON status + code edits, surgical changes only |
+| **Close** | `/audit:a11y-close` | Update known-findings DB, JSON confirmation |
 
 ## Known-Findings Database
 

@@ -332,10 +332,10 @@ Delegate iOS accessibility tasks to the unified accessibility agent:
 | Task | Agent | Command |
 |------|-------|---------|
 | Real-time a11y guidance | `epost-a11y-specialist` | (automatic during coding) |
-| Batch audit (pre-commit/PR) | `epost-a11y-specialist` | `/a11y:audit` |
-| Fix specific finding | `epost-a11y-specialist` | `/a11y:fix <id>` |
-| Fix top N findings | `epost-a11y-specialist` | `/a11y:fix-batch <n>` |
-| Review accessibility | `epost-a11y-specialist` | `/a11y:review [buttons\|headings\|modals]` |
+| Batch audit (pre-commit/PR) | `epost-a11y-specialist` | `/audit:a11y` |
+| Fix specific finding | `epost-a11y-specialist` | `/fix:a11y <id>` |
+| Fix top N findings | `epost-a11y-specialist` | `/fix:a11y-batch <n>` |
+| Review accessibility | `epost-a11y-specialist` | `/review:a11y [buttons\|headings\|modals]` |
 
 When a developer asks about accessibility, VoiceOver, or WCAG, route to `epost-a11y-specialist`.
 

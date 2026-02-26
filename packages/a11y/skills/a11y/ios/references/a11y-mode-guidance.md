@@ -6,7 +6,7 @@ user-invocable: false
 
 # Accessibility Guidance Mode
 
-Activated by: `/a11y:review [buttons|headings|modals]` or direct accessibility questions.
+Activated by: `/review:a11y [buttons|headings|modals]` or direct accessibility questions.
 
 ## Core Principle
 
