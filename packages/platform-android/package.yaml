@@ -12,11 +12,16 @@ provides:
     - epost-android-developer
   skills:
     - android/development
+    - android/accessibility
     - android/ui-lib
   commands:
     - android/cook
     - android/test
     - android/debug
+    - android/a11y/audit
+    - android/a11y/fix
+    - android/a11y/fix-batch
+    - android/a11y/review
 
 files:
   agents/: agents/
