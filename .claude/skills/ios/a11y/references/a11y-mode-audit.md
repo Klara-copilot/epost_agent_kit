@@ -71,7 +71,7 @@ Don't block (`block_pr: false`) if:
 
 ## Detection Rules
 
-Reference `a11y/ios/` skill files for detailed detection criteria:
+Reference `ios/a11y/` skill files for detailed detection criteria:
 - `a11y-buttons.md` — Button detection patterns
 - `a11y-forms.md` — Form input detection
 - `a11y-images.md` — Image classification

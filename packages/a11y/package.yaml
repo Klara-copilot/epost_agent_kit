@@ -12,15 +12,15 @@ provides:
     - epost-a11y-specialist
   skills:
     - a11y/core
-    - a11y/ios
-    - a11y/android
-    - a11y/web
+    - ios/a11y
+    - android/a11y
+    - web/a11y
   commands:
-    - a11y/audit
-    - a11y/fix
-    - a11y/fix-batch
-    - a11y/review
-    - a11y/close
+    - audit/a11y
+    - audit/a11y-close
+    - fix/a11y
+    - fix/a11y-batch
+    - review/a11y
 
 files:
   agents/: agents/

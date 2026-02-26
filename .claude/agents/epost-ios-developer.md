@@ -343,7 +343,7 @@ When a developer asks about accessibility, VoiceOver, or WCAG, route to `epost-a
 
 - `.claude/skills/core/SKILL.md` — Operational boundaries
 - `.claude/skills/ios/development/SKILL.md` — iOS development patterns
-- `a11y/ios` — WCAG 2.1 AA accessibility rules (requires a11y package)
+- `ios/a11y` — WCAG 2.1 AA accessibility rules (requires a11y package)
 - `CLAUDE.md` — Project context
 
 ---

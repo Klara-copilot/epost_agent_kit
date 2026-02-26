@@ -49,9 +49,9 @@ Activate ONLY the skill matching the detected platform:
 
 | Signal | Platform | Skill |
 |--------|----------|-------|
-| `.swift`, `.xib`, SwiftUI | iOS | `a11y/ios` |
-| `.kt`, Compose | Android | `a11y/android` |
-| `.tsx`, `.jsx`, HTML, CSS | Web | `a11y/web` |
+| `.swift`, `.xib`, SwiftUI | iOS | `ios/a11y` |
+| `.kt`, Compose | Android | `android/a11y` |
+| `.tsx`, `.jsx`, HTML, CSS | Web | `web/a11y` |
 
 If no signal, ask the user.
 

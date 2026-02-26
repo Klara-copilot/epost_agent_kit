@@ -1,5 +1,5 @@
 ---
-name: a11y/ios
+name: ios/a11y
 description: WCAG 2.1 AA accessibility rules for iOS — UIKit-primary (iOS 16+), VoiceOver, SwiftUI secondary (iOS 15+), fix templates
 user-invocable: false
 ---

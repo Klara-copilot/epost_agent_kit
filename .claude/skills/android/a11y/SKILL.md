@@ -1,5 +1,5 @@
 ---
-name: a11y/android
+name: android/a11y
 description: WCAG 2.1 AA accessibility rules for Android — Compose + traditional Views/XML, TalkBack, contentDescription, touch targets, focus semantics, color contrast
 user-invocable: false
 ---
@@ -54,4 +54,4 @@ All interactive composables (buttons, checkboxes, icon buttons, clickable rows) 
 ## Related Documents
 
 - `a11y/core` — POUR framework, severity scoring, operating modes
-- `a11y/ios` — iOS equivalent (VoiceOver, UIKit, SwiftUI)
+- `ios/a11y` — iOS equivalent (VoiceOver, UIKit, SwiftUI)

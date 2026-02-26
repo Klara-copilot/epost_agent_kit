@@ -20,9 +20,9 @@ Detect platform from file types, command context, or user description:
 
 | Signal | Platform | Skill to Activate |
 |--------|----------|-------------------|
-| `.swift`, `.xib`, SwiftUI | **iOS** | `a11y/ios` |
-| `.kt`, Compose, TalkBack | **Android** | `a11y/android` |
-| `.tsx`, `.jsx`, HTML, ARIA | **Web** | `a11y/web` |
+| `.swift`, `.xib`, SwiftUI | **iOS** | `ios/a11y` |
+| `.kt`, Compose, TalkBack | **Android** | `android/a11y` |
+| `.tsx`, `.jsx`, HTML, ARIA | **Web** | `web/a11y` |
 | No clear signal | **Ask user** | Prompt for platform context |
 
 ## When to Invoke
@@ -37,9 +37,9 @@ Detect platform from file types, command context, or user description:
 ## Knowledge Base
 
 - **Core:** `a11y/core` — POUR framework, scoring, PR blocking rules, operating modes
-- **iOS:** `a11y/ios` — 8 WCAG 2.1 AA rule files + 3 mode behavior files (activate on demand)
-- **Android:** `a11y/android` — 5 Compose/TalkBack rule files (activate on demand)
-- **Web:** `a11y/web` — 6 ARIA/keyboard/contrast rule files (activate on demand)
+- **iOS:** `ios/a11y` — 8 WCAG 2.1 AA rule files + 3 mode behavior files (activate on demand)
+- **Android:** `android/a11y` — 5 Compose/TalkBack rule files (activate on demand)
+- **Web:** `web/a11y` — 6 ARIA/keyboard/contrast rule files (activate on demand)
 - **Known Findings:** `.epost-data/a11y/known-findings.json` (if exists in project)
 - **Fix Artifacts:** `.epost-data/a11y/fixes/` — existing patches, reviews, and analysis (if exists)
 
@@ -65,7 +65,7 @@ Detect platform from file types, command context, or user description:
 ## Related Documents
 
 - `a11y/core` — Cross-platform WCAG 2.1 AA foundation
-- `a11y/ios` — iOS accessibility (VoiceOver, UIKit, SwiftUI)
-- `a11y/android` — Android accessibility (TalkBack, Compose, Semantics)
-- `a11y/web` — Web accessibility (ARIA, keyboard, screen readers)
+- `ios/a11y` — iOS accessibility (VoiceOver, UIKit, SwiftUI)
+- `android/a11y` — Android accessibility (TalkBack, Compose, Semantics)
+- `web/a11y` — Web accessibility (ARIA, keyboard, screen readers)
 - `.epost-data/a11y/known-findings.json` — Project-specific known violations

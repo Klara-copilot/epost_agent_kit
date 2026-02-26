@@ -12,6 +12,6 @@
 
 ### Skills
 - `a11y/core` — Cross-platform WCAG 2.1 AA foundation (POUR, scoring)
-- `a11y/ios` — iOS (VoiceOver, UIKit-primary, SwiftUI)
-- `a11y/android` — Android (Compose, Views/XML, TalkBack)
-- `a11y/web` — Web (ARIA, keyboard, screen readers)
+- `ios/a11y` — iOS (VoiceOver, UIKit-primary, SwiftUI) *(extends ios/\*)*
+- `android/a11y` — Android (Compose, Views/XML, TalkBack) *(extends android/\*)*
+- `web/a11y` — Web (ARIA, keyboard, screen readers) *(extends web/\*)*

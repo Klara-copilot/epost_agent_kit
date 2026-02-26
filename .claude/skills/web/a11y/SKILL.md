@@ -1,5 +1,5 @@
 ---
-name: a11y/web
+name: web/a11y
 description: WCAG 2.1 AA accessibility rules for Web — ARIA, semantic HTML, keyboard navigation, focus management, color contrast, screen reader testing
 user-invocable: false
 ---
@@ -111,6 +111,6 @@ tabIndex={-1}  // Programmatic focus only, not in tab order
 
 ## Related Documents
 
-- `a11y/ios` — iOS counterpart (VoiceOver, UIKit, SwiftUI)
-- `a11y/android` — Android counterpart (TalkBack, Compose, Semantics)
+- `ios/a11y` — iOS counterpart (VoiceOver, UIKit, SwiftUI)
+- `android/a11y` — Android counterpart (TalkBack, Compose, Semantics)
 - `a11y/core` — Platform-agnostic core principles (POUR, scoring)
