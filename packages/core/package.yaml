@@ -19,7 +19,7 @@ provides:
     - epost-git-manager
     - epost-brainstormer
     - epost-guide
-    - epost-a11y-specialist
+    - epost-scout
   skills:
     - core
     - code-review
@@ -60,7 +60,6 @@ provides:
     - plan/deep
     - plan/parallel
     - plan/validate
-    - review/a11y
     - review/code
 
 files:

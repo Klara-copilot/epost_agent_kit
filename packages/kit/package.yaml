@@ -1,0 +1,39 @@
+name: kit
+version: "1.1.0"
+description: "Kit authoring and CLI development tools for epost_agent_kit"
+layer: 1
+platforms: [all]
+
+dependencies:
+  - core
+
+provides:
+  agents:
+    - epost-kit-designer
+    - epost-cli-developer
+  skills:
+    - kit/agents
+    - kit/agents/agent-development
+    - kit/agents/skill-development
+    - kit/commands
+    - kit/hooks
+    - kit/cli
+  commands:
+    - kit/add-agent
+    - kit/add-skill
+    - kit/add-command
+    - kit/add-hook
+    - kit/optimize-skill
+    - add-command/simple
+    - add-command/splash
+    - cli/cook
+    - cli/doctor
+    - cli/test
+
+files:
+  agents/: agents/
+  skills/: skills/
+  commands/: commands/
+
+settings_strategy: skip
+claude_snippet: CLAUDE.snippet.md

@@ -16,6 +16,7 @@
 - `/ios:a11y:fix` — Fix a specific accessibility finding
 - `/ios:a11y:fix-batch` — Fix top N accessibility findings
 - `/ios:a11y:review` — Review iOS accessibility (buttons/headings/modals/all)
+- `/ios:a11y:close` — Mark an accessibility finding as resolved
 
 ### Agents
 - `epost-ios-developer` — iOS platform specialist

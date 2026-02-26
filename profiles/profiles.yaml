@@ -14,7 +14,7 @@ profiles:
   ios-b2c:
     display_name: "iOS App Developer"
     teams: [optimus]
-    packages: [core, platform-ios, domains]
+    packages: [core, a11y, platform-ios, domains]
     optional: [design-system]
 
   android-b2c:
@@ -26,7 +26,7 @@ profiles:
   mobile-b2c:
     display_name: "Mobile Developer (iOS + Android)"
     teams: [optimus]
-    packages: [core, platform-ios, platform-android, domains]
+    packages: [core, a11y, platform-ios, platform-android, domains]
     optional: [design-system]
 
   # ─── Backend/API Teams (Hacka, Kepler) ───
@@ -44,7 +44,7 @@ profiles:
   ios-ui-lib:
     display_name: "iOS UI Library Developer"
     teams: [muji]
-    packages: [core, platform-ios, design-system]
+    packages: [core, a11y, platform-ios, design-system]
 
   android-ui-lib:
     display_name: "Android UI Library Developer"
@@ -60,12 +60,12 @@ profiles:
   # ─── Kit Development ───
   kit-designer:
     display_name: "Kit Designer"
-    packages: [core, kit-design]
+    packages: [core, kit]
 
   # ─── Full ───
   full:
     display_name: "Full Kit (everything)"
-    packages: [core, platform-web, platform-ios, platform-android, platform-backend, design-system, domains, kit-design]
+    packages: [core, a11y, platform-web, platform-ios, platform-android, platform-backend, design-system, domains, kit]
 
 auto_detect:
   rules:

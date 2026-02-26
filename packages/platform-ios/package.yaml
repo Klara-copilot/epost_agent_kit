@@ -12,7 +12,6 @@ provides:
     - epost-ios-developer
   skills:
     - ios/development
-    - ios/accessibility
     - ios/ui-lib
     - ios/rag
   commands:
@@ -20,10 +19,6 @@ provides:
     - ios/test
     - ios/debug
     - ios/simulator
-    - ios/a11y/audit
-    - ios/a11y/fix
-    - ios/a11y/fix-batch
-    - ios/a11y/review
 
 files:
   agents/: agents/
