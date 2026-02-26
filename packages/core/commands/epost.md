@@ -35,7 +35,7 @@ Analyze `$ARGUMENTS` and route based on intent keywords:
 | ask, research, what is, how does | Spawn epost-researcher | epost-researcher |
 | brainstorm, think, evaluate, compare | Spawn epost-brainstormer | epost-brainstormer |
 | guide, help me, how do I, wizard | Show discovery menu or spawn epost-guide | epost-guide |
-| a11y, accessibility | `/review:a11y` | epost-a11y-specialist |
+| a11y, accessibility | `/a11y:review` | epost-a11y-specialist |
 | convert, prototype, migrate | `/web:convert` | epost-web-developer |
 | bootstrap, init, scaffold | `/bootstrap:fast` or `/bootstrap:parallel` | epost-implementer |
 
@@ -78,7 +78,7 @@ When invoked with no arguments (`/epost`), display this menu:
 | Ask a question | `/epost ask ...` |
 | Brainstorm approaches | `/epost brainstorm ...` |
 | Interactive wizard | `/epost guide` |
-| Accessibility review | `/review:a11y` |
+| Accessibility review | `/a11y:review` |
 
 ### Platform Commands
 | iOS | Android | Web | Backend |

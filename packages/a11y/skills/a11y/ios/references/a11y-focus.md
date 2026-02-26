@@ -16,6 +16,7 @@ Accessibility rules for managing focus, announcements, and VoiceOver navigation,
 - [Focus Order](#focus-order)
 - [Programmatic Focus](#programmatic-focus)
 - [Screen Changes](#screen-changes)
+- [Modal / Dialog Focus (UIKit)](#modal--dialog-focus-uikit)
 - [Dynamic Content](#dynamic-content)
 
 ## Related Documents
@@ -26,28 +27,30 @@ Accessibility rules for managing focus, announcements, and VoiceOver navigation,
 
 ## Focus Basics
 
-### Focus Notification
+### Programmatic Focus (SwiftUI)
 
-**Monitor focus changes:**
-- Observe `elementFocusedNotification`
-- Respond to focus events appropriately
-- Don't interfere with normal focus behavior
+**Move VoiceOver focus programmatically (iOS 15+):**
+- Use `@AccessibilityFocusState` to drive focus from state
+- Boolean form for a single target, enum form for multiple targets
+- Project targets iOS 18+, so no availability check needed
 
 ```swift
-// ✅ Focus notification observer
-NotificationCenter.default.addObserver(
-    self,
-    selector: #selector(elementFocused),
-    name: UIAccessibility.elementFocusedNotification,
-    object: nil
-)
+// Boolean-based focus
+@AccessibilityFocusState var isFocused: Bool
+Text("Notification").accessibilityFocused($isFocused)
+// Set programmatically:
+isFocused = true
 
-@objc private func elementFocused(_ notification: Notification) {
-    guard let element = notification.userInfo?[UIAccessibility.focusedElementUserInfoKey] as? UIView else {
-        return
-    }
-    // Handle focus change
-}
+// Enum-based focus for multiple targets
+enum FocusTarget: Hashable { case title, error, submitButton }
+@AccessibilityFocusState var focus: FocusTarget?
+
+Text("Title").accessibilityFocused($focus, equals: .title)
+Text("Error").accessibilityFocused($focus, equals: .error)
+Button("Submit") { }.accessibilityFocused($focus, equals: .submitButton)
+
+// Move focus:
+focus = .error
 ```
 
 ### Focus Indicators
@@ -265,6 +268,63 @@ func navigateToSettings() {
 ### Modal Presentations
 
 **Handle modal focus:** Focus first element in modal, provide clear dismiss option, announce modal purpose.
+
+## Modal / Dialog Focus (UIKit)
+
+**Problem (WCAG 2.1.1):** When a dialog or popup opens, VoiceOver focus often stays on the background (e.g., the page heading). Users don't know a dialog has appeared.
+
+**Two-step fix:**
+1. Set `accessibilityViewIsModal = true` on the dialog root — traps VoiceOver inside
+2. Post `.screenChanged` pointing at the first interactive element
+
+```swift
+// ✅ Standard UIViewController presentation:
+func showDialog() {
+    let vc = ConfirmationViewController()
+    present(vc, animated: true) {
+        vc.view.accessibilityViewIsModal = true        // Trap focus inside dialog
+        UIAccessibility.post(
+            notification: .screenChanged,
+            argument: vc.confirmButton                 // Focus lands here
+        )
+    }
+}
+
+// ✅ Custom overlay/popup (not presented as a VC):
+func showPopupOverlay() {
+    popupView.isHidden = false
+    popupView.accessibilityViewIsModal = true          // Trap
+    UIAccessibility.post(
+        notification: .screenChanged,
+        argument: popupView.titleLabel                 // Or first button
+    )
+}
+
+// ✅ On dismiss: restore focus to the element that triggered the dialog
+func dismissDialog() {
+    presentedViewController?.dismiss(animated: true) {
+        UIAccessibility.post(
+            notification: .screenChanged,
+            argument: self.triggerButton               // Return focus to opener
+        )
+    }
+}
+```
+
+**Anti-patterns:**
+```swift
+// ❌ Missing accessibilityViewIsModal — VoiceOver can escape to background
+present(vc, animated: true)                           // No trap, no focus
+
+// ❌ Forgetting the notification — focus stays on previous element
+vc.view.accessibilityViewIsModal = true               // Trapped but never moved there
+```
+
+**Checklist:**
+- ✅ `accessibilityViewIsModal = true` on dialog root view
+- ✅ `.screenChanged` notification on presentation, pointing at first element
+- ✅ `.screenChanged` notification on dismiss, returning to trigger
+- ✅ Apply to: presented VCs, action sheets, custom popups, bottom sheets
 
 ### Navigation Transitions
 

@@ -16,6 +16,7 @@ Rules for managing TalkBack focus behavior in Jetpack Compose. Covers semantic g
 - [stateDescription](#statedescription)
 - [traversalIndex](#traversalindex)
 - [clearAndSetSemantics](#clearandsetsemantics)
+- [Custom Toggles with toggleableState](#custom-toggles-with-toggleablestate)
 - [Focus Order Principles](#focus-order-principles)
 - [Common Violations](#common-violations)
 
@@ -304,6 +305,34 @@ Row(
     }
 }
 ```
+
+---
+
+## Custom Toggles with toggleableState
+
+Use `clearAndSetSemantics` with `toggleableState` when building custom toggle controls that need complete semantic control — replacing all child node semantics with a single, precise announcement.
+
+```kotlin
+// Custom toggle with full semantic override
+Row(
+    modifier = Modifier
+        .clickable { enabled = !enabled }
+        .clearAndSetSemantics {
+            stateDescription = if (enabled) "On" else "Off"
+            toggleableState = ToggleableState(enabled)
+            role = Role.Switch
+            contentDescription = "Dark mode"
+        }
+) {
+    Icon(if (enabled) Icons.Filled.DarkMode else Icons.Outlined.DarkMode, null)
+    Text("Dark Mode")
+}
+```
+
+`clearAndSetSemantics` removes all child semantics (icon `contentDescription`, `Text` nodes) and replaces them with the block's declarations. TalkBack announces: "Dark mode, On, Switch" or "Dark mode, Off, Switch". Use this pattern when:
+- Child composables would produce redundant or conflicting announcements
+- The toggle visual is composed of multiple elements (icon + text + indicator)
+- You need `toggleableState` to convey tri-state (on/off/indeterminate) alongside `stateDescription`
 
 ---
 

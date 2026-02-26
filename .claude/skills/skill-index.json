@@ -1,11 +1,11 @@
 {
-  "generated": "2026-02-26T07:10:26.263Z",
+  "generated": "2026-02-26T08:32:19.887Z",
   "version": "1.0.0",
   "count": 45,
   "skills": [
     {
       "name": "a11y/android",
-      "description": "WCAG 2.1 AA accessibility rules for Android — Jetpack Compose contentDescription, touch targets, TalkBack, focus semantics, color contrast",
+      "description": "WCAG 2.1 AA accessibility rules for Android — Compose + traditional Views/XML, TalkBack, contentDescription, touch targets, focus semantics, color contrast",
       "keywords": [],
       "platforms": [
         "all"
@@ -27,7 +27,7 @@
     },
     {
       "name": "a11y/ios",
-      "description": "WCAG 2.1 AA accessibility rules for iOS — VoiceOver, UIKit, SwiftUI patterns, fix templates",
+      "description": "WCAG 2.1 AA accessibility rules for iOS — UIKit-primary (iOS 16+), VoiceOver, SwiftUI secondary (iOS 15+), fix templates",
       "keywords": [],
       "platforms": [
         "all"

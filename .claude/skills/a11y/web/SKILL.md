@@ -108,7 +108,6 @@ tabIndex={-1}  // Programmatic focus only, not in tab order
 ## Agents Using This Skill
 
 - `epost-a11y-specialist` — Multi-platform accessibility orchestrator
-- `epost-web-developer` — Web platform specialist
 
 ## Related Documents
 

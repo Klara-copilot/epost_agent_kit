@@ -1,6 +1,6 @@
 ---
 name: a11y/android
-description: WCAG 2.1 AA accessibility rules for Android — Jetpack Compose contentDescription, touch targets, TalkBack, focus semantics, color contrast
+description: WCAG 2.1 AA accessibility rules for Android — Compose + traditional Views/XML, TalkBack, contentDescription, touch targets, focus semantics, color contrast
 user-invocable: false
 ---
 
@@ -8,24 +8,28 @@ user-invocable: false
 
 ## Purpose
 
-WCAG 2.1 AA accessibility rules for Android development using Jetpack Compose. Covers TalkBack support, content descriptions, touch target sizing, focus semantics, heading structure, and color contrast — all using modern Compose/Material3 APIs.
+WCAG 2.1 AA accessibility rules for Android development. Covers both **Jetpack Compose** (rustX/communities modules) and **traditional Views/XML** (epostSdk/app modules). Includes TalkBack support, content descriptions, touch targets, focus semantics, heading structure, color contrast, custom Views, RecyclerView, and AccessibilityDelegate patterns.
 
 ## Aspect Files
 
 | File | Coverage |
 |------|----------|
-| `references/android-content-descriptions.md` | contentDescription for images, icons, custom composables — meaningful vs decorative |
+| `references/android-content-descriptions.md` | **Compose**: contentDescription for images, icons, composables — meaningful vs decorative, live regions, custom actions |
 | `references/android-touch-targets.md` | 48×48dp minimum, MinimumTouchTargetSize, Box padding patterns |
-| `references/android-focus-semantics.md` | mergeDescendants, stateDescription, traversalIndex, clearAndSetSemantics |
+| `references/android-focus-semantics.md` | **Compose**: mergeDescendants, stateDescription, traversalIndex, clearAndSetSemantics, toggleableState |
 | `references/android-headings.md` | heading() semantic, hierarchy, TalkBack heading navigation |
 | `references/android-contrast.md` | WCAG contrast ratios, MaterialTheme, dark mode, dynamic color, testing tools |
+| `references/android-views-xml-a11y.md` | **Views/XML**: contentDescription, importantForAccessibility, labelFor, liveRegion, custom View onInitializeAccessibilityNodeInfo, RecyclerView/ViewHolder, AccessibilityDelegate |
 
 ## Fix Templates
 
 | Template ID | Violation | Fix |
 |-------------|-----------|-----|
-| `add_content_description` | Image/Icon missing contentDescription | Add `contentDescription = "..."` to Image or Icon |
-| `make_decorative` | Decorative image incorrectly announced | Set `contentDescription = null` on Image or Icon |
+| `add_content_description` | Image/Icon missing contentDescription (Compose) | Add `contentDescription = "..."` to Image or Icon |
+| `make_decorative` | Decorative image incorrectly announced (Compose) | Set `contentDescription = null` on Image or Icon |
+| `add_content_description_xml` | Image/Icon missing contentDescription (XML) | Add `android:contentDescription="..."` to ImageView/ImageButton |
+| `make_decorative_xml` | Decorative image announced (XML) | Set `android:importantForAccessibility="no"` |
+| `add_viewholder_description` | RecyclerView item missing accessible description | Set `holder.itemView.contentDescription` in `onBindViewHolder` |
 | `add_touch_target` | Tap target smaller than 48×48dp | Wrap in Box with `Modifier.sizeIn(minWidth = 48.dp, minHeight = 48.dp)` |
 | `add_heading_semantic` | Section title not marked as heading | Add `Modifier.semantics { heading() }` |
 | `add_state_description` | Custom toggle/state without state announcement | Add `Modifier.semantics { stateDescription = "..." }` |
@@ -50,4 +54,4 @@ All interactive composables (buttons, checkboxes, icon buttons, clickable rows) 
 ## Related Documents
 
 - `a11y/core` — POUR framework, severity scoring, operating modes
-- `packages/a11y/skills/ios/accessibility/SKILL.md` — iOS equivalent skill
+- `a11y/ios` — iOS equivalent (VoiceOver, UIKit, SwiftUI)

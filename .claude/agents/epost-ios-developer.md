@@ -332,10 +332,10 @@ Delegate iOS accessibility tasks to the unified accessibility agent:
 | Task | Agent | Command |
 |------|-------|---------|
 | Real-time a11y guidance | `epost-a11y-specialist` | (automatic during coding) |
-| Batch audit (pre-commit/PR) | `epost-a11y-specialist` | `/ios:a11y:audit` |
-| Fix specific finding | `epost-a11y-specialist` | `/ios:a11y:fix <id>` |
-| Fix top N findings | `epost-a11y-specialist` | `/ios:a11y:fix-batch <n>` |
-| Review accessibility | `epost-a11y-specialist` | `/ios:a11y:review [buttons\|headings\|modals]` |
+| Batch audit (pre-commit/PR) | `epost-a11y-specialist` | `/a11y:audit` |
+| Fix specific finding | `epost-a11y-specialist` | `/a11y:fix <id>` |
+| Fix top N findings | `epost-a11y-specialist` | `/a11y:fix-batch <n>` |
+| Review accessibility | `epost-a11y-specialist` | `/a11y:review [buttons\|headings\|modals]` |
 
 When a developer asks about accessibility, VoiceOver, or WCAG, route to `epost-a11y-specialist`.
 
@@ -343,7 +343,7 @@ When a developer asks about accessibility, VoiceOver, or WCAG, route to `epost-a
 
 - `.claude/skills/core/SKILL.md` — Operational boundaries
 - `.claude/skills/ios/development/SKILL.md` — iOS development patterns
-- `.claude/skills/ios/accessibility/SKILL.md` — WCAG 2.1 AA accessibility rules
+- `a11y/ios` — WCAG 2.1 AA accessibility rules (requires a11y package)
 - `CLAUDE.md` — Project context
 
 ---

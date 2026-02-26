@@ -17,6 +17,10 @@ Foundational accessibility rules for iOS VoiceOver support, ensuring all UI elem
 - [VoiceOver Detection](#voiceover-detection)
 - [Required Properties](#required-properties)
 - [Best Practices](#best-practices)
+- [Unreachable Elements Detection](#unreachable-elements-detection)
+- [Dynamic Type (UIKit)](#dynamic-type-uikit)
+- [SwiftUI Accessibility Modifiers (iOS 15+)](#swiftui-accessibility-modifiers-ios-15)
+- [Dynamic Type & Reduce Motion (SwiftUI)](#dynamic-type--reduce-motion)
 
 ## Related Documents
 
@@ -301,3 +305,141 @@ childView2.accessibilityLabel = "Second item"
 button.accessibilityLabel = NSLocalizedString("save_button_label", comment: "Save button")
 button.accessibilityHint = NSLocalizedString("save_button_hint", comment: "Saves the current document")
 ```
+
+## Unreachable Elements Detection
+
+The most common UIKit a11y bug: a container view with `isAccessibilityElement = true` absorbs all VoiceOver focus — its children become completely unreachable. This causes ~44% of real VoiceOver violations.
+
+**Symptoms:**
+- VoiceOver reads a container as a single element ("Navigation content", "Letter tile")
+- Individual buttons inside cannot be reached by swiping
+- Elements are visually present but VoiceOver skips them entirely
+
+**Fix pattern:**
+
+```swift
+// ❌ Wrong: container swallows all 5 buttons inside
+bottomBarView.isAccessibilityElement = true  // reads as "Navigation content" only
+
+// ✅ Fix 1: disable container, list children explicitly
+bottomBarView.isAccessibilityElement = false
+bottomBarView.accessibilityElements = [backBtn, deleteBtn, saveBtn, shareBtn, moreBtn]
+
+// ✅ Fix 2: ordering on the parent view
+view.accessibilityElements = [headerLabel, contentArea, actionButton, dismissButton]
+
+// ✅ Fix 3: individual elements self-declare (when container has no isAccessibilityElement set)
+containerView.isAccessibilityElement = false  // default; children are visible to VoiceOver
+```
+
+**Detection checklist:**
+- Container has `isAccessibilityElement = true` AND contains interactive children → likely bug
+- VoiceOver reads a container label but its buttons are unreachable → container needs `= false`
+- Three-dot menus, bottom bars, nav bars are common culprits
+
+---
+
+## Dynamic Type (UIKit)
+
+Dynamic Type lets users choose their preferred text size in Settings. Apps must honor this setting.
+
+```swift
+// ✅ Use text styles — automatically scales with user's preference
+label.font = UIFont.preferredFont(forTextStyle: .body)
+label.adjustsFontForContentSizeCategory = true  // Required for live updates!
+
+// ✅ React to size changes (e.g., after user returns from Settings)
+override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    super.traitCollectionDidChange(previousTraitCollection)
+    if traitCollection.preferredContentSizeCategory != previousTraitCollection?.preferredContentSizeCategory {
+        label.font = UIFont.preferredFont(forTextStyle: .body)
+        titleLabel.font = UIFont.preferredFont(forTextStyle: .title1)
+    }
+}
+
+// ✅ Custom font that scales
+let customFont = UIFont(name: "MyFont-Regular", size: 16)!
+label.font = UIFontMetrics(forTextStyle: .body).scaledFont(for: customFont)
+label.adjustsFontForContentSizeCategory = true
+
+// ❌ Anti-pattern: fixed sizes don't scale
+label.font = UIFont.systemFont(ofSize: 16)        // doesn't scale
+label.font = UIFont(name: "CustomFont", size: 14) // doesn't scale without UIFontMetrics
+```
+
+**UIFont text styles:** `.largeTitle`, `.title1/.title2/.title3`, `.headline`, `.body`, `.callout`, `.subheadline`, `.footnote`, `.caption1/.caption2`
+
+Test: Go to **Settings → Accessibility → Display & Text Size → Larger Text** and drag to max. All text should enlarge.
+
+---
+
+## SwiftUI Accessibility Modifiers (iOS 15+)
+
+Modern SwiftUI modifiers for accessibility — project targets iOS 16+, no availability guards needed for iOS 15+ APIs.
+
+| Modifier | Purpose |
+|----------|---------|
+| `.accessibilityLabel(_:isEnabled:)` | Conditional label — apply label only when `isEnabled` is true |
+| `.accessibilityAddTraits(.isHeader)` | Add `.isHeader`, `.isButton`, `.isToggle`, etc. to element |
+| `.accessibilityElement(children: .ignore)` | Combine/contain/ignore child elements (`.combine`, `.contain`, `.ignore`) |
+| `.accessibilityFocused($binding)` | Programmatic VoiceOver focus management via `@AccessibilityFocusState` |
+| `.accessibilityAdjustableAction { action in }` | Handle `.increment`/`.decrement` for adjustable elements |
+
+```swift
+// ✅ Conditional label
+Text(item.name)
+    .accessibilityLabel(item.name, isEnabled: !item.name.isEmpty)
+
+// ✅ Traits
+Text("Section Title")
+    .accessibilityAddTraits(.isHeader)
+
+// ✅ Group children
+HStack {
+    Image(systemName: "heart.fill")
+    Text("Liked")
+}
+.accessibilityElement(children: .combine)
+
+// ✅ Adjustable action
+Slider(value: $volume)
+    .accessibilityAdjustableAction { action in
+        switch action {
+        case .increment: volume = min(1, volume + 0.1)
+        case .decrement: volume = max(0, volume - 0.1)
+        default: break
+        }
+    }
+```
+
+## Dynamic Type & Reduce Motion
+
+**Respond to user accessibility preferences:**
+
+```swift
+// Dynamic Type — scale a custom dimension with the user's text size preference
+@ScaledMetric var iconSize: CGFloat = 24
+
+// Reduce motion — skip animations when the user prefers reduced motion
+@Environment(\.accessibilityReduceMotion) var reduceMotion
+
+var body: some View {
+    Circle()
+        .frame(width: iconSize, height: iconSize)
+        .animation(reduceMotion ? nil : .spring(), value: isExpanded)
+}
+
+// Observe current Dynamic Type category
+@Environment(\.dynamicTypeSize) var typeSize
+
+// UIKit equivalent (read current preferred category)
+let category = UIApplication.shared.preferredContentSizeCategory
+```
+
+**Rules:**
+- Never hard-code font sizes for body text — use `.font(.body)` / `.font(.headline)` etc.
+- Use `@ScaledMetric` for spacing/icon sizes that should scale with text size
+- Always gate animations behind `accessibilityReduceMotion`
+- Test with largest Accessibility text size in Settings
+
+> **Note:** For UIKit Dynamic Type patterns see [Dynamic Type (UIKit)](#dynamic-type-uikit) above.

@@ -18,6 +18,9 @@ Accessibility rules specific to buttons and button-like interactive elements, en
 - [Icon Buttons](#icon-buttons)
 - [Button Groups](#button-groups)
 - [Custom Buttons](#custom-buttons)
+- [Buttons Read as Images](#buttons-read-as-images)
+- [Navigation Bar / Bottom Bar Button Groups](#navigation-bar--bottom-bar-button-groups)
+- [Tab Bar Item Accessibility](#tab-bar-item-accessibility)
 
 ## Related Documents
 
@@ -179,21 +182,15 @@ func setLoading(_ isLoading: Bool) {
 
 ### Toggle Button Trait
 
-**iOS 17+ toggle buttons:**
-- Use `.toggleButton` trait
+**Toggle buttons:**
+- Use `.toggleButton` trait (available since iOS 13; project targets iOS 18+)
 - Set value to "On" or "Off"
 - VoiceOver announces state clearly
 
 ```swift
-// ✅ Toggle button (iOS 17+)
-if #available(iOS 17.0, *) {
-    darkModeButton.accessibilityTraits = [.button, .toggleButton]
-    darkModeButton.accessibilityValue = isDarkMode ? "On" : "Off"
-} else {
-    // Fallback for older iOS
-    darkModeButton.accessibilityTraits = .button
-    darkModeButton.accessibilityValue = isDarkMode ? "On" : "Off"
-}
+// ✅ Toggle button
+darkModeButton.accessibilityTraits = [.button, .toggleButton]
+darkModeButton.accessibilityValue = isDarkMode ? "On" : "Off"
 ```
 
 ### Toggle Button Labels
@@ -289,6 +286,112 @@ class CustomButton: UIView {
 
 **Buttons that perform actions:** Label describes action, hint explains result, update label if action changes.
 
+## Buttons Read as Images
+
+**Problem:** Buttons that display only an image (no title text) are announced as "image" by VoiceOver — making them appear non-interactive. Accounts for ~44% of real VoiceOver violations in production apps.
+
+**Detection:** Button uses `setImage()` with no `setTitle()`, or a `UIView` with `UIImageView` + tap gesture but no explicit traits.
+
+```swift
+// ❌ Wrong: VoiceOver reads "image" — not interactive
+let orderBtn = UIButton()
+orderBtn.setImage(UIImage(named: "jetzt_bestellen"), for: .normal)
+// Missing: accessibilityLabel, wrong default trait
+
+// ✅ Fix: explicit label + button trait
+orderBtn.isAccessibilityElement = true
+orderBtn.accessibilityTraits = .button          // NOT .image
+orderBtn.accessibilityLabel = "Order now"       // Describe the ACTION, not the image
+
+// ✅ Custom UIView acting as button (e.g. letter tile):
+class LetterTileView: UIView {
+    var senderName: String = "" {
+        didSet { accessibilityLabel = "Letter from \(senderName)" }
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        isAccessibilityElement = true
+        accessibilityTraits = .button
+    }
+    required init?(coder: NSCoder) { super.init(coder: coder) }
+}
+```
+
+---
+
+## Navigation Bar / Bottom Bar Button Groups
+
+**Problem:** Bottom navigation bars and toolbars with `isAccessibilityElement = true` on the container are read as a single element ("Navigation content") — all individual buttons inside become unreachable.
+
+```swift
+// ❌ Wrong: VoiceOver reads "Navigation content" only — 5 buttons invisible
+letterDetailBottomBar.isAccessibilityElement = true
+
+// ✅ Fix: disable container, enumerate children explicitly
+letterDetailBottomBar.isAccessibilityElement = false
+letterDetailBottomBar.accessibilityElements = [
+    backButton,
+    deleteButton,
+    saveButton,
+    shareButton,
+    moreOptionsButton
+]
+
+// Each button must have its own label and .button trait:
+backButton.accessibilityLabel = "Back"
+backButton.accessibilityTraits = .button
+
+deleteButton.accessibilityLabel = "Delete letter"
+deleteButton.accessibilityTraits = .button
+
+moreOptionsButton.accessibilityLabel = "More options"
+moreOptionsButton.accessibilityTraits = .button
+```
+
+---
+
+## Tab Bar Item Accessibility
+
+**Problem:** Tab bar items read as icon file names (e.g., "epost ic 40x40") instead of human-readable labels. Only the active tab may be reachable via swipe.
+
+```swift
+// ❌ Wrong: VoiceOver reads "epost ic 40x40" — useless to user
+let ePostItem = UITabBarItem()
+ePostItem.image = UIImage(named: "epost_ic_40x40")
+
+// ✅ Fix: always pass title to UITabBarItem
+let ePostItem = UITabBarItem(
+    title: "ePost",
+    image: UIImage(named: "epost_ic_40x40"),
+    selectedImage: UIImage(named: "epost_ic_40x40_selected")
+)
+
+// ✅ For custom tab bar views — set per-button labels and states
+func updateTabAccessibility() {
+    for (i, tabButton) in tabButtons.enumerated() {
+        tabButton.isAccessibilityElement = true
+        tabButton.accessibilityLabel = tabTitles[i]           // e.g., "ePost"
+        tabButton.accessibilityTraits = (i == selectedIndex)
+            ? [.button, .selected]
+            : .button
+    }
+}
+
+// ✅ Custom tab bar container must NOT block children
+customTabBar.isAccessibilityElement = false
+
+// ✅ Announce tab change to VoiceOver
+func selectTab(_ index: Int) {
+    selectedIndex = index
+    updateTabAccessibility()
+    if UIAccessibility.isVoiceOverRunning {
+        UIAccessibility.post(notification: .screenChanged, argument: tabButtons[index])
+    }
+}
+```
+
+---
+
 ### Best Practices Summary
 
 **Button Accessibility Checklist:**
@@ -297,6 +400,6 @@ class CustomButton: UIView {
 - ✅ Icon-only buttons have descriptive labels
 - ✅ State changes are reflected in traits/value
 - ✅ Disabled buttons have `.notEnabled` trait
-- ✅ Toggle buttons use `.toggleButton` trait (iOS 17+)
+- ✅ Toggle buttons use `.toggleButton` trait
 - ✅ Hints provided when action isn't obvious
 - ✅ All labels are localized

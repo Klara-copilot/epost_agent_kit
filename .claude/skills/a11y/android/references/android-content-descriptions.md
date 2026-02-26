@@ -17,6 +17,8 @@ Rules for providing TalkBack-compatible content descriptions in Jetpack Compose.
 - [Actionable Icons](#actionable-icons)
 - [Custom Composables](#custom-composables)
 - [Common Violations](#common-violations)
+- [Live Regions](#live-regions)
+- [Custom Accessibility Actions](#custom-accessibility-actions)
 
 ## Related Documents
 
@@ -292,3 +294,51 @@ fun ArticleCard(article: Article, onClick: () -> Unit) {
 | Decorative icon has description | Duplicate TalkBack announcement with nearby text | Set `contentDescription = null` on decorative icon |
 | Generic labels like "icon", "button" | Non-descriptive TalkBack announcement | Replace with action or content description |
 | Resource filename as description | Reads "ic_user_profile" aloud | Replace with human-readable description |
+
+---
+
+## Live Regions
+
+Live regions automatically announce dynamic content changes to TalkBack without requiring the user to navigate to the element.
+
+```kotlin
+// Polite: announced after current speech finishes
+Text(
+    text = "$count items in cart",
+    modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite }
+)
+
+// Assertive: interrupts current speech immediately
+Text(
+    text = "Error: payment failed",
+    modifier = Modifier.semantics { liveRegion = LiveRegionMode.Assertive }
+)
+```
+
+Use `Polite` for status updates (cart count, search results count, progress messages). Use `Assertive` for errors and critical alerts that require immediate attention. Prefer `Polite` by default — `Assertive` interrupts the user and should be reserved for time-sensitive errors.
+
+---
+
+## Custom Accessibility Actions
+
+`customActions` adds named actions to the TalkBack actions menu for complex widgets whose interactions cannot be conveyed by standard semantics alone.
+
+```kotlin
+Slider(
+    value = volume,
+    onValueChange = { volume = it },
+    modifier = Modifier.semantics {
+        contentDescription = "Volume slider"
+        stateDescription = "${(volume * 100).toInt()} percent"
+        customActions = listOf(
+            CustomAccessibilityAction("Increase volume") { /* action */ true },
+            CustomAccessibilityAction("Decrease volume") { /* action */ true }
+        )
+    }
+)
+```
+
+Use `customActions` when:
+- A widget supports swipe gestures or drag interactions that TalkBack cannot discover automatically
+- A list item has multiple actions (edit, delete, share) that need to be accessible without visible buttons
+- A custom control has domain-specific operations not covered by built-in roles

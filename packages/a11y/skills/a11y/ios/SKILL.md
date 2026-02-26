@@ -1,6 +1,6 @@
 ---
 name: a11y/ios
-description: WCAG 2.1 AA accessibility rules for iOS — VoiceOver, UIKit, SwiftUI patterns, fix templates
+description: WCAG 2.1 AA accessibility rules for iOS — UIKit-primary (iOS 16+), VoiceOver, SwiftUI secondary (iOS 15+), fix templates
 user-invocable: false
 ---
 
@@ -14,8 +14,8 @@ Comprehensive WCAG 2.1 AA accessibility rules for iOS development. Covers VoiceO
 
 | File | Coverage |
 |------|----------|
-| `references/a11y-core.md` | Core principles: perceivable, operable, understandable, robust. Enabling accessibility, properties, VoiceOver detection |
-| `references/a11y-buttons.md` | Button accessibility: labels, traits, states, icon buttons, toggle buttons, groups, custom buttons |
+| `references/a11y-core.md` | Core principles, UIKit enabling, properties, VoiceOver detection, **unreachable element detection**, **Dynamic Type (UIKit)**, SwiftUI modifiers |
+| `references/a11y-buttons.md` | Button accessibility: labels, traits, states, icon buttons, toggle buttons, groups, **buttons-read-as-images**, **bottom-bar button groups**, **tab bar items** |
 | `references/a11y-forms.md` | Form input accessibility: labels, validation, error states, input types, form structure |
 | `references/a11y-headings.md` | Heading structure: `.header` trait, heading levels (H1-H6), navigation, dynamic content |
 | `references/a11y-focus.md` | Focus management: notifications, indicators, focus order, groups, programmatic focus, screen changes |
