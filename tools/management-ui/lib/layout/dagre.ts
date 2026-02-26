@@ -1,7 +1,7 @@
 /**
  * Column-based layout for React Flow
  * Each entity type gets its own vertical column:
- *   Packages → Agents → Commands → Skills
+ *   Packages → Commands → Agents → Skills
  * Nodes sorted by connection count (desc) within each column.
  */
 
@@ -18,8 +18,8 @@ const MARGIN = 40;
 // Column order: left → right
 const COLUMN_ORDER: GraphNode['type'][] = [
   'package',
-  'agent',
   'command',
+  'agent',
   'skill',
 ];
 

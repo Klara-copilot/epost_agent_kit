@@ -654,6 +654,7 @@ Plugin-dev's skills demonstrate best practices:
 
 For complete skill-creator methodology:
 - **`references/skill-creator-original.md`** - Full original skill-creator content
+- **`references/skill-eval.md`** - Eval/iterate loop, quality checklist, description optimization
 
 ## Implementation Workflow
 

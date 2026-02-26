@@ -6,22 +6,92 @@ This file provides guidance to Claude Code when working with code in this reposi
 ## Project: epost_agent_kit
 
 
-## Installed Profile: ``
+## Installed Profile: `full`
 
-**Packages**: core, platform-android, platform-backend, platform-ios, platform-web, domains, design-system, kit-design
+**Packages**: core, a11y, platform-web, platform-ios, platform-android, platform-backend, kit, design-system, domains
 
-**Installed by**: epost-kit v0.1.0 on 2026-02-25
+**Installed by**: epost-kit v0.1.0 on 2026-02-26
 
 ---
 
 ## Claude Code Agent System
 
 ### Configuration
-- **Agents**: `.claude/agents/` — 19 agents
+- **Agents**: `.claude/agents/` — 20 agents
 - **Commands**: `.claude/commands/` — Slash commands
 - **Skills**: `.claude/skills/` — Passive knowledge
 
 
+
+---
+
+
+## Accessibility (WCAG 2.1 AA)
+
+### Agent
+- `epost-a11y-specialist` — Multi-platform accessibility orchestrator (iOS, Android, Web)
+
+### Commands
+- `/a11y:audit` — Audit staged changes for violations (auto-detects platform)
+- `/a11y:fix <id>` — Fix a specific finding by ID
+- `/a11y:fix-batch <n>` — Batch-fix top N priority findings
+- `/a11y:review` — Review accessibility by focus area
+- `/a11y:close <id>` — Mark a finding as resolved
+
+### Skills
+- `a11y/core` — Cross-platform WCAG 2.1 AA foundation (POUR, scoring)
+- `a11y/ios` — iOS (VoiceOver, SwiftUI, UIKit)
+- `a11y/android` — Android (Compose, TalkBack, semantics)
+- `a11y/web` — Web (ARIA, keyboard, screen readers)
+
+---
+
+
+## Web Platform
+
+### Tech Stack
+- **Framework**: Next.js 14 (App Router)
+- **UI Library**: React 18
+- **Language**: TypeScript 5+
+- **Styling**: Tailwind CSS + SCSS
+- **UI Components**: shadcn/ui or klara-theme
+- **Testing**: Jest + React Testing Library, Playwright
+- **State**: Redux Toolkit + Redux Persist
+- **Containerization**: Docker + Docker Compose
+
+### Commands
+- `/web:cook` — Implement web features (Next.js, React, TypeScript)
+- `/web:test` — Run web tests (Jest, Playwright, RTL)
+
+### Agent
+- `epost-web-developer` — Web platform specialist for Next.js development
+
+---
+
+
+## iOS Platform
+
+### Tech Stack
+- **Language**: Swift 6
+- **UI**: SwiftUI + UIKit
+- **Minimum Target**: iOS 18+
+- **Testing**: XCTest, XCUITest
+- **Build**: Xcode, XcodeBuildMCP
+
+### Commands
+- `/ios:cook` — Implement iOS features (Swift, SwiftUI)
+- `/ios:test` — Run iOS unit and UI tests
+- `/ios:debug` — Debug crashes, concurrency, SwiftUI state
+- `/ios:simulator` — Manage iOS simulators
+- `/ios:a11y:audit` — Audit staged Swift changes for accessibility
+- `/ios:a11y:fix` — Fix a specific accessibility finding
+- `/ios:a11y:fix-batch` — Fix top N accessibility findings
+- `/ios:a11y:review` — Review iOS accessibility (buttons/headings/modals/all)
+- `/ios:a11y:close` — Mark an accessibility finding as resolved
+
+### Agents
+- `epost-ios-developer` — iOS platform specialist
+- `epost-a11y-specialist` — iOS accessibility auditing and fixing (WCAG 2.1 AA)
 
 ---
 
@@ -79,61 +149,34 @@ This file provides guidance to Claude Code when working with code in this reposi
 ---
 
 
-## iOS Platform
-
-### Tech Stack
-- **Language**: Swift 6
-- **UI**: SwiftUI + UIKit
-- **Minimum Target**: iOS 18+
-- **Testing**: XCTest, XCUITest
-- **Build**: Xcode, XcodeBuildMCP
-
-### Commands
-- `/ios:cook` — Implement iOS features (Swift, SwiftUI)
-- `/ios:test` — Run iOS unit and UI tests
-- `/ios:debug` — Debug crashes, concurrency, SwiftUI state
-- `/ios:simulator` — Manage iOS simulators
-- `/ios:a11y:audit` — Audit staged Swift changes for accessibility
-- `/ios:a11y:fix` — Fix a specific accessibility finding
-- `/ios:a11y:fix-batch` — Fix top N accessibility findings
-- `/ios:a11y:review` — Review iOS accessibility (buttons/headings/modals/all)
-
-### Agents
-- `epost-ios-developer` — iOS platform specialist
-- `epost-a11y-specialist` — iOS accessibility auditing and fixing (WCAG 2.1 AA)
-
----
-
-
-## Web Platform
-
-### Tech Stack
-- **Framework**: Next.js 14 (App Router)
-- **UI Library**: React 18
-- **Language**: TypeScript 5+
-- **Styling**: Tailwind CSS + SCSS
-- **UI Components**: shadcn/ui or klara-theme
-- **Testing**: Jest + React Testing Library, Playwright
-- **State**: Redux Toolkit + Redux Persist
-- **Containerization**: Docker + Docker Compose
-
-### Commands
-- `/web:cook` — Implement web features (Next.js, React, TypeScript)
-- `/web:test` — Run web tests (Jest, Playwright, RTL)
+## Kit Authoring Tools
 
 ### Agent
-- `epost-web-developer` — Web platform specialist for Next.js development
+- `epost-kit-designer` — Creates and maintains agents, skills, commands, and hooks for epost_agent_kit
 
----
+### Commands
+- `/kit:add-agent` — Create a new agent definition
+- `/kit:add-skill` — Create a new skill definition
+- `/kit:add-command` — Generate slash commands (simple or splash variants)
+- `/kit:add-hook` — Create a new hook script
+- `/kit:optimize-skill` — Optimize an existing skill
 
+### Skills
+- `kit/agents` — Agent ecosystem reference and naming conventions
+- `kit/agents/agent-development` — Agent frontmatter, system prompts, triggering patterns
+- `kit/agents/skill-development` — Skill authoring, progressive disclosure, validation
+- `kit/commands` — Slash command structure, frontmatter, arguments
+- `kit/hooks` — Hook event types, I/O contract, creation workflow
 
-## Business Domains
+## CLI Development Tools
 
-### B2B Domain
-B2B modules: Monitoring, Communities, Inbox, Smart Send, Composer, Archive, Contacts, Organization, Smart Letter.
+### Agent
+- `epost-cli-developer` — CLI specialist for epost-agent-cli TypeScript development
 
-### B2C Domain
-Consumer mobile application patterns for iOS and Android.
+### Commands
+- `/cli:cook` — Implement CLI features
+- `/cli:doctor` — Diagnose CLI issues
+- `/cli:test` — Run CLI tests
 
 ---
 
@@ -152,14 +195,13 @@ Consumer mobile application patterns for iOS and Android.
 ---
 
 
-## Kit Design Tools
+## Business Domains
 
-### Agents
-- `epost-scout` — Codebase exploration and file discovery
+### B2B Domain
+B2B modules: Monitoring, Communities, Inbox, Smart Send, Composer, Archive, Contacts, Organization, Smart Letter.
 
-### Skills
-- `agents/claude/agent-development/` — Agent creation and maintenance patterns
-- `agents/claude/skill-development/` — Skill authoring and frontmatter conventions
+### B2C Domain
+Consumer mobile application patterns for iOS and Android.
 
 ---
 

@@ -4,12 +4,14 @@
 - `epost-a11y-specialist` — Multi-platform accessibility orchestrator (iOS, Android, Web)
 
 ### Commands
-- `/review:a11y` — Multi-platform accessibility review
-- `/ios:a11y:audit` — Audit staged Swift changes for violations
-- `/ios:a11y:fix` — Fix a specific finding by ID
-- `/ios:a11y:fix-batch` — Batch-fix top N priority findings
-- `/ios:a11y:review` — Review iOS accessibility by focus area
-- `/ios:a11y:close` — Mark a finding as resolved
+- `/a11y:audit` — Audit staged changes for violations (auto-detects platform)
+- `/a11y:fix <id>` — Fix a specific finding by ID
+- `/a11y:fix-batch <n>` — Batch-fix top N priority findings
+- `/a11y:review` — Review accessibility by focus area
+- `/a11y:close <id>` — Mark a finding as resolved
 
 ### Skills
-- `ios/accessibility` — WCAG 2.1 AA rules for iOS (VoiceOver, traits, contrast, focus)
+- `a11y/core` — Cross-platform WCAG 2.1 AA foundation (POUR, scoring)
+- `a11y/ios` — iOS (VoiceOver, SwiftUI, UIKit)
+- `a11y/android` — Android (Compose, TalkBack, semantics)
+- `a11y/web` — Web (ARIA, keyboard, screen readers)

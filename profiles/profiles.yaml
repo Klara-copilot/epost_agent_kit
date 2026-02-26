@@ -8,26 +8,26 @@ profiles:
     display_name: "Web Fullstack Developer"
     teams: [miracle, helios, titan]
     packages: [core, platform-web, platform-backend, domains]
-    optional: [design-system]
+    optional: [design-system, a11y]
 
   # ─── Mobile Teams (Optimus) ───
   ios-b2c:
     display_name: "iOS App Developer"
     teams: [optimus]
-    packages: [core, a11y, platform-ios, domains]
-    optional: [design-system]
+    packages: [core, platform-ios, domains]
+    optional: [design-system, a11y]
 
   android-b2c:
     display_name: "Android App Developer"
     teams: [optimus]
     packages: [core, platform-android, domains]
-    optional: [design-system]
+    optional: [design-system, a11y]
 
   mobile-b2c:
     display_name: "Mobile Developer (iOS + Android)"
     teams: [optimus]
-    packages: [core, a11y, platform-ios, platform-android, domains]
-    optional: [design-system]
+    packages: [core, platform-ios, platform-android, domains]
+    optional: [design-system, a11y]
 
   # ─── Backend/API Teams (Hacka, Kepler) ───
   backend-api:
@@ -40,16 +40,19 @@ profiles:
     display_name: "Web UI Library Developer"
     teams: [muji]
     packages: [core, platform-web, design-system]
+    optional: [a11y]
 
   ios-ui-lib:
     display_name: "iOS UI Library Developer"
     teams: [muji]
-    packages: [core, a11y, platform-ios, design-system]
+    packages: [core, platform-ios, design-system]
+    optional: [a11y]
 
   android-ui-lib:
     display_name: "Android UI Library Developer"
     teams: [muji]
     packages: [core, platform-android, design-system]
+    optional: [a11y]
 
   # ─── Architecture Teams ───
   cloud-architect:

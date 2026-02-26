@@ -1,8 +1,52 @@
 {
-  "generated": "2026-02-25T10:15:53.455Z",
+  "generated": "2026-02-26T07:10:26.263Z",
   "version": "1.0.0",
-  "count": 41,
+  "count": 45,
   "skills": [
+    {
+      "name": "a11y/android",
+      "description": "WCAG 2.1 AA accessibility rules for Android — Jetpack Compose contentDescription, touch targets, TalkBack, focus semantics, color contrast",
+      "keywords": [],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [],
+      "agent-affinity": [],
+      "path": "a11y/android/SKILL.md"
+    },
+    {
+      "name": "a11y/core",
+      "description": "WCAG 2.1 AA cross-platform accessibility foundation — POUR framework, severity scoring, known-findings database, and operating modes",
+      "keywords": [],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [],
+      "agent-affinity": [],
+      "path": "a11y/core/SKILL.md"
+    },
+    {
+      "name": "a11y/ios",
+      "description": "WCAG 2.1 AA accessibility rules for iOS — VoiceOver, UIKit, SwiftUI patterns, fix templates",
+      "keywords": [],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [],
+      "agent-affinity": [],
+      "path": "a11y/ios/SKILL.md"
+    },
+    {
+      "name": "a11y/web",
+      "description": "WCAG 2.1 AA accessibility rules for Web — ARIA, semantic HTML, keyboard navigation, focus management, color contrast, screen reader testing",
+      "keywords": [],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [],
+      "agent-affinity": [],
+      "path": "a11y/web/SKILL.md"
+    },
     {
       "name": "android/development",
       "description": "Android development patterns with Kotlin and Jetpack Compose. Includes templates, patterns, and test examples for building production-ready Android apps.",
@@ -296,17 +340,6 @@
       "path": "infra/docker/SKILL.md"
     },
     {
-      "name": "ios/accessibility",
-      "description": "WCAG 2.1 AA compliance rules for iOS — VoiceOver, UIKit, SwiftUI accessibility patterns",
-      "keywords": [],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [],
-      "path": "ios/accessibility/SKILL.md"
-    },
-    {
       "name": "ios/development",
       "description": "Modern iOS development with Swift 6, SwiftUI, UIKit, and XcodeBuildMCP integration",
       "keywords": [
@@ -440,6 +473,17 @@
       "triggers": [],
       "agent-affinity": [],
       "path": "kit/commands/SKILL.md"
+    },
+    {
+      "name": "kit/hooks",
+      "description": "This skill should be used when the user asks to \"create a hook\", \"add a hook\", \"write a PreToolUse hook\", \"implement a SessionStart hook\", \"block tool access\", \"validate tool use\", \"add automation on stop\", or mentions hook events (PreToolUse, PostToolUse, Stop, SubagentStop, SessionStart, SessionEnd, UserPromptSubmit, PreCompact, Notification). Provides guidance for creating hooks in the epost_agent_kit package system.",
+      "keywords": [],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [],
+      "agent-affinity": [],
+      "path": "kit/hooks/SKILL.md"
     },
     {
       "name": "knowledge/base",

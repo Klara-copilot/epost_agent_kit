@@ -1,5 +1,5 @@
 name: a11y
-version: "1.0.0"
+version: "2.0.0"
 description: "Accessibility: WCAG 2.1 AA auditing, fixing, and guidance (iOS, Android, Web)"
 layer: 1
 platforms: [all]
@@ -11,19 +11,22 @@ provides:
   agents:
     - epost-a11y-specialist
   skills:
-    - ios/accessibility
+    - a11y/core
+    - a11y/ios
+    - a11y/android
+    - a11y/web
   commands:
-    - review/a11y
-    - ios/a11y/audit
-    - ios/a11y/fix
-    - ios/a11y/fix-batch
-    - ios/a11y/review
-    - ios/a11y/close
+    - a11y/audit
+    - a11y/fix
+    - a11y/fix-batch
+    - a11y/review
+    - a11y/close
 
 files:
   agents/: agents/
   skills/: skills/
   commands/: commands/
+  assets/: assets/
 
 settings_strategy: skip
 claude_snippet: CLAUDE.snippet.md

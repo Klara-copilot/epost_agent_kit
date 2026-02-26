@@ -1,0 +1,50 @@
+---
+description: (ePost) Fix a specific accessibility finding by ID
+agent: epost-a11y-specialist
+argument-hint: "<finding-id>"
+---
+
+Fix finding ID $ARGUMENTS from `.epost-data/a11y/known-findings.json`.
+
+**IMPORTANT:** Analyze the skills catalog and activate ONLY the skills needed for the finding's platform.
+
+## Platform Detection
+
+Read the finding's `platform` field to select the correct skill:
+- `ios` → use `a11y/ios` skill fix templates
+- `android` → use `a11y/android` skill fix templates
+- `web` → use `a11y/web` skill fix templates
+
+## Instructions
+
+1. Load the finding object with the specified ID from `.epost-data/a11y/known-findings.json`
+2. Check if finding has `resolved: true` — if so, skip it
+3. Check `.epost-data/a11y/fixes/patches/` for existing `finding-{id}-*.diff` — reuse if applicable
+4. Use `file_pattern` (glob) to locate the relevant file(s)
+5. Use `code_pattern` (regex) to locate the specific code element
+6. Apply the appropriate fix template from the platform-specific skill
+7. Create minimal patch (unified diff format with 3 lines context)
+8. After fix is applied and verified, suggest: `Run /a11y:close {id} to mark as resolved`
+
+## Output
+
+```json
+{
+  "finding_id": 3,
+  "platform": "ios|android|web",
+  "file": "path/to/file",
+  "status": "FIXED",
+  "diff_summary": "Added accessibilityLabel to mapButton",
+  "lines_changed": 2,
+  "confidence": "high"
+}
+```
+
+Status: `FIXED`, `NEEDS_REVIEW`, `SKIPPED`
+
+## Constraints
+- Surgical changes only — do NOT refactor
+- Only add accessibility attributes
+- Don't change variable names or reorganize code
+- If ambiguous, return `NEEDS_REVIEW`
+- Preserve existing code style
