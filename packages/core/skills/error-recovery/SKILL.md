@@ -5,8 +5,9 @@ keywords: [error, retry, fallback, circuit-breaker, backoff, resilience, failure
 platforms: [all]
 triggers: [error, exception, timeout, retry, fallback]
 agent-affinity: [epost-implementer, epost-debugger, epost-tester]
-platform: global
-category: development
+metadata:
+  platform: global
+  category: development
 ---
 
 # Error Recovery Skill
