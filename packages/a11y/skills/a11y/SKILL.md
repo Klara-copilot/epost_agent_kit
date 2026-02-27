@@ -67,7 +67,8 @@ If no signal, ask the user.
 ## Known-Findings Database
 
 Location: `.epost-data/a11y/known-findings.json` (v1.2 schema)
-
-Each finding has: `id`, `platform`, `wcag`, `title`, `file_pattern`, `code_pattern`, `fix_template`, `priority` (1–3), `resolved`, `resolved_date`.
-
 Schema: `.claude/assets/known-findings-schema.json`
+
+Each finding: `id`, `platform`, `wcag`, `title`, `file_pattern`, `code_pattern`, `fix_template`, `priority` (1–3), `resolved`, `resolved_date`.
+
+See `data-store` skill for directory convention, gitignore rules, and how to adopt this pattern for other domains.

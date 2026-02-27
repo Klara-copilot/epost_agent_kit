@@ -37,6 +37,7 @@ provides:
     - doc-coauthoring
     - infra-cloud
     - infra-docker
+    - data-store
   commands:
     - epost
     - bootstrap/fast

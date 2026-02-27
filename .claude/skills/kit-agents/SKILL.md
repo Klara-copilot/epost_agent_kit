@@ -30,7 +30,7 @@ Commands and skills are functionally equivalent and share the same frontmatter f
 
 ## Nested Directory Support
 
-Skills support nested directories. Claude Code auto-discovers `SKILL.md` files at any depth under `.claude/skills/`. This enables hierarchical organization like `skills/agents/claude/agent-development/SKILL.md`.
+Skills support nested directories. Claude Code auto-discovers `SKILL.md` files at any depth under `.claude/skills/`. All skills in this ecosystem use flat names (e.g., `kit-agent-development/SKILL.md`, `web-nextjs/SKILL.md`).
 
 ## Agent Frontmatter Reference
 
@@ -101,34 +101,32 @@ Skills support nested directories. Claude Code auto-discovers `SKILL.md` files a
 │   ├── git/                          # Git: commit, push, pr
 │   ├── docs/                         # Docs: component, init, update
 │   └── plan/                         # Planning: fast, hard, parallel
-├── skills/                           # Domain knowledge (44 skills)
-│   ├── agents/                       # Ecosystem hub
-│   │   ├── SKILL.md                  # This file
-│   │   └── claude/                   # Claude Code-specific
-│   │       ├── agent-development/    # Agent creation guide
-│   │       └── skill-development/    # Skill creation guide
-│   ├── core/                         # Operational rules (4 aspects)
-│   ├── web/                          # Web skills
-│   │   ├── nextjs/                   # Next.js patterns
-│   │   ├── frontend-development/     # React/frontend patterns
-│   │   ├── backend-development/      # Node.js/API patterns
-│   │   ├── figma/                    # Figma MCP + extraction procedure
-│   │   └── ui-lib-dev/               # klara-theme pipeline (5 aspects)
-│   ├── ios/                          # iOS skills
-│   │   └── development/              # Swift/SwiftUI patterns
-│   ├── android/                      # Android skills
-│   │   └── development/              # Kotlin/Compose patterns
-│   ├── planning/                     # Planning methodology (context: fork)
-│   ├── debugging/                    # Debug methodology (context: fork)
-│   ├── research/                     # Research methodology (context: fork)
-│   ├── databases/                    # Database patterns
-│   ├── docker/                       # Container patterns
-│   ├── code-review/                  # Code quality assessment
-│   ├── docs-seeker/                  # Documentation lookup (Context7)
-│   ├── error-recovery/               # Error handling patterns
-│   ├── problem-solving/              # Root cause analysis
-│   ├── repomix/                      # Codebase summaries
-│   └── sequential-thinking/          # Step-by-step analysis
+├── skills/                           # Domain knowledge (46 skills, flat layout)
+│   ├── kit-agents/                   # Ecosystem hub (this file)
+│   ├── kit-agent-development/        # Agent creation guide
+│   ├── kit-skill-development/        # Skill creation guide
+│   ├── kit-commands/                 # Command authoring
+│   ├── kit-hooks/                    # Hook authoring
+│   ├── kit-cli/                      # CLI tool patterns
+│   ├── core/                         # Operational rules
+│   ├── data-store/                   # Agent persistent data store convention
+│   ├── web-nextjs/                   # Next.js patterns
+│   ├── web-frontend/                 # React/frontend patterns
+│   ├── web-figma/                    # Figma MCP + extraction
+│   ├── web-ui-lib/                   # UI component library
+│   ├── web-ui-lib-dev/               # klara-theme pipeline
+│   ├── web-a11y/                     # Web accessibility (WCAG 2.1 AA)
+│   ├── ios-development/              # Swift/SwiftUI patterns
+│   ├── ios-a11y/                     # iOS accessibility
+│   ├── android-development/          # Kotlin/Compose patterns
+│   ├── android-a11y/                 # Android accessibility
+│   ├── backend-javaee/               # Jakarta EE patterns
+│   ├── a11y/                         # Cross-platform a11y foundation
+│   ├── planning/                     # Planning methodology
+│   ├── debugging/                    # Debug methodology
+│   ├── knowledge-base/               # Knowledge base management
+│   ├── knowledge-retrieval/          # Knowledge lookup
+│   └── ...                           # (other cross-cutting skills)
 ├── workflows/                        # Reference docs (NOT auto-discovered)
 │   ├── feature-development.md
 │   ├── bug-fixing.md
@@ -144,8 +142,8 @@ Skills support nested directories. Claude Code auto-discovers `SKILL.md` files a
 | Agent files | `epost-<role>.md` | `epost-architect.md` |
 | Platform agents | `epost-<platform>-developer.md` | `epost-web-developer.md` |
 | Commands | `<category>/<action>.md` | `web/cook.md` |
-| Skills | `<domain>/SKILL.md` | `web/nextjs/SKILL.md` |
-| Nested skills | `<parent>/<child>/<domain>/SKILL.md` | `agents/claude/agent-development/SKILL.md` |
+| Skills | `<name>/SKILL.md` | `web-nextjs/SKILL.md` |
+| Kit skills | `kit-<topic>/SKILL.md` | `kit-agent-development/SKILL.md` |
 
 ## Description Patterns
 
@@ -174,8 +172,8 @@ Load with: `claude --plugin-dir /path/to/plugin`
 
 ## Sub-Skills
 
-- `claude/agent-development/SKILL.md` — Agent creation, frontmatter, system prompts, triggering
-- `claude/skill-development/SKILL.md` — Skill creation, progressive disclosure, validation
+- `kit-agent-development` — Agent creation, frontmatter, system prompts, triggering
+- `kit-skill-development` — Skill creation, progressive disclosure, validation
 
 ## Related Documents
 

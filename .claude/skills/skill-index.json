@@ -1,7 +1,7 @@
 {
-  "generated": "2026-02-26T22:22:18.667Z",
+  "generated": "2026-02-27T01:52:17.866Z",
   "version": "1.0.0",
-  "count": 45,
+  "count": 46,
   "skills": [
     {
       "name": "a11y",
@@ -120,6 +120,17 @@
       "triggers": [],
       "agent-affinity": [],
       "path": "core/SKILL.md"
+    },
+    {
+      "name": "data-store",
+      "description": "Agent persistent data store convention for .epost-data/. Use when authoring an agent that produces or consumes project-level persistent data between sessions.",
+      "keywords": [],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [],
+      "agent-affinity": [],
+      "path": "data-store/SKILL.md"
     },
     {
       "name": "debugging",

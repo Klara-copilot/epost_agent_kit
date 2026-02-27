@@ -247,7 +247,7 @@ Return JSON with:
 
 Then convert to agent file format with frontmatter.
 
-See `examples/agent-creation-prompt.md` for complete template.
+Save the JSON response, then convert to agent file format with frontmatter.
 
 ### Method 2: Manual Creation
 
@@ -397,42 +397,35 @@ When creating agents for the ePost agent kit, these additional fields configure 
 - ❌ Write vague system prompts
 - ❌ Skip testing
 
-## Additional Resources
+## Declaring a Data Store
 
-### Reference Files
+If your agent produces persistent project-level data (findings, benchmarks, patches), declare a data domain using the `.epost-data/` convention. See the `data-store` skill for the full convention and gitignore rules.
 
-For detailed guidance, consult:
+**Template — add to agent system prompt body:**
 
-- **`references/system-prompt-design.md`** - Complete system prompt patterns
-- **`references/triggering-examples.md`** - Example formats and best practices
-- **`references/agent-creation-system-prompt.md`** - The exact prompt from Claude Code
+```markdown
+## Data Store
+- **DB:** `.epost-data/{domain}/{domain}.json` (if exists)
+- **Artifacts:** `.epost-data/{domain}/artifacts/` (if exists)
+- **Schema:** `.claude/assets/{domain}-schema.json`
+```
 
-### Example Files
-
-Working examples in `examples/`:
-
-- **`agent-creation-prompt.md`** - AI-assisted agent generation template
-- **`complete-agent-examples.md`** - Full agent examples for different use cases
-
-### Utility Scripts
-
-Development tools in `scripts/`:
-
-- **`validate-agent.sh`** - Validate agent file structure
-- **`test-agent-trigger.sh`** - Test if agent triggers correctly
+**Steps:**
+1. Create schema at `packages/{pkg}/assets/{domain}-schema.json`
+2. Add the "Data Store" section above to the agent's system prompt
+3. Reference paths in commands with `(if exists)` guards
+4. Register the domain in `data-store` skill's Domain Registry table
 
 ## Implementation Workflow
 
 To create an agent for a plugin:
 
 1. Define agent purpose and triggering conditions
-2. Choose creation method (AI-assisted or manual)
-3. Create `agents/agent-name.md` file
-4. Write frontmatter with all required fields
-5. Write system prompt following best practices
-6. Include 2-4 triggering examples in description
-7. Validate with `scripts/validate-agent.sh`
-8. Test triggering with real scenarios
-9. Document agent in plugin README
+2. Create `agents/agent-name.md` with required frontmatter
+3. Write system prompt following best practices
+4. Include 2-4 triggering examples in description
+5. If agent produces persistent data, declare a data store (see above)
+6. Validate with `./scripts/validate-skill.sh` (for skills) or check frontmatter manually
+7. Test triggering with real scenarios
 
 Focus on clear triggering conditions and comprehensive system prompts for autonomous operation.
