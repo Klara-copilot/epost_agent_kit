@@ -1,7 +1,8 @@
 # System Architecture
 
 **Created by**: Phuong Doan
-**Last Updated**: 2026-02-09
+**Last Updated**: 2026-02-25
+**Version**: 0.1.0
 
 ## High-Level Overview
 
@@ -83,9 +84,9 @@ epost_agent_kit implements a **multi-platform agent distribution framework** usi
 - Report progress and results
 
 **Agent Types**:
-1. **Global Agents** (10): Orchestration and coordination
-2. **Platform Agents** (4): Domain-specific execution
-3. **Specialized Agents** (7): Specific capabilities
+1. **Core Agents** (12): Orchestration, coordination, and general tasks
+2. **Platform Agents** (4): Domain-specific execution (web, ios, android, backend)
+3. **Specialized Agents** (4): Specific capabilities (scout, muji, cli-developer, brainstormer)
 
 ### 3. Platform Integration System
 
@@ -106,10 +107,15 @@ packages/
 │   ├── agents/
 │   ├── skills/
 │   └── commands/
-└── platform-backend/      # Backend platform
-    ├── agents/
-    ├── skills/
-    └── commands/
+├── platform-backend/      # Backend platform
+│   ├── agents/
+│   ├── skills/
+│   └── commands/
+└── github-copilot/        # GitHub Copilot format support
+    ├── instructions/      # Agent instruction templates
+    ├── prompts/           # Command prompt templates
+    ├── skills/            # Skill templates
+    └── agents/            # Platform-specific agent instructions
 ```
 
 **Responsibilities**:
@@ -166,6 +172,7 @@ commands:
 **Key Files**:
 - `epost-agent-cli/src/core/template-manager.ts` - Template processing
 - `epost-agent-cli/src/core/claude-md-generator.ts` - Claude format
+- `packages/github-copilot/` - GitHub Copilot templates
 
 **Conversion Matrix**:
 | Component | Claude Code | Cursor | GitHub Copilot |
@@ -175,10 +182,18 @@ commands:
 | Commands | `.claude/commands/*.md` | `.cursor/commands/*.md` | `.github/prompts/*.prompt.md` |
 | Skills | `.claude/skills/*/SKILL.md` | Merged into rules | Merged into instructions |
 
+**GitHub Copilot Package**:
+The `github-copilot` package provides conversion templates:
+- `instructions/agent-template.md` - Agent instruction file format
+- `prompts/command-template.md` - Command prompt format
+- `skills/skill-template.md` - Skill instruction format
+- `instructions/claude-md-template.md` - CLAUDE.md equivalent format
+- `COPILOT.snippet.md` - IDE configuration snippet
+
 **Conversion Process**:
 1. Parse source format (frontmatter + content)
 2. Extract metadata and content
-3. Transform to target format
+3. Transform to target format using platform templates
 4. Apply platform-specific adjustments
 5. Write to target location
 

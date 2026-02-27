@@ -1,131 +1,86 @@
 # Codebase Summary
 
 **Created by**: Phuong Doan
-**Last Updated**: 2026-02-10
+**Last Updated**: 2026-02-25
+**Version**: 0.1.0
 
 ## Project Overview
 
-epost_agent_kit is a comprehensive multi-platform agent framework that enables distribution of AI agents across Claude Code, Cursor, and GitHub Copilot. It implements a parent-child delegation architecture where global agents coordinate workflows while platform-specific agents execute domain-specific implementations.
+epost_agent_kit is a multi-platform agent distribution framework enabling single-source AI agents, skills, and commands with automatic conversion across Claude Code, Cursor, and GitHub Copilot.
 
 ## Tech Stack
 
 ### Core Framework
-- **Language**: TypeScript 5.7+
-- **Runtime**: Node.js >=18.0.0
-- **CLI Framework**: Commander.js 12.1
-- **UI/Prompts**: Inquirer 7.2, Ora 8.1, cli-table3
-- **Testing**: Vitest 2.1, Coverage V8
-- **Linting**: ESLint 9.18 with TypeScript plugin
-- **Config Management**: Cosmiconfig 9.0
-- **Validation**: Zod 3.24
-- **Process Management**: Execa 9.5
+| Component | Version | Purpose |
+|-----------|---------|---------|
+| TypeScript | 5.7+ | Primary language |
+| Node.js | >=20.0.0 (LTS) | Runtime |
+| Commander.js | 12.1 | CLI framework |
+| Inquirer | 7.2 | Interactive prompts |
+| Ora | 8.1 | Spinners |
+| Vitest | 2.1 | Testing |
+| ESLint | 9.18 | Linting |
+| Cosmiconfig | 9.0 | Configuration |
+| Zod | 3.24 | Validation |
+| Execa | 9.5 | Process management |
 
 ### Platform Support
-- **Web**: Next.js 14, React 18, TypeScript, TailwindCSS, Jest, Playwright
-- **iOS**: Swift 6, SwiftUI, UIKit, XCTest, Xcode
-- **Android**: Kotlin, Jetpack Compose, MVVM, JUnit, Espresso, Gradle
-- **Backend**: Java 8, Jakarta EE 8, WildFly 26.1, PostgreSQL, Maven
+| Platform | Language | Framework | Build |
+|----------|----------|-----------|-------|
+| Web | TypeScript | Next.js 14, React 18 | npm/Vercel |
+| iOS | Swift 6 | SwiftUI/UIKit | Xcode |
+| Android | Kotlin | Jetpack Compose | Gradle |
+| Backend | Java 8 | Jakarta EE 8 | Maven |
+
+## Lines of Code Summary
+
+| Package | LOC | Description |
+|---------|-----|-------------|
+| packages/core | 12,356 | Base agents, skills, commands |
+| packages/platform-ios | 7,018 | iOS platform components |
+| packages/platform-android | 2,036 | Android platform components |
+| packages/platform-backend | 530 | Backend platform components |
+| packages/platform-web | 2,786 | Web platform components |
+| packages/design-system | 73,761 | UI library & Figma variables |
+| packages/domains | 734 | B2B/B2C domain knowledge |
+| packages/kit-design | 3,328 | Kit development tools |
+| epost-agent-cli | 6,322 | Distribution CLI tool |
+| tools/management-ui | 4,991 | Next.js visualization app |
+| **Total** | **~114,862** | |
 
 ## Directory Structure
 
 ```
 epost_agent_kit/
-├── README.md                       # Quick start guide
-├── CLAUDE.md                       # Claude Code configuration
-├── CHANGELOG.md                    # Version history
-├── .epost-metadata.json           # Kit metadata
-├── .gitignore
+├── README.md
+├── CLAUDE.md
+├── CHANGELOG.md
+├── .epost-metadata.json
 ├── .mcp.json
 │
-├── docs/                          # Documentation (NEWLY CREATED)
-│   ├── codebase-summary.md       # This file
-│   ├── code-standards.md         # Coding conventions
-│   ├── system-architecture.md    # Architecture details
-│   ├── api-routes.md             # API documentation
-│   ├── data-models.md            # Data structures
-│   └── deployment-guide.md       # Deployment instructions
+├── docs/                          # Documentation
+│   ├── project-overview-pdr.md    # Vision & requirements
+│   ├── project-roadmap.md         # Phases & milestones
+│   ├── system-architecture.md     # Architecture details
+│   ├── codebase-summary.md        # This file
+│   ├── code-standards.md          # Coding conventions
+│   ├── api-routes.md              # API documentation
+│   ├── data-models.md             # Data structures
+│   └── deployment-guide.md        # Deployment instructions
 │
-├── .claude/                       # Claude Code configuration
-│   ├── agents/                    # 21 agent definitions
-│   │   ├── epost-orchestrator.md
-│   │   ├── epost-architect.md
-│   │   ├── epost-planner.md
-│   │   ├── epost-implementer.md
-│   │   ├── epost-reviewer.md
-│   │   ├── epost-researcher.md
-│   │   ├── epost-debugger.md
-│   │   ├── epost-tester.md
-│   │   ├── epost-documenter.md
-│   │   ├── epost-git-manager.md
-│   │   ├── epost-scout.md
-│   │   ├── epost-brainstormer.md
-│   │   ├── epost-database-admin.md
-│   │   ├── epost-backend-developer.md
-│   │   ├── epost-web-developer.md
-│   │   ├── epost-ios-developer.md
-│   │   ├── epost-android-developer.md
-│   │   ├── epost-a11y-specialist.md
-│   │   ├── epost-muji.md
-│   │   ├── epost-cli-developer.md
-│   │   ├── epost-guide.md
-│   │   └── epost-backend-developer.md
-│   │
-│   ├── commands/                  # Slash commands
-│   │   ├── plan.md
-│   │   ├── cook.md
-│   │   ├── test.md
-│   │   ├── debug.md
-│   │   ├── git-commit.md
-│   │   ├── web-cook.md
-│   │   ├── web-test.md
-│   │   ├── ios-cook.md
-│   │   ├── ios-test.md
-│   │   ├── ios-debug.md
-│   │   ├── ios-simulator.md
-│   │   ├── ios-a11y-*.md
-│   │   ├── android-cook.md
-│   │   ├── android-test.md
-│   │   ├── backend-cook.md
-│   │   ├── backend-test.md
-│   │   └── docs-component.md
-│   │
-│   ├── skills/                    # Knowledge base
-│   │   ├── core/
-│   │   ├── research/
-│   │   ├── docker/
-│   │   ├── code-review/
-│   │   ├── debugging/
-│   │   ├── planning/
-│   │   ├── problem-solving/
-│   │   ├── sequential-thinking/
-│   │   ├── docs-seeker/
-│   │   ├── repomix/
-│   │   ├── web/
-│   │   │   ├── frontend-development/
-│   │   │   ├── nextjs/
-│   │   │   ├── api-routes/
-│   │   │   ├── klara-theme/
-│   │   │   └── figma-integration/
-│   │   ├── ios/
-│   │   │   └── ios-development/
-│   │   ├── android/
-│   │   │   └── android-development/
-│   │   └── backend/
-│   │       └── backend-development/
-│   │
-│   ├── hooks/                     # Git hooks and lifecycle
-│   ├── output-styles/             # Response formatting
-│   ├── scripts/                   # Automation scripts
-│   ├── workflows/                 # Workflow definitions
-│   └── settings.json              # Claude settings
+├── .claude/                       # Claude Code configuration (installed)
+│   ├── agents/                    # 16 agents (installed from packages)
+│   ├── commands/                  # 53 commands (installed from packages)
+│   ├── skills/                    # 41 skills (installed from packages)
+│   ├── hooks/
+│   ├── output-styles/
+│   ├── workflows/
+│   └── settings.json
 │
-├── scripts/                       # Project automation
-│   └── migrate-skills.mjs         # agentskills.io compliance migration
-│
-├── epost-agent-cli/              # Distribution CLI tool
+├── epost-agent-cli/              # Distribution CLI
 │   ├── src/
-│   │   ├── types/                # TypeScript type definitions
-│   │   ├── core/                 # Core functionality
+│   │   ├── types/
+│   │   ├── core/
 │   │   │   ├── backup-manager.ts
 │   │   │   ├── branding.ts
 │   │   │   ├── checksum.ts
@@ -144,191 +99,148 @@ epost_agent_kit/
 │   │   │   ├── settings-merger.ts
 │   │   │   ├── template-manager.ts
 │   │   │   └── ui.ts
-│   │   ├── commands/             # CLI command handlers
-│   │   ├── cli.ts                # CLI entry point
-│   │   └── index.ts              # Module exports
-│   ├── dist/                     # Compiled output
-│   ├── tests/                    # Test suite
-│   ├── package.json              # Dependencies
-│   ├── tsconfig.json             # TypeScript config
-│   ├── eslint.config.js          # ESLint config
-│   └── vitest.config.ts          # Test config
+│   │   ├── commands/
+│   │   ├── cli.ts
+│   │   └── index.ts
+│   ├── dist/
+│   ├── tests/
+│   ├── package.json
+│   ├── tsconfig.json
+│   └── vitest.config.ts
 │
-├── packages/                     # Package library
-│   ├── core/                     # Core package components
-│   ├── platform-web/             # Web platform package
-│   ├── platform-ios/             # iOS platform package
-│   ├── platform-android/         # Android platform package
-│   ├── platform-backend/         # Backend platform package
-│   ├── ui-ux/                    # UI/UX design system
-│   ├── arch-cloud/               # Cloud architecture
-│   ├── domain-b2b/               # B2B domain
-│   ├── domain-b2c/               # B2C domain
-│   ├── meta-kit-design/          # Kit design tools
-│   ├── rag-web/                  # Web RAG system
-│   └── rag-ios/                  # iOS RAG system
+├── packages/                     # Modular packages
+│   ├── core/
+│   ├── platform-web/
+│   ├── platform-ios/
+│   ├── platform-android/
+│   ├── platform-backend/
+│   ├── design-system/
+│   ├── domains/
+│   └── kit-design/
 │
-├── plans/                        # Implementation plans
-│   └── 260205-0834-unified-architecture-implementation/
+├── tools/
+│   └── management-ui/           # Next.js visualization
+│       ├── app/
+│       ├── components/
+│       └── lib/
 │
-├── profiles/                     # Installation profiles
+├── profiles/                    # Installation profiles
 │   └── full.yaml
 │
-├── templates/                    # Template files
+├── plans/                       # Implementation plans
+├── .knowledge/                  # Design system data
 │
-├── install-macos.sh             # macOS installer
-├── install.ps1                  # Windows PowerShell installer
-└── install.cmd                  # Windows CMD installer
+├── install-macos.sh
+├── install.ps1
+└── install.cmd
 ```
 
 ## Key Components
 
 ### CLI Tool (epost-agent-cli)
-- **Entry Point**: `src/cli.ts` - Commander.js CLI setup
-- **Core Modules**:
-  - `backup-manager.ts` - Backup/restore functionality
-  - `package-manager.ts` - Package installation
-  - `profile-loader.ts` - Profile loading
-  - `template-manager.ts` - Template processing
-  - `github-client.ts` - GitHub API integration
-  - `file-system.ts` - File operations
-  - `config-loader.ts` - Configuration management
-  - `logger.ts` - Logging system
-  - `ui.ts` - Terminal UI components
+
+**Entry Point**: `src/cli.ts`
+
+**Core Modules**:
+| Module | Purpose |
+|--------|---------|
+| backup-manager.ts | Backup/restore functionality |
+| package-manager.ts | Package installation |
+| profile-loader.ts | Profile loading |
+| template-manager.ts | Template processing |
+| github-client.ts | GitHub API integration |
+| file-system.ts | File operations |
+| config-loader.ts | Configuration management |
+| logger.ts | Logging system |
+| ui.ts | Terminal UI components |
 
 ### Agent System
-- **21 Total Agents**: 10 global + 11 specialized
-- **Global Agents**: Orchestration and coordination
-- **Platform Agents**: Domain-specific execution (web, iOS, Android, backend)
-- **Specialized Agents**: Scout, brainstormer, database-admin, a11y-specialist, etc.
 
-### Package System
-- **12 Packages**: Organized by platform and domain
-- **Modular Installation**: Install specific packages as needed
-- **Profile-Based**: Use predefined profiles (full, minimal, etc.)
+| Category | Count | Examples |
+|----------|-------|----------|
+| Core Agents | 12 | orchestrator, architect, implementer, reviewer, researcher |
+| Platform Agents | 4 | web-developer, ios-developer, android-developer, backend-developer |
+| Specialized Agents | 4 | scout, brainstormer, muji, cli-developer |
 
-## Installation Scripts
+### Command Categories
 
-### macOS (`install-macos.sh`)
-- Checks Node.js version
-- Installs dependencies
-- Builds CLI tool
-- Links binary for npx usage
+| Category | Count | Commands |
+|----------|-------|----------|
+| bootstrap | 2 | fast, parallel |
+| cook | 2 | fast, parallel |
+| docs | 3 | component, init, update |
+| fix | 7 | fast, deep, ci, test, types, ui, logs |
+| git | 3 | commit, push, pr |
+| plan | 4 | fast, deep, parallel, validate |
+| review | 2 | code, a11y |
+| ios/a11y | 4 | audit, fix, fix-batch, review |
+| cli | 3 | cook, doctor, test |
+| meta | 3 | add-agent, add-skill, generate-command |
+| generate-command | 2 | simple, splash |
 
-### Windows PowerShell (`install.ps1`)
-- Version validation
-- npm install
-- Build process
-- Global linking
+## CLI Commands
 
-### Windows CMD (`install.cmd`)
-- Same functionality as PowerShell
-- CMD-compatible syntax
-
-## Key Features
-
-### 1. Multi-Platform Distribution
-- Single source for agents, skills, commands
-- Auto-converts for Claude Code, Cursor, GitHub Copilot
-- Platform-specific optimizations
-
-### 2. Parent-Child Delegation
-- Global agents orchestrate
-- Platform agents execute
-- Clear separation of concerns
-
-### 3. Package Management
-- Modular installation
-- Profile-based setup
-- Dependency resolution
-
-### 4. Version Control
-- Checksums for integrity
-- Backup/restore functionality
-- Update management
-
-### 5. Extensibility
-- Custom profiles
-- Package creation
-- Template system
-
-## Entry Points
-
-### CLI Commands
+### Installation
 ```bash
 npx epost-kit install              # Install kit
 npx epost-kit install --target cursor
-npx epost-kit list                 # List components
 npx epost-kit update               # Update kit
-npx epost-kit create skill <name>  # Create skill
-npx epost-kit --version            # Show version
+npx epost-kit uninstall            # Remove kit
 ```
 
-### Agent Commands
+### Management
+```bash
+npx epost-kit list                 # List components
+npx epost-kit doctor               # Health check
+npx epost-kit profile list         # List profiles
+npx epost-kit package list         # List packages
 ```
-/plan           # Create implementation plan
-/cook           # Implement features
-/test           # Run tests
-/debug          # Debug issues
-/git:commit     # Git operations
-/web:cook       # Web implementation
-/ios:cook       # iOS implementation
-/android:cook   # Android implementation
-/backend:cook   # Backend implementation
+
+### Development
+```bash
+npx epost-kit dev                  # Development mode
+npx epost-kit workspace init       # Initialize workspace
 ```
 
 ## Testing Strategy
 
-- **Framework**: Vitest 2.1
-- **Coverage**: V8 coverage reporting
-- **Test Location**: `epost-agent-cli/tests/`
-- **Run Tests**: `npm test` or `npm run test:watch`
+| Aspect | Details |
+|--------|---------|
+| Framework | Vitest 2.1 |
+| Coverage | V8 coverage |
+| Location | `epost-agent-cli/tests/` |
+| Target | 80%+ overall, 90%+ core |
 
 ## Build Process
 
 1. TypeScript compilation (`tsc`)
-2. Output to `dist/` directory
+2. Output to `dist/`
 3. Linting validation
 4. Test execution
 5. Binary linking
 
 ## Configuration Files
 
-- `package.json` - npm configuration and dependencies
-- `tsconfig.json` - TypeScript compiler options
-- `eslint.config.js` - Code linting rules
-- `vitest.config.ts` - Test configuration
-- `.epost-metadata.json` - Kit metadata
-- `.claude/settings.json` - Claude settings
-- `.mcp.json` - MCP server configuration
+| File | Purpose |
+|------|---------|
+| package.json | npm dependencies |
+| tsconfig.json | TypeScript config |
+| eslint.config.js | Linting rules |
+| vitest.config.ts | Test config |
+| .epost-metadata.json | Kit metadata |
+| .claude/settings.json | Claude settings |
 
 ## Getting Started
 
-1. **Install Kit**:
-   ```bash
-   ./install-macos.sh  # macOS
-   # or
-   install.ps1         # Windows PowerShell
-   ```
+1. **Install**: `./install-macos.sh` or `npx epost-kit install`
+2. **Verify**: `npx epost-kit --version`
+3. **Use**: Invoke with `/` commands in Claude Code
+4. **Read**: Start with `docs/project-overview-pdr.md`
 
-2. **Verify Installation**:
-   ```bash
-   npx epost-kit --version
-   ```
+## Related Documents
 
-3. **Use Agents**:
-   - Invoke with `/` commands in Claude Code
-   - Commands auto-route to appropriate agents
-
-4. **Read Documentation**:
-   - Start with README.md
-   - Review docs/system-architecture.md
-   - Check docs/code-standards.md
-
-## Next Steps
-
-- Implement Phase 3-4 platform agents
-- Complete iOS and Android agents
-- Enhance CLI features
-- Add E2E verification
-- Improve documentation
+- [project-overview-pdr.md](project-overview-pdr.md) - Vision & requirements
+- [project-roadmap.md](project-roadmap.md) - Phases & milestones
+- [system-architecture.md](system-architecture.md) - Architecture details
+- [code-standards.md](code-standards.md) - Coding conventions
+- [deployment-guide.md](deployment-guide.md) - Deployment instructions

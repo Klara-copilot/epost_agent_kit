@@ -1,7 +1,8 @@
 # Code Standards
 
 **Created by**: Phuong Doan
-**Last Updated**: 2026-02-09
+**Last Updated**: 2026-02-25
+**Version**: 0.1.0
 
 ## Naming Conventions
 

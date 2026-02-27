@@ -1,7 +1,8 @@
 # Deployment Guide
 
 **Created by**: Phuong Doan
-**Last Updated**: 2026-02-09
+**Last Updated**: 2026-02-25
+**Version**: 0.1.0
 
 ## Environment Variables
 
@@ -68,8 +69,8 @@ project-root/
 #### Prerequisites
 ```bash
 # Node.js version check
-node --version  # Should be >= 18.0.0
-npm --version   # Should be >= 9.0.0
+node --version  # Should be >= 20.0.0 (LTS recommended)
+npm --version   # Should be >= 10.0.0
 ```
 
 #### Build Steps
@@ -159,14 +160,14 @@ cd ios-project
 xcodebuild -workspace MyApp.xcworkspace \
            -scheme MyApp \
            -sdk iphonesimulator \
-           -destination 'platform=iOS Simulator,name=iPhone 15,OS=latest' \
+           -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
            build
 
 # Run tests
 xcodebuild test -workspace MyApp.xcworkspace \
                 -scheme MyApp \
                 -sdk iphonesimulator \
-                -destination 'platform=iOS Simulator,name=iPhone 15,OS=latest'
+                -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest'
 ```
 
 #### Android Platform (Kotlin/Gradle)
@@ -332,11 +333,12 @@ xcodebuild -exportArchive \
   -exportPath build \
   -exportOptionsPlist ExportOptions.plist
 
-# Upload to App Store Connect
-xcrun altool --upload-app \
-  -f build/MyApp.ipa \
-  -u username@example.com \
-  -p app-specific-password
+# Upload to App Store Connect (using notarytool, altool is deprecated)
+xcrun notarytool submit build/MyApp.ipa \
+  --apple-id username@example.com \
+  --team-id TEAM_ID \
+  --password app-specific-password \
+  --wait
 ```
 
 ### 5. Google Play (Android Platform)
@@ -426,7 +428,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
 
       - name: Install dependencies
         run: npm install
@@ -466,7 +468,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
 
       - name: Install dependencies
         run: npm install
@@ -500,7 +502,7 @@ jobs:
       - name: Setup Xcode
         uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: '15.0'
+          xcode-version: '16.0'
 
       - name: Build
         run: |
@@ -515,7 +517,7 @@ jobs:
             -workspace MyApp.xcworkspace \
             -scheme MyApp \
             -sdk iphonesimulator \
-            -destination 'platform=iOS Simulator,name=iPhone 15'
+            -destination 'platform=iOS Simulator,name=iPhone 16'
 ```
 
 #### Android Platform Workflow

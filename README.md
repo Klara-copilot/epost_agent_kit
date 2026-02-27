@@ -1,257 +1,233 @@
 # epost_agent_kit
 
-A comprehensive multi-platform agent kit framework for distributing AI agents across Claude Code, Cursor, and GitHub Copilot using parent-child delegation architecture.
+Multi-platform agent distribution framework for Claude Code, Cursor, and GitHub Copilot.
 
 ## Overview
 
-epost_agent_kit is an architecture and distribution framework that enables:
-
-- **Multi-Platform Support**: Single source of truth for agents, rules, skills, and commands that automatically converts across Claude Code, Cursor, and GitHub Copilot
-- **Parent-Child Delegation**: Global agents orchestrate and delegate platform-specific work to specialized platform agents
-- **CLI Distribution**: `npx epost-kit` command-line tool for installing components into any IDE
-- **Modular Architecture**: Agents, rules, skills, and commands organized by platform with cross-platform core components
+- **Multi-Platform Support**: Single source of truth converting across IDEs
+- **Parent-Child Delegation**: Global agents orchestrate; platform agents execute
+- **CLI Distribution**: `npx epost-kit` for installation and management
+- **Modular Architecture**: Package-based installation with profiles
 
 ## Quick Start
 
 ### Installation
 
-#### From npm (Recommended)
-
+**From npm:**
 ```bash
-# Add this kit to your Claude Code project
-npx epost-kit install
-
-# Or target a specific platform
+npx epost-kit install                # Auto-detect platform
 npx epost-kit install --target cursor
 npx epost-kit install --target copilot
 ```
 
-#### Local Development Installation
-
-For local development and testing:
-
-**macOS:**
+**Local Development (macOS):**
 ```bash
-# From epost-agent-kit/ root directory
 ./install-macos.sh
 ```
 
-**Windows PowerShell:**
+**Local Development (Windows):**
 ```powershell
-# From epost-agent-kit\ root directory
 powershell -ExecutionPolicy Bypass -File install.ps1
 ```
 
-**Windows CMD:**
-```cmd
-REM From epost-agent-kit\ root directory
-install.cmd
-```
+**Requirements:** Node.js >= 18.0.0
 
-Requirements:
-- Node.js >=18.0.0
-- npm
-
-After installation, verify with:
+### Verification
 ```bash
-npx epost-kit --version  # Should output: 0.1.0
-```
-
-### Basic Usage
-
-Once installed, use platform-specific commands:
-
-**Claude Code**:
-```
-/cook        # Run implementer with auto-platform detection
-/web:cook    # Explicitly target web platform implementer
-```
-
-**Cursor**:
-```
-/cook        # Via .cursor/commands/cook.md
-```
-
-**GitHub Copilot**:
-```
-/cook        # Via .github/prompts/cook.prompt.md
+npx epost-kit --version  # 0.1.0
+npx epost-kit doctor     # Health check
 ```
 
 ## Architecture
 
-### Parent-Child Delegation Model
-
 ```
 User Request → Orchestrator → Global Agent → Platform Agent → Execute
-                                  ↓
-                            (architect, implementer,
-                             reviewer, debugger, tester,
-                             researcher, documenter)
-                                  ↓
-                            (web/, ios/, android/
-                             platform-specific agents)
 ```
 
-**Global Agents** (orchestrate workflows):
-- `orchestrator` - Task router and project manager
-- `architect` - System design and research orchestration
-- `planner` - Plan creation specialist (delegated from architect)
-- `implementer` - Delegates to platform implementers
-- `reviewer` - Code review and performance analysis
-- `researcher` - Multi-source research and validation
-- `debugger` - Debugging coordination
-- `tester` - Test orchestration
-- `documenter` - Cross-platform documentation
-- `git-manager` - Git operations
+**Global Agents** (orchestrate):
+| Agent | Model | Role |
+|-------|-------|------|
+| orchestrator | haiku | Task router |
+| architect | opus | System design |
+| implementer | sonnet | Feature implementation |
+| reviewer | sonnet | Code review |
+| researcher | sonnet | Technology research |
+| debugger | sonnet | Debugging |
+| tester | haiku | QA & testing |
+| documenter | haiku | Documentation |
+| git-manager | haiku | Git operations |
+| brainstormer | sonnet | Creative ideation |
+| guide | sonnet | Natural language concierge |
+| a11y-specialist | sonnet | Accessibility (WCAG 2.1 AA) |
 
-**Platform Agents** (execute within domain):
-- `web/` - Next.js, React, TypeScript, Tailwind
-- `ios/` - Swift 6, SwiftUI, UIKit
-- `android/` - Kotlin, Jetpack Compose
+**Platform Agents** (execute):
+- `web-developer` - Next.js 14, React 18, TypeScript
+- `ios-developer` - Swift 6, SwiftUI, UIKit
+- `android-developer` - Kotlin, Jetpack Compose
+- `backend-developer` - Java 8, Jakarta EE, WildFly
 
-## Key Files
+## Commands
 
-- **[README.md](README.md)** - Quick start and overview
-- **[docs/project-overview-pdr.md](docs/project-overview-pdr.md)** - Vision, requirements, and success criteria
-- **[docs/system-architecture.md](docs/system-architecture.md)** - Detailed architecture and component interactions
-- **[docs/codebase-summary.md](docs/codebase-summary.md)** - Current state and directory structure
-- **[docs/code-standards.md](docs/code-standards.md)** - Coding conventions and best practices
-- **[docs/project-roadmap.md](docs/project-roadmap.md)** - Implementation phases and timeline
+### Core Commands
+```
+/plan           Create implementation plan
+/cook           Implement features (auto-detect platform)
+/test           Run tests
+/debug          Debug issues
+/review         Code review
+/git:commit     Git operations
+```
+
+### Platform Commands
+```
+/web:cook           Web implementation
+/web:test           Web tests
+/ios:cook           iOS implementation
+/ios:test           iOS tests
+/ios:a11y:audit     Accessibility audit
+/ios:a11y:fix       Fix a11y issue
+/ios:a11y:fix-batch Fix batch a11y issues
+/ios:a11y:review    Review iOS accessibility
+/android:cook       Android implementation
+/backend:cook       Backend implementation
+```
+
+## Platform Specifications
+
+| Platform | Language | Framework | Architecture |
+|----------|----------|-----------|--------------|
+| Web | TypeScript | Next.js 14, React 18 | App Router |
+| iOS | Swift 6 | SwiftUI/UIKit | MVVM/TCA |
+| Android | Kotlin | Jetpack Compose | MVVM+Hilt |
+| Backend | Java 8 | Jakarta EE 8 | WildFly 26.1 |
+
+## Packages
+
+| Package | LOC | Description |
+|---------|-----|-------------|
+| core | 12,356 | Base agents, skills, commands |
+| platform-ios | 7,018 | iOS components |
+| platform-android | 2,036 | Android components |
+| platform-backend | 530 | Backend components |
+| platform-web | 2,786 | Web components |
+| design-system | 73,761 | UI library & Figma |
+| domains | 734 | B2B/B2C knowledge |
+| kit-design | 3,328 | Kit development tools |
+| github-copilot | ~200 | GitHub Copilot format templates |
+| **Total** | **~115K** | |
 
 ## Project Status
 
-**Current Phase**: Agent Enhancement (Phase 2)
+**Version**: 0.1.0
+**Phase**: Active Development (Phase 3-6)
 
-**Progress**: Phase 2 Completed (Global Agents Enhancement + Planner Agent)
+**Completed**:
+- Phase 0-2: Foundation & Global Agents
+- Core CLI functionality
+- 12 core agents + 4 platform agents
 
-**Agents**: 20 agents (10 global + 10 specialized)
+**In Progress**:
+- Phase 3-4: Platform & Specialized Agents
+- Phase 5-6: iOS & Android completion
 
-**Key Milestones**:
-- Phase 0: Dependencies & Audit (✓ Completed)
-- Phase 1: Enhancement Strategy (✓ Completed)
-- Phase 2: Global Agents Enhancement (✓ Completed 2026-02-05)
-- Phase 3-4: Platform agents & new agents (In Progress)
-- Phase 5-6: iOS and Android agents (Planned)
-- Phase 7-9: CLI, sync, and E2E verification (Planned)
-
-## Core Concepts
-
-### Global vs Platform Agents
-
-**Global agents** detect context and delegate:
-- Read task requirements
-- Analyze file types and project structure
-- Route to appropriate platform agent
-- Never write platform-specific code directly
-
-**Platform agents** execute within their domain:
-- Implement features in their language/framework
-- Use platform-specific skills and tools
-- Report back to global agent
-- Self-contained within their platform
-
-### Multi-Platform Conversion
-
-The kit automatically converts components across platforms:
-
-| Component | Claude Code | Cursor | GitHub Copilot |
-|-----------|------------|--------|-----------------|
-| Agents | `.claude/agents/*.md` | `AGENTS.md` | `.github/agents/*.agent.md` |
-| Rules | `CLAUDE.md` | `.cursor/rules/*.mdc` | `.github/instructions/*.instructions.md` |
-| Commands | `.claude/skills/*/SKILL.md` | `.cursor/commands/*.md` | `.github/prompts/*.prompt.md` |
-
-## Distribution Strategy
-
-### Two-Layer Architecture
-
-**Layer 1**: Skills only
-```bash
-npx skills add Klara-copilot/epost_agent_kit
-```
-
-**Layer 2**: Full ecosystem
-```bash
-npx epost-kit install
-```
-
-### Target Platforms
-
-- **Claude Code** (native) - `.claude/` with YAML frontmatter agents
-- **Cursor** - `AGENTS.md`, `.cursor/rules/`, `.cursor/commands/`
-- **GitHub Copilot** - `.github/agents/`, `.github/instructions/`, `.github/prompts/`
-
-## Repository Structure
+## Directory Structure
 
 ```
 epost_agent_kit/
 ├── README.md
 ├── CLAUDE.md
-├── docs/                           # Documentation
+├── docs/                      # Documentation
 │   ├── project-overview-pdr.md
+│   ├── project-roadmap.md
 │   ├── system-architecture.md
 │   ├── codebase-summary.md
 │   ├── code-standards.md
-│   └── project-roadmap.md
-├── .claude/
-│   ├── agents/                     # Global agents
-│   │   ├── orchestrator.md
-│   │   ├── architect.md
-│   │   ├── implementer.md
-│   │   ├── reviewer.md
-│   │   ├── web/                    # Web platform agents
-│   │   ├── ios/                    # iOS platform agents
-│   │   └── android/                # Android platform agents
-│   ├── skills/                     # Skills by platform
-│   ├── rules/                      # Global rules
-│   └── commands/                   # Commands by category
-├── .github/
-│   ├── agents/                     # Copilot agents (generated)
-│   ├── instructions/               # Copilot instructions
-│   └── prompts/                    # Copilot prompts
-├── .cursor/
-│   ├── rules/                      # Cursor rules (generated)
-│   └── commands/                   # Cursor commands (generated)
-├── plans/                          # Implementation plans
-│   └── 260205-0834-unified-architecture-implementation/
-├── knowledge/                      # Design system data
-└── .git/                          # Git repository
+│   ├── deployment-guide.md
+│   ├── data-models.md
+│   └── api-routes.md
+├── .claude/                   # Claude Code config (installed)
+│   ├── agents/               # 16 agents
+│   ├── commands/             # 53 commands
+│   ├── skills/               # 41 skills
+│   └── settings.json
+├── epost-agent-cli/          # Distribution CLI
+│   └── src/
+│       ├── core/             # Core modules
+│       └── commands/         # CLI handlers
+├── packages/                 # Source packages
+│   ├── core/                 # 12 core agents + base commands
+│   ├── platform-web/         # Web platform
+│   ├── platform-ios/         # iOS platform + a11y commands
+│   ├── platform-android/     # Android platform
+│   ├── platform-backend/     # Backend platform
+│   ├── design-system/        # UI library + Figma
+│   ├── domains/              # B2B/B2C knowledge
+│   ├── kit-design/           # Kit development tools
+│   └── github-copilot/       # GitHub Copilot format templates
+├── tools/
+│   └── management-ui/        # Next.js visualization app
+├── profiles/                 # Installation profiles
+│   └── full.yaml
+├── .knowledge/               # Design system data
+└── install-macos.sh          # Installers
 ```
 
-## Getting Started
+## Documentation
 
-1. **Read the Documentation**
-   - Start with [docs/project-overview-pdr.md](docs/project-overview-pdr.md) for project vision
-   - Review [docs/system-architecture.md](docs/system-architecture.md) for architecture details
-   - Check [docs/project-roadmap.md](docs/project-roadmap.md) for implementation phases
+| Document | Purpose |
+|----------|---------|
+| [project-overview-pdr.md](docs/project-overview-pdr.md) | Vision & requirements |
+| [project-roadmap.md](docs/project-roadmap.md) | Phases & milestones |
+| [system-architecture.md](docs/system-architecture.md) | Architecture details |
+| [codebase-summary.md](docs/codebase-summary.md) | Codebase overview |
+| [code-standards.md](docs/code-standards.md) | Coding conventions |
+| [deployment-guide.md](docs/deployment-guide.md) | Deployment instructions |
 
-2. **Understand the Architecture**
-   - Global agents coordinate; platform agents execute
-   - Tasks flow through orchestrator → global agent → platform agent
-   - Each agent has specific responsibilities (architect plans, implementer codes, reviewer checks)
+## CLI Reference
 
-3. **Use the CLI**
-   - Install with `npx epost-kit install`
-   - List components with `npx epost-kit list`
-   - Create new skills with `npx epost-kit create skill {platform} {name}`
+```bash
+npx epost-kit install          # Install kit
+npx epost-kit update           # Update kit
+npx epost-kit uninstall        # Remove kit
+npx epost-kit list             # List components
+npx epost-kit doctor           # Health check
+npx epost-kit profile list     # List profiles
+npx epost-kit package list     # List packages
+```
 
-4. **Contribute**
-   - Follow [docs/code-standards.md](docs/code-standards.md)
-   - Submit changes as PRs with clear descriptions
-   - Ensure documentation stays current with code changes
+## Multi-Platform Conversion
+
+| Component | Claude Code | Cursor | GitHub Copilot |
+|-----------|-------------|--------|----------------|
+| Agents | `.claude/agents/*.md` | `AGENTS.md` | `.github/agents/*.agent.md` |
+| Rules | `CLAUDE.md` | `.cursor/rules/*.mdc` | `.github/instructions/*.md` |
+| Commands | `.claude/commands/*.md` | `.cursor/commands/*.md` | `.github/prompts/*.prompt.md` |
+| Skills | `.claude/skills/*/SKILL.md` | Merged into rules | Merged into instructions |
+
+**GitHub Copilot Templates**: `packages/github-copilot/` provides conversion templates for agents, commands, skills, and CLAUDE.md equivalents.
+
+## Development
+
+```bash
+# Setup
+npm install
+npm run build
+
+# Testing
+npm test
+npm run lint
+
+# Local linking
+npm link
+npx epost-kit --version
+```
 
 ## License
 
 Proprietary - Klara-copilot GitHub organization
 
-## Support
-
-For questions or issues:
-1. Check [docs/project-roadmap.md](docs/project-roadmap.md) for known limitations
-2. Review implementation phases for upcoming features
-3. Contact project maintainers
-
 ---
 
 **Created by**: Phuong Doan
-**Last Updated**: 2026-02-05
-**Status**: Planning Phase
+**Last Updated**: 2026-02-25
+**Version**: 0.1.0
