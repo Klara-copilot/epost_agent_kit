@@ -6,8 +6,7 @@
 ### Commands
 - `/audit:a11y` — Audit staged changes for violations (auto-detects platform)
 - `/audit:a11y-close <id>` — Mark a finding as resolved
-- `/fix:a11y <id>` — Fix a specific finding by ID
-- `/fix:a11y-batch <n>` — Batch-fix top N priority findings
+- `/fix:a11y [<n> | #<id>]` — Fix top N findings by priority, or a specific finding by ID
 - `/review:a11y` — Review accessibility compliance by focus area
 
 ### Skills

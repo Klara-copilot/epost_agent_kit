@@ -123,7 +123,7 @@ export async function runOnboard(opts: OnboardOptions): Promise<void> {
   // ── Multi-profile selection ──
   // Allow combining multiple profiles (union of packages)
   const selectedProfiles: string[] = [selectedProfile];
-  let combinedPackages = new Set(info?.packages || []);
+  const combinedPackages = new Set(info?.packages || []);
 
   if (!skipPackageSelection) {
     let addMore = await confirm({

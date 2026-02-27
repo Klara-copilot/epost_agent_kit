@@ -6,7 +6,7 @@ user-invocable: false
 
 # Accessibility Fix Mode
 
-Activated by: `/fix:a11y <id>` and `/fix:a11y-batch <n>` commands.
+Activated by: `/fix:a11y [<n> | #<id>]` command.
 
 ## Input
 

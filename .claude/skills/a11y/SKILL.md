@@ -61,7 +61,7 @@ If no signal, ask the user.
 |------|---------|----------|
 | **Guidance** | `/review:a11y`, direct questions | Human-readable examples, no file writes |
 | **Audit** | `/audit:a11y` | JSON-only output, read-only (no Write/Edit) |
-| **Fix** | `/fix:a11y`, `/fix:a11y-batch` | JSON status + code edits, surgical changes only |
+| **Fix** | `/fix:a11y` | JSON status + code edits, surgical changes only |
 | **Close** | `/audit:a11y-close` | Update known-findings DB, JSON confirmation |
 
 ## Known-Findings Database

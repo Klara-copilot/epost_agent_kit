@@ -19,7 +19,6 @@ provides:
     - audit/a11y
     - audit/a11y-close
     - fix/a11y
-    - fix/a11y-batch
     - review/a11y
 
 files:
