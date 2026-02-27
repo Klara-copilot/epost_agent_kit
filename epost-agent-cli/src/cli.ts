@@ -179,6 +179,34 @@ workspaceCmd
     await runWorkspaceInit({ ...program.opts(), ...opts });
   });
 
+// Command: lint - Validate references
+program
+  .command("lint")
+  .description("Validate references across installed agent/skill/command files")
+  .option("--json", "Output results as JSON", false)
+  .option("--fix", "Auto-fix stale references using rename map", false)
+  .option("--dir <path>", "Target project directory")
+  .action(async (opts) => {
+    if (opts.fix) {
+      const { runFixRefs } = await import("./commands/fix-refs.js");
+      await runFixRefs({ ...program.opts(), apply: true, dir: opts.dir });
+    } else {
+      const { runLint } = await import("./commands/lint.js");
+      await runLint({ ...program.opts(), ...opts });
+    }
+  });
+
+// Command: fix-refs - Auto-fix stale references
+program
+  .command("fix-refs")
+  .description("Auto-fix stale references using rename maps from package.yaml")
+  .option("--apply", "Write changes to disk (default: dry-run)", false)
+  .option("--dir <path>", "Target project directory")
+  .action(async (opts) => {
+    const { runFixRefs } = await import("./commands/fix-refs.js");
+    await runFixRefs({ ...program.opts(), ...opts });
+  });
+
 // ─── Dev Watcher Command ───
 
 program

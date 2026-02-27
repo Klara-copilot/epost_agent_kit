@@ -75,4 +75,9 @@ files:
   .ck.json: .ck.json
   .ckignore: .ckignore
 
+renames:
+  skills:
+    core-a11y: a11y
+    databases: infra-docker
+
 settings_strategy: base

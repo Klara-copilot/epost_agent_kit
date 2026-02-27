@@ -156,6 +156,43 @@ export async function checkFilePermissions(cwd: string): Promise<CheckResult> {
   }
 }
 
+export async function checkBrokenRefs(cwd: string): Promise<CheckResult> {
+  const claudeDir = join(cwd, '.claude');
+  const packagesDir = join(cwd, 'packages');
+
+  if (!existsSync(claudeDir) || !existsSync(packagesDir)) {
+    return { status: 'pass', message: 'Ref check skipped (no .claude/ or packages/)', fixable: false };
+  }
+
+  try {
+    const { loadAllManifests } = await import('./package-resolver.js');
+    const { buildRefRegistry, validateReferences } = await import('./ref-validator.js');
+
+    const manifests = await loadAllManifests(packagesDir);
+    const registry = buildRefRegistry(manifests);
+    const errors = await validateReferences(claudeDir, registry);
+
+    if (errors.length === 0) {
+      return { status: 'pass', message: 'All references valid', fixable: false };
+    }
+
+    return {
+      status: 'warn',
+      message: `${errors.length} broken ref(s). Run: epost-kit lint`,
+      fixable: true,
+      fix: async () => {
+        logger.info('Run: epost-kit lint --json for details');
+      },
+    };
+  } catch (error) {
+    return {
+      status: 'warn',
+      message: `Ref check failed: ${error instanceof Error ? error.message : 'unknown'}`,
+      fixable: false,
+    };
+  }
+}
+
 export async function checkDependencies(cwd: string): Promise<CheckResult> {
   if (!existsSync(join(cwd, 'package.json'))) {
     return { status: 'pass', message: 'No package.json', fixable: false };
@@ -176,5 +213,6 @@ export async function runAllChecks(cwd: string): Promise<CheckResult[]> {
     checkGitHubAuth(),
     checkFilePermissions(cwd),
     checkDependencies(cwd),
+    checkBrokenRefs(cwd),
   ]);
 }

@@ -72,7 +72,7 @@ You excel at:
 - Use skill: `web-frontend` - React components
 - Use skill: `web/backend-development` - API routes
 - Use skill: `web-figma` - Figma design-to-code (for klara-theme)
-- Use shared skills: `databases`, `docker` when needed
+- Use shared skills: `infra-docker`, `docker` when needed
 
 **Implement Code**:
 

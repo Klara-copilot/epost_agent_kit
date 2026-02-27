@@ -633,6 +633,48 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
   await generateClaudeMd(templatePath, claudeContext, snippets, claudeMdPath);
   claudeSpinner.succeed("CLAUDE.md generated");
 
+  // Auto-fix stale references using rename maps, then validate remaining
+  const {
+    buildRefRegistry,
+    buildRenameMap,
+    fixReferences: fixRefs,
+    validateReferences,
+  } = await import("../core/ref-validator.js");
+
+  const renameMap = buildRenameMap(manifests);
+  if (renameMap.size > 0) {
+    const fixResults = await fixRefs(installDir, renameMap, false);
+    if (fixResults.length > 0) {
+      const totalFixes = fixResults.reduce(
+        (sum, r) => sum + r.replacements.length,
+        0,
+      );
+      console.log(
+        `\n  ${pc.green("✓")} Auto-fixed ${totalFixes} stale reference(s) via rename map`,
+      );
+    }
+  }
+
+  const refRegistry = buildRefRegistry(manifests);
+  const refErrors = await validateReferences(installDir, refRegistry);
+  if (refErrors.length > 0) {
+    console.log(
+      `\n  ${pc.yellow("⚠")} Found ${refErrors.length} broken reference(s):`,
+    );
+    for (const err of refErrors.slice(0, 10)) {
+      const suggestion = err.suggestion ? ` → ${err.suggestion}` : "";
+      console.log(
+        `    ${pc.dim(err.file)}:${err.line} ${err.type} "${pc.red(err.ref)}"${pc.green(suggestion)}`,
+      );
+    }
+    if (refErrors.length > 10) {
+      console.log(
+        pc.dim(`    ... and ${refErrors.length - 10} more. Run: epost-kit lint`),
+      );
+    }
+    console.log();
+  }
+
   // ── Step 7/7: Finalize ──
   logger.step(7, 7, "Finalizing");
   const metaSpinner = ora("Updating metadata...").start();

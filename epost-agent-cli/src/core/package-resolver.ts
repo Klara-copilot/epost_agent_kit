@@ -25,6 +25,11 @@ export interface PackageManifest {
   files: Record<string, string>;
   settings_strategy: "base" | "merge" | "skip";
   claude_snippet?: string;
+  renames?: {
+    skills?: Record<string, string>;
+    agents?: Record<string, string>;
+    commands?: Record<string, string>;
+  };
 }
 
 export interface ProfileDefinition {
@@ -202,6 +207,13 @@ export async function loadPackageManifest(
       files: parsed.files || {},
       settings_strategy: parsed.settings_strategy || "merge",
       claude_snippet: parsed.claude_snippet,
+      renames: parsed.renames
+        ? {
+            skills: parsed.renames.skills || undefined,
+            agents: parsed.renames.agents || undefined,
+            commands: parsed.renames.commands || undefined,
+          }
+        : undefined,
     };
   } catch (error) {
     throw new ConfigError(
