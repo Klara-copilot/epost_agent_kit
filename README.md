@@ -113,6 +113,7 @@ User Request → Orchestrator → Global Agent → Platform Agent → Execute
 | design-system | 73,761 | UI library & Figma |
 | domains | 734 | B2B/B2C knowledge |
 | kit-design | 3,328 | Kit development tools |
+| github-copilot | ~200 | GitHub Copilot format templates |
 | **Total** | **~115K** | |
 
 ## Project Status
@@ -161,7 +162,8 @@ epost_agent_kit/
 │   ├── platform-backend/     # Backend platform
 │   ├── design-system/        # UI library + Figma
 │   ├── domains/              # B2B/B2C knowledge
-│   └── kit-design/           # Kit development tools
+│   ├── kit-design/           # Kit development tools
+│   └── github-copilot/       # GitHub Copilot format templates
 ├── tools/
 │   └── management-ui/        # Next.js visualization app
 ├── profiles/                 # Installation profiles
@@ -200,6 +202,9 @@ npx epost-kit package list     # List packages
 | Agents | `.claude/agents/*.md` | `AGENTS.md` | `.github/agents/*.agent.md` |
 | Rules | `CLAUDE.md` | `.cursor/rules/*.mdc` | `.github/instructions/*.md` |
 | Commands | `.claude/commands/*.md` | `.cursor/commands/*.md` | `.github/prompts/*.prompt.md` |
+| Skills | `.claude/skills/*/SKILL.md` | Merged into rules | Merged into instructions |
+
+**GitHub Copilot Templates**: `packages/github-copilot/` provides conversion templates for agents, commands, skills, and CLAUDE.md equivalents.
 
 ## Development
 
