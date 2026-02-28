@@ -130,7 +130,7 @@ Check for compound requests via conjunctions:
 **Always** show the user what you decided and why:
 
 ```
-Routing to `/fix:types` — detected TypeScript errors on web platform (branch: feature/auth)
+Routing to `/fix` — detected TypeScript errors on web platform (branch: feature/auth)
 ```
 
 or

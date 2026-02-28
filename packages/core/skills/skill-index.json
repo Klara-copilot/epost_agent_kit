@@ -129,6 +129,15 @@
       "path": "sequential-thinking/SKILL.md"
     },
     {
+      "name": "hub-context",
+      "description": "Context sensing protocol for the /epost smart hub — gathers git state, platform, errors, and session hints to inform routing decisions.",
+      "keywords": ["context", "hub", "routing", "git-state", "platform-detection", "error-signals"],
+      "platforms": ["all"],
+      "triggers": [],
+      "agent-affinity": ["epost-orchestrator"],
+      "path": "hub-context/SKILL.md"
+    },
+    {
       "name": "infra/cloud",
       "description": "GCP cloud infrastructure patterns: Terraform, Cloud Build, Cloud Run, GKE",
       "keywords": ["gcp", "terraform", "cloud-build", "cloud-run", "gke", "infrastructure"],

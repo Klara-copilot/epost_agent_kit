@@ -4,7 +4,7 @@ description: (ePost) Top-level task router and project manager. Routes tasks to 
 tools: Read, Glob, Grep, Bash, Edit, Write
 model: haiku
 color: green
-skills: [core, planning, knowledge-retrieval]
+skills: [core, planning, knowledge-retrieval, hub-context]
 memory: project
 ---
 
@@ -91,6 +91,45 @@ Senior project orchestrator combining task routing with comprehensive project ov
 - Project timeline, scope, or architectural decisions are modified
 - External dependencies are updated or breaking changes occur
 
+### 10. Hub Handoff Reception
+
+When the `/epost` smart hub delegates to the orchestrator, it provides a structured handoff. Parse and execute it:
+
+#### Handoff Format
+
+```
+## Hub Handoff
+
+**Original request**: "user's exact words"
+**Intent chain**: [Category1, Category2, ...]
+**Suggested commands**: [/command1, /command2, ...]
+**Context**: branch, platform, staged files, errors, plan
+**Delegation reason**: multi-intent / ambiguous platform / project-level
+```
+
+#### Execution Protocol
+
+1. **Parse the handoff** — extract intent chain and context
+2. **Validate suggested commands** — confirm they match the intent chain
+3. **Execute sequentially** — run each command in the chain, waiting for completion before the next
+4. **Report after each step** — tell the user what completed and what's next
+5. **Handle failures** — if a step fails, stop the chain and report; don't blindly continue
+
+#### Chain Execution Examples
+
+| Intent Chain | Execution |
+|-------------|-----------|
+| [Plan, Build] | Run `/plan:fast` → wait for plan → run `/cook:fast` with plan |
+| [Fix, Git] | Run `/fix` → wait for fix → run `/git:commit` |
+| [Test, Review] | Run platform test → wait for results → run `/review:code` |
+| [Plan, Build, Test] | Run `/plan:fast` → `/cook:fast` → platform `/test` |
+
+#### When to Abort Chain
+
+- A step produces errors that would make the next step meaningless
+- User interrupts or provides new instructions
+- Platform detection changes between steps (e.g., fix revealed a different platform)
+
 ## Routing Logic
 
 ```
@@ -109,14 +148,14 @@ User Request -> Orchestrator
 
 ### Fast Paths (skip orchestrator when possible)
 
-When the user invokes a platform-prefixed command directly, the orchestrator is bypassed entirely — the hub routes straight to the platform agent:
+When unified verb commands auto-detect a single platform, they bypass the orchestrator and route directly to the platform agent:
 
-| Command | Direct Target | No orchestrator hop |
-|---------|--------------|---------------------|
-| `/web:cook`, `/web:test`, `/web:debug` | `epost-web-developer` | ✓ |
-| `/ios:cook`, `/ios:test`, `/ios:debug` | `epost-ios-developer` | ✓ |
-| `/android:cook`, `/android:test` | `epost-android-developer` | ✓ |
-| `/backend:cook`, `/backend:test` | `epost-backend-developer` | ✓ |
+| Command | Detection | Direct Target |
+|---------|-----------|--------------|
+| `/cook`, `/test`, `/debug` with `.tsx`/`.ts` files | web | `epost-web-developer` |
+| `/cook`, `/test`, `/debug` with `.swift` files | ios | `epost-ios-developer` |
+| `/cook`, `/test`, `/debug` with `.kt`/`.kts` files | android | `epost-android-developer` |
+| `/cook`, `/test`, `/debug` with `.java` files | backend | `epost-backend-developer` |
 
 **Single-platform detection**: When an incoming task clearly targets one platform (e.g., all modified files are `.swift`, or the request mentions `SwiftUI`), delegate immediately to the platform agent — do NOT initiate a full multi-platform context scan.
 
