@@ -17,7 +17,7 @@ provides:
     - web-a11y
   commands:
     - audit/a11y
-    - audit/a11y-close
+    - audit-close/a11y
     - fix/a11y
     - review/a11y
 

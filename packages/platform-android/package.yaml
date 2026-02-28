@@ -13,15 +13,9 @@ provides:
   skills:
     - android-development
     - android-ui-lib
-  commands:
-    - android/cook
-    - android/test
-    - android/debug
-
 files:
   agents/: agents/
   skills/: skills/
-  commands/: commands/android/
 
 settings_strategy: merge
 claude_snippet: CLAUDE.snippet.md

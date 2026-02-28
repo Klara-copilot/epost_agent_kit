@@ -14,16 +14,9 @@ provides:
     - ios-development
     - ios-ui-lib
     - ios-rag
-  commands:
-    - ios/cook
-    - ios/test
-    - ios/debug
-    - ios/simulator
-
 files:
   agents/: agents/
   skills/: skills/
-  commands/: commands/ios/
 
 settings_strategy: merge
 claude_snippet: CLAUDE.snippet.md

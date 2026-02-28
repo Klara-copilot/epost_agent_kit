@@ -17,17 +17,9 @@ provides:
     - web-modules
     - web-prototype
     - web-rag
-  commands:
-    - web/cook
-    - web/test
-    - web/debug
-    - web/convert
-    - web/new-module
-
 files:
   agents/: agents/
   skills/: skills/
-  commands/: commands/web/
 
 settings_strategy: merge
 claude_snippet: CLAUDE.snippet.md

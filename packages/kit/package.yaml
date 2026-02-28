@@ -24,8 +24,6 @@ provides:
     - kit/add-command
     - kit/add-hook
     - kit/optimize-skill
-    - add-command/simple
-    - add-command/splash
     - cli/cook
     - cli/doctor
     - cli/test

@@ -38,29 +38,34 @@ provides:
     - infra-cloud
     - infra-docker
     - data-store
+    - hub-context
   commands:
     - epost
-    - bootstrap/fast
-    - bootstrap/parallel
+    - cook
     - cook/fast
     - cook/parallel
-    - docs/init
-    - docs/update
-    - docs/component
-    - fix/ci
-    - fix/fast
+    - test
+    - debug
+    - fix
     - fix/deep
-    - fix/logs
-    - fix/test
-    - fix/types
+    - fix/ci
     - fix/ui
-    - git/commit
-    - git/pr
-    - git/push
+    - plan
     - plan/fast
     - plan/deep
     - plan/parallel
     - plan/validate
+    - bootstrap
+    - bootstrap/fast
+    - bootstrap/parallel
+    - convert
+    - simulator
+    - docs/init
+    - docs/update
+    - docs/component
+    - git/commit
+    - git/pr
+    - git/push
     - review/code
 
 files:

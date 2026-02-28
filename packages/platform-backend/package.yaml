@@ -13,15 +13,9 @@ provides:
   skills:
     - backend-javaee
     - backend-databases
-  commands:
-    - backend/cook
-    - backend/test
-    - backend/debug
-
 files:
   agents/: agents/
   skills/: skills/
-  commands/: commands/backend/
 
 settings_strategy: merge
 claude_snippet: CLAUDE.snippet.md
