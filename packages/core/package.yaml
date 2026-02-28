@@ -86,3 +86,4 @@ renames:
     databases: infra-docker
 
 settings_strategy: base
+claude_snippet: CLAUDE.snippet.md

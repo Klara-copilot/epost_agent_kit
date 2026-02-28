@@ -21,8 +21,8 @@
 - Maven profiles for SonarQube analysis
 
 ### Commands
-- `/backend:cook` — Implement backend features (Java EE, WildFly)
-- `/backend:test` — Run Maven tests (unit + integration via Arquillian)
+- `/cook` — Implement features (auto-detects backend from `.java` files)
+- `/test` — Run tests (auto-detects backend: Maven JUnit, Arquillian)
 
 ### Agent
 - `epost-backend-developer` — Java EE backend specialist

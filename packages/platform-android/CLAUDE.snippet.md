@@ -10,8 +10,8 @@
 - **Build**: Gradle (Kotlin DSL)
 
 ### Commands
-- `/android:cook` — Implement Android features (Kotlin, Compose)
-- `/android:test` — Run Android unit and instrumented tests
+- `/cook` — Implement features (auto-detects Android from `.kt`/`.kts` files)
+- `/test` — Run tests (auto-detects Android: JUnit, Espresso)
 
 ### Agent
 - `epost-android-developer` — Android platform specialist

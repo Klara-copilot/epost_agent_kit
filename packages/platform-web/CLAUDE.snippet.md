@@ -11,8 +11,8 @@
 - **Containerization**: Docker + Docker Compose
 
 ### Commands
-- `/web:cook` — Implement web features (Next.js, React, TypeScript)
-- `/web:test` — Run web tests (Jest, Playwright, RTL)
+- `/cook` — Implement features (auto-detects web from `.tsx`/`.ts` files)
+- `/test` — Run tests (auto-detects web: Jest, Playwright, RTL)
 
 ### Agent
 - `epost-web-developer` — Web platform specialist for Next.js development

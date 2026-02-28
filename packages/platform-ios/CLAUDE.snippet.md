@@ -8,10 +8,10 @@
 - **Build**: Xcode, XcodeBuildMCP
 
 ### Commands
-- `/ios:cook` — Implement iOS features (Swift, SwiftUI)
-- `/ios:test` — Run iOS unit and UI tests
-- `/ios:debug` — Debug crashes, concurrency, SwiftUI state
-- `/ios:simulator` — Manage iOS simulators
+- `/cook` — Implement features (auto-detects iOS from `.swift` files)
+- `/test` — Run tests (auto-detects iOS: XCTest, XCUITest)
+- `/debug` — Debug crashes, concurrency, SwiftUI state (auto-detects iOS)
+- `/simulator` — Manage iOS simulators
 
 ### Agents
 - `epost-ios-developer` — iOS platform specialist
