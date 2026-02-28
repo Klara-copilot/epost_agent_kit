@@ -1,7 +1,7 @@
 {
-  "generated": "2026-02-27T02:17:34.454Z",
+  "generated": "2026-02-28T06:08:51.928Z",
   "version": "1.0.0",
-  "count": 46,
+  "count": 47,
   "skills": [
     {
       "name": "a11y",
@@ -254,6 +254,26 @@
         "epost-tester"
       ],
       "path": "error-recovery/SKILL.md"
+    },
+    {
+      "name": "hub-context",
+      "description": "Context sensing protocol for the /epost smart hub — gathers git state, platform, errors, and session hints to inform routing decisions.",
+      "keywords": [
+        "context",
+        "hub",
+        "routing",
+        "git-state",
+        "platform-detection",
+        "error-signals"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [],
+      "agent-affinity": [
+        "epost-orchestrator"
+      ],
+      "path": "hub-context/SKILL.md"
     },
     {
       "name": "infra-cloud",

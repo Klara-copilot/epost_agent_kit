@@ -1,116 +1,255 @@
 ---
 title: epost
-description: (ePost) Smart hub — single entry point that routes to the right command via intent detection
-argument-hint: [what you want to do, or leave blank for discovery menu]
+description: (ePost) Smart hub v2 — context-aware entry point with semantic intent detection, workflow chaining, and contextual discovery
+argument-hint: [what you want to do, or leave blank for contextual menu]
 ---
 
-# Smart Hub — `/epost`
+# Smart Hub v2 — `/epost`
 
-The single intelligent entry point to the epost agent ecosystem. Detects intent from natural language and routes to the appropriate command/agent.
+The intelligent entry point to the epost agent ecosystem. Senses your current work context, detects intent from natural language, chains multi-step workflows, and shows contextual suggestions.
 
-## Usage
+## Execution Flow
 
-```
-/epost                          → Show discovery menu (help)
-/epost fix the login timeout    → Routes to /fix:fast or /fix:deep
-/epost plan a notification system → Routes to /plan:fast or /plan:deep
-/epost review my changes        → Routes to /review:code
-/epost cook the auth feature    → Routes to /cook:fast
-```
+On every invocation, follow these steps **in order**:
 
-## Intent Detection
+### Step 1: Gather Context Snapshot
 
-Analyze `$ARGUMENTS` and route based on intent keywords:
+**Before parsing arguments**, gather the current work context using the `hub-context` skill protocol:
 
-| Intent Keywords | Routes To | Agent |
-|----------------|-----------|-------|
-| plan, design, architect | `/plan:fast` or `/plan:deep` (based on complexity) | epost-architect |
-| cook, implement, build, create | `/cook:fast` or `/cook:parallel` | epost-implementer |
-| fix, debug, error, crash, broken | `/fix:fast` or `/fix:deep` | epost-debugger |
-| test, coverage, validate | Platform test command | epost-tester |
-| review, check, audit | `/review:code` | epost-reviewer |
-| commit, push, pr, git | `/git:commit`, `/git:push`, or `/git:pr` | epost-git-manager |
-| docs, document, write docs | `/docs:init` or `/docs:update` | epost-documenter |
-| scout, search, find, explore | Spawn epost-scout | epost-scout |
-| ask, research, what is, how does | Spawn epost-researcher | epost-researcher |
-| brainstorm, think, evaluate, compare | Spawn epost-brainstormer | epost-brainstormer |
-| guide, help me, how do I, wizard | Show discovery menu or spawn epost-guide | epost-guide |
-| a11y, accessibility | `/review:a11y` | epost-a11y-specialist |
-| convert, prototype, migrate | `/web:convert` | epost-web-developer |
-| bootstrap, init, scaffold | `/bootstrap:fast` or `/bootstrap:parallel` | epost-implementer |
-
-### Platform Prefix Detection
-
-If `$ARGUMENTS` starts with a platform name, route to platform-specific commands:
-
-| Prefix | Routes To |
-|--------|-----------|
-| `ios ...` | `/ios:cook`, `/ios:test`, `/ios:debug` based on intent |
-| `android ...` | `/android:cook`, `/android:test`, `/android:debug` based on intent |
-| `web ...` | `/web:cook`, `/web:test`, `/web:debug` based on intent |
-| `backend ...` | `/backend:cook`, `/backend:test`, `/backend:debug` based on intent |
-
-### Complexity Scoring
-
-For plan/fix intents, estimate complexity to choose variant:
-
-- **Simple** (score 1): Single file, clear fix, known pattern → fast variant
-- **Moderate** (score 2-3): Multiple files, some unknowns → fast or deep
-- **Complex** (score 4-5): Multi-module, research needed → deep variant
-
-## Discovery Menu
-
-When invoked with no arguments (`/epost`), display this menu:
+1. Run `git branch --show-current` → capture branch name
+2. Run `git diff --cached --name-only` → capture staged files
+3. Run `git diff --name-only` → capture unstaged changes
+4. Run `git log --oneline -3` → capture recent commits
+5. Detect platform from file extensions in changed files (`.tsx`→web, `.swift`→ios, `.kt`→android, `.java`→backend)
+6. Check for active plan files: `ls ./plans/*.md 2>/dev/null`
+7. If web platform detected and `tsconfig.json` exists, run `npx tsc --noEmit 2>&1 | head -5` for error signals (timeout 5s)
+8. Summarize context:
 
 ```
+[Context] branch: {name} | platform: {detected}
+[Context] staged: {n} files | unstaged: {n} files
+[Context] errors: {summary or "none"}
+[Context] plan: {file or "none"}
+```
+
+### Step 2: Parse Intent from Arguments
+
+If `$ARGUMENTS` is empty → skip to Step 4 (Contextual Discovery Menu).
+
+Otherwise, classify the request using **semantic intent categories**:
+
+#### Intent Categories
+
+| Category | Signal Words | Context Boost | Routes To |
+|----------|-------------|---------------|-----------|
+| **Build** | cook, implement, build, create, add, scaffold, make, continue | Has plan file → boost | `/cook` or orchestrator |
+| **Fix** | fix, debug, error, crash, broken, failing, wrong, what's wrong | Has error signals → boost | `/fix` (auto-detects error type) |
+| **Plan** | plan, design, architect, think about, spec, roadmap | Complex request → boost | `/plan` (auto-detects complexity) |
+| **Test** | test, coverage, validate, verify, check tests, run tests | Has test failures → boost | `/test` (auto-detects platform) |
+| **Review** | review, check code, audit, look at, inspect | Has staged changes → boost | `/review:code` |
+| **Git** | commit, push, pr, merge, branch, release, done, ship | Has staged changes → boost | `/git:{action}` |
+| **Docs** | docs, document, write docs, readme | — | `/docs:init` or `/docs:update` |
+| **Explore** | scout, search, find, explore, where is, show me | — | `epost-scout` |
+| **Knowledge** | which agent, list agents/skills/commands, what's our, convention, kit, our agents, our skills, what rag | Internal ref → epost-guide | `epost-guide` (knowledge mode) |
+| **Components** | what components, search components, find component, design tokens | RAG query → epost-guide | `epost-guide` (RAG query mode) |
+| **Research** | research, what is [external tech], how does [external tech], best practice for [tech] | External tech ref | `epost-researcher` |
+| **A11y** | a11y, accessibility, wcag, screen reader, voiceover | — | `/review:a11y` or `/fix:a11y` |
+| **Brainstorm** | brainstorm, evaluate, compare, think about options, weigh | — | `epost-brainstormer` |
+| **Guide** | guide, help me, how do I, wizard | — | Show discovery menu or `epost-guide` |
+| **Convert** | convert, prototype, migrate | — | `/convert` |
+| **Bootstrap** | bootstrap, init, scaffold new | — | `/bootstrap` (auto-detects scope) |
+
+#### Context Boost Rules
+
+When context signals match a category, that category gets priority **even with weaker keyword matches**:
+
+| Context Signal | Boosts Category | Example |
+|---------------|----------------|---------|
+| TypeScript/build errors detected | Fix | "what's wrong?" → `/fix` (auto-detects types) |
+| Staged files present | Git or Review | "I'm done" → `/git:commit` |
+| Active plan file exists | Build | "continue" → `/cook:fast` with plan |
+| Test failures detected | Fix | "help" → `/fix` (auto-detects test failures) |
+| Feature branch, no changes yet | Build or Plan | "what's next?" → resume from plan |
+| Clean main branch, no work | Plan or Explore | show contextual menu |
+| Merge conflicts | Fix | "help" → suggest conflict resolution |
+
+#### Internal vs External Knowledge Detection
+
+When the request is a knowledge question ("what is...", "how does...", "ask about..."):
+
+**Route to epost-guide** when referencing internal kit concepts:
+- Keywords: "our", "we", "agent", "skill", "command", "kit", "rag", "convention", "module", "component"
+
+**Route to epost-researcher** when referencing external tech:
+- No internal keywords present + mentions specific technologies, libraries, or frameworks
+
+#### Fuzzy Matching
+
+Don't require exact keyword matches. Use semantic understanding:
+- "my tests are broken" → Fix (via "broken") + Test (via "tests"). Context boost breaks the tie.
+- "I need to change the button" → Build (change ≈ modify ≈ implement)
+- "what happened?" → context boost determines: if errors → Fix; if clean → Explore
+- "I'm stuck" → if errors → Fix; if plan exists → Build; else → Guide
+
+### Step 3: Detect Multi-Intent and Route
+
+#### Multi-Intent Detection
+
+Check for compound requests via conjunctions:
+
+**Triggers**: "and", "then", "after that", "followed by", comma-separated action verbs, semicolons
+
+| Pattern | Intent Chain | Delegation |
+|---------|-------------|------------|
+| "plan and build X" | [Plan, Build] | → orchestrator |
+| "fix the bug then commit" | [Fix, Git] | → orchestrator |
+| "test and review" | [Test, Review] | → orchestrator |
+| "plan, implement, and test the feature" | [Plan, Build, Test] | → orchestrator |
+
+**If multi-intent detected** → delegate to `epost-orchestrator` with a structured handoff (see Orchestrator Delegation below).
+
+#### Single Intent Routing
+
+**If single intent detected:**
+
+1. **Platform prefix check**: If `$ARGUMENTS` starts with `ios`, `android`, `web`, or `backend`, route to platform-specific command.
+2. **Variant auto-selection** based on complexity:
+
+| Complexity Signal | Variant |
+|-------------------|---------|
+| Single file + clear error | `:fast` |
+| 2-5 files, one module | `:fast` |
+| Multiple modules, some unknowns | `:deep` |
+| Multi-platform or needs research | `:deep` or `:parallel` |
+| Has existing plan with phases | `:parallel` (follow plan) |
+
+3. **Route directly** to the matched command.
+
+#### Routing Decision Report
+
+**Always** show the user what you decided and why:
+
+```
+Routing to `/fix` — detected TypeScript errors on web platform (branch: feature/auth)
+```
+
+or
+
+```
+Delegating to orchestrator — multi-intent detected: [Plan, Build] for notification system (web)
+```
+
+### Step 4: Contextual Discovery Menu
+
+When invoked with **no arguments**, show a context-aware menu instead of the static command list.
+
+#### If active work detected (staged files, errors, plan):
+
+```markdown
+## Suggested Actions
+
+You're on `{branch}` with {context_summary}.
+
+| # | Action | Command | Why |
+|---|--------|---------|-----|
+| 1 | {most relevant action} | `{command}` | {reason from context} |
+| 2 | {second action} | `{command}` | {reason} |
+| 3 | {third action} | `{command}` | {reason} |
+| 4 | {fourth action} | `{command}` | {reason} |
+
+> Describe what you want to do, or type a number. Full command list: say "show all commands"
+```
+
+**Priority rules for suggestions:**
+1. If merge conflicts → suggest fix/resolve first
+2. If errors → suggest fix commands
+3. If staged files → suggest commit or review
+4. If active plan → suggest continuing implementation
+5. If feature branch, no changes → suggest starting work or checking plan
+6. Always include at least one "escape hatch" (explore, plan, help)
+
+#### If clean state (main branch, no changes, no errors):
+
+```markdown
 ## What do you want to do?
+
+No active work detected on `{branch}`.
 
 | Action | Command |
 |--------|---------|
-| Build a feature | `/epost build ...` or `/cook:fast` |
-| Fix an issue | `/epost fix ...` or `/fix:fast` |
-| Plan something | `/epost plan ...` or `/plan:fast` |
-| Review code | `/epost review` or `/review:code` |
-| Run tests | `/epost test` or platform test command |
-| Git operations | `/git:commit`, `/git:push`, `/git:pr` |
-| Documentation | `/docs:init`, `/docs:update` |
+| Plan a feature | `/epost plan ...` |
+| Build something | `/epost build ...` |
+| Fix an issue | `/epost fix ...` |
 | Explore codebase | `/epost scout ...` |
-| Ask a question | `/epost ask ...` |
-| Brainstorm approaches | `/epost brainstorm ...` |
-| Interactive wizard | `/epost guide` |
-| Accessibility review | `/review:a11y` |
+| Ask about the kit | `/epost which agent handles X?` |
+| Research external tech | `/epost research ...` |
 
-### Platform Commands
-| iOS | Android | Web | Backend |
-|-----|---------|-----|---------|
-| `/ios:cook` | `/android:cook` | `/web:cook` | `/backend:cook` |
-| `/ios:test` | `/android:test` | `/web:test` | `/backend:test` |
-| `/ios:debug` | `/android:debug` | `/web:debug` | `/backend:debug` |
-
-### Advanced
-| Fix Variants | Plan Variants | Build Variants |
-|-------------|---------------|----------------|
-| `/fix:fast` | `/plan:fast` | `/cook:fast` |
-| `/fix:deep` | `/plan:deep` | `/cook:parallel` |
-| `/fix:ci` | `/plan:parallel` | `/bootstrap:fast` |
-| `/fix:test` | `/plan:validate` | `/bootstrap:parallel` |
-| `/fix:types` | | |
-| `/fix:ui` | | |
-| `/fix:logs` | | |
+> Describe what you want to do in natural language.
 ```
 
-## Routing Process
+#### Full command list (on "show all commands"):
 
-1. **Parse arguments** — Extract intent keywords and platform prefix
-2. **Detect platform** — Check for explicit prefix or infer from context
-3. **Classify intent** — Match keywords to intent category
-4. **Score complexity** — Estimate task complexity for variant selection
-5. **Route** — Invoke the matched command with remaining arguments
-6. **Report** — Show user which command was selected and why
+```
+### All Commands
+
+| Category | Commands |
+|----------|----------|
+| Core Verbs | `/cook`, `/test`, `/debug`, `/fix`, `/plan`, `/bootstrap` |
+| Planning | `/plan:fast`, `/plan:deep`, `/plan:parallel`, `/plan:validate` |
+| Building | `/cook:fast`, `/cook:parallel`, `/bootstrap:fast`, `/bootstrap:parallel` |
+| Fixing | `/fix:deep`, `/fix:ci`, `/fix:ui`, `/fix:a11y` |
+| Review | `/review:code`, `/review:a11y`, `/audit:a11y` |
+| Git | `/git:commit`, `/git:push`, `/git:pr` |
+| Docs | `/docs:init`, `/docs:update`, `/docs:component` |
+| Tools | `/convert`, `/simulator` |
+| Kit | `/kit:add-agent`, `/kit:add-skill`, `/kit:add-command`, `/kit:add-hook`, `/kit:optimize-skill` |
+| CLI | `/cli:cook`, `/cli:test`, `/cli:doctor` |
+| Accessibility | `/audit:a11y`, `/audit-close:a11y`, `/fix:a11y`, `/review:a11y` |
+```
+
+## Orchestrator Delegation
+
+When delegating to `epost-orchestrator`, provide a structured handoff:
+
+```markdown
+## Hub Handoff
+
+**Original request**: "{user's exact words}"
+**Intent chain**: [{Category1}, {Category2}, ...]
+**Suggested commands**: [{/command1}, {/command2}, ...]
+**Context**:
+  - Branch: {branch_name}
+  - Platform: {detected_platform}
+  - Staged: {count} files
+  - Errors: {summary}
+  - Plan: {plan_file or "none"}
+**Delegation reason**: {why hub can't handle directly — multi-intent / ambiguous platform / project-level}
+```
+
+**Delegation triggers:**
+- Multi-intent chain detected (2+ intents)
+- Ambiguous platform (files from multiple platforms changed)
+- Project oversight request ("status", "progress", "what's left")
+- Multi-platform task ("test everything", "review all platforms")
+
+## Platform Hint Detection
+
+If `$ARGUMENTS` starts with a platform name, pass it as a hint to the unified verb command:
+
+| Prefix | Effect |
+|--------|--------|
+| `ios ...` | Forces `/cook`, `/test`, `/debug` to use iOS agent |
+| `android ...` | Forces `/cook`, `/test`, `/debug` to use Android agent |
+| `web ...` | Forces `/cook`, `/test`, `/debug` to use Web agent |
+| `backend ...` | Forces `/cook`, `/test`, `/debug` to use Backend agent |
 
 ## Rules
 
-- If no clear intent detected → show discovery menu
-- If ambiguous between two intents → ask user to clarify (max 1 question)
-- Always show the user which command you're routing to before executing
+- **ALWAYS** gather context before routing (Step 1 is mandatory)
+- If no clear intent detected → show contextual discovery menu
+- If ambiguous between two intents → use context boost to break tie; if still ambiguous → ask user (max 1 question)
+- Always show the routing decision and reasoning before executing
 - Prefer fast variants unless complexity clearly warrants deep
+- Multi-intent requests → always delegate to orchestrator
+- Context gathering should be fast (< 5 seconds total). Skip slow checks.
+- If not in a git repo, skip git state gracefully and proceed with intent-only routing

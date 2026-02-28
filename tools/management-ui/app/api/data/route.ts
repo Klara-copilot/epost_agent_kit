@@ -10,6 +10,7 @@ import { logger } from '@/lib/utils/logger';
 
 export async function GET() {
   try {
+    logger.clear(); // Clear stale logs from previous requests
     logger.info('api', 'Received request to load agent system data');
 
     // Load data

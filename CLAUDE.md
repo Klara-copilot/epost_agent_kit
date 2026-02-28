@@ -10,7 +10,7 @@ This file provides guidance to Claude Code when working with code in this reposi
 
 **Packages**: core, a11y, platform-web, platform-ios, platform-android, platform-backend, kit, design-system, domains
 
-**Installed by**: epost-kit v0.1.0 on 2026-02-27
+**Installed by**: epost-kit v0.1.0 on 2026-02-28
 
 ---
 
@@ -22,6 +22,53 @@ This file provides guidance to Claude Code when working with code in this reposi
 - **Skills**: `.claude/skills/` — Passive knowledge
 
 
+
+---
+
+
+## Smart Routing
+
+On every user prompt involving a dev task, sense context before acting:
+1. Check git state (branch, staged/unstaged files)
+2. Detect platform from changed file extensions (`.tsx`→web, `.swift`→ios, `.kt`→android, `.java`→backend)
+3. Check for active plans in `./plans/`
+4. Route to best-fit command based on intent + context
+
+**This applies to every prompt — not just `/epost` invocations.**
+
+### Prompt Classification
+- **Dev task** (action verbs: cook, fix, plan, test, debug, etc.) → route via intent map below
+- **Kit question** ("which agent", "list commands", "our conventions") → route to `epost-guide`
+- **External tech question** ("how does React...", "what is gRPC") → route to `epost-researcher`
+- **Conversational** (greetings, opinions, clarifications) → respond directly, no routing
+
+### Intent → Command Map
+
+| Intent | Signal Words | Routes To |
+|--------|-------------|-----------|
+| Build | cook, implement, build, create, add, make, continue | `/cook` |
+| Fix | fix, broken, error, crash, failing, what's wrong | `/fix` |
+| Plan | plan, design, architect, spec, roadmap | `/plan` |
+| Test | test, coverage, validate, verify | `/test` |
+| Debug | debug, trace, inspect, diagnose | `/debug` |
+| Review | review, check code, audit | `/review:code` |
+| Git | commit, push, pr, merge, done, ship | `/git:commit`, `/git:push`, `/git:pr` |
+| Docs | docs, document, write docs | `/docs:init` or `/docs:update` |
+| Scaffold | bootstrap, init, scaffold, new project, new module | `/bootstrap` |
+| Convert | convert, prototype, migrate | `/convert` |
+| A11y | a11y, accessibility, wcag | `/fix:a11y` or `/review:a11y` |
+
+### Context Boost Rules
+- TypeScript/build errors detected → always route to `/fix` first
+- Staged files present → boost Git or Review intent
+- Active plan file exists → boost Build intent ("continue" → `/cook`)
+- Merge conflicts → suggest fix/resolve
+- Feature branch with no changes → boost Plan or Build
+
+### Rules
+- If user types a slash command explicitly → execute it directly, skip routing
+- If ambiguous → use context boost to break tie; if still ambiguous → ask user (max 1 question)
+- If multi-intent ("plan and build X") → delegate to `epost-orchestrator`
 
 ---
 
@@ -59,8 +106,8 @@ This file provides guidance to Claude Code when working with code in this reposi
 - **Containerization**: Docker + Docker Compose
 
 ### Commands
-- `/web:cook` — Implement web features (Next.js, React, TypeScript)
-- `/web:test` — Run web tests (Jest, Playwright, RTL)
+- `/cook` — Implement features (auto-detects web from `.tsx`/`.ts` files)
+- `/test` — Run tests (auto-detects web: Jest, Playwright, RTL)
 
 ### Agent
 - `epost-web-developer` — Web platform specialist for Next.js development
@@ -78,10 +125,10 @@ This file provides guidance to Claude Code when working with code in this reposi
 - **Build**: Xcode, XcodeBuildMCP
 
 ### Commands
-- `/ios:cook` — Implement iOS features (Swift, SwiftUI)
-- `/ios:test` — Run iOS unit and UI tests
-- `/ios:debug` — Debug crashes, concurrency, SwiftUI state
-- `/ios:simulator` — Manage iOS simulators
+- `/cook` — Implement features (auto-detects iOS from `.swift` files)
+- `/test` — Run tests (auto-detects iOS: XCTest, XCUITest)
+- `/debug` — Debug crashes, concurrency, SwiftUI state (auto-detects iOS)
+- `/simulator` — Manage iOS simulators
 
 ### Agents
 - `epost-ios-developer` — iOS platform specialist
@@ -101,8 +148,8 @@ This file provides guidance to Claude Code when working with code in this reposi
 - **Build**: Gradle (Kotlin DSL)
 
 ### Commands
-- `/android:cook` — Implement Android features (Kotlin, Compose)
-- `/android:test` — Run Android unit and instrumented tests
+- `/cook` — Implement features (auto-detects Android from `.kt`/`.kts` files)
+- `/test` — Run tests (auto-detects Android: JUnit, Espresso)
 
 ### Agent
 - `epost-android-developer` — Android platform specialist
@@ -133,8 +180,8 @@ This file provides guidance to Claude Code when working with code in this reposi
 - Maven profiles for SonarQube analysis
 
 ### Commands
-- `/backend:cook` — Implement backend features (Java EE, WildFly)
-- `/backend:test` — Run Maven tests (unit + integration via Arquillian)
+- `/cook` — Implement features (auto-detects backend from `.java` files)
+- `/test` — Run tests (auto-detects backend: Maven JUnit, Arquillian)
 
 ### Agent
 - `epost-backend-developer` — Java EE backend specialist

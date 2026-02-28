@@ -1,5 +1,5 @@
 ---
-title: Convert Command
+title: Convert
 description: (ePost) Convert prototype/external code to system-consistent code
 agent: epost-web-developer
 argument-hint: "[path/to/prototype or repo URL]"
@@ -12,9 +12,9 @@ Convert external prototypes, mockups, or inconsistent code into production-ready
 ## Usage
 
 ```
-/web:convert /path/to/prototype
-/web:convert https://github.com/user/prototype-repo
-/web:convert ./my-mockup --module smart-send
+/convert /path/to/prototype
+/convert https://github.com/user/prototype-repo
+/convert ./my-mockup --module smart-send
 ```
 
 ## Your Process

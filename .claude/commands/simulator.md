@@ -1,8 +1,8 @@
 ---
-title: iOS Simulator
+title: Simulator
 description: (ePost) List, boot, shutdown, and manage iOS simulators using XcodeBuildMCP or xcrun simctl
 agent: epost-ios-developer
-argument-hint: 👉👉👉 [--list | --boot | --shutdown | --install | --launch | --screenshot]
+argument-hint: [--list | --boot | --shutdown | --install | --launch | --screenshot]
 allowed-tools:
   - Read
   - Grep
@@ -25,12 +25,12 @@ List, boot, shutdown, and manage iOS simulators using XcodeBuildMCP or xcrun sim
 
 ## Usage
 ```
-/ios:sim --list                    # List available simulators
-/ios:sim --boot "iPhone 16 Pro"    # Boot simulator
-/ios:sim --shutdown                # Shutdown booted simulator
-/ios:sim --install MyApp.app       # Install app
-/ios:sim --launch com.myapp.bundle # Launch app
-/ios:sim --screenshot              # Take screenshot
+/simulator --list                    # List available simulators
+/simulator --boot "iPhone 16 Pro"    # Boot simulator
+/simulator --shutdown                # Shutdown booted simulator
+/simulator --install MyApp.app       # Install app
+/simulator --launch com.myapp.bundle # Launch app
+/simulator --screenshot              # Take screenshot
 ```
 
 ## Your Process
@@ -145,7 +145,7 @@ xcrun simctl io booted screenshot screenshot.png
 ## Simulator Operation Complete
 
 ### Action
-- [Action performed]: ✅ Success / ❌ Failed
+- [Action performed]: Success / Failed
 
 ### Simulator Details
 - Device: iPhone 16 Pro
