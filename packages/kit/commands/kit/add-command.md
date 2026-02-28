@@ -12,22 +12,21 @@ Generate new command files using Command Development skill from kit-design packa
 
 ## Workflow
 
-1. **Command Type Selection**: Ask user to select command type:
-   - `splash` — Router command with multiple variants (e.g., /plan, /plan:fast, /plan:deep)
-   - `simple` — Single standalone command
+1. **Command Type Detection**: Determine command type from `$ARGUMENTS` or ask user:
+   - If `$ARGUMENTS` contains "splash" or user wants router + variants → **Splash Mode**
+   - If `$ARGUMENTS` contains "simple" or user wants a standalone command → **Simple Mode**
+   - If unclear → ask user: "Splash (router + variants) or Simple (standalone)?"
 
-2. **Route to Variant**:
-   - If user selects `splash` → delegate to `/add-command:splash`
-   - If user selects `simple` → delegate to `/add-command:simple`
+2. **Simple Mode** — Generate a single standalone command file:
+   - Ask for: command name, description, agent, argument-hint
+   - Create command markdown with frontmatter and process sections
+   - Save to `packages/{package}/commands/{name}.md`
 
-## Delegation
-
-Use the Skill tool to invoke the appropriate variant:
-
-```
-Skill("add-command:splash")   # For splash command generation
-Skill("add-command:simple")   # For simple command generation
-```
+3. **Splash Mode** — Generate router + variant command files:
+   - Ask for: command namespace, variant names (e.g., fast, deep, parallel)
+   - Create router command in `packages/{package}/commands/{namespace}.md`
+   - Create variant commands in `packages/{package}/commands/{namespace}/{variant}.md`
+   - Each variant gets its own agent, description, and process
 
 ## Command Naming Convention
 
@@ -62,7 +61,7 @@ All epost_agent_kit commands follow `{namespace}/{action-or-variant}` pattern:
 
 ## Important Notes
 
-**IMPORTANT:** This is a router command — it delegates to variants, does not generate commands directly.
+**IMPORTANT:** This command handles both simple and splash generation inline (no longer delegates to variants).
 **IMPORTANT:** All new commands MUST have an `agent:` field in frontmatter.
 **IMPORTANT:** Commands are instructions FOR Claude, not messages TO the user.
 **IMPORTANT:** Copy to `packages/{package}/commands/` as source of truth, `.claude/commands/` is generated.
