@@ -48,9 +48,11 @@ import {
 import { mergeAndWriteSettings } from "../core/settings-merger.js";
 import {
   generateClaudeMd,
+  generateCopilotInstructions,
   collectSnippets,
   type ClaudeMdContext,
 } from "../core/claude-md-generator.js";
+import { createTargetAdapter, type TargetAdapter } from "../core/target-adapter.js";
 import { detectProjectProfile, listProfiles } from "../core/profile-loader.js";
 import { tmpdir } from "node:os";
 import type { InitOptions } from "../types/command-options.js";
@@ -292,13 +294,9 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
     });
   }
 
-  // Determine install directory based on target
-  const installDirName =
-    target === "claude"
-      ? ".claude"
-      : target === "cursor"
-        ? ".cursor"
-        : ".github";
+  // Create target adapter for format transformation
+  const adapter = await createTargetAdapter(target);
+  const installDirName = adapter.installDir;
   const installDir = join(projectDir, installDirName);
 
   // Load manifests for install
@@ -356,7 +354,9 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
 
   // On fresh install, remove stale generated directories to prevent accumulation
   if (!isUpdate) {
-    for (const dir of ["agents", "skills", "commands"]) {
+    const staleDirs = ["agents", "skills", adapter.commandDir()];
+    if (!adapter.usesSettingsJson()) staleDirs.push("hooks", "instructions");
+    for (const dir of staleDirs) {
       const dirPath = join(installDir, dir);
       if (await dirExists(dirPath)) {
         await rm(dirPath, { recursive: true });
@@ -398,13 +398,14 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
     // Copy files according to manifest's files mapping
     for (const [srcSubDir, destSubDir] of Object.entries(manifest.files)) {
       const srcPath = join(pkgDir, srcSubDir);
-      const destPath = join(installDir, destSubDir);
 
       // Handle single file mapping (e.g., "settings.json: settings.json")
       if (!srcSubDir.endsWith("/")) {
         if (await fileExists(srcPath)) {
           // Settings files handled separately
           if (srcSubDir === "settings.json") continue;
+
+          const destPath = join(installDir, destSubDir);
           await mkdir(join(destPath, ".."), { recursive: true });
           await copyFile(srcPath, destPath);
 
@@ -423,21 +424,56 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
         continue;
       }
 
-      // Directory copy
+      // Directory copy — apply adapter transforms for agents, commands, skills
       if (await dirExists(srcPath)) {
-        // Snapshot existing files before copy to avoid overwriting prior package attribution
-        const existingFiles = (await dirExists(destPath))
-          ? new Set(await scanDirFiles(destPath))
+        const destDir = join(installDir, destSubDir);
+        const existingFiles = (await dirExists(destDir))
+          ? new Set(await scanDirFiles(destDir))
           : new Set<string>();
 
-        await safeCopyDir(srcPath, destPath);
+        // Determine if this is a transformable directory
+        const isAgentDir = destSubDir.startsWith("agents");
+        const isCommandDir = destSubDir.startsWith("commands");
+        const isSkillDir = destSubDir.startsWith("skills");
+        const isHookDir = destSubDir.startsWith("hooks");
 
-        // Track only NEW files from this package (not files from prior packages)
-        const allFilesNow = await scanDirFiles(destPath);
+        // For Copilot: commands → prompts directory
+        const actualDestDir = isCommandDir
+          ? join(installDir, adapter.commandDir())
+          : isHookDir
+            ? join(installDir, adapter.hookScriptDir())
+            : destDir;
+
+        await mkdir(actualDestDir, { recursive: true });
+
+        if (isAgentDir || isCommandDir || isSkillDir) {
+          // Transform files individually through adapter
+          await transformAndCopyDir(
+            srcPath,
+            actualDestDir,
+            adapter,
+            isAgentDir ? "agent" : isCommandDir ? "command" : "skill",
+          );
+        } else {
+          // Non-transformable dirs: copy as-is, apply path replacements
+          await safeCopyDir(srcPath, actualDestDir);
+          // Apply path replacement in hook scripts
+          if (isHookDir) {
+            await replacePathsInDir(actualDestDir, adapter);
+          }
+        }
+
+        // Track only NEW files from this package
+        const allFilesNow = await scanDirFiles(actualDestDir);
+        const actualDestSubDir = isCommandDir
+          ? adapter.commandDir()
+          : isHookDir
+            ? adapter.hookScriptDir()
+            : destSubDir;
         for (const file of allFilesNow) {
           if (existingFiles.has(file)) continue;
-          const relativePath = join(installDirName, destSubDir, file);
-          const fullPath = join(destPath, file);
+          const relativePath = join(installDirName, actualDestSubDir, file);
+          const fullPath = join(actualDestDir, file);
           const checksum = await hashFile(fullPath);
           allFiles[relativePath] = {
             path: relativePath,
@@ -518,15 +554,15 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
 
   // Recount from actual installed files for accuracy
   const agentsDir = join(installDir, "agents");
-  const commandsDir = join(installDir, "commands");
+  const commandsDirPath = join(installDir, adapter.commandDir());
   if (await dirExists(agentsDir)) {
     const agentFiles = (await scanDirFiles(agentsDir)).filter((f) =>
       f.endsWith(".md"),
     );
     totalAgents = agentFiles.length;
   }
-  if (await dirExists(commandsDir)) {
-    const commandFiles = (await scanDirFiles(commandsDir)).filter((f) =>
+  if (await dirExists(commandsDirPath)) {
+    const commandFiles = (await scanDirFiles(commandsDirPath)).filter((f) =>
       f.endsWith(".md"),
     );
     totalCommands = commandFiles.length;
@@ -588,25 +624,39 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
     skillIndexSpinner.warn("No skills directory found");
   }
 
-  // Merge settings
-  const settingsSpinner = ora("Merging settings...").start();
-  const settingsOutput = join(installDir, "settings.json");
-  const { sources: settingsSources } = await mergeAndWriteSettings(
-    settingsPackages,
-    settingsOutput,
-  );
-  settingsSpinner.succeed(
-    `Settings merged from ${settingsSources.length} packages`,
-  );
+  // Merge settings / generate hooks
+  if (adapter.usesSettingsJson()) {
+    const settingsSpinner = ora("Merging settings...").start();
+    const settingsOutput = join(installDir, "settings.json");
+    const { sources: settingsSources } = await mergeAndWriteSettings(
+      settingsPackages,
+      settingsOutput,
+    );
+    settingsSpinner.succeed(
+      `Settings merged from ${settingsSources.length} packages`,
+    );
+  } else {
+    // Copilot: merge settings first (in-memory), then transform hooks
+    const settingsSpinner = ora("Generating hooks configuration...").start();
+    const tmpSettingsPath = join(tmpdir(), `epost-settings-${Date.now()}.json`);
+    const { merged } = await mergeAndWriteSettings(
+      settingsPackages,
+      tmpSettingsPath,
+    );
+    // Transform hooks from merged settings
+    const hookResult = adapter.transformHooks(merged as Record<string, unknown>);
+    if (hookResult) {
+      const hooksDir = join(installDir, "hooks");
+      await mkdir(hooksDir, { recursive: true });
+      await writeFile(join(hooksDir, hookResult.filename), hookResult.content, "utf-8");
+    }
+    // Clean up temp file
+    try { await rm(tmpSettingsPath); } catch { /* ignore */ }
+    settingsSpinner.succeed("Hooks configuration generated");
+  }
 
-  // Generate CLAUDE.md
-  const claudeSpinner = ora("Generating CLAUDE.md...").start();
+  // Generate root instructions (CLAUDE.md or copilot-instructions.md)
   const snippets = await collectSnippets(snippetPackages);
-  const templatesDir = await findTemplatesDir(projectDir);
-  const templatePath = templatesDir
-    ? join(templatesDir, "repo-claude.md.hbs")
-    : "";
-
   const platforms = new Set<string>();
   for (const pkgName of resolved.packages) {
     const manifest = manifests.get(pkgName);
@@ -615,7 +665,7 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
     }
   }
 
-  const claudeContext: ClaudeMdContext = {
+  const instrContext: ClaudeMdContext = {
     profile: profileName,
     packages: resolved.packages,
     target,
@@ -623,15 +673,29 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
     cliVersion: "0.1.0",
     installedAt: new Date().toISOString().split("T")[0],
     projectName,
-    platforms: [...platforms],
+    platforms: Array.from(platforms),
     agentCount: totalAgents,
     skillCount: totalSkills,
     commandCount: totalCommands,
   };
 
-  const claudeMdPath = join(projectDir, "CLAUDE.md");
-  await generateClaudeMd(templatePath, claudeContext, snippets, claudeMdPath);
-  claudeSpinner.succeed("CLAUDE.md generated");
+  if (adapter.usesSettingsJson()) {
+    // Claude/Cursor: generate CLAUDE.md
+    const claudeSpinner = ora("Generating CLAUDE.md...").start();
+    const templatesDir = await findTemplatesDir(projectDir);
+    const templatePath = templatesDir
+      ? join(templatesDir, "repo-claude.md.hbs")
+      : "";
+    const claudeMdPath = join(projectDir, "CLAUDE.md");
+    await generateClaudeMd(templatePath, instrContext, snippets, claudeMdPath);
+    claudeSpinner.succeed("CLAUDE.md generated");
+  } else {
+    // Copilot: generate copilot-instructions.md
+    const copilotSpinner = ora("Generating copilot-instructions.md...").start();
+    const instrPath = join(installDir, adapter.rootInstructionsFilename());
+    await generateCopilotInstructions(instrContext, snippets, instrPath);
+    copilotSpinner.succeed("copilot-instructions.md generated");
+  }
 
   // Auto-fix stale references using rename maps, then validate remaining
   const {
@@ -703,12 +767,10 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
     }),
   );
 
-  console.log(
-    box(
-      `Run ${pc.bold("claude")} to activate your AI assistant.\nType ${pc.bold("/")} to discover all available commands.`,
-      { title: "Ready" },
-    ),
-  );
+  const readyMsg = target === "github-copilot"
+    ? `Open VS Code → Copilot Chat → type ${pc.bold("@")} to discover agents.\nType ${pc.bold("/")} to discover all available prompts.`
+    : `Run ${pc.bold("claude")} to activate your AI assistant.\nType ${pc.bold("/")} to discover all available commands.`;
+  console.log(box(readyMsg, { title: "Ready" }));
 }
 
 // ─── Utility: scan directory for relative file paths ───
@@ -731,6 +793,70 @@ async function scanDirFiles(dir: string, prefix = ""): Promise<string[]> {
     // Directory doesn't exist
   }
   return files;
+}
+
+// ─── Utility: transform and copy directory through adapter ───
+
+async function transformAndCopyDir(
+  srcDir: string,
+  destDir: string,
+  adapter: TargetAdapter,
+  fileType: "agent" | "command" | "skill",
+): Promise<void> {
+  const files = await scanDirFiles(srcDir);
+  for (const relPath of files) {
+    const srcFile = join(srcDir, relPath);
+    const content = await readFile(srcFile, "utf-8");
+
+    if (!relPath.endsWith(".md")) {
+      // Non-markdown files: copy as-is with path replacement
+      const destFile = join(destDir, relPath);
+      await mkdir(dirname(destFile), { recursive: true });
+      const transformed = adapter.replacePathRefs(content);
+      await writeFile(destFile, transformed, "utf-8");
+      continue;
+    }
+
+    let result: { content: string; filename: string };
+    switch (fileType) {
+      case "agent":
+        result = adapter.transformAgent(content, basename(relPath));
+        break;
+      case "command": {
+        // Commands may be nested (review/code.md), use full relative path
+        result = adapter.transformCommand(content, relPath);
+        break;
+      }
+      case "skill":
+        // Skills keep their directory structure
+        result = { content: adapter.transformSkill(content), filename: relPath };
+        break;
+    }
+
+    const destFile = fileType === "command"
+      ? join(destDir, result.filename)  // commands flatten to single dir
+      : join(destDir, dirname(relPath), result.filename);
+    await mkdir(dirname(destFile), { recursive: true });
+    await writeFile(destFile, result.content, "utf-8");
+  }
+}
+
+// ─── Utility: replace path references in directory files ───
+
+async function replacePathsInDir(
+  dir: string,
+  adapter: TargetAdapter,
+): Promise<void> {
+  const files = await scanDirFiles(dir);
+  for (const relPath of files) {
+    if (!relPath.endsWith(".cjs") && !relPath.endsWith(".js") && !relPath.endsWith(".json")) continue;
+    const filePath = join(dir, relPath);
+    const content = await readFile(filePath, "utf-8");
+    const transformed = adapter.replacePathRefs(content);
+    if (transformed !== content) {
+      await writeFile(filePath, transformed, "utf-8");
+    }
+  }
 }
 
 // ─── Utility: generate skill-index.json from installed SKILL.md files ───

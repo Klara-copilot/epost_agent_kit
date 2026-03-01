@@ -4,9 +4,9 @@
  * For kit designers iterating on package content
  */
 
-import { resolve, join, relative, dirname } from "node:path";
+import { resolve, join, relative, dirname, basename } from "node:path";
 import { watch } from "node:fs";
-import { copyFile, mkdir } from "node:fs/promises";
+import { copyFile, mkdir, readFile, writeFile } from "node:fs/promises";
 import { logger } from "../core/logger.js";
 import { fileExists, dirExists } from "../core/file-system.js";
 import { loadAllManifests, resolvePackages } from "../core/package-resolver.js";
@@ -14,8 +14,11 @@ import { mergeAndWriteSettings } from "../core/settings-merger.js";
 import {
   collectSnippets,
   generateClaudeMd,
+  generateCopilotInstructions,
   type ClaudeMdContext,
 } from "../core/claude-md-generator.js";
+import { createTargetAdapter } from "../core/target-adapter.js";
+import { readMetadata } from "../core/ownership.js";
 import type { DevWatcherOptions } from "../types/command-options.js";
 
 export async function runDev(opts: DevWatcherOptions): Promise<void> {
@@ -27,12 +30,17 @@ export async function runDev(opts: DevWatcherOptions): Promise<void> {
     );
   }
 
-  // Resolve target directory
+  // Resolve target directory and detect installed target
   const targetDir = opts.target ? resolve(opts.target) : resolve(process.cwd());
-  const installDir = join(targetDir, ".claude");
+
+  // Auto-detect target from metadata or installed dirs
+  const metadata = await readMetadata(targetDir);
+  const detectedTarget = metadata?.target || "claude";
+  const adapter = await createTargetAdapter(detectedTarget);
+  const installDir = join(targetDir, adapter.installDir);
 
   if (!(await dirExists(installDir))) {
-    logger.warn(`Target .claude/ directory not found at ${installDir}`);
+    logger.warn(`Target ${adapter.installDir}/ directory not found at ${installDir}`);
     logger.info(
       "Run `epost-kit init` first, or use --target to point to a project.",
     );
@@ -93,14 +101,55 @@ export async function runDev(opts: DevWatcherOptions): Promise<void> {
         if (srcSubDir.endsWith("/") && changedPath.startsWith(srcSubDir)) {
           const relativeInSrc = changedPath.slice(srcSubDir.length);
           const srcFile = join(pkgDir, changedPath);
-          const destFile = join(installDir, destSubDir, relativeInSrc);
 
           if (await fileExists(srcFile)) {
-            await mkdir(dirname(destFile), { recursive: true });
-            await copyFile(srcFile, destFile);
-            logger.info(
-              `[dev] → ${pkgName}/${changedPath} → ${relative(targetDir, destFile)} (updated)`,
-            );
+            // Determine file type for adapter transformation
+            const isAgent = destSubDir.startsWith("agents");
+            const isCommand = destSubDir.startsWith("commands");
+            const isSkill = destSubDir.startsWith("skills");
+            const isHook = destSubDir.startsWith("hooks");
+            const isMd = relativeInSrc.endsWith(".md");
+
+            // Resolve actual dest dir (commands→prompts for Copilot)
+            const actualDestDir = isCommand
+              ? adapter.commandDir()
+              : isHook
+                ? adapter.hookScriptDir()
+                : destSubDir;
+
+            if (isMd && (isAgent || isCommand || isSkill)) {
+              // Transform through adapter
+              const content = await readFile(srcFile, "utf-8");
+              let result: { content: string; filename: string };
+              if (isAgent) {
+                result = adapter.transformAgent(content, basename(relativeInSrc));
+              } else if (isCommand) {
+                result = adapter.transformCommand(content, relativeInSrc);
+              } else {
+                result = { content: adapter.transformSkill(content), filename: relativeInSrc };
+              }
+              const destFile = isCommand
+                ? join(installDir, actualDestDir, result.filename)
+                : join(installDir, actualDestDir, dirname(relativeInSrc), result.filename);
+              await mkdir(dirname(destFile), { recursive: true });
+              await writeFile(destFile, result.content, "utf-8");
+              logger.info(
+                `[dev] → ${pkgName}/${changedPath} → ${relative(targetDir, destFile)} (transformed)`,
+              );
+            } else {
+              // Non-transformable: copy with path replacement
+              const destFile = join(installDir, actualDestDir, relativeInSrc);
+              await mkdir(dirname(destFile), { recursive: true });
+              if (isHook && (relativeInSrc.endsWith(".cjs") || relativeInSrc.endsWith(".js"))) {
+                const content = await readFile(srcFile, "utf-8");
+                await writeFile(destFile, adapter.replacePathRefs(content), "utf-8");
+              } else {
+                await copyFile(srcFile, destFile);
+              }
+              logger.info(
+                `[dev] → ${pkgName}/${changedPath} → ${relative(targetDir, destFile)} (updated)`,
+              );
+            }
           }
         }
       }
@@ -155,26 +204,34 @@ export async function runDev(opts: DevWatcherOptions): Promise<void> {
 
       const context: ClaudeMdContext = {
         packages: watchPackages,
-        target: "claude",
+        target: detectedTarget,
         kitVersion: "1.0.0",
         projectName: "dev",
-        platforms: [...platforms],
+        platforms: Array.from(platforms),
         agentCount: 0,
         skillCount: 0,
         commandCount: 0,
       };
 
-      const templatesDir = resolve(join(process.cwd(), "templates"));
-      const templatePath = join(templatesDir, "repo-claude.md.hbs");
-      await generateClaudeMd(
-        templatePath,
-        context,
-        snippets,
-        join(targetDir, "CLAUDE.md"),
-      );
-      logger.info(
-        `[dev] ✓ CLAUDE.md regenerated (${snippets.length} snippets merged)`,
-      );
+      if (adapter.usesSettingsJson()) {
+        const templatesDir = resolve(join(process.cwd(), "templates"));
+        const templatePath = join(templatesDir, "repo-claude.md.hbs");
+        await generateClaudeMd(
+          templatePath,
+          context,
+          snippets,
+          join(targetDir, "CLAUDE.md"),
+        );
+        logger.info(
+          `[dev] ✓ CLAUDE.md regenerated (${snippets.length} snippets merged)`,
+        );
+      } else {
+        const instrPath = join(installDir, adapter.rootInstructionsFilename());
+        await generateCopilotInstructions(context, snippets, instrPath);
+        logger.info(
+          `[dev] ✓ copilot-instructions.md regenerated (${snippets.length} snippets merged)`,
+        );
+      }
     }
   };
 

@@ -260,7 +260,10 @@ export async function validateReferences(
   const errors: RefError[] = [];
 
   const agentsDir = join(claudeDir, "agents");
-  const commandsDir = join(claudeDir, "commands");
+  // Support both Claude ("commands") and Copilot ("prompts") directory names
+  const commandsDir = existsSync(join(claudeDir, "commands"))
+    ? join(claudeDir, "commands")
+    : join(claudeDir, "prompts");
   const skillsDir = join(claudeDir, "skills");
 
   // Scan agent files for skills: [...] frontmatter
