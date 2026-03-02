@@ -14,12 +14,14 @@ import {
   mkdir,
   rm,
 } from "node:fs/promises";
-import { select, confirm, checkbox } from "@inquirer/prompts";
+import { select, confirm, checkbox, input } from "@inquirer/prompts";
+import { execa } from "execa";
 import ora from "ora";
 import pc from "picocolors";
 import { logger } from "../core/logger.js";
 import { fileExists, dirExists, safeCopyDir } from "../core/file-system.js";
 import {
+  banner,
   box,
   keyValue,
   packageTable,
@@ -53,17 +55,17 @@ import {
   type ClaudeMdContext,
 } from "../core/claude-md-generator.js";
 import { createTargetAdapter, type TargetAdapter } from "../core/target-adapter.js";
-import { detectProjectProfile, listProfiles } from "../core/profile-loader.js";
+import {
+  detectProjectProfile,
+  listProfiles,
+  findKitRoot,
+  getOrderedTeamChoices,
+  findProfilesByTeam,
+  getProfileInfo,
+} from "../core/profile-loader.js";
 import { tmpdir } from "node:os";
 import type { InitOptions } from "../types/command-options.js";
 import type { FileOwnership } from "../types/index.js";
-
-/**
- * Determine if we should use package-based installation
- */
-function usePackageMode(opts: InitOptions): boolean {
-  return !!(opts.profile || opts.packages);
-}
 
 const __init_dir = dirname(fileURLToPath(import.meta.url));
 
@@ -182,39 +184,59 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
     .map((s) => s.trim())
     .filter(Boolean);
 
-  // ── Step 2/7: Detect profile ──
+  // ── Step 2/7: Select profiles ──
   let profileName = opts.profile;
+  let mergedProfilePackages: string[] | undefined;
 
   if (!profileName && !packagesList) {
-    logger.step(2, 7, "Detecting project type");
-    // Try auto-detect
+    logger.step(2, 7, "Selecting profiles");
     const profiles = await loadProfiles(profilesPath);
-    const detected = await detectProjectProfile(projectDir, profiles);
 
-    if (detected && !opts.yes) {
-      const useDetected = await confirm({
-        message: `Detected project type: ${detected.displayName} (${detected.confidence} confidence). Use this profile?`,
-        default: true,
-      });
-
-      if (useDetected) {
+    if (opts.yes) {
+      // Non-interactive: use auto-detect or default to core
+      const detected = await detectProjectProfile(projectDir, profiles);
+      if (detected) {
         profileName = detected.profile;
+        logger.info(`Auto-detected profile: ${detected.displayName}`);
       }
-    } else if (detected && opts.yes) {
-      profileName = detected.profile;
-      logger.info(`Auto-detected profile: ${detected.displayName}`);
-    }
-
-    // If still no profile, let user choose
-    if (!profileName && !packagesList && !opts.yes) {
+    } else {
+      // Interactive: multi-select with auto-detected profile pre-checked
+      const detected = await detectProjectProfile(projectDir, profiles);
       const allProfiles = listProfiles(profiles);
-      profileName = await select({
-        message: "Select a profile:",
+
+      if (detected) {
+        logger.info(
+          `Detected project type: ${detected.displayName} (${detected.confidence} confidence)`,
+        );
+      }
+
+      const selectedProfiles = await checkbox({
+        message: "Select profiles (space to toggle, enter to confirm):",
         choices: allProfiles.map((p) => ({
-          name: `${p.displayName} (${p.packages.length} packages)`,
+          name: `${p.displayName} (${p.packages.join(", ")})`,
           value: p.name,
+          checked: detected ? p.name === detected.profile : false,
         })),
       });
+
+      if (selectedProfiles.length === 0) {
+        logger.info("No profiles selected. Cancelled.");
+        return;
+      } else if (selectedProfiles.length === 1) {
+        profileName = selectedProfiles[0];
+      } else {
+        // Merge packages from all selected profiles
+        const pkgSet = new Set<string>();
+        for (const pName of selectedProfiles) {
+          const pInfo = getProfileInfo(pName, profiles);
+          if (pInfo) pInfo.packages.forEach((pkg) => pkgSet.add(pkg));
+        }
+        mergedProfilePackages = [...pkgSet];
+        profileName = selectedProfiles.join("+");
+        logger.info(
+          `Combined ${selectedProfiles.length} profiles: ${mergedProfilePackages.join(", ")}`,
+        );
+      }
     }
   }
 
@@ -224,8 +246,8 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
   const resolved = await resolvePackages({
     packagesDir,
     profilesPath,
-    profile: profileName,
-    packages: packagesList,
+    profile: mergedProfilePackages ? undefined : profileName,
+    packages: mergedProfilePackages || packagesList,
     includeOptional: optionalList,
     exclude: excludeList,
   });
@@ -312,7 +334,6 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
             layer: m.layer,
             agents: m.provides.agents.length,
             skills: m.provides.skills.length,
-            commands: m.provides.commands.length,
           }
         : null;
     })
@@ -354,7 +375,7 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
 
   // On fresh install, remove stale generated directories to prevent accumulation
   if (!isUpdate) {
-    const staleDirs = ["agents", "skills", adapter.commandDir()];
+    const staleDirs = ["agents", "skills"];
     if (!adapter.usesSettingsJson()) staleDirs.push("hooks", "instructions");
     for (const dir of staleDirs) {
       const dirPath = join(installDir, dir);
@@ -372,8 +393,7 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
 
   const allFiles: Record<string, FileOwnership> = {};
   let totalAgents = 0,
-    totalSkills = 0,
-    totalCommands = 0;
+    totalSkills = 0;
   const settingsPackages: Array<{
     name: string;
     dir: string;
@@ -433,26 +453,22 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
 
         // Determine if this is a transformable directory
         const isAgentDir = destSubDir.startsWith("agents");
-        const isCommandDir = destSubDir.startsWith("commands");
         const isSkillDir = destSubDir.startsWith("skills");
         const isHookDir = destSubDir.startsWith("hooks");
 
-        // For Copilot: commands → prompts directory
-        const actualDestDir = isCommandDir
-          ? join(installDir, adapter.commandDir())
-          : isHookDir
-            ? join(installDir, adapter.hookScriptDir())
-            : destDir;
+        const actualDestDir = isHookDir
+          ? join(installDir, adapter.hookScriptDir())
+          : destDir;
 
         await mkdir(actualDestDir, { recursive: true });
 
-        if (isAgentDir || isCommandDir || isSkillDir) {
+        if (isAgentDir || isSkillDir) {
           // Transform files individually through adapter
           await transformAndCopyDir(
             srcPath,
             actualDestDir,
             adapter,
-            isAgentDir ? "agent" : isCommandDir ? "command" : "skill",
+            isAgentDir ? "agent" : "skill",
           );
         } else {
           // Non-transformable dirs: copy as-is, apply path replacements
@@ -465,11 +481,9 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
 
         // Track only NEW files from this package
         const allFilesNow = await scanDirFiles(actualDestDir);
-        const actualDestSubDir = isCommandDir
-          ? adapter.commandDir()
-          : isHookDir
-            ? adapter.hookScriptDir()
-            : destSubDir;
+        const actualDestSubDir = isHookDir
+          ? adapter.hookScriptDir()
+          : destSubDir;
         for (const file of allFilesNow) {
           if (existingFiles.has(file)) continue;
           const relativePath = join(installDirName, actualDestSubDir, file);
@@ -507,65 +521,15 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
     // Count provides
     totalAgents += manifest.provides.agents.length;
     totalSkills += manifest.provides.skills.length;
-    totalCommands += manifest.provides.commands.length;
-  }
-
-  // ── Filter advanced commands if user opted out ──
-  if (opts.advancedCommands === false) {
-    const commandsInstallDir = join(installDir, "commands");
-    if (await dirExists(commandsInstallDir)) {
-      // Advanced = variant/shortcut prefixes (every one has an /epost:* equivalent)
-      const advancedPrefixes = [
-        "fix",
-        "cook",
-        "bootstrap",
-        "plan",
-        "review",
-        "skill",
-        "meta",
-        "generate-command",
-      ];
-      const allCmdFiles = await scanDirFiles(commandsInstallDir);
-      let removedCount = 0;
-      for (const file of allCmdFiles) {
-        const prefix = file.split("/")[0];
-        if (advancedPrefixes.includes(prefix)) {
-          await rm(join(commandsInstallDir, file));
-          removedCount++;
-        }
-      }
-      // Clean empty directories
-      for (const prefix of advancedPrefixes) {
-        const dir = join(commandsInstallDir, prefix);
-        if (await dirExists(dir)) {
-          const remaining = await scanDirFiles(dir);
-          if (remaining.length === 0) {
-            await rm(dir, { recursive: true });
-          }
-        }
-      }
-      if (removedCount > 0) {
-        logger.debug(
-          `Removed ${removedCount} advanced command files (opt-out)`,
-        );
-      }
-    }
   }
 
   // Recount from actual installed files for accuracy
   const agentsDir = join(installDir, "agents");
-  const commandsDirPath = join(installDir, adapter.commandDir());
   if (await dirExists(agentsDir)) {
     const agentFiles = (await scanDirFiles(agentsDir)).filter((f) =>
       f.endsWith(".md"),
     );
     totalAgents = agentFiles.length;
-  }
-  if (await dirExists(commandsDirPath)) {
-    const commandFiles = (await scanDirFiles(commandsDirPath)).filter((f) =>
-      f.endsWith(".md"),
-    );
-    totalCommands = commandFiles.length;
   }
 
   installSpinner.succeed(`Installed ${resolved.packages.length} packages`);
@@ -676,7 +640,7 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
     platforms: Array.from(platforms),
     agentCount: totalAgents,
     skillCount: totalSkills,
-    commandCount: totalCommands,
+    commandCount: 0,
   };
 
   if (adapter.usesSettingsJson()) {
@@ -760,7 +724,6 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
   summaryPairs.push(["Packages", `${resolved.packages.length}`]);
   summaryPairs.push(["Agents", `${totalAgents}`]);
   summaryPairs.push(["Skills", `${totalSkills}`]);
-  summaryPairs.push(["Commands", `${totalCommands}`]);
   console.log(
     box(keyValue(summaryPairs, { indent: 0 }), {
       title: "Installation Complete",
@@ -768,8 +731,8 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
   );
 
   const readyMsg = target === "github-copilot"
-    ? `Open VS Code → Copilot Chat → type ${pc.bold("@")} to discover agents.\nType ${pc.bold("/")} to discover all available prompts.`
-    : `Run ${pc.bold("claude")} to activate your AI assistant.\nType ${pc.bold("/")} to discover all available commands.`;
+    ? `Open VS Code → Copilot Chat → type ${pc.bold("@")} to discover agents.\nType ${pc.bold("/")} to discover all available skills.`
+    : `Run ${pc.bold("claude")} to activate your AI assistant.\nType ${pc.bold("/")} to discover all available skills.`;
   console.log(box(readyMsg, { title: "Ready" }));
 }
 
@@ -801,7 +764,7 @@ async function transformAndCopyDir(
   srcDir: string,
   destDir: string,
   adapter: TargetAdapter,
-  fileType: "agent" | "command" | "skill",
+  fileType: "agent" | "skill",
 ): Promise<void> {
   const files = await scanDirFiles(srcDir);
   for (const relPath of files) {
@@ -822,20 +785,20 @@ async function transformAndCopyDir(
       case "agent":
         result = adapter.transformAgent(content, basename(relPath));
         break;
-      case "command": {
-        // Commands may be nested (review/code.md), use full relative path
-        result = adapter.transformCommand(content, relPath);
-        break;
-      }
       case "skill":
         // Skills keep their directory structure
         result = { content: adapter.transformSkill(content), filename: relPath };
         break;
     }
 
-    const destFile = fileType === "command"
-      ? join(destDir, result.filename)  // commands flatten to single dir
-      : join(destDir, dirname(relPath), result.filename);
+    // For agents, filename is just the basename (may be renamed by adapter)
+    // so we need dirname(relPath) to preserve directory structure.
+    // For skills, filename IS relPath (full relative path preserved),
+    // so dirname(relPath) would double-count the directory.
+    const destFile =
+      fileType === "agent"
+        ? join(destDir, dirname(relPath), result.filename)
+        : join(destDir, result.filename);
     await mkdir(dirname(destFile), { recursive: true });
     await writeFile(destFile, result.content, "utf-8");
   }
@@ -1198,23 +1161,209 @@ async function runKitInit(opts: InitOptions): Promise<void> {
   }
 }
 
-// ─── Main Entry ───
+// ─── Guided Wizard Flow (merged from onboard command) ───
 
-export async function runInit(opts: InitOptions): Promise<void> {
-  if (usePackageMode(opts)) {
-    return runPackageInit(opts);
+async function runWizardFlow(opts: InitOptions): Promise<void> {
+  console.log(banner());
+  console.log(
+    box(
+      "Welcome! This wizard sets up your dev\nenvironment with agents, skills & commands\ntailored for your team and role.",
+    ),
+  );
+
+  const kitRoot = await findKitRoot();
+  if (!kitRoot) {
+    throw new Error(
+      "Cannot find epost_agent_kit repository.\nRun from the kit repo or ensure epost-kit is linked (npm link).",
+    );
   }
 
-  // Try package-based if packages/ dir exists and no explicit --kit
-  if (!opts.kit) {
-    const packagesDir = await findKitPackagesDir();
-    if (packagesDir) {
-      logger.debug(
-        "Packages directory found, using package-based installation",
-      );
-      return runPackageInit(opts);
+  const profilesPath = join(kitRoot, "profiles", "profiles.yaml");
+  const packagesDir = join(kitRoot, "packages");
+  const profiles = await loadProfiles(profilesPath);
+
+  // ── Step 1/5: Team selection ──
+  logger.step(1, 5, "Select your team");
+  const teamChoices = getOrderedTeamChoices(profiles);
+  const teamChoice = await select({
+    message: "What team are you on?",
+    choices: teamChoices,
+  });
+
+  // ── Step 2/5: Role selection ──
+  logger.step(2, 5, "Choose your role");
+  let selectedProfiles: string[] = [];
+  let skipPackageSelection = false;
+
+  if (teamChoice === "__explore__") {
+    selectedProfiles = ["full"];
+    skipPackageSelection = true;
+    logger.info("\nSelected: Full Kit (everything)");
+  } else {
+    // Build profile choices — pre-check team-matching profiles
+    const allProfiles = listProfiles(profiles);
+    const teamProfileNames =
+      teamChoice === "__other__"
+        ? []
+        : findProfilesByTeam(teamChoice, profiles).map((p) => p.name);
+
+    selectedProfiles = await checkbox({
+      message: "Select profiles (space to toggle, enter to confirm):",
+      choices: allProfiles.map((p) => ({
+        name: `${p.displayName} (${p.packages.join(", ")})`,
+        value: p.name,
+        checked: teamProfileNames.includes(p.name),
+      })),
+    });
+
+    if (selectedProfiles.length === 0) {
+      logger.info("No profiles selected. Setup cancelled.");
+      return;
     }
   }
 
-  return runKitInit(opts);
+  // Merge packages from all selected profiles
+  const combinedPackages = new Set<string>();
+  for (const pName of selectedProfiles) {
+    const pInfo = getProfileInfo(pName, profiles);
+    if (pInfo) pInfo.packages.forEach((pkg) => combinedPackages.add(pkg));
+  }
+
+  // ── Step 3/5: Package selection ──
+  logger.step(3, 5, "Select packages");
+  const allManifests = await loadAllManifests(packagesDir);
+  let selected: string[];
+
+  if (skipPackageSelection) {
+    selected = [...allManifests.keys()];
+    logger.info(`All ${selected.length} packages included (Full Kit)`);
+  } else {
+    selected = await checkbox({
+      message: "Select packages to install:",
+      choices: [...allManifests.entries()]
+        .sort((a, b) => a[1].layer - b[1].layer)
+        .map(([name, m]) => ({
+          name: `${name} — ${m.description}`,
+          value: name,
+          checked: combinedPackages.has(name),
+        })),
+    });
+
+    if (selected.length === 0) {
+      logger.info("No packages selected. Setup cancelled.");
+      return;
+    }
+  }
+
+  // Show summary
+  const summaries: PackageManifestSummary[] = [];
+  for (const name of selected) {
+    const m = allManifests.get(name);
+    if (m) {
+      summaries.push({
+        name: m.name,
+        description: m.description,
+        layer: m.layer,
+        agents: m.provides.agents.length,
+        skills: m.provides.skills.length,
+        commands: m.provides.commands.length,
+      });
+    }
+  }
+  if (summaries.length > 0) {
+    console.log(packageTable(summaries));
+  }
+
+  const proceed = await confirm({
+    message: `Install ${selected.length} packages?`,
+    default: true,
+  });
+  if (!proceed) {
+    logger.info("Setup cancelled.");
+    return;
+  }
+
+  // ── Step 4/5: Target directory ──
+  logger.step(4, 5, "Choose target directory");
+  const dirChoice = await select({
+    message: "Where to install?",
+    choices: [
+      {
+        name: `Current directory (${basename(process.cwd())})`,
+        value: "cwd" as const,
+      },
+      { name: "Enter a path...", value: "path" as const },
+      { name: "Clone a git repository...", value: "clone" as const },
+    ],
+  });
+
+  let targetDir = process.cwd();
+
+  if (dirChoice === "path") {
+    const dirPath = await input({ message: "Enter project directory path:" });
+    targetDir = resolve(dirPath);
+    if (!(await dirExists(targetDir))) {
+      throw new Error(`Directory not found: ${targetDir}`);
+    }
+  }
+
+  if (dirChoice === "clone") {
+    const gitUrl = await input({ message: "Git repository URL:" });
+    const defaultName = basename(gitUrl, ".git").replace(/\.git$/, "");
+    const dirName = await input({
+      message: "Clone into directory:",
+      default: defaultName,
+    });
+    logger.info(`\nCloning ${gitUrl}...`);
+    await execa("git", ["clone", gitUrl, dirName]);
+    targetDir = resolve(dirName);
+    logger.info(`Cloned to ${targetDir}`);
+  }
+
+  // ── Step 5/5: Install ──
+  logger.step(5, 5, "Installing packages");
+  process.chdir(targetDir);
+
+  await runPackageInit({
+    ...opts,
+    packages: selected.join(","),
+  });
+
+  console.log(
+    box(
+      `Setup complete!\n\nRun ${pc.bold("claude")} to activate your AI assistant.\nType ${pc.bold("/")} to discover all available commands.`,
+      { title: "Ready" },
+    ),
+  );
+}
+
+// ─── Main Entry ───
+
+export async function runInit(opts: InitOptions): Promise<void> {
+  // Legacy kit mode
+  if (opts.kit) {
+    return runKitInit(opts);
+  }
+
+  // Explicit flags → direct package install
+  if (opts.profile || opts.packages || opts.yes) {
+    return runPackageInit(opts);
+  }
+
+  // Auto-detect packages dir
+  const packagesDir = await findKitPackagesDir();
+  if (!packagesDir) {
+    throw new Error(
+      "Cannot find packages/ directory. Run from the kit repo, or use --kit for legacy installation.",
+    );
+  }
+
+  // Existing installation → direct update
+  const metadata = await readMetadata(resolve(process.cwd()));
+  if (metadata) {
+    return runPackageInit(opts);
+  }
+
+  // First-time: run guided wizard
+  return runWizardFlow(opts);
 }

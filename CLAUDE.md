@@ -10,14 +10,14 @@ This file provides guidance to Claude Code when working with code in this reposi
 
 **Packages**: core, a11y, platform-web, platform-ios, platform-android, platform-backend, kit, design-system, domains
 
-**Installed by**: epost-kit v0.1.0 on 2026-02-28
+**Installed by**: epost-kit v0.1.0 on 2026-03-01
 
 ---
 
 ## Claude Code Agent System
 
 ### Configuration
-- **Agents**: `.claude/agents/` — 20 agents
+- **Agents**: `.claude/agents/` — 13 agents
 - **Commands**: `.claude/commands/` — Slash commands
 - **Skills**: `.claude/skills/` — Passive knowledge
 
@@ -32,17 +32,17 @@ On every user prompt involving a dev task, sense context before acting:
 1. Check git state (branch, staged/unstaged files)
 2. Detect platform from changed file extensions (`.tsx`→web, `.swift`→ios, `.kt`→android, `.java`→backend)
 3. Check for active plans in `./plans/`
-4. Route to best-fit command based on intent + context
+4. Route to best-fit skill based on intent + context
 
 **This applies to every prompt — not just `/epost` invocations.**
 
 ### Prompt Classification
 - **Dev task** (action verbs: cook, fix, plan, test, debug, etc.) → route via intent map below
-- **Kit question** ("which agent", "list commands", "our conventions") → route to `epost-guide`
+- **Kit question** ("which agent", "list skills", "our conventions") → route to `epost-orchestrator`
 - **External tech question** ("how does React...", "what is gRPC") → route to `epost-researcher`
 - **Conversational** (greetings, opinions, clarifications) → respond directly, no routing
 
-### Intent → Command Map
+### Intent → Skill Map
 
 | Intent | Signal Words | Routes To |
 |--------|-------------|-----------|
@@ -51,12 +51,12 @@ On every user prompt involving a dev task, sense context before acting:
 | Plan | plan, design, architect, spec, roadmap | `/plan` |
 | Test | test, coverage, validate, verify | `/test` |
 | Debug | debug, trace, inspect, diagnose | `/debug` |
-| Review | review, check code, audit | `/review:code` |
-| Git | commit, push, pr, merge, done, ship | `/git:commit`, `/git:push`, `/git:pr` |
-| Docs | docs, document, write docs | `/docs:init` or `/docs:update` |
+| Review | review, check code, audit | `/review-code` |
+| Git | commit, push, pr, merge, done, ship | `/git-commit`, `/git-push`, `/git-pr` |
+| Docs | docs, document, write docs | `/docs-init` or `/docs-update` |
 | Scaffold | bootstrap, init, scaffold, new project, new module | `/bootstrap` |
 | Convert | convert, prototype, migrate | `/convert` |
-| A11y | a11y, accessibility, wcag | `/fix:a11y` or `/review:a11y` |
+| A11y | a11y, accessibility, wcag | `/fix-a11y` or `/review-a11y` |
 
 ### Context Boost Rules
 - TypeScript/build errors detected → always route to `/fix` first
@@ -77,12 +77,6 @@ On every user prompt involving a dev task, sense context before acting:
 
 ### Agent
 - `epost-a11y-specialist` — Multi-platform accessibility orchestrator (iOS, Android, Web)
-
-### Commands
-- `/audit:a11y` — Audit staged changes for violations (auto-detects platform)
-- `/audit:a11y-close <id>` — Mark a finding as resolved
-- `/fix:a11y [<n> | #<id>]` — Fix top N findings by priority, or a specific finding by ID
-- `/review:a11y` — Review accessibility compliance by focus area
 
 ### Skills
 - `a11y` — Cross-platform WCAG 2.1 AA foundation (POUR, scoring)
@@ -105,12 +99,11 @@ On every user prompt involving a dev task, sense context before acting:
 - **State**: Redux Toolkit + Redux Persist
 - **Containerization**: Docker + Docker Compose
 
-### Commands
-- `/cook` — Implement features (auto-detects web from `.tsx`/`.ts` files)
-- `/test` — Run tests (auto-detects web: Jest, Playwright, RTL)
-
-### Agent
-- `epost-web-developer` — Web platform specialist for Next.js development
+### Skills
+- `web-frontend` — React components, hooks, state management
+- `web-nextjs` — Next.js 14 App Router, Server Components
+- `web-api-routes` — API endpoints, server actions
+- `web-modules` — B2B module integration
 
 ---
 
@@ -124,14 +117,10 @@ On every user prompt involving a dev task, sense context before acting:
 - **Testing**: XCTest, XCUITest
 - **Build**: Xcode, XcodeBuildMCP
 
-### Commands
-- `/cook` — Implement features (auto-detects iOS from `.swift` files)
-- `/test` — Run tests (auto-detects iOS: XCTest, XCUITest)
-- `/debug` — Debug crashes, concurrency, SwiftUI state (auto-detects iOS)
-- `/simulator` — Manage iOS simulators
-
-### Agents
-- `epost-ios-developer` — iOS platform specialist
+### Skills
+- `ios-development` — Swift 6, SwiftUI/UIKit patterns, Xcode builds
+- `ios-ui-lib` — iOS theme SwiftUI components and design tokens
+- `ios-rag` — iOS codebase vector search
 
 ---
 
@@ -147,12 +136,9 @@ On every user prompt involving a dev task, sense context before acting:
 - **Testing**: JUnit, Espresso, Compose UI Testing
 - **Build**: Gradle (Kotlin DSL)
 
-### Commands
-- `/cook` — Implement features (auto-detects Android from `.kt`/`.kts` files)
-- `/test` — Run tests (auto-detects Android: JUnit, Espresso)
-
-### Agent
-- `epost-android-developer` — Android platform specialist
+### Skills
+- `android-development` — Kotlin, Jetpack Compose, Hilt DI patterns
+- `android-ui-lib` — Android theme Compose components and design tokens
 
 ---
 
@@ -179,27 +165,14 @@ On every user prompt involving a dev task, sense context before acting:
 - `persistence.xml` for JPA configuration
 - Maven profiles for SonarQube analysis
 
-### Commands
-- `/cook` — Implement features (auto-detects backend from `.java` files)
-- `/test` — Run tests (auto-detects backend: Maven JUnit, Arquillian)
-
-### Agent
-- `epost-backend-developer` — Java EE backend specialist
+### Skills
+- `backend-javaee` — Jakarta EE patterns, WildFly deployment, Maven builds
+- `backend-databases` — PostgreSQL + MongoDB persistence
 
 ---
 
 
 ## Kit Authoring Tools
-
-### Agent
-- `epost-kit-designer` — Creates and maintains agents, skills, commands, and hooks for epost_agent_kit
-
-### Commands
-- `/kit:add-agent` — Create a new agent definition
-- `/kit:add-skill` — Create a new skill definition
-- `/kit:add-command` — Generate slash commands (simple or splash variants)
-- `/kit:add-hook` — Create a new hook script
-- `/kit:optimize-skill` — Optimize an existing skill
 
 ### Skills
 - `kit-agents` — Agent ecosystem reference and naming conventions
@@ -207,16 +180,7 @@ On every user prompt involving a dev task, sense context before acting:
 - `kit-skill-development` — Skill authoring, progressive disclosure, validation
 - `kit-commands` — Slash command structure, frontmatter, arguments
 - `kit-hooks` — Hook event types, I/O contract, creation workflow
-
-## CLI Development Tools
-
-### Agent
-- `epost-cli-developer` — CLI specialist for epost-agent-cli TypeScript development
-
-### Commands
-- `/cli:cook` — Implement CLI features
-- `/cli:doctor` — Diagnose CLI issues
-- `/cli:test` — Run CLI tests
+- `kit-cli` — epost-kit CLI development (Commander.js, TypeScript)
 
 ---
 
