@@ -17,7 +17,7 @@ The MUJI team builds and maintains the design system components. You guide the f
 
 ```
 Figma design
-  → /docs:component <key>       Extract Figma data, create prop mappings
+  → /docs-component <key>       Extract Figma data, create prop mappings
   → plan-feature                 6 JSON plan artifacts (inventory, variants, tokens, integration, implementation, order)
   → implement-component          Component code + Storybook stories (Default/Sizes/Variants/States)
   → audit-ui                     Compare implementation vs plan vs Figma → audit-report.json
@@ -28,7 +28,7 @@ Figma design
 ### Triggers
 
 - Working inside `libs/klara-theme/`, `libs/ios-theme/`, `libs/android-theme/`
-- Using `/docs:component` or `/design:fast`
+- Using `/docs-component` or `/design-fast`
 - Explicit component CRUD requests (create, update, delete, refactor)
 
 ### Skills Used

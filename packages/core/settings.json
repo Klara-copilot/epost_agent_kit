@@ -73,6 +73,18 @@
       {
         "hooks": [
           {
+            "type": "prompt",
+            "prompt": "Before session ends, write a breadcrumb summary to .epost-data/improvements/current-session.json. Read the existing file first (it has startedAt, sessionId, branch). Then MERGE these fields into it using the Write tool:\n\n- errors: { count: <number of errors you encountered>, types: [<error categories like 'TypeScript', 'Runtime', 'Build', 'Test'>] }\n- skills: { loaded: [<skill names you activated>] }\n- rework: { fixIterations: <times you had to re-fix something>, verificationFailures: <times a verification/test failed> }\n- routing: { intent: '<primary intent like build/fix/plan>', command: '<skill invoked like /cook or /fix>', platform: '<web/ios/android/backend/kit or null>' }\n- tasks: { total: <tasks worked on>, completed: <tasks finished>, failed: <tasks that failed> }\n\nKeep the existing startedAt, sessionId, branch fields. Write the merged JSON. Do NOT create a new file — update the existing one. If the file doesn't exist or you have nothing to report, output {\"ok\": true} and skip."
+          },
+          {
+            "type": "command",
+            "command": "node .claude/hooks/session-metrics.cjs 2>/dev/null || true"
+          },
+          {
+            "type": "command",
+            "command": "node .claude/hooks/lesson-capture.cjs 2>/dev/null || true"
+          },
+          {
             "type": "command",
             "command": "node .claude/hooks/notifications/notify.cjs 2>/dev/null || true"
           },

@@ -1,12 +1,12 @@
 ---
 name: infra-cloud
-description: "GCP cloud infrastructure patterns: Terraform, Cloud Build, Cloud Run, GKE"
+description: "Use when working with GCP infrastructure — Terraform, Cloud Build, Cloud Run, GKE, deployment pipelines"
 user-invocable: false
 
 metadata:
-  agent-affinity: "[epost-architect, epost-implementer]"
-  keywords: "[gcp, terraform, cloud-build, cloud-run, gke, infrastructure]"
-  platforms: "[all]""
+  agent-affinity: [epost-architect, epost-implementer]
+  keywords: [gcp, terraform, cloud-build, cloud-run, gke, infrastructure]
+  platforms: [all]
 ---
 
 # Cloud Architecture Knowledge

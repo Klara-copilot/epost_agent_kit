@@ -13,7 +13,6 @@ created: YYYY-MM-DD
 updated: YYYY-MM-DD
 tags: [architecture, component, domain]
 related: []
-agent: epost-architect
 supersedes: null
 superseded-by: null
 ---
@@ -79,13 +78,14 @@ proposed → accepted → deprecated → superseded
 
 ## Naming Convention
 
-File: `NNNN-short-kebab-title.md`
+File: `ADR-NNNN-short-kebab-title.md`
 ID: `ADR-NNNN`
+Directory: `docs/decisions/`
 
 Examples:
-- `0001-use-nextjs-app-router.md` → `ADR-0001`
-- `0002-adopt-redux-toolkit.md` → `ADR-0002`
-- `0003-separate-ios-android-repos.md` → `ADR-0003`
+- `docs/decisions/ADR-0001-nextjs-app-router.md` → `ADR-0001`
+- `docs/decisions/ADR-0002-adopt-redux-toolkit.md` → `ADR-0002`
+- `docs/decisions/ADR-0003-separate-ios-android-repos.md` → `ADR-0003`
 
 ## When to Write an ADR
 
@@ -100,8 +100,9 @@ Examples:
 **Don't write ADR for**:
 - Implementation details (use `patterns/` instead)
 - Bug fixes (use `findings/` instead)
-- Library version updates (use `decisions/` instead)
+- System structure docs (use `architecture/` instead)
 - Coding style (use `conventions/` instead)
+- Feature guides (use `features/` instead)
 
 ## Quick Decision vs ADR
 
@@ -128,7 +129,7 @@ supersedes: ADR-0001
 Use `related` for dependencies without supersession:
 
 ```yaml
-related: [ADR-0002, ADR-0007]
+related: [ADR-0002, ARCH-0001]
 ```
 
 ## Example ADR
@@ -142,7 +143,6 @@ created: 2026-02-08
 updated: 2026-02-08
 tags: [nextjs, routing, architecture, react]
 related: [PATTERN-003]
-agent: epost-architect
 supersedes: null
 superseded-by: null
 ---

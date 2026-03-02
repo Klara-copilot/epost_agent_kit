@@ -1,7 +1,19 @@
 ---
 name: a11y
-description: WCAG 2.1 AA cross-platform accessibility foundation — POUR framework, severity scoring, known-findings database, and operating modes
+description: Use when accessibility, WCAG, POUR, or a11y compliance is relevant across any platform
 user-invocable: false
+metadata:
+  keywords:
+    - a11y
+    - accessibility
+    - wcag
+    - aria
+    - screen-reader
+    - pour
+  agent-affinity:
+    - epost-a11y-specialist
+  platforms:
+    - all
 ---
 
 # Accessibility Core — WCAG 2.1 AA
@@ -59,10 +71,21 @@ If no signal, ask the user.
 
 | Mode | Trigger | Behavior |
 |------|---------|----------|
-| **Guidance** | `/review:a11y`, direct questions | Human-readable examples, no file writes |
-| **Audit** | `/audit:a11y` | JSON-only output, read-only (no Write/Edit) |
-| **Fix** | `/fix:a11y` | JSON status + code edits, surgical changes only |
-| **Close** | `/audit:a11y-close` | Update known-findings DB, JSON confirmation |
+| **Guidance** | `/review-a11y`, direct questions | Human-readable examples, no file writes |
+| **Audit** | `/audit-a11y` | JSON-only output, read-only (no Write/Edit) |
+| **Fix** | `/fix-a11y` | JSON status + code edits, surgical changes only |
+| **Close** | `/audit-close-a11y` | Update known-findings DB, JSON confirmation |
+
+## Sub-Skill Routing
+
+When this skill is active and user intent matches a sub-skill, delegate:
+
+| Intent | Sub-Skill | When |
+|--------|-----------|------|
+| Audit violations | `audit-a11y` | `/audit-a11y`, "audit accessibility" |
+| Fix violations | `fix-a11y` | `/fix-a11y`, "fix a11y", fix top N |
+| Close finding | `audit-close-a11y` | `/audit-close-a11y`, mark resolved |
+| Review compliance | `review-a11y` | `/review-a11y`, "review accessibility" |
 
 ## Known-Findings Database
 

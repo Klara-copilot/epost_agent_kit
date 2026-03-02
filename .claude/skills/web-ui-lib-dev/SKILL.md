@@ -1,12 +1,12 @@
 ---
 name: web-ui-lib-dev
-description: klara-theme UI component library patterns, Figma-to-code pipeline, and component documentation workflows. Use when working with klara-theme components, planning features, implementing components, auditing UI, or documenting components.
+description: Use when building, auditing, or documenting klara-theme components through the Figma-to-code pipeline
 user-invocable: false
 
 metadata:
-  agent-affinity: "[epost-muji, epost-web-developer]"
-  keywords: "[klara-theme, components, pipeline, audit, storybook]"
-  platforms: "[web]""
+  agent-affinity: [epost-muji, epost-implementer]
+  keywords: [klara-theme, components, pipeline, audit, storybook]
+  platforms: [web]
 ---
 
 # klara-theme Skill

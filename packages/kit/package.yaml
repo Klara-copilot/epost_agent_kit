@@ -10,7 +10,6 @@ dependencies:
 provides:
   agents:
     - epost-kit-designer
-    - epost-cli-developer
   skills:
     - kit-agents
     - kit-agent-development
@@ -18,20 +17,18 @@ provides:
     - kit-commands
     - kit-hooks
     - kit-cli
-  commands:
-    - kit/add-agent
-    - kit/add-skill
-    - kit/add-command
-    - kit/add-hook
-    - kit/optimize-skill
-    - cli/cook
-    - cli/doctor
-    - cli/test
+    - kit-add-agent
+    - kit-add-skill
+    - kit-add-command
+    - kit-add-hook
+    - kit-optimize-skill
+    - cli-cook
+    - cli-doctor
+    - cli-test
 
 files:
   agents/: agents/
   skills/: skills/
-  commands/: commands/
 
 settings_strategy: skip
 claude_snippet: CLAUDE.snippet.md

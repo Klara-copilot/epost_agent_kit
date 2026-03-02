@@ -8,7 +8,7 @@ description: "klara-theme integration patterns: theming, composition, state"
 ## Theme Provider Setup
 
 ```tsx
-import { ThemeProvider } from '@epost/klara-theme';
+import { ThemeProvider } from '@org/design-system';
 
 function App() {
   return (
@@ -45,7 +45,7 @@ function App() {
 
 ## State Management
 
-- Form state: Use `react-hook-form` with klara-theme's `FormField`
+- Form state: Use your project's form library with klara-theme's `FormField`
 - Toast state: Use klara-theme's `useToast()` hook
 - Modal state: Use component's built-in `open` prop + `onOpenChange`
 

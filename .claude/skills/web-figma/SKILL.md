@@ -1,12 +1,12 @@
 ---
 name: web-figma
-description: Figma MCP tool patterns, design token mapping, and visual validation for klara-theme components. Use when extracting Figma data, documenting components from Figma, mapping design tokens, or comparing implementation to Figma designs.
+description: Use when extracting Figma data, mapping design tokens to code, or comparing implementation against Figma designs
 user-invocable: false
 
 metadata:
-  agent-affinity: "[epost-muji, epost-web-developer]"
-  keywords: "[figma, design, tokens, mcp, figma-to-code]"
-  platforms: "[web]""
+  agent-affinity: [epost-muji, epost-implementer]
+  keywords: [figma, design, tokens, mcp, figma-to-code]
+  platforms: [web]
 ---
 
 # Figma Integration Skill
@@ -113,7 +113,7 @@ If differences found, categorize as:
 ## Related Resources
 
 - **klara-theme docs**: `libs/klara-theme/CLAUDE.md`
-- **ui-lib-dev skill**: `.claude/skills/web/ui-lib-dev/` — Component pipeline (plan, implement, audit, fix, document)
+- **ui-lib-dev skill**: `web-ui-lib-dev` — Component pipeline (plan, implement, audit, fix, document)
 - **Schemas**: `libs/klara-theme/figma-data/schema/`
   - `component-data.schema.json` — Figma component data structure
   - `component-mapping.schema.json` — Prop mapping structure

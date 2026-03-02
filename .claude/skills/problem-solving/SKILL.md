@@ -1,12 +1,12 @@
 ---
 name: problem-solving
-description: Root cause analysis and complex problem resolution with systematic techniques
+description: Use when stuck, facing a complex bug, or need root cause analysis — 5 whys, bisection, inversion techniques
 
 metadata:
-  agent-affinity: "[epost-debugger, epost-implementer, epost-architect]"
-  keywords: "[problem-solving, root-cause, analysis, debugging, 5-whys, bisection]"
-  platforms: "[all]"
-  triggers: "["stuck", "problem", "root cause", "why"]""
+  agent-affinity: [epost-debugger, epost-implementer, epost-architect]
+  keywords: [problem-solving, root-cause, analysis, debugging, 5-whys, bisection, crash, error, stuck]
+  platforms: [all]
+  triggers: ["stuck", "problem", "root cause", "why"]
 ---
 
 # Problem Solving Skill
@@ -29,6 +29,9 @@ Ask "what would make this fail?" then prevent those conditions.
 
 #### Collision Zone Thinking
 Find where multiple systems interact. Bugs live at boundaries.
+
+#### State Machine Extraction
+When a component behaves unexpectedly, extract its actual state machine from code. Compare actual vs expected transitions — the diff IS the bug. See `planning/references/state-machine-guide.md` for notation.
 
 #### Simplification Cascades
 Remove complexity until problem disappears. Add back until it returns.

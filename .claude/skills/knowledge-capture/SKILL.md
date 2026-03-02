@@ -1,20 +1,20 @@
 ---
 name: knowledge-capture
-description: Post-task knowledge capture workflow — persist debug findings, implementation patterns, research results, review conventions to .knowledge/ directory.
+description: Use after completing a task — capture learnings, save patterns, record post-mortems to docs/
 user-invocable: true
 
 metadata:
-  agent-affinity: "[epost-debugger, epost-implementer, epost-researcher, epost-reviewer, epost-architect]"
-  keywords: "[capture, learn, persist, record, post-mortem, retrospective]"
-  platforms: "[all]"
-  triggers: "["capture learnings", "save pattern", "record finding", "what did we learn"]""
+  agent-affinity: [epost-debugger, epost-implementer, epost-researcher, epost-reviewer, epost-architect]
+  keywords: [capture, learn, persist, record, post-mortem, retrospective]
+  platforms: [all]
+  triggers: ["capture learnings", "save pattern", "record finding", "what did we learn"]
 ---
 
 # Knowledge Capture Skill
 
 ## Purpose
 
-Post-task workflow for capturing learnings and persisting knowledge to `.knowledge/` directory for team-wide reuse.
+Post-task workflow for capturing learnings and persisting knowledge to `docs/` directory for team-wide reuse.
 
 ## When Active
 
@@ -23,6 +23,8 @@ Post-task workflow for capturing learnings and persisting knowledge to `.knowled
 - After research (technology decision made)
 - After review (convention established)
 - After architecture work (ADR needed)
+- After documenting system structure
+- After writing feature guides
 
 ## Capture Workflow
 
@@ -33,27 +35,23 @@ Post-task workflow for capturing learnings and persisting knowledge to `.knowled
 - Technology choice rationale
 - Coding convention
 - Architectural decision
+- System structure insight
+- Feature deep-dive
 
 ### 2. Categorize
 **Which category fits?**
 
-| Learning Type | Category | Directory |
-|---------------|----------|-----------|
-| Architectural choice | ADR | `adrs/` |
-| Implementation pattern | Pattern | `patterns/` |
-| Debug root cause | Finding | `findings/` |
-| Technology choice | Decision | `decisions/` |
-| Coding standard | Convention | `conventions/` |
+See `knowledge-base` for schema, categories, and significance thresholds.
 
 ### 3. Check Existing
 **Already documented?**
 
 ```bash
-# Search knowledge index
-jq '.entries[] | select(.tags[] | contains("your-topic"))' .knowledge/index.json
+# Search docs index
+jq '.entries[] | select(.tags[] | contains("your-topic"))' docs/index.json
 
 # Grep for similar entries
-grep -r "your topic" .knowledge/ --include="*.md"
+grep -r "your topic" docs/ --include="*.md"
 ```
 
 If exists: Update existing entry instead of creating duplicate
@@ -64,11 +62,12 @@ If exists: Update existing entry instead of creating duplicate
 See "Entry Templates" section below for category-specific formats.
 
 ### 5. Update Index
-**Modify `.knowledge/index.json`**
+**Modify `docs/index.json`**
 
-1. Increment `counts.<category>`
-2. Add entry to `entries` array
-3. Sort by `created` desc
+1. Add entry to `entries` array
+2. Include `agentHint` (when should agents check this) and `audience` (["agent", "human"])
+3. Update `updatedAt` timestamp
+4. Sort by category, then by ID
 
 ### 6. Cross-Reference
 **Link related entries**
@@ -78,28 +77,6 @@ Add IDs to `related` array:
 related: [ADR-0001, PATTERN-005, FINDING-012]
 ```
 
-## Significance Threshold
-
-### Record When
-
-| Criteria | Example |
-|----------|---------|
-| **Non-obvious root cause** | Took >10 minutes to find |
-| **New pattern emerged** | First use of composition pattern in codebase |
-| **Questionable decision** | Could be challenged later ("why did we choose X?") |
-| **Inconsistent convention** | Team uses mix of approaches, need standard |
-| **Key research finding** | Library comparison reveals important trade-offs |
-
-### Don't Record
-
-| Type | Reason |
-|------|--------|
-| **Trivial fixes** | Typos, missing imports, formatting |
-| **Well-known patterns** | Standard React hooks, basic CRUD |
-| **Official docs** | Already in library documentation |
-| **Obvious bugs** | Simple logic errors, off-by-one |
-| **Personal notes** | Use agent memory instead |
-
 ## Entry Templates
 
 ### ADR (Architecture Decision)
@@ -107,14 +84,12 @@ related: [ADR-0001, PATTERN-005, FINDING-012]
 **Full template in**: `knowledge-base/references/adr-patterns.md`
 
 ```markdown
-"
 ---
 id: ADR-NNNN
 title: [Active voice decision]
 status: proposed
 created: YYYY-MM-DD
 tags: [architecture, domain]
-agent: epost-architect
 ---
 
 # ADR-NNNN: [Title]
@@ -133,6 +108,29 @@ agent: epost-architect
 **Option A**: [pros, cons, rejection reason]
 ```
 
+### Architecture (System Structure)
+
+```markdown
+---
+id: ARCH-NNNN
+title: [System aspect being documented]
+status: current
+created: YYYY-MM-DD
+tags: [architecture, system-design]
+---
+
+# ARCH-NNNN: [Title]
+
+## Overview
+[What this documents]
+
+## Components
+[Module/component descriptions and relationships]
+
+## Data Flow
+[How data moves through the system]
+```
+
 ### Pattern (Implementation)
 
 ```markdown
@@ -142,7 +140,6 @@ title: [Pattern name]
 status: active
 created: YYYY-MM-DD
 tags: [technology, domain]
-agent: epost-implementer
 ---
 
 # PATTERN-NNNN: [Title]
@@ -151,12 +148,60 @@ agent: epost-implementer
 [Scenario where pattern applies]
 
 ## Implementation
-```code
 [Code example]
-```
 
 ## Caveats
 [Limitations, gotchas]
+```
+
+### Convention (Coding Standard)
+
+```markdown
+---
+id: CONV-NNNN
+title: [Convention rule]
+status: active
+created: YYYY-MM-DD
+tags: [code-style, language]
+---
+
+# CONV-NNNN: [Title]
+
+**Rule**: [Convention statement]
+
+**Good**: [Example following rule]
+
+**Bad**: [Example violating rule]
+
+**Rationale**: [Why this convention]
+
+**Enforcement**: [Linter rule, review checklist]
+```
+
+### Feature (Deep-Dive Guide)
+
+```markdown
+---
+id: FEAT-NNNN
+title: [Feature name]
+status: current
+created: YYYY-MM-DD
+tags: [feature, domain]
+---
+
+# FEAT-NNNN: [Title]
+
+## Overview
+[Feature purpose and scope]
+
+## Usage
+[How to use/configure]
+
+## Implementation
+[Key implementation details]
+
+## Known Limitations
+[Gotchas, edge cases]
 ```
 
 ### Finding (Debug Root Cause)
@@ -168,7 +213,6 @@ title: [Short symptom description]
 status: resolved
 created: YYYY-MM-DD
 tags: [technology, bug-type]
-agent: epost-debugger
 ---
 
 # FINDING-NNNN: [Title]
@@ -180,60 +224,6 @@ agent: epost-debugger
 **Resolution**: [Fix applied]
 
 **Prevention**: [How to avoid future occurrences]
-```
-
-### Decision (Technology Choice)
-
-```markdown
----
-id: DECISION-NNNN
-title: Use X over Y
-status: accepted
-created: YYYY-MM-DD
-tags: [technology, domain]
-agent: epost-architect
----
-
-# DECISION-NNNN: [Title]
-
-**Options**: [Alternatives evaluated]
-
-**Choice**: [Selected option]
-
-**Rationale**: [Why chosen]
-
-**Trade-offs**: [Acknowledged downsides]
-```
-
-### Convention (Coding Standard)
-
-```markdown
----
-id: CONVENTION-NNNN
-title: [Convention rule]
-status: active
-created: YYYY-MM-DD
-tags: [code-style, language]
-agent: epost-reviewer
----
-
-# CONVENTION-NNNN: [Title]
-
-**Rule**: [Convention statement]
-
-**Good**:
-```code
-[Example following rule]
-```
-
-**Bad**:
-```code
-[Example violating rule]
-```
-
-**Rationale**: [Why this convention]
-
-**Enforcement**: [Linter rule, review checklist]
 ```
 
 ## Compact Writing Tips
@@ -258,15 +248,14 @@ agent: epost-reviewer
 
 **3. Check Existing**
 ```bash
-grep -r "useEffect.*loop" .knowledge/findings/
+grep -r "useEffect.*loop" docs/findings/
 # No matches, create new entry
 ```
 
 **4. Write Entry**
-> File: `.knowledge/findings/0012-object-literal-useeffect-loop.md`
+> File: `docs/findings/FINDING-0012-object-literal-useeffect-loop.md`
 
 ```markdown
-"
 ---
 id: FINDING-0012
 title: Object literal in useEffect dependency causes infinite loop
@@ -275,7 +264,6 @@ created: 2026-02-08
 updated: 2026-02-08
 tags: [react, hooks, performance, debugging]
 related: [PATTERN-005]
-agent: epost-debugger
 ---
 
 # FINDING-0012: Object literal in useEffect dependency causes infinite loop
@@ -295,32 +283,22 @@ agent: epost-debugger
 ```
 
 **5. Update Index**
-```bash
-# Get next ID
-jq '.counts.findings' .knowledge/index.json
-# Returns: 12, so next is 13
-
-# Update index (simplified - actual update via tool)
-jq '.counts.findings = 13' .knowledge/index.json
-jq '.entries += [new_entry]' .knowledge/index.json
+```json
+{
+  "id": "FINDING-0012",
+  "title": "Object literal in useEffect dependency causes infinite loop",
+  "category": "finding",
+  "status": "resolved",
+  "audience": ["agent", "human"],
+  "path": "docs/findings/FINDING-0012-object-literal-useeffect-loop.md",
+  "tags": ["react", "hooks", "performance", "debugging"],
+  "agentHint": "check when debugging infinite re-renders or useEffect dependency issues",
+  "related": ["PATTERN-005"]
+}
 ```
 
 **6. Cross-Reference**
 > Link to `PATTERN-005` (React hooks best practices)
-
-## Memory vs Knowledge Base
-
-| Use Agent Memory For | Use Knowledge Base For |
-|----------------------|------------------------|
-| Current task context | Permanent team knowledge |
-| Working notes | Validated learnings |
-| Session continuity | Cross-session insights |
-| Personal reminders | Shared patterns |
-| Auto-managed | Explicitly curated |
-
-**Agent Memory**: "Currently debugging auth, checked AuthProvider, LoginForm, useAuth hook"
-
-**Knowledge Base**: "Auth uses OAuth 2.0 PKCE flow, see ADR-0003 for rationale and PATTERN-008 for implementation"
 
 ## Integration with Other Skills
 
@@ -336,17 +314,18 @@ implementer → discover pattern → knowledge-capture → create PATTERN
 
 ### Post-Research
 ```
-research → make decision → knowledge-capture → create DECISION
+research → make decision → knowledge-capture → create ADR
 ```
 
 ### Post-Review
 ```
-code-review → identify convention → knowledge-capture → create CONVENTION
+code-review → identify convention → knowledge-capture → create CONV
 ```
 
 ### Post-Architecture
 ```
 architect → make decision → knowledge-capture → create ADR
+architect → document system → knowledge-capture → create ARCH
 ```
 
 ## File Operations
@@ -355,41 +334,23 @@ architect → make decision → knowledge-capture → create ADR
 
 ```bash
 # 1. Determine next ID
-NEXT_ID=$(jq -r '.entries[] | select(.category == "finding") | .id' .knowledge/index.json | sort | tail -1 | awk -F'-' '{print $2+1}')
+jq -r '[.entries[] | select(.category == "finding") | .id] | sort | last' docs/index.json
 
-# 2. Create file
-cat > .knowledge/findings/${NEXT_ID}-title.md <<EOF
-"
----
-id: FINDING-${NEXT_ID}
-title: Title here
-status: resolved
-created: $(date +%Y-%m-%d)
-updated: $(date +%Y-%m-%d)
-tags: [tag1, tag2]
-related: []
-agent: epost-debugger
----
+# 2. Create file in appropriate directory
+# docs/findings/FINDING-NNNN-title.md
 
-# FINDING-${NEXT_ID}: Title
-
-Content here
-EOF
-
-# 3. Update index (using tool, not direct edit)
+# 3. Update docs/index.json (add entry with agentHint + audience)
 ```
 
 ### Update Existing Entry
 
 ```bash
 # 1. Find entry
-ENTRY_PATH=$(jq -r '.entries[] | select(.id == "FINDING-0012") | .path' .knowledge/index.json)
+ENTRY_PATH=$(jq -r '.entries[] | select(.id == "FINDING-0012") | .path' docs/index.json)
 
-# 2. Edit file
-# Use Edit tool to modify .knowledge/$ENTRY_PATH
+# 2. Edit file at $ENTRY_PATH
 
-# 3. Update index timestamp
-jq '(.entries[] | select(.id == "FINDING-0012") | .updated) = "'$(date +%Y-%m-%d)'"' .knowledge/index.json
+# 3. Update index entry fields + updatedAt timestamp
 ```
 
 ## Quality Checklist
@@ -397,13 +358,13 @@ jq '(.entries[] | select(.id == "FINDING-0012") | .updated) = "'$(date +%Y-%m-%d
 Before finalizing entry:
 
 - [ ] Category appropriate for learning type
-- [ ] ID follows `CATEGORY-NNNN` format
+- [ ] ID follows `PREFIX-NNNN` format
 - [ ] Frontmatter complete (no missing fields)
 - [ ] Title descriptive (5-10 words)
 - [ ] Tags relevant and specific
 - [ ] Content concise (use bullets, code blocks)
 - [ ] Cross-references added to `related`
-- [ ] Index updated (counts + entry added)
+- [ ] Index updated (entry + agentHint + audience)
 - [ ] File saved to correct category directory
 
 ## Related Skills
@@ -413,6 +374,7 @@ Before finalizing entry:
 - `debugging` — Debugging methodology (source of findings)
 - `code-review` — Review process (source of conventions)
 - `research` — Research methodology (source of decisions)
+- `auto-improvement` — Auto-triggered when significance threshold met on session Stop
 
 ## References
 

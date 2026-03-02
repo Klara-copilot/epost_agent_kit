@@ -4,7 +4,7 @@ Run this checklist before completing any module integration work.
 
 ## Design System Compliance
 
-- [ ] All components imported from `@luz-next/klara-theme`
+- [ ] All components imported from your design system
 - [ ] No hardcoded colors (use semantic tokens: `bg-base-*`, `text-base-*`)
 - [ ] No hardcoded spacing (use numeric scale: `p-200`, `gap-100`)
 - [ ] No hardcoded border-radius (use token scale: `rounded-200`)
@@ -51,6 +51,6 @@ Run this checklist before completing any module integration work.
 
 ## Build
 
-- [ ] `nx build luz-epost` passes
-- [ ] `nx lint luz-epost` passes
+- [ ] Project build passes
+- [ ] Project lint passes
 - [ ] No TypeScript errors (`npx tsc --noEmit`)

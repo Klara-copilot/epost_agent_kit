@@ -1,7 +1,18 @@
 ---
 name: android-a11y
-description: WCAG 2.1 AA accessibility rules for Android — Compose + traditional Views/XML, TalkBack, contentDescription, touch targets, focus semantics, color contrast
+description: Use when Android accessibility issues arise — TalkBack, contentDescription, touch targets, focus order, contrast in Compose or Views/XML
 user-invocable: false
+metadata:
+  keywords:
+    - talkback
+    - android-accessibility
+    - content-description
+    - touch-target
+  agent-affinity:
+    - epost-a11y-specialist
+    - epost-implementer
+  platforms:
+    - android
 ---
 
 # Android Accessibility Skill

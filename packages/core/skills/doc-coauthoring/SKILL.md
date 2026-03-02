@@ -1,6 +1,27 @@
 ---
 name: doc-coauthoring
-description: Guide users through a structured workflow for co-authoring documentation. Use when user wants to write documentation, proposals, technical specs, decision docs, or similar structured content. This workflow helps users efficiently transfer context, refine content through iteration, and verify the doc works for readers. Trigger when user mentions writing docs, creating proposals, drafting specs, or similar documentation tasks.
+description: Use when user wants to write a doc, proposal, spec, RFC, PRD, or decision record collaboratively
+
+metadata:
+  agent-affinity:
+    - epost-documenter
+    - epost-architect
+  keywords:
+    - documentation
+    - writing
+    - proposal
+    - spec
+    - technical-writing
+    - collaboration
+    - prd
+    - rfc
+    - decision
+    - write
+    - draft
+    - coauthor
+    - adr
+  platforms:
+    - all
 ---
 
 # Doc Co-Authoring Workflow
@@ -285,9 +306,6 @@ Indicate intention to fix these gaps.
 
 Loop back to refinement for problematic sections.
 
-"
----
-
 **If no access to sub-agents (e.g., claude.ai web interface):**
 
 The user will need to do the testing manually.
@@ -324,9 +342,6 @@ Also ask Reader Claude:
 Ask what Reader Claude got wrong or struggled with. Indicate intention to fix those gaps.
 
 Loop back to refinement for any problematic sections.
-
-"
----
 
 ### Exit Condition (Both Approaches)
 

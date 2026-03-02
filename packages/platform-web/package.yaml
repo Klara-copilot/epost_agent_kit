@@ -8,8 +8,7 @@ dependencies:
   - core
 
 provides:
-  agents:
-    - epost-web-developer
+  agents: []
   skills:
     - web-nextjs
     - web-frontend
@@ -17,8 +16,10 @@ provides:
     - web-modules
     - web-prototype
     - web-rag
+    - web-i18n
+    - web-auth
+    - web-testing
 files:
-  agents/: agents/
   skills/: skills/
 
 settings_strategy: merge

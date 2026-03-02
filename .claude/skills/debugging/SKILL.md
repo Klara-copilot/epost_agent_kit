@@ -1,15 +1,34 @@
 ---
 name: debugging
-description: Systematic debugging methodology with root cause analysis and fix validation
+description: Use when something is broken — errors, bugs, crashes, exceptions, unexpected behavior, stack traces
 user-invocable: false
+tier: core
 context: fork
 agent: epost-debugger
 
 metadata:
-  agent-affinity: "[epost-debugger, epost-implementer]"
-  keywords: "[debug, error, bug, troubleshoot, root-cause, stack-trace, logging]"
-  platforms: "[all]"
-  triggers: "["/debug", "error", "bug", "crash", "exception"]""
+  agent-affinity:
+    - epost-debugger
+    - epost-implementer
+  keywords:
+    - debug
+    - error
+    - bug
+    - troubleshoot
+    - root-cause
+    - stack-trace
+    - logging
+    - crash
+    - exception
+    - fix
+  platforms:
+    - all
+  triggers:
+    - /debug
+    - error
+    - bug
+    - crash
+    - exception
 ---
 
 # Debugging Skill
@@ -49,10 +68,8 @@ User uses /debug, reports errors.
 - Step reproduction
 
 ### Root Cause Analysis
-- 5 Whys technique
-- Fishbone diagrams
-- Timeline analysis
-- Code flow tracing
+
+See `problem-solving` for root cause analysis techniques (5 Whys, bisection, inversion).
 
 ### Fix Validation
 - Regression testing
@@ -130,19 +147,27 @@ logger.info('User action', {
 - Assertions: Programmer errors (should never happen)
 - Exceptions: Runtime problems (can happen legitimately)
 
-## Root Cause Tracing
+### State Diagram Tracing
 
-### The 5-Step Method
-1. **Observe**: What exactly is wrong?
-2. **Question**: Why is this happening?
-3. **Hypothesis**: What could cause this?
-4. **Isolate**: Test each hypothesis
-5. **Verify**: Confirm root cause and fix
+When debugging **state-related bugs** (unexpected transitions, stuck states, race conditions):
 
-### Binary Search for Root Cause
-- Cut code/config in half
-- Does symptom persist? Keep smaller half, discard larger
-- Repeat until isolated to single cause
+1. **Draw the ACTUAL state machine** from code — read every `if/switch/state=` and extract what ACTUALLY happens
+2. **Draw the EXPECTED state machine** from requirements or docs
+3. **Overlay and diff** — mismatches reveal the bug:
+   - Missing transitions (no path from state A to B)
+   - Unguarded transitions (state changes without preconditions)
+   - Dead states (reachable but no exit — component gets "stuck")
+   - Race conditions (two transitions competing for same state)
+
+```
+ACTUAL:   [LOADING] ──(timeout)──▸ [LOADING]     ← stuck! no error path
+EXPECTED: [LOADING] ──(timeout)──▸ [ERROR] ──(retry)──▸ [LOADING]
+MISSING:  timeout → ERROR transition
+```
+
+Applies to: React `useState`/`useReducer`, iOS view lifecycle, Android Compose state, async/Promise chains, WebSocket connections.
+
+See `planning/references/state-machine-guide.md` for notation and common patterns.
 
 ## Verification Checklist
 - [ ] Symptom reproduced consistently
@@ -159,17 +184,36 @@ logger.info('User action', {
 - Source maps (correct line numbers)
 - Test suite (regression testing)
 
-## Post-Debug Knowledge Capture
+## References
+- `references/debugging-flow.dot` — Authoritative debugging process flowchart
+- `references/condition-based-waiting.md` — Patterns for replacing `sleep()` with condition polling
 
-After resolving a significant bug, persist the learning:
-1. If root cause was non-obvious → write to `.knowledge/findings/`
-2. If a new debugging pattern emerged → write to `.knowledge/patterns/`
-3. If an architectural decision was made during fixing → write to `.knowledge/adrs/`
+Use `knowledge-capture` skill to persist learnings after this task.
 
-Use `knowledge-capture` skill for templates and the `knowledge-base` skill for storage format.
+## Debugging Discipline
+
+> **IRON LAW: NO FIXES WITHOUT ROOT CAUSE FIRST.**
+>
+> Applying a fix before identifying root cause is not debugging — it is guessing. Guesses compound into technical debt.
+
+See `verification-before-completion` skill for anti-rationalization table, red flags, and the full verification gate protocol.
+
+## Sub-Skill Routing
+
+When this skill is active and user intent matches a sub-skill, delegate:
+
+| Intent | Sub-Skill | When |
+|--------|-----------|------|
+| Interactive debug | `debug` | `/debug`, "debug this", trace/inspect |
+| Fix broken code | `fix` | `/fix`, "fix this", error/crash/failing |
+| Fix deeply | `fix-deep` | `/fix-deep`, complex multi-file bugs |
+| Fix CI pipeline | `fix-ci` | `/fix-ci`, CI/CD failures, build pipeline |
+| Fix UI issues | `fix-ui` | `/fix-ui`, visual bugs, layout broken |
 
 ### Related Skills
-- `knowledge-base` — Knowledge storage format and `.knowledge/` directory
+- `knowledge-base` — Knowledge storage format and `docs/` directory
 - `knowledge-capture` — Post-task capture workflow
 - `problem-solving` — Root cause analysis techniques
 - `error-recovery` — Error handling and recovery patterns
+- `verification-before-completion` — Verify fixes before claiming done
+- `auto-improvement` — Error metrics auto-captured by session-metrics hook on Stop

@@ -8,13 +8,11 @@ dependencies:
   - core
 
 provides:
-  agents:
-    - epost-backend-developer
+  agents: []
   skills:
     - backend-javaee
     - backend-databases
 files:
-  agents/: agents/
   skills/: skills/
 
 settings_strategy: merge

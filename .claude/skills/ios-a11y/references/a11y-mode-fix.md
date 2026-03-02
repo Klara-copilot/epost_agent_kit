@@ -6,7 +6,7 @@ user-invocable: false
 
 # Accessibility Fix Mode
 
-Activated by: `/fix:a11y [<n> | #<id>]` command.
+Activated by: `/fix-a11y [<n> | #<id>]` command.
 
 ## Input
 
@@ -69,7 +69,7 @@ Receives finding objects from `.epost-data/a11y/known-findings.json`:
 5. **Apply fix** — Use `fix_template` to determine minimal change
 6. **Generate diff** — Unified diff format with 3 lines context
 7. **Generate summary** — Status, confidence, lines changed
-8. **Suggest close** — After fix is applied and verified, suggest: `Run /audit:a11y-close {id} to mark as resolved`
+8. **Suggest close** — After fix is applied and verified, suggest: `Run /audit-close-a11y {id} to mark as resolved`
 
 ## Constraints
 

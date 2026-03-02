@@ -2,7 +2,18 @@
 name: kit-skill-development
 description: This skill should be used when the user wants to "create a skill", "add a skill to plugin", "write a new skill", "improve skill description", "organize skill content", or needs guidance on skill structure, progressive disclosure, or skill development best practices for Claude Code plugins.
 disable-model-invocation: true
-"
+metadata:
+  keywords:
+    - skill
+    - create-skill
+    - optimize-skill
+    - frontmatter
+    - progressive-disclosure
+  agent-affinity:
+    - epost-implementer
+    - epost-architect
+  platforms:
+    - all
 ---
 
 # Skill Development for Claude Code Plugins
@@ -77,12 +88,35 @@ skill-name/
     └── validate.sh
 ```
 
+## CSO: Cognitive Skill Optimization
+
+Skills only work if models follow the body, not just the description. CSO prevents the "Description Trap" — where a description that summarizes workflow causes the model to skip the skill body entirely.
+
+**Key rules:**
+- Description = triggering conditions ONLY (when/who/situation), never workflow steps
+- Discipline skills MUST include: Iron Law block, Anti-Rationalization table, Red Flags list
+- Close every loophole explicitly — models find workarounds to vague instructions
+- Add foundational principle: "Violating the letter of the rules IS violating the spirit"
+
+See `references/cso-principles.md` for the full guide with examples, bad/good descriptions, token budgets, and anti-rationalization table format.
+
 ## agentskills.io Compliance Rules
 
 - `SKILL.md` MUST be in skill root (only `.md` in root)
 - Reference docs → `references/`, data files → `assets/`, scripts → `scripts/`
 - `name:` MUST be lowercase with hyphens only — **no `/`, spaces, or underscores** per spec
   (Note: epost-kit uses `/` as a namespace extension, e.g. `ios-a11y` — intentional divergence)
+
+## Sub-Skill Routing
+
+When this skill is active and user intent matches a sub-skill, delegate:
+
+| Intent | Sub-Skill | When |
+|--------|-----------|------|
+| Add new skill | `kit-add-skill` | `/kit-add-skill`, create skill |
+| Optimize skill | `kit-optimize-skill` | `/kit-optimize-skill`, improve existing |
+| Add new agent | `kit-add-agent` | `/kit-add-agent`, create agent |
+| Add new hook | `kit-add-hook` | `/kit-add-hook`, create hook |
 
 ## Reference Files
 

@@ -4,17 +4,17 @@ On every user prompt involving a dev task, sense context before acting:
 1. Check git state (branch, staged/unstaged files)
 2. Detect platform from changed file extensions (`.tsx`→web, `.swift`→ios, `.kt`→android, `.java`→backend)
 3. Check for active plans in `./plans/`
-4. Route to best-fit command based on intent + context
+4. Route to best-fit skill based on intent + context
 
 **This applies to every prompt — not just `/epost` invocations.**
 
 ### Prompt Classification
 - **Dev task** (action verbs: cook, fix, plan, test, debug, etc.) → route via intent map below
-- **Kit question** ("which agent", "list commands", "our conventions") → route to `epost-guide`
+- **Kit question** ("which agent", "list skills", "our conventions") → route to `epost-orchestrator`
 - **External tech question** ("how does React...", "what is gRPC") → route to `epost-researcher`
 - **Conversational** (greetings, opinions, clarifications) → respond directly, no routing
 
-### Intent → Command Map
+### Intent → Skill Map
 
 | Intent | Signal Words | Routes To |
 |--------|-------------|-----------|
@@ -23,12 +23,12 @@ On every user prompt involving a dev task, sense context before acting:
 | Plan | plan, design, architect, spec, roadmap | `/plan` |
 | Test | test, coverage, validate, verify | `/test` |
 | Debug | debug, trace, inspect, diagnose | `/debug` |
-| Review | review, check code, audit | `/review:code` |
-| Git | commit, push, pr, merge, done, ship | `/git:commit`, `/git:push`, `/git:pr` |
-| Docs | docs, document, write docs | `/docs:init` or `/docs:update` |
+| Review | review, check code, audit | `/review-code` |
+| Git | commit, push, pr, merge, done, ship | `/git-commit`, `/git-push`, `/git-pr` |
+| Docs | docs, document, write docs | `/docs-init` or `/docs-update` |
 | Scaffold | bootstrap, init, scaffold, new project, new module | `/bootstrap` |
 | Convert | convert, prototype, migrate | `/convert` |
-| A11y | a11y, accessibility, wcag | `/fix:a11y` or `/review:a11y` |
+| A11y | a11y, accessibility, wcag | `/fix-a11y` or `/review-a11y` |
 
 ### Context Boost Rules
 - TypeScript/build errors detected → always route to `/fix` first

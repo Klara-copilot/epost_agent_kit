@@ -67,7 +67,7 @@ argument-hint: [pr-number] [priority] [assignee]
 
 ```yaml
 ---
-agent: epost-web-developer
+agent: epost-implementer
 ---
 ```
 

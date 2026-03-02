@@ -7,11 +7,7 @@
 - **Testing**: XCTest, XCUITest
 - **Build**: Xcode, XcodeBuildMCP
 
-### Commands
-- `/cook` — Implement features (auto-detects iOS from `.swift` files)
-- `/test` — Run tests (auto-detects iOS: XCTest, XCUITest)
-- `/debug` — Debug crashes, concurrency, SwiftUI state (auto-detects iOS)
-- `/simulator` — Manage iOS simulators
-
-### Agents
-- `epost-ios-developer` — iOS platform specialist
+### Skills
+- `ios-development` — Swift 6, SwiftUI/UIKit patterns, Xcode builds
+- `ios-ui-lib` — iOS theme SwiftUI components and design tokens
+- `ios-rag` — iOS codebase vector search

@@ -1,114 +1,122 @@
 ---
 name: knowledge-base
-description: Project knowledge management — ADRs, learned patterns, debug findings, decision history. Use when agents need to persist knowledge for future sessions.
+description: Use when recording ADRs, saving debug findings, persisting patterns, or referencing past decisions in docs/
 user-invocable: false
 
 metadata:
-  agent-affinity: "[epost-architect, epost-debugger, epost-documenter, epost-implementer]"
-  keywords: "[knowledge, adr, decision, pattern, learning, memory, persist, capture]"
-  platforms: "[all]"
-  triggers: "["ADR", "decision record", "learned pattern", "save finding"]""
+  agent-affinity: [epost-architect, epost-debugger, epost-documenter, epost-implementer]
+  keywords: [knowledge, adr, decision, pattern, learning, memory, persist, capture]
+  platforms: [all]
+  triggers: ["ADR", "decision record", "learned pattern", "save finding"]
 ---
 
 # Knowledge Base Skill
 
 ## Purpose
 
-Shared project knowledge management system for persisting architectural decisions, learned patterns, debug findings, technical decisions, and coding conventions across sessions.
+Shared project knowledge management system for persisting architectural decisions, learned patterns, debug findings, coding conventions, system architecture docs, and feature deep-dives across sessions.
 
 ## When Active
 
 - Recording architectural decisions
 - Capturing implementation patterns
 - Documenting debugging findings
-- Persisting technical decisions
 - Establishing coding conventions
+- Documenting system architecture
+- Writing feature deep-dives
 
 ## Directory Structure
 
 ```
-.knowledge/                    # Project root (git-tracked)
-├── index.json                 # Machine-readable index
-├── adrs/                      # Architecture Decision Records
-│   └── 0001-title.md
-├── patterns/                  # Implementation patterns
-│   └── 0001-title.md
-├── findings/                  # Debug findings and solutions
-│   └── 0001-title.md
-├── decisions/                 # Technical decisions
-│   └── 0001-title.md
-└── conventions/               # Coding conventions
-    └── 0001-title.md
+docs/                           # Project root (git-tracked)
+├── index.json                  # Machine-readable registry with agentHint
+├── decisions/                  # Architectural decisions (ADRs)
+│   └── ADR-NNNN-title.md
+├── architecture/               # System structure docs
+│   └── ARCH-NNNN-title.md
+├── patterns/                   # Reusable code patterns
+│   └── PATTERN-NNNN-title.md
+├── conventions/                # Coding rules
+│   └── CONV-NNNN-title.md
+├── features/                   # Feature deep-dives
+│   └── FEAT-NNNN-title.md
+└── findings/                   # Debug insights, gotchas
+    └── FINDING-NNNN-title.md
 ```
 
 ## Knowledge Categories
 
-| Category | Purpose | When to Record |
-|----------|---------|----------------|
-| ADRs | Architectural choices with rationale | Non-trivial architectural decisions |
-| Patterns | Reusable implementation approaches | New code patterns emerge |
-| Findings | Debug root causes and resolutions | Non-obvious bugs fixed |
-| Decisions | Technology/library choices | Evaluation leads to choice |
-| Conventions | Team coding standards | Inconsistencies resolved |
+| Category | ID Prefix | Purpose | When to Record |
+|----------|-----------|---------|----------------|
+| decision | `ADR-NNNN` | Architectural choices with rationale | Non-trivial architectural decisions |
+| architecture | `ARCH-NNNN` | System structure and component relationships | Documenting system design |
+| pattern | `PATTERN-NNNN` | Reusable implementation approaches | New code patterns emerge |
+| convention | `CONV-NNNN` | Coding rules and constraints | Inconsistencies resolved |
+| feature | `FEAT-NNNN` | Feature-specific deep-dives | Complex feature needs documentation |
+| finding | `FINDING-NNNN` | Debug root causes, gotchas | Non-obvious bugs fixed |
 
 ## File Format
 
 ### Naming Convention
-`NNNN-short-kebab-title.md` where NNNN is zero-padded sequential ID (0001, 0002, etc.)
+`PREFIX-NNNN-short-kebab-title.md` where PREFIX matches the category ID prefix.
+
+Examples:
+- `ADR-0001-nextjs-app-router.md`
+- `ARCH-0001-system-overview.md`
+- `CONV-0001-named-exports.md`
 
 ### Frontmatter Schema
 
 ```yaml
 ---
-id: CATEGORY-NNNN
+id: PREFIX-NNNN
 title: Short descriptive title
 status: proposed|accepted|deprecated|superseded
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 tags: [tag1, tag2]
 related: [ID1, ID2]
-agent: agent-name
-supersedes: ID (optional)
-superseded-by: ID (optional)
+supersedes: ID (optional, ADRs only)
+superseded-by: ID (optional, ADRs only)
 ---
 ```
 
-### ID Prefixes by Category
-
-- ADRs: `ADR-0001`
-- Patterns: `PATTERN-0001`
-- Findings: `FINDING-0001`
-- Decisions: `DECISION-0001`
-- Conventions: `CONVENTION-0001`
-
 ## Index Format
 
-The `.knowledge/index.json` file provides fast lookups:
+The `docs/index.json` file provides fast lookups:
 
 ```json
 {
-  "version": "1.0.0",
-  "counts": {
-    "adrs": 0,
-    "patterns": 0,
-    "findings": 0,
-    "decisions": 0,
-    "conventions": 0
+  "schemaVersion": "1.0.0",
+  "description": "Project documentation registry",
+  "updatedAt": "2026-02-28",
+  "categories": {
+    "decision": "Architectural choices and reasoning (ADRs)",
+    "architecture": "System structure, libs, data flow",
+    "pattern": "Reusable code patterns with examples",
+    "convention": "Coding rules and constraints",
+    "feature": "Deep-dive guides for specific features",
+    "finding": "Discovered gotchas and debug insights"
   },
   "entries": [{
     "id": "ADR-0001",
-    "category": "adr",
-    "title": "Use Next.js App Router for routing",
+    "title": "Use Next.js App Router",
+    "category": "decision",
     "status": "accepted",
-    "created": "2026-02-08",
-    "updated": "2026-02-08",
-    "tags": ["nextjs", "routing", "architecture"],
-    "path": "adrs/0001-use-nextjs-app-router.md",
-    "related": ["PATTERN-003"],
-    "agent": "epost-architect"
+    "audience": ["agent", "human"],
+    "path": "docs/decisions/ADR-0001-nextjs-app-router.md",
+    "tags": ["nextjs", "routing"],
+    "agentHint": "check before choosing routing strategy or adding pages",
+    "related": ["ARCH-0001"]
   }]
 }
 ```
+
+### Key Fields
+
+- **`agentHint`** — Single sentence: when should an agent check this entry. Matched against current task keywords.
+- **`audience`** — `["agent", "human"]` or `["agent"]` for agent-only entries.
+- **`path`** — Relative to project root (e.g., `docs/decisions/ADR-0001.md`).
 
 ## Significance Threshold
 
@@ -157,9 +165,20 @@ This creates a knowledge graph linking related concepts.
 
 1. **During implementation**: Discover patterns → capture to `patterns/`
 2. **During debugging**: Find root cause → capture to `findings/`
-3. **During research**: Make technology choice → capture to `decisions/`
+3. **During architecture**: Make design choice → capture to `decisions/`
 4. **During review**: Identify convention → capture to `conventions/`
-5. **During architecture**: Make design choice → capture to `adrs/`
+5. **During documentation**: Document system structure → capture to `architecture/`
+6. **During feature work**: Complex feature needs guide → capture to `features/`
+
+## Sub-Skill Routing
+
+When this skill is active and user intent matches a sub-skill, delegate:
+
+| Intent | Sub-Skill | When |
+|--------|-----------|------|
+| Capture knowledge | `knowledge-capture` | After debug/plan, persist learning |
+| Retrieve knowledge | `knowledge-retrieval` | Before planning/research, search internal |
+| Store data | `data-store` | `.epost-data/` directory patterns |
 
 ## Related Skills
 

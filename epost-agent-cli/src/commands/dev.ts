@@ -105,32 +105,24 @@ export async function runDev(opts: DevWatcherOptions): Promise<void> {
           if (await fileExists(srcFile)) {
             // Determine file type for adapter transformation
             const isAgent = destSubDir.startsWith("agents");
-            const isCommand = destSubDir.startsWith("commands");
             const isSkill = destSubDir.startsWith("skills");
             const isHook = destSubDir.startsWith("hooks");
             const isMd = relativeInSrc.endsWith(".md");
 
-            // Resolve actual dest dir (commands→prompts for Copilot)
-            const actualDestDir = isCommand
-              ? adapter.commandDir()
-              : isHook
-                ? adapter.hookScriptDir()
-                : destSubDir;
+            const actualDestDir = isHook
+              ? adapter.hookScriptDir()
+              : destSubDir;
 
-            if (isMd && (isAgent || isCommand || isSkill)) {
+            if (isMd && (isAgent || isSkill)) {
               // Transform through adapter
               const content = await readFile(srcFile, "utf-8");
               let result: { content: string; filename: string };
               if (isAgent) {
                 result = adapter.transformAgent(content, basename(relativeInSrc));
-              } else if (isCommand) {
-                result = adapter.transformCommand(content, relativeInSrc);
               } else {
                 result = { content: adapter.transformSkill(content), filename: relativeInSrc };
               }
-              const destFile = isCommand
-                ? join(installDir, actualDestDir, result.filename)
-                : join(installDir, actualDestDir, dirname(relativeInSrc), result.filename);
+              const destFile = join(installDir, actualDestDir, dirname(relativeInSrc), result.filename);
               await mkdir(dirname(destFile), { recursive: true });
               await writeFile(destFile, result.content, "utf-8");
               logger.info(

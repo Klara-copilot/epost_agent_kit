@@ -8,14 +8,13 @@ dependencies:
   - core
 
 provides:
-  agents:
-    - epost-ios-developer
+  agents: []
   skills:
     - ios-development
     - ios-ui-lib
     - ios-rag
+    - simulator
 files:
-  agents/: agents/
   skills/: skills/
 
 settings_strategy: merge

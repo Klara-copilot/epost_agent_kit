@@ -31,9 +31,10 @@ program
     await runNew({ ...program.opts(), ...opts });
   });
 
-// Command: init - Initialize in existing project
+// Command: init - Initialize epost-agent-kit (includes guided wizard for first-time setup)
 program
   .command("init")
+  .alias("onboard")
   .description("Initialize epost-agent-kit in existing project")
   .option("--kit <name>", "Kit template to use (legacy mode)")
   .option("--profile <name>", "Developer profile (e.g., web-b2b, ios-b2c)")
@@ -151,17 +152,6 @@ packageCmd
   .action(async (name, opts) => {
     const { runPackageRemove } = await import("./commands/package.js");
     await runPackageRemove({ ...program.opts(), ...opts, name });
-  });
-
-// ─── Onboard Command ───
-
-program
-  .command("onboard")
-  .description("Guided first-time setup wizard for new developers")
-  .option("--dir <path>", "Target project directory")
-  .action(async (opts) => {
-    const { runOnboard } = await import("./commands/onboard.js");
-    await runOnboard({ ...program.opts(), ...opts });
   });
 
 // ─── Workspace Commands ───

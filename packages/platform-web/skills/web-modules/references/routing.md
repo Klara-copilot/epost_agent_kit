@@ -73,7 +73,7 @@ export default function LetterDetailPage({
 ## Navigation
 
 ```tsx
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/navigation'; // your app's navigation.ts wrapper
 import { useParams } from 'next/navigation';
 
 // Navigate programmatically

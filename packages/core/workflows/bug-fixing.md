@@ -7,7 +7,7 @@ User reports a bug or issue.
 
 ### 1. Code Search
 **Command**: `/scout [search query]`
-**Agent**: epost-scout
+**Agent**: Explore agent
 **Output**: List of relevant files
 
 The scout agent:
@@ -58,7 +58,7 @@ The reviewer agent:
 - Validates test coverage
 
 ### 6. Commit
-**Command**: `/git:commit`
+**Command**: `/git-commit`
 **Agent**: epost-git-manager
 **Output**: Commit with `fix:` type
 
@@ -66,7 +66,7 @@ The reviewer agent:
 ```mermaid
 graph LR
     A[Bug Report] --> B[/scout command]
-    B --> C[epost-scout]
+    B --> C[Explore agent]
     C --> D[Relevant files found]
     D --> E[/debug command]
     E --> F[epost-debugger]
@@ -78,7 +78,7 @@ graph LR
     K -->|No| H
     K -->|Yes| L[/review command]
     L --> M[epost-reviewer]
-    M --> N[/git:commit command]
+    M --> N[/git-commit command]
     N --> O[epost-git-manager]
     O --> P[Fixed and committed]
 ```

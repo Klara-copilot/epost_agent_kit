@@ -1,13 +1,14 @@
 ---
 name: hub-context
-description: Context sensing protocol for the /epost smart hub — gathers git state, platform, errors, and session hints to inform routing decisions.
+description: Use when routing user prompts to the right skill or agent. Senses git state, detects platform, classifies intent, and applies context boosts before dispatching.
 user-invocable: false
+tier: core
 
 metadata:
-  agent-affinity: "[epost-orchestrator]"
-  keywords: "[context, hub, routing, git-state, platform-detection, error-signals]"
-  platforms: "[all]"
-  triggers: "[]"
+  agent-affinity: [epost-orchestrator]
+  keywords: [context, hub, routing, git-state, platform-detection, error-signals]
+  platforms: [all]
+  triggers: []
 ---
 
 # Hub Context Skill
@@ -92,12 +93,42 @@ The routing engine uses context to boost intent categories:
 | Context Signal | Boosts Category | Example Routing Effect |
 |---------------|----------------|----------------------|
 | TypeScript/build errors detected | **Fix** | "what's wrong?" → `/fix` (auto-detects types) |
-| Staged files present | **Git** or **Review** | "I'm done" → `/git:commit` |
+| Staged files present | **Git** or **Review** | "I'm done" → `/git-commit` |
 | Active plan file exists | **Build** | "continue" → `/cook` with plan context |
 | Test failures detected | **Fix** or **Test** | "help" → `/fix` (auto-detects test failures) |
 | Feature branch, no changes | **Build** or **Plan** | "what's next?" → continue from plan |
 | Clean main branch | **Plan** or **Explore** | show contextual menu |
 | Merge conflicts detected | **Fix** | auto-suggest conflict resolution |
+
+## Smart Routing
+
+### Prompt Classification
+- **Dev task** (action verbs: cook, fix, plan, test, debug, etc.) → route via intent map
+- **Kit question** ("which agent", "list commands", "our conventions") → `epost-orchestrator`
+- **External tech question** ("how does React...", "what is gRPC") → `epost-researcher`
+- **Conversational** (greetings, opinions, clarifications) → respond directly, no routing
+
+### Intent → Skill Map
+
+| Intent | Signal Words | Routes To |
+|--------|-------------|-----------|
+| Build | cook, implement, build, create, add, make, continue | `/cook` skill |
+| Fix | fix, broken, error, crash, failing, what's wrong | `/fix` skill |
+| Plan | plan, design, architect, spec, roadmap | `/plan` skill |
+| Test | test, coverage, validate, verify | `/test` skill |
+| Debug | debug, trace, inspect, diagnose | `/debug` skill |
+| Review | review, check code, audit | `/review-code` skill |
+| Git | commit, push, pr, merge, done, ship | `/git-commit`, `/git-push`, `/git-pr` |
+| Docs | docs, document, write docs | `/docs-init` or `/docs-update` |
+| Scaffold | bootstrap, init, scaffold, new project, new module | `/bootstrap` skill |
+| Convert | convert, prototype, migrate | `/convert` skill |
+| A11y | a11y, accessibility, wcag | `/fix-a11y` or `/review-a11y` |
+
+### Routing Rules
+- If user types a slash command explicitly → execute it directly, skip routing
+- If ambiguous → use context boost to break tie; if still ambiguous → ask user (max 1 question)
+- If multi-intent ("plan and build X") → delegate to `epost-orchestrator`
+- Platform detection delegates to `skill-discovery` — never hardcode platform logic here
 
 ## Rules
 

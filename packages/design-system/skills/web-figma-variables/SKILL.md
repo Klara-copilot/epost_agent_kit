@@ -1,12 +1,12 @@
 ---
 name: web-figma-variables
-description: Vien 2.0 design system variable architecture — 1,059 variables across 42 collections with full reference chain analysis
+description: Use when working with Vien 2.0 Figma variables, design tokens, semantic colors, or multi-brand theming
 user-invocable: false
 
 metadata:
-  agent-affinity: "[epost-muji]"
-  keywords: "[figma, variables, tokens, design-system, semantic]"
-  platforms: "[web]""
+  agent-affinity: [epost-muji]
+  keywords: [figma, variables, tokens, design-system, semantic]
+  platforms: [web]
 ---
 
 # Figma Variables Architecture Skill

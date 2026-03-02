@@ -1,12 +1,12 @@
 ---
 name: android-development
-description: Android development patterns with Kotlin and Jetpack Compose. Includes templates, patterns, and test examples for building production-ready Android apps.
+description: Use when working with .kt/.kts files, Gradle builds, Jetpack Compose, or Android-specific features
 
 metadata:
-  agent-affinity: "[epost-android-developer, epost-implementer]"
-  keywords: "[android, kotlin, jetpack-compose, mvvm, hilt, room, retrofit]"
-  platforms: "[android]"
-  triggers: "[".kt", ".kts", "build.gradle", "AndroidManifest.xml", "android"]""
+  agent-affinity: [epost-implementer, epost-tester, epost-debugger, epost-reviewer]
+  keywords: [android, kotlin, jetpack-compose, mvvm, hilt, room, retrofit]
+  platforms: [android]
+  triggers: [".kt", ".kts", "build.gradle", "AndroidManifest.xml", "android"]
 ---
 
 # Android Development Skill
@@ -127,86 +127,9 @@ Testing patterns:
 - **Compose Testing**: UI testing with semantics
 - **Espresso**: Android UI testing (if needed)
 
-## Usage Instructions
+## Usage Instructions & Version Compatibility
 
-### 1. Starting New Android Project
-
-Use app module template:
-```kotlin
-// Copy build-gradle-app.kts
-// Configure namespace, applicationId, version
-// Add version catalog (libs.versions.toml)
-```
-
-### 2. Creating a Feature
-
-Use the template stack:
-```kotlin
-// 1. Define domain model (data class)
-// 2. Create Repository interface (from hilt-module-template.kt)
-// 3. Implement ViewModel (from viewmodel-template.kt)
-// 4. Build Compose UI (from compose-screen-template.kt)
-// 5. Add navigation (from navigation-template.kt)
-// 6. Write tests (from test examples)
-```
-
-### 3. Setting Up Database
-
-Use Room template:
-```kotlin
-// Copy room-entity-dao-template.kt
-// Define entities with @Entity
-// Create DAOs with suspend functions and Flow
-// Add migrations for schema changes
-// Inject via Hilt module
-```
-
-### 4. Setting Up API Client
-
-Use Retrofit template:
-```kotlin
-// Copy retrofit-service-template.kt
-// Define API endpoints
-// Add interceptors (auth, logging)
-// Use Kotlinx Serialization
-// Wrap responses in Result type
-```
-
-### 5. Implementing Error Handling
-
-Follow error-handling.md:
-```kotlin
-// Use Result<T> wrapper
-// Define domain exceptions
-// Convert to user messages
-// Add retry logic for network calls
-// Validate input early
-```
-
-### 6. Writing Tests
-
-Use test templates:
-```kotlin
-// ViewModels: Test state transitions with Turbine
-// Repositories: Use fakes or MockK
-// UI: Test semantics, interactions, accessibility
-// Aim for 80% overall coverage, 90% for ViewModels
-```
-
-## Version Compatibility
-
-**Tested with:**
-- Kotlin 2.0.21+
-- Compose BOM 2024.12.01
-- Android Gradle Plugin 8.7.3
-- Hilt 2.51
-- Room 2.6.1
-- Retrofit 2.9.0
-
-**Minimum Requirements:**
-- Android Studio Ladybug | 2024.2.1+
-- Gradle 8.9+
-- JDK 17+
+See `references/usage-and-compatibility.md` for step-by-step setup guides (project, features, database, API, error handling, tests) and version compatibility matrix.
 
 ## Best Practices
 
@@ -219,7 +142,7 @@ Use test templates:
 7. **Handle errors gracefully** - Always provide user-friendly messages
 8. **Test each layer independently** - Mock dependencies appropriately
 9. **Use Material 3 design** - Follow system theme and dynamic colors
-10. **Optimize for performance** - Profile with Instruments, minimize recomposition
+10. **Optimize for performance** - Profile with Android Studio Profiler, minimize recomposition
 
 ## Common Patterns
 
@@ -277,7 +200,38 @@ class MyRepository @Inject constructor(
 - [Material 3 Design](https://m3.material.io)
 - [Now in Android Sample](https://github.com/android/nowinandroid)
 
-"
----
+## Build Commands
 
-**Status**: Production-ready with comprehensive templates and patterns
+```bash
+./gradlew assembleDebug       # Build debug APK
+./gradlew installDebug        # Install on device
+./gradlew build               # Full build with tests
+./gradlew test                # Run unit tests
+./gradlew connectedAndroidTest # Run instrumentation tests
+./gradlew jacocoTestReport    # Generate coverage report
+./gradlew lint                # Run Android linter
+./gradlew ktlintCheck         # Run Kotlin linter
+```
+
+## Coverage Goals
+- **Minimum**: 80% overall coverage
+- **ViewModels**: 90%+ (business logic)
+- **Utilities**: 95%+ (pure functions)
+- **UI**: 70%+ (composables)
+
+## Sub-Skill Routing
+
+When this skill is active and user intent matches a sub-skill, delegate:
+
+| Intent | Sub-Skill | When |
+|--------|-----------|------|
+| UI components | `android-ui-lib` | Theme Compose components, design tokens |
+
+## Rules
+- Use StateFlow, not LiveData for state management
+- Coroutines for async operations and Flow for data streams
+- Jetpack Compose for all UI (no XML layouts)
+- Use MockK for mocking in tests
+- Keep composables small and focused
+- Use Material 3 design system
+- Support both light and dark themes

@@ -1,13 +1,13 @@
 ---
 name: ios-development
-description: Modern iOS development with Swift 6, SwiftUI, UIKit, and XcodeBuildMCP integration
+description: Use when working with .swift files, Xcode projects, SwiftUI/UIKit, or iOS-specific features
 user-invocable: false
 
 metadata:
-  agent-affinity: "[epost-ios-developer, epost-implementer, epost-tester]"
-  keywords: "[ios, swift, swiftui, uikit, xcode, iphone, ipad, mobile]"
-  platforms: "[ios]"
-  triggers: "[".swift", ".xcodeproj", ".xcworkspace", "ios", "iphone", "ipad"]""
+  agent-affinity: [epost-implementer, epost-tester, epost-debugger, epost-reviewer]
+  keywords: [ios, swift, swiftui, uikit, xcode, iphone, ipad, mobile]
+  platforms: [ios]
+  triggers: [".swift", ".xcodeproj", ".xcworkspace", "ios", "iphone", "ipad"]
 ---
 
 # iOS Development Skill
@@ -78,57 +78,6 @@ When XcodeBuildMCP is available, this skill provides autonomous Xcode operations
 ### Prerequisites
 - macOS 14.5+ with Xcode 16.x+
 - XcodeBuildMCP server: `claude mcp add XcodeBuildMCP npx xcodebuildmcp@latest`
-
-## Expertise
-
-### Swift 6 Concurrency
-- async/await patterns
-- Sendable protocol
-- Actors for thread-safety
-- Task cancellation
-- Structured concurrency
-
-### SwiftUI vs UIKit
-- SwiftUI for new features
-- UIKit for complex views
-- SwiftUI/UIKit interoperability
-- UIViewRepresentable/UIViewControllerRepresentable
-
-### Architecture
-- MVVM pattern
-- The Composable Architecture (TCA)
-- State management with @Observable
-- Dependency injection
-
-### Navigation
-- NavigationStack (iOS 16+)
-- NavigationPath
-- Sheet presentations
-- Full-screen covers
-
-### Networking
-- async URLSession
-- Codable for JSON
-- Error handling
-- Retry logic
-
-### Persistence
-- SwiftData (iOS 17+)
-- Core Data fallback
-- UserDefaults for simple data
-- Keychain for secrets
-
-### Testing
-- XCTest for unit tests
-- XCUITest for UI tests
-- Mocking dependencies
-- Test doubles
-
-### Performance
-- Instruments profiling
-- Memory management
-- Drawing optimization
-- Lazy loading
 
 ## Patterns
 
@@ -214,3 +163,43 @@ mcp__xcodebuildmcp__tap({ simulatorId: 'UUID', x: 100, y: 200 })
 - SwiftData for persistence
 - XCTest/XCUITest for testing
 - XcodeBuildMCP for automation (optional)
+
+## Sub-Skill Routing
+
+When this skill is active and user intent matches a sub-skill, delegate:
+
+| Intent | Sub-Skill | When |
+|--------|-----------|------|
+| UI components | `ios-ui-lib` | Theme components, design tokens |
+| RAG search | `ios-rag` | Vector search iOS codebase |
+
+## Rules
+- SwiftUI first; UIKit only when required
+- Use @Observable, not ObservableObject
+- async/await, not completion handlers
+- MainActor for all UI updates
+- Write tests for business logic
+- Build after each major implementation step
+- Use Swift Testing framework for new tests (iOS 18+)
+- Mock network calls with URLProtocol or dependency injection
+
+## Build Commands
+```bash
+# MCP (preferred)
+mcp__xcodebuildmcp__build_sim  # Build for simulator
+mcp__xcodebuildmcp__test_sim   # Run tests
+
+# Fallback
+xcodebuild -project MyApp.xcodeproj -scheme MyApp -sdk iphonesimulator build
+xcodebuild test -project MyApp.xcodeproj -scheme MyApp -destination 'platform=iOS Simulator,name=iPhone 15'
+```
+
+## Simulator Commands
+```bash
+xcrun simctl list devices          # List devices
+xcrun simctl boot "iPhone 15 Pro"  # Boot
+xcrun simctl install booted /path/to/MyApp.app  # Install
+xcrun simctl launch booted com.example.MyApp    # Launch
+xcrun simctl io booted screenshot screenshot.png  # Screenshot
+xcrun simctl erase "iPhone 15 Pro"  # Reset
+```

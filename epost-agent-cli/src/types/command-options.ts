@@ -64,11 +64,6 @@ export interface PackageRemoveOptions extends GlobalOptions {
   force?: boolean;
 }
 
-export interface OnboardOptions extends GlobalOptions {
-  dir?: string;
-  advancedCommands?: boolean;
-}
-
 export interface WorkspaceInitOptions extends GlobalOptions {
   dir?: string;
 }

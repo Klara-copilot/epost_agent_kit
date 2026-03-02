@@ -19,10 +19,6 @@ export class ClaudeAdapter implements TargetAdapter {
     return { content, filename };
   }
 
-  transformCommand(content: string, filename: string): TransformResult {
-    return { content, filename };
-  }
-
   transformSkill(content: string): string {
     return content;
   }
@@ -35,15 +31,7 @@ export class ClaudeAdapter implements TargetAdapter {
     return true;
   }
 
-  commandDir(): string {
-    return 'commands';
-  }
-
   agentExt(): string {
-    return '.md';
-  }
-
-  commandExt(): string {
     return '.md';
   }
 

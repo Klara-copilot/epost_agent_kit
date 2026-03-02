@@ -35,10 +35,10 @@ Layout | Navigation | Forms | Data Display | Feedback | Actions
 ## Usage Pattern (stable)
 
 ```tsx
-import { ComponentName } from '@epost/klara-theme';
+import { ComponentName } from '@org/design-system';
 ```
 
 - All components support `className` prop
 - WAI-ARIA accessibility patterns
-- `variant` prop for visual variations (primary, secondary, outline, ghost)
+- `styling` prop for visual variations (primary, secondary, outline, ghost)
 - Theme tokens via CSS custom properties

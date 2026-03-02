@@ -9,9 +9,6 @@
 - **Testing**: JUnit, Espresso, Compose UI Testing
 - **Build**: Gradle (Kotlin DSL)
 
-### Commands
-- `/cook` — Implement features (auto-detects Android from `.kt`/`.kts` files)
-- `/test` — Run tests (auto-detects Android: JUnit, Espresso)
-
-### Agent
-- `epost-android-developer` — Android platform specialist
+### Skills
+- `android-development` — Kotlin, Jetpack Compose, Hilt DI patterns
+- `android-ui-lib` — Android theme Compose components and design tokens

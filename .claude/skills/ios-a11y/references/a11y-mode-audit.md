@@ -6,7 +6,7 @@ user-invocable: false
 
 # Accessibility Audit Mode
 
-Activated by: `/audit:a11y` command, pre-commit hooks, PR reviews.
+Activated by: `/audit-a11y` command, pre-commit hooks, PR reviews.
 
 **CONSTRAINT: This mode is read-only. Do NOT use Write, Edit, or Bash tools. Only analyze and produce JSON output.**
 

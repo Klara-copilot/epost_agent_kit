@@ -158,6 +158,48 @@ async function main() {
       writeEnv(envFile, 'CK_CODING_LEVEL_STYLE', getCodingLevelStyleName(codingLevel));
     }
 
+    // Write current session marker for session-metrics Stop hook
+    const improvementsDir = path.join(process.cwd(), '.epost-data', 'improvements');
+    try {
+      fs.mkdirSync(improvementsDir, { recursive: true });
+      fs.writeFileSync(
+        path.join(improvementsDir, 'current-session.json'),
+        JSON.stringify({
+          startedAt: new Date().toISOString(),
+          sessionId: sessionId || `anon-${Date.now()}`,
+          branch: staticEnv.gitBranch || 'unknown'
+        })
+      );
+    } catch { /* silent — non-critical */ }
+
+    // Biweekly improvement summary gate
+    try {
+      const summaryMetaPath = path.join(process.cwd(), '.epost-data', 'improvements', 'last-summary.json');
+      const sessionsPath = path.join(process.cwd(), '.epost-data', 'improvements', 'sessions.jsonl');
+      const FOURTEEN_DAYS_MS = 14 * 24 * 60 * 60 * 1000;
+      let shouldPromptSummary = false;
+
+      if (fs.existsSync(sessionsPath)) {
+        const sessionLines = fs.readFileSync(sessionsPath, 'utf-8').split('\n').filter(Boolean);
+        if (sessionLines.length >= 5) { // Only prompt if we have enough data
+          if (fs.existsSync(summaryMetaPath)) {
+            const meta = JSON.parse(fs.readFileSync(summaryMetaPath, 'utf-8'));
+            const lastRun = new Date(meta.generatedAt).getTime();
+            if (Date.now() - lastRun > FOURTEEN_DAYS_MS) {
+              shouldPromptSummary = true;
+            }
+          } else {
+            // Never run before — prompt if we have data
+            shouldPromptSummary = true;
+          }
+        }
+      }
+
+      if (shouldPromptSummary) {
+        console.log(`\n📊 Biweekly improvement summary is due. Run \`/review-improvements\` to analyze session patterns and generate a summary.`);
+      }
+    } catch { /* silent — non-critical */ }
+
     console.log(`Session ${source}. ${buildContextOutput(config, detections, resolved, staticEnv.gitRoot)}`);
 
     // Info: Show git root when running from subdirectory (Issue #327: now supported)

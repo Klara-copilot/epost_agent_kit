@@ -8,13 +8,11 @@ dependencies:
   - core
 
 provides:
-  agents:
-    - epost-android-developer
+  agents: []
   skills:
     - android-development
     - android-ui-lib
 files:
-  agents/: agents/
   skills/: skills/
 
 settings_strategy: merge

@@ -1,20 +1,38 @@
 ---
 name: domain-b2b
-description: "Deep per-module knowledge: components, hooks, stores, APIs, data flows for each B2B module"
+description: "Use when working in a B2B module — Inbox, Monitoring, Composer, Smart Send, Communities, Archive, Contacts, Organization"
 user-invocable: false
 
 metadata:
-  agent-affinity: "[epost-web-developer, epost-guide, epost-implementer, epost-scout]"
-  keywords: "[module, inbox, monitoring, composer, smart-send, communities, archive, contacts, organization, smart-letter]"
-  platforms: "[web]"
-  triggers: "["which module", "module structure", "explore module", "understand module"]""
+  agent-affinity:
+    - epost-implementer
+    - epost-orchestrator
+  keywords:
+    - module
+    - inbox
+    - monitoring
+    - composer
+    - smart-send
+    - smart send
+    - communities
+    - archive
+    - contacts
+    - organization
+    - smart-letter
+  platforms:
+    - web
+  triggers:
+    - which module
+    - module structure
+    - explore module
+    - understand module
 ---
 
 # Domain B2B Modules Skill
 
 ## Purpose
 
-Deep per-module knowledge for B2B modules in the luz_next web application. Each module has a reference covering components, hooks, stores, API endpoints, and data flows.
+Deep per-module knowledge for B2B modules. Each module has a reference covering components, hooks, stores, API endpoints, and data flows.
 
 ## Module Index
 
@@ -55,5 +73,5 @@ Component -> Hook -> Action -> Service -> Caller -> Backend API
 
 - `web-nextjs` — Next.js App Router conventions
 - `web-ui-lib` — klara-theme component library
-- `web/frontend-development` — React patterns
-- `web/module-integration` — Module integration patterns
+- `web-frontend` — React patterns
+- `web-modules` — Module integration patterns

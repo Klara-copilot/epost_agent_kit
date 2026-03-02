@@ -1,7 +1,20 @@
 ---
 name: kit-cli
-description: TypeScript CLI development patterns with Commander, @inquirer/prompts, and vitest testing for epost-kit
+description: Use when developing the epost-kit CLI — Commander.js commands, @inquirer/prompts, vitest tests, TypeScript patterns
 user-invocable: false
+metadata:
+  keywords:
+    - cli
+    - commander
+    - inquirer
+    - vitest
+    - epost-kit
+  agent-affinity:
+    - epost-implementer
+    - epost-tester
+    - epost-debugger
+  platforms:
+    - all
 ---
 
 # CLI Development Patterns

@@ -1,15 +1,32 @@
 ---
 name: research
-description: Multi-source information gathering and validation with cross-referencing
+description: Use when user asks to research, compare options, find best practices, or investigate a technology
 user-invocable: false
 context: fork
-agent: Explore
+agent: Explore  # Claude Code built-in subagent type
 
 metadata:
-  agent-affinity: "[epost-researcher, epost-architect]"
-  keywords: "[research, investigation, documentation, sources, validation, best-practices]"
-  platforms: "[all]"
-  triggers: "["/research", "research", "best practices", "how to"]""
+  agent-affinity:
+    - epost-researcher
+    - epost-architect
+  keywords:
+    - research
+    - investigation
+    - documentation
+    - sources
+    - validation
+    - best-practices
+    - how-to
+    - compare
+    - evaluate
+    - library
+  platforms:
+    - all
+  triggers:
+    - /research
+    - research
+    - best practices
+    - how to
 ---
 
 # Research Skill
@@ -166,22 +183,25 @@ User asks for research, best practices, comparison.
 ## Knowledge-First Research
 
 Before external research, check internal knowledge:
-1. Search `.knowledge/` for prior research on the topic
+1. Search `docs/` for prior research on the topic
 2. Check skill aspect files for existing domain knowledge
 3. Search agent memory for related past sessions
 4. Only proceed to external sources if internal knowledge is insufficient
 
 Use `knowledge-retrieval` skill for the full priority chain.
 
-## Post-Research Capture
+Use `knowledge-capture` skill to persist learnings after this task.
 
-After completing significant research, persist key findings:
-1. Cache findings in `.knowledge/findings/`
-2. Record technology decisions in `.knowledge/decisions/`
+## Sub-Skill Routing
 
-Use `knowledge-capture` skill for templates.
+When this skill is active and user intent matches a sub-skill, delegate:
+
+| Intent | Sub-Skill | When |
+|--------|-----------|------|
+| Explore codebase | `scout` | `/scout`, "explore", "find in codebase" |
+| Search docs | `docs-seeker` | External documentation search |
+| Export context | `repomix` | `/repomix`, bundle code for external review |
 
 ### Related Skills
 - `knowledge-retrieval` — Internal-first search protocol
 - `knowledge-capture` — Post-task capture workflow
-- `docs-seeker` — External documentation search (Context7, WebSearch)

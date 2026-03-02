@@ -27,10 +27,10 @@ Detect platform from file types, command context, or user description:
 
 ## When to Invoke
 
-- `/audit:a11y` — Audit staged changes for violations (auto-detects platform)
-- `/fix:a11y [<n> | #<id>]` — Fix top N findings by priority, or a specific finding by ID
-- `/review:a11y [platform] [focus]` — Review accessibility by focus area
-- `/audit:a11y-close <id>` — Mark a finding as resolved
+- `/audit-a11y` — Audit staged changes for violations (auto-detects platform)
+- `/fix-a11y [<n> | #<id>]` — Fix top N findings by priority, or a specific finding by ID
+- `/review-a11y [platform] [focus]` — Review accessibility by focus area
+- `/audit-close-a11y <id>` — Mark a finding as resolved
 - Direct questions about accessibility, VoiceOver, TalkBack, screen readers, or WCAG
 
 ## Knowledge Base

@@ -180,7 +180,7 @@ filters: { topic: "design-system", file_type: "tsx" }
 
 // Dark mode toggle
 query: "theme switcher dark mode toggle implementation"
-filters: { topic: "design-system", topic: "ui" }
+filters: { topic: "design-system" }
 ```
 
 **Expected Results**: Theme integration code examples
@@ -437,4 +437,4 @@ You don't need to include all variants in your query.
 
 - `SKILL.md` — Main web RAG skill documentation
 - Server API: `http://localhost:2636/docs`
-- Indexed codebase: `luz_next` repository
+- Indexed codebase: your project repository

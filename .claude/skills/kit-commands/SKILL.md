@@ -1,7 +1,17 @@
 ---
 name: kit-commands
 description: This skill should be used when the user asks to "create a slash command", "add a command", "write a custom command", "define command arguments", "use command frontmatter", "organize commands", "create command with file references", "interactive command", "use AskUserQuestion in command", or needs guidance on slash command structure, YAML frontmatter fields, dynamic arguments, bash execution in commands, user interaction patterns, or command development best practices for Claude Code.
-"
+disable-model-invocation: true
+metadata:
+  keywords:
+    - command
+    - slash-command
+    - add-command
+    - command-frontmatter
+  agent-affinity:
+    - epost-implementer
+  platforms:
+    - all
 ---
 
 # Command Development for Claude Code
@@ -37,7 +47,7 @@ No frontmatter needed for simple commands.
 
 | Field | Type | Purpose |
 |-------|------|---------|
-| `description` | String | Shown in `/help` |
+| `description` | String | Shown in `/help`. **MUST** start with `(ePost)` prefix |
 | `allowed-tools` | String | Tools command can use (e.g. `Read, Bash(git:*)`) |
 | `model` | String | `sonnet`, `opus`, or `haiku` |
 | `argument-hint` | String | Documents arguments for autocomplete |
@@ -80,6 +90,7 @@ commands/
 ## Best Practices
 
 - **Single responsibility** — one command, one task
+- **Description prefix** — ALL commands MUST have `(ePost)` prefix in description field (e.g., `description: (ePost) Fix issues`)
 - **Explicit dependencies** — use `allowed-tools` when needed
 - **Always add `argument-hint`** when command takes arguments
 - **Validate arguments early** — check for required args in prompt body

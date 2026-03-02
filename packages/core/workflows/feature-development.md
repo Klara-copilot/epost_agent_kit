@@ -60,7 +60,7 @@ The documenter agent:
 - Ensures API documentation is current
 
 ### 6. Commit
-**Command**: `/git:commit`
+**Command**: `/git-commit`
 **Agent**: epost-git-manager
 **Output**: Clean git commit
 
@@ -86,7 +86,7 @@ graph LR
     I -->|Yes| J[/review command]
     J --> K[epost-reviewer]
     K --> L[epost-documenter]
-    L --> M[/git:commit command]
+    L --> M[/git-commit command]
     M --> N[epost-git-manager]
     N --> O[Committed]
 ```

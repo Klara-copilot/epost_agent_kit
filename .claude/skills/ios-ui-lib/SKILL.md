@@ -1,12 +1,19 @@
 ---
 name: ios-ui-lib
-description: "iOS theme UI library: SwiftUI components and design tokens"
+description: "Use when referencing iOS theme SwiftUI components, design tokens, or platform-specific token mappings"
 user-invocable: false
 
 metadata:
-  agent-affinity: "[epost-muji, epost-ios-developer]"
-  keywords: "[ui-lib, components, design-tokens, integration, swiftui]"
-  platforms: "[ios]""
+  keywords:
+    - ios-ui
+    - swiftui-components
+    - design-tokens
+    - theme
+  agent-affinity:
+    - epost-muji
+    - epost-implementer
+  platforms:
+    - ios
 ---
 
 # iOS Theme Knowledge

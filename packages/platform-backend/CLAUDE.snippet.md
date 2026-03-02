@@ -20,9 +20,6 @@
 - `persistence.xml` for JPA configuration
 - Maven profiles for SonarQube analysis
 
-### Commands
-- `/cook` — Implement features (auto-detects backend from `.java` files)
-- `/test` — Run tests (auto-detects backend: Maven JUnit, Arquillian)
-
-### Agent
-- `epost-backend-developer` — Java EE backend specialist
+### Skills
+- `backend-javaee` — Jakarta EE patterns, WildFly deployment, Maven builds
+- `backend-databases` — PostgreSQL + MongoDB persistence

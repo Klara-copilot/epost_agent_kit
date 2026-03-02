@@ -1,8 +1,21 @@
 ---
 name: backend-databases
-description: "PostgreSQL and MongoDB database patterns for epost backend"
+description: "Use when working with PostgreSQL queries, MongoDB documents, or database persistence in the epost backend"
 user-invocable: false
-"
+metadata:
+  keywords:
+    - postgresql
+    - mongodb
+    - database
+    - sql
+    - query
+    - migration
+    - connection-pool
+  agent-affinity:
+    - epost-implementer
+    - epost-debugger
+  platforms:
+    - backend
 ---
 
 # Database Knowledge

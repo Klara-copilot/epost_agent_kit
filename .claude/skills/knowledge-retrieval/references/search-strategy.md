@@ -2,56 +2,61 @@
 
 How to search each knowledge source effectively.
 
-## Level 1: .knowledge/ Search
+## Level 1: docs/ Search
 
 ### Index Query
 
-**File**: `.knowledge/index.json`
+**File**: `docs/index.json`
 
 **Filter by category**:
 ```bash
-jq '.entries[] | select(.category == "pattern")' .knowledge/index.json
+jq '.entries[] | select(.category == "pattern")' docs/index.json
 ```
 
 **Filter by tag**:
 ```bash
-jq '.entries[] | select(.tags[] | contains("react"))' .knowledge/index.json
+jq '.entries[] | select(.tags[] | contains("react"))' docs/index.json
+```
+
+**Filter by agentHint relevance**:
+```bash
+jq '.entries[] | select(.agentHint | test("routing|pages"; "i"))' docs/index.json
 ```
 
 **Filter by status**:
 ```bash
-jq '.entries[] | select(.status == "accepted")' .knowledge/index.json
+jq '.entries[] | select(.status == "accepted")' docs/index.json
 ```
 
 **Full-text title search**:
 ```bash
-jq '.entries[] | select(.title | test("error.*boundary"; "i"))' .knowledge/index.json
+jq '.entries[] | select(.title | test("error.*boundary"; "i"))' docs/index.json
 ```
 
 **Get entry path**:
 ```bash
-jq -r '.entries[] | select(.id == "ADR-0001") | .path' .knowledge/index.json
+jq -r '.entries[] | select(.id == "ADR-0001") | .path' docs/index.json
 ```
 
 **Follow related entries**:
 ```bash
 # Get related IDs
-jq -r '.entries[] | select(.id == "ADR-0001") | .related[]' .knowledge/index.json
+jq -r '.entries[] | select(.id == "ADR-0001") | .related[]' docs/index.json
 
 # Resolve related entries
-jq '.entries[] | select(.id | IN("PATTERN-003", "FINDING-012"))' .knowledge/index.json
+jq '.entries[] | select(.id | IN("PATTERN-003", "FINDING-012"))' docs/index.json
 ```
 
 ### Content Search
 
 **Grep across all entries**:
 ```bash
-grep -r "Server Component" .knowledge/ --include="*.md"
+grep -r "Server Component" docs/ --include="*.md"
 ```
 
 **Search specific category**:
 ```bash
-grep -r "authentication" .knowledge/adrs/ --include="*.md"
+grep -r "authentication" docs/decisions/ --include="*.md"
 ```
 
 ## Level 2: RAG System Search
@@ -316,7 +321,7 @@ When results found in multiple sources, correlate:
 
 **Example**: Error boundary pattern
 
-1. **.knowledge/**: `PATTERN-0005: Error boundary for async components`
+1. **docs/**: `PATTERN-0005: Error boundary for async components`
 2. **RAG**: `app/components/ErrorBoundary.tsx` (implementation)
 3. **Skills**: `debugging/SKILL.md` (when error boundaries don't catch)
 4. **Codebase**: 12 usages via grep
@@ -333,11 +338,12 @@ When results found in multiple sources, correlate:
 
 1. **Start specific, broaden if needed**: `"useAuth hook"` -> `"auth hook"` -> `"authentication"`
 2. **Check index before content**: Index is faster, prevents full file reads
-3. **Use filters aggressively**: Category, tag, file_type, scope narrow results
-4. **Follow relationships**: `related` field in knowledge entries, imports in code
-5. **Cache results**: Don't re-search same query in single session
-6. **Combine tools**: Grep finds files, Read gets content, index provides metadata
-7. **Verify dates**: Prefer recent content, note stale entries
+3. **Use agentHint**: Match hint text against current task for fast relevance filtering
+4. **Use filters aggressively**: Category, tag, file_type, scope narrow results
+5. **Follow relationships**: `related` field in knowledge entries, imports in code
+6. **Cache results**: Don't re-search same query in single session
+7. **Combine tools**: Grep finds files, Read gets content, index provides metadata
+8. **Verify dates**: Prefer recent content, note stale entries
 
 ## Related References
 

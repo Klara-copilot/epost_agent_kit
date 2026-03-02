@@ -1,14 +1,13 @@
 # API Binding Pattern
 
-## The luz_next Data Flow
+## Data Flow
 
 ```
 Component (UI layer)
   -> Custom Hook (state + effects)
     -> Redux Action (async thunk)
-      -> Service (API abstraction)
-        -> Caller (HTTP client)
-          -> Backend API (JAX-RS)
+      -> Caller (FetchBuilder HTTP client)
+          -> Backend API
 ```
 
 ## Layer 1: Component
@@ -58,14 +57,14 @@ export function useLetters() {
 
 ```typescript
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { letterService } from '../_services/letterService';
+import { getLetters } from '../_callers/letter-caller';
 import { Letter } from '../_ui-models/letter';
 
 export const fetchLetters = createAsyncThunk<Letter[]>(
   'smartLetter/fetchLetters',
   async (_, { rejectWithValue }) => {
     try {
-      return await letterService.getAll();
+      return await getLetters();
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -75,39 +74,34 @@ export const fetchLetters = createAsyncThunk<Letter[]>(
 
 **Rules**: Actions call services and handle errors. Return typed payloads.
 
-## Layer 4: Service
+## Layer 4: Caller (FetchBuilder)
 
 ```typescript
+// _callers/letter-caller.ts
+'use server';
+import { fetchBuilder } from '@/service/fetch-builder';
+import { LETTER_API } from '@/constants/api-urls';
 import { Letter } from '../_ui-models/letter';
 
-const BASE = '/api/smart-letter';
+export async function getLetters(): Promise<Letter[]> {
+  return fetchBuilder(LETTER_API.LIST)
+    .fetch<Letter[]>();
+}
 
-export const letterService = {
-  getAll: async (): Promise<Letter[]> => {
-    const res = await fetch(BASE);
-    if (!res.ok) throw new Error(`Failed: ${res.status}`);
-    return res.json();
-  },
+export async function getLetterById(id: string): Promise<Letter> {
+  return fetchBuilder(LETTER_API.DETAIL(id))
+    .fetch<Letter>();
+}
 
-  getById: async (id: string): Promise<Letter> => {
-    const res = await fetch(`${BASE}/${id}`);
-    if (!res.ok) throw new Error(`Failed: ${res.status}`);
-    return res.json();
-  },
-
-  create: async (data: Partial<Letter>): Promise<Letter> => {
-    const res = await fetch(BASE, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    });
-    if (!res.ok) throw new Error(`Failed: ${res.status}`);
-    return res.json();
-  },
-};
+export async function createLetter(data: Partial<Letter>): Promise<Letter> {
+  return fetchBuilder(LETTER_API.LIST)
+    .withMethod('POST')
+    .withBody(data)
+    .fetch<Letter>();
+}
 ```
 
-**Rules**: Services shape requests and parse responses. Handle HTTP errors. Return typed data.
+**Rules**: Callers use FetchBuilder for all HTTP requests. Never use raw `fetch()`. Return typed data.
 
 ## Anti-Patterns
 

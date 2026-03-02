@@ -2,16 +2,9 @@
 
 ## Replace Mock Data with API Integration
 
-### luz_next Data Flow Pattern
+### Data Flow Pattern
 
-```
-Component (renders UI)
-  -> Custom Hook (manages state + side effects)
-    -> Redux Action (dispatches to store)
-      -> Service (shapes API request)
-        -> Caller (executes HTTP call)
-          -> Backend API (JAX-RS endpoint)
-```
+See `web-modules/references/api-binding.md` for the canonical data flow diagram.
 
 ### Step 1: Identify Mock Data
 
@@ -43,34 +36,31 @@ export enum LetterStatus {
 }
 ```
 
-### Step 3: Create Service
+### Step 3: Create Caller (FetchBuilder)
 
 ```typescript
-// _services/letterService.ts
+// _callers/letter-caller.ts
+'use server';
+import { fetchBuilder } from '@/service/fetch-builder';
+import { LETTER_API } from '@/constants/api-urls';
 import { Letter } from '../_ui-models/letter';
 
-const BASE_URL = '/api/smart-letter';
+export async function getLetters(): Promise<Letter[]> {
+  return fetchBuilder(LETTER_API.LIST)
+    .fetch<Letter[]>();
+}
 
-export const letterService = {
-  async getAll(): Promise<Letter[]> {
-    const response = await fetch(BASE_URL);
-    return response.json();
-  },
+export async function getLetterById(id: string): Promise<Letter> {
+  return fetchBuilder(LETTER_API.DETAIL(id))
+    .fetch<Letter>();
+}
 
-  async getById(id: string): Promise<Letter> {
-    const response = await fetch(`${BASE_URL}/${id}`);
-    return response.json();
-  },
-
-  async create(letter: Partial<Letter>): Promise<Letter> {
-    const response = await fetch(BASE_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(letter),
-    });
-    return response.json();
-  },
-};
+export async function createLetter(letter: Partial<Letter>): Promise<Letter> {
+  return fetchBuilder(LETTER_API.LIST)
+    .withMethod('POST')
+    .withBody(letter)
+    .fetch<Letter>();
+}
 ```
 
 ### Step 4: Create Redux Action
@@ -78,16 +68,16 @@ export const letterService = {
 ```typescript
 // _actions/letterActions.ts
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { letterService } from '../_services/letterService';
+import { getLetters, createLetter as createLetterCaller } from '../_callers/letter-caller';
 
 export const fetchLetters = createAsyncThunk(
   'smartLetter/fetchLetters',
-  async () => letterService.getAll()
+  async () => getLetters()
 );
 
 export const createLetter = createAsyncThunk(
   'smartLetter/createLetter',
-  async (letter: Partial<Letter>) => letterService.create(letter)
+  async (letter: Partial<Letter>) => createLetterCaller(letter)
 );
 ```
 
@@ -157,7 +147,7 @@ export function useLetters() {
 'use client';
 
 import { useLetters } from '../_hooks/useLetters';
-import { Spinner } from '@luz-next/klara-theme';
+import { Spinner } from 'your-design-system';
 
 export function LetterList() {
   const { letters, loading, error } = useLetters();

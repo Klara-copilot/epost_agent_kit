@@ -1,12 +1,12 @@
 ---
 name: repomix
-description: Generate comprehensive codebase summaries for analysis and understanding
+description: Use when you need a full codebase overview, repo summary, or are unfamiliar with a repository structure
 
 metadata:
-  agent-affinity: "[epost-scout, epost-researcher, epost-architect]"
-  keywords: "[repomix, codebase, summary, analysis, repo, overview]"
-  platforms: "[all]"
-  triggers: "["repomix", "codebase summary", "repo overview"]""
+  agent-affinity: [epost-researcher, epost-architect]
+  keywords: [repomix, codebase, summary, analysis, repo, overview]
+  platforms: [all]
+  triggers: ["repomix", "codebase summary", "repo overview"]
 ---
 
 # Repomix Skill

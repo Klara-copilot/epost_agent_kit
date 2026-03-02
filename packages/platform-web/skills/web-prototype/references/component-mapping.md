@@ -4,27 +4,27 @@
 
 | HTML/Generic | klara-theme Component | Import |
 |-------------|----------------------|--------|
-| `<button>` | `Button` | `@luz-next/klara-theme` |
-| `<input type="text">` | `Input` | `@luz-next/klara-theme` |
-| `<input type="checkbox">` | `Checkbox` | `@luz-next/klara-theme` |
-| `<select>` | `Select` | `@luz-next/klara-theme` |
-| `<textarea>` | `TextArea` | `@luz-next/klara-theme` |
-| `<dialog>` | `Dialog` | `@luz-next/klara-theme` |
-| `<table>` | `DataTable` | `@luz-next/klara-theme` |
-| `<nav>` tabs | `Tabs` + `TabsList` + `TabsContent` | `@luz-next/klara-theme` |
-| `<details>` | `Accordion` | `@luz-next/klara-theme` |
-| Toast/notification | `Toast` | `@luz-next/klara-theme` |
-| Tooltip | `Tooltip` | `@luz-next/klara-theme` |
-| Dropdown menu | `DropdownMenu` | `@luz-next/klara-theme` |
-| Breadcrumb | `Breadcrumb` | `@luz-next/klara-theme` |
-| Badge | `Badge` | `@luz-next/klara-theme` |
-| Avatar | `Avatar` | `@luz-next/klara-theme` |
-| Card | `Card` | `@luz-next/klara-theme` |
-| Spinner | `Spinner` | `@luz-next/klara-theme` |
-| Switch/toggle | `Switch` | `@luz-next/klara-theme` |
-| Radio group | `RadioGroup` | `@luz-next/klara-theme` |
-| Progress bar | `Progress` | `@luz-next/klara-theme` |
-| Separator | `Separator` | `@luz-next/klara-theme` |
+| `<button>` | `Button` | your design system package |
+| `<input type="text">` | `Input` | your design system package |
+| `<input type="checkbox">` | `Checkbox` | your design system package |
+| `<select>` | `Select` | your design system package |
+| `<textarea>` | `TextArea` | your design system package |
+| `<dialog>` | `Dialog` | your design system package |
+| `<table>` | `DataTable` | your design system package |
+| `<nav>` tabs | `Tabs` + `TabsList` + `TabsContent` | your design system package |
+| `<details>` | `Accordion` | your design system package |
+| Toast/notification | `Toast` | your design system package |
+| Tooltip | `Tooltip` | your design system package |
+| Dropdown menu | `DropdownMenu` | your design system package |
+| Breadcrumb | `Breadcrumb` | your design system package |
+| Badge | `Badge` | your design system package |
+| Avatar | `Avatar` | your design system package |
+| Card | `Card` | your design system package |
+| Spinner | `Spinner` | your design system package |
+| Switch/toggle | `Switch` | your design system package |
+| Radio group | `RadioGroup` | your design system package |
+| Progress bar | `Progress` | your design system package |
+| Separator | `Separator` | your design system package |
 
 ## MUI -> klara-theme
 

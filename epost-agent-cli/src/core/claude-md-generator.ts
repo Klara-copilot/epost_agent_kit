@@ -191,8 +191,8 @@ export interface ClaudeMdContext {
   agentCount: number;
   /** Number of skills installed */
   skillCount: number;
-  /** Number of commands installed */
-  commandCount: number;
+  /** Number of commands installed (legacy, always 0) */
+  commandCount?: number;
   /** Any additional context */
   [key: string]: any;
 }
@@ -270,7 +270,7 @@ function generateDefaultClaudeMd(
   }
   lines.push(`**Platforms**: ${context.platforms.join(", ")}`);
   lines.push(
-    `**Agents**: ${context.agentCount} | **Skills**: ${context.skillCount} | **Commands**: ${context.commandCount}`,
+    `**Agents**: ${context.agentCount} | **Skills**: ${context.skillCount}`,
   );
   lines.push("");
 
@@ -332,7 +332,7 @@ function generateDefaultCopilotInstructions(
     lines.push(`**Profile**: ${context.profile}`);
   }
   lines.push(`**Platforms**: ${context.platforms.join(", ")}`);
-  lines.push(`**Agents**: ${context.agentCount} | **Skills**: ${context.skillCount} | **Prompts**: ${context.commandCount}`);
+  lines.push(`**Agents**: ${context.agentCount} | **Skills**: ${context.skillCount}`);
   lines.push("");
 
   // Agent system — Copilot paths

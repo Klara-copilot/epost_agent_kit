@@ -1,12 +1,12 @@
 ---
 name: web-ui-lib
-description: "klara-theme web UI library: React components, design tokens, theming"
+description: "Use when referencing klara-theme component APIs, props, variants, spacing tokens, or theme provider patterns"
 user-invocable: false
 
 metadata:
-  agent-affinity: "[epost-muji, epost-web-developer]"
-  keywords: "[ui-lib, components, design-tokens, integration]"
-  platforms: "[web]""
+  agent-affinity: [epost-muji, epost-implementer]
+  keywords: [ui-lib, components, design-tokens, integration]
+  platforms: [web]
 ---
 
 # klara-theme Knowledge

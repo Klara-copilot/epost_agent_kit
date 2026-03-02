@@ -1,14 +1,11 @@
 ---
 name: error-recovery
-description: Standardized patterns for handling transient errors, retries, and fallback strategies
+description: Use when operations fail transiently — timeouts, network errors, retries, circuit breakers, graceful degradation
 metadata:
-  agent-affinity: "[epost-implementer, epost-debugger, epost-tester]"
-  keywords: "[error, retry, fallback, circuit-breaker, backoff, resilience, failure, exponential, degradation]"
-  platforms: "[all]"
-  triggers: "[error, exception, timeout, retry, fallback]"
-  platform: global
-  category: development
-"
+  agent-affinity: [epost-implementer, epost-debugger, epost-tester]
+  keywords: [error, retry, fallback, circuit-breaker, backoff, resilience, failure, exponential, degradation]
+  platforms: [all]
+  triggers: [error, exception, timeout, retry, fallback]
 ---
 
 # Error Recovery Skill

@@ -10,9 +10,11 @@
 - **State**: Redux Toolkit + Redux Persist
 - **Containerization**: Docker + Docker Compose
 
-### Commands
-- `/cook` — Implement features (auto-detects web from `.tsx`/`.ts` files)
-- `/test` — Run tests (auto-detects web: Jest, Playwright, RTL)
-
-### Agent
-- `epost-web-developer` — Web platform specialist for Next.js development
+### Skills
+- `web-frontend` — React components, hooks, Redux Toolkit dual-store, composition patterns
+- `web-nextjs` — Next.js 14 App Router, routing, middleware, server actions, performance
+- `web-api-routes` — FetchBuilder HTTP client, caller patterns, API constants
+- `web-i18n` — next-intl configuration, translation patterns, locale routing
+- `web-auth` — NextAuth + Keycloak, session management, feature switches
+- `web-testing` — Jest + RTL unit tests, Playwright E2E, test patterns
+- `web-modules` — B2B module integration

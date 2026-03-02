@@ -1,12 +1,19 @@
 ---
 name: android-ui-lib
-description: "Android theme UI library: Compose components and design tokens"
+description: "Use when referencing Android theme Compose components, design tokens, or Material theme integration"
 user-invocable: false
 
 metadata:
-  agent-affinity: "[epost-muji, epost-android-developer]"
-  keywords: "[ui-lib, components, design-tokens, integration, compose]"
-  platforms: "[android]""
+  keywords:
+    - android-ui
+    - compose-components
+    - design-tokens
+    - theme
+  agent-affinity:
+    - epost-muji
+    - epost-implementer
+  platforms:
+    - android
 ---
 
 # Android Theme Knowledge

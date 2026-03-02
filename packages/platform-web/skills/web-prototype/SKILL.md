@@ -1,20 +1,20 @@
 ---
 name: web-prototype
-description: "Analyze external prototypes and convert to luz_next code with klara-theme, proper tokens, and module structure"
+description: "Use when converting an external prototype, mockup, or codebase into production code with your design system"
 user-invocable: false
 
 metadata:
-  agent-affinity: "[epost-web-developer, epost-implementer, epost-guide]"
-  keywords: "[convert, prototype, migrate, rewrite, transform, external, mockup]"
-  platforms: "[web]"
-  triggers: "["/convert", "convert to klara-theme", "make it consistent"]""
+  agent-affinity: [epost-implementer]
+  keywords: [convert, prototype, migrate, rewrite, transform, external, mockup]
+  platforms: [web]
+  triggers: ["/convert", "convert to klara-theme", "make it consistent"]
 ---
 
 # Prototype Conversion Skill
 
 ## Purpose
 
-Convert external prototypes, mockups, or codebases into production-ready luz_next code using klara-theme components, semantic design tokens, and proper module architecture.
+Convert external prototypes, mockups, or codebases into production-ready code using your design system components, semantic design tokens, and proper module architecture.
 
 ## Reference Files
 
@@ -44,6 +44,6 @@ Convert external prototypes, mockups, or codebases into production-ready luz_nex
 
 ## Related Skills
 
-- `web/module-integration` — Module integration patterns
+- `web-modules` — Module integration patterns
 - `web-ui-lib` — klara-theme component reference
-- `domain/b2b` — Module knowledge
+- `domain-b2b` — Module knowledge

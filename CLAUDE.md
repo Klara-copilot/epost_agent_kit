@@ -10,7 +10,7 @@ This file provides guidance to Claude Code when working with code in this reposi
 
 **Packages**: core, a11y, platform-web, platform-ios, platform-android, platform-backend, kit, design-system, domains
 
-**Installed by**: epost-kit v0.1.0 on 2026-03-01
+**Installed by**: epost-kit v0.1.0 on 2026-03-02
 
 ---
 
@@ -100,9 +100,12 @@ On every user prompt involving a dev task, sense context before acting:
 - **Containerization**: Docker + Docker Compose
 
 ### Skills
-- `web-frontend` — React components, hooks, state management
-- `web-nextjs` — Next.js 14 App Router, Server Components
-- `web-api-routes` — API endpoints, server actions
+- `web-frontend` — React components, hooks, Redux Toolkit dual-store, composition patterns
+- `web-nextjs` — Next.js 14 App Router, routing, middleware, server actions, performance
+- `web-api-routes` — FetchBuilder HTTP client, caller patterns, API constants
+- `web-i18n` — next-intl configuration, translation patterns, locale routing
+- `web-auth` — NextAuth + Keycloak, session management, feature switches
+- `web-testing` — Jest + RTL unit tests, Playwright E2E, test patterns
 - `web-modules` — B2B module integration
 
 ---

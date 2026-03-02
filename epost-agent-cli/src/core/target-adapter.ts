@@ -26,9 +26,6 @@ export interface TargetAdapter {
   /** Transform an agent .md file. Returns null to skip (copy as-is). */
   transformAgent(content: string, filename: string): TransformResult;
 
-  /** Transform a command .md file. Returns null to skip (copy as-is). */
-  transformCommand(content: string, filename: string): TransformResult;
-
   /** Transform a SKILL.md file. */
   transformSkill(content: string): string;
 
@@ -38,14 +35,8 @@ export interface TargetAdapter {
   /** Whether this target uses settings.json as-is (Claude/Cursor) or needs transformation. */
   usesSettingsJson(): boolean;
 
-  /** Directory name for commands output: 'commands' or 'prompts' */
-  commandDir(): string;
-
   /** File extension for agents: '.md' or '.agent.md' */
   agentExt(): string;
-
-  /** File extension for commands: '.md' or '.prompt.md' */
-  commandExt(): string;
 
   /** Directory for hook scripts: 'hooks' or 'hooks/scripts' */
   hookScriptDir(): string;

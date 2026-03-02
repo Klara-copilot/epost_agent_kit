@@ -1,6 +1,6 @@
 ---
 name: data-store
-description: Agent persistent data store convention for .epost-data/. Use when authoring an agent that produces or consumes project-level persistent data between sessions.
+description: Use when an agent needs to persist or retrieve project-level data across sessions via .epost-data/
 user-invocable: false
 ---
 

@@ -1,7 +1,8 @@
 ---
 name: core
-description: Operational boundaries, safety rules, and documentation standards. Active for all agent operations, file modifications, and architectural decisions.
+description: Use when any agent modifies files, makes architectural decisions, or needs safety and documentation rules
 user-invocable: false
+tier: core
 ---
 
 # Core Rules Skill

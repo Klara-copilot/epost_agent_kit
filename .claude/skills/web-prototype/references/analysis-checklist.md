@@ -73,8 +73,8 @@ For each component found:
 {Components needing custom implementation}
 
 ### Dependencies to Replace
-| Current | luz_next Equivalent |
-|---------|-------------------|
+| Current | Target App Equivalent |
+|---------|---------------------|
 
 ### Estimated Effort
 {Small / Medium / Large}

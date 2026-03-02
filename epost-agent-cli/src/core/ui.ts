@@ -260,20 +260,19 @@ export interface PackageManifestSummary {
   layer: number;
   agents: number;
   skills: number;
-  commands: number;
+  commands?: number;
   platforms?: string[];
   dependencies?: string[];
   installed?: boolean;
 }
 
 export function packageTable(manifests: PackageManifestSummary[]): string {
-  const headers = ["Package", "Layer", "Agents", "Skills", "Cmds"];
+  const headers = ["Package", "Layer", "Agents", "Skills"];
   const rows = manifests.map((m) => [
     m.name,
     `${m.layer}`,
     `${m.agents}`,
     `${m.skills}`,
-    `${m.commands}`,
   ]);
   return table(headers, rows);
 }
@@ -316,7 +315,7 @@ export function layerDiagram(
           ? "[ ]"
           : pc.dim("[ ]");
       const dots = ".".repeat(Math.max(1, 24 - pkg.name.length));
-      const counts = `${pkg.agents}A ${pkg.skills}S ${pkg.commands}C`;
+      const counts = `${pkg.agents}A ${pkg.skills}S`;
       lines.push(
         noColor
           ? `    ${marker} ${pkg.name} ${dots} ${counts}`

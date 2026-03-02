@@ -1,12 +1,12 @@
 ---
 name: sequential-thinking
-description: Structured step-by-step analysis for complex problems and debugging
+description: Use when facing a complex problem that needs step-by-step breakdown, branching analysis, or iterative reasoning
 
 metadata:
-  agent-affinity: "[epost-debugger, epost-architect, epost-implementer]"
-  keywords: "[sequential, thinking, analysis, step-by-step, reasoning, logic]"
-  platforms: "[all]"
-  triggers: "["complex problem", "step by step", "analyze"]""
+  agent-affinity: [epost-debugger, epost-architect, epost-implementer]
+  keywords: [sequential, thinking, analysis, step-by-step, reasoning, logic, stuck, complex, bug]
+  platforms: [all]
+  triggers: ["complex problem", "step by step", "analyze"]
 ---
 
 # Sequential Thinking Skill
@@ -47,17 +47,6 @@ After reaching conclusion, revisit assumptions. Check for gaps.
 - **Design**: Think through all edge cases
 
 ## Patterns
-
-### Debug Trace Format
-```
-Problem: [What's broken]
-Symptoms: [Observable behavior]
-Step 1: [What happens first]
-Step 2: [What happens next]
-...
-Root Cause: [Why it happened]
-Fix: [Solution]
-```
 
 ### Hypothesis Testing
 ```

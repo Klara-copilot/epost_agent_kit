@@ -75,18 +75,18 @@ Initial release.
 - Added `/core:ask` — Ask questions about the codebase
 - Added `/core:brainstorm` — Evaluate technical approaches before implementation
 - Added `/core:bootstrap` — Initialize a new project from scratch
-- Added `/plan:fast` — Quick plan from codebase analysis only
-- Added `/plan:deep` — Deep plan with sequential research
-- Added `/plan:parallel` — Dependency-aware plan with file ownership matrix
-- Added `/fix:deep` — Complex bug fixes requiring investigation
+- Added `/plan-fast` — Quick plan from codebase analysis only
+- Added `/plan-deep` — Deep plan with sequential research
+- Added `/plan-parallel` — Dependency-aware plan with file ownership matrix
+- Added `/fix-deep` — Complex bug fixes requiring investigation
 - Added `/fix:fast` — Quick fixes for simple bugs
 - Added `/fix:test` — Fix failing tests
-- Added `/fix:ci` — Fix CI/CD pipeline failures
-- Added `/fix:ui` — Fix UI bugs and visual issues
-- Added `/git:commit` — Stage and commit with conventional commits
-- Added `/git:push` — Commit changes and push to remote
-- Added `/git:pr` — Create GitHub pull request from current branch
-- Added `/git:cm` — Alias for /git:commit
-- Added `/git:cp` — Alias for /git:push
-- Added `/docs:init` — Scan codebase and generate documentation
-- Added `/docs:update` — Update existing documentation
+- Added `/fix-ci` — Fix CI/CD pipeline failures
+- Added `/fix-ui` — Fix UI bugs and visual issues
+- Added `/git-commit` — Stage and commit with conventional commits
+- Added `/git-push` — Commit changes and push to remote
+- Added `/git-pr` — Create GitHub pull request from current branch
+- Added `/git-cm` — Alias for /git-commit
+- Added `/git:cp` — Alias for /git-push
+- Added `/docs-init` — Scan codebase and generate documentation
+- Added `/docs-update` — Update existing documentation

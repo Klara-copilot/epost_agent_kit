@@ -1,7 +1,20 @@
 ---
 name: web-a11y
-description: WCAG 2.1 AA accessibility rules for Web — ARIA, semantic HTML, keyboard navigation, focus management, color contrast, screen reader testing
+description: Use when web accessibility issues arise — ARIA roles, keyboard navigation, focus trapping, alt text, contrast, screen readers
 user-invocable: false
+metadata:
+  keywords:
+    - keyboard
+    - aria
+    - focus
+    - screen-reader
+    - web-accessibility
+    - semantic-html
+  agent-affinity:
+    - epost-a11y-specialist
+    - epost-implementer
+  platforms:
+    - web
 ---
 
 # Web Accessibility Skill

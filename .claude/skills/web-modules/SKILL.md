@@ -1,20 +1,20 @@
 ---
 name: web-modules
-description: "Patterns for integrating components into luz_next B2B modules with API binding, state management, and routing"
+description: "Use when integrating a component into a B2B module — adding screens, binding APIs, wiring stores, setting up routes"
 user-invocable: false
 
 metadata:
-  agent-affinity: "[epost-web-developer, epost-implementer, epost-guide]"
-  keywords: "[integrate, module, screen, page, api, store, hook, bind]"
-  platforms: "[web]"
-  triggers: "["add to module", "integrate into", "create screen", "add page", "bind api"]""
+  agent-affinity: [epost-implementer]
+  keywords: [integrate, module, screen, page, api, store, hook, bind]
+  platforms: [web]
+  triggers: ["add to module", "integrate into", "create screen", "add page", "bind api"]
 ---
 
 # Module Integration Skill
 
 ## Purpose
 
-Patterns for integrating components into luz_next B2B modules with proper API binding, state management, routing, and design system compliance.
+Patterns for integrating components into B2B modules with proper API binding, state management, routing, and design system compliance.
 
 ## Reference Files
 
@@ -40,7 +40,7 @@ Patterns for integrating components into luz_next B2B modules with proper API bi
 
 ## Related Skills
 
-- `web/prototype-conversion` — Converting external code
-- `domain/b2b` — Module knowledge
+- `web-prototype` — Converting external code
+- `domain-b2b` — Module knowledge
 - `web-ui-lib` — Component reference
 - `web-nextjs` — App Router patterns

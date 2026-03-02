@@ -105,62 +105,6 @@ export class CopilotAdapter implements TargetAdapter {
     };
   }
 
-  transformCommand(content: string, filename: string): TransformResult {
-    const { frontmatter: fm, body } = parseFrontmatter(content);
-    const newFm: Record<string, unknown> = {};
-
-    // Keep: description
-    if (fm.description) newFm.description = fm.description;
-
-    // Derive name from filename (strip .md, replace / with -)
-    const cmdName = filename.replace(/\.md$/, '').replace(/\//g, '-');
-    newFm.name = cmdName;
-
-    // Set mode: agent (when agent specified or tools needed)
-    newFm.mode = 'agent';
-
-    // Keep agent reference
-    if (fm.agent) newFm.agent = fm.agent;
-
-    // Keep argument-hint
-    if (fm['argument-hint']) newFm['argument-hint'] = fm['argument-hint'];
-
-    // Transform model
-    const model = String(fm.model || '');
-    if (model && MODEL_MAP[model]) {
-      newFm.model = MODEL_MAP[model];
-    } else if (model) {
-      newFm.model = model;
-    }
-
-    // Build tools from allowed-tools or default
-    if (fm['allowed-tools']) {
-      const allowedStr = String(fm['allowed-tools']);
-      const tools = allowedStr.split(',').map(t => t.trim());
-      newFm.tools = this.mapToolNames(tools);
-    } else {
-      newFm.tools = DEFAULT_TOOLS;
-    }
-
-    // Transform body
-    let newBody = this.replacePathRefs(body);
-    // $ARGUMENTS → ${input:args}
-    newBody = newBody.replace(/\$ARGUMENTS/g, '${input:args}');
-    // $1, $2, etc → ${input:arg1}, ${input:arg2}
-    newBody = newBody.replace(/\$(\d+)/g, (_, n) => `\${input:arg${n}}`);
-
-    // Rename: review/code.md → review-code.prompt.md
-    const newFilename = filename
-      .replace(/\.md$/, '')
-      .replace(/\//g, '-')
-      + '.prompt.md';
-
-    return {
-      content: serializeFrontmatter(newFm, newBody),
-      filename: newFilename,
-    };
-  }
-
   transformSkill(content: string): string {
     // user-invocable → user-invokable (Copilot spelling)
     let result = content.replace(/user-invocable/g, 'user-invokable');
@@ -225,16 +169,8 @@ export class CopilotAdapter implements TargetAdapter {
     return false; // Copilot doesn't use settings.json
   }
 
-  commandDir(): string {
-    return 'prompts';
-  }
-
   agentExt(): string {
     return '.agent.md';
-  }
-
-  commandExt(): string {
-    return '.prompt.md';
   }
 
   hookScriptDir(): string {
@@ -272,19 +208,4 @@ export class CopilotAdapter implements TargetAdapter {
     return DEFAULT_TOOLS.filter(t => !disallowedCopilot.has(t));
   }
 
-  /** Map Claude Code tool names to Copilot tool names */
-  private mapToolNames(claudeTools: string[]): string[] {
-    const mapped = new Set<string>();
-    for (const tool of claudeTools) {
-      const copilotTool = TOOL_MAP[tool.trim()];
-      if (copilotTool) {
-        mapped.add(copilotTool);
-      }
-      // Also check if it's already a Copilot tool name
-      if (DEFAULT_TOOLS.includes(tool.trim())) {
-        mapped.add(tool.trim());
-      }
-    }
-    return mapped.size > 0 ? Array.from(mapped) : DEFAULT_TOOLS;
-  }
 }

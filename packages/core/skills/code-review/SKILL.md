@@ -1,12 +1,13 @@
 ---
 name: code-review
-description: Comprehensive code quality assessment and verification with systematic review process
+description: Use when reviewing code, checking quality before commit, or auditing changed files for issues
+tier: core
 
 metadata:
-  agent-affinity: "[epost-reviewer, epost-implementer]"
-  keywords: "[review, code-quality, security, performance, testing, verification]"
-  platforms: "[all]"
-  triggers: "["/review", "code review", "review code"]""
+  agent-affinity: [epost-reviewer, epost-implementer]
+  keywords: [review, code-quality, security, performance, testing, verification]
+  platforms: [all]
+  triggers: ["/review", "code review", "review code"]
 ---
 
 # Code Review Skill
@@ -29,16 +30,14 @@ User uses /review, asks for code review, or before committing code.
 ### Systematic Review
 - **Structure**: File organization, module boundaries
 - **Logic**: Algorithm correctness, edge cases
+- **State Machines**: For stateful components — all states have exits, error/timeout handled, transitions guarded, no implicit hidden states, concurrent mutations safe
 - **Types**: Type safety, missing type checks
 - **Performance**: N+1 queries, unnecessary renders, inefficient loops
 - **Security**: Input validation, auth checks, data exposure
 
 ### Verification Before Completion
-- All tasks in plan TODO list verified
-- No remaining TODO comments in production code
-- Build/typecheck passes
-- Tests pass with adequate coverage
-- Security checklist completed
+
+See `verification-before-completion` skill for the full gate protocol.
 
 ### Severity Classification
 - **Critical**: Security vulnerabilities, data loss, breaking changes
@@ -77,14 +76,21 @@ User uses /review, asks for code review, or before committing code.
 - Balance strictness with pragmatism
 - Check tests alongside code changes
 
-## Review Knowledge Patterns
+Use `knowledge-capture` skill to persist learnings after this task.
 
-After code review, capture recurring patterns:
-1. If a convention violation appears repeatedly → record in `.knowledge/conventions/`
-2. If a new quality pattern is identified → record in `.knowledge/patterns/`
+## Sub-Skill Routing
 
-Use `knowledge-capture` skill for templates.
+When this skill is active and user intent matches a sub-skill, delegate:
+
+| Intent | Sub-Skill | When |
+|--------|-----------|------|
+| Review code | `review-code` | `/review-code`, "review my code" |
+| Review improvements | `review-improvements` | `/review-improvements`, improvement suggestions |
+| Run tests | `test` | `/test`, "run tests", "check coverage" |
+| Verify completion | `verification-before-completion` | Before claiming task done |
+| Receive review | `receiving-code-review` | Processing feedback from reviewers |
 
 ### Related Skills
 - `knowledge-base` — Knowledge storage format
 - `knowledge-capture` — Post-task capture workflow
+- `auto-improvement` — Convention violations auto-detected across sessions via metrics

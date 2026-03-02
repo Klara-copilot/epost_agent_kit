@@ -1,7 +1,18 @@
 ---
 name: ios-a11y
-description: WCAG 2.1 AA accessibility rules for iOS — UIKit-primary (iOS 16+), VoiceOver, SwiftUI secondary (iOS 15+), fix templates
+description: Use when iOS accessibility issues arise — VoiceOver, UIKit/SwiftUI labels, traits, focus, Dynamic Type, contrast
 user-invocable: false
+metadata:
+  keywords:
+    - voiceover
+    - ios-accessibility
+    - accessibility-label
+    - dynamic-type
+  agent-affinity:
+    - epost-a11y-specialist
+    - epost-implementer
+  platforms:
+    - ios
 ---
 
 # iOS Accessibility Skill
