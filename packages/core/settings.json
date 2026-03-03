@@ -65,10 +65,6 @@
           {
             "type": "command",
             "command": "node .claude/hooks/notifications/notify.cjs 2>/dev/null || true"
-          },
-          {
-            "type": "prompt",
-            "prompt": "Verify all requested tasks are complete. Your response MUST be ONLY JSON with no other text. If all tasks are done: {\"ok\": true}. If any remain unfinished: {\"ok\": false, \"reason\": \"brief description of remaining work\"}."
           }
         ]
       }
