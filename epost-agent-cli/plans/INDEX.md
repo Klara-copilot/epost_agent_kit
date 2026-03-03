@@ -11,6 +11,8 @@ See [PLAN_FORMAT.md](PLAN_FORMAT.md) for standardized plan template.
 | PLAN-0019 | Skill Chain View Mode | epost-architect | 2026-03-03 | [tools/management-ui/plans/skill-chain-view/plan.md](../../tools/management-ui/plans/skill-chain-view/plan.md) |
 | PLAN-0020 | Git Skills & Skill-Discovery Integration | epost-architect | 2026-03-03 | [active/plan-git-skill-discovery/plan.md](active/plan-git-skill-discovery/plan.md) |
 | PLAN-0021 | Re-implement Lost Features | epost-architect | 2026-03-03 | [../../plans/260303-1000-reimpl-lost-features/plan.md](../../plans/260303-1000-reimpl-lost-features/plan.md) |
+| PLAN-0022 | Skill Discovery Chain Canvas | epost-architect | 2026-03-03 | [../../tools/management-ui/plans/skill-discovery-canvas/plan.md](../../tools/management-ui/plans/skill-discovery-canvas/plan.md) |
+| PLAN-0023 | Dual-View Redesign: Agent-Centric + Skill-Centric | epost-architect | 2026-03-03 | [../../tools/management-ui/plans/dual-view-redesign/plan.md](../../tools/management-ui/plans/dual-view-redesign/plan.md) |
 
 ## Completed
 

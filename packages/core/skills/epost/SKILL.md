@@ -190,7 +190,7 @@ No active work detected on `{branch}`.
 | Git | `/git-commit`, `/git-push`, `/git-pr` |
 | Docs | `/docs-init`, `/docs-update`, `/docs-component` |
 | Tools | `/convert`, `/simulator` |
-| Kit | `/kit-add-agent`, `/kit-add-skill`, `/kit-add-command`, `/kit-add-hook`, `/kit-optimize-skill` |
+| Kit | `/kit-add-agent`, `/kit-add-skill`, `/kit-add-hook`, `/kit-optimize-skill` |
 | CLI | `/cli-cook`, `/cli-test`, `/cli-doctor` |
 | Accessibility | `/audit-a11y`, `/audit-close-a11y`, `/fix-a11y`, `/review-a11y` |
 ```

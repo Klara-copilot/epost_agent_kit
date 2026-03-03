@@ -1,7 +1,7 @@
 {
-  "generated": "2026-03-03T03:24:31.492Z",
+  "generated": "2026-03-03T04:17:54.547Z",
   "version": "1.0.0",
-  "count": 98,
+  "count": 96,
   "skills": [
     {
       "name": "a11y",
@@ -1207,25 +1207,6 @@
       "path": "kit-add-agent/SKILL.md"
     },
     {
-      "name": "kit-add-command",
-      "description": "(ePost) Generate new slash commands interactively",
-      "keywords": [],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [],
-      "connections": {
-        "extends": [],
-        "requires": [
-          "kit-commands"
-        ],
-        "conflicts": [],
-        "enhances": []
-      },
-      "path": "kit-add-command/SKILL.md"
-    },
-    {
       "name": "kit-add-hook",
       "description": "(ePost) Create a new hook for Claude Code automation",
       "keywords": [],
@@ -1341,32 +1322,6 @@
         "enhances": []
       },
       "path": "kit-cli/SKILL.md"
-    },
-    {
-      "name": "kit-commands",
-      "description": "This skill should be used when the user asks to \"create a slash command\", \"add a command\", \"write a custom command\", \"define command arguments\", \"use command frontmatter\", \"organize commands\", \"create command with file references\", \"interactive command\", \"use AskUserQuestion in command\", or needs guidance on slash command structure, YAML frontmatter fields, dynamic arguments, bash execution in commands, user interaction patterns, or command development best practices for Claude Code.",
-      "keywords": [
-        "command",
-        "slash-command",
-        "add-command",
-        "command-frontmatter"
-      ],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [
-        "epost-implementer"
-      ],
-      "connections": {
-        "extends": [],
-        "requires": [],
-        "conflicts": [],
-        "enhances": [
-          "kit-agents"
-        ]
-      },
-      "path": "kit-commands/SKILL.md"
     },
     {
       "name": "kit-hooks",

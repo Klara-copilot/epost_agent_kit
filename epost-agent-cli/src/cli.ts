@@ -12,6 +12,57 @@ const __dirname = dirname(__filename);
 const packageJsonPath = join(__dirname, "../package.json");
 const packageJson = JSON.parse(readFileSync(packageJsonPath, "utf-8"));
 
+// ─── Go-style command suggestions ───
+
+/** Levenshtein edit distance (Damerau variant, max 8) */
+function editDistance(a: string, b: string): number {
+  const maxDist = 8;
+  if (Math.abs(a.length - b.length) > maxDist) return maxDist + 1;
+  const d: number[][] = [];
+  for (let i = 0; i <= a.length; i++) d[i] = [i];
+  for (let j = 0; j <= b.length; j++) d[0][j] = j;
+  for (let j = 1; j <= b.length; j++) {
+    for (let i = 1; i <= a.length; i++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + cost);
+      if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) {
+        d[i][j] = Math.min(d[i][j], d[i - 2][j - 2] + 1);
+      }
+    }
+  }
+  return d[a.length][b.length];
+}
+
+/**
+ * Find the closest command name(s) among candidates.
+ * Threshold: similarity >= 0.5 (Go uses ~0.6 but we're more lenient for short commands).
+ */
+function findSuggestions(word: string, candidates: string[]): string[] {
+  const w = word.toLowerCase();
+  let best: string[] = [];
+  let bestDist = Infinity;
+
+  for (const candidate of candidates) {
+    const c = candidate.toLowerCase();
+    // Prefix match gets a boost
+    const prefixMatch = c.startsWith(w) || w.startsWith(c);
+    const dist = prefixMatch ? 0 : editDistance(w, c);
+    const maxLen = Math.max(w.length, c.length);
+    const similarity = (maxLen - dist) / maxLen;
+
+    if (similarity < 0.5 && !prefixMatch) continue;
+
+    if (dist < bestDist) {
+      bestDist = dist;
+      best = [candidate];
+    } else if (dist === bestDist) {
+      best.push(candidate);
+    }
+  }
+
+  return best;
+}
+
 const program = new Command()
   .name("epost-kit")
   .description("Distribution CLI for epost-agent-kit framework")
@@ -220,6 +271,50 @@ program
     const { runDev } = await import("./commands/dev.js");
     await runDev({ ...program.opts(), ...opts });
   });
+
+// ─── Go-style unknown command handler ───
+
+program.on("command:*", (operands: string[]) => {
+  const unknown = operands[0];
+
+  // Collect all visible top-level command names (including aliases)
+  // Cast to any to access Commander's internal _hidden field not exposed by extra-typings
+  const allNames: string[] = [];
+  for (const cmd of program.commands) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    if (!(cmd as any)._hidden) {
+      allNames.push(cmd.name());
+      for (const alias of cmd.aliases()) allNames.push(alias);
+    }
+  }
+
+  const suggestions = findSuggestions(unknown, allNames);
+
+  process.stderr.write(`error: unknown command '${unknown}' for 'epost-kit'\n`);
+
+  if (suggestions.length > 0) {
+    process.stderr.write(
+      `\nDid you mean ${suggestions.length === 1 ? "this" : "one of these"}?\n`,
+    );
+    for (const s of suggestions) {
+      process.stderr.write(`        ${s}\n`);
+    }
+  } else {
+    process.stderr.write(`\nAvailable commands:\n`);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const topLevel = program.commands
+      .filter((c) => !(c as any)._hidden)
+      .map((c) => c.name());
+    for (const name of topLevel) {
+      process.stderr.write(`        ${name}\n`);
+    }
+  }
+
+  process.stderr.write(
+    `\nRun 'epost-kit --help' for a list of all commands.\n`,
+  );
+  process.exit(1);
+});
 
 // Error handling
 process.on("unhandledRejection", (error) => {

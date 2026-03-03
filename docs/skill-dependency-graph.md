@@ -63,11 +63,9 @@ graph TD
   kit_cli[kit-cli] -.->|requires| cli_doctor[cli-doctor]
   kit_cli[kit-cli] -.->|requires| cli_test[cli-test]
   kit_agent_development[kit-agent-development] -.->|requires| kit_add_agent[kit-add-agent]
-  kit_commands[kit-commands] -.->|requires| kit_add_command[kit-add-command]
   kit_hooks[kit-hooks] -.->|requires| kit_add_hook[kit-add-hook]
   kit_skill_development[kit-skill-development] -.->|requires| kit_add_skill[kit-add-skill]
   kit_agent_development[kit-agent-development] ~~~|enhances| kit_agents[kit-agents]
-  kit_commands[kit-commands] ~~~|enhances| kit_agents[kit-agents]
   kit_hooks[kit-hooks] ~~~|enhances| kit_agents[kit-agents]
   kit_skill_development[kit-skill-development] -.->|requires| kit_optimize_skill[kit-optimize-skill]
   kit_skill_development[kit-skill-development] ~~~|enhances| kit_agents[kit-agents]
@@ -84,8 +82,8 @@ graph TD
 
 ## Stats
 
-- **Skills**: 98
+- **Skills**: 96
 - **Extends**: 14
-- **Requires**: 15
+- **Requires**: 14
 - **Conflicts**: 12
-- **Enhances**: 35
+- **Enhances**: 34

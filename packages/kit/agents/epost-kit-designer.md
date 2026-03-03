@@ -29,7 +29,6 @@ Specialized agent for designing and maintaining the epost_agent_kit package syst
 On activation, discover and load:
 - `kit-agent-development` — when creating/modifying agents
 - `kit-skill-development` — when creating/modifying skills
-- `kit-commands` — when working with slash commands
 - `kit-hooks` — when creating/modifying hooks
 - `kit-cli` — when working on epost-agent-cli code
 

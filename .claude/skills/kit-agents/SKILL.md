@@ -114,7 +114,6 @@ Skills support nested directories. Claude Code auto-discovers `SKILL.md` files a
 │   ├── kit-agents/                   # Ecosystem hub (this file)
 │   ├── kit-agent-development/        # Agent creation guide
 │   ├── kit-skill-development/        # Skill creation guide
-│   ├── kit-commands/                 # Command authoring
 │   ├── kit-hooks/                    # Hook authoring
 │   ├── kit-cli/                      # CLI tool patterns
 │   ├── core/                         # Operational rules

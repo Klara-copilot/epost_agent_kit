@@ -13,12 +13,12 @@
     "design-system",
     "domains"
   ],
-  "installedAt": "2026-03-03T03:24:31.697Z",
+  "installedAt": "2026-03-03T04:17:54.688Z",
   "files": {
     ".claude/.ck.json": {
       "path": ".claude/.ck.json",
       "checksum": "1bf7f54a5921781a5cbed6f168f8d00fbdc7ac663d445fba86b217df8599e436",
-      "installedAt": "2026-03-03T03:24:30.344Z",
+      "installedAt": "2026-03-03T04:17:53.896Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -26,15 +26,23 @@
     ".claude/.ckignore": {
       "path": ".claude/.ckignore",
       "checksum": "dd2c75e3a0e5d16f65ed4a5a5bb6b4d05656be2c666c4e7d409c41c2781490e6",
-      "installedAt": "2026-03-03T03:24:30.348Z",
+      "installedAt": "2026-03-03T04:17:53.899Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
     },
+    ".claude/skills/web-a11y/.DS_Store": {
+      "path": ".claude/skills/web-a11y/.DS_Store",
+      "checksum": "52454f08b20542031e909d02705cd37d4f55bc14f01896c9a9479100b7fe9f7b",
+      "installedAt": "2026-03-03T04:17:53.989Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "a11y"
+    },
     ".claude/skills/skill-index.json": {
       "path": ".claude/skills/skill-index.json",
-      "checksum": "e6cfb23d65d7c5a187cb0b2b8eed0f805674f885f01594bd0466215504aeaf89",
-      "installedAt": "2026-03-03T03:24:31.495Z",
+      "checksum": "ef523eb1eb729a90c1f9aa4001c4898cc3b1045fc4816a79e59b91b1ae4c8574",
+      "installedAt": "2026-03-03T04:17:54.550Z",
       "version": "1.0.0",
       "modified": false,
       "package": "core"

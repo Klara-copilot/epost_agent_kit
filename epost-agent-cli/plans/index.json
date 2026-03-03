@@ -2,10 +2,10 @@
   "version": "1.0.0",
   "updated": "2026-02-08",
   "counts": {
-    "active": 3,
+    "active": 5,
     "completed": 18,
     "archived": 0,
-    "total": 21
+    "total": 23
   },
   "plans": [
     {
@@ -218,6 +218,26 @@
       "authors": ["epost-architect"],
       "tags": ["recovery", "skills", "cli", "management-ui"],
       "file": "../../plans/260303-1000-reimpl-lost-features/plan.md"
+    },
+    {
+      "id": "PLAN-0022",
+      "title": "Skill Discovery Chain Canvas",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-03",
+      "authors": ["epost-architect"],
+      "tags": ["management-ui", "visualization", "canvas", "skill-discovery"],
+      "file": "../../tools/management-ui/plans/skill-discovery-canvas/plan.md"
+    },
+    {
+      "id": "PLAN-0023",
+      "title": "Dual-View Redesign: Agent-Centric + Skill-Centric",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-03",
+      "authors": ["epost-architect"],
+      "tags": ["management-ui", "ux", "canvas", "views", "agent-view", "skill-view"],
+      "file": "../../tools/management-ui/plans/dual-view-redesign/plan.md"
     }
   ]
 }
