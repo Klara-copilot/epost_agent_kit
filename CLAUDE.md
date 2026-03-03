@@ -6,7 +6,7 @@ This file provides guidance to Claude Code when working with code in this reposi
 ## Project: epost_agent_kit
 
 
-## Installed Profile: ``
+## Installed Profile: `full`
 
 **Packages**: core, a11y, platform-web, platform-ios, platform-android, platform-backend, kit, design-system, domains
 
