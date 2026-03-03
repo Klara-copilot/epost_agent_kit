@@ -35,7 +35,7 @@ interface FlowCanvasProps {
   selectedNodeId: string | null;
   focusedNodeId: string | null;
   onNodeSelect: (nodeId: string | null) => void;
-  onNodeFocus: (nodeId: string) => void;
+  onPaneClick: () => void;
   designMode: boolean;
   designEdges: DesignEdge[];
   onConnect: (params: Connection) => void;
@@ -50,7 +50,7 @@ export default function FlowCanvas({
   selectedNodeId,
   focusedNodeId,
   onNodeSelect,
-  onNodeFocus,
+  onPaneClick,
   designMode,
   designEdges,
   onConnect,
@@ -250,23 +250,12 @@ export default function FlowCanvas({
     return baseEdges;
   }, [layoutEdges, layoutNodes, hoveredNodeId, focusState, designMode, designEdges, removedEdgeSources, focusedNodeId, skillChain, globalChain]);
 
-  // Single click: select (+ re-focus if already in focus mode)
+  // Single click: select (page.tsx decides if it should focus)
   const onNodeClick: NodeMouseHandler = useCallback(
     (_event, node) => {
       onNodeSelect(node.id);
-      if (focusedNodeId) {
-        onNodeFocus(node.id);
-      }
     },
-    [onNodeSelect, onNodeFocus, focusedNodeId]
-  );
-
-  // Double click: enter focus mode
-  const onNodeDoubleClick: NodeMouseHandler = useCallback(
-    (_event, node) => {
-      onNodeFocus(node.id);
-    },
-    [onNodeFocus]
+    [onNodeSelect]
   );
 
   const onNodeMouseEnter: NodeMouseHandler = useCallback((_event, node) => {
@@ -277,9 +266,9 @@ export default function FlowCanvas({
     setHoveredNodeId(null);
   }, []);
 
-  const onPaneClick = useCallback(() => {
-    onNodeSelect(null);
-  }, [onNodeSelect]);
+  const handlePaneClick = useCallback(() => {
+    onPaneClick();
+  }, [onPaneClick]);
 
   // Design mode edge click: mark skill-dependency edges for removal
   const onEdgeClick = useCallback(
@@ -337,10 +326,9 @@ export default function FlowCanvas({
         onNodesChange={() => {}}
         onEdgesChange={() => {}}
         onNodeClick={onNodeClick}
-        onNodeDoubleClick={onNodeDoubleClick}
         onNodeMouseEnter={onNodeMouseEnter}
         onNodeMouseLeave={onNodeMouseLeave}
-        onPaneClick={onPaneClick}
+        onPaneClick={handlePaneClick}
         onConnect={designMode ? onConnect : undefined}
         onEdgeClick={designMode ? onEdgeClick : undefined}
         nodeTypes={nodeTypes}
