@@ -14,6 +14,7 @@
  * Core logic extracted to lib/privacy-checker.cjs for OpenCode plugin reuse.
  */
 
+const fs = require('fs');
 const path = require('path');
 
 // Import shared privacy checking logic
@@ -80,10 +81,12 @@ function formatApprovalNotice(filePath) {
 }
 
 // Main
-async function main() {
+function main() {
   let input = '';
-  for await (const chunk of process.stdin) {
-    input += chunk;
+  try {
+    input = fs.readFileSync(0, 'utf-8');
+  } catch {
+    process.exit(0); // No stdin, allow
   }
 
   let hookData;
@@ -129,7 +132,7 @@ async function main() {
 
 // Run main only when executed directly (not when required for testing)
 if (require.main === module) {
-  main().catch(() => process.exit(0));
+  main();
 }
 
 // Export functions for unit testing
