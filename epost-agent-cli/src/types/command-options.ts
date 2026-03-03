@@ -18,6 +18,8 @@ export interface InitOptions extends GlobalOptions {
   packages?: string;
   optional?: string;
   exclude?: string;
+  additional?: string;
+  target?: string;
   fresh?: boolean;
   dryRun?: boolean;
   dir?: string;

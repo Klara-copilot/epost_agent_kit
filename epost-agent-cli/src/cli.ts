@@ -95,6 +95,8 @@ program
   )
   .option("--optional <list>", "Comma-separated optional packages to include")
   .option("--exclude <list>", "Comma-separated packages to exclude")
+  .option("--additional <list>", "Comma-separated additional packages beyond profile")
+  .option("--target <name>", "IDE target (claude, cursor, github-copilot)")
   .option("--fresh", "Fresh install (ignore existing files)", false)
   .option("--dry-run", "Preview changes without applying", false)
   .option("--dir <path>", "Target project directory")

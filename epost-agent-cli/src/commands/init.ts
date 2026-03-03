@@ -301,10 +301,72 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
     }
   }
 
+  // ── Additional packages (beyond profile) ──
+  const manifests = await loadAllManifests(packagesDir);
+  const additionalList = opts.additional
+    ?.split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
+
+  const currentPkgSet = new Set(resolved.packages);
+  const availableAdditional = [...manifests.keys()].filter(
+    (name) => !currentPkgSet.has(name)
+  );
+
+  if (additionalList && additionalList.length > 0) {
+    // Non-interactive: add specified additional packages
+    const reResolved = await resolvePackages({
+      packagesDir,
+      profilesPath,
+      packages: [...resolved.packages, ...additionalList],
+      exclude: excludeList,
+    });
+    resolved.packages.length = 0;
+    resolved.packages.push(...reResolved.packages);
+  } else if (availableAdditional.length > 0 && !opts.yes) {
+    const addMore = await confirm({
+      message: "Add packages beyond your profile?",
+      default: false,
+    });
+
+    if (addMore) {
+      const selectedAdditional = await checkbox({
+        message: "Select additional packages:",
+        choices: availableAdditional.map((name) => {
+          const m = manifests.get(name);
+          return {
+            name: m ? `${name} — ${m.description}` : name,
+            value: name,
+          };
+        }),
+      });
+
+      if (selectedAdditional.length > 0) {
+        const reResolved = await resolvePackages({
+          packagesDir,
+          profilesPath,
+          packages: [...resolved.packages, ...selectedAdditional],
+          exclude: excludeList,
+        });
+        resolved.packages.length = 0;
+        resolved.packages.push(...reResolved.packages);
+      }
+    }
+  }
+
   // Select IDE target
+  const validTargets = ["claude", "cursor", "github-copilot"] as const;
   let target: "claude" | "cursor" | "github-copilot" =
     metadata?.target || "claude";
-  if (!metadata && !opts.yes) {
+
+  if (opts.target) {
+    if (!validTargets.includes(opts.target as any)) {
+      throw new Error(
+        `Invalid target "${opts.target}". Valid: ${validTargets.join(", ")}`
+      );
+    }
+    target = opts.target as typeof target;
+  } else if (!metadata && !opts.yes) {
     target = await select({
       message: "Select IDE target:",
       choices: [
@@ -320,9 +382,6 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
   const adapter = await createTargetAdapter(target);
   const installDirName = adapter.installDir;
   const installDir = join(projectDir, installDirName);
-
-  // Load manifests for install
-  const manifests = await loadAllManifests(packagesDir);
 
   // Build summary for display
   const pkgSummaries: PackageManifestSummary[] = resolved.packages
@@ -1033,9 +1092,18 @@ async function runKitInit(opts: InitOptions): Promise<void> {
   }
 
   // Step 5: Select target
+  const validTargetsLegacy = ["claude", "cursor", "github-copilot"] as const;
   let target: "claude" | "cursor" | "github-copilot" =
     metadata?.target || "claude";
-  if (!metadata && !opts.yes) {
+
+  if (opts.target) {
+    if (!validTargetsLegacy.includes(opts.target as any)) {
+      throw new Error(
+        `Invalid target "${opts.target}". Valid: ${validTargetsLegacy.join(", ")}`
+      );
+    }
+    target = opts.target as typeof target;
+  } else if (!metadata && !opts.yes) {
     target = await select({
       message: "Select IDE target:",
       choices: [
