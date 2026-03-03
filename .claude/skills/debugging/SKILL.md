@@ -23,6 +23,8 @@ metadata:
     - fix
   platforms:
     - all
+  connections:
+    enhances: [debug, fix, fix-deep, fix-ci, fix-ui]
   triggers:
     - /debug
     - error

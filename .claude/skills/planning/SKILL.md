@@ -23,6 +23,8 @@ metadata:
     - blueprint
   platforms:
     - all
+  connections:
+    enhances: [plan, plan-fast, plan-deep, plan-parallel, plan-validate]
   triggers:
     - /plan
     - create plan

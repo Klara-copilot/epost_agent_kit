@@ -8,6 +8,7 @@ metadata:
   argument-hint: "[issue description]"
   connections:
     conflicts: [fix-deep]
+    enhances: [fix-deep, fix-ci, fix-ui]
 ---
 
 # Fix — Unified Fix Command

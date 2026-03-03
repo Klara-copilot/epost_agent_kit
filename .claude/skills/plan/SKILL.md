@@ -6,6 +6,9 @@ context: fork
 agent: epost-architect
 metadata:
   argument-hint: "[feature or task description]"
+  connections:
+    requires: [planning]
+    enhances: [plan-fast, plan-deep, plan-parallel, plan-validate]
 ---
 
 # Plan — Unified Planning Command

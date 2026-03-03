@@ -8,6 +8,8 @@ metadata:
   keywords: [convert, prototype, migrate, rewrite, transform, external, mockup]
   platforms: [web]
   triggers: ["/convert", "convert to klara-theme", "make it consistent"]
+  connections:
+    enhances: [convert]
 ---
 
 # Prototype Conversion Skill

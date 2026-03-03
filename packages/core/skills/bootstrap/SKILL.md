@@ -6,6 +6,8 @@ context: fork
 agent: epost-implementer
 metadata:
   argument-hint: "[project or module description]"
+  connections:
+    enhances: [bootstrap-fast, bootstrap-parallel]
 ---
 
 # Bootstrap — Unified Scaffolding Command

@@ -6,6 +6,8 @@ context: fork
 agent: epost-reviewer
 metadata:
   argument-hint: "[scope-or-prompt]"
+  connections:
+    requires: [code-review]
 ---
 
 **Ultrathink** to exhaustively list ALL potential edge cases, then dispatch parallel `epost-reviewer` agents to verify: <scope>$ARGUMENTS</scope>

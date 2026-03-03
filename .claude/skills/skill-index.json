@@ -1,5 +1,5 @@
 {
-  "generated": "2026-03-03T05:14:56.579Z",
+  "generated": "2026-03-03T06:05:11.308Z",
   "version": "1.0.0",
   "count": 96,
   "skills": [
@@ -261,7 +261,10 @@
         "extends": [],
         "requires": [],
         "conflicts": [],
-        "enhances": []
+        "enhances": [
+          "bootstrap-fast",
+          "bootstrap-parallel"
+        ]
       },
       "path": "bootstrap/SKILL.md"
     },
@@ -391,7 +394,10 @@
         "extends": [],
         "requires": [],
         "conflicts": [],
-        "enhances": []
+        "enhances": [
+          "review-code",
+          "review-improvements"
+        ]
       },
       "path": "code-review/SKILL.md"
     },
@@ -406,7 +412,9 @@
       "agent-affinity": [],
       "connections": {
         "extends": [],
-        "requires": [],
+        "requires": [
+          "web-prototype"
+        ],
         "conflicts": [],
         "enhances": []
       },
@@ -516,7 +524,9 @@
       "agent-affinity": [],
       "connections": {
         "extends": [],
-        "requires": [],
+        "requires": [
+          "debugging"
+        ],
         "conflicts": [],
         "enhances": []
       },
@@ -555,7 +565,13 @@
         "extends": [],
         "requires": [],
         "conflicts": [],
-        "enhances": []
+        "enhances": [
+          "debug",
+          "fix",
+          "fix-deep",
+          "fix-ci",
+          "fix-ui"
+        ]
       },
       "path": "debugging/SKILL.md"
     },
@@ -813,7 +829,11 @@
         "conflicts": [
           "fix-deep"
         ],
-        "enhances": []
+        "enhances": [
+          "fix-deep",
+          "fix-ci",
+          "fix-ui"
+        ]
       },
       "path": "fix/SKILL.md"
     },
@@ -1539,9 +1559,16 @@
       "agent-affinity": [],
       "connections": {
         "extends": [],
-        "requires": [],
+        "requires": [
+          "planning"
+        ],
         "conflicts": [],
-        "enhances": []
+        "enhances": [
+          "plan-fast",
+          "plan-deep",
+          "plan-parallel",
+          "plan-validate"
+        ]
       },
       "path": "plan/SKILL.md"
     },
@@ -1661,7 +1688,13 @@
         "extends": [],
         "requires": [],
         "conflicts": [],
-        "enhances": []
+        "enhances": [
+          "plan",
+          "plan-fast",
+          "plan-deep",
+          "plan-parallel",
+          "plan-validate"
+        ]
       },
       "path": "planning/SKILL.md"
     },
@@ -1829,7 +1862,9 @@
       "agent-affinity": [],
       "connections": {
         "extends": [],
-        "requires": [],
+        "requires": [
+          "code-review"
+        ],
         "conflicts": [],
         "enhances": []
       },
@@ -2364,7 +2399,9 @@
         "extends": [],
         "requires": [],
         "conflicts": [],
-        "enhances": []
+        "enhances": [
+          "convert"
+        ]
       },
       "path": "web-prototype/SKILL.md"
     },

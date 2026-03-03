@@ -6,6 +6,8 @@ context: fork
 agent: epost-implementer
 metadata:
   argument-hint: "[path/to/prototype or repo URL]"
+  connections:
+    requires: [web-prototype]
 ---
 
 # Convert Command

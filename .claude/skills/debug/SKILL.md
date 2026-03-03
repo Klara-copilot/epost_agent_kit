@@ -6,6 +6,8 @@ context: fork
 agent: epost-debugger
 metadata:
   argument-hint: "[issue description or error log]"
+  connections:
+    requires: [debugging]
 ---
 
 # Debug — Unified Debug Command

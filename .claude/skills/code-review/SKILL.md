@@ -8,6 +8,8 @@ metadata:
   keywords: [review, code-quality, security, performance, testing, verification]
   platforms: [all]
   triggers: ["/review", "code review", "review code"]
+  connections:
+    enhances: [review-code, review-improvements]
 ---
 
 # Code Review Skill

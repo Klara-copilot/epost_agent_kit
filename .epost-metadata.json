@@ -14,12 +14,12 @@
     "design-system",
     "domains"
   ],
-  "installedAt": "2026-03-03T05:14:56.828Z",
+  "installedAt": "2026-03-03T06:05:11.540Z",
   "files": {
     ".claude/.ck.json": {
       "path": ".claude/.ck.json",
       "checksum": "1bf7f54a5921781a5cbed6f168f8d00fbdc7ac663d445fba86b217df8599e436",
-      "installedAt": "2026-03-03T05:14:55.619Z",
+      "installedAt": "2026-03-03T06:05:10.585Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -27,47 +27,15 @@
     ".claude/.ckignore": {
       "path": ".claude/.ckignore",
       "checksum": "dd2c75e3a0e5d16f65ed4a5a5bb6b4d05656be2c666c4e7d409c41c2781490e6",
-      "installedAt": "2026-03-03T05:14:55.622Z",
+      "installedAt": "2026-03-03T06:05:10.589Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
     },
-    ".claude/skills/audit-a11y/.DS_Store": {
-      "path": ".claude/skills/audit-a11y/.DS_Store",
-      "checksum": "52454f08b20542031e909d02705cd37d4f55bc14f01896c9a9479100b7fe9f7b",
-      "installedAt": "2026-03-03T05:14:55.788Z",
-      "version": "2.0.0",
-      "modified": false,
-      "package": "a11y"
-    },
-    ".claude/skills/audit-a11y/references/android-audit-mode.md": {
-      "path": ".claude/skills/audit-a11y/references/android-audit-mode.md",
-      "checksum": "29b5da472fa542c581cad044b8b920335b51d45923136301d45550517b246944",
-      "installedAt": "2026-03-03T05:14:55.788Z",
-      "version": "2.0.0",
-      "modified": false,
-      "package": "a11y"
-    },
-    ".claude/skills/fix-a11y/references/android-fix-mode.md": {
-      "path": ".claude/skills/fix-a11y/references/android-fix-mode.md",
-      "checksum": "dba613ad7b6e1c0f1bdbc1002a7accc5182df4192029518511cef27e9f809f47",
-      "installedAt": "2026-03-03T05:14:55.789Z",
-      "version": "2.0.0",
-      "modified": false,
-      "package": "a11y"
-    },
-    ".claude/skills/review-a11y/references/android-guidance-mode.md": {
-      "path": ".claude/skills/review-a11y/references/android-guidance-mode.md",
-      "checksum": "f5bf2b5ac56f53e7ed0fcbafab6ee88f246330780e55b51544cd9bb1b2625d46",
-      "installedAt": "2026-03-03T05:14:55.789Z",
-      "version": "2.0.0",
-      "modified": false,
-      "package": "a11y"
-    },
     ".claude/skills/skill-index.json": {
       "path": ".claude/skills/skill-index.json",
-      "checksum": "a58092eff4a13f4efbde32ac54b17fa3cd53be1ae67d7b777b3b01d1faecba10",
-      "installedAt": "2026-03-03T05:14:56.582Z",
+      "checksum": "f6e8e5064dee32fd95285e413920ec979d799050282fccd50c83c5fa7ee785fd",
+      "installedAt": "2026-03-03T06:05:11.311Z",
       "version": "1.0.0",
       "modified": false,
       "package": "core"
