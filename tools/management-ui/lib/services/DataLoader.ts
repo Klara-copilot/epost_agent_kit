@@ -5,7 +5,7 @@
  * instead of the assembled .claude/ directory (which contains duplicates).
  */
 
-import { PATHS } from '../config';
+import { PATHS, EPOST_AGENT_KIT_PATH } from '../config';
 import { LoadedData, Agent, Skill, Command, Package, ParseError, SkillConnections } from '../types/entities';
 import { agentParser } from '../parsers/AgentParser';
 import { skillParser } from '../parsers/SkillParser';
@@ -151,7 +151,8 @@ export class DataLoader {
    * connection metadata that isn't in individual SKILL.md frontmatter.
    */
   private mergeSkillIndex(skills: Skill[]): void {
-    const indexPath = join(PATHS.packages, 'core', 'skills', 'skill-index.json');
+    // Read from .claude/ (generated output with merged connections), not packages/ (stale source)
+    const indexPath = join(EPOST_AGENT_KIT_PATH, '.claude', 'skills', 'skill-index.json');
     if (!existsSync(indexPath)) {
       logger.warn('loader', 'skill-index.json not found, skipping connection merge');
       return;
