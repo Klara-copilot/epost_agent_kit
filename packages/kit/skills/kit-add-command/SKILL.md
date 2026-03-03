@@ -6,6 +6,8 @@ context: fork
 agent: epost-implementer
 metadata:
   argument-hint: "[splash|simple]"
+  connections:
+    requires: [kit-commands]
 ---
 
 ## Your Mission

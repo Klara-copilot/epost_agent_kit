@@ -6,6 +6,9 @@ context: fork
 agent: epost-architect
 metadata:
   argument-hint: "[enhanced planning prompt from router]"
+  connections:
+    extends: [plan]
+    conflicts: [plan-deep, plan-parallel]
 ---
 
 # Plan Fast Variant

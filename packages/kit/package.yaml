@@ -22,6 +22,7 @@ provides:
     - kit-add-command
     - kit-add-hook
     - kit-optimize-skill
+    - kit-verify
     - cli-cook
     - cli-doctor
     - cli-test

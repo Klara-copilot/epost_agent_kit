@@ -6,6 +6,9 @@ context: fork
 agent: epost-debugger
 metadata:
   argument-hint: "[complex issue description]"
+  connections:
+    extends: [fix]
+    conflicts: [fix]
 ---
 
 # Systematic Deep Fix

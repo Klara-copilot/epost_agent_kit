@@ -7,6 +7,8 @@ metadata:
   agent-affinity: [epost-implementer, epost-debugger, epost-tester]
   keywords: [feedback, review-comment, suggestion, change-request, reviewer, nit, fix-this]
   platforms: [all]
+  connections:
+    enhances: [code-review]
 ---
 
 # Receiving Code Review

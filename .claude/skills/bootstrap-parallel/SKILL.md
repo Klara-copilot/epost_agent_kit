@@ -6,6 +6,9 @@ context: fork
 agent: epost-implementer
 metadata:
   argument-hint: "[multi-module project description]"
+  connections:
+    extends: [bootstrap]
+    conflicts: [bootstrap-fast]
 ---
 
 # Bootstrap Parallel

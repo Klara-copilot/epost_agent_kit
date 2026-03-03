@@ -6,6 +6,8 @@ context: fork
 agent: epost-debugger
 metadata:
   argument-hint: "[symptom or error]"
+  connections:
+    requires: [kit-cli]
 ---
 
 Debug issues in the epost-kit CLI tool.

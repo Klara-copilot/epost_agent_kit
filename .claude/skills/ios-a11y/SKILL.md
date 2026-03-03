@@ -13,6 +13,8 @@ metadata:
     - epost-implementer
   platforms:
     - ios
+  connections:
+    extends: [a11y]
 ---
 
 # iOS Accessibility Skill

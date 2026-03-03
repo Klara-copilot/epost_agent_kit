@@ -7,6 +7,8 @@ metadata:
   agent-affinity: [epost-orchestrator, epost-implementer]
   keywords: [parallel, subagent, dispatch, implementation-loop, two-stage-review]
   platforms: [all]
+  connections:
+    enhances: [planning]
 ---
 
 # Subagent-Driven Development

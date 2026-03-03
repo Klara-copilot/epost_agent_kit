@@ -14,6 +14,8 @@ metadata:
     - epost-architect
   platforms:
     - all
+  connections:
+    enhances: [kit-agents]
 ---
 
 # Skill Development for Claude Code Plugins
@@ -53,6 +55,26 @@ description: This skill should be used when the user asks to "phrase 1", "phrase
 `user-invocable`, `disable-model-invocation`, `context`, `agent`, `keywords`, `platforms`, `triggers`, `agent-affinity`
 
 **Invalid:** `version:` — not a Claude Code frontmatter field.
+
+## Skill Connections
+
+Declare relationships between skills using `metadata.connections`. Extracted into `skill-index.json` during init.
+
+```yaml
+metadata:
+  connections:
+    extends: [parent-skill]        # inherits from; parent loaded before this
+    requires: [dependency-skill]   # must be co-loaded for this skill to work
+    conflicts: [incompatible-skill] # cannot coexist in same agent
+    enhances: [enhanced-skill]     # optional complement; not required
+```
+
+**Rules:**
+- Only declare direct relationships (not transitive)
+- `extends` implies the parent is loaded first — use for specializations (e.g., `ios-a11y` extends `a11y`)
+- `requires` means this skill is broken without the dependency — use sparingly
+- `conflicts` is bidirectional — if A conflicts B, B should conflict A
+- `enhances` is advisory — hints at useful pairings without hard dependency
 
 ## Writing Style
 

@@ -7,6 +7,8 @@ metadata:
   keywords: [sequential, thinking, analysis, step-by-step, reasoning, logic, stuck, complex, bug]
   platforms: [all]
   triggers: ["complex problem", "step by step", "analyze"]
+  connections:
+    enhances: [debugging]
 ---
 
 # Sequential Thinking Skill

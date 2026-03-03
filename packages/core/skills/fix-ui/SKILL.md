@@ -6,6 +6,8 @@ context: fork
 agent: epost-debugger
 metadata:
   argument-hint: "[UI issue description]"
+  connections:
+    extends: [fix]
 ---
 
 # Fix UI/Layout Issues

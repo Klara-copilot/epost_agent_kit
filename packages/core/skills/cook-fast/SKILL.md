@@ -6,6 +6,9 @@ context: fork
 agent: epost-implementer
 metadata:
   argument-hint: "[feature description]"
+  connections:
+    extends: [cook]
+    conflicts: [cook-parallel]
 ---
 
 # Cook Fast

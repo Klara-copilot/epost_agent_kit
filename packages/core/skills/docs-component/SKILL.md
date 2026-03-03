@@ -6,6 +6,8 @@ context: fork
 agent: epost-documenter
 metadata:
   argument-hint: "<componentKey> [nodeId]"
+  connections:
+    requires: [web-ui-lib, web-figma]
 ---
 
 # /docs-component

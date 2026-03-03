@@ -3,7 +3,7 @@ name: epost-researcher
 description: (ePost) Expert technology researcher specializing in software development. Conducts comprehensive research on technologies, frameworks, tools, best practices, and documentation to synthesize actionable intelligence for development teams.
 model: sonnet
 color: purple
-skills: [core, skill-discovery, research]
+skills: [core, skill-discovery, research, knowledge-retrieval]
 permissionMode: plan
 disallowedTools: Write, Edit
 ---

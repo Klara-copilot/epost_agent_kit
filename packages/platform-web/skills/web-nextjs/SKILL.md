@@ -8,6 +8,8 @@ metadata:
   keywords: [nextjs, next, app-router, server-components, server-actions, routing, middleware]
   platforms: [web]
   triggers: ["next.js", "nextjs", "app router", "server component", "middleware", "layout.tsx", "page.tsx"]
+  connections:
+    enhances: [web-frontend]
 ---
 
 # Next.js 14 — App Router Patterns

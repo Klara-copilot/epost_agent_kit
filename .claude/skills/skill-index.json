@@ -1,7 +1,7 @@
 {
-  "generated": "2026-03-02T06:27:52.225Z",
+  "generated": "2026-03-03T03:24:31.492Z",
   "version": "1.0.0",
-  "count": 96,
+  "count": 98,
   "skills": [
     {
       "name": "a11y",
@@ -21,6 +21,12 @@
       "agent-affinity": [
         "epost-a11y-specialist"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "a11y/SKILL.md"
     },
     {
@@ -40,6 +46,14 @@
         "epost-a11y-specialist",
         "epost-implementer"
       ],
+      "connections": {
+        "extends": [
+          "a11y"
+        ],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "android-a11y/SKILL.md"
     },
     {
@@ -70,6 +84,12 @@
         "epost-debugger",
         "epost-reviewer"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "android-development/SKILL.md"
     },
     {
@@ -89,6 +109,14 @@
         "epost-muji",
         "epost-implementer"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": [
+          "android-development"
+        ]
+      },
       "path": "android-ui-lib/SKILL.md"
     },
     {
@@ -100,6 +128,12 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "audit-a11y/SKILL.md"
     },
     {
@@ -111,6 +145,12 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "audit-close-a11y/SKILL.md"
     },
     {
@@ -139,6 +179,12 @@
         "epost-reviewer",
         "epost-debugger"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "auto-improvement/SKILL.md"
     },
     {
@@ -161,6 +207,14 @@
         "epost-implementer",
         "epost-debugger"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": [
+          "backend-javaee"
+        ]
+      },
       "path": "backend-databases/SKILL.md"
     },
     {
@@ -186,6 +240,12 @@
         "epost-debugger",
         "epost-reviewer"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "backend-javaee/SKILL.md"
     },
     {
@@ -197,6 +257,12 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "bootstrap/SKILL.md"
     },
     {
@@ -208,6 +274,16 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [
+          "bootstrap"
+        ],
+        "requires": [],
+        "conflicts": [
+          "bootstrap-parallel"
+        ],
+        "enhances": []
+      },
       "path": "bootstrap-fast/SKILL.md"
     },
     {
@@ -219,6 +295,16 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [
+          "bootstrap"
+        ],
+        "requires": [],
+        "conflicts": [
+          "bootstrap-fast"
+        ],
+        "enhances": []
+      },
       "path": "bootstrap-parallel/SKILL.md"
     },
     {
@@ -230,6 +316,14 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [
+          "kit-cli"
+        ],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "cli-cook/SKILL.md"
     },
     {
@@ -241,6 +335,14 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [
+          "kit-cli"
+        ],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "cli-doctor/SKILL.md"
     },
     {
@@ -252,6 +354,14 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [
+          "kit-cli"
+        ],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "cli-test/SKILL.md"
     },
     {
@@ -277,6 +387,12 @@
         "epost-reviewer",
         "epost-implementer"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "code-review/SKILL.md"
     },
     {
@@ -288,6 +404,12 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "convert/SKILL.md"
     },
     {
@@ -299,6 +421,12 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "cook/SKILL.md"
     },
     {
@@ -310,6 +438,16 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [
+          "cook"
+        ],
+        "requires": [],
+        "conflicts": [
+          "cook-parallel"
+        ],
+        "enhances": []
+      },
       "path": "cook-fast/SKILL.md"
     },
     {
@@ -321,6 +459,16 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [
+          "cook"
+        ],
+        "requires": [],
+        "conflicts": [
+          "cook-fast"
+        ],
+        "enhances": []
+      },
       "path": "cook-parallel/SKILL.md"
     },
     {
@@ -332,6 +480,12 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "core/SKILL.md"
     },
     {
@@ -343,6 +497,12 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "data-store/SKILL.md"
     },
     {
@@ -354,6 +514,12 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "debug/SKILL.md"
     },
     {
@@ -385,6 +551,12 @@
         "epost-debugger",
         "epost-implementer"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "debugging/SKILL.md"
     },
     {
@@ -413,6 +585,12 @@
         "epost-documenter",
         "epost-architect"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "doc-coauthoring/SKILL.md"
     },
     {
@@ -424,6 +602,15 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [
+          "web-ui-lib",
+          "web-figma"
+        ],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "docs-component/SKILL.md"
     },
     {
@@ -435,6 +622,12 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "docs-init/SKILL.md"
     },
     {
@@ -463,17 +656,36 @@
         "epost-researcher",
         "epost-implementer"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": [
+          "research"
+        ]
+      },
       "path": "docs-seeker/SKILL.md"
     },
     {
       "name": "docs-update",
-      "description": "(ePost) Update existing documentation",
-      "keywords": [],
+      "description": "(ePost) Update existing documentation or scan for staleness",
+      "keywords": [
+        "docs-update",
+        "documentation",
+        "stale-docs",
+        "refresh-docs"
+      ],
       "platforms": [
         "all"
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "docs-update/SKILL.md"
     },
     {
@@ -505,6 +717,12 @@
         "epost-implementer",
         "epost-orchestrator"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "domain-b2b/SKILL.md"
     },
     {
@@ -516,6 +734,12 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "domain-b2c/SKILL.md"
     },
     {
@@ -527,6 +751,12 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "epost/SKILL.md"
     },
     {
@@ -558,6 +788,14 @@
         "epost-debugger",
         "epost-tester"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": [
+          "debugging"
+        ]
+      },
       "path": "error-recovery/SKILL.md"
     },
     {
@@ -569,6 +807,14 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [
+          "fix-deep"
+        ],
+        "enhances": []
+      },
       "path": "fix/SKILL.md"
     },
     {
@@ -580,6 +826,12 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "fix-a11y/SKILL.md"
     },
     {
@@ -591,6 +843,14 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [
+          "fix"
+        ],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "fix-ci/SKILL.md"
     },
     {
@@ -602,6 +862,16 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [
+          "fix"
+        ],
+        "requires": [],
+        "conflicts": [
+          "fix"
+        ],
+        "enhances": []
+      },
       "path": "fix-deep/SKILL.md"
     },
     {
@@ -613,7 +883,43 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [
+          "fix"
+        ],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "fix-ui/SKILL.md"
+    },
+    {
+      "name": "get-started",
+      "description": "(ePost) Onboard to a project — read docs, summarize project state, route to next action",
+      "keywords": [
+        "onboard",
+        "get-started",
+        "begin",
+        "new-project",
+        "what-is-this"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [],
+      "agent-affinity": [
+        "epost-researcher"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": [
+          "docs-init",
+          "docs-update"
+        ]
+      },
+      "path": "get-started/SKILL.md"
     },
     {
       "name": "git-commit",
@@ -624,6 +930,12 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "git-commit/SKILL.md"
     },
     {
@@ -635,6 +947,12 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "git-pr/SKILL.md"
     },
     {
@@ -646,6 +964,12 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "git-push/SKILL.md"
     },
     {
@@ -666,6 +990,14 @@
       "agent-affinity": [
         "epost-orchestrator"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": [
+          "skill-discovery"
+        ]
+      },
       "path": "hub-context/SKILL.md"
     },
     {
@@ -687,6 +1019,12 @@
         "epost-architect",
         "epost-implementer"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "infra-cloud/SKILL.md"
     },
     {
@@ -713,6 +1051,12 @@
         "epost-implementer",
         "epost-architect"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "infra-docker/SKILL.md"
     },
     {
@@ -732,6 +1076,14 @@
         "epost-a11y-specialist",
         "epost-implementer"
       ],
+      "connections": {
+        "extends": [
+          "a11y"
+        ],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "ios-a11y/SKILL.md"
     },
     {
@@ -764,6 +1116,12 @@
         "epost-debugger",
         "epost-reviewer"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "ios-development/SKILL.md"
     },
     {
@@ -792,6 +1150,14 @@
         "epost-muji",
         "epost-implementer"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": [
+          "ios-development"
+        ]
+      },
       "path": "ios-rag/SKILL.md"
     },
     {
@@ -811,6 +1177,14 @@
         "epost-muji",
         "epost-implementer"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": [
+          "ios-development"
+        ]
+      },
       "path": "ios-ui-lib/SKILL.md"
     },
     {
@@ -822,6 +1196,14 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [
+          "kit-agent-development"
+        ],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "kit-add-agent/SKILL.md"
     },
     {
@@ -833,6 +1215,14 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [
+          "kit-commands"
+        ],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "kit-add-command/SKILL.md"
     },
     {
@@ -844,6 +1234,14 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [
+          "kit-hooks"
+        ],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "kit-add-hook/SKILL.md"
     },
     {
@@ -855,6 +1253,14 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [
+          "kit-skill-development"
+        ],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "kit-add-skill/SKILL.md"
     },
     {
@@ -873,6 +1279,14 @@
       "agent-affinity": [
         "epost-implementer"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": [
+          "kit-agents"
+        ]
+      },
       "path": "kit-agent-development/SKILL.md"
     },
     {
@@ -893,6 +1307,12 @@
         "epost-implementer",
         "epost-kit-designer"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "kit-agents/SKILL.md"
     },
     {
@@ -914,6 +1334,12 @@
         "epost-tester",
         "epost-debugger"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "kit-cli/SKILL.md"
     },
     {
@@ -932,6 +1358,14 @@
       "agent-affinity": [
         "epost-implementer"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": [
+          "kit-agents"
+        ]
+      },
       "path": "kit-commands/SKILL.md"
     },
     {
@@ -943,6 +1377,14 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": [
+          "kit-agents"
+        ]
+      },
       "path": "kit-hooks/SKILL.md"
     },
     {
@@ -954,6 +1396,14 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [
+          "kit-skill-development"
+        ],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "kit-optimize-skill/SKILL.md"
     },
     {
@@ -974,7 +1424,43 @@
         "epost-implementer",
         "epost-architect"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": [
+          "kit-agents"
+        ]
+      },
       "path": "kit-skill-development/SKILL.md"
+    },
+    {
+      "name": "kit-verify",
+      "description": "Use when preparing a release, running pre-init checks, auditing kit health, or when asked to \"verify\", \"audit kit\", \"pre-release check\"",
+      "keywords": [
+        "verify",
+        "audit",
+        "pre-release",
+        "health-check",
+        "lint"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [],
+      "agent-affinity": [
+        "epost-kit-designer",
+        "epost-reviewer"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [
+          "kit-agents"
+        ],
+        "conflicts": [],
+        "enhances": []
+      },
+      "path": "kit-verify/SKILL.md"
     },
     {
       "name": "knowledge-base",
@@ -1004,6 +1490,12 @@
         "epost-documenter",
         "epost-implementer"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "knowledge-base/SKILL.md"
     },
     {
@@ -1033,6 +1525,14 @@
         "epost-reviewer",
         "epost-architect"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [
+          "knowledge-base"
+        ],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "knowledge-capture/SKILL.md"
     },
     {
@@ -1062,6 +1562,15 @@
         "epost-debugger",
         "epost-researcher"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": [
+          "research",
+          "planning"
+        ]
+      },
       "path": "knowledge-retrieval/SKILL.md"
     },
     {
@@ -1073,6 +1582,12 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "plan/SKILL.md"
     },
     {
@@ -1084,6 +1599,17 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [
+          "plan"
+        ],
+        "requires": [],
+        "conflicts": [
+          "plan-fast",
+          "plan-parallel"
+        ],
+        "enhances": []
+      },
       "path": "plan-deep/SKILL.md"
     },
     {
@@ -1095,6 +1621,17 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [
+          "plan"
+        ],
+        "requires": [],
+        "conflicts": [
+          "plan-deep",
+          "plan-parallel"
+        ],
+        "enhances": []
+      },
       "path": "plan-fast/SKILL.md"
     },
     {
@@ -1106,6 +1643,17 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [
+          "plan"
+        ],
+        "requires": [],
+        "conflicts": [
+          "plan-fast",
+          "plan-deep"
+        ],
+        "enhances": []
+      },
       "path": "plan-parallel/SKILL.md"
     },
     {
@@ -1117,6 +1665,14 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [
+          "plan"
+        ],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "plan-validate/SKILL.md"
     },
     {
@@ -1146,6 +1702,12 @@
         "epost-architect",
         "epost-orchestrator"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "planning/SKILL.md"
     },
     {
@@ -1176,6 +1738,14 @@
         "epost-implementer",
         "epost-architect"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": [
+          "debugging"
+        ]
+      },
       "path": "problem-solving/SKILL.md"
     },
     {
@@ -1199,6 +1769,14 @@
         "epost-debugger",
         "epost-tester"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": [
+          "code-review"
+        ]
+      },
       "path": "receiving-code-review/SKILL.md"
     },
     {
@@ -1224,6 +1802,12 @@
         "epost-researcher",
         "epost-architect"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "repomix/SKILL.md"
     },
     {
@@ -1254,6 +1838,12 @@
         "epost-researcher",
         "epost-architect"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "research/SKILL.md"
     },
     {
@@ -1265,6 +1855,12 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "review-a11y/SKILL.md"
     },
     {
@@ -1276,6 +1872,12 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "review-code/SKILL.md"
     },
     {
@@ -1287,6 +1889,12 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "review-improvements/SKILL.md"
     },
     {
@@ -1298,6 +1906,12 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "scout/SKILL.md"
     },
     {
@@ -1327,6 +1941,14 @@
         "epost-architect",
         "epost-implementer"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": [
+          "debugging"
+        ]
+      },
       "path": "sequential-thinking/SKILL.md"
     },
     {
@@ -1338,6 +1960,12 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "simulator/SKILL.md"
     },
     {
@@ -1363,6 +1991,12 @@
         "epost-reviewer",
         "epost-orchestrator"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "skill-discovery/SKILL.md"
     },
     {
@@ -1383,6 +2017,14 @@
         "epost-orchestrator",
         "epost-implementer"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": [
+          "planning"
+        ]
+      },
       "path": "subagent-driven-development/SKILL.md"
     },
     {
@@ -1394,6 +2036,12 @@
       ],
       "triggers": [],
       "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "test/SKILL.md"
     },
     {
@@ -1417,6 +2065,25 @@
       "agent-affinity": [
         "all"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": [
+          "cook",
+          "cook-fast",
+          "cook-parallel",
+          "fix",
+          "fix-deep",
+          "plan",
+          "plan-fast",
+          "plan-deep",
+          "plan-parallel",
+          "bootstrap",
+          "bootstrap-fast",
+          "bootstrap-parallel"
+        ]
+      },
       "path": "verification-before-completion/SKILL.md"
     },
     {
@@ -1438,6 +2105,14 @@
         "epost-a11y-specialist",
         "epost-implementer"
       ],
+      "connections": {
+        "extends": [
+          "a11y"
+        ],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "web-a11y/SKILL.md"
     },
     {
@@ -1466,6 +2141,14 @@
       "agent-affinity": [
         "epost-implementer"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": [
+          "web-frontend"
+        ]
+      },
       "path": "web-api-routes/SKILL.md"
     },
     {
@@ -1493,6 +2176,12 @@
       "agent-affinity": [
         "epost-implementer"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "web-auth/SKILL.md"
     },
     {
@@ -1513,6 +2202,12 @@
         "epost-muji",
         "epost-implementer"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "web-figma/SKILL.md"
     },
     {
@@ -1532,6 +2227,14 @@
       "agent-affinity": [
         "epost-muji"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [
+          "web-figma"
+        ],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "web-figma-variables/SKILL.md"
     },
     {
@@ -1565,6 +2268,12 @@
         "epost-debugger",
         "epost-reviewer"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "web-frontend/SKILL.md"
     },
     {
@@ -1592,6 +2301,12 @@
       "agent-affinity": [
         "epost-implementer"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "web-i18n/SKILL.md"
     },
     {
@@ -1620,6 +2335,14 @@
       "agent-affinity": [
         "epost-implementer"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": [
+          "web-frontend"
+        ]
+      },
       "path": "web-modules/SKILL.md"
     },
     {
@@ -1649,6 +2372,14 @@
       "agent-affinity": [
         "epost-implementer"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": [
+          "web-frontend"
+        ]
+      },
       "path": "web-nextjs/SKILL.md"
     },
     {
@@ -1674,6 +2405,12 @@
       "agent-affinity": [
         "epost-implementer"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "web-prototype/SKILL.md"
     },
     {
@@ -1700,6 +2437,14 @@
         "epost-muji",
         "epost-implementer"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": [
+          "web-frontend"
+        ]
+      },
       "path": "web-rag/SKILL.md"
     },
     {
@@ -1731,6 +2476,12 @@
         "epost-tester",
         "epost-implementer"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "web-testing/SKILL.md"
     },
     {
@@ -1750,6 +2501,12 @@
         "epost-muji",
         "epost-implementer"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "web-ui-lib/SKILL.md"
     },
     {
@@ -1770,6 +2527,15 @@
         "epost-muji",
         "epost-implementer"
       ],
+      "connections": {
+        "extends": [],
+        "requires": [
+          "web-ui-lib",
+          "web-figma"
+        ],
+        "conflicts": [],
+        "enhances": []
+      },
       "path": "web-ui-lib-dev/SKILL.md"
     }
   ]

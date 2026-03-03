@@ -6,6 +6,8 @@ context: fork
 agent: epost-tester
 metadata:
   argument-hint: "[test scope or file]"
+  connections:
+    requires: [kit-cli]
 ---
 
 Run and manage tests for the epost-kit CLI project.

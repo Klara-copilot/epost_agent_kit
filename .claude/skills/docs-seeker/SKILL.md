@@ -7,6 +7,8 @@ metadata:
   keywords: [docs, documentation, search, context7, api-reference, library, research, best-practices]
   platforms: [all]
   triggers: ["documentation", "docs", "api reference", "how to use"]
+  connections:
+    enhances: [research]
 ---
 
 # Documentation Seeker Skill

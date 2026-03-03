@@ -70,6 +70,7 @@ provides:
     - docs-init
     - docs-update
     - docs-component
+    - get-started
 files:
   agents/: agents/
   skills/: skills/

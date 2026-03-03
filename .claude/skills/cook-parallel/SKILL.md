@@ -6,6 +6,9 @@ context: fork
 agent: epost-implementer
 metadata:
   argument-hint: "[multi-module feature description]"
+  connections:
+    extends: [cook]
+    conflicts: [cook-fast]
 ---
 
 # Cook Parallel

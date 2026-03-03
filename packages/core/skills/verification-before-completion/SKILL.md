@@ -7,6 +7,8 @@ metadata:
   agent-affinity: [all]
   keywords: [done, complete, finished, ready, verified, passing, success, all-set, looks-good]
   platforms: [all]
+  connections:
+    enhances: [cook, cook-fast, cook-parallel, fix, fix-deep, plan, plan-fast, plan-deep, plan-parallel, bootstrap, bootstrap-fast, bootstrap-parallel]
 ---
 
 # Verification Before Completion

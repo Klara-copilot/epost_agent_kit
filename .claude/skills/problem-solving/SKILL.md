@@ -7,6 +7,8 @@ metadata:
   keywords: [problem-solving, root-cause, analysis, debugging, 5-whys, bisection, crash, error, stuck]
   platforms: [all]
   triggers: ["stuck", "problem", "root cause", "why"]
+  connections:
+    enhances: [debugging]
 ---
 
 # Problem Solving Skill

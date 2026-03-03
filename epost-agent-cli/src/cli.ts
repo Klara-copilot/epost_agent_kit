@@ -197,6 +197,17 @@ program
     await runFixRefs({ ...program.opts(), ...opts });
   });
 
+// Command: verify - Pre-release audit pipeline
+program
+  .command("verify")
+  .description("Full pre-release audit: lint + health checks + dependency graph")
+  .option("--strict", "Treat warnings as errors (CI gate)", false)
+  .option("--dir <path>", "Target project directory")
+  .action(async (opts) => {
+    const { runVerify } = await import("./commands/verify.js");
+    await runVerify({ ...program.opts(), ...opts });
+  });
+
 // ─── Dev Watcher Command ───
 
 program

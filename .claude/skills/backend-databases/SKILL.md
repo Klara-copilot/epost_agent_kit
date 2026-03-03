@@ -16,6 +16,8 @@ metadata:
     - epost-debugger
   platforms:
     - backend
+  connections:
+    enhances: [backend-javaee]
 ---
 
 # Database Knowledge

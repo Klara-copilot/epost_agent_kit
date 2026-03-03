@@ -6,6 +6,8 @@ context: fork
 agent: epost-implementer
 metadata:
   argument-hint: "[skill-name] [prompt]"
+  connections:
+    requires: [kit-skill-development]
 ---
 
 Think harder.

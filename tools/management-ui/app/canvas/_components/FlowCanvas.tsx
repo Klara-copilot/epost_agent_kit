@@ -19,6 +19,7 @@ import { FocusContext } from './FocusContext';
 import { applyDagreLayout } from '@/lib/layout/dagre';
 import { getConnectedNodeIds, getVisibleEdgeIds } from '@/lib/layout/focus';
 import type { GraphNode, Edge as GraphEdge } from '@/lib/types/graph';
+import type { SkillChain, GlobalSkillChain } from '@/lib/services/SkillChainResolver';
 import type { DesignEdge } from '../page';
 
 const nodeTypes = {
@@ -39,6 +40,8 @@ interface FlowCanvasProps {
   designEdges: DesignEdge[];
   onConnect: (params: Connection) => void;
   onDesignEdgeRemove: (edgeId: string, source: string, target: string) => void;
+  skillChain: SkillChain | null;
+  globalChain: GlobalSkillChain | null;
 }
 
 export default function FlowCanvas({
@@ -52,6 +55,8 @@ export default function FlowCanvas({
   designEdges,
   onConnect,
   onDesignEdgeRemove,
+  skillChain,
+  globalChain,
 }: FlowCanvasProps) {
   const [hoveredNodeId, setHoveredNodeId] = useState<string | null>(null);
   const { fitView } = useReactFlow();
@@ -164,8 +169,61 @@ export default function FlowCanvas({
         };
       }
 
+      // In chain mode, boost skill-to-skill edges and style affinity edges
+      if (globalChain) {
+        const isSkillToSkill = edge.source.startsWith('skill:') && edge.target.startsWith('skill:');
+        const isAffinityEdge = edge.id.startsWith('affinity:');
+        if (isSkillToSkill) {
+          return {
+            ...edge,
+            style: {
+              ...edge.style,
+              opacity: Math.max((edge.style?.opacity as number) || 0.5, 0.8),
+              strokeWidth: 2,
+            },
+          };
+        }
+        if (isAffinityEdge) {
+          return {
+            ...edge,
+            style: {
+              ...edge.style,
+              stroke: '#f59e0b',
+              strokeDasharray: '6 4',
+              opacity: 0.35,
+              strokeWidth: 1,
+            },
+          };
+        }
+      }
+
       return edge;
     });
+
+    // In agent focus mode, inject affinity edges (agent → affinity skills)
+    if (focusedNodeId?.startsWith('agent:') && skillChain) {
+      const affinityEdges: RFEdge[] = [];
+      for (const entry of skillChain.affinity) {
+        const targetId = `skill:${entry.skillName}`;
+        // Only add if the target node exists in the layout
+        if (layoutNodes.some(n => n.id === targetId)) {
+          affinityEdges.push({
+            id: `affinity-${focusedNodeId}-${targetId}`,
+            source: focusedNodeId!,
+            target: targetId,
+            type: 'smoothstep',
+            animated: false,
+            style: {
+              stroke: '#f59e0b',
+              strokeWidth: 1.5,
+              strokeDasharray: '6 4',
+              opacity: 0.6,
+            },
+          });
+        }
+      }
+      baseEdges.push(...affinityEdges);
+    }
 
     // In design mode, append custom "add" edges in green
     if (designMode) {
@@ -190,7 +248,7 @@ export default function FlowCanvas({
     }
 
     return baseEdges;
-  }, [layoutEdges, hoveredNodeId, focusState, designMode, designEdges, removedEdgeSources]);
+  }, [layoutEdges, layoutNodes, hoveredNodeId, focusState, designMode, designEdges, removedEdgeSources, focusedNodeId, skillChain, globalChain]);
 
   // Single click: select (+ re-focus if already in focus mode)
   const onNodeClick: NodeMouseHandler = useCallback(
@@ -241,9 +299,34 @@ export default function FlowCanvas({
     [designMode, graphEdges, onDesignEdgeRemove]
   );
 
+  // Build skill layer map keyed by RF node ID (e.g., "skill:debugging")
+  // Uses per-agent chain when focusing an agent, or global chain in chain view mode
+  const skillLayerMap = useMemo(() => {
+    const sourceMap = skillChain?.layerMap ?? globalChain?.layerMap;
+    if (!sourceMap) return null;
+    const map = new Map<string, 'declared' | 'affinity' | 'platform' | 'enhancer'>();
+    for (const [skillName, layer] of sourceMap) {
+      map.set(`skill:${skillName}`, layer);
+    }
+    return map;
+  }, [skillChain, globalChain]);
+
+  // Determine if the focused node is an agent
+  const focusedAgentId = useMemo(() => {
+    if (!focusedNodeId?.startsWith('agent:')) return null;
+    return focusedNodeId;
+  }, [focusedNodeId]);
+
+  // Enable layer styling when: focusing an agent OR in global chain mode
+  const showLayers = focusedAgentId || globalChain;
+
   const focusContextValue = useMemo(
-    () => ({ visibleNodeIds: focusState?.visibleNodes ?? null }),
-    [focusState]
+    () => ({
+      visibleNodeIds: focusState?.visibleNodes ?? null,
+      skillLayerMap: showLayers ? skillLayerMap : null,
+      focusedAgentId: focusedAgentId ?? (globalChain ? 'global' : null),
+    }),
+    [focusState, skillLayerMap, focusedAgentId, showLayers, globalChain]
   );
 
   return (

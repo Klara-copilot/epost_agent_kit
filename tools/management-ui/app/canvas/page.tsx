@@ -7,6 +7,7 @@ import { GraphNode, Edge } from '@/lib/types/graph';
 import Link from 'next/link';
 import FlowCanvas from './_components/FlowCanvas';
 import DesignPanel from './_components/DesignPanel';
+import { resolveSkillChain, resolveGlobalSkillChain, type SkillChain, type GlobalSkillChain } from '@/lib/services/SkillChainResolver';
 
 export interface DesignEdge {
   id: string;
@@ -51,6 +52,7 @@ export default function CanvasPage() {
   );
   const [designMode, setDesignMode] = useState(false);
   const [designEdges, setDesignEdges] = useState<DesignEdge[]>([]);
+  const [viewMode, setViewMode] = useState<'full' | 'chain'>('full');
 
   // Escape key exits focus mode
   useEffect(() => {
@@ -182,6 +184,64 @@ export default function CanvasPage() {
     );
   };
 
+  // Compute skill chain when an agent is focused
+  const skillChain = useMemo<SkillChain | null>(() => {
+    if (!focusedNodeId?.startsWith('agent:') || !data) return null;
+    const agentId = focusedNodeId.replace('agent:', '');
+    const agent = data.agents.find(a => a.id === agentId);
+    if (!agent) return null;
+    return resolveSkillChain(agent, data.skills);
+  }, [focusedNodeId, data]);
+
+  // Compute global skill chain for chain view mode
+  const globalChain = useMemo<GlobalSkillChain | null>(() => {
+    if (viewMode !== 'chain' || !data) return null;
+    return resolveGlobalSkillChain(data.agents, data.skills);
+  }, [viewMode, data]);
+
+  // Filter graph for chain view mode
+  const filteredGraph = useMemo(() => {
+    if (!graph || viewMode === 'full') return graph;
+
+    // Chain mode: only agents + skills
+    const filteredNodes = graph.nodes.filter(
+      (n) => n.type === 'agent' || n.type === 'skill'
+    );
+    const nodeKeys = new Set(
+      filteredNodes.map((n) => `${n.type}:${getNodeId(n)}`)
+    );
+
+    // Keep existing edges between visible nodes
+    const filteredEdges = graph.edges.filter(
+      (e) => nodeKeys.has(e.source) && nodeKeys.has(e.target)
+    );
+
+    // Inject affinity edges from global chain
+    if (globalChain) {
+      for (const { agentId, skillName } of globalChain.affinityEdges) {
+        const sourceKey = `agent:${agentId}`;
+        const targetKey = `skill:${skillName}`;
+        if (nodeKeys.has(sourceKey) && nodeKeys.has(targetKey)) {
+          // Don't duplicate if already exists as skill-dependency
+          const exists = filteredEdges.some(
+            e => e.source === sourceKey && e.target === targetKey
+          );
+          if (!exists) {
+            filteredEdges.push({
+              id: `affinity:${sourceKey}→${targetKey}`,
+              source: sourceKey,
+              target: targetKey,
+              type: 'skill-dependency', // Reuse type for layout compatibility
+              metadata: { isAffinity: true },
+            });
+          }
+        }
+      }
+    }
+
+    return { nodes: filteredNodes, edges: filteredEdges };
+  }, [graph, viewMode, globalChain]);
+
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: 'var(--bg-main)' }}>
@@ -231,6 +291,17 @@ export default function CanvasPage() {
               Exit Focus (Esc)
             </button>
           )}
+          <button
+            onClick={() => setViewMode(v => v === 'full' ? 'chain' : 'full')}
+            className="text-xs font-medium px-3 py-1.5 rounded cursor-pointer transition-colors"
+            style={{
+              backgroundColor: viewMode === 'chain' ? '#4ec9b0' : 'var(--bg-main)',
+              color: viewMode === 'chain' ? '#000' : 'var(--text-secondary)',
+              border: `1px solid ${viewMode === 'chain' ? '#4ec9b0' : 'var(--border)'}`,
+            }}
+          >
+            {viewMode === 'chain' ? '◆ Skill Chain' : '◇ Skill Chain'}
+          </button>
           <button
             onClick={handleDesignModeToggle}
             className="text-xs font-medium px-3 py-1.5 rounded cursor-pointer transition-colors"
@@ -332,8 +403,8 @@ export default function CanvasPage() {
         <div className="flex-1 relative" style={{ backgroundColor: 'var(--bg-main)' }}>
           <ReactFlowProvider>
             <FlowCanvas
-              graphNodes={graph.nodes}
-              graphEdges={graph.edges}
+              graphNodes={filteredGraph!.nodes}
+              graphEdges={filteredGraph!.edges}
               selectedNodeId={selectedNode ? `${selectedNode.type}:${getNodeId(selectedNode)}` : null}
               focusedNodeId={focusedNodeId}
               onNodeSelect={handleNodeSelect}
@@ -342,6 +413,8 @@ export default function CanvasPage() {
               designEdges={designEdges}
               onConnect={handleConnect}
               onDesignEdgeRemove={handleDesignEdgeRemove}
+              skillChain={skillChain}
+              globalChain={globalChain}
             />
           </ReactFlowProvider>
           {designMode && (
@@ -351,6 +424,7 @@ export default function CanvasPage() {
               onClear={handleClearDesign}
             />
           )}
+          {viewMode === 'chain' && <ChainLegend />}
         </div>
 
         {/* Right: Properties Panel */}
@@ -375,6 +449,12 @@ export default function CanvasPage() {
                   <div className="text-sm" style={{ color: 'var(--text-secondary)' }}>{getNodeDescription(selectedNode)}</div>
                 </div>
               )}
+              {selectedNode.type === 'skill' && (
+                <SkillMetadataSection node={selectedNode} />
+              )}
+              {selectedNode.type === 'agent' && skillChain && (
+                <SkillChainSummary chain={skillChain} />
+              )}
               <ConnectionsSection
                 selectedNode={selectedNode}
                 graph={graph}
@@ -393,6 +473,61 @@ export default function CanvasPage() {
             </div>
           )}
         </div>
+      </div>
+    </div>
+  );
+}
+
+function ChainLegend() {
+  const layers = [
+    { label: 'Declared', color: '#10b981', style: 'solid' },
+    { label: 'Affinity', color: '#f59e0b', style: 'dashed' },
+    { label: 'Platform', color: '#f59e0b', style: 'dashed' },
+    { label: 'Enhancer', color: '#4ec9b0', style: 'dotted' },
+  ];
+  const edges = [
+    { label: 'Requires', color: '#ef4444', dash: '' },
+    { label: 'Enhances', color: '#4ec9b0', dash: '8 4' },
+    { label: 'Conflicts', color: '#ef4444', dash: '3 3' },
+    { label: 'Extends', color: '#60a5fa', dash: '' },
+    { label: 'Agent affinity', color: '#f59e0b', dash: '6 4' },
+  ];
+
+  return (
+    <div
+      className="absolute bottom-4 left-4 p-3 rounded-lg text-xs space-y-2"
+      style={{ backgroundColor: 'rgba(30,30,30,0.92)', border: '1px solid var(--border)', zIndex: 10 }}
+    >
+      <div className="font-semibold" style={{ color: 'var(--text-secondary)' }}>Skill Chain Legend</div>
+      <div className="space-y-1">
+        {layers.map(l => (
+          <div key={l.label} className="flex items-center gap-2">
+            <span
+              style={{
+                width: 16,
+                height: 4,
+                display: 'inline-block',
+                borderTop: `3px ${l.style} ${l.color}`,
+              }}
+            />
+            <span style={{ color: 'var(--text-tertiary)' }}>{l.label}</span>
+          </div>
+        ))}
+      </div>
+      <div className="space-y-1" style={{ borderTop: '1px solid var(--border)', paddingTop: '4px' }}>
+        {edges.map(e => (
+          <div key={e.label} className="flex items-center gap-2">
+            <svg width="16" height="4" style={{ flexShrink: 0 }}>
+              <line
+                x1="0" y1="2" x2="16" y2="2"
+                stroke={e.color}
+                strokeWidth="2"
+                strokeDasharray={e.dash}
+              />
+            </svg>
+            <span style={{ color: 'var(--text-tertiary)' }}>{e.label}</span>
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -484,7 +619,220 @@ const EDGE_TYPE_LABELS: Record<string, { label: string; color: string; icon: str
   'package-provides': { label: 'Packages', color: '#8b5cf6', icon: '📦' },
   'profile-includes': { label: 'Profiles', color: '#6b7280', icon: '📋' },
   'same-type-hierarchy': { label: 'Hierarchy', color: '#60a5fa', icon: '🔗' },
+  'skill-extends': { label: 'Extends', color: '#60a5fa', icon: '↑' },
+  'skill-requires': { label: 'Requires', color: '#ef4444', icon: '◆' },
+  'skill-enhances': { label: 'Enhances', color: '#4ec9b0', icon: '✦' },
+  'skill-conflicts': { label: 'Conflicts', color: '#ef4444', icon: '✕' },
 };
+
+function SkillChainSummary({ chain }: { chain: SkillChain }) {
+  return (
+    <div>
+      <div className="text-xs uppercase mb-2 font-semibold" style={{ color: 'var(--text-tertiary)' }}>
+        Skill Loading Chain
+      </div>
+      <div className="space-y-3">
+        {/* Declared */}
+        <div>
+          <div className="text-xs font-medium flex items-center gap-1 mb-1" style={{ color: '#10b981' }}>
+            <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#10b981', display: 'inline-block' }} />
+            <span>Declared</span>
+            <span style={{ color: 'var(--text-tertiary)' }}>({chain.declared.length})</span>
+          </div>
+          <div className="space-y-0.5" style={{ paddingLeft: '16px' }}>
+            {chain.declared.map(e => (
+              <div key={e.skillName} className="text-xs font-mono" style={{ color: 'var(--text-secondary)' }}>
+                {e.skillName}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Affinity */}
+        {chain.affinity.length > 0 && (
+          <div>
+            <div className="text-xs font-medium flex items-center gap-1 mb-1" style={{ color: '#f59e0b' }}>
+              <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'transparent', border: '2px solid #f59e0b', display: 'inline-block' }} />
+              <span>Discoverable</span>
+              <span style={{ color: 'var(--text-tertiary)' }}>({chain.affinity.length})</span>
+            </div>
+            <div className="space-y-0.5" style={{ paddingLeft: '16px' }}>
+              {chain.affinity.map(e => (
+                <div key={e.skillName} className="text-xs font-mono" style={{ color: 'var(--text-secondary)' }}>
+                  {e.skillName}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Platform Chains */}
+        {chain.platformChains.length > 0 && (
+          <div>
+            <div className="text-xs font-medium flex items-center gap-1 mb-1" style={{ color: '#f59e0b' }}>
+              <span>Platform Chains</span>
+            </div>
+            <div className="space-y-2" style={{ paddingLeft: '8px' }}>
+              {chain.platformChains.map(pc => (
+                <div key={pc.platform}>
+                  <div className="text-xs font-semibold mb-0.5" style={{ color: 'var(--text-secondary)' }}>
+                    {pc.platform.charAt(0).toUpperCase() + pc.platform.slice(1)}
+                  </div>
+                  <div className="space-y-0.5" style={{ paddingLeft: '12px' }}>
+                    {pc.skills.map(e => (
+                      <div key={e.skillName} className="text-xs font-mono flex items-center gap-1" style={{ color: 'var(--text-tertiary)' }}>
+                        {e.loadedVia ? (
+                          <>
+                            <span style={{ color: e.loadedVia.type === 'extends' ? '#60a5fa' : '#ef4444', fontSize: '10px' }}>
+                              {e.loadedVia.type === 'extends' ? '↑' : '◆'}
+                            </span>
+                            <span>{e.skillName}</span>
+                            <span style={{ fontSize: '9px', color: 'var(--text-tertiary)' }}>
+                              ({e.loadedVia.type} {e.loadedVia.from})
+                            </span>
+                          </>
+                        ) : (
+                          <span>{e.skillName}</span>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Enhancers */}
+        {chain.enhancers.length > 0 && (
+          <div>
+            <div className="text-xs font-medium flex items-center gap-1 mb-1" style={{ color: '#4ec9b0' }}>
+              <span>Enhancers</span>
+              <span style={{ color: 'var(--text-tertiary)' }}>({chain.enhancers.length})</span>
+            </div>
+            <div className="space-y-0.5" style={{ paddingLeft: '16px' }}>
+              {chain.enhancers.map(e => (
+                <div key={e.skillName} className="text-xs font-mono flex items-center gap-1" style={{ color: 'var(--text-tertiary)' }}>
+                  <span style={{ color: '#4ec9b0', fontSize: '10px' }}>✦</span>
+                  <span>{e.skillName}</span>
+                  <span style={{ fontSize: '9px' }}>enhances {e.enhances}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function SkillMetadataSection({ node }: { node: GraphNode }) {
+  if (node.type !== 'skill') return null;
+  const data = node.data;
+  const tier = data.tier;
+  const connections = data.connections;
+
+  const hasAnyConnection = connections && (
+    connections.extends?.length ||
+    connections.requires?.length ||
+    connections.enhances?.length ||
+    connections.conflicts?.length
+  );
+
+  return (
+    <div className="space-y-3">
+      {/* Tier */}
+      {tier && (
+        <div>
+          <div className="text-xs uppercase mb-1" style={{ color: 'var(--text-tertiary)' }}>Tier</div>
+          <div className="flex items-center gap-2">
+            <span
+              style={{
+                width: 10,
+                height: 10,
+                borderRadius: '50%',
+                display: 'inline-block',
+                background: tier === 'core' ? '#10b981' : 'transparent',
+                border: tier === 'core' ? '2px solid #10b981' : '2px solid #f59e0b',
+              }}
+            />
+            <span className="text-sm font-medium" style={{ color: tier === 'core' ? '#10b981' : '#f59e0b' }}>
+              {tier === 'core' ? 'Core (always loaded)' : 'Discoverable (lazy-loaded)'}
+            </span>
+          </div>
+        </div>
+      )}
+
+      {/* Skill Connections */}
+      {hasAnyConnection && (
+        <div>
+          <div className="text-xs uppercase mb-2" style={{ color: 'var(--text-tertiary)' }}>Skill Connections</div>
+          <div className="space-y-2">
+            {connections!.requires?.length ? (
+              <SkillConnectionList label="Requires" items={connections!.requires!} color="#ef4444" icon="◆" />
+            ) : null}
+            {connections!.enhances?.length ? (
+              <SkillConnectionList label="Enhances" items={connections!.enhances!} color="#4ec9b0" icon="✦" />
+            ) : null}
+            {connections!.conflicts?.length ? (
+              <SkillConnectionList label="Conflicts" items={connections!.conflicts!} color="#ef4444" icon="✕" />
+            ) : null}
+            {connections!.extends?.length ? (
+              <SkillConnectionList label="Extends" items={connections!.extends!} color="#60a5fa" icon="↑" />
+            ) : null}
+          </div>
+        </div>
+      )}
+
+      {/* Agent Affinity */}
+      {data.agentAffinity?.length > 0 && (
+        <div>
+          <div className="text-xs uppercase mb-1" style={{ color: 'var(--text-tertiary)' }}>Agent Affinity</div>
+          <div className="flex flex-wrap gap-1">
+            {data.agentAffinity.map((agent) => (
+              <span
+                key={agent}
+                className="text-xs px-2 py-0.5 rounded font-mono"
+                style={{ backgroundColor: 'rgba(0, 122, 204, 0.15)', color: '#60a5fa' }}
+              >
+                {agent}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function SkillConnectionList({
+  label,
+  items,
+  color,
+  icon,
+}: {
+  label: string;
+  items: string[];
+  color: string;
+  icon: string;
+}) {
+  return (
+    <div>
+      <div className="text-xs font-medium flex items-center gap-1 mb-1" style={{ color }}>
+        <span>{icon}</span>
+        <span>{label}</span>
+        <span style={{ color: 'var(--text-tertiary)' }}>({items.length})</span>
+      </div>
+      <div className="space-y-0.5" style={{ paddingLeft: '16px' }}>
+        {items.map((name) => (
+          <div key={name} className="text-xs font-mono" style={{ color: 'var(--text-secondary)' }}>
+            {name}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 function ConnectionsSection({
   selectedNode,

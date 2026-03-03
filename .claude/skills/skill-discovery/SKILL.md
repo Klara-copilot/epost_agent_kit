@@ -62,6 +62,7 @@ Scan the user request for these patterns:
 | Figma, design tokens, components, theme | design system | web-figma, web-ui-lib |
 | Docker, container, GCP, Terraform | infrastructure | infra-docker, infra-cloud |
 | B2B module, inbox, monitoring, composer | domain | domain-b2b |
+| get started, onboard, begin, new to project | onboarding | get-started |
 
 ### 1c. Domain Signals (from git context)
 - Files in module-specific directories → domain skills

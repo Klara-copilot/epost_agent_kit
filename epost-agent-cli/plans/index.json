@@ -2,10 +2,10 @@
   "version": "1.0.0",
   "updated": "2026-02-08",
   "counts": {
-    "active": 0,
+    "active": 3,
     "completed": 18,
     "archived": 0,
-    "total": 18
+    "total": 21
   },
   "plans": [
     {
@@ -188,6 +188,36 @@
       "authors": ["epost-implementer"],
       "tags": ["agents", "cli", "platform-agent"],
       "file": "completed/plan-260208-1625-cli-developer-agent.md"
+    },
+    {
+      "id": "PLAN-0019",
+      "title": "Skill Chain View Mode",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-03",
+      "authors": ["epost-architect"],
+      "tags": ["management-ui", "visualization", "canvas", "skill-chain"],
+      "file": "../../tools/management-ui/plans/skill-chain-view/plan.md"
+    },
+    {
+      "id": "PLAN-0020",
+      "title": "Git Skills & Skill-Discovery Integration",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-03",
+      "authors": ["epost-architect"],
+      "tags": ["skills", "git", "skill-discovery", "kit"],
+      "file": "active/plan-git-skill-discovery/plan.md"
+    },
+    {
+      "id": "PLAN-0021",
+      "title": "Re-implement Lost Features",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-03",
+      "authors": ["epost-architect"],
+      "tags": ["recovery", "skills", "cli", "management-ui"],
+      "file": "../../plans/260303-1000-reimpl-lost-features/plan.md"
     }
   ]
 }

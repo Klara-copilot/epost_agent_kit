@@ -6,6 +6,8 @@ metadata:
   keywords: [error, retry, fallback, circuit-breaker, backoff, resilience, failure, exponential, degradation]
   platforms: [all]
   triggers: [error, exception, timeout, retry, fallback]
+  connections:
+    enhances: [debugging]
 ---
 
 # Error Recovery Skill

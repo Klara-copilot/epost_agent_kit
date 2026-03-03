@@ -8,6 +8,8 @@ metadata:
   keywords: [api, rest, fetchbuilder, caller, server-action, route, endpoint]
   platforms: [web]
   triggers: ["route.ts", "api/", "server action", "endpoint", "caller", "fetchbuilder"]
+  connections:
+    enhances: [web-frontend]
 ---
 
 # Web API Routes — FetchBuilder & Caller Patterns

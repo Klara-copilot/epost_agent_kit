@@ -6,11 +6,11 @@ This file provides guidance to Claude Code when working with code in this reposi
 ## Project: epost_agent_kit
 
 
-## Installed Profile: `full`
+## Installed Profile: ``
 
 **Packages**: core, a11y, platform-web, platform-ios, platform-android, platform-backend, kit, design-system, domains
 
-**Installed by**: epost-kit v0.1.0 on 2026-03-02
+**Installed by**: epost-kit v0.1.0 on 2026-03-03
 
 ---
 
@@ -57,6 +57,7 @@ On every user prompt involving a dev task, sense context before acting:
 | Scaffold | bootstrap, init, scaffold, new project, new module | `/bootstrap` |
 | Convert | convert, prototype, migrate | `/convert` |
 | A11y | a11y, accessibility, wcag | `/fix-a11y` or `/review-a11y` |
+| Onboard | get started, begin, onboard, new to project, what is this | `/get-started` |
 
 ### Context Boost Rules
 - TypeScript/build errors detected → always route to `/fix` first

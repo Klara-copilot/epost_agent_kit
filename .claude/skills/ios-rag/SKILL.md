@@ -7,13 +7,15 @@ metadata:
   agent-affinity: [epost-a11y-specialist, epost-muji, epost-implementer]
   keywords: [rag, vector-search, ios, swift, swiftui, uikit, design-system]
   triggers: ["search swift", "find view", "ios pattern", "theme token"]
+  connections:
+    enhances: [ios-development]
 ---
 
 # iOS RAG Skill
 
 ## Purpose
 
-Vector search across three iOS repositories: main app (luz_epost_ios), design system (luz_ios_designui), and theme library (luz_theme_ui). Uses ChromaDB with sentence-transformer embeddings for semantic search of Swift code, SwiftUI views, and design patterns.
+Vector search across multiple iOS repositories. Uses ChromaDB with sentence-transformer embeddings for semantic search of Swift code, SwiftUI views, and design patterns. Call `status` to discover currently indexed projects.
 
 ## Server Connection
 
@@ -25,13 +27,7 @@ Vector search across three iOS repositories: main app (luz_epost_ios), design sy
 
 ## Indexed Repositories
 
-| Repository | Purpose | Coverage |
-|------------|---------|----------|
-| `luz_epost_ios` | Main iOS app | App screens, features, business logic |
-| `luz_ios_designui` | Design system | Reusable UI components, patterns |
-| `luz_theme_ui` | Theme library | Theme tokens, styling, branding |
-
-All three repositories are indexed together, enabling cross-project pattern discovery.
+Call `status` to discover which projects are currently indexed and their stats. Projects are indexed together, enabling cross-project pattern discovery.
 
 ## MCP Tools
 
@@ -44,7 +40,7 @@ Primary search tool. Returns relevant code chunks with metadata.
 - `top_k` (int, default 5): Number of results to return
 - `enforce_scope` (boolean, default true): Limit to single project or search all
 - `filters` (object, optional):
-  - `project`: Filter by project (luz_epost_ios, luz_ios_designui, luz_theme_ui)
+  - `project`: Filter by project name (discover available projects via `status`)
   - `component`: Filter by component/view name
   - `topic`: Filter by topic (ui, theme, state-management, networking, persistence)
   - `file_type`: Filter by extension (swift, storyboard, xib, plist, xcconfig)
@@ -91,12 +87,22 @@ Results are:
 | Cross-project pattern | ✅ | ⚠️ (one repo at a time) | ❌ |
 | Existing view for task | ✅ | ❌ | ❌ |
 
-### Decision Flow
+### Query Strategy Decision Tree
+
+1. **Known view or file name?** → Standard `query` + `component` filter
+2. **Exact pattern or API?** → Standard `query` + `topic` + `file_type` filters
+3. **Conceptual or cross-cutting?** → Smart query with HyDE (see `references/smart-query.md`)
+4. **< 3 results or all scores < 0.3?** → Broaden: remove filters, try synonyms, alternate casing
+5. **Still sparse?** → Try `enforce_scope: false` to search all indexed repos
+6. **Still nothing?** → Fall through to L4 (codebase Grep/Glob)
+
+### Quick Decision Flow
 
 1. **Known filename or exact pattern?** → Use Grep/Glob
 2. **Apple framework API?** → Use Context7
 3. **Cross-project search?** → Use RAG with enforce_scope=false
 4. **Semantic discovery?** → Use RAG
+5. When results have `stale_sidecar: true`, trust code chunks but ignore metadata fields
 
 ## Integration
 
@@ -126,11 +132,7 @@ Query Context7 → Return
 
 ### Projects
 
-| Project | Content |
-|---------|---------|
-| `luz_epost_ios` | Main app, feature screens, app logic |
-| `luz_ios_designui` | Design system components, patterns |
-| `luz_theme_ui` | Theme tokens, styles, branding |
+Discover available projects via `status` tool. Use the `project` filter to narrow results to a specific repo.
 
 ### Topics
 
@@ -174,9 +176,6 @@ Files are indexed with priority scores (1-10):
 ## References
 
 - `references/query-patterns.md` — iOS-specific query examples, troubleshooting, best practices
+- `references/smart-query.md` — HyDE + multi-query retrieval for improved recall
 - Server repo: `epost_ios_rag`
 - API docs: `http://localhost:2637/docs`
-- Indexed projects:
-  - `luz_epost_ios` — Main app
-  - `luz_ios_designui` — Design system
-  - `luz_theme_ui` — Theme library

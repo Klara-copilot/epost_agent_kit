@@ -316,6 +316,45 @@ export class GraphBuilder {
       logger.info('graph', `Added ${hierarchyEdges} same-type hierarchy edges`);
     }
 
+    // Build edges: skill → skill connections (extends, requires, enhances, conflicts)
+    logger.debug('graph', 'Building skill-to-skill connection edges');
+    let skillConnectionEdges = 0;
+    data.skills.forEach(skill => {
+      if (!skill.connections) return;
+      const sourceKey = nodeKey('skill', skill.id);
+
+      const connectionTypes = [
+        { field: 'extends' as const, edgeType: 'skill-extends' as const },
+        { field: 'requires' as const, edgeType: 'skill-requires' as const },
+        { field: 'enhances' as const, edgeType: 'skill-enhances' as const },
+        { field: 'conflicts' as const, edgeType: 'skill-conflicts' as const },
+      ];
+
+      for (const { field, edgeType } of connectionTypes) {
+        const targets = skill.connections![field];
+        if (!targets?.length) continue;
+
+        for (const targetName of targets) {
+          // Resolve target: try direct match, then alias
+          let targetKey = nodeKey('skill', targetName);
+          if (!nodes.has(targetKey) && skillAliases.has(targetName)) {
+            targetKey = nodeKey('skill', skillAliases.get(targetName)!);
+          }
+
+          edges.push({
+            id: `${sourceKey}→${edgeType}:${targetKey}`,
+            source: sourceKey,
+            target: targetKey,
+            type: edgeType,
+          });
+          skillConnectionEdges++;
+        }
+      }
+    });
+    if (skillConnectionEdges > 0) {
+      logger.info('graph', `Added ${skillConnectionEdges} skill-to-skill connection edges`);
+    }
+
     logger.info('graph', `Graph built successfully: ${nodes.size} nodes, ${edges.length} edges`);
     logger.debug('graph', 'Graph build complete', {
       nodeCount: nodes.size,
@@ -350,6 +389,10 @@ export class GraphBuilder {
         'package-provides': 0,
         'profile-includes': 0,
         'same-type-hierarchy': 0,
+        'skill-extends': 0,
+        'skill-requires': 0,
+        'skill-enhances': 0,
+        'skill-conflicts': 0,
       },
     };
 

@@ -12,6 +12,8 @@ metadata:
     - epost-implementer
   platforms:
     - all
+  connections:
+    enhances: [kit-agents]
 ---
 
 # Command Development for Claude Code

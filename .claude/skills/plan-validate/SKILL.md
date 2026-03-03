@@ -6,6 +6,8 @@ context: fork
 agent: epost-architect
 metadata:
   argument-hint: "[plan-path]"
+  connections:
+    extends: [plan]
 ---
 
 ## Your mission

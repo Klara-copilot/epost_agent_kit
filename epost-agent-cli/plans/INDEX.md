@@ -6,7 +6,11 @@ See [PLAN_FORMAT.md](PLAN_FORMAT.md) for standardized plan template.
 
 ## Active
 
-_No active plans._
+| ID | Title | Agent | Date | File |
+|----|-------|-------|------|------|
+| PLAN-0019 | Skill Chain View Mode | epost-architect | 2026-03-03 | [tools/management-ui/plans/skill-chain-view/plan.md](../../tools/management-ui/plans/skill-chain-view/plan.md) |
+| PLAN-0020 | Git Skills & Skill-Discovery Integration | epost-architect | 2026-03-03 | [active/plan-git-skill-discovery/plan.md](active/plan-git-skill-discovery/plan.md) |
+| PLAN-0021 | Re-implement Lost Features | epost-architect | 2026-03-03 | [../../plans/260303-1000-reimpl-lost-features/plan.md](../../plans/260303-1000-reimpl-lost-features/plan.md) |
 
 ## Completed
 

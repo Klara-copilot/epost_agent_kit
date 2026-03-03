@@ -13,6 +13,8 @@ metadata:
     - epost-implementer
   platforms:
     - android
+  connections:
+    extends: [a11y]
 ---
 
 # Android Accessibility Skill

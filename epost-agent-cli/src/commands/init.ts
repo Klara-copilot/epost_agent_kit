@@ -824,6 +824,13 @@ async function replacePathsInDir(
 
 // ─── Utility: generate skill-index.json from installed SKILL.md files ───
 
+interface SkillConnections {
+  extends: string[];
+  requires: string[];
+  conflicts: string[];
+  enhances: string[];
+}
+
 interface SkillIndexEntry {
   name: string;
   description: string;
@@ -831,6 +838,7 @@ interface SkillIndexEntry {
   platforms: string[];
   triggers: string[];
   "agent-affinity": string[];
+  connections: SkillConnections;
   path: string;
 }
 
@@ -854,6 +862,13 @@ async function generateSkillIndex(skillsDir: string): Promise<{
         typeof v === "string" ? v : fallback;
       const asArr = (v: string | string[] | undefined, fallback: string[]) =>
         Array.isArray(v) ? v : fallback;
+      // Build connections from metadata.connections (parser flattens nested YAML)
+      const connections: SkillConnections = {
+        extends: asArr(metadata.extends, []),
+        requires: asArr(metadata.requires, []),
+        conflicts: asArr(metadata.conflicts, []),
+        enhances: asArr(metadata.enhances, []),
+      };
       skills.push({
         name: asStr(metadata.name, ""),
         description: asStr(metadata.description, ""),
@@ -861,6 +876,7 @@ async function generateSkillIndex(skillsDir: string): Promise<{
         platforms: asArr(metadata.platforms, ["all"]),
         triggers: asArr(metadata.triggers, []),
         "agent-affinity": asArr(metadata["agent-affinity"], []),
+        connections,
         path: relativePath,
       });
     } catch {

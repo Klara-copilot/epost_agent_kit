@@ -6,6 +6,8 @@ context: fork
 agent: epost-implementer
 metadata:
   argument-hint: "[agent-name] [description]"
+  connections:
+    requires: [kit-agent-development]
 ---
 
 ## Your Mission
@@ -28,21 +30,28 @@ Create a new agent definition file following epost_agent_kit conventions.
    - Model tier: haiku (routing/search), sonnet (implementation), opus (architecture)
    - Color: blue, cyan, green, yellow, magenta, red
 
-2. **Scaffold Agent File**:
+2. **Suggest Skills** — scan existing skills for likely matches based on agent role/platform:
+   - Core skills all agents should have (e.g., `core`)
+   - Platform skills matching the agent's domain
+   - Workflow skills matching the agent's purpose
+
+3. **Scaffold Agent File**:
    - Create `packages/{package}/agents/{agent-name}.md` with proper frontmatter
    - Include: name, description (with `<example>` blocks), model, color
-   - Add: skills, permissionMode, disallowedTools as needed
+   - Add: skills (from step 2), permissionMode, disallowedTools as needed
    - Write system prompt body with role definition, workflow, and rules
 
-3. **Copy to Package Source**:
+4. **Copy to Package Source**:
    - Copy agent file to `packages/{package}/agents/{agent-name}.md`
    - This is the source of truth — `.claude/` is generated output
 
-4. **Register**:
+5. **Register**:
    - Update `packages/{package}/package.yaml` agents list
    - Update `packages/kit/skills/kit-agents/SKILL.md` agent tree
 
-5. **Report**: Agent name, package, model, file paths created
+6. **Validate**: Run `epost-kit lint` on new agent — catch broken skill refs
+
+7. **Report**: Agent name, package, model, skills list, file paths created
 
 ## Rules
 

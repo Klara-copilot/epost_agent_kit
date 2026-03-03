@@ -14,6 +14,8 @@ metadata:
     - epost-implementer
   platforms:
     - android
+  connections:
+    enhances: [android-development]
 ---
 
 # Android Theme Knowledge

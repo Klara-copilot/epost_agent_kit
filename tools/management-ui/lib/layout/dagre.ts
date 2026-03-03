@@ -49,6 +49,24 @@ const EDGE_STYLES: Record<
     strokeDasharray: '4 2',
     opacity: 0.6,
   },
+  'skill-extends': {
+    stroke: '#60a5fa',
+    opacity: 0.7,
+  },
+  'skill-requires': {
+    stroke: '#ef4444',
+    opacity: 0.6,
+  },
+  'skill-enhances': {
+    stroke: '#4ec9b0',
+    strokeDasharray: '8 4',
+    opacity: 0.5,
+  },
+  'skill-conflicts': {
+    stroke: '#ef4444',
+    strokeDasharray: '3 3',
+    opacity: 0.4,
+  },
 };
 
 function getNodeId(node: GraphNode): string {

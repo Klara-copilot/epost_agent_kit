@@ -8,6 +8,8 @@ metadata:
   keywords: [retrieve, search, knowledge, context, rag, lookup, prior-art]
   platforms: [all]
   triggers: ["what do we know about", "check knowledge", "prior art", "previous decision"]
+  connections:
+    enhances: [research, planning]
 ---
 
 # Knowledge Retrieval Skill
@@ -85,16 +87,52 @@ research → docs-seeker (external)
 research → synthesize findings
 ```
 
+## Cross-Source Bridging
+
+docs/ (L1) and RAG (L2) complement each other. Bridge them:
+
+| docs/ finding | RAG action |
+|---------------|------------|
+| ADR mentions component path | Query RAG for current implementation state |
+| PATTERN describes approach | Query RAG for usage examples across codebase |
+| FINDING references file | Query RAG for related files in same module |
+| Convention names a pattern | Query RAG for conformance/violations |
+
+| RAG finding | docs/ action |
+|-------------|--------------|
+| Result looks like a recurring pattern | Check `docs/patterns/` for documented version |
+| Multiple results share an approach | Check `docs/conventions/` for existing convention |
+| No docs/ entry for frequently-queried topic | Flag for `knowledge-capture` |
+
+**Rule**: Always cross-reference. An ADR without code validation is stale. A code pattern without docs is undocumented risk.
+
+## Cross-Platform RAG Coordination
+
+When a query spans platforms, coordinate RAG queries:
+
+| Scenario | Query strategy |
+|----------|---------------|
+| Design tokens, colors, typography | Query both web (2636) + iOS (2637) RAGs |
+| Component parity check | Query both, compare by concept |
+| Pattern consistency | Query both, note divergences |
+| Platform-specific implementation | Query single platform RAG only |
+
+**Dedup rule**: Group results by concept, not file. Note platform differences.
+**Authority rule**: Definitions live in design system RAG, usage examples in platform RAG. Prefer the authoritative source.
+
 ## Staleness Detection
 
-| Source | Freshness | Validation |
-|--------|-----------|------------|
-| `docs/` | Check `updatedAt` field | Verify if >90 days old |
-| RAG | Always fresh (auto-indexed) | Trust current |
-| Skills | Manually updated | Check last commit |
+| Source | Freshness Signal | Action |
+|--------|-----------------|--------|
+| `docs/` | `updatedAt` field | Verify if >90 days old, cross-check with RAG |
+| RAG code chunks | Auto-indexed on file change | Trust current code content |
+| RAG sidecar metadata | `stale_sidecar: true` flag | Metadata outdated but code chunks still valid |
+| Skills | Manually updated | Check last commit date |
 | Codebase | Always current | Trust HEAD |
-| Context7 | Always fresh (live docs) | Trust current |
-| WebSearch | Check publication date | Prefer <2 years |
+| Context7 | Live docs | Trust current |
+| WebSearch | Publication date | Prefer <2 years |
+
+**RAG staleness rule**: When `stale_sidecar: true`, use code chunks for implementation details but ignore metadata fields (summary, topics, component_names). Sidecar regeneration is handled server-side automatically.
 
 ## Best Practices
 

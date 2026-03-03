@@ -12,6 +12,8 @@ metadata:
     - epost-implementer
   platforms:
     - all
+  connections:
+    enhances: [kit-agents]
 ---
 
 # Agent Development for Claude Code Plugins

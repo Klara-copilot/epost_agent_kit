@@ -77,6 +77,19 @@ Skills support nested directories. Claude Code auto-discovers `SKILL.md` files a
 | `model` | No | string | Override model for this skill |
 | `argument-hint` | No | string | Placeholder text for skill argument |
 
+**epost-kit metadata extensions (nested under `metadata:`):**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `keywords` | array | Search terms for skill discovery |
+| `platforms` | array | Target platforms: ios, android, web, backend, cli, all |
+| `triggers` | array | File patterns that trigger skill (e.g., `.kt`, `.swift`) |
+| `agent-affinity` | array | Preferred agents for this skill |
+| `connections.extends` | array | Parent skills this inherits from |
+| `connections.requires` | array | Skills that must be co-loaded |
+| `connections.conflicts` | array | Skills that cannot coexist |
+| `connections.enhances` | array | Optional complementary skills |
+
 **Invalid fields:** `version` (not recognized by Claude Code)
 
 ## Directory Structure

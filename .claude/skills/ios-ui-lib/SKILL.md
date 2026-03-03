@@ -14,6 +14,8 @@ metadata:
     - epost-implementer
   platforms:
     - ios
+  connections:
+    enhances: [ios-development]
 ---
 
 # iOS Theme Knowledge

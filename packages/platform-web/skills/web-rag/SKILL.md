@@ -8,7 +8,8 @@ metadata:
   keywords: [rag, vector-search, klara-theme, web, components, design-tokens]
   platforms: [web]
   triggers: [search components, find component, klara-theme, design token]
-"
+  connections:
+    enhances: [web-frontend]
 ---
 
 # Web RAG Skill
@@ -115,12 +116,21 @@ Query Context7 → Return
 
 See `references/query-patterns.md` for filter combinations, examples, and troubleshooting.
 
+## Query Strategy Decision Tree
+
+1. **Known component or file name?** → Standard `query` + `component` filter
+2. **Exact pattern or API?** → Standard `query` + `topic` + `file_type` filters
+3. **Conceptual or cross-cutting?** → Smart query with HyDE (see `references/smart-query.md`)
+4. **< 3 results or all scores < 0.3?** → Broaden: remove filters, try synonyms, alternate casing
+5. **Still nothing?** → Fall through to L4 (codebase Grep/Glob)
+
 ## Rules
 
 1. Start broad, then filter — refine with filters not longer queries
 2. Use natural language — "button with loading state" better than "btn loading"
 3. Check relevance scores — < 0.3 may indicate poor match, rephrase query
 4. Fallback to grep if RAG fails or server is offline
+5. When results have `stale_sidecar: true`, trust code chunks but ignore metadata fields
 
 ## Related Skills
 
@@ -132,7 +142,7 @@ See `references/query-patterns.md` for filter combinations, examples, and troubl
 
 ## References
 
-- `query-patterns.md` — Common query examples
-- `smart-query.md` — HyDE + multi-query retrieval for improved recall
+- `references/query-patterns.md` — Common query examples
+- `references/smart-query.md` — HyDE + multi-query retrieval for improved recall
 - Server repo: `epost_web_theme_rag`
 - API docs: `http://localhost:2636/docs`

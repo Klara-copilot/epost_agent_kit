@@ -8,6 +8,8 @@ metadata:
   keywords: [capture, learn, persist, record, post-mortem, retrospective]
   platforms: [all]
   triggers: ["capture learnings", "save pattern", "record finding", "what did we learn"]
+  connections:
+    requires: [knowledge-base]
 ---
 
 # Knowledge Capture Skill

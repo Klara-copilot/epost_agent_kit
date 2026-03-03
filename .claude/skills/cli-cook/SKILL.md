@@ -6,6 +6,8 @@ context: fork
 agent: epost-implementer
 metadata:
   argument-hint: "[CLI feature description]"
+  connections:
+    requires: [kit-cli]
 ---
 
 Implement CLI features in the epost-agent-cli project.

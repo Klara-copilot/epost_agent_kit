@@ -9,6 +9,8 @@ metadata:
   keywords: [context, hub, routing, git-state, platform-detection, error-signals]
   platforms: [all]
   triggers: []
+  connections:
+    enhances: [skill-discovery]
 ---
 
 # Hub Context Skill
@@ -123,6 +125,7 @@ The routing engine uses context to boost intent categories:
 | Scaffold | bootstrap, init, scaffold, new project, new module | `/bootstrap` skill |
 | Convert | convert, prototype, migrate | `/convert` skill |
 | A11y | a11y, accessibility, wcag | `/fix-a11y` or `/review-a11y` |
+| Onboard | get started, begin, onboard, new to project, what is this | `/get-started` |
 
 ### Routing Rules
 - If user types a slash command explicitly → execute it directly, skip routing

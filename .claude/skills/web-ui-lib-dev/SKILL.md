@@ -7,6 +7,8 @@ metadata:
   agent-affinity: [epost-muji, epost-implementer]
   keywords: [klara-theme, components, pipeline, audit, storybook]
   platforms: [web]
+  connections:
+    requires: [web-ui-lib, web-figma]
 ---
 
 # klara-theme Skill

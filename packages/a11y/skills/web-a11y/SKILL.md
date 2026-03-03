@@ -15,6 +15,8 @@ metadata:
     - epost-implementer
   platforms:
     - web
+  connections:
+    extends: [a11y]
 ---
 
 # Web Accessibility Skill

@@ -6,6 +6,8 @@ context: fork
 agent: epost-implementer
 metadata:
   argument-hint: "[hook-name] [event-type]"
+  connections:
+    requires: [kit-hooks]
 ---
 
 ## Your Mission

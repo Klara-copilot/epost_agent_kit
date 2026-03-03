@@ -6,6 +6,8 @@ context: fork
 agent: epost-debugger
 metadata:
   argument-hint: "[issue description]"
+  connections:
+    conflicts: [fix-deep]
 ---
 
 # Fix — Unified Fix Command

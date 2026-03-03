@@ -29,6 +29,7 @@ On every user prompt involving a dev task, sense context before acting:
 | Scaffold | bootstrap, init, scaffold, new project, new module | `/bootstrap` |
 | Convert | convert, prototype, migrate | `/convert` |
 | A11y | a11y, accessibility, wcag | `/fix-a11y` or `/review-a11y` |
+| Onboard | get started, begin, onboard, new to project, what is this | `/get-started` |
 
 ### Context Boost Rules
 - TypeScript/build errors detected → always route to `/fix` first

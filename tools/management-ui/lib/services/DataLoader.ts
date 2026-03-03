@@ -6,14 +6,14 @@
  */
 
 import { PATHS } from '../config';
-import { LoadedData, Agent, Skill, Command, Package, ParseError } from '../types/entities';
+import { LoadedData, Agent, Skill, Command, Package, ParseError, SkillConnections } from '../types/entities';
 import { agentParser } from '../parsers/AgentParser';
 import { skillParser } from '../parsers/SkillParser';
 import { commandParser } from '../parsers/CommandParser';
 import { packageParser } from '../parsers/PackageParser';
 import { profileParser } from '../parsers/ProfileParser';
 import { logger } from '../utils/logger';
-import { existsSync } from 'fs';
+import { existsSync, readFileSync } from 'fs';
 import { join, dirname } from 'path';
 
 export class DataLoader {
@@ -105,6 +105,9 @@ export class DataLoader {
         }
       }
 
+      // Merge skill-index.json data (connections, tier) into loaded skills
+      this.mergeSkillIndex(allSkills);
+
       const elapsed = Date.now() - startTime;
 
       logger.info('loader', `Data loaded successfully in ${elapsed}ms`, {
@@ -139,6 +142,50 @@ export class DataLoader {
         stack: error instanceof Error ? error.stack : undefined,
       });
       throw error;
+    }
+  }
+
+  /**
+   * Merge skill-index.json data (connections, tier) into loaded skills.
+   * The index lives in packages/core/skills/skill-index.json and contains
+   * connection metadata that isn't in individual SKILL.md frontmatter.
+   */
+  private mergeSkillIndex(skills: Skill[]): void {
+    const indexPath = join(PATHS.packages, 'core', 'skills', 'skill-index.json');
+    if (!existsSync(indexPath)) {
+      logger.warn('loader', 'skill-index.json not found, skipping connection merge');
+      return;
+    }
+
+    try {
+      const raw = JSON.parse(readFileSync(indexPath, 'utf-8'));
+      const indexSkills: Array<{
+        name: string;
+        tier?: string;
+        connections?: SkillConnections;
+      }> = raw.skills || [];
+
+      const indexMap = new Map(indexSkills.map(s => [s.name, s]));
+      let merged = 0;
+
+      for (const skill of skills) {
+        const entry = indexMap.get(skill.name);
+        if (!entry) continue;
+
+        if (entry.tier === 'core' || entry.tier === 'discoverable') {
+          skill.tier = entry.tier;
+        }
+        if (entry.connections) {
+          skill.connections = entry.connections;
+        }
+        merged++;
+      }
+
+      logger.info('loader', `Merged skill-index data into ${merged}/${skills.length} skills`);
+    } catch (err) {
+      logger.error('loader', 'Failed to parse skill-index.json', {
+        error: err instanceof Error ? err.message : String(err),
+      });
     }
   }
 

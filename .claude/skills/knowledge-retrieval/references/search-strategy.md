@@ -334,6 +334,39 @@ When results found in multiple sources, correlate:
 - **Limitation**: Doesn't catch event handler errors (per debugging skill)
 - **Reference**: React official docs for API details
 
+## Result Quality Assessment
+
+### Score Interpretation
+
+| Score Range | Quality | Action |
+|-------------|---------|--------|
+| 0.7+ | High | Use directly, high confidence |
+| 0.5–0.7 | Medium | Usable but verify against source file |
+| 0.3–0.5 | Low | Expand query or fall through to next level |
+| < 0.3 | Noise | Discard, rephrase query entirely |
+
+### Confidence Heuristics
+
+| Signal | Confidence | Meaning |
+|--------|-----------|---------|
+| Top result > 0.7, multiple results from same module | **High** | Strong match, consistent context |
+| Top result 0.5–0.7, results from diverse files | **Medium** | Partial match, verify in context |
+| All results < 0.5 | **Low** | Poor match, broaden or fall through |
+| Single result > 0.7, rest < 0.3 | **Medium** | Isolated match, check for completeness |
+
+### Fall-Through Protocol
+
+When RAG results are insufficient:
+
+1. **Broaden query**: Remove filters, try synonyms, alternate casing
+2. **Web RAG**: Try `enforce_scope: false` equivalent (remove scope filter)
+3. **iOS RAG**: Try `enforce_scope: false` to search all three repos
+4. **Fall to L4**: Grep/Glob codebase search
+5. **Fall to L5**: Context7 or WebSearch for external docs
+6. **Never**: Return low-confidence results as authoritative answers
+
+**Rule**: If best score < 0.3 after broadening, explicitly state "RAG did not find relevant results" and proceed to next level. Do not guess from noise.
+
 ## Search Optimization Tips
 
 1. **Start specific, broaden if needed**: `"useAuth hook"` -> `"auth hook"` -> `"authentication"`

@@ -6,7 +6,7 @@
 import { Agent, Skill, Command, Package } from './entities';
 
 export type NodeType = 'agent' | 'skill' | 'command' | 'package';
-export type EdgeType = 'skill-dependency' | 'command-invocation' | 'package-provides' | 'profile-includes' | 'same-type-hierarchy';
+export type EdgeType = 'skill-dependency' | 'command-invocation' | 'package-provides' | 'profile-includes' | 'same-type-hierarchy' | 'skill-extends' | 'skill-requires' | 'skill-enhances' | 'skill-conflicts';
 
 /**
  * Position in 2D space

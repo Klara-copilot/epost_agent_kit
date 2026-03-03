@@ -6,6 +6,8 @@ context: fork
 agent: epost-debugger
 metadata:
   argument-hint: "[CI failure description or log URL]"
+  connections:
+    extends: [fix]
 ---
 
 # Fix CI Pipeline Failures

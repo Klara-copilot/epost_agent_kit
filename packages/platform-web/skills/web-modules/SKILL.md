@@ -8,6 +8,8 @@ metadata:
   keywords: [integrate, module, screen, page, api, store, hook, bind]
   platforms: [web]
   triggers: ["add to module", "integrate into", "create screen", "add page", "bind api"]
+  connections:
+    enhances: [web-frontend]
 ---
 
 # Module Integration Skill

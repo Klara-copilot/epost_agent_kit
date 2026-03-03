@@ -7,6 +7,8 @@ metadata:
   agent-affinity: [epost-muji]
   keywords: [figma, variables, tokens, design-system, semantic]
   platforms: [web]
+  connections:
+    requires: [web-figma]
 ---
 
 # Figma Variables Architecture Skill

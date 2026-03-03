@@ -8,6 +8,14 @@ export type ModelType = 'haiku' | 'sonnet' | 'opus';
 export type MemoryType = 'project' | 'session';
 export type PermissionMode = 'default' | 'acceptEdits' | 'plan' | 'bypassPermissions';
 export type ContextType = 'fork' | 'inline';
+export type SkillTier = 'core' | 'discoverable';
+
+export interface SkillConnections {
+  extends: string[];
+  requires: string[];
+  enhances: string[];
+  conflicts: string[];
+}
 
 /**
  * Base entity with common properties
@@ -60,6 +68,8 @@ export interface Skill extends Entity {
   disableModelInvocation?: boolean;
   version?: string;
   references: Reference[];
+  tier?: SkillTier;
+  connections?: SkillConnections;
 }
 
 /**
