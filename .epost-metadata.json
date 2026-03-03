@@ -14,12 +14,12 @@
     "design-system",
     "domains"
   ],
-  "installedAt": "2026-03-03T04:54:13.338Z",
+  "installedAt": "2026-03-03T05:14:56.828Z",
   "files": {
     ".claude/.ck.json": {
       "path": ".claude/.ck.json",
       "checksum": "1bf7f54a5921781a5cbed6f168f8d00fbdc7ac663d445fba86b217df8599e436",
-      "installedAt": "2026-03-03T04:54:12.468Z",
+      "installedAt": "2026-03-03T05:14:55.619Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -27,23 +27,47 @@
     ".claude/.ckignore": {
       "path": ".claude/.ckignore",
       "checksum": "dd2c75e3a0e5d16f65ed4a5a5bb6b4d05656be2c666c4e7d409c41c2781490e6",
-      "installedAt": "2026-03-03T04:54:12.470Z",
+      "installedAt": "2026-03-03T05:14:55.622Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
     },
-    ".claude/assets/a11y-data-readme.md": {
-      "path": ".claude/assets/a11y-data-readme.md",
-      "checksum": "d04779b07989fbd122f42242d501633477c1747fbe302db75484a452cac3ce16",
-      "installedAt": "2026-03-03T04:54:12.523Z",
+    ".claude/skills/audit-a11y/.DS_Store": {
+      "path": ".claude/skills/audit-a11y/.DS_Store",
+      "checksum": "52454f08b20542031e909d02705cd37d4f55bc14f01896c9a9479100b7fe9f7b",
+      "installedAt": "2026-03-03T05:14:55.788Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "a11y"
+    },
+    ".claude/skills/audit-a11y/references/android-audit-mode.md": {
+      "path": ".claude/skills/audit-a11y/references/android-audit-mode.md",
+      "checksum": "29b5da472fa542c581cad044b8b920335b51d45923136301d45550517b246944",
+      "installedAt": "2026-03-03T05:14:55.788Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "a11y"
+    },
+    ".claude/skills/fix-a11y/references/android-fix-mode.md": {
+      "path": ".claude/skills/fix-a11y/references/android-fix-mode.md",
+      "checksum": "dba613ad7b6e1c0f1bdbc1002a7accc5182df4192029518511cef27e9f809f47",
+      "installedAt": "2026-03-03T05:14:55.789Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "a11y"
+    },
+    ".claude/skills/review-a11y/references/android-guidance-mode.md": {
+      "path": ".claude/skills/review-a11y/references/android-guidance-mode.md",
+      "checksum": "f5bf2b5ac56f53e7ed0fcbafab6ee88f246330780e55b51544cd9bb1b2625d46",
+      "installedAt": "2026-03-03T05:14:55.789Z",
       "version": "2.0.0",
       "modified": false,
       "package": "a11y"
     },
     ".claude/skills/skill-index.json": {
       "path": ".claude/skills/skill-index.json",
-      "checksum": "0f8106749df137ea89448210d683c97397f953b302ebf13ca7c1fc838e37a548",
-      "installedAt": "2026-03-03T04:54:13.092Z",
+      "checksum": "a58092eff4a13f4efbde32ac54b17fa3cd53be1ae67d7b777b3b01d1faecba10",
+      "installedAt": "2026-03-03T05:14:56.582Z",
       "version": "1.0.0",
       "modified": false,
       "package": "core"

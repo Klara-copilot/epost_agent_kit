@@ -15,6 +15,7 @@ Fix accessibility findings from `.epost-data/a11y/known-findings.json`.
 | File | Coverage |
 |------|----------|
 | `references/ios-fix-mode.md` | iOS fix mode: fix templates, known-findings input, status codes, surgical fix process |
+| `references/android-fix-mode.md` | Android fix mode: Compose + Views/XML fix templates, code examples, surgical fix process |
 
 **Argument:**
 - `#<id>` — fix a specific finding by ID (e.g. `/fix-a11y #3`)
@@ -22,6 +23,13 @@ Fix accessibility findings from `.epost-data/a11y/known-findings.json`.
 - _(none)_ — fix top 1 priority finding
 
 **IMPORTANT:** Analyze the skills catalog and activate ONLY the skills needed for the detected platforms.
+
+## Argument Parsing
+
+Parse `$ARGUMENTS` to determine mode:
+1. Starts with `#` → **single mode** — extract numeric ID (e.g. `#3` → id=3)
+2. Is a positive integer → **batch mode** — use as N (e.g. `5` → top 5)
+3. Empty or missing → **batch mode** — N=1 (default)
 
 ## Platform Detection
 

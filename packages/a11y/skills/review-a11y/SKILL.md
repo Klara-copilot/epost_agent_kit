@@ -15,6 +15,7 @@ Review accessibility compliance for the detected platform and focus area.
 | File | Coverage |
 |------|----------|
 | `references/ios-guidance-mode.md` | iOS guidance mode: real-time advice, code examples, response style rules |
+| `references/android-guidance-mode.md` | Android guidance mode: Compose + Views/XML advice, code examples, TalkBack patterns |
 
 <scope>$ARGUMENTS</scope>
 
