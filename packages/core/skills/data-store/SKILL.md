@@ -17,6 +17,19 @@ Defines how agents store and access persistent project-level data across session
     artifacts/            ← generated patches, diffs, temp files (optional)
 ```
 
+### a11y Domain Layout
+
+```
+.epost-data/a11y/
+├── fixes/
+│   ├── findings/         ← audit-a11y JSON reports (audit-YYMMDD-HHMM.json)
+│   ├── patches/          ← fix-a11y unified diffs (finding-{id}-YYMMDD.diff)
+│   └── reviews/          ← review-a11y JSON reports (review-YYMMDD-HHMM.json)
+├── README.md             ← structure guide
+├── analysis.md           ← trend summary
+└── known-findings.json   ← findings DB
+```
+
 ## Rules
 
 | Rule | Detail |

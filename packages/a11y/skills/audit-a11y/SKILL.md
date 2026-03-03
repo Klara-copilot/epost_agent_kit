@@ -42,6 +42,7 @@ See `a11y` skill for platform routing.
       - Map type → `fix_template`: missing_button_label→add_button_label, missing_form_label→add_form_label, missing_heading_trait→add_heading_trait, focus_trap→add_modal_focus_trap, missing_status_announcement→add_status_announcement, *→other_manual
       - `estimated_effort_minutes`: priority 1 → 10, priority 2 → 15, priority 3 → 5
    f. Save file, report: "Persisted N new findings (IDs: X, Y, Z)"
+9. **Save report file** — write the full JSON output to `.epost-data/a11y/fixes/findings/audit-YYMMDD-HHMM.json` (create directories if missing). Print: `Report saved: .epost-data/a11y/fixes/findings/audit-YYMMDD-HHMM.json`
 
 ## Output
 

@@ -2,6 +2,7 @@
   "cliVersion": "0.1.0",
   "target": "claude",
   "kitVersion": "1.0.0",
+  "profile": "full",
   "installedPackages": [
     "core",
     "a11y",
@@ -13,12 +14,12 @@
     "design-system",
     "domains"
   ],
-  "installedAt": "2026-03-03T04:36:25.458Z",
+  "installedAt": "2026-03-03T04:54:13.338Z",
   "files": {
     ".claude/.ck.json": {
       "path": ".claude/.ck.json",
       "checksum": "1bf7f54a5921781a5cbed6f168f8d00fbdc7ac663d445fba86b217df8599e436",
-      "installedAt": "2026-03-03T04:36:24.723Z",
+      "installedAt": "2026-03-03T04:54:12.468Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -26,39 +27,23 @@
     ".claude/.ckignore": {
       "path": ".claude/.ckignore",
       "checksum": "dd2c75e3a0e5d16f65ed4a5a5bb6b4d05656be2c666c4e7d409c41c2781490e6",
-      "installedAt": "2026-03-03T04:36:24.730Z",
+      "installedAt": "2026-03-03T04:54:12.470Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
     },
-    ".claude/skills/audit-a11y/references/ios-audit-mode.md": {
-      "path": ".claude/skills/audit-a11y/references/ios-audit-mode.md",
-      "checksum": "46323af751d6294a0d840e515ebf0e2a2dfe1b72c9018dcd793a396e2f948d65",
-      "installedAt": "2026-03-03T04:36:24.846Z",
-      "version": "2.0.0",
-      "modified": false,
-      "package": "a11y"
-    },
-    ".claude/skills/fix-a11y/references/ios-fix-mode.md": {
-      "path": ".claude/skills/fix-a11y/references/ios-fix-mode.md",
-      "checksum": "6a0cc3ef0b8520eb8d4111b56118c840d6a035eecf62e43f9d8142dba51df8ab",
-      "installedAt": "2026-03-03T04:36:24.846Z",
-      "version": "2.0.0",
-      "modified": false,
-      "package": "a11y"
-    },
-    ".claude/skills/review-a11y/references/ios-guidance-mode.md": {
-      "path": ".claude/skills/review-a11y/references/ios-guidance-mode.md",
-      "checksum": "5be6ae84cf6fa45b074673d61be1272bc3793c9f2fb60665af2faae1cc86c3e8",
-      "installedAt": "2026-03-03T04:36:24.846Z",
+    ".claude/assets/a11y-data-readme.md": {
+      "path": ".claude/assets/a11y-data-readme.md",
+      "checksum": "d04779b07989fbd122f42242d501633477c1747fbe302db75484a452cac3ce16",
+      "installedAt": "2026-03-03T04:54:12.523Z",
       "version": "2.0.0",
       "modified": false,
       "package": "a11y"
     },
     ".claude/skills/skill-index.json": {
       "path": ".claude/skills/skill-index.json",
-      "checksum": "33b3b26b185d6fd850e6e4b4c6851b974c26fb60ea82056bb49de17553b25924",
-      "installedAt": "2026-03-03T04:36:25.287Z",
+      "checksum": "0f8106749df137ea89448210d683c97397f953b302ebf13ca7c1fc838e37a548",
+      "installedAt": "2026-03-03T04:54:13.092Z",
       "version": "1.0.0",
       "modified": false,
       "package": "core"

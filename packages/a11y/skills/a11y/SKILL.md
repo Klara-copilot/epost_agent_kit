@@ -87,11 +87,22 @@ When this skill is active and user intent matches a sub-skill, delegate:
 | Close finding | `audit-close-a11y` | `/audit-close-a11y`, mark resolved |
 | Review compliance | `review-a11y` | `/review-a11y`, "review accessibility" |
 
-## Known-Findings Database
+## Data Store
 
-Location: `.epost-data/a11y/known-findings.json` (v1.2 schema)
+```
+.epost-data/a11y/
+├── fixes/
+│   ├── findings/     ← audit-a11y reports (audit-YYMMDD-HHMM.json)
+│   ├── patches/      ← fix-a11y diffs (finding-{id}-YYMMDD.diff)
+│   └── reviews/      ← review-a11y reports (review-YYMMDD-HHMM.json)
+├── README.md
+├── analysis.md       ← trend summary
+└── known-findings.json (v1.3 schema)
+```
+
 Schema: `.claude/assets/known-findings-schema.json`
+Each finding: `id`, `platform`, `wcag`, `title`, `file_pattern`, `code_pattern`, `fix_template`, `priority` (1–3), `resolved`, `resolved_date`, `fix_applied`, `source`, `first_detected_date`.
 
-Each finding: `id`, `platform`, `wcag`, `title`, `file_pattern`, `code_pattern`, `fix_template`, `priority` (1–3), `resolved`, `resolved_date`.
+On first run, any a11y command creates missing directories and copies `README.md` from assets template.
 
-See `data-store` skill for directory convention, gitignore rules, and how to adopt this pattern for other domains.
+See `data-store` skill for directory convention and gitignore rules.

@@ -42,6 +42,7 @@ See `a11y` skill for platform routing.
 4. **Check known findings** — match against `.epost-data/a11y/known-findings.json` (if exists)
 5. **Report** — unified findings with severity and fix suggestions
 6. **Persist new findings** — same as audit-a11y step 8 (dedup by wcag+file_pattern+code_pattern, auto-assign ID, set `source: "review"`). Create `.epost-data/a11y/known-findings.json` if missing.
+7. **Save report file** — write the full JSON output to `.epost-data/a11y/fixes/reviews/review-YYMMDD-HHMM.json` (create directories if missing). Print: `Report saved: .epost-data/a11y/fixes/reviews/review-YYMMDD-HHMM.json`
 
 ## Platform-Specific Checks
 

@@ -39,8 +39,9 @@ See `a11y` skill for platform routing. Read the finding's `platform` field to se
 6. Use `code_pattern` (regex) to locate the specific code element
 7. Apply the appropriate fix template from the platform-specific skill
 8. Create minimal patch (unified diff format with 3 lines context)
-9. **Update finding status** — if status is FIXED, load `known-findings.json`, set `fix_applied: true` and `fix_applied_date: today` on the finding, save file
-10. Suggest: `Run /audit-close-a11y {id} to mark as resolved after verification`
+9. **Save patch file** — write diff to `.epost-data/a11y/fixes/patches/finding-{id}-YYMMDD.diff` (create directories if missing)
+10. **Update finding status** — if status is FIXED, load `known-findings.json`, set `fix_applied: true` and `fix_applied_date: today` on the finding, save file
+11. Suggest: `Run /audit-close-a11y {id} to mark as resolved after verification`
 
 **Output:** single JSON object
 
@@ -58,8 +59,9 @@ See `a11y` skill for platform routing. Read the finding's `platform` field to se
    - Generate unified diff
    - Determine status (FIXED / NEEDS_REVIEW / SKIPPED)
 6. Show diffs for review — do NOT apply patches automatically
-7. **Update finding status** — for each FIXED finding, load `known-findings.json`, set `fix_applied: true` and `fix_applied_date: today`, save
-8. After verification, suggest `/audit-close-a11y <id>` for each fixed finding
+7. **Save patch files** — for each finding, write diff to `.epost-data/a11y/fixes/patches/finding-{id}-YYMMDD.diff`
+8. **Update finding status** — for each FIXED finding, load `known-findings.json`, set `fix_applied: true` and `fix_applied_date: today`, save
+9. After verification, suggest `/audit-close-a11y <id>` for each fixed finding
 
 **Output:** JSON array (one object per finding)
 
