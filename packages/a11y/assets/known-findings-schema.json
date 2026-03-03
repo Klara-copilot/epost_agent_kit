@@ -8,7 +8,7 @@
     "version": {
       "type": "string",
       "description": "Schema version",
-      "enum": ["1.0", "1.1", "1.2"]
+      "enum": ["1.0", "1.1", "1.2", "1.3"]
     },
     "audit_date": {
       "type": "string",
@@ -90,6 +90,27 @@
             "type": ["string", "null"],
             "format": "date",
             "description": "Date when finding was resolved (YYYY-MM-DD), null if unresolved"
+          },
+          "fix_applied": {
+            "type": "boolean",
+            "default": false,
+            "description": "Whether a fix has been applied (pending human verification via audit-close)"
+          },
+          "fix_applied_date": {
+            "type": ["string", "null"],
+            "format": "date",
+            "description": "Date when fix was applied (YYYY-MM-DD), null if not yet fixed"
+          },
+          "source": {
+            "type": "string",
+            "enum": ["audit", "review", "manual"],
+            "default": "manual",
+            "description": "How this finding was discovered"
+          },
+          "first_detected_date": {
+            "type": ["string", "null"],
+            "format": "date",
+            "description": "Date when finding was first detected (YYYY-MM-DD)"
           }
         }
       }

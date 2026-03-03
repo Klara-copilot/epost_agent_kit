@@ -71,10 +71,10 @@ Don't block (`block_pr: false`) if:
 
 ## Detection Rules
 
-Reference `ios/a11y/` skill files for detailed detection criteria:
-- `a11y-buttons.md` — Button detection patterns
+Reference `ios-a11y` skill references for detailed detection criteria:
+- `a11y-buttons.md` — Button detection patterns (includes image-buttons)
 - `a11y-forms.md` — Form input detection
-- `a11y-images.md` — Image classification
+- `a11y-core.md` — Core principles, complex image accessibility
 - `a11y-headings.md` — Heading detection
 - `a11y-focus.md` — Focus management checks
 - `a11y-colors-contrast.md` — Contrast checks

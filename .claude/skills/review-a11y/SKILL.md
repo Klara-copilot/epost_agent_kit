@@ -10,6 +10,12 @@ metadata:
 
 Review accessibility compliance for the detected platform and focus area.
 
+## Aspect Files
+
+| File | Coverage |
+|------|----------|
+| `references/ios-guidance-mode.md` | iOS guidance mode: real-time advice, code examples, response style rules |
+
 <scope>$ARGUMENTS</scope>
 
 **IMPORTANT:** Analyze the skills catalog and activate ONLY the skills needed for the detected platform.
@@ -35,6 +41,7 @@ See `a11y` skill for platform routing.
 3. **Scan focus area(s)** — using platform-specific skill rules
 4. **Check known findings** — match against `.epost-data/a11y/known-findings.json` (if exists)
 5. **Report** — unified findings with severity and fix suggestions
+6. **Persist new findings** — same as audit-a11y step 8 (dedup by wcag+file_pattern+code_pattern, auto-assign ID, set `source: "review"`). Create `.epost-data/a11y/known-findings.json` if missing.
 
 ## Platform-Specific Checks
 

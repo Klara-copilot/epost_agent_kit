@@ -443,3 +443,29 @@ let category = UIApplication.shared.preferredContentSizeCategory
 - Test with largest Accessibility text size in Settings
 
 > **Note:** For UIKit Dynamic Type patterns see [Dynamic Type (UIKit)](#dynamic-type-uikit) above.
+
+## Complex Image Accessibility
+
+### Charts and Graphs
+Describe data insights, not visual appearance. Include key numbers/percentages and trends.
+
+```swift
+chartView.accessibilityLabel = "Sales chart"
+chartView.accessibilityValue = "Sales increased from $10,000 to $15,000 over 6 months, showing 50% growth"
+```
+
+### Diagrams and Flowcharts
+Describe structure, relationships, and key steps.
+
+```swift
+flowDiagram.accessibilityLabel = "User registration flow diagram"
+flowDiagram.accessibilityValue = "Shows steps: enter email, verify email, create password, complete profile"
+```
+
+### Maps
+Identify what the map shows, include location names, describe relevant features.
+
+```swift
+mapView.accessibilityLabel = "Map of downtown area"
+mapView.accessibilityValue = "Shows user's current location at Main Street and 5th Avenue, with nearby restaurants highlighted"
+```

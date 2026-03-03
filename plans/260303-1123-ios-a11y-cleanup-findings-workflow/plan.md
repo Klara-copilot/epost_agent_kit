@@ -1,7 +1,7 @@
 ---
 title: "iOS a11y cleanup + findings persistence workflow"
 description: "Remove unnecessary iOS a11y references, add findings report storage to audit/fix/review skills"
-status: pending
+status: done
 priority: P2
 effort: 2h
 branch: master

@@ -10,6 +10,12 @@ metadata:
 
 Fix accessibility findings from `.epost-data/a11y/known-findings.json`.
 
+## Aspect Files
+
+| File | Coverage |
+|------|----------|
+| `references/ios-fix-mode.md` | iOS fix mode: fix templates, known-findings input, status codes, surgical fix process |
+
 **Argument:**
 - `#<id>` — fix a specific finding by ID (e.g. `/fix-a11y #3`)
 - `<n>` — fix top N unresolved priority-1 findings (e.g. `/fix-a11y 5`)
@@ -33,7 +39,8 @@ See `a11y` skill for platform routing. Read the finding's `platform` field to se
 6. Use `code_pattern` (regex) to locate the specific code element
 7. Apply the appropriate fix template from the platform-specific skill
 8. Create minimal patch (unified diff format with 3 lines context)
-9. Suggest: `Run /audit-close-a11y {id} to mark as resolved`
+9. **Update finding status** — if status is FIXED, load `known-findings.json`, set `fix_applied: true` and `fix_applied_date: today` on the finding, save file
+10. Suggest: `Run /audit-close-a11y {id} to mark as resolved after verification`
 
 **Output:** single JSON object
 
@@ -51,7 +58,8 @@ See `a11y` skill for platform routing. Read the finding's `platform` field to se
    - Generate unified diff
    - Determine status (FIXED / NEEDS_REVIEW / SKIPPED)
 6. Show diffs for review — do NOT apply patches automatically
-7. After verification, suggest `/audit-close-a11y <id>` for each fixed finding
+7. **Update finding status** — for each FIXED finding, load `known-findings.json`, set `fix_applied: true` and `fix_applied_date: today`, save
+8. After verification, suggest `/audit-close-a11y <id>` for each fixed finding
 
 **Output:** JSON array (one object per finding)
 

@@ -29,8 +29,27 @@ See `a11y` skill for platform routing.
 5. **Detect regressions** — if a `resolved: true` finding reappears, flag as `regression`
 6. **Classify violations** — type, WCAG criterion, severity, finding ID, regression status
 7. **Determine block** — critical violations, regressions, or 5+ serious = block PR
+8. **Persist new findings** — for each violation NOT matched to an existing finding:
+   a. Load `.epost-data/a11y/known-findings.json` (create with `{"version":"1.3","audit_date":"today","critical_findings":[]}` if missing)
+   b. **Dedup**: skip if existing finding matches `wcag` + `file_pattern` + `code_pattern` (all three)
+   c. If matched and `resolved: true` → flag as regression (already handled in step 5)
+   d. If matched and unresolved → skip, set `finding_id` in output
+   e. If unmatched → create new finding:
+      - `id`: max(existing IDs) + 1
+      - Map severity: critical/serious → priority 1, moderate → 2, minor → 3
+      - `source: "audit"`, `first_detected_date: today`
+      - Infer `file_pattern` from violation file path, `code_pattern` from violation context
+      - Map type → `fix_template`: missing_button_label→add_button_label, missing_form_label→add_form_label, missing_heading_trait→add_heading_trait, focus_trap→add_modal_focus_trap, missing_status_announcement→add_status_announcement, *→other_manual
+      - `estimated_effort_minutes`: priority 1 → 10, priority 2 → 15, priority 3 → 5
+   f. Save file, report: "Persisted N new findings (IDs: X, Y, Z)"
 
 ## Output
+
+## Aspect Files
+
+| File | Coverage |
+|------|----------|
+| `references/ios-audit-mode.md` | iOS audit mode: JSON output schema, violation types, block-PR logic, detection rules |
 
 Valid JSON only — no prose:
 
