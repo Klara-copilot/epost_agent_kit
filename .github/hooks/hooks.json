@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "hooks": {
+    "SessionStart": [
+      {
+        "type": "command",
+        "bash": "node .github/hooks/session-init.cjs"
+      }
+    ],
+    "SubagentStart": [
+      {
+        "type": "command",
+        "bash": "node .github/hooks/subagent-init.cjs"
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "type": "command",
+        "bash": "node .github/hooks/dev-rules-reminder.cjs"
+      }
+    ],
+    "PreToolUse": [
+      {
+        "type": "command",
+        "bash": "node .github/hooks/scout-block.cjs"
+      },
+      {
+        "type": "command",
+        "bash": "node .github/hooks/privacy-block.cjs"
+      }
+    ],
+    "Stop": [
+      {
+        "type": "command",
+        "bash": "node .github/hooks/session-metrics.cjs 2>/dev/null || true"
+      },
+      {
+        "type": "command",
+        "bash": "node .github/hooks/lesson-capture.cjs 2>/dev/null || true"
+      },
+      {
+        "type": "command",
+        "bash": "node .github/hooks/notifications/notify.cjs 2>/dev/null || true"
+      }
+    ]
+  }
+}
