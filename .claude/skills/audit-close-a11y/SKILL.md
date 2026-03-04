@@ -1,9 +1,8 @@
 ---
 name: audit-close-a11y
 description: "(ePost) Mark an accessibility finding as resolved"
-user-invocable: true
-context: fork
-agent: epost-a11y-specialist
+user-invocable: false
+disable-model-invocation: true
 metadata:
   argument-hint: "<finding-id>"
 ---

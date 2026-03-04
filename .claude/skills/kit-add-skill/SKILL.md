@@ -1,9 +1,8 @@
 ---
 name: kit-add-skill
 description: "(ePost) Create a new skill definition"
-user-invocable: true
-context: fork
-agent: epost-implementer
+user-invocable: false
+disable-model-invocation: true
 metadata:
   argument-hint: "[skill-name] [description]"
   connections:

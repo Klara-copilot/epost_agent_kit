@@ -1,10 +1,32 @@
 {
-  "generated": "2026-03-03T06:05:11.308Z",
+  "generated": "2026-03-04T03:47:45.147Z",
   "version": "1.0.0",
-  "count": 96,
+  "count": 98,
   "skills": [
     {
       "name": "a11y",
+      "description": "(ePost) Accessibility workflow — auto-detects audit, fix, review, or close",
+      "keywords": [],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [],
+      "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": [
+          "audit-a11y",
+          "fix-a11y",
+          "review-a11y",
+          "audit-close-a11y"
+        ]
+      },
+      "path": "a11y/SKILL.md"
+    },
+    {
+      "name": "a11y-wcag",
       "description": "Use when accessibility, WCAG, POUR, or a11y compliance is relevant across any platform",
       "keywords": [
         "a11y",
@@ -27,7 +49,7 @@
         "conflicts": [],
         "enhances": []
       },
-      "path": "a11y/SKILL.md"
+      "path": "a11y-wcag/SKILL.md"
     },
     {
       "name": "android-a11y",
@@ -311,63 +333,6 @@
       "path": "bootstrap-parallel/SKILL.md"
     },
     {
-      "name": "cli-cook",
-      "description": "(ePost) Implement CLI features in the epost-agent-cli project",
-      "keywords": [],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [],
-      "connections": {
-        "extends": [],
-        "requires": [
-          "kit-cli"
-        ],
-        "conflicts": [],
-        "enhances": []
-      },
-      "path": "cli-cook/SKILL.md"
-    },
-    {
-      "name": "cli-doctor",
-      "description": "(ePost) Debug issues in the epost-kit CLI tool",
-      "keywords": [],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [],
-      "connections": {
-        "extends": [],
-        "requires": [
-          "kit-cli"
-        ],
-        "conflicts": [],
-        "enhances": []
-      },
-      "path": "cli-doctor/SKILL.md"
-    },
-    {
-      "name": "cli-test",
-      "description": "(ePost) Run and manage tests for the epost-kit CLI project",
-      "keywords": [],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [],
-      "connections": {
-        "extends": [],
-        "requires": [
-          "kit-cli"
-        ],
-        "conflicts": [],
-        "enhances": []
-      },
-      "path": "cli-test/SKILL.md"
-    },
-    {
       "name": "code-review",
       "description": "Use when reviewing code, checking quality before commit, or auditing changed files for issues",
       "keywords": [
@@ -610,6 +575,29 @@
       "path": "doc-coauthoring/SKILL.md"
     },
     {
+      "name": "docs",
+      "description": "(ePost) Documentation workflow — auto-detects init, update, or component",
+      "keywords": [],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [],
+      "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [
+          "knowledge-base"
+        ],
+        "conflicts": [],
+        "enhances": [
+          "docs-init",
+          "docs-update",
+          "docs-component"
+        ]
+      },
+      "path": "docs/SKILL.md"
+    },
+    {
       "name": "docs-component",
       "description": "(ePost) Document a klara-theme component (Figma data + prop mapping)",
       "keywords": [],
@@ -631,16 +619,25 @@
     },
     {
       "name": "docs-init",
-      "description": "(ePost) Scan codebase and generate comprehensive documentation",
-      "keywords": [],
+      "description": "(ePost) Scan codebase and generate structured KB documentation",
+      "keywords": [
+        "docs-init",
+        "documentation",
+        "generate-docs",
+        "scaffold-docs"
+      ],
       "platforms": [
         "all"
       ],
       "triggers": [],
-      "agent-affinity": [],
+      "agent-affinity": [
+        "epost-documenter"
+      ],
       "connections": {
         "extends": [],
-        "requires": [],
+        "requires": [
+          "knowledge-base"
+        ],
         "conflicts": [],
         "enhances": []
       },
@@ -689,18 +686,25 @@
         "docs-update",
         "documentation",
         "stale-docs",
-        "refresh-docs"
+        "refresh-docs",
+        "verify-docs"
       ],
       "platforms": [
         "all"
       ],
       "triggers": [],
-      "agent-affinity": [],
+      "agent-affinity": [
+        "epost-documenter"
+      ],
       "connections": {
         "extends": [],
-        "requires": [],
+        "requires": [
+          "knowledge-base"
+        ],
         "conflicts": [],
-        "enhances": []
+        "enhances": [
+          "knowledge-retrieval"
+        ]
       },
       "path": "docs-update/SKILL.md"
     },
@@ -915,13 +919,14 @@
     },
     {
       "name": "get-started",
-      "description": "(ePost) Onboard to a project — read docs, summarize project state, route to next action",
+      "description": "(ePost) Onboard to a project — detect state, then orchestrate researcher → documenter → implementer pipeline",
       "keywords": [
         "onboard",
         "get-started",
         "begin",
         "new-project",
-        "what-is-this"
+        "what-is-this",
+        "existing-project"
       ],
       "platforms": [
         "all"
@@ -940,6 +945,27 @@
         ]
       },
       "path": "get-started/SKILL.md"
+    },
+    {
+      "name": "git",
+      "description": "(ePost) Git workflow — auto-detects commit, push, or PR",
+      "keywords": [],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [],
+      "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": [
+          "git-commit",
+          "git-push",
+          "git-pr"
+        ]
+      },
+      "path": "git/SKILL.md"
     },
     {
       "name": "git-commit",
@@ -1206,6 +1232,31 @@
         ]
       },
       "path": "ios-ui-lib/SKILL.md"
+    },
+    {
+      "name": "kit",
+      "description": "(ePost) Kit authoring — create agents, skills, hooks, or optimize",
+      "keywords": [],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [],
+      "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [
+          "kit-agents",
+          "kit-skill-development"
+        ],
+        "conflicts": [],
+        "enhances": [
+          "kit-add-agent",
+          "kit-add-skill",
+          "kit-add-hook",
+          "kit-optimize-skill"
+        ]
+      },
+      "path": "kit/SKILL.md"
     },
     {
       "name": "kit-add-agent",
@@ -1833,6 +1884,27 @@
         "enhances": []
       },
       "path": "research/SKILL.md"
+    },
+    {
+      "name": "review",
+      "description": "(ePost) Review workflow — auto-detects code, a11y, or improvements",
+      "keywords": [],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [],
+      "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "conflicts": [],
+        "enhances": [
+          "review-code",
+          "review-a11y",
+          "review-improvements"
+        ]
+      },
+      "path": "review/SKILL.md"
     },
     {
       "name": "review-a11y",

@@ -12,6 +12,12 @@ metadata:
 
 Implement features with automatic platform detection.
 
+## Step 0 — Flag Override
+
+If `$ARGUMENTS` starts with `--fast`: skip auto-detection, dispatch `cook-fast` directly. Remaining args are the task description.
+If `$ARGUMENTS` starts with `--parallel`: skip auto-detection, dispatch `cook-parallel` directly. Remaining args are the task description.
+Otherwise: continue to Platform Detection.
+
 ## Platform Detection
 
 Detect platform per `skill-discovery` protocol.

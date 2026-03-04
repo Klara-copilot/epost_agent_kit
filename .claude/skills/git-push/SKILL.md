@@ -1,9 +1,8 @@
 ---
 name: git-push
 description: "(ePost) Commit changes and push to remote"
-user-invocable: true
-context: fork
-agent: epost-git-manager
+user-invocable: false
+disable-model-invocation: true
 ---
 
 # Git Push Command

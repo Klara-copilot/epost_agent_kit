@@ -1,9 +1,8 @@
 ---
 name: cook-parallel
 description: "(ePost) Parallel implementation for multi-module features"
-user-invocable: true
-context: fork
-agent: epost-implementer
+user-invocable: false
+disable-model-invocation: true
 metadata:
   argument-hint: "[multi-module feature description]"
   connections:

@@ -1,9 +1,8 @@
 ---
 name: kit-add-agent
 description: "(ePost) Create a new agent definition"
-user-invocable: true
-context: fork
-agent: epost-implementer
+user-invocable: false
+disable-model-invocation: true
 metadata:
   argument-hint: "[agent-name] [description]"
   connections:

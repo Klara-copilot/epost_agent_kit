@@ -1,9 +1,8 @@
 ---
 name: bootstrap-parallel
 description: "(ePost) Parallel bootstrap for multi-module projects"
-user-invocable: true
-context: fork
-agent: epost-implementer
+user-invocable: false
+disable-model-invocation: true
 metadata:
   argument-hint: "[multi-module project description]"
   connections:

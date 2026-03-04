@@ -1,9 +1,8 @@
 ---
 name: plan-validate
 description: "(ePost) Validate plan with critical questions interview"
-user-invocable: true
-context: fork
-agent: epost-architect
+user-invocable: false
+disable-model-invocation: true
 metadata:
   argument-hint: "[plan-path]"
   connections:

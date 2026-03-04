@@ -1,9 +1,8 @@
 ---
 name: fix-deep
 description: "(ePost) Systematic deep fix with full investigation"
-user-invocable: true
-context: fork
-agent: epost-debugger
+user-invocable: false
+disable-model-invocation: true
 metadata:
   argument-hint: "[complex issue description]"
   connections:

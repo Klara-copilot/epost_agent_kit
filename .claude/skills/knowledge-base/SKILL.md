@@ -65,20 +65,159 @@ Examples:
 - `ARCH-0001-system-overview.md`
 - `CONV-0001-named-exports.md`
 
-### Frontmatter Schema
+### Metadata Convention
+- **No YAML frontmatter** — all metadata lives in `docs/index.json`
+- Docs use `## Status` and `## Tags` body sections
+- Status values: `accepted` (decisions, conventions, patterns) or `current` (architecture, features, findings)
 
-```yaml
----
-id: PREFIX-NNNN
-title: Short descriptive title
-status: proposed|accepted|deprecated|superseded
-created: YYYY-MM-DD
-updated: YYYY-MM-DD
-tags: [tag1, tag2]
-related: [ID1, ID2]
-supersedes: ID (optional, ADRs only)
-superseded-by: ID (optional, ADRs only)
----
+## Document Templates
+
+### ADR (Architecture Decision Record)
+```markdown
+# ADR-NNNN: {Title}
+
+## Status
+Accepted
+
+## Context
+{Problem statement and decision drivers}
+
+### Decision Drivers
+- **Driver** — explanation
+
+## Decision
+{One-sentence statement of what was decided}
+
+## Alternatives Considered
+| Option | Pros | Cons | Reason Rejected |
+|--------|------|------|-----------------|
+
+## Consequences
+
+### Positive
+- ...
+
+### Negative
+- ...
+
+### Neutral
+- ...
+
+## Tags
+tag1, tag2
+```
+
+### ARCH (Architecture)
+```markdown
+# {Title}
+
+## {Section heading}
+{Free-form reference prose — system structure, data flow, component relationships}
+
+## {Section heading}
+### {Subsection}
+- ...
+```
+Note: ARCH docs are free-form. No Status/Tags sections — metadata in index.json only.
+
+### CONV (Convention)
+```markdown
+# CONV-NNNN: {Title}
+
+## Status
+Accepted
+
+## Convention
+{One-paragraph rule statement}
+
+## Examples
+
+### Correct
+\`\`\`tsx
+// correct code
+\`\`\`
+
+### Incorrect
+\`\`\`tsx
+// incorrect code
+\`\`\`
+
+## Exceptions
+- ...
+
+## Tags
+tag1, tag2
+```
+
+### FEAT (Feature Deep-Dive)
+```markdown
+# {Feature Name} — {Subtitle}
+
+## What is it?
+{Description}
+
+## Why is it used?
+{Rationale}
+
+## How it works
+{Implementation details, code examples, tables}
+
+## Summary
+{Key takeaways}
+```
+Note: FEAT docs are free-form around What/Why/How. No Status/Tags sections.
+
+### PATTERN (Reusable Code Pattern)
+```markdown
+# PATTERN-NNNN: {Title}
+
+## Status
+Accepted
+
+## Pattern
+{One-paragraph description}
+
+## Implementation
+\`\`\`tsx
+// actual working code snippet
+\`\`\`
+
+### Explanation
+1. Step-by-step breakdown
+
+## Key Points
+- ...
+
+## Tags
+tag1, tag2
+```
+
+### FINDING (Discovered Gotcha / Bug Insight)
+```markdown
+# FINDING-NNNN: {Title}
+
+## Status
+Current
+
+## Finding
+{One-paragraph statement of what was discovered}
+
+## Evidence
+\`\`\`
+{Code snippet showing the behavior}
+\`\`\`
+
+## Impact
+- ...
+
+## Workaround
+1. {Numbered steps}
+
+## Related
+- FEAT-NNNN: ...
+
+## Tags
+tag1, tag2
 ```
 
 ## Index Format

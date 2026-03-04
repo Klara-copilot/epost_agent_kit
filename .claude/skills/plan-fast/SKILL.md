@@ -1,9 +1,8 @@
 ---
 name: plan-fast
 description: "(ePost) Quick plan from codebase analysis only, no research"
-user-invocable: true
-context: fork
-agent: epost-architect
+user-invocable: false
+disable-model-invocation: true
 metadata:
   argument-hint: "[enhanced planning prompt from router]"
   connections:

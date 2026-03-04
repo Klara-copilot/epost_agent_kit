@@ -1,9 +1,8 @@
 ---
 name: kit-add-hook
 description: "(ePost) Create a new hook for Claude Code automation"
-user-invocable: true
-context: fork
-agent: epost-implementer
+user-invocable: false
+disable-model-invocation: true
 metadata:
   argument-hint: "[hook-name] [event-type]"
   connections:

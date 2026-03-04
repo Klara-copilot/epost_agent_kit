@@ -1,9 +1,8 @@
 ---
 name: plan-deep
 description: "(ePost) Deep plan with sequential research and comprehensive analysis"
-user-invocable: true
-context: fork
-agent: epost-architect
+user-invocable: false
+disable-model-invocation: true
 metadata:
   argument-hint: "[enhanced planning prompt from router]"
   connections:

@@ -15,6 +15,13 @@ metadata:
 
 Fix issues with automatic error type detection. Absorbs `:fast`, `:test`, `:types`, `:logs` into one auto-detecting command.
 
+## Step 0 — Flag Override
+
+If `$ARGUMENTS` starts with `--ci`: skip auto-detection, dispatch `fix-ci` directly. Remaining args are the issue description.
+If `$ARGUMENTS` starts with `--deep`: skip auto-detection, dispatch `fix-deep` directly.
+If `$ARGUMENTS` starts with `--ui`: skip auto-detection, dispatch `fix-ui` directly.
+Otherwise: continue to Error Type Auto-Detection.
+
 ## Error Type Auto-Detection
 
 Before fixing, detect the error type from context:
@@ -45,11 +52,11 @@ Same as `/cook` — detect from changed files or `$ARGUMENTS` platform hint.
 
 ## Explicit Overrides
 
-For cases where auto-detection isn't enough, users can still use:
-- `/fix-deep` — full systematic investigation with documentation
-- `/fix-ci` — CI pipeline debugging (reads CI logs, reproduces locally)
-- `/fix-ui` — visual/layout issues (CSS, a11y check, cross-browser)
-- `/fix-a11y` — accessibility findings from `.epost-data/a11y/known-findings.json`
+For cases where auto-detection isn't enough, use flags:
+- `/fix --deep` — full systematic investigation with documentation
+- `/fix --ci` — CI pipeline debugging (reads CI logs, reproduces locally)
+- `/fix --ui` — visual/layout issues (CSS, a11y check, cross-browser)
+- `/a11y --fix` — accessibility findings from `.epost-data/a11y/known-findings.json`
 
 <issue>$ARGUMENTS</issue>
 

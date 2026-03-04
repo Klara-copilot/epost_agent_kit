@@ -1,161 +1,187 @@
 ---
 name: docs-init
-description: "(ePost) Scan codebase and generate comprehensive documentation"
-user-invocable: true
-context: fork
-agent: epost-documenter
+description: "(ePost) Scan codebase and generate structured KB documentation"
+user-invocable: false
+disable-model-invocation: true
 metadata:
-  argument-hint: "[scan entire codebase and create docs/]"
+  argument-hint: "[--migrate | scan and generate KB docs]"
+  keywords:
+    - docs-init
+    - documentation
+    - generate-docs
+    - scaffold-docs
+  agent-affinity:
+    - epost-documenter
+  platforms:
+    - all
+  connections:
+    requires: [knowledge-base]
 ---
 
-# Docs: Init Command
+# Docs: Init
 
-Scan the entire codebase and generate comprehensive documentation files.
+Scan codebase and generate structured Knowledge Base documentation following the `knowledge-base` skill format.
 
 ## Usage
 ```
-/docs-init
+/docs-init              # Generate KB structure from codebase analysis
+/docs-init --migrate    # Convert existing flat docs to KB structure
 ```
 
-## Your Process
+## Mode Detection
+
+- `$ARGUMENTS` contains `--migrate` → **Migration Mode**
+- Otherwise → **Generation Mode**
+
+## Generation Mode
 
 ### 1. Scan the Codebase
 - Use Glob to explore directory structure
-- Use Grep to find key patterns (imports, exports, types)
-- Read key files (package.json, tsconfig, configs)
-- Identify: framework, language, database, deployment
+- Use Grep to find key patterns (imports, exports, types, routes)
+- Read key files (package.json, pom.xml, tsconfig, configs, Dockerfile, CI configs)
+- Identify: framework, language, database, deployment, major deps, modules
 
-### 2. Generate Documentation Files
+### 2. Create KB Directory Structure
 
-Create all files in `docs/` directory (create if doesn't exist):
+```
+docs/
+├── index.json
+├── decisions/
+├── architecture/
+├── patterns/
+├── conventions/
+├── features/
+└── findings/
+    └── .gitkeep
+```
 
-#### `docs/codebase-summary.md`
+### 3. Auto-Generate Documents
+
+Use templates from `knowledge-base` skill. Generate based on detected signals:
+
+#### ADRs (from major dependencies)
+For each major framework/library detected (e.g., Next.js, Redux, Hibernate):
+- `ADR-NNNN-{dep-name}.md` — why this dep was chosen
+- Infer context from package.json/pom.xml version, config files, usage patterns
+- Set `status: accepted`, write Decision Drivers from config evidence
+
+#### ARCH (from project structure)
+- `ARCH-0001-overview.md` — project overview, tech stack, directory structure, data flow
+- Additional ARCH docs for detected subsystems (e.g., ARCH-0002-api-layer.md if API routes found)
+
+#### CONVs (from linting/config)
+- Detect from: eslint/prettier configs, tsconfig strictness, naming patterns in code
+- `CONV-NNNN-{convention}.md` — with Correct/Incorrect examples from actual code
+
+#### FEATs (from route groups/modules)
+- Detect from: route files, module directories, feature folders
+- `FEAT-NNNN-{feature}.md` — What/Why/How for each major feature area
+
+#### PATTERNs (from recurring code)
+- Detect from: provider wrappers, HOC usage, custom hooks, middleware chains
+- `PATTERN-NNNN-{pattern}.md` — with actual code examples from the codebase
+
+#### FINDINGs
+- Create `findings/.gitkeep` only — findings are populated during debugging, not init
+
+### 4. Generate index.json
+
+Create `docs/index.json` with all generated entries:
+
+```json
+{
+  "schemaVersion": "1.0.0",
+  "description": "Project documentation registry",
+  "updatedAt": "{today YYYY-MM-DD}",
+  "categories": {
+    "decision": "Architectural choices and reasoning (ADRs)",
+    "architecture": "System structure, libs, data flow",
+    "pattern": "Reusable code patterns with examples",
+    "convention": "Coding rules and constraints",
+    "feature": "Deep-dive guides for specific features",
+    "finding": "Discovered gotchas and debug insights"
+  },
+  "entries": [
+    {
+      "id": "ADR-0001",
+      "title": "...",
+      "category": "decision",
+      "status": "accepted",
+      "audience": ["agent", "human"],
+      "path": "docs/decisions/ADR-0001-title.md",
+      "tags": [],
+      "agentHint": "check before ...",
+      "related": []
+    }
+  ]
+}
+```
+
+Key rules for `agentHint`:
+- Start with "check before..." — tells agents *when* to read this doc
+- Be specific: "check before choosing routing strategy" not "routing docs"
+
+### 5. Report
+
 ```markdown
-# Codebase Summary
+## Documentation Generated
 
-## Project Overview
-[What this project does]
+| Category | Count | Files |
+|----------|-------|-------|
+| ADR | N | ADR-0001, ADR-0002, ... |
+| ARCH | N | ARCH-0001, ... |
+| CONV | N | CONV-0001, ... |
+| FEAT | N | FEAT-0001, ... |
+| PATTERN | N | PATTERN-0001, ... |
+| FINDING | 0 | (populated during debugging) |
 
-## Tech Stack
-- [Framework]
-- [Language]
-- [Database]
-- [Deployment]
-
-## Directory Structure
-```
-[dir tree]
-```
-
-## Key Files
-- `path/to/file` - Description
-- `path/to/file` - Description
-
-## Getting Started
-- Installation: [commands]
-- Development: [commands]
-- Build: [commands]
+**Total**: N entries in `docs/index.json`
+**Next**: Run `/docs-update --verify` to validate content accuracy
 ```
 
-#### `docs/code-standards.md`
-```markdown
-# Code Standards
+## Migration Mode (`--migrate`)
 
-## Naming Conventions
-- Files: [pattern]
-- Variables: [pattern]
-- Components: [pattern]
+Convert existing flat docs to KB structure.
 
-## Code Patterns Found
-- [Pattern 1 with examples]
-- [Pattern 2 with examples]
+### 1. Read Existing Flat Docs
+Read all files in `docs/*.md` (top-level only, not subdirectories).
 
-## Linting/Formatting
-- Tool: [name]
-- Config: [location]
+### 2. Map Content to KB Categories
 
-## Testing Approach
-- Framework: [name]
-- Coverage: [target]
-```
+| Flat File | Target | Category |
+|-----------|--------|----------|
+| `codebase-summary.md` | `ARCH-0001-overview.md` | architecture |
+| `code-standards.md` | Split into `CONV-NNNN-*.md` entries | convention |
+| `system-architecture.md` | `ARCH-0002-system-architecture.md` | architecture |
+| `api-routes.md` | `FEAT-NNNN-api-routes.md` | feature |
+| `data-models.md` | `ARCH-NNNN-data-models.md` | architecture |
+| `deployment-guide.md` | `ARCH-NNNN-deployment.md` | architecture |
+| `project-overview-pdr.md` | `ARCH-NNNN-project-overview.md` | architecture |
+| Other `.md` files | Classify by content → appropriate category | varies |
 
-#### `docs/system-architecture.md`
-```markdown
-# System Architecture
+### 3. Reformat Content
+- Apply KB templates from `knowledge-base` skill
+- Add `## Status`, `## Tags` sections where appropriate
+- Split large files if > 800 LOC
 
-## High-Level Overview
-[Architecture diagram description]
+### 4. Supplement with Codebase Scan
+After migrating existing content, scan codebase for gaps:
+- Missing ADRs for major deps → generate
+- No patterns documented → detect and generate
+- No conventions → detect from config
 
-## Core Modules
-- **Module Name** - Purpose
-  - Key files: [list]
-  - Dependencies: [list]
+### 5. Create index.json
+Build `docs/index.json` with all migrated + newly generated entries.
 
-## Data Flow
-[How data moves through the system]
-
-## Key Patterns
-- [Pattern used and why]
-```
-
-#### `docs/api-routes.md` (if applicable)
-```markdown
-# API Routes
-
-## REST Endpoints
-| Method | Path | Description | File |
-|--------|------|-------------|------|
-| GET | /api/... | ... | src/... |
-```
-
-#### `docs/data-models.md` (if applicable)
-```markdown
-# Data Models
-
-## Database Schema
-[Tables/collections and relationships]
-
-## TypeScript Types
-[Key types and interfaces]
-
-## State Management
-[How state is managed]
-```
-
-#### `docs/deployment-guide.md`
-```markdown
-# Deployment Guide
-
-## Environment Variables
-[Required vars and descriptions]
-
-## Build Process
-[Commands and steps]
-
-## Deployment Platforms
-- [Platform 1]: [specifics]
-- [Platform 2]: [specifics]
-
-## CI/CD
-[Pipeline info if found]
-```
-
-### 3. Save Files
-- Create `docs/` directory if needed
-- Write each markdown file
-- Use proper formatting (headings, code blocks, tables)
+### 6. Clean Up
+- Delete original flat files (they've been migrated)
+- One bulk commit with all changes
 
 ## Analysis Rules
-- Scan EVERYTHING - don't skip directories
+- Scan EVERYTHING — don't skip directories
 - Look for config files (package.json, tsconfig.json, .env.example)
 - Check for Docker files, CI configs
 - Find test files to understand testing approach
-- Look for README files
 - Examine imports/exports to understand dependencies
-
-## Completion
-Report:
-- Files created: [count]
-- docs/ directory location
-- Summary of findings (framework, language, patterns)
-- Next steps for the user
+- **Evidence-based only** — verify functions/classes/routes exist before documenting
+- Keep files under 800 LOC (docs.maxLoc)

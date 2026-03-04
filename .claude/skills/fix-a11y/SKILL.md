@@ -1,9 +1,8 @@
 ---
 name: fix-a11y
 description: "(ePost) Fix accessibility findings — by ID (#<id>) or top N by priority (<n>)"
-user-invocable: true
-context: fork
-agent: epost-a11y-specialist
+user-invocable: false
+disable-model-invocation: true
 metadata:
   argument-hint: "[<n> | #<id>]"
 ---

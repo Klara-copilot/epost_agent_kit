@@ -1,9 +1,8 @@
 ---
 name: review-code
 description: "(ePost) Ultrathink edge cases, then parallel verify with reviewers"
-user-invocable: true
-context: fork
-agent: epost-reviewer
+user-invocable: false
+disable-model-invocation: true
 metadata:
   argument-hint: "[scope-or-prompt]"
   connections:
