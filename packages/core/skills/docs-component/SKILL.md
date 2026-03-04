@@ -1,9 +1,8 @@
 ---
 name: docs-component
 description: "(ePost) Document a klara-theme component (Figma data + prop mapping)"
-user-invocable: true
-context: fork
-agent: epost-documenter
+user-invocable: false
+disable-model-invocation: true
 metadata:
   argument-hint: "<componentKey> [nodeId]"
   connections:

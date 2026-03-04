@@ -16,14 +16,12 @@ provides:
     - kit-skill-development
     - kit-hooks
     - kit-cli
+    - kit
     - kit-add-agent
     - kit-add-skill
     - kit-add-hook
     - kit-optimize-skill
     - kit-verify
-    - cli-cook
-    - cli-doctor
-    - cli-test
 
 files:
   agents/: agents/

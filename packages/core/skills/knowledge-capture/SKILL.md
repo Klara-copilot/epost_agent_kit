@@ -1,7 +1,8 @@
 ---
 name: knowledge-capture
 description: Use after completing a task — capture learnings, save patterns, record post-mortems to docs/
-user-invocable: true
+user-invocable: false
+disable-model-invocation: true
 
 metadata:
   agent-affinity: [epost-debugger, epost-implementer, epost-researcher, epost-reviewer, epost-architect]

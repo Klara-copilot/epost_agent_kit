@@ -1,9 +1,8 @@
 ---
 name: kit-optimize-skill
 description: "(ePost) Optimize an existing agent skill automatically"
-user-invocable: true
-context: fork
-agent: epost-implementer
+user-invocable: false
+disable-model-invocation: true
 metadata:
   argument-hint: "[skill-name] [prompt]"
   connections:

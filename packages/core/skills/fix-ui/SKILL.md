@@ -1,9 +1,8 @@
 ---
 name: fix-ui
 description: "(ePost) Fix UI/layout issues"
-user-invocable: true
-context: fork
-agent: epost-debugger
+user-invocable: false
+disable-model-invocation: true
 metadata:
   argument-hint: "[UI issue description]"
   connections:

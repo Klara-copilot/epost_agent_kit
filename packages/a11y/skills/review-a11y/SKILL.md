@@ -1,9 +1,8 @@
 ---
 name: review-a11y
 description: "(ePost) Review accessibility compliance (WCAG 2.1 AA)"
-user-invocable: true
-context: fork
-agent: epost-a11y-specialist
+user-invocable: false
+disable-model-invocation: true
 metadata:
   argument-hint: "[ios|android|web] [buttons|headings|modals|forms|all]"
 ---

@@ -1,9 +1,8 @@
 ---
 name: audit-a11y
 description: "(ePost) Audit staged changes for WCAG 2.1 AA accessibility violations"
-user-invocable: true
-context: fork
-agent: epost-a11y-specialist
+user-invocable: false
+disable-model-invocation: true
 metadata:
   argument-hint: "[ios|android|web]"
 ---

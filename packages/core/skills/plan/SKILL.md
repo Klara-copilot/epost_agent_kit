@@ -15,6 +15,14 @@ metadata:
 
 Create implementation plans with automatic complexity detection.
 
+## Step 0 — Flag Override
+
+If `$ARGUMENTS` starts with `--fast`: skip auto-detection, dispatch `plan-fast` directly. Remaining args are the task description.
+If `$ARGUMENTS` starts with `--deep`: skip auto-detection, dispatch `plan-deep` directly.
+If `$ARGUMENTS` starts with `--parallel`: skip auto-detection, dispatch `plan-parallel` directly.
+If `$ARGUMENTS` starts with `--validate`: skip auto-detection, dispatch `plan-validate` directly.
+Otherwise: continue to Complexity Auto-Detection.
+
 ## Complexity Auto-Detection
 
 1. **Simple** (1 module, clear scope, < 5 files) → delegate to `/plan-fast`

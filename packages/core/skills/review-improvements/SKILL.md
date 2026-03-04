@@ -1,9 +1,8 @@
 ---
 name: review-improvements
 description: "(ePost) Review auto-improvement metrics, detect patterns, surface recommendations"
-user-invocable: true
-context: fork
-model: haiku
+user-invocable: false
+disable-model-invocation: true
 allowed-tools: Read, Write, Bash(node packages/core/scripts/detect-improvements.cjs), Bash(node .claude/scripts/detect-improvements.cjs), Bash(ls *), Bash(wc *), Bash(date *)
 ---
 

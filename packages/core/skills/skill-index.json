@@ -1,42 +1,114 @@
 {
-  "generated": "2026-03-01T10:38:30.809Z",
+  "generated": "2026-03-04T03:32:00.701Z",
   "version": "2.0.0",
-  "count": 60,
+  "count": 65,
   "categories": {
-    "development-tools": 30,
-    "analysis-reasoning": 20,
+    "development-tools": 39,
+    "analysis-reasoning": 24,
     "infrastructure": 2
   },
-  "connectedSkills": 28,
+  "connectedSkills": 32,
   "skills": [
     {
       "name": "a11y",
+      "description": "(ePost) Accessibility workflow — auto-detects audit, fix, review, or close",
+      "category": "development-tools",
+      "tier": "core",
+      "keywords": [
+        "a11y",
+        "accessibility",
+        "wcag",
+        "audit",
+        "fix"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "a11y",
+        "accessibility",
+        "wcag",
+        "audit accessibility"
+      ],
+      "agent-affinity": [
+        "epost-a11y-specialist"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [
+          "audit-a11y",
+          "fix-a11y",
+          "review-a11y",
+          "audit-close-a11y"
+        ],
+        "conflicts": []
+      },
+      "path": "a11y/SKILL.md"
+    },
+    {
+      "name": "a11y-wcag",
       "description": "Use when accessibility, WCAG, POUR, or a11y compliance is relevant across any platform",
       "category": "analysis-reasoning",
       "tier": "core",
-      "keywords": ["a11y", "accessibility", "wcag", "aria", "screen-reader", "pour"],
-      "platforms": ["all"],
-      "triggers": ["accessibility", "a11y", "wcag", "screen reader", "voiceover", "talkback"],
-      "agent-affinity": ["epost-a11y-specialist"],
+      "keywords": [
+        "a11y",
+        "accessibility",
+        "wcag",
+        "aria",
+        "screen-reader",
+        "pour"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "accessibility",
+        "a11y",
+        "wcag",
+        "screen reader",
+        "voiceover",
+        "talkback"
+      ],
+      "agent-affinity": [
+        "epost-a11y-specialist"
+      ],
       "connections": {
         "extends": [],
         "requires": [],
         "enhances": [],
         "conflicts": []
       },
-      "path": "a11y/SKILL.md"
+      "path": "a11y-wcag/SKILL.md"
     },
     {
       "name": "android-a11y",
       "description": "Use when Android accessibility issues arise — TalkBack, contentDescription, touch targets, focus order, contrast in Compose or Views/XML",
       "category": "analysis-reasoning",
       "tier": "discoverable",
-      "keywords": ["talkback", "android-accessibility", "content-description", "touch-target"],
-      "platforms": ["android"],
-      "triggers": ["talkback", "android accessibility", "content description", "touch target"],
-      "agent-affinity": ["epost-a11y-specialist", "epost-implementer"],
+      "keywords": [
+        "talkback",
+        "android-accessibility",
+        "content-description",
+        "touch-target"
+      ],
+      "platforms": [
+        "android"
+      ],
+      "triggers": [
+        "talkback",
+        "android accessibility",
+        "content description",
+        "touch target"
+      ],
+      "agent-affinity": [
+        "epost-a11y-specialist",
+        "epost-implementer"
+      ],
       "connections": {
-        "extends": ["a11y"],
+        "extends": [
+          "a11y-wcag"
+        ],
         "requires": [],
         "enhances": [],
         "conflicts": []
@@ -48,13 +120,29 @@
       "description": "(ePost) Audit staged changes for WCAG 2.1 AA accessibility violations",
       "category": "development-tools",
       "tier": "discoverable",
-      "keywords": ["audit", "a11y", "accessibility", "violations", "wcag"],
-      "platforms": ["all"],
-      "triggers": ["audit accessibility", "a11y audit", "check accessibility"],
-      "agent-affinity": ["epost-a11y-specialist"],
+      "keywords": [
+        "audit",
+        "a11y",
+        "accessibility",
+        "violations",
+        "wcag"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "audit accessibility",
+        "a11y audit",
+        "check accessibility"
+      ],
+      "agent-affinity": [
+        "epost-a11y-specialist"
+      ],
       "connections": {
         "extends": [],
-        "requires": ["a11y"],
+        "requires": [
+          "a11y-wcag"
+        ],
         "enhances": [],
         "conflicts": []
       },
@@ -65,85 +153,32 @@
       "description": "(ePost) Mark an accessibility finding as resolved",
       "category": "development-tools",
       "tier": "discoverable",
-      "keywords": ["close", "resolve", "finding", "a11y"],
-      "platforms": ["all"],
-      "triggers": ["close finding", "resolve a11y", "mark resolved"],
-      "agent-affinity": ["epost-a11y-specialist"],
+      "keywords": [
+        "close",
+        "resolve",
+        "finding",
+        "a11y"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "close finding",
+        "resolve a11y",
+        "mark resolved"
+      ],
+      "agent-affinity": [
+        "epost-a11y-specialist"
+      ],
       "connections": {
         "extends": [],
-        "requires": ["a11y"],
+        "requires": [
+          "a11y-wcag"
+        ],
         "enhances": [],
         "conflicts": []
       },
       "path": "audit-close-a11y/SKILL.md"
-    },
-    {
-      "name": "fix-a11y",
-      "description": "(ePost) Fix accessibility findings — by ID (#<id>) or top N by priority (<n>)",
-      "category": "development-tools",
-      "tier": "discoverable",
-      "keywords": ["fix", "a11y", "accessibility", "finding", "patch"],
-      "platforms": ["all"],
-      "triggers": ["fix accessibility", "fix a11y", "fix finding"],
-      "agent-affinity": ["epost-a11y-specialist"],
-      "connections": {
-        "extends": [],
-        "requires": ["a11y"],
-        "enhances": [],
-        "conflicts": []
-      },
-      "path": "fix-a11y/SKILL.md"
-    },
-    {
-      "name": "ios-a11y",
-      "description": "Use when iOS accessibility issues arise — VoiceOver, UIKit/SwiftUI labels, traits, focus, Dynamic Type, contrast",
-      "category": "analysis-reasoning",
-      "tier": "discoverable",
-      "keywords": ["voiceover", "ios-accessibility", "accessibility-label", "dynamic-type"],
-      "platforms": ["ios"],
-      "triggers": ["voiceover", "ios accessibility", "accessibility label", "dynamic type"],
-      "agent-affinity": ["epost-a11y-specialist", "epost-implementer"],
-      "connections": {
-        "extends": ["a11y"],
-        "requires": [],
-        "enhances": [],
-        "conflicts": []
-      },
-      "path": "ios-a11y/SKILL.md"
-    },
-    {
-      "name": "review-a11y",
-      "description": "(ePost) Review accessibility compliance (WCAG 2.1 AA)",
-      "category": "development-tools",
-      "tier": "discoverable",
-      "keywords": ["review", "a11y", "accessibility", "compliance", "wcag"],
-      "platforms": ["all"],
-      "triggers": ["review accessibility", "a11y review", "check compliance"],
-      "agent-affinity": ["epost-a11y-specialist"],
-      "connections": {
-        "extends": [],
-        "requires": ["a11y"],
-        "enhances": [],
-        "conflicts": []
-      },
-      "path": "review-a11y/SKILL.md"
-    },
-    {
-      "name": "web-a11y",
-      "description": "Use when web accessibility issues arise — ARIA roles, keyboard navigation, focus trapping, alt text, contrast, screen readers",
-      "category": "analysis-reasoning",
-      "tier": "discoverable",
-      "keywords": ["keyboard", "aria", "focus", "screen-reader", "web-accessibility", "semantic-html"],
-      "platforms": ["web"],
-      "triggers": ["aria", "keyboard navigation", "web accessibility", "focus trap"],
-      "agent-affinity": ["epost-a11y-specialist", "epost-implementer"],
-      "connections": {
-        "extends": ["a11y"],
-        "requires": [],
-        "enhances": [],
-        "conflicts": []
-      },
-      "path": "web-a11y/SKILL.md"
     },
     {
       "name": "auto-improvement",
@@ -488,6 +523,44 @@
       "path": "doc-coauthoring/SKILL.md"
     },
     {
+      "name": "docs",
+      "description": "(ePost) Documentation workflow — auto-detects init, update, or component",
+      "category": "development-tools",
+      "tier": "core",
+      "keywords": [
+        "docs",
+        "documentation",
+        "init",
+        "update",
+        "component"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "docs",
+        "document",
+        "write docs",
+        "documentation"
+      ],
+      "agent-affinity": [
+        "epost-documenter"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [
+          "knowledge-base"
+        ],
+        "enhances": [
+          "docs-init",
+          "docs-update",
+          "docs-component"
+        ],
+        "conflicts": []
+      },
+      "path": "docs/SKILL.md"
+    },
+    {
       "name": "docs-component",
       "description": "(ePost) Document a klara-theme component (Figma data + prop mapping)",
       "category": "development-tools",
@@ -511,18 +584,31 @@
     },
     {
       "name": "docs-init",
-      "description": "(ePost) Scan codebase and generate comprehensive documentation",
+      "description": "(ePost) Scan codebase and generate structured KB documentation",
       "category": "development-tools",
       "tier": "discoverable",
-      "keywords": [],
+      "keywords": [
+        "docs-init",
+        "documentation",
+        "generate-docs",
+        "scaffold-docs"
+      ],
       "platforms": [
         "all"
       ],
-      "triggers": [],
-      "agent-affinity": [],
+      "triggers": [
+        "docs init",
+        "generate docs",
+        "scaffold docs"
+      ],
+      "agent-affinity": [
+        "epost-documenter"
+      ],
       "connections": {
         "extends": [],
-        "requires": [],
+        "requires": [
+          "knowledge-base"
+        ],
         "enhances": [],
         "conflicts": []
       },
@@ -568,19 +654,36 @@
     },
     {
       "name": "docs-update",
-      "description": "(ePost) Update existing documentation",
+      "description": "(ePost) Update existing documentation or scan for staleness",
       "category": "development-tools",
       "tier": "discoverable",
-      "keywords": [],
+      "keywords": [
+        "docs-update",
+        "documentation",
+        "stale-docs",
+        "refresh-docs",
+        "verify-docs"
+      ],
       "platforms": [
         "all"
       ],
-      "triggers": [],
-      "agent-affinity": [],
+      "triggers": [
+        "update docs",
+        "docs update",
+        "stale docs",
+        "verify docs"
+      ],
+      "agent-affinity": [
+        "epost-documenter"
+      ],
       "connections": {
         "extends": [],
-        "requires": [],
-        "enhances": [],
+        "requires": [
+          "knowledge-base"
+        ],
+        "enhances": [
+          "knowledge-retrieval"
+        ],
         "conflicts": []
       },
       "path": "docs-update/SKILL.md"
@@ -667,6 +770,39 @@
       "path": "fix/SKILL.md"
     },
     {
+      "name": "fix-a11y",
+      "description": "(ePost) Fix accessibility findings — by ID (#<id>) or top N by priority (<n>)",
+      "category": "development-tools",
+      "tier": "discoverable",
+      "keywords": [
+        "fix",
+        "a11y",
+        "accessibility",
+        "finding",
+        "patch"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "fix accessibility",
+        "fix a11y",
+        "fix finding"
+      ],
+      "agent-affinity": [
+        "epost-a11y-specialist"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [
+          "a11y-wcag"
+        ],
+        "enhances": [],
+        "conflicts": []
+      },
+      "path": "fix-a11y/SKILL.md"
+    },
+    {
       "name": "fix-ci",
       "description": "(ePost) Fix CI pipeline failures",
       "category": "development-tools",
@@ -726,16 +862,101 @@
       "path": "fix-ui/SKILL.md"
     },
     {
+      "name": "get-started",
+      "description": "(ePost) Onboard to a project — read docs, summarize project state, route to next action",
+      "category": "development-tools",
+      "tier": "discoverable",
+      "keywords": [
+        "onboard",
+        "get-started",
+        "begin",
+        "new-project",
+        "what-is-this",
+        "existing-project"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "get started",
+        "onboard",
+        "new to project",
+        "what is this"
+      ],
+      "agent-affinity": [
+        "epost-researcher"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [
+          "docs-init",
+          "docs-update"
+        ],
+        "conflicts": []
+      },
+      "path": "get-started/SKILL.md"
+    },
+    {
+      "name": "git",
+      "description": "(ePost) Git workflow — auto-detects commit, push, or PR",
+      "category": "development-tools",
+      "tier": "core",
+      "keywords": [
+        "git",
+        "commit",
+        "push",
+        "pr",
+        "pull-request"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "commit",
+        "push",
+        "pr",
+        "pull request",
+        "git"
+      ],
+      "agent-affinity": [
+        "epost-git-manager"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [
+          "git-commit",
+          "git-push",
+          "git-pr"
+        ],
+        "conflicts": []
+      },
+      "path": "git/SKILL.md"
+    },
+    {
       "name": "git-commit",
       "description": "(ePost) Stage and commit with conventional commits",
       "category": "development-tools",
       "tier": "discoverable",
-      "keywords": ["commit", "stage", "git", "conventional"],
+      "keywords": [
+        "commit",
+        "stage",
+        "git",
+        "conventional"
+      ],
       "platforms": [
         "all"
       ],
-      "triggers": ["commit", "stage changes", "git add", "conventional commit"],
-      "agent-affinity": ["epost-git-manager"],
+      "triggers": [
+        "commit",
+        "stage changes",
+        "git add",
+        "conventional commit"
+      ],
+      "agent-affinity": [
+        "epost-git-manager"
+      ],
       "connections": {
         "extends": [],
         "requires": [],
@@ -749,15 +970,29 @@
       "description": "(ePost) Create GitHub pull request from current branch",
       "category": "development-tools",
       "tier": "discoverable",
-      "keywords": ["pull request", "pr", "github", "merge request"],
+      "keywords": [
+        "pull request",
+        "pr",
+        "github",
+        "merge request"
+      ],
       "platforms": [
         "all"
       ],
-      "triggers": ["pull request", "create pr", "open pr", "merge request"],
-      "agent-affinity": ["epost-git-manager"],
+      "triggers": [
+        "pull request",
+        "create pr",
+        "open pr",
+        "merge request"
+      ],
+      "agent-affinity": [
+        "epost-git-manager"
+      ],
       "connections": {
         "extends": [],
-        "requires": ["git-push"],
+        "requires": [
+          "git-push"
+        ],
         "enhances": [],
         "conflicts": []
       },
@@ -768,16 +1003,30 @@
       "description": "(ePost) Commit changes and push to remote",
       "category": "development-tools",
       "tier": "discoverable",
-      "keywords": ["push", "remote", "git push", "upstream"],
+      "keywords": [
+        "push",
+        "remote",
+        "git push",
+        "upstream"
+      ],
       "platforms": [
         "all"
       ],
-      "triggers": ["push", "push to remote", "git push", "push upstream"],
-      "agent-affinity": ["epost-git-manager"],
+      "triggers": [
+        "push",
+        "push to remote",
+        "git push",
+        "push upstream"
+      ],
+      "agent-affinity": [
+        "epost-git-manager"
+      ],
       "connections": {
         "extends": [],
         "requires": [],
-        "enhances": ["git-commit"],
+        "enhances": [
+          "git-commit"
+        ],
         "conflicts": []
       },
       "path": "git-push/SKILL.md"
@@ -876,6 +1125,40 @@
       "path": "infra-docker/SKILL.md"
     },
     {
+      "name": "ios-a11y",
+      "description": "Use when iOS accessibility issues arise — VoiceOver, UIKit/SwiftUI labels, traits, focus, Dynamic Type, contrast",
+      "category": "analysis-reasoning",
+      "tier": "discoverable",
+      "keywords": [
+        "voiceover",
+        "ios-accessibility",
+        "accessibility-label",
+        "dynamic-type"
+      ],
+      "platforms": [
+        "ios"
+      ],
+      "triggers": [
+        "voiceover",
+        "ios accessibility",
+        "accessibility label",
+        "dynamic type"
+      ],
+      "agent-affinity": [
+        "epost-a11y-specialist",
+        "epost-implementer"
+      ],
+      "connections": {
+        "extends": [
+          "a11y-wcag"
+        ],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "path": "ios-a11y/SKILL.md"
+    },
+    {
       "name": "knowledge-base",
       "description": "Use when recording ADRs, saving debug findings, persisting patterns, or referencing past decisions in docs/",
       "category": "analysis-reasoning",
@@ -908,7 +1191,11 @@
       "connections": {
         "extends": [],
         "requires": [],
-        "enhances": [],
+        "enhances": [
+          "docs-init",
+          "docs-update",
+          "get-started"
+        ],
         "conflicts": []
       },
       "path": "knowledge-base/SKILL.md"
@@ -1279,6 +1566,74 @@
       "path": "research/SKILL.md"
     },
     {
+      "name": "review",
+      "description": "(ePost) Review workflow — auto-detects code, a11y, or improvements",
+      "category": "development-tools",
+      "tier": "core",
+      "keywords": [
+        "review",
+        "code-review",
+        "audit",
+        "improvements"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "review",
+        "check code",
+        "audit",
+        "inspect"
+      ],
+      "agent-affinity": [
+        "epost-reviewer"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [
+          "review-code",
+          "review-a11y",
+          "review-improvements"
+        ],
+        "conflicts": []
+      },
+      "path": "review/SKILL.md"
+    },
+    {
+      "name": "review-a11y",
+      "description": "(ePost) Review accessibility compliance (WCAG 2.1 AA)",
+      "category": "development-tools",
+      "tier": "discoverable",
+      "keywords": [
+        "review",
+        "a11y",
+        "accessibility",
+        "compliance",
+        "wcag"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "review accessibility",
+        "a11y review",
+        "check compliance"
+      ],
+      "agent-affinity": [
+        "epost-a11y-specialist"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [
+          "a11y-wcag"
+        ],
+        "enhances": [],
+        "conflicts": []
+      },
+      "path": "review-a11y/SKILL.md"
+    },
+    {
       "name": "review-code",
       "description": "(ePost) Ultrathink edge cases, then parallel verify with reviewers",
       "category": "development-tools",
@@ -1505,6 +1860,42 @@
         "conflicts": []
       },
       "path": "verification-before-completion/SKILL.md"
+    },
+    {
+      "name": "web-a11y",
+      "description": "Use when web accessibility issues arise — ARIA roles, keyboard navigation, focus trapping, alt text, contrast, screen readers",
+      "category": "analysis-reasoning",
+      "tier": "discoverable",
+      "keywords": [
+        "keyboard",
+        "aria",
+        "focus",
+        "screen-reader",
+        "web-accessibility",
+        "semantic-html"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "triggers": [
+        "aria",
+        "keyboard navigation",
+        "web accessibility",
+        "focus trap"
+      ],
+      "agent-affinity": [
+        "epost-a11y-specialist",
+        "epost-implementer"
+      ],
+      "connections": {
+        "extends": [
+          "a11y-wcag"
+        ],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "path": "web-a11y/SKILL.md"
     }
   ]
 }

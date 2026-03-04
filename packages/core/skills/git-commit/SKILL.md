@@ -1,9 +1,8 @@
 ---
 name: git-commit
 description: "(ePost) Stage and commit with conventional commits"
-user-invocable: true
-context: fork
-agent: epost-git-manager
+user-invocable: false
+disable-model-invocation: true
 ---
 
 # Git Commit Command

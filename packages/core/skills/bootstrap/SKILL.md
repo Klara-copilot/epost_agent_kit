@@ -14,6 +14,12 @@ metadata:
 
 Scaffold new projects or modules with automatic scope detection.
 
+## Step 0 — Flag Override
+
+If `$ARGUMENTS` starts with `--fast`: skip auto-detection, dispatch `bootstrap-fast` directly. Remaining args are the task description.
+If `$ARGUMENTS` starts with `--parallel`: skip auto-detection, dispatch `bootstrap-parallel` directly. Remaining args are the task description.
+Otherwise: continue to Scope Auto-Detection.
+
 ## Scope Auto-Detection
 
 ### New Module (within existing project)

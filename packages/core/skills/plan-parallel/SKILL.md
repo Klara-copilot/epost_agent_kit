@@ -1,9 +1,8 @@
 ---
 name: plan-parallel
 description: "(ePost) Dependency-aware plan with file ownership matrix for parallel execution"
-user-invocable: true
-context: fork
-agent: epost-architect
+user-invocable: false
+disable-model-invocation: true
 metadata:
   argument-hint: "[enhanced planning prompt from router]"
   connections:

@@ -1,9 +1,8 @@
 ---
 name: fix-ci
 description: "(ePost) Fix CI pipeline failures"
-user-invocable: true
-context: fork
-agent: epost-debugger
+user-invocable: false
+disable-model-invocation: true
 metadata:
   argument-hint: "[CI failure description or log URL]"
   connections:

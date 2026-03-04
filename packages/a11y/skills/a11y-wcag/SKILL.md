@@ -1,5 +1,5 @@
 ---
-name: a11y
+name: a11y-wcag
 description: Use when accessibility, WCAG, POUR, or a11y compliance is relevant across any platform
 user-invocable: false
 metadata:

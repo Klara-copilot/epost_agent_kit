@@ -1,9 +1,8 @@
 ---
 name: git-pr
 description: "(ePost) Create GitHub pull request from current branch"
-user-invocable: true
-context: fork
-agent: epost-git-manager
+user-invocable: false
+disable-model-invocation: true
 ---
 
 # Git Pull Request Command

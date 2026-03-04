@@ -62,14 +62,18 @@ provides:
     - bootstrap
     - bootstrap-fast
     - bootstrap-parallel
+    - git
     - git-commit
     - git-push
     - git-pr
+    - review
     - review-code
     - review-improvements
+    - docs
     - docs-init
     - docs-update
     - docs-component
+    - a11y
     - get-started
 files:
   agents/: agents/

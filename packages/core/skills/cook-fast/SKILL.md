@@ -1,9 +1,8 @@
 ---
 name: cook-fast
 description: "(ePost) Direct implementation — skip plan question"
-user-invocable: true
-context: fork
-agent: epost-implementer
+user-invocable: false
+disable-model-invocation: true
 metadata:
   argument-hint: "[feature description]"
   connections:

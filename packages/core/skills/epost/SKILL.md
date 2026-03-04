@@ -34,14 +34,14 @@ Otherwise, classify the request using **semantic intent categories**:
 | **Fix** | fix, debug, error, crash, broken, failing, wrong, what's wrong | Has error signals → boost | `/fix` (auto-detects error type) |
 | **Plan** | plan, design, architect, think about, spec, roadmap | Complex request → boost | `/plan` (auto-detects complexity) |
 | **Test** | test, coverage, validate, verify, check tests, run tests | Has test failures → boost | `/test` (auto-detects platform) |
-| **Review** | review, check code, audit, look at, inspect | Has staged changes → boost | `/review-code` |
-| **Git** | commit, push, pr, merge, branch, release, done, ship | Has staged changes → boost | `/git-{action}` |
-| **Docs** | docs, document, write docs, readme | — | `/docs-init` or `/docs-update` |
+| **Review** | review, check code, audit, look at, inspect | Has staged changes → boost | `/review` (auto-detects variant) |
+| **Git** | commit, push, pr, merge, branch, release, done, ship | Has staged changes → boost | `/git` (auto-detects action) |
+| **Docs** | docs, document, write docs, readme | — | `/docs` (auto-detects init vs update) |
 | **Explore** | scout, search, find, explore, where is, show me | — | `/scout` skill |
 | **Knowledge** | which agent, list agents/skills/commands, what's our, convention, kit, our agents, our skills, what rag | Internal ref | `epost-orchestrator` |
 | **Components** | what components, search components, find component, design tokens | RAG query | `epost-orchestrator` |
 | **Research** | research, what is [external tech], how does [external tech], best practice for [tech] | External tech ref | `epost-researcher` |
-| **A11y** | a11y, accessibility, wcag, screen reader, voiceover | — | `/review-a11y` or `/fix-a11y` |
+| **A11y** | a11y, accessibility, wcag, screen reader, voiceover | — | `/a11y` (auto-detects variant) |
 | **Brainstorm** | brainstorm, evaluate, compare, think about options, weigh | — | `epost-brainstormer` |
 | **Guide** | guide, help me, how do I, wizard | — | Show discovery menu or `epost-orchestrator` |
 | **Convert** | convert, prototype, migrate | — | `/convert` |
@@ -54,8 +54,8 @@ When context signals match a category, that category gets priority **even with w
 | Context Signal | Boosts Category | Example |
 |---------------|----------------|---------|
 | TypeScript/build errors detected | Fix | "what's wrong?" → `/fix` (auto-detects types) |
-| Staged files present | Git or Review | "I'm done" → `/git-commit` |
-| Active plan file exists | Build | "continue" → `/cook-fast` with plan |
+| Staged files present | Git or Review | "I'm done" → `/git --commit` |
+| Active plan file exists | Build | "continue" → `/cook --fast` with plan |
 | Test failures detected | Fix | "help" → `/fix` (auto-detects test failures) |
 | Feature branch, no changes yet | Build or Plan | "what's next?" → resume from plan |
 | Clean main branch, no work | Plan or Explore | show contextual menu |
@@ -180,19 +180,16 @@ No active work detected on `{branch}`.
 ```
 ### All Commands
 
-| Category | Commands |
-|----------|----------|
-| Core Verbs | `/cook`, `/test`, `/debug`, `/fix`, `/plan`, `/bootstrap` |
-| Planning | `/plan-fast`, `/plan-deep`, `/plan-parallel`, `/plan-validate` |
-| Building | `/cook-fast`, `/cook-parallel`, `/bootstrap-fast`, `/bootstrap-parallel` |
-| Fixing | `/fix-deep`, `/fix-ci`, `/fix-ui`, `/fix-a11y` |
-| Review | `/review-code`, `/review-a11y`, `/audit-a11y` |
-| Git | `/git-commit`, `/git-push`, `/git-pr` |
-| Docs | `/docs-init`, `/docs-update`, `/docs-component` |
-| Tools | `/convert`, `/simulator` |
-| Kit | `/kit-add-agent`, `/kit-add-skill`, `/kit-add-hook`, `/kit-optimize-skill` |
-| CLI | `/cli-cook`, `/cli-test`, `/cli-doctor` |
-| Accessibility | `/audit-a11y`, `/audit-close-a11y`, `/fix-a11y`, `/review-a11y` |
+| Category | Command | Flags |
+|----------|---------|-------|
+| Core Verbs | `/cook`, `/fix`, `/plan`, `/debug`, `/test`, `/bootstrap` | `--fast`, `--deep`, `--parallel`, `--ci`, `--ui`, `--validate` |
+| Git | `/git` | `--commit`, `--push`, `--pr` |
+| Docs | `/docs` | `--migrate`, `--scan`, `--verify`, `--batch` |
+| Review | `/review` | `--code`, `--a11y`, `--improvements` |
+| A11y | `/a11y` | `--audit`, `--fix`, `--review`, `--close` |
+| Kit | `/kit` | `--add-agent`, `--add-skill`, `--add-hook`, `--optimize` |
+| Onboarding | `/get-started`, `/epost` | — |
+| Utilities | `/convert`, `/scout`, `/simulator` | — |
 ```
 
 ## Orchestrator Delegation

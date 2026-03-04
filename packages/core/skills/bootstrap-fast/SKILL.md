@@ -1,9 +1,8 @@
 ---
 name: bootstrap-fast
 description: "(ePost) Linear bootstrap for single-module projects"
-user-invocable: true
-context: fork
-agent: epost-implementer
+user-invocable: false
+disable-model-invocation: true
 metadata:
   argument-hint: "[project description]"
   connections:
