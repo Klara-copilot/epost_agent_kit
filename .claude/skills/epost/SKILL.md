@@ -61,15 +61,32 @@ When context signals match a category, that category gets priority **even with w
 | Clean main branch, no work | Plan or Explore | show contextual menu |
 | Merge conflicts | Fix | "help" → suggest conflict resolution |
 
-#### Internal vs External Knowledge Detection
+#### Knowledge Question Routing
 
-When the request is a knowledge question ("what is...", "how does...", "ask about..."):
+When the request is a question ("what is...", "how does...", "where is...", "show me...", "find..."):
 
-**Route to epost-orchestrator** when referencing internal kit concepts:
-- Keywords: "our", "we", "agent", "skill", "command", "kit", "rag", "convention", "module", "component"
+**Answer directly** when asking about the kit itself (agents, skills, commands, hooks, conventions):
+- Signals: "our agent", "which skill", "list commands", "what's our convention", "which agent handles X", "how does /cook work", "what skills exist"
+- Action: Answer from context — no delegation needed
 
-**Route to epost-researcher** when referencing external tech:
-- No internal keywords present + mentions specific technologies, libraries, or frameworks
+**Project overview questions** — check docs first, fall back gracefully:
+- Signals: "what is this project", "what does this project do", "tell me about this project", "what is this repo", "what is this codebase", "give me an overview", "what are we building", "what does this do"
+- Action (in order):
+  1. Check if `docs/index.json` exists → if yes, read it + key ARCH/FEAT entries and synthesize a summary
+  2. If no `docs/`, check README → summarize from README
+  3. If no docs and no README → say: "No documentation found. Run `/get-started` to onboard — it will research the codebase, generate docs, and install dependencies."
+- Example: "what is this project about?" → read docs/index.json or README, answer directly
+
+**Route to `/scout`** when asking about project source code or codebase structure:
+- Signals: "where is", "find the", "show me the code", "how is X implemented", "what does this file do", "search for", "which file", "where's the class/function/component", "how does the CLI work", "how does feature X work"
+- Action: Delegate to `scout` skill — it explores files, traces patterns, searches across platforms
+- Example: "where is authentication handled?" → `/scout`
+- Example: "find the Button component" → `/scout`
+
+**Route to `epost-researcher`** when asking about external tech:
+- Signals: no project/kit reference + specific library, framework, or technology name
+- Example: "how does JWT work?" → `epost-researcher`
+- Example: "what is gRPC?" → `epost-researcher`
 
 #### Fuzzy Matching
 

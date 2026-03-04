@@ -36,33 +36,30 @@ Write a ~50-100 word hypothetical code snippet or doc fragment that would appear
 | "how does button animation work?" | `Button uses framer-motion AnimatePresence with spring transition for hover/press states. Animation variants object defines scale and opacity transforms. CSS transition handles background-color and border-color on hover.` |
 | "how to add dark mode support?" | `ThemeProvider wraps app with klara-theme tokens. useTheme() hook accesses current theme. CSS variables var(--kds-color-background) switch between light/dark values. Toggle via data-theme attribute on root.` |
 
-### Step 3: Generate 3-5 Variant Queries
+### Step 3: Generate 1-2 Structural Variants
+
+The RAG server auto-expands synonyms and recognizes component aliases (call `expansions` MCP tool to see current data). Do NOT generate synonym variants — generate structural variants only (different angle or scope).
 
 | Strategy | Example (for "button animation") |
 |----------|--------------------------------|
-| Technical synonyms | "Button CSS transition hover effect" |
-| Component-specific | "ButtonBase motion variants framer-motion" |
-| Framework-specific | "React onClick animation spring" |
-| Design-system specific | "klara-theme button interaction states" |
-| File-type targeted | "button styles SCSS keyframes" |
+| Component-specific (different scope) | "ButtonBase motion variants framer-motion" |
+| Architecture-level | "klara-theme button interaction states CSS variables" |
 
 **Tips:**
-- Use PascalCase AND kebab-case (Button / button)
-- Include framework terms (React, framer-motion, SCSS)
-- Include design system terms (klara-theme, design token, kds)
-- Mix code-level and concept-level phrasings
+- Use PascalCase for component names (Button, ButtonBase) — server handles alias expansion
+- Focus on structural differences (file-level vs. concept-level, or different component scope)
+- Do NOT add synonym variants like "btn animation" or "component hover effect" — server handles these
 
 ### Step 4: Execute Queries
 
 ```
 query(original_query, top_k=3)
 query(hyde_passage_truncated_to_100_words, top_k=3)
-query(variant_1, top_k=3)
-query(variant_2, top_k=3)
-query(variant_3, top_k=3)
+query(structural_variant_1, top_k=3)
+# optional: query(structural_variant_2, top_k=3)
 ```
 
-Use `top_k=3` per query — yields up to 15 candidates before dedup.
+Use `top_k=3` per query — yields up to 9-12 candidates before dedup (reduced from 15 since synonym variants are skipped).
 
 ### Step 5: Merge Results
 
@@ -73,33 +70,52 @@ Use `top_k=3` per query — yields up to 15 candidates before dedup.
 
 ## Filters
 
-Narrow results when domain is clear:
+Narrow results when domain is clear. Discover valid filter values at runtime via `status` or `catalog` tools — do not hardcode topic, file_type, or module values.
 
 ```
-filters={"topic": "design-system"}     # Tokens, themes
-filters={"category": "component"}       # Only components
-filters={"file_type": "scss"}           # Only styles
-filters={"component": "button"}         # Specific component
+filters={"topic": "<discover via status>"}     # Topic area
+filters={"category": "component"}              # Only components
+filters={"file_type": "<discover via status>"} # File extension
+filters={"component": "<canonical from expansions>"}  # Specific component
 ```
 
 ## Worked Example
 
-**User asks:** "What components use the Dialog?"
+**User asks:** "What components use [SomeComponent]?"
 
 | Step | Output |
 |------|--------|
-| HyDE | `import { Dialog, DialogContent, DialogTrigger } from '@klara/dialog'; Dialog is used in ConfirmationModal, DeleteModal, SettingsPanel.` |
-| Variant 1 | "Dialog component imports usage" |
-| Variant 2 | "DialogContent DialogTrigger integration" |
-| Variant 3 | "modal overlay popup klara dialog" |
+| HyDE | Write ~50-100 word hypothetical import/usage snippet showing how [SomeComponent] would be consumed |
+| Variant 1 | "[SomeComponent] imports usage" |
+| Variant 2 | "[SomeComponent] integration pattern" |
+
+## Server-Side Expansion
+
+The RAG server auto-expands queries before embedding:
+- **Synonym expansion**: "btn" -> "button", "loading" -> "fetching pending spinner", etc. (60+ groups)
+- **Component recognition**: "TextField" -> detected, canonical "text-field" injected into query
+- **Multi-word phrase matching**: "design token" -> expanded with klara-theme, scss variable, etc.
+- **Punctuation stripping**: "(color, typography)" -> both words expanded correctly
+
+Call `expansions` MCP tool (format: "full") for current synonym groups.
+Call `expansions` MCP tool (format: "full") for canonical component names.
+
+### Impact on Strategy
+
+| Technique | Still Needed? | Why |
+|-----------|:---:|-----|
+| HyDE passage | YES | Server can't generate hypothetical code |
+| Structural variants (1-2) | YES | Different angle/scope — not synonyms |
+| Synonym variants | NO | Server handles "btn"/"button", "animation"/"transition" |
+| Component filter with canonical name | YES | Use name from `expansions` MCP tool |
 
 ## Notes
 
-- The `query` tool already does synonym expansion server-side; this adds LLM-level intelligence on top
-- If original query returns 5+ high-score results, skip variant queries
+- If original query returns 5+ high-score results, skip all variants
 - For exact lookups, use `query` or `navigate` directly
 
 ## Related Documents
 
 - `SKILL.md` — Main web RAG skill documentation
-- `query-patterns.md` — Common query examples and filter patterns
+- `component-mappings.md` — How to get canonical names via `expansions` MCP tool
+- `synonym-groups.md` — How to get synonym groups via `expansions` MCP tool

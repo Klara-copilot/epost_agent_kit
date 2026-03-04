@@ -20,7 +20,7 @@ Improve RAG recall on conceptual/abstract queries by generating hypothetical ans
 ### Step 1: Analyze Query
 
 Identify before searching:
-- **View/type names**: EPButton, SettingsView, ThemeToken
+- **View/type names**: specific view or type (get canonical name from `expansions`)
 - **Concepts**: dark mode, navigation, state management, accessibility
 - **File types**: swift, storyboard, xib
 - **Scope**: specific file vs. pattern vs. architecture
@@ -33,36 +33,35 @@ Write a ~50-100 word hypothetical Swift code snippet or doc fragment that would 
 
 | User Query | HyDE Passage |
 |-----------|-------------|
-| "how does button theming work?" | `EPButton applies theme tokens via ThemeProvider. ButtonToken struct defines primary, secondary, and ghost variants. Color values resolve through ColorToken.primary and ColorToken.onPrimary. Font uses TypographyToken.button. Modifier .epButtonStyle(.primary) applies the full token set.` |
-| "how to handle navigation?" | `NavigationCoordinator protocol defines push, pop, present methods. Each feature module creates a concrete coordinator. AppCoordinator holds child coordinators in a stack. Deep links resolve through URLScheme handler to coordinator actions.` |
+| "how does [concept] work?" | Write ~50-100 word hypothetical Swift code snippet describing implementation of the concept |
+| "how to handle [pattern]?" | Write ~50-100 word hypothetical Swift code snippet showing the pattern in action |
 
-### Step 3: Generate 3-5 Variant Queries
+### Step 3: Generate 1-2 Structural Variants
 
-| Strategy | Example (for "button theming") |
+The RAG server auto-expands synonyms and recognizes component aliases (call `expansions` MCP tool to see current data). Do NOT generate synonym variants — generate structural variants only (different angle or scope).
+
+**Note**: iOS server does word-by-word expansion only (no phrase matching). Multi-word synonym keys in iOS config (e.g., "dependency injection") are NOT matched as phrases yet.
+
+| Strategy | Example (for "[concept]") |
 |----------|-------------------------------|
-| Technical synonyms | "EPButton color token styling" |
-| Type-specific | "ButtonToken ThemeProvider modifier" |
-| Framework-specific | "SwiftUI ViewModifier button appearance" |
-| Design-system specific | "theme token color typography button" |
-| Protocol-level | "ButtonStyle protocol custom styling" |
+| Type-specific (different scope) | "[Type] [RelatedType] protocol" |
+| Architecture-level | "[concept] pattern protocol implementation" |
 
 **Tips:**
-- Use PascalCase for types (EPButton, ThemeToken)
-- Include framework terms (SwiftUI, UIKit, Combine)
-- Include design system terms (ThemeToken, ColorToken, TypographyToken)
-- Mix code-level and concept-level phrasings
+- Use PascalCase for types — server handles alias expansion word-by-word
+- Focus on structural differences, not synonym rephrasings
+- Do NOT add synonym variants like "UIButton color token" or "btn appearance" — server handles these
 
 ### Step 4: Execute Queries
 
 ```
 query(original_query, top_k=3)
 query(hyde_passage_truncated_to_100_words, top_k=3)
-query(variant_1, top_k=3)
-query(variant_2, top_k=3)
-query(variant_3, top_k=3)
+query(structural_variant_1, top_k=3)
+# optional: query(structural_variant_2, top_k=3)
 ```
 
-Use `top_k=3` per query — yields up to 15 candidates before dedup.
+Use `top_k=3` per query — yields up to 9-12 candidates before dedup.
 
 ### Step 5: Merge Results
 
@@ -71,13 +70,34 @@ Use `top_k=3` per query — yields up to 15 candidates before dedup.
 3. **Diversify** across views, models, protocols, extensions
 4. **Present** best 5-8 unique results with source query context
 
+## Server-Side Expansion
+
+The iOS RAG server auto-expands queries before embedding:
+- **Synonym expansion**: "button" -> "UIButton btn", "label" -> "UILabel", etc. (30+ groups)
+- **Component recognition**: "PrimaryButton" -> detected, canonical name injected into query
+- **Word-by-word matching**: each token expanded individually
+
+**Limitation**: iOS server does NOT do multi-word phrase matching yet. "dependency injection" in config won't match as a phrase — only individual words "dependency" and "injection" expand separately.
+
+Call `expansions` MCP tool (format: "full") for current synonym groups.
+Call `expansions` MCP tool (format: "full") for canonical component names.
+
+### Impact on Strategy
+
+| Technique | Still Needed? | Why |
+|-----------|:---:|-----|
+| HyDE passage | YES | Server can't generate hypothetical Swift code |
+| Structural variants (1-2) | YES | Different angle/scope — not synonyms |
+| Synonym variants | NO | Server handles "UIButton"/"button"/"btn" |
+| Component filter with canonical | YES | Use name from `expansions` MCP tool |
+
 ## Notes
 
-- The `query` tool already does synonym expansion server-side; this adds LLM-level intelligence on top
-- If original query returns 5+ high-score results (>0.5), skip variant queries
+- If original query returns 5+ high-score results, skip all variants
 - For exact lookups, use `query` with component filter directly
 
 ## Related Documents
 
 - `SKILL.md` — Main iOS RAG skill documentation
-- `query-patterns.md` — Common query examples and filter patterns
+- `component-mappings.md` — How to get canonical names via `expansions` MCP tool
+- `synonym-groups.md` — How to get synonym groups via `expansions` MCP tool

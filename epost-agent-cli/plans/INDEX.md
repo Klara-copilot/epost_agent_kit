@@ -18,6 +18,11 @@ See [PLAN_FORMAT.md](PLAN_FORMAT.md) for standardized plan template.
 | PLAN-0025 | Init CLI Interactive UX Improvements | epost-implementer | 2026-03-03 | [../../plans/reports/epost-implementer-260303-1535-init-cli-ux-improvements.md](../../plans/reports/epost-implementer-260303-1535-init-cli-ux-improvements.md) |
 | PLAN-0026 | Auto-Orchestrating /get-started | epost-architect | 2026-03-04 | [../../plans/260304-0408-get-started-auto-orchestration/plan.md](../../plans/260304-0408-get-started-auto-orchestration/plan.md) |
 | PLAN-0027 | Generalize /get-started for Any Project Type | epost-architect | 2026-03-04 | [../../plans/260304-0659-generalize-get-started/plan.md](../../plans/260304-0659-generalize-get-started/plan.md) |
+| PLAN-0028 | Improve /scout with Smart Routing & RAG | epost-architect | 2026-03-04 | [../../plans/260304-1237-improve-scout/plan.md](../../plans/260304-1237-improve-scout/plan.md) |
+| PLAN-0029 | Scout Phases 5-7: Query Expansion Sync | epost-implementer | 2026-03-04 | [../../plans/reports/epost-implementer-260304-1321-improve-scout-phases-5-7.md](../../plans/reports/epost-implementer-260304-1321-improve-scout-phases-5-7.md) |
+| PLAN-0030 | RAG Query Expansion API — Serve Mappings via MCP | epost-architect | 2026-03-04 | [../../plans/260304-1350-rag-expansion-api/plan.md](../../plans/260304-1350-rag-expansion-api/plan.md) |
+| PLAN-0031 | RAG Expansion API — Implementation | epost-implementer | 2026-03-04 | [../../plans/reports/epost-implementer-260304-1404-rag-expansion-api.md](../../plans/reports/epost-implementer-260304-1404-rag-expansion-api.md) |
+| PLAN-0032 | Rethink RAG Skills — Dynamic, MCP-Integrated | epost-architect | 2026-03-04 | [../../plans/260304-1433-rethink-rag-skills/plan.md](../../plans/260304-1433-rethink-rag-skills/plan.md) |
 
 ## Completed
 

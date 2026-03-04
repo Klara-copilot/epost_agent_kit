@@ -9,7 +9,7 @@
 **Date**: 2026-03-04
 **Priority**: P1
 **Description**: Add decision tree for routing queries to best search backend
-**Implementation Status**: Pending
+**Implementation Status**: DONE
 
 ## Key Insights
 - knowledge-retrieval already defines a 5-level retrieval chain (docs -> RAG -> skills -> codebase -> external)

@@ -3,16 +3,30 @@
   "target": "claude",
   "kitVersion": "1.0.0",
   "installedPackages": [
-    "core",
-    "a11y",
-    "kit"
+    "core"
   ],
-  "installedAt": "2026-03-04T04:48:24.016Z",
+  "installedAt": "2026-03-04T05:51:38.257Z",
   "files": {
+    ".claude/skills/scout-deep/SKILL.md": {
+      "path": ".claude/skills/scout-deep/SKILL.md",
+      "checksum": "cecd9b3ed3812099810da8572d735806ed66e008d8fd741de84c3f454fb3effe",
+      "installedAt": "2026-03-04T05:51:37.310Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/scout-fast/SKILL.md": {
+      "path": ".claude/skills/scout-fast/SKILL.md",
+      "checksum": "0b573d41257bc7f6dbe4a243f774f018568b4460afabc06162a3e24a6c459b48",
+      "installedAt": "2026-03-04T05:51:37.310Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
     ".claude/.ck.json": {
       "path": ".claude/.ck.json",
       "checksum": "1bf7f54a5921781a5cbed6f168f8d00fbdc7ac663d445fba86b217df8599e436",
-      "installedAt": "2026-03-04T04:48:23.356Z",
+      "installedAt": "2026-03-04T05:51:38.071Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -20,15 +34,15 @@
     ".claude/.ckignore": {
       "path": ".claude/.ckignore",
       "checksum": "dd2c75e3a0e5d16f65ed4a5a5bb6b4d05656be2c666c4e7d409c41c2781490e6",
-      "installedAt": "2026-03-04T04:48:23.360Z",
+      "installedAt": "2026-03-04T05:51:38.074Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
     },
     ".claude/skills/skill-index.json": {
       "path": ".claude/skills/skill-index.json",
-      "checksum": "5b3d22eca01dc5603a8af7a2f0706f69a064b222445b9a0aafbce3d2733c8bce",
-      "installedAt": "2026-03-04T04:48:23.885Z",
+      "checksum": "d21196fcd0456144b20fc30f7e2c94cea612f2907da3d2916df223ecbea90faf",
+      "installedAt": "2026-03-04T05:51:38.117Z",
       "version": "1.0.0",
       "modified": false,
       "package": "core"

@@ -9,7 +9,7 @@
 **Date**: 2026-03-04
 **Priority**: P1
 **Description**: Wire scout to use RAG MCP tools for semantic search
-**Implementation Status**: Pending
+**Implementation Status**: DONE
 
 ## Key Insights
 - web-rag and ios-rag are standalone skills with MCP query/status tools

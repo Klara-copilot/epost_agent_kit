@@ -9,7 +9,7 @@
 **Date**: 2026-03-04
 **Priority**: P1
 **Description**: Wire scout into skill ecosystem -- keywords, connections, agent-affinity
-**Implementation Status**: Pending
+**Implementation Status**: DONE
 
 ## Key Insights
 - Scout currently has ZERO metadata in skill-index (empty keywords, triggers, connections)

@@ -1,11 +1,11 @@
 {
   "version": "1.0.0",
-  "updated": "2026-02-08",
+  "updated": "2026-03-04",
   "counts": {
-    "active": 9,
-    "completed": 18,
+    "active": 12,
+    "completed": 19,
     "archived": 0,
-    "total": 27
+    "total": 31
   },
   "plans": [
     {
@@ -278,6 +278,46 @@
       "authors": ["epost-architect"],
       "tags": ["skill", "onboarding", "generalization"],
       "file": "../../plans/260304-0659-generalize-get-started/plan.md"
+    },
+    {
+      "id": "PLAN-0028",
+      "title": "Improve /scout with Smart Routing & RAG",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-04",
+      "authors": ["epost-architect"],
+      "tags": ["scout", "rag", "routing", "skills", "web-rag", "ios-rag"],
+      "file": "../../plans/260304-1237-improve-scout/plan.md"
+    },
+    {
+      "id": "PLAN-0029",
+      "title": "Scout Phases 5-7: Query Expansion Sync",
+      "type": "report",
+      "status": "completed",
+      "created": "2026-03-04",
+      "authors": ["epost-implementer"],
+      "tags": ["scout", "rag", "query-expansion", "ios-rag", "web-rag", "knowledge-retrieval"],
+      "file": "../../plans/reports/epost-implementer-260304-1321-improve-scout-phases-5-7.md"
+    },
+    {
+      "id": "PLAN-0030",
+      "title": "RAG Query Expansion API — Serve Mappings via MCP",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-04",
+      "authors": ["epost-architect"],
+      "tags": ["rag", "mcp", "web-rag", "ios-rag", "query-expansion", "skills"],
+      "file": "../../plans/260304-1350-rag-expansion-api/plan.md"
+    },
+    {
+      "id": "PLAN-0032",
+      "title": "Rethink RAG Skills — Dynamic, MCP-Integrated",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-04",
+      "authors": ["epost-architect"],
+      "tags": ["rag", "skills", "web-rag", "ios-rag", "mcp", "dynamic"],
+      "file": "../../plans/260304-1433-rethink-rag-skills/plan.md"
     }
   ]
 }

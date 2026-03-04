@@ -69,7 +69,7 @@ When semantic search is chosen (web-rag/ios-rag):
 
 1. **Lazy health check** — attempt RAG query on first semantic search, catch errors gracefully
 2. **Query construction** — ask RAG: "Find [component/token/pattern] matching [user's intent]"
-3. **Filter extraction** — extract relevant filters from query (e.g., "accessibility" → filter by ARIA, VoiceOver; "styling" → filter by tokens, Tailwind)
+3. **Filter extraction** — extract relevant filters from query (e.g., "accessibility" → filter by ARIA, VoiceOver; "styling" → filter by tokens, Tailwind). Use canonical component names when filtering: see `web-rag/references/component-mappings.md` or `ios-rag/references/component-mappings.md` (e.g., "datepicker" → `component: "date-picker"`, "btn" → `component: "button"`, "PrimaryButton" → `component: "PrimaryButton"`)
 4. **Result limit** — request top 10–15 results, deduplicate by file path
 5. **Fallback** — if RAG fails or returns empty, use Grep on full codebase
 

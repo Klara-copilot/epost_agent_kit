@@ -291,7 +291,24 @@ get-library-docs(
 
 ## Keyword Expansion Techniques
 
-### Synonyms
+### Server-Side vs Agent-Side Expansion
+
+RAG servers auto-expand queries before embedding. Know what each side handles:
+
+| Expansion Type | Who Does It | When |
+|---------------|-------------|------|
+| Synonym expansion | RAG server (auto) | Every query — "btn"->"button", "a11y"->"accessibility" |
+| Component recognition | RAG server (auto) | When alias in query — "TextField" injects "text-field" |
+| Multi-word phrases | Web RAG server (auto) | "design token" -> klara-theme, scss variable, etc. |
+| Punctuation stripping | Web RAG server (auto) | "(color, typography)" -> both words expanded |
+| HyDE passage | Agent (manual) | Conceptual queries — server can't generate code |
+| Structural variants | Agent (manual) | When < 3 results — different angle, not synonyms |
+| Filter extraction | Agent (manual) | Always — use canonical names from component-mappings.md |
+
+**Rule**: Don't duplicate server-side expansions. Agent effort should go to HyDE and structural variants.
+**See**: `web-rag/references/synonym-groups.md`, `ios-rag/references/synonym-groups.md` for what's auto-expanded.
+
+### Synonyms (agent-side, for non-RAG searches only)
 
 | Original | Synonyms |
 |----------|----------|
