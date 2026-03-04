@@ -236,7 +236,7 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
   }
 
   // ── Step 3/7: Select editor/IDE ──
-  const validTargets = ["claude", "cursor", "github-copilot", "zed", "windsurf"] as const;
+  const validTargets = ["claude", "cursor", "vscode"] as const;
   type ValidTarget = typeof validTargets[number];
   let target: ValidTarget = (metadata?.target as ValidTarget) || "claude";
 
@@ -254,9 +254,7 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
       choices: [
         { name: "Claude Code", value: "claude" as const },
         { name: "Cursor", value: "cursor" as const },
-        { name: "GitHub Copilot", value: "github-copilot" as const },
-        { name: "Zed", value: "zed" as const },
-        { name: "Windsurf", value: "windsurf" as const },
+        { name: "VS Code", value: "vscode" as const },
       ],
       default: target,
     });
@@ -755,7 +753,7 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
   if (profileName) summaryPairs.push(["Profile", profileName]);
   summaryPairs.push([
     "Target",
-    `${target === "claude" ? "Claude Code" : target === "cursor" ? "Cursor" : target === "zed" ? "Zed" : target === "windsurf" ? "Windsurf" : "GitHub Copilot"} (${installDirName}/)`,
+    `${target === "claude" ? "Claude Code" : target === "cursor" ? "Cursor" : "VS Code"} (${installDirName}/)`,
   ]);
   summaryPairs.push(["Packages", `${resolved.packages.length}`]);
   summaryPairs.push(["Agents", `${totalAgents}`]);
@@ -766,7 +764,7 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
     }),
   );
 
-  const readyMsg = target === "github-copilot"
+  const readyMsg = target === "vscode"
     ? `Open VS Code → Copilot Chat → type ${pc.bold("@")} to discover agents.\nType ${pc.bold("/")} to discover all available skills.`
     : `Run ${pc.bold("claude")} to activate your AI assistant.\nType ${pc.bold("/")} to discover all available skills.`;
   console.log(box(readyMsg, { title: "Ready" }));
@@ -1029,7 +1027,7 @@ async function runKitInit(opts: InitOptions): Promise<void> {
       if (ckMeta.name === "claudekit-engineer") {
         logger.info("ClaudeKit Engineer kit detected - migration available");
 
-        let migrationTarget: "claude" | "cursor" | "github-copilot" = "claude";
+        let migrationTarget: "claude" | "cursor" | "vscode" = "claude";
         if (!opts.yes) {
           migrationTarget = await select({
             message: "Select epost-agent-kit target for migration:",
@@ -1041,8 +1039,8 @@ async function runKitInit(opts: InitOptions): Promise<void> {
                 disabled: true,
               },
               {
-                name: "GitHub Copilot (not yet supported)",
-                value: "github-copilot" as const,
+                name: "VS Code (not yet supported)",
+                value: "vscode" as const,
                 disabled: true,
               },
             ],
@@ -1069,7 +1067,7 @@ async function runKitInit(opts: InitOptions): Promise<void> {
   }
 
   // Step 5: Select target
-  const validTargetsLegacy = ["claude", "cursor", "github-copilot", "zed", "windsurf"] as const;
+  const validTargetsLegacy = ["claude", "cursor", "vscode"] as const;
   type LegacyTarget = typeof validTargetsLegacy[number];
   let target: LegacyTarget = (metadata?.target as LegacyTarget) || "claude";
 
@@ -1086,9 +1084,7 @@ async function runKitInit(opts: InitOptions): Promise<void> {
       choices: [
         { name: "Claude Code", value: "claude" as const },
         { name: "Cursor", value: "cursor" as const },
-        { name: "GitHub Copilot", value: "github-copilot" as const },
-        { name: "Zed", value: "zed" as const },
-        { name: "Windsurf", value: "windsurf" as const },
+        { name: "VS Code", value: "vscode" as const },
       ],
       default: "claude" as const,
     });

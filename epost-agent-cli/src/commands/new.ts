@@ -55,14 +55,14 @@ export async function runNew(opts: NewOptions): Promise<void> {
   }
 
   // Step 4: Select IDE target
-  let target: 'claude' | 'cursor' | 'github-copilot' = 'claude';
+  let target: 'claude' | 'cursor' | 'vscode' = 'claude';
   if (!opts.yes) {
     target = await select({
       message: 'Select IDE target:',
       choices: [
         { name: 'Claude Code', value: 'claude' as const },
         { name: 'Cursor', value: 'cursor' as const },
-        { name: 'GitHub Copilot', value: 'github-copilot' as const },
+        { name: 'VS Code', value: 'vscode' as const },
       ],
       default: 'claude' as const,
     });

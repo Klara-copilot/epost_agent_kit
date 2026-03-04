@@ -61,7 +61,7 @@ const AGENT_HANDOFFS: Record<string, Array<{ label: string; agent: string; promp
 // ── Adapter ──
 
 export class CopilotAdapter implements TargetAdapter {
-  readonly name = 'github-copilot' as const;
+  readonly name = 'vscode' as const;
   readonly installDir = '.github';
 
   transformAgent(content: string, filename: string): TransformResult {

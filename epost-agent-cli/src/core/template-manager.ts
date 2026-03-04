@@ -15,7 +15,7 @@ export interface KitTemplate {
   id: string;
   name: string;
   description: string;
-  targets: Array<'claude' | 'cursor' | 'github-copilot' | 'zed' | 'windsurf'>;
+  targets: Array<'claude' | 'cursor' | 'vscode'>;
 }
 
 /** Available kit templates (hardcoded for v1, engineer only) */
@@ -24,7 +24,7 @@ export const AVAILABLE_KITS: KitTemplate[] = [
     id: 'engineer',
     name: 'Engineer Kit',
     description: 'Full-stack development with 19 agents + 17 skills',
-    targets: ['claude', 'cursor', 'github-copilot'],
+    targets: ['claude', 'cursor', 'vscode'],
   },
 ];
 

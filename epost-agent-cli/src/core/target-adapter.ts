@@ -7,7 +7,7 @@
 
 // ── Types ──
 
-export type TargetName = 'claude' | 'cursor' | 'github-copilot' | 'zed' | 'windsurf';
+export type TargetName = 'claude' | 'cursor' | 'vscode';
 
 /** Result of a file transformation */
 export interface TransformResult {
@@ -53,13 +53,11 @@ export interface TargetAdapter {
 export async function createTargetAdapter(target: TargetName): Promise<TargetAdapter> {
   switch (target) {
     case 'claude':
-    case 'cursor':
-    case 'zed':
-    case 'windsurf': {
+    case 'cursor': {
       const { ClaudeAdapter } = await import('./claude-adapter.js');
       return new ClaudeAdapter(target);
     }
-    case 'github-copilot': {
+    case 'vscode': {
       const { CopilotAdapter } = await import('./copilot-adapter.js');
       return new CopilotAdapter();
     }
