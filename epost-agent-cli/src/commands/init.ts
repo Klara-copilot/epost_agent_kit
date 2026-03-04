@@ -14,14 +14,12 @@ import {
   mkdir,
   rm,
 } from "node:fs/promises";
-import { select, confirm, checkbox, input } from "@inquirer/prompts";
-import { execa } from "execa";
+import { select, confirm, checkbox, Separator } from "@inquirer/prompts";
 import ora from "ora";
 import pc from "picocolors";
 import { logger } from "../core/logger.js";
 import { fileExists, dirExists, safeCopyDir } from "../core/file-system.js";
 import {
-  banner,
   box,
   keyValue,
   packageTable,
@@ -58,9 +56,6 @@ import { createTargetAdapter, type TargetAdapter } from "../core/target-adapter.
 import {
   detectProjectProfile,
   listProfiles,
-  findKitRoot,
-  getOrderedTeamChoices,
-  findProfilesByTeam,
   getProfileInfo,
 } from "../core/profile-loader.js";
 import { tmpdir } from "node:os";
@@ -240,8 +235,35 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
     }
   }
 
-  // ── Step 3/7: Resolve packages ──
-  logger.step(3, 7, "Resolving packages");
+  // ── Step 3/7: Select editor/IDE ──
+  const validTargets = ["claude", "cursor", "github-copilot", "zed", "windsurf"] as const;
+  type ValidTarget = typeof validTargets[number];
+  let target: ValidTarget = (metadata?.target as ValidTarget) || "claude";
+
+  if (opts.target) {
+    if (!validTargets.includes(opts.target as any)) {
+      throw new Error(
+        `Invalid target "${opts.target}". Valid: ${validTargets.join(", ")}`
+      );
+    }
+    target = opts.target as ValidTarget;
+  } else if (!opts.yes) {
+    logger.step(3, 7, "Selecting editor");
+    target = await select({
+      message: "Which editor/IDE are you using?",
+      choices: [
+        { name: "Claude Code", value: "claude" as const },
+        { name: "Cursor", value: "cursor" as const },
+        { name: "GitHub Copilot", value: "github-copilot" as const },
+        { name: "Zed", value: "zed" as const },
+        { name: "Windsurf", value: "windsurf" as const },
+      ],
+      default: target,
+    });
+  }
+
+  // ── Step 4/7: Resolve packages ──
+  logger.step(4, 7, "Resolving packages");
   const spinner = ora("Resolving packages...").start();
   const resolved = await resolvePackages({
     packagesDir,
@@ -267,7 +289,7 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
       const reResolved = await resolvePackages({
         packagesDir,
         profilesPath,
-        profile: profileName,
+        profile: mergedProfilePackages ? undefined : profileName,
         packages: [...resolved.packages, ...resolved.recommended],
         includeOptional: optionalList,
         exclude: excludeList,
@@ -277,41 +299,13 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
     }
   }
 
-  // ── Step 4/7: Select options ──
-  logger.step(4, 7, "Selecting options");
-  if (resolved.optional.length > 0 && !opts.yes) {
-    const selectedOptional = await checkbox({
-      message: "Select optional packages to include:",
-      choices: resolved.optional.map((name) => ({
-        name,
-        value: name,
-      })),
-    });
-
-    if (selectedOptional.length > 0) {
-      const reResolved = await resolvePackages({
-        packagesDir,
-        profilesPath,
-        profile: profileName,
-        packages: [...resolved.packages, ...selectedOptional],
-        exclude: excludeList,
-      });
-      resolved.packages.length = 0;
-      resolved.packages.push(...reResolved.packages);
-    }
-  }
-
-  // ── Additional packages (beyond profile) ──
+  // ── Step 5/7: Select extras ──
+  logger.step(5, 7, "Selecting extras");
   const manifests = await loadAllManifests(packagesDir);
   const additionalList = opts.additional
     ?.split(",")
     .map((s) => s.trim())
     .filter(Boolean);
-
-  const currentPkgSet = new Set(resolved.packages);
-  const availableAdditional = [...manifests.keys()].filter(
-    (name) => !currentPkgSet.has(name)
-  );
 
   if (additionalList && additionalList.length > 0) {
     // Non-interactive: add specified additional packages
@@ -323,59 +317,45 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
     });
     resolved.packages.length = 0;
     resolved.packages.push(...reResolved.packages);
-  } else if (availableAdditional.length > 0 && !opts.yes) {
-    const addMore = await confirm({
-      message: "Add packages beyond your profile?",
-      default: false,
-    });
+  } else if (!opts.yes) {
+    const currentPkgSet = new Set(resolved.packages);
 
-    if (addMore) {
-      const selectedAdditional = await checkbox({
-        message: "Select additional packages:",
-        choices: availableAdditional.map((name) => {
-          const m = manifests.get(name);
-          return {
-            name: m ? `${name} — ${m.description}` : name,
-            value: name,
-          };
-        }),
+    type CheckboxChoice = { name: string; value: string; checked: boolean };
+    const optionalChoices: CheckboxChoice[] = resolved.optional.map((name) => ({
+      name,
+      value: name,
+      checked: false,
+    }));
+    const additionalChoices: CheckboxChoice[] = [...manifests.keys()]
+      .filter((name) => !currentPkgSet.has(name) && !resolved.optional.includes(name))
+      .map((name) => {
+        const m = manifests.get(name);
+        return { name: m ? `${name} — ${m.description}` : name, value: name, checked: false };
       });
 
-      if (selectedAdditional.length > 0) {
+    const hasExtras = optionalChoices.length > 0 || additionalChoices.length > 0;
+    if (hasExtras) {
+      const choices: (CheckboxChoice | Separator)[] = [];
+      if (optionalChoices.length > 0) {
+        choices.push(new Separator("── Optional (from your profile) ──"), ...optionalChoices);
+      }
+      if (additionalChoices.length > 0) {
+        choices.push(new Separator("── Additional packages ──"), ...additionalChoices);
+      }
+
+      const selected = await checkbox({ message: "Select extra packages:", choices });
+      if (selected.length > 0) {
         const reResolved = await resolvePackages({
           packagesDir,
           profilesPath,
-          packages: [...resolved.packages, ...selectedAdditional],
+          profile: mergedProfilePackages ? undefined : profileName,
+          packages: [...resolved.packages, ...selected],
           exclude: excludeList,
         });
         resolved.packages.length = 0;
         resolved.packages.push(...reResolved.packages);
       }
     }
-  }
-
-  // Select IDE target
-  const validTargets = ["claude", "cursor", "github-copilot"] as const;
-  let target: "claude" | "cursor" | "github-copilot" =
-    metadata?.target || "claude";
-
-  if (opts.target) {
-    if (!validTargets.includes(opts.target as any)) {
-      throw new Error(
-        `Invalid target "${opts.target}". Valid: ${validTargets.join(", ")}`
-      );
-    }
-    target = opts.target as typeof target;
-  } else if (!metadata && !opts.yes) {
-    target = await select({
-      message: "Select IDE target:",
-      choices: [
-        { name: "Claude Code", value: "claude" as const },
-        { name: "Cursor", value: "cursor" as const },
-        { name: "GitHub Copilot", value: "github-copilot" as const },
-      ],
-      default: "claude" as const,
-    });
   }
 
   // Create target adapter for format transformation
@@ -424,9 +404,9 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
     }
   }
 
-  // ── Step 5/7: Backup (if updating) ──
+  // ── Step 6/7: Install packages ──
+  logger.step(6, 7, "Installing packages");
   if (isUpdate) {
-    logger.step(5, 7, "Creating backup");
     const backupSpinner = ora("Creating backup...").start();
     await createBackup(projectDir, "pre-update");
     backupSpinner.succeed("Backup created");
@@ -444,9 +424,6 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
       }
     }
   }
-
-  // ── Step 5/7: Install packages ──
-  logger.step(5, 7, "Installing packages");
   const installSpinner = ora("Installing packages...").start();
   await mkdir(installDir, { recursive: true });
 
@@ -778,7 +755,7 @@ async function runPackageInit(opts: InitOptions): Promise<void> {
   if (profileName) summaryPairs.push(["Profile", profileName]);
   summaryPairs.push([
     "Target",
-    `${target === "claude" ? "Claude Code" : target === "cursor" ? "Cursor" : "GitHub Copilot"} (${installDirName}/)`,
+    `${target === "claude" ? "Claude Code" : target === "cursor" ? "Cursor" : target === "zed" ? "Zed" : target === "windsurf" ? "Windsurf" : "GitHub Copilot"} (${installDirName}/)`,
   ]);
   summaryPairs.push(["Packages", `${resolved.packages.length}`]);
   summaryPairs.push(["Agents", `${totalAgents}`]);
@@ -1092,9 +1069,9 @@ async function runKitInit(opts: InitOptions): Promise<void> {
   }
 
   // Step 5: Select target
-  const validTargetsLegacy = ["claude", "cursor", "github-copilot"] as const;
-  let target: "claude" | "cursor" | "github-copilot" =
-    metadata?.target || "claude";
+  const validTargetsLegacy = ["claude", "cursor", "github-copilot", "zed", "windsurf"] as const;
+  type LegacyTarget = typeof validTargetsLegacy[number];
+  let target: LegacyTarget = (metadata?.target as LegacyTarget) || "claude";
 
   if (opts.target) {
     if (!validTargetsLegacy.includes(opts.target as any)) {
@@ -1102,7 +1079,7 @@ async function runKitInit(opts: InitOptions): Promise<void> {
         `Invalid target "${opts.target}". Valid: ${validTargetsLegacy.join(", ")}`
       );
     }
-    target = opts.target as typeof target;
+    target = opts.target as LegacyTarget;
   } else if (!metadata && !opts.yes) {
     target = await select({
       message: "Select IDE target:",
@@ -1110,6 +1087,8 @@ async function runKitInit(opts: InitOptions): Promise<void> {
         { name: "Claude Code", value: "claude" as const },
         { name: "Cursor", value: "cursor" as const },
         { name: "GitHub Copilot", value: "github-copilot" as const },
+        { name: "Zed", value: "zed" as const },
+        { name: "Windsurf", value: "windsurf" as const },
       ],
       default: "claude" as const,
     });
@@ -1245,182 +1224,6 @@ async function runKitInit(opts: InitOptions): Promise<void> {
   }
 }
 
-// ─── Guided Wizard Flow (merged from onboard command) ───
-
-async function runWizardFlow(opts: InitOptions): Promise<void> {
-  console.log(banner());
-  console.log(
-    box(
-      "Welcome! This wizard sets up your dev\nenvironment with agents, skills & commands\ntailored for your team and role.",
-    ),
-  );
-
-  const kitRoot = await findKitRoot();
-  if (!kitRoot) {
-    throw new Error(
-      "Cannot find epost_agent_kit repository.\nRun from the kit repo or ensure epost-kit is linked (npm link).",
-    );
-  }
-
-  const profilesPath = join(kitRoot, "profiles", "profiles.yaml");
-  const packagesDir = join(kitRoot, "packages");
-  const profiles = await loadProfiles(profilesPath);
-
-  // ── Step 1/5: Team selection ──
-  logger.step(1, 5, "Select your team");
-  const teamChoices = getOrderedTeamChoices(profiles);
-  const teamChoice = await select({
-    message: "What team are you on?",
-    choices: teamChoices,
-  });
-
-  // ── Step 2/5: Role selection ──
-  logger.step(2, 5, "Choose your role");
-  let selectedProfiles: string[] = [];
-  let skipPackageSelection = false;
-
-  if (teamChoice === "__explore__") {
-    selectedProfiles = ["full"];
-    skipPackageSelection = true;
-    logger.info("\nSelected: Full Kit (everything)");
-  } else {
-    // Build profile choices — pre-check team-matching profiles
-    const allProfiles = listProfiles(profiles);
-    const teamProfileNames =
-      teamChoice === "__other__"
-        ? []
-        : findProfilesByTeam(teamChoice, profiles).map((p) => p.name);
-
-    selectedProfiles = await checkbox({
-      message: "Select profiles (space to toggle, enter to confirm):",
-      choices: allProfiles.map((p) => ({
-        name: `${p.displayName} (${p.packages.join(", ")})`,
-        value: p.name,
-        checked: teamProfileNames.includes(p.name),
-      })),
-    });
-
-    if (selectedProfiles.length === 0) {
-      logger.info("No profiles selected. Setup cancelled.");
-      return;
-    }
-  }
-
-  // Merge packages from all selected profiles
-  const combinedPackages = new Set<string>();
-  for (const pName of selectedProfiles) {
-    const pInfo = getProfileInfo(pName, profiles);
-    if (pInfo) pInfo.packages.forEach((pkg) => combinedPackages.add(pkg));
-  }
-
-  // ── Step 3/5: Package selection ──
-  logger.step(3, 5, "Select packages");
-  const allManifests = await loadAllManifests(packagesDir);
-  let selected: string[];
-
-  if (skipPackageSelection) {
-    selected = [...allManifests.keys()];
-    logger.info(`All ${selected.length} packages included (Full Kit)`);
-  } else {
-    selected = await checkbox({
-      message: "Select packages to install:",
-      choices: [...allManifests.entries()]
-        .sort((a, b) => a[1].layer - b[1].layer)
-        .map(([name, m]) => ({
-          name: `${name} — ${m.description}`,
-          value: name,
-          checked: combinedPackages.has(name),
-        })),
-    });
-
-    if (selected.length === 0) {
-      logger.info("No packages selected. Setup cancelled.");
-      return;
-    }
-  }
-
-  // Show summary
-  const summaries: PackageManifestSummary[] = [];
-  for (const name of selected) {
-    const m = allManifests.get(name);
-    if (m) {
-      summaries.push({
-        name: m.name,
-        description: m.description,
-        layer: m.layer,
-        agents: m.provides.agents.length,
-        skills: m.provides.skills.length,
-        commands: m.provides.commands.length,
-      });
-    }
-  }
-  if (summaries.length > 0) {
-    console.log(packageTable(summaries));
-  }
-
-  const proceed = await confirm({
-    message: `Install ${selected.length} packages?`,
-    default: true,
-  });
-  if (!proceed) {
-    logger.info("Setup cancelled.");
-    return;
-  }
-
-  // ── Step 4/5: Target directory ──
-  logger.step(4, 5, "Choose target directory");
-  const dirChoice = await select({
-    message: "Where to install?",
-    choices: [
-      {
-        name: `Current directory (${basename(process.cwd())})`,
-        value: "cwd" as const,
-      },
-      { name: "Enter a path...", value: "path" as const },
-      { name: "Clone a git repository...", value: "clone" as const },
-    ],
-  });
-
-  let targetDir = process.cwd();
-
-  if (dirChoice === "path") {
-    const dirPath = await input({ message: "Enter project directory path:" });
-    targetDir = resolve(dirPath);
-    if (!(await dirExists(targetDir))) {
-      throw new Error(`Directory not found: ${targetDir}`);
-    }
-  }
-
-  if (dirChoice === "clone") {
-    const gitUrl = await input({ message: "Git repository URL:" });
-    const defaultName = basename(gitUrl, ".git").replace(/\.git$/, "");
-    const dirName = await input({
-      message: "Clone into directory:",
-      default: defaultName,
-    });
-    logger.info(`\nCloning ${gitUrl}...`);
-    await execa("git", ["clone", gitUrl, dirName]);
-    targetDir = resolve(dirName);
-    logger.info(`Cloned to ${targetDir}`);
-  }
-
-  // ── Step 5/5: Install ──
-  logger.step(5, 5, "Installing packages");
-  process.chdir(targetDir);
-
-  await runPackageInit({
-    ...opts,
-    packages: selected.join(","),
-  });
-
-  console.log(
-    box(
-      `Setup complete!\n\nRun ${pc.bold("claude")} to activate your AI assistant.\nType ${pc.bold("/")} to discover all available commands.`,
-      { title: "Ready" },
-    ),
-  );
-}
-
 // ─── Main Entry ───
 
 export async function runInit(opts: InitOptions): Promise<void> {
@@ -1448,6 +1251,6 @@ export async function runInit(opts: InitOptions): Promise<void> {
     return runPackageInit(opts);
   }
 
-  // First-time: run guided wizard
-  return runWizardFlow(opts);
+  // First-time: run package init directly (same flow as update)
+  return runPackageInit(opts);
 }

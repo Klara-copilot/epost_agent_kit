@@ -15,7 +15,7 @@ export interface KitTemplate {
   id: string;
   name: string;
   description: string;
-  targets: Array<'claude' | 'cursor' | 'github-copilot'>;
+  targets: Array<'claude' | 'cursor' | 'github-copilot' | 'zed' | 'windsurf'>;
 }
 
 /** Available kit templates (hardcoded for v1, engineer only) */

@@ -13,6 +13,11 @@ See [PLAN_FORMAT.md](PLAN_FORMAT.md) for standardized plan template.
 | PLAN-0021 | Re-implement Lost Features | epost-architect | 2026-03-03 | [../../plans/260303-1000-reimpl-lost-features/plan.md](../../plans/260303-1000-reimpl-lost-features/plan.md) |
 | PLAN-0022 | Skill Discovery Chain Canvas | epost-architect | 2026-03-03 | [../../tools/management-ui/plans/skill-discovery-canvas/plan.md](../../tools/management-ui/plans/skill-discovery-canvas/plan.md) |
 | PLAN-0023 | Dual-View Redesign: Agent-Centric + Skill-Centric | epost-architect | 2026-03-03 | [../../tools/management-ui/plans/dual-view-redesign/plan.md](../../tools/management-ui/plans/dual-view-redesign/plan.md) |
+| PLAN-0024 | Skill Taxonomy Cleanup | epost-architect | 2026-03-03 | [../../plans/260303-1250-skill-taxonomy-cleanup/plan.md](../../plans/260303-1250-skill-taxonomy-cleanup/plan.md) |
+
+| PLAN-0025 | Init CLI Interactive UX Improvements | epost-implementer | 2026-03-03 | [../../plans/reports/epost-implementer-260303-1535-init-cli-ux-improvements.md](../../plans/reports/epost-implementer-260303-1535-init-cli-ux-improvements.md) |
+| PLAN-0026 | Auto-Orchestrating /get-started | epost-architect | 2026-03-04 | [../../plans/260304-0408-get-started-auto-orchestration/plan.md](../../plans/260304-0408-get-started-auto-orchestration/plan.md) |
+| PLAN-0027 | Generalize /get-started for Any Project Type | epost-architect | 2026-03-04 | [../../plans/260304-0659-generalize-get-started/plan.md](../../plans/260304-0659-generalize-get-started/plan.md) |
 
 ## Completed
 

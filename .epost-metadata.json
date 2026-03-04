@@ -14,12 +14,12 @@
     "design-system",
     "domains"
   ],
-  "installedAt": "2026-03-03T06:05:11.540Z",
+  "installedAt": "2026-03-04T03:47:45.369Z",
   "files": {
     ".claude/.ck.json": {
       "path": ".claude/.ck.json",
       "checksum": "1bf7f54a5921781a5cbed6f168f8d00fbdc7ac663d445fba86b217df8599e436",
-      "installedAt": "2026-03-03T06:05:10.585Z",
+      "installedAt": "2026-03-04T03:47:44.724Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -27,15 +27,15 @@
     ".claude/.ckignore": {
       "path": ".claude/.ckignore",
       "checksum": "dd2c75e3a0e5d16f65ed4a5a5bb6b4d05656be2c666c4e7d409c41c2781490e6",
-      "installedAt": "2026-03-03T06:05:10.589Z",
+      "installedAt": "2026-03-04T03:47:44.729Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
     },
     ".claude/skills/skill-index.json": {
       "path": ".claude/skills/skill-index.json",
-      "checksum": "f6e8e5064dee32fd95285e413920ec979d799050282fccd50c83c5fa7ee785fd",
-      "installedAt": "2026-03-03T06:05:11.311Z",
+      "checksum": "ca6a987a85e9f75e6578f374a98329b42151424aeec5bbdb336677052ba9a983",
+      "installedAt": "2026-03-04T03:47:45.152Z",
       "version": "1.0.0",
       "modified": false,
       "package": "core"

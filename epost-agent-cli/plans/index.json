@@ -2,10 +2,10 @@
   "version": "1.0.0",
   "updated": "2026-02-08",
   "counts": {
-    "active": 5,
+    "active": 9,
     "completed": 18,
     "archived": 0,
-    "total": 23
+    "total": 27
   },
   "plans": [
     {
@@ -238,6 +238,46 @@
       "authors": ["epost-architect"],
       "tags": ["management-ui", "ux", "canvas", "views", "agent-view", "skill-view"],
       "file": "../../tools/management-ui/plans/dual-view-redesign/plan.md"
+    },
+    {
+      "id": "PLAN-0024",
+      "title": "Skill Taxonomy Cleanup",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-03",
+      "authors": ["epost-architect"],
+      "tags": ["skills", "taxonomy", "dedup", "connections", "hub-context"],
+      "file": "../../plans/260303-1250-skill-taxonomy-cleanup/plan.md"
+    },
+    {
+      "id": "PLAN-0025",
+      "title": "Init CLI Interactive UX Improvements",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-03",
+      "authors": ["epost-implementer"],
+      "tags": ["cli", "init", "ux", "interactive", "editor"],
+      "file": "../../plans/reports/epost-implementer-260303-1535-init-cli-ux-improvements.md"
+    },
+    {
+      "id": "PLAN-0026",
+      "title": "Auto-Orchestrating /get-started",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-04",
+      "authors": ["epost-architect"],
+      "tags": ["skill", "onboarding", "orchestration", "subagent"],
+      "file": "../../plans/260304-0408-get-started-auto-orchestration/plan.md"
+    },
+    {
+      "id": "PLAN-0027",
+      "title": "Generalize /get-started for Any Project Type",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-04",
+      "authors": ["epost-architect"],
+      "tags": ["skill", "onboarding", "generalization"],
+      "file": "../../plans/260304-0659-generalize-get-started/plan.md"
     }
   ]
 }

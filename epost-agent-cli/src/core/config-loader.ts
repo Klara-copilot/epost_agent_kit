@@ -17,7 +17,7 @@ import { APP_NAME } from '../constants.js';
 export const ConfigSchema = z.object({
   kit: z.string().optional(),
   version: z.string().optional(),
-  target: z.enum(['claude', 'cursor', 'github-copilot']).optional(),
+  target: z.enum(['claude', 'cursor', 'github-copilot', 'zed', 'windsurf']).optional(),
   registry: z.string().url().optional(),
   /** Profile name (e.g., "web-b2b", "ios-b2c") */
   profile: z.string().optional(),

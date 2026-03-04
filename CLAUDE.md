@@ -10,7 +10,7 @@ This file provides guidance to Claude Code when working with code in this reposi
 
 **Packages**: core, a11y, platform-web, platform-ios, platform-android, platform-backend, kit, design-system, domains
 
-**Installed by**: epost-kit v0.1.0 on 2026-03-03
+**Installed by**: epost-kit v0.1.0 on 2026-03-04
 
 ---
 
