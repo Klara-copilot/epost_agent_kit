@@ -1,7 +1,7 @@
 {
   "generated": "2026-03-04T03:32:00.701Z",
   "version": "2.0.0",
-  "count": 67,
+  "count": 65,
   "categories": {
     "development-tools": 39,
     "analysis-reasoning": 24,
@@ -11,7 +11,7 @@
   "skills": [
     {
       "name": "a11y",
-      "description": "(ePost) Accessibility workflow — auto-detects audit, fix, review, or close",
+      "description": "(ePost) Accessibility workflow \u2014 auto-detects audit, fix, review, or close",
       "category": "development-tools",
       "tier": "core",
       "keywords": [
@@ -83,7 +83,7 @@
     },
     {
       "name": "android-a11y",
-      "description": "Use when Android accessibility issues arise — TalkBack, contentDescription, touch targets, focus order, contrast in Compose or Views/XML",
+      "description": "Use when Android accessibility issues arise \u2014 TalkBack, contentDescription, touch targets, focus order, contrast in Compose or Views/XML",
       "category": "analysis-reasoning",
       "tier": "discoverable",
       "keywords": [
@@ -218,7 +218,7 @@
     },
     {
       "name": "bootstrap",
-      "description": "(ePost) Scaffold new projects or modules — auto-detects scope",
+      "description": "(ePost) Scaffold new projects or modules \u2014 auto-detects scope",
       "category": "development-tools",
       "tier": "discoverable",
       "keywords": [],
@@ -331,7 +331,7 @@
     },
     {
       "name": "cook",
-      "description": "(ePost) Implement features — auto-detects platform",
+      "description": "(ePost) Implement features \u2014 auto-detects platform",
       "category": "development-tools",
       "tier": "discoverable",
       "keywords": [],
@@ -350,7 +350,7 @@
     },
     {
       "name": "cook-fast",
-      "description": "(ePost) Direct implementation — skip plan question",
+      "description": "(ePost) Direct implementation \u2014 skip plan question",
       "category": "development-tools",
       "tier": "discoverable",
       "keywords": [],
@@ -430,7 +430,7 @@
     },
     {
       "name": "debug",
-      "description": "(ePost) Debug issues — auto-detects platform",
+      "description": "(ePost) Debug issues \u2014 auto-detects platform",
       "category": "development-tools",
       "tier": "discoverable",
       "keywords": [],
@@ -449,7 +449,7 @@
     },
     {
       "name": "debugging",
-      "description": "Use when something is broken — errors, bugs, crashes, exceptions, unexpected behavior, stack traces",
+      "description": "Use when something is broken \u2014 errors, bugs, crashes, exceptions, unexpected behavior, stack traces",
       "category": "analysis-reasoning",
       "tier": "core",
       "keywords": [
@@ -524,7 +524,7 @@
     },
     {
       "name": "docs",
-      "description": "(ePost) Documentation workflow — auto-detects init, update, or component",
+      "description": "(ePost) Documentation workflow \u2014 auto-detects init, update, or component",
       "category": "development-tools",
       "tier": "core",
       "keywords": [
@@ -690,7 +690,7 @@
     },
     {
       "name": "epost",
-      "description": "(ePost) Smart hub v2 — context-aware entry point with semantic intent detection, workflow chaining, and contextual discovery",
+      "description": "(ePost) Smart hub v2 \u2014 context-aware entry point with semantic intent detection, workflow chaining, and contextual discovery",
       "category": "development-tools",
       "tier": "discoverable",
       "keywords": [],
@@ -709,7 +709,7 @@
     },
     {
       "name": "error-recovery",
-      "description": "Use when operations fail transiently — timeouts, network errors, retries, circuit breakers, graceful degradation",
+      "description": "Use when operations fail transiently \u2014 timeouts, network errors, retries, circuit breakers, graceful degradation",
       "category": "analysis-reasoning",
       "tier": "discoverable",
       "keywords": [
@@ -750,7 +750,7 @@
     },
     {
       "name": "fix",
-      "description": "(ePost) Fix issues — auto-detects error type and platform",
+      "description": "(ePost) Fix issues \u2014 auto-detects error type and platform",
       "category": "development-tools",
       "tier": "discoverable",
       "keywords": [],
@@ -771,7 +771,7 @@
     },
     {
       "name": "fix-a11y",
-      "description": "(ePost) Fix accessibility findings — by ID (#<id>) or top N by priority (<n>)",
+      "description": "(ePost) Fix accessibility findings \u2014 by ID (#<id>) or top N by priority (<n>)",
       "category": "development-tools",
       "tier": "discoverable",
       "keywords": [
@@ -863,7 +863,7 @@
     },
     {
       "name": "get-started",
-      "description": "(ePost) Onboard to a project — read docs, summarize project state, route to next action",
+      "description": "(ePost) Onboard to a project \u2014 read docs, summarize project state, route to next action",
       "category": "development-tools",
       "tier": "discoverable",
       "keywords": [
@@ -899,7 +899,7 @@
     },
     {
       "name": "git",
-      "description": "(ePost) Git workflow — auto-detects commit, push, or PR",
+      "description": "(ePost) Git workflow \u2014 auto-detects commit, push, or PR",
       "category": "development-tools",
       "tier": "core",
       "keywords": [
@@ -1063,7 +1063,7 @@
     },
     {
       "name": "infra-cloud",
-      "description": "Use when working with GCP infrastructure — Terraform, Cloud Build, Cloud Run, GKE, deployment pipelines",
+      "description": "Use when working with GCP infrastructure \u2014 Terraform, Cloud Build, Cloud Run, GKE, deployment pipelines",
       "category": "infrastructure",
       "tier": "discoverable",
       "keywords": [
@@ -1126,7 +1126,7 @@
     },
     {
       "name": "ios-a11y",
-      "description": "Use when iOS accessibility issues arise — VoiceOver, UIKit/SwiftUI labels, traits, focus, Dynamic Type, contrast",
+      "description": "Use when iOS accessibility issues arise \u2014 VoiceOver, UIKit/SwiftUI labels, traits, focus, Dynamic Type, contrast",
       "category": "analysis-reasoning",
       "tier": "discoverable",
       "keywords": [
@@ -1202,7 +1202,7 @@
     },
     {
       "name": "knowledge-capture",
-      "description": "Use after completing a task — capture learnings, save patterns, record post-mortems to docs/",
+      "description": "Use after completing a task \u2014 capture learnings, save patterns, record post-mortems to docs/",
       "category": "analysis-reasoning",
       "tier": "discoverable",
       "keywords": [
@@ -1241,7 +1241,7 @@
     },
     {
       "name": "knowledge-retrieval",
-      "description": "Use when you need prior art, past decisions, or existing patterns — checks docs/, skills, and RAG before external sources",
+      "description": "Use when you need prior art, past decisions, or existing patterns \u2014 checks docs/, skills, and RAG before external sources",
       "category": "analysis-reasoning",
       "tier": "discoverable",
       "keywords": [
@@ -1281,7 +1281,7 @@
     },
     {
       "name": "plan",
-      "description": "(ePost) Create implementation plan — auto-detects complexity",
+      "description": "(ePost) Create implementation plan \u2014 auto-detects complexity",
       "category": "development-tools",
       "tier": "discoverable",
       "keywords": [],
@@ -1422,7 +1422,7 @@
     },
     {
       "name": "problem-solving",
-      "description": "Use when stuck, facing a complex bug, or need root cause analysis — 5 whys, bisection, inversion techniques",
+      "description": "Use when stuck, facing a complex bug, or need root cause analysis \u2014 5 whys, bisection, inversion techniques",
       "category": "analysis-reasoning",
       "tier": "discoverable",
       "keywords": [
@@ -1567,7 +1567,7 @@
     },
     {
       "name": "review",
-      "description": "(ePost) Review workflow — auto-detects code, a11y, or improvements",
+      "description": "(ePost) Review workflow \u2014 auto-detects code, a11y, or improvements",
       "category": "development-tools",
       "tier": "core",
       "keywords": [
@@ -1673,56 +1673,62 @@
     },
     {
       "name": "scout",
-      "description": "(ePost) Explore codebase — find files, patterns, RAG + grep search across platforms",
+      "description": "(ePost) Explore codebase \u2014 find files, patterns, RAG + grep search across platforms",
       "category": "development-tools",
       "tier": "core",
-      "keywords": ["explore", "search", "find", "locate", "trace", "pattern", "architecture", "codebase", "where-is", "which-file", "implementation"],
-      "platforms": ["all"],
-      "triggers": ["where is", "find the", "search for", "which file", "how is X implemented", "trace", "explore", "show me the code"],
-      "agent-affinity": ["Explore", "epost-architect", "epost-researcher", "epost-debugger"],
+      "keywords": [
+        "explore",
+        "search",
+        "find",
+        "locate",
+        "trace",
+        "pattern",
+        "architecture",
+        "codebase",
+        "where-is",
+        "which-file",
+        "implementation"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "where is",
+        "find the",
+        "search for",
+        "which file",
+        "how is X implemented",
+        "trace",
+        "explore",
+        "show me the code"
+      ],
+      "agent-affinity": [
+        "Explore",
+        "epost-architect",
+        "epost-researcher",
+        "epost-debugger"
+      ],
       "connections": {
         "extends": [],
         "requires": [],
-        "enhances": ["planning", "debugging", "implementation"],
-        "uses": ["knowledge-retrieval", "web-rag", "ios-rag"],
-        "complementary": ["repomix", "scout-fast", "scout-deep"]
+        "enhances": [
+          "planning",
+          "debugging",
+          "implementation"
+        ],
+        "uses": [
+          "knowledge-retrieval",
+          "web-rag",
+          "ios-rag"
+        ],
+        "complementary": [
+          "repomix"
+        ]
       },
-      "path": "scout/SKILL.md"
-    },
-    {
-      "name": "scout-fast",
-      "description": "Quick codebase search using grep only — no RAG, no semantic search",
-      "category": "development-tools",
-      "tier": "discoverable",
-      "keywords": ["quick", "fast", "search", "grep", "find", "exact-match"],
-      "platforms": ["all"],
-      "triggers": ["search for", "find the", "where is", "quick search", "grep for"],
-      "agent-affinity": ["Explore"],
-      "connections": {
-        "extends": [],
-        "requires": [],
-        "enhances": [],
-        "complements": ["scout", "scout-deep"]
-      },
-      "path": "scout-fast/SKILL.md"
-    },
-    {
-      "name": "scout-deep",
-      "description": "Deep codebase search using RAG + grep — exhaustive semantic + exact match results",
-      "category": "development-tools",
-      "tier": "discoverable",
-      "keywords": ["deep", "thorough", "exhaustive", "semantic", "rag", "comprehensive", "all-results"],
-      "platforms": ["all"],
-      "triggers": ["search everywhere", "find everything", "deep search", "exhaustive", "show all"],
-      "agent-affinity": ["Explore", "epost-architect", "epost-researcher"],
-      "connections": {
-        "extends": [],
-        "requires": [],
-        "enhances": [],
-        "complements": ["scout", "scout-fast"],
-        "uses": ["knowledge-retrieval", "web-rag", "ios-rag"]
-      },
-      "path": "scout-deep/SKILL.md"
+      "path": "scout/SKILL.md",
+      "metadata": {
+        "argument-hint": "[--fast | --deep] [search query or platform-prefix: query]"
+      }
     },
     {
       "name": "sequential-thinking",
@@ -1847,7 +1853,7 @@
     },
     {
       "name": "test",
-      "description": "(ePost) Run tests — auto-detects platform",
+      "description": "(ePost) Run tests \u2014 auto-detects platform",
       "category": "development-tools",
       "tier": "discoverable",
       "keywords": [],
@@ -1897,7 +1903,7 @@
     },
     {
       "name": "web-a11y",
-      "description": "Use when web accessibility issues arise — ARIA roles, keyboard navigation, focus trapping, alt text, contrast, screen readers",
+      "description": "Use when web accessibility issues arise \u2014 ARIA roles, keyboard navigation, focus trapping, alt text, contrast, screen readers",
       "category": "analysis-reasoning",
       "tier": "discoverable",
       "keywords": [

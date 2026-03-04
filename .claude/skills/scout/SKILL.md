@@ -5,7 +5,7 @@ user-invocable: true
 context: fork
 agent: Explore
 metadata:
-  argument-hint: "[search query or platform-prefix: query]"
+  argument-hint: "[--fast | --deep] [search query or platform-prefix: query]"
   keywords: [explore, search, find, locate, trace, pattern, architecture, codebase, where-is, which-file, implementation]
   triggers:
     - "where is"
@@ -22,65 +22,82 @@ metadata:
   connections:
     uses: [knowledge-retrieval, web-rag, ios-rag]
     enhances: [planning, debugging, implementation]
-    complementary: [repomix, scout-fast, scout-deep]
+    complementary: [repomix]
 ---
 
 # Scout — Smart Codebase Explorer
 
 Explore the codebase for files, patterns, architecture insights, and implementations. Auto-detects platform and intelligently routes between RAG (semantic search) and Grep (exact matches) with graceful fallback.
 
+## Flags
+
+| Flag | Behavior |
+|------|----------|
+| *(none)* | **Auto mode** — smart routing: RAG for semantic queries, Grep for exact matches |
+| `--fast` | **Grep only** — no RAG, no external service. Fast, offline-friendly, exact matches |
+| `--deep` | **Exhaustive** — RAG + Grep merged, all results returned and ranked |
+
 ## Query
 
 <query>$ARGUMENTS</query>
 
-## Step 1: Classify Query Intent
+## Step 1: Parse Flags & Query
 
-Determine what the user is looking for:
+- Strip `--fast` or `--deep` from `$ARGUMENTS` before processing
+- Default mode if no flag: **auto**
+
+## Step 2: Classify Query Intent
+
 - **File location** — "where is X", "find the Y", "which file has Z"
 - **Pattern/Implementation** — "how is X implemented", "show me the code for Y", "trace X"
 - **Architecture/Structure** — "what does X do", "how does the Y work", "architecture of Z"
 - **Dependencies/Relationships** — "what calls X", "where is X used", "dependencies of Y"
 
-## Step 2: Detect Platform(s)
+## Step 3: Detect Platform(s)
 
-Extract platform from:
 1. **Explicit prefix** — `web:`, `ios:`, `android:`, `backend:` at query start
-2. **Query keywords** — "React", "SwiftUI", "Compose", "JAX-RS", "Retrofit" → platform inference
-3. **Default** — if ambiguous, search all platforms (then deduplicate by relevance)
+2. **Query keywords** — "React", "SwiftUI", "Compose", "JAX-RS" → platform inference
+3. **Default** — if ambiguous, search all platforms (deduplicate by relevance)
 
-## Step 3: Smart Search Routing
+## Step 4: Search Routing
 
-**Decision tree** (in order):
+### --fast mode (Grep only)
 
-| Intent | Platform | Strategy | Tools |
-|--------|----------|----------|-------|
-| Exact file name | any | Grep filename | Glob, Grep |
-| Implementation / pattern | **web** | Semantic first | web-rag → fallback Grep |
-| Implementation / pattern | **ios** | Semantic first | ios-rag → fallback Grep |
-| Implementation / pattern | **android** | Grep only | Grep (android-rag pending) |
-| Architecture / design | any | docs/ first | Read docs/architecture/, docs/patterns/ → Grep → RAG |
-| Dependencies | any | Grep dependencies | Grep for imports, require() |
+| Query Type | Tool | Strategy |
+|------------|------|----------|
+| Filename | Glob | `**/{filename}*` |
+| String/symbol | Grep | Literal string match |
+| Regex pattern | Grep | Full regex support |
+| Platform-specific | Grep + Glob | Filter by extension (.tsx, .swift, .kt, .java) |
 
-**Offline fallback**: RAG unavailable → silently use Grep. Do NOT report RAG failure; results may be less semantically relevant but still correct.
+### auto mode (Smart routing)
 
-## Step 4: RAG Integration (Lazy Detection)
+| Intent | Platform | Strategy |
+|--------|----------|----------|
+| Exact file name | any | Glob/Grep filename |
+| Implementation / pattern | **web** | web-rag → fallback Grep |
+| Implementation / pattern | **ios** | ios-rag → fallback Grep |
+| Implementation / pattern | **android/backend** | Grep only |
+| Architecture / design | any | docs/ first → Grep → RAG |
+| Dependencies | any | Grep for imports |
 
-When semantic search is chosen (web-rag/ios-rag):
+### --deep mode (RAG + Grep merged)
 
-1. **Lazy health check** — attempt RAG query on first semantic search, catch errors gracefully
-2. **Query construction** — ask RAG: "Find [component/token/pattern] matching [user's intent]"
-3. **Filter extraction** — extract relevant filters from query (e.g., "accessibility" → filter by ARIA, VoiceOver; "styling" → filter by tokens, Tailwind)
-4. **Result limit** — request top 10–15 results, deduplicate by file path
-5. **Fallback** — if RAG fails or returns empty, use Grep on full codebase
+Run both RAG semantic search AND Grep, merge and deduplicate results ranked by relevance.
 
-**RAG query examples**:
-- "Find React components for user authentication" → web-rag semantic search
-- "Find SwiftUI views for navigation" → ios-rag semantic search
-- "Find accessibility helpers" → web-rag/ios-rag filtered by a11y keywords
+## Step 5: RAG Integration (auto and --deep modes)
 
-## Step 5: Result Categorization & Synthesis
+1. **Lazy health check** — attempt query, catch errors gracefully
+2. **Query construction** — "Find [component/token/pattern] matching [intent]"
+3. **Filter extraction** — extract filters from query. Use canonical component names: `web-rag/references/component-mappings.md` or `ios-rag/references/component-mappings.md`
+4. **Result limit** — top 10–15 (auto), all available (--deep)
+5. **Fallback** — if RAG fails or returns empty, use Grep silently
 
-Group results by category:
+**Offline fallback**: RAG unavailable → use Grep. Do NOT report RAG failure.
+
+## Step 6: Result Categorization & Synthesis
+
+Group by category:
 
 | Category | Signals |
 |----------|---------|
@@ -88,28 +105,23 @@ Group results by category:
 | **Logic/Utils** | hooks, helpers, services, utils, managers |
 | **Tokens/Config** | design tokens, theme, config, constants |
 | **Tests** | .test.ts, .test.swift, Test.kt, *Test.java |
-| **Docs** | .md, .mdx files, comments |
+| **Docs** | .md, .mdx files |
 
-For each result:
-- **File path** (short, relative to root)
-- **One-line summary** (what it does, copy from docstring or infer)
-- **Platform tag** (web, ios, android, backend)
-- **Relevance badge** (exact match, high relevance, medium relevance)
+Per result: file path (relative) · one-line summary · platform tag · relevance badge
 
-## Step 6: Rank & Report
+## Step 7: Rank & Report
 
-Rank by:
-1. Exact filename matches first
-2. Same platform as query
-3. RAG relevance score (if used)
-4. Frequency of matches in codebase
+Rank by: exact filename > same platform > RAG score > match frequency
 
-Report results concisely — file list + brief context. If >15 results, summarize top 10 + "See full results with `/scout-deep [query]`"
+- **auto/--fast**: top 10 results. If >15, hint: "Run `/scout --deep [query]` for all results"
+- **--deep**: all results in sections (Semantic Matches / Exact Matches / By Category)
 
 ## Examples
 
-- `/scout auth flow` → Search all platforms for auth-related files
-- `/scout web: Button component` → web-rag semantic search for Button implementations
-- `/scout ios: navigation` → ios-rag semantic search for navigation patterns
-- `/scout where is the user model` → Grep exact match for "user model"
-- `/scout web: authentication middleware` → web-rag search with platform detection
+- `/scout auth flow` → auto search all platforms
+- `/scout web: Button component` → web-rag semantic for Button
+- `/scout ios: navigation` → ios-rag semantic for navigation
+- `/scout --fast useAuth` → grep-only, no RAG
+- `/scout --fast web: route.ts` → grep for route.ts in web
+- `/scout --deep Button` → all Button-related code, RAG + grep merged
+- `/scout --deep web: authentication` → exhaustive auth search in web
