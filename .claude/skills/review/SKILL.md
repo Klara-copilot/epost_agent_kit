@@ -5,9 +5,9 @@ user-invocable: true
 context: fork
 agent: epost-reviewer
 metadata:
-  argument-hint: "[--code | --a11y | --improvements]"
+  argument-hint: "[--code | --a11y | --improvements | --ui]"
   connections:
-    enhances: [review-code, review-a11y, review-improvements]
+    enhances: [review-code, review-a11y, review-improvements, audit-ui-component]
 ---
 
 # Review — Unified Review Command
@@ -19,6 +19,7 @@ Auto-detect and execute the appropriate review workflow.
 If `$ARGUMENTS` starts with `--code`: dispatch `review-code` directly.
 If `$ARGUMENTS` starts with `--a11y`: dispatch `review-a11y` directly.
 If `$ARGUMENTS` starts with `--improvements`: run review-improvements inline (see below).
+If `$ARGUMENTS` starts with `--ui`: delegate to `epost-muji` with `audit-ui-component` skill.
 Otherwise: continue to Auto-Detection.
 
 ## Auto-Detection
@@ -29,6 +30,7 @@ Analyze `$ARGUMENTS` keywords:
 |--------------|----------|
 | "a11y", "accessibility", "wcag" | `review-a11y` |
 | "improvements", "metrics", "patterns" | Run review-improvements inline |
+| "component", "ui-lib", "klara", "design system", "muji", "token", "EpostButton", "EpostCard" | delegate to `epost-muji` with `audit-ui-component` |
 | Default (no keyword match) | `review-code` |
 
 ## Review-Improvements (Inline)
