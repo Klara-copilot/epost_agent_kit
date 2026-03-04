@@ -1,11 +1,11 @@
 {
   "generated": "2026-03-04T05:51:38.113Z",
   "version": "1.0.0",
-  "count": 100,
+  "count": 99,
   "skills": [
     {
       "name": "a11y",
-      "description": "(ePost) Accessibility workflow — auto-detects audit, fix, review, or close",
+      "description": "(ePost) Accessibility workflow \u2014 auto-detects audit, fix, review, or close",
       "keywords": [],
       "platforms": [
         "all"
@@ -53,7 +53,7 @@
     },
     {
       "name": "android-a11y",
-      "description": "Use when Android accessibility issues arise — TalkBack, contentDescription, touch targets, focus order, contrast in Compose or Views/XML",
+      "description": "Use when Android accessibility issues arise \u2014 TalkBack, contentDescription, touch targets, focus order, contrast in Compose or Views/XML",
       "keywords": [
         "talkback",
         "android-accessibility",
@@ -241,7 +241,7 @@
     },
     {
       "name": "backend-javaee",
-      "description": "Use when working with Jakarta EE — JAX-RS endpoints, CDI/EJB services, JPA/Hibernate, WildFly deployment",
+      "description": "Use when working with Jakarta EE \u2014 JAX-RS endpoints, CDI/EJB services, JPA/Hibernate, WildFly deployment",
       "keywords": [
         "javaee",
         "jakarta",
@@ -272,7 +272,7 @@
     },
     {
       "name": "bootstrap",
-      "description": "(ePost) Scaffold new projects or modules — auto-detects scope",
+      "description": "(ePost) Scaffold new projects or modules \u2014 auto-detects scope",
       "keywords": [],
       "platforms": [
         "all"
@@ -387,7 +387,7 @@
     },
     {
       "name": "cook",
-      "description": "(ePost) Implement features — auto-detects platform",
+      "description": "(ePost) Implement features \u2014 auto-detects platform",
       "keywords": [],
       "platforms": [
         "all"
@@ -404,7 +404,7 @@
     },
     {
       "name": "cook-fast",
-      "description": "(ePost) Direct implementation — skip plan question",
+      "description": "(ePost) Direct implementation \u2014 skip plan question",
       "keywords": [],
       "platforms": [
         "all"
@@ -480,26 +480,7 @@
     },
     {
       "name": "debug",
-      "description": "(ePost) Debug issues — auto-detects platform",
-      "keywords": [],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [],
-      "connections": {
-        "extends": [],
-        "requires": [
-          "debugging"
-        ],
-        "conflicts": [],
-        "enhances": []
-      },
-      "path": "debug/SKILL.md"
-    },
-    {
-      "name": "debugging",
-      "description": "Use when something is broken — errors, bugs, crashes, exceptions, unexpected behavior, stack traces",
+      "description": "Use when something is broken \u2014 errors, bugs, crashes, exceptions, unexpected behavior, stack traces",
       "keywords": [
         "debug",
         "error",
@@ -531,14 +512,13 @@
         "requires": [],
         "conflicts": [],
         "enhances": [
-          "debug",
           "fix",
           "fix-deep",
           "fix-ci",
           "fix-ui"
         ]
       },
-      "path": "debugging/SKILL.md"
+      "path": "debug/SKILL.md"
     },
     {
       "name": "doc-coauthoring",
@@ -576,7 +556,7 @@
     },
     {
       "name": "docs",
-      "description": "(ePost) Documentation workflow — auto-detects init, update, or component",
+      "description": "(ePost) Documentation workflow \u2014 auto-detects init, update, or component",
       "keywords": [],
       "platforms": [
         "all"
@@ -710,7 +690,7 @@
     },
     {
       "name": "domain-b2b",
-      "description": "Use when working in a B2B module — Inbox, Monitoring, Composer, Smart Send, Communities, Archive, Contacts, Organization",
+      "description": "Use when working in a B2B module \u2014 Inbox, Monitoring, Composer, Smart Send, Communities, Archive, Contacts, Organization",
       "keywords": [
         "module",
         "inbox",
@@ -747,7 +727,7 @@
     },
     {
       "name": "domain-b2c",
-      "description": "Use when working on the consumer epost app — B2C mail, documents, notifications on iOS or Android",
+      "description": "Use when working on the consumer epost app \u2014 B2C mail, documents, notifications on iOS or Android",
       "keywords": [],
       "platforms": [
         "all"
@@ -764,7 +744,7 @@
     },
     {
       "name": "epost",
-      "description": "(ePost) Smart hub v2 — context-aware entry point with semantic intent detection, workflow chaining, and contextual discovery",
+      "description": "(ePost) Smart hub v2 \u2014 context-aware entry point with semantic intent detection, workflow chaining, and contextual discovery",
       "keywords": [],
       "platforms": [
         "all"
@@ -781,7 +761,7 @@
     },
     {
       "name": "error-recovery",
-      "description": "Use when operations fail transiently — timeouts, network errors, retries, circuit breakers, graceful degradation",
+      "description": "Use when operations fail transiently \u2014 timeouts, network errors, retries, circuit breakers, graceful degradation",
       "keywords": [
         "error",
         "retry",
@@ -813,14 +793,14 @@
         "requires": [],
         "conflicts": [],
         "enhances": [
-          "debugging"
+          "debug"
         ]
       },
       "path": "error-recovery/SKILL.md"
     },
     {
       "name": "fix",
-      "description": "(ePost) Fix issues — auto-detects error type and platform",
+      "description": "(ePost) Fix issues \u2014 auto-detects error type and platform",
       "keywords": [],
       "platforms": [
         "all"
@@ -843,7 +823,7 @@
     },
     {
       "name": "fix-a11y",
-      "description": "(ePost) Fix accessibility findings — by ID (#<id>) or top N by priority (<n>)",
+      "description": "(ePost) Fix accessibility findings \u2014 by ID (#<id>) or top N by priority (<n>)",
       "keywords": [],
       "platforms": [
         "all"
@@ -919,7 +899,7 @@
     },
     {
       "name": "get-started",
-      "description": "(ePost) Onboard to a project — detect state, then orchestrate researcher → documenter → implementer pipeline",
+      "description": "(ePost) Onboard to a project \u2014 detect state, then orchestrate researcher \u2192 documenter \u2192 implementer pipeline",
       "keywords": [
         "onboard",
         "get-started",
@@ -948,7 +928,7 @@
     },
     {
       "name": "git",
-      "description": "(ePost) Git workflow — auto-detects commit, push, or PR",
+      "description": "(ePost) Git workflow \u2014 auto-detects commit, push, or PR",
       "keywords": [],
       "platforms": [
         "all"
@@ -1048,7 +1028,7 @@
     },
     {
       "name": "infra-cloud",
-      "description": "Use when working with GCP infrastructure — Terraform, Cloud Build, Cloud Run, GKE, deployment pipelines",
+      "description": "Use when working with GCP infrastructure \u2014 Terraform, Cloud Build, Cloud Run, GKE, deployment pipelines",
       "keywords": [
         "gcp",
         "terraform",
@@ -1107,7 +1087,7 @@
     },
     {
       "name": "ios-a11y",
-      "description": "Use when iOS accessibility issues arise — VoiceOver, UIKit/SwiftUI labels, traits, focus, Dynamic Type, contrast",
+      "description": "Use when iOS accessibility issues arise \u2014 VoiceOver, UIKit/SwiftUI labels, traits, focus, Dynamic Type, contrast",
       "keywords": [
         "voiceover",
         "ios-accessibility",
@@ -1235,7 +1215,7 @@
     },
     {
       "name": "kit",
-      "description": "(ePost) Kit authoring — create agents, skills, hooks, or optimize",
+      "description": "(ePost) Kit authoring \u2014 create agents, skills, hooks, or optimize",
       "keywords": [],
       "platforms": [
         "all"
@@ -1369,7 +1349,7 @@
     },
     {
       "name": "kit-cli",
-      "description": "Use when developing the epost-kit CLI — Commander.js commands, @inquirer/prompts, vitest tests, TypeScript patterns",
+      "description": "Use when developing the epost-kit CLI \u2014 Commander.js commands, @inquirer/prompts, vitest tests, TypeScript patterns",
       "keywords": [
         "cli",
         "commander",
@@ -1526,7 +1506,7 @@
     },
     {
       "name": "knowledge-capture",
-      "description": "Use after completing a task — capture learnings, save patterns, record post-mortems to docs/",
+      "description": "Use after completing a task \u2014 capture learnings, save patterns, record post-mortems to docs/",
       "keywords": [
         "capture",
         "learn",
@@ -1563,7 +1543,7 @@
     },
     {
       "name": "knowledge-retrieval",
-      "description": "Use when you need prior art, past decisions, or existing patterns — checks docs/, skills, and RAG before external sources",
+      "description": "Use when you need prior art, past decisions, or existing patterns \u2014 checks docs/, skills, and RAG before external sources",
       "keywords": [
         "retrieve",
         "search",
@@ -1594,25 +1574,41 @@
         "conflicts": [],
         "enhances": [
           "research",
-          "planning"
+          "plan"
         ]
       },
       "path": "knowledge-retrieval/SKILL.md"
     },
     {
       "name": "plan",
-      "description": "(ePost) Create implementation plan — auto-detects complexity",
-      "keywords": [],
+      "description": "(ePost) Create implementation plan \u2014 auto-detects complexity",
+      "keywords": [
+        "plan",
+        "planning",
+        "requirements",
+        "tasks",
+        "estimation",
+        "roadmap",
+        "design",
+        "spec",
+        "architecture",
+        "blueprint"
+      ],
       "platforms": [
         "all"
       ],
-      "triggers": [],
-      "agent-affinity": [],
+      "triggers": [
+        "/plan",
+        "create plan",
+        "implementation plan"
+      ],
+      "agent-affinity": [
+        "epost-architect",
+        "epost-orchestrator"
+      ],
       "connections": {
         "extends": [],
-        "requires": [
-          "planning"
-        ],
+        "requires": [],
         "conflicts": [],
         "enhances": [
           "plan-fast",
@@ -1709,49 +1705,8 @@
       "path": "plan-validate/SKILL.md"
     },
     {
-      "name": "planning",
-      "description": "Use when user asks to plan, design, architect, spec out, or create an implementation roadmap",
-      "keywords": [
-        "plan",
-        "planning",
-        "requirements",
-        "tasks",
-        "estimation",
-        "roadmap",
-        "design",
-        "spec",
-        "architecture",
-        "blueprint"
-      ],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [
-        "/plan",
-        "create plan",
-        "implementation plan"
-      ],
-      "agent-affinity": [
-        "epost-architect",
-        "epost-orchestrator"
-      ],
-      "connections": {
-        "extends": [],
-        "requires": [],
-        "conflicts": [],
-        "enhances": [
-          "plan",
-          "plan-fast",
-          "plan-deep",
-          "plan-parallel",
-          "plan-validate"
-        ]
-      },
-      "path": "planning/SKILL.md"
-    },
-    {
       "name": "problem-solving",
-      "description": "Use when stuck, facing a complex bug, or need root cause analysis — 5 whys, bisection, inversion techniques",
+      "description": "Use when stuck, facing a complex bug, or need root cause analysis \u2014 5 whys, bisection, inversion techniques",
       "keywords": [
         "problem-solving",
         "root-cause",
@@ -1782,7 +1737,7 @@
         "requires": [],
         "conflicts": [],
         "enhances": [
-          "debugging"
+          "debug"
         ]
       },
       "path": "problem-solving/SKILL.md"
@@ -1887,7 +1842,7 @@
     },
     {
       "name": "review",
-      "description": "(ePost) Review workflow — auto-detects code, a11y, or improvements",
+      "description": "(ePost) Review workflow \u2014 auto-detects code, a11y, or improvements",
       "keywords": [],
       "platforms": [
         "all"
@@ -1961,7 +1916,7 @@
     },
     {
       "name": "scout",
-      "description": "(ePost) Explore codebase — find files, patterns, RAG + grep search across platforms",
+      "description": "(ePost) Explore codebase \u2014 find files, patterns, RAG + grep search across platforms",
       "keywords": [
         "explore",
         "search",
@@ -2003,8 +1958,8 @@
         "requires": [],
         "conflicts": [],
         "enhances": [
-          "planning",
-          "debugging",
+          "plan",
+          "debug",
           "implementation"
         ]
       },
@@ -2012,7 +1967,7 @@
     },
     {
       "name": "scout-deep",
-      "description": "Deep codebase search using RAG + grep — exhaustive semantic + exact match results",
+      "description": "Deep codebase search using RAG + grep \u2014 exhaustive semantic + exact match results",
       "keywords": [
         "deep",
         "thorough",
@@ -2051,7 +2006,7 @@
     },
     {
       "name": "scout-fast",
-      "description": "Quick codebase search using grep only — no RAG, no semantic search",
+      "description": "Quick codebase search using grep only \u2014 no RAG, no semantic search",
       "keywords": [
         "quick",
         "fast",
@@ -2116,7 +2071,7 @@
         "requires": [],
         "conflicts": [],
         "enhances": [
-          "debugging"
+          "debug"
         ]
       },
       "path": "sequential-thinking/SKILL.md"
@@ -2185,21 +2140,22 @@
       "triggers": [],
       "agent-affinity": [
         "epost-orchestrator",
-        "epost-implementer"
+        "epost-implementer",
+        "epost-architect"
       ],
       "connections": {
         "extends": [],
         "requires": [],
         "conflicts": [],
         "enhances": [
-          "planning"
+          "plan"
         ]
       },
       "path": "subagent-driven-development/SKILL.md"
     },
     {
       "name": "test",
-      "description": "(ePost) Run tests — auto-detects platform",
+      "description": "(ePost) Run tests \u2014 auto-detects platform",
       "keywords": [],
       "platforms": [
         "all"
@@ -2258,7 +2214,7 @@
     },
     {
       "name": "web-a11y",
-      "description": "Use when web accessibility issues arise — ARIA roles, keyboard navigation, focus trapping, alt text, contrast, screen readers",
+      "description": "Use when web accessibility issues arise \u2014 ARIA roles, keyboard navigation, focus trapping, alt text, contrast, screen readers",
       "keywords": [
         "keyboard",
         "aria",
@@ -2481,7 +2437,7 @@
     },
     {
       "name": "web-modules",
-      "description": "Use when integrating a component into a B2B module — adding screens, binding APIs, wiring stores, setting up routes",
+      "description": "Use when integrating a component into a B2B module \u2014 adding screens, binding APIs, wiring stores, setting up routes",
       "keywords": [
         "integrate",
         "module",
@@ -2709,6 +2665,54 @@
         "enhances": []
       },
       "path": "web-ui-lib-dev/SKILL.md"
+    },
+    {
+      "name": "audit-ui-component",
+      "description": "Use when auditing or reviewing a UI library component implementation for quality, token usage, patterns, performance, security, or cross-platform consistency",
+      "keywords": [
+        "audit",
+        "review",
+        "ui-lib",
+        "component",
+        "muji",
+        "tokens",
+        "quality",
+        "cross-platform",
+        "patterns",
+        "security"
+      ],
+      "platforms": [
+        "web",
+        "ios",
+        "android"
+      ],
+      "triggers": [
+        "audit component",
+        "review component",
+        "audit ui",
+        "muji review",
+        "check component quality"
+      ],
+      "agent-affinity": [
+        "epost-muji",
+        "epost-reviewer"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [
+          "code-review"
+        ],
+        "enhances": [
+          "web-ui-lib-dev",
+          "ios-ui-lib",
+          "android-ui-lib"
+        ],
+        "uses": [
+          "web-rag",
+          "ios-rag"
+        ]
+      },
+      "path": "audit-ui-component/SKILL.md"
     }
   ]
 }
