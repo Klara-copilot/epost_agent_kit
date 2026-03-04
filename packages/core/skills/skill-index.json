@@ -1,7 +1,7 @@
 {
   "generated": "2026-03-04T03:32:00.701Z",
   "version": "2.0.0",
-  "count": 65,
+  "count": 67,
   "categories": {
     "development-tools": 39,
     "analysis-reasoning": 24,
@@ -1673,22 +1673,56 @@
     },
     {
       "name": "scout",
-      "description": "(ePost) Explore codebase — find files, trace patterns, search across platforms",
+      "description": "(ePost) Explore codebase — find files, patterns, RAG + grep search across platforms",
+      "category": "development-tools",
+      "tier": "core",
+      "keywords": ["explore", "search", "find", "locate", "trace", "pattern", "architecture", "codebase", "where-is", "which-file", "implementation"],
+      "platforms": ["all"],
+      "triggers": ["where is", "find the", "search for", "which file", "how is X implemented", "trace", "explore", "show me the code"],
+      "agent-affinity": ["Explore", "epost-architect", "epost-researcher", "epost-debugger"],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": ["planning", "debugging", "implementation"],
+        "uses": ["knowledge-retrieval", "web-rag", "ios-rag"],
+        "complementary": ["repomix", "scout-fast", "scout-deep"]
+      },
+      "path": "scout/SKILL.md"
+    },
+    {
+      "name": "scout-fast",
+      "description": "Quick codebase search using grep only — no RAG, no semantic search",
       "category": "development-tools",
       "tier": "discoverable",
-      "keywords": [],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [],
+      "keywords": ["quick", "fast", "search", "grep", "find", "exact-match"],
+      "platforms": ["all"],
+      "triggers": ["search for", "find the", "where is", "quick search", "grep for"],
+      "agent-affinity": ["Explore"],
       "connections": {
         "extends": [],
         "requires": [],
         "enhances": [],
-        "conflicts": []
+        "complements": ["scout", "scout-deep"]
       },
-      "path": "scout/SKILL.md"
+      "path": "scout-fast/SKILL.md"
+    },
+    {
+      "name": "scout-deep",
+      "description": "Deep codebase search using RAG + grep — exhaustive semantic + exact match results",
+      "category": "development-tools",
+      "tier": "discoverable",
+      "keywords": ["deep", "thorough", "exhaustive", "semantic", "rag", "comprehensive", "all-results"],
+      "platforms": ["all"],
+      "triggers": ["search everywhere", "find everything", "deep search", "exhaustive", "show all"],
+      "agent-affinity": ["Explore", "epost-architect", "epost-researcher"],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "complements": ["scout", "scout-fast"],
+        "uses": ["knowledge-retrieval", "web-rag", "ios-rag"]
+      },
+      "path": "scout-deep/SKILL.md"
     },
     {
       "name": "sequential-thinking",
