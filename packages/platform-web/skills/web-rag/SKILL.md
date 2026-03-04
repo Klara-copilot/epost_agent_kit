@@ -1,13 +1,13 @@
 ---
 name: web-rag
-description: Use when searching web codebase for klara-theme components, design tokens, or existing Next.js patterns via vector search
+description: Use when searching web codebase for components, design tokens, Next.js patterns, or any luz_next implementation via vector search
 user-invocable: false
 
 metadata:
-  agent-affinity: [epost-muji, epost-implementer]
-  keywords: [rag, vector-search, klara-theme, web, components, design-tokens]
+  agent-affinity: [epost-muji, epost-implementer, epost-architect, epost-researcher]
+  keywords: [rag, vector-search, klara-theme, luz-next, web, components, design-tokens, patterns, implementation]
   platforms: [web]
-  triggers: [search components, find component, klara-theme, design token]
+  triggers: [search components, find component, klara-theme, design token, luz_next, web pattern, implementation]
   connections:
     enhances: [web-frontend]
 ---
@@ -16,7 +16,7 @@ metadata:
 
 ## Purpose
 
-Vector search for the web codebase. Semantic search across component libraries, design tokens, and implementation patterns via MCP tools.
+Vector search for the web codebase. Semantic search across luz_next application code, klara-theme component libraries, design tokens, and implementation patterns via MCP tools.
 
 ## MCP Tools
 
