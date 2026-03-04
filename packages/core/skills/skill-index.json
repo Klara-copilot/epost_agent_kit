@@ -1,7 +1,7 @@
 {
   "generated": "2026-03-04T05:51:38.113Z",
   "version": "1.0.0",
-  "count": 99,
+  "count": 100,
   "skills": [
     {
       "name": "a11y",
@@ -2667,8 +2667,48 @@
       "path": "web-ui-lib-dev/SKILL.md"
     },
     {
-      "name": "audit-ui-component",
-      "description": "Use when auditing or reviewing a UI library component implementation for quality, token usage, patterns, performance, security, or cross-platform consistency",
+      "name": "audit",
+      "description": "(ePost) Audit workflow \u2014 auto-detects UI component, a11y, or code audit",
+      "keywords": [
+        "audit",
+        "review",
+        "component",
+        "a11y",
+        "accessibility",
+        "code",
+        "quality",
+        "ui-lib",
+        "muji"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "audit",
+        "audit component",
+        "audit ui",
+        "audit a11y",
+        "code audit"
+      ],
+      "agent-affinity": [
+        "epost-muji",
+        "epost-reviewer",
+        "epost-a11y-specialist"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [
+          "audit-ui",
+          "audit-a11y",
+          "code-review"
+        ]
+      },
+      "path": "audit/SKILL.md"
+    },
+    {
+      "name": "audit-ui",
+      "description": "Use when auditing a UI library component for quality, token usage, patterns, performance, security, or cross-platform consistency \u2014 variant of /audit dispatched by epost-muji",
       "keywords": [
         "audit",
         "review",
@@ -2712,7 +2752,7 @@
           "ios-rag"
         ]
       },
-      "path": "audit-ui-component/SKILL.md"
+      "path": "audit-ui/SKILL.md"
     }
   ]
 }

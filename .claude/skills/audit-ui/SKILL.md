@@ -1,7 +1,7 @@
 ---
-name: audit-ui-component
+name: audit-ui
 description: Use when auditing or reviewing a UI library component implementation for quality, token usage, patterns, performance, security, or cross-platform consistency
-user-invocable: true
+user-invocable: false
 context: fork
 agent: epost-muji
 metadata:

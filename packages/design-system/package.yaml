@@ -15,7 +15,7 @@ provides:
     - web-figma-variables
     - web-ui-lib
     - web-ui-lib-dev
-    - audit-ui-component
+    - audit-ui
   commands: []
 
 files:

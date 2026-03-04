@@ -3,7 +3,7 @@ name: epost-muji
 model: sonnet
 color: "#FF1493"
 description: (ePost) MUJI UI library agent — design system development, component knowledge, Figma-to-code pipeline
-skills: [core, web-ui-lib, ios-ui-lib, android-ui-lib, web-figma-variables, web-ui-lib-dev, web-figma, web-rag, ios-rag, audit-ui-component]
+skills: [core, web-ui-lib, ios-ui-lib, android-ui-lib, web-figma-variables, web-ui-lib-dev, web-figma, web-rag, ios-rag, audit-ui]
 memory: project
 ---
 
