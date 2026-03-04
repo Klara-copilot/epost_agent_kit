@@ -12,30 +12,43 @@ metadata:
 
 # Git — Unified Git Workflow Command
 
-Auto-detect and execute the appropriate git workflow.
+**NEVER suggest `/git-commit`, `/git-push`, `/git-pr` as commands — they no longer exist.**
 
-## Step 0 — Flag Override
+## Step 0 — Flag / Intent Override
 
-If `$ARGUMENTS` starts with `--commit`: dispatch `git-commit` directly.
-If `$ARGUMENTS` starts with `--push`: dispatch `git-push` directly.
-If `$ARGUMENTS` starts with `--pr`: dispatch `git-pr` directly.
-Otherwise: continue to Auto-Detection.
+If `$ARGUMENTS` contains `--commit` or user said "commit": execute commit workflow immediately.
+If `$ARGUMENTS` contains `--push` or user said "push": execute commit+push workflow immediately.
+If `$ARGUMENTS` contains `--pr` or user said "pr" / "pull request": execute PR workflow immediately.
+Otherwise: continue to Step 1.
 
-## Auto-Detection
+## Step 1 — Detect State
 
-1. Run `git status` and `git log --oneline @{u}..HEAD 2>/dev/null`
-2. Check `gh pr list --head $(git branch --show-current) --json number 2>/dev/null`
+Run:
+```bash
+git status --short && echo "---AHEAD---" && git log --oneline @{u}..HEAD 2>/dev/null | wc -l | tr -d ' ' && echo "---PR---" && gh pr list --head "$(git branch --show-current)" --json number --jq length 2>/dev/null || echo 0
+```
 
-### Decision Matrix
+## Step 2 — Ask (Contextual, Natural Language)
 
-| Condition | Dispatch |
-|-----------|----------|
-| Staged or unstaged changes exist | `git-commit` |
-| Clean working tree, commits ahead of remote | `git-push` |
-| Feature branch, no open PR, pushed to remote | `git-pr` |
-| Feature branch, unpushed commits, no PR | `git-push` (then suggest `--pr`) |
-| Nothing to do (clean, up to date) | Report "nothing to commit or push" |
+Use `AskUserQuestion` with options based on git state. Examples:
 
-## Execution
+**Changes detected (e.g., 26 modified + 14 untracked):**
+- "Commit (26 modified, 14 new files)"
+- "Commit and push"
+- "Show changes (git diff)"
+- "Describe what you want..."
 
-Load the reference documentation for the dispatched variant and execute its workflow.
+**Clean tree, N commits ahead:**
+- "Push (N commits to remote)"
+- "Create pull request"
+- "Show commits"
+- "Describe what you want..."
+
+**Clean and up-to-date:**
+- "Create pull request"
+- "Show recent commits"
+- "Describe what you want..."
+
+## Step 3 — Execute
+
+Based on the user's answer, run the matching workflow from the `git-commit`, `git-push`, or `git-pr` reference skills loaded in this agent.

@@ -6,9 +6,9 @@ This file provides guidance to Claude Code when working with code in this reposi
 ## Project: epost_agent_kit
 
 
-## Installed Profile: `full`
+## Installed Profile: ``
 
-**Packages**: core, a11y, platform-web, platform-ios, platform-android, platform-backend, kit, design-system, domains
+**Packages**: core, a11y, kit
 
 **Installed by**: epost-kit v0.1.0 on 2026-03-04
 
@@ -88,94 +88,6 @@ On every user prompt involving a dev task, sense context before acting:
 ---
 
 
-## Web Platform
-
-### Tech Stack
-- **Framework**: Next.js 14 (App Router)
-- **UI Library**: React 18
-- **Language**: TypeScript 5+
-- **Styling**: Tailwind CSS + SCSS
-- **UI Components**: shadcn/ui or klara-theme
-- **Testing**: Jest + React Testing Library, Playwright
-- **State**: Redux Toolkit + Redux Persist
-- **Containerization**: Docker + Docker Compose
-
-### Skills
-- `web-frontend` — React components, hooks, Redux Toolkit dual-store, composition patterns
-- `web-nextjs` — Next.js 14 App Router, routing, middleware, server actions, performance
-- `web-api-routes` — FetchBuilder HTTP client, caller patterns, API constants
-- `web-i18n` — next-intl configuration, translation patterns, locale routing
-- `web-auth` — NextAuth + Keycloak, session management, feature switches
-- `web-testing` — Jest + RTL unit tests, Playwright E2E, test patterns
-- `web-modules` — B2B module integration
-
----
-
-
-## iOS Platform
-
-### Tech Stack
-- **Language**: Swift 6
-- **UI**: SwiftUI + UIKit
-- **Minimum Target**: iOS 18+
-- **Testing**: XCTest, XCUITest
-- **Build**: Xcode, XcodeBuildMCP
-
-### Skills
-- `ios-development` — Swift 6, SwiftUI/UIKit patterns, Xcode builds
-- `ios-ui-lib` — iOS theme SwiftUI components and design tokens
-- `ios-rag` — iOS codebase vector search
-
----
-
-
-## Android Platform
-
-### Tech Stack
-- **Language**: Kotlin
-- **UI**: Jetpack Compose
-- **Architecture**: MVVM, Hilt DI
-- **Database**: Room
-- **Networking**: Retrofit
-- **Testing**: JUnit, Espresso, Compose UI Testing
-- **Build**: Gradle (Kotlin DSL)
-
-### Skills
-- `android-development` — Kotlin, Jetpack Compose, Hilt DI patterns
-- `android-ui-lib` — Android theme Compose components and design tokens
-
----
-
-
-## Backend Platform
-
-### Tech Stack
-- **Language**: Java 8
-- **Platform**: Jakarta EE 8 / WildFly 26.1
-- **REST**: JAX-RS via RESTEasy
-- **CDI/EJB**: Jakarta CDI + EJB
-- **ORM**: Hibernate 5.6
-- **Databases**: PostgreSQL + MongoDB
-- **Build**: Maven
-- **Microprofile**: Eclipse MicroProfile 4.1
-- **Testing**: JUnit 4, Mockito, PowerMock, Arquillian
-- **Coverage**: JaCoCo
-- **Quality**: SonarQube
-- **Artifacts**: GCP Artifact Registry
-
-### Conventions
-- WAR packaging deployed to WildFly
-- `@Inject`, `@EJB`, `@Path` annotations (Jakarta EE, not Spring)
-- `persistence.xml` for JPA configuration
-- Maven profiles for SonarQube analysis
-
-### Skills
-- `backend-javaee` — Jakarta EE patterns, WildFly deployment, Maven builds
-- `backend-databases` — PostgreSQL + MongoDB persistence
-
----
-
-
 ## Kit Authoring Tools
 
 ### Skills
@@ -184,31 +96,6 @@ On every user prompt involving a dev task, sense context before acting:
 - `kit-skill-development` — Skill authoring, progressive disclosure, validation
 - `kit-hooks` — Hook event types, I/O contract, creation workflow
 - `kit-cli` — epost-kit CLI development (Commander.js, TypeScript)
-
----
-
-
-## Design System
-
-### Agent
-- `epost-muji` — MUJI UI library agent for design system development, component knowledge, Figma-to-code pipeline
-
-### Skills
-- `web-figma` — Figma MCP tool patterns and design token extraction
-- `web-figma-variables` — Vien 2.0 design system variable architecture (1,059 variables, 42 collections)
-- `web-ui-lib` — Web UI library component catalog (React/Next.js)
-- `web-ui-lib-dev` — klara-theme development pipeline (plan, implement, audit, fix, document)
-
----
-
-
-## Business Domains
-
-### B2B Domain
-B2B modules: Monitoring, Communities, Inbox, Smart Send, Composer, Archive, Contacts, Organization, Smart Letter.
-
-### B2C Domain
-Consumer mobile application patterns for iOS and Android.
 
 ---
 
