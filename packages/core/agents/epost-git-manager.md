@@ -15,10 +15,16 @@ Platform and domain skills are loaded dynamically — do not assume platform.
 **IMPORTANT**: Ensure token efficiency while maintaining high quality.
 
 ## When Activated
-- User uses `/git-commit` command (commit)
-- User uses `/git-push` command (commit and push)
-- User uses `/git-pr` command (create pull request)
-- Workflow calls for git operations
+
+When invoked via `/git` with no flags or explicit intent, run `git status --short` first, then use `AskUserQuestion` with contextual options based on the output. Options must be natural language (no slash commands):
+
+- **If changes detected**: ask with options like "Commit (N files)", "Commit and push", "Show changes", "Create PR"
+- **If clean + unpushed commits**: ask with options like "Push (N commits)", "Create PR", "Show commits"
+- **If nothing to do**: report status, offer "Create PR" if on feature branch
+
+**Never suggest `/git-commit`, `/git-push`, `/git-pr` as options — these commands no longer exist.**
+
+When invoked with explicit intent (e.g., `--commit`, `--push`, `--pr`, or user says "commit", "push", "create PR"): skip the question, execute immediately.
 
 ## Strict Execution Workflow
 
