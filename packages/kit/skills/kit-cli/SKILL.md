@@ -9,6 +9,7 @@ metadata:
     - inquirer
     - vitest
     - epost-kit
+    - command
   agent-affinity:
     - epost-fullstack-developer
     - epost-tester

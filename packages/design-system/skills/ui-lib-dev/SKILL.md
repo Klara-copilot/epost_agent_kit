@@ -5,7 +5,7 @@ user-invocable: false
 
 metadata:
   agent-affinity: [epost-muji, epost-fullstack-developer]
-  keywords: [klara-theme, components, pipeline, audit, storybook]
+  keywords: [klara-theme, component, components, pipeline, audit, storybook]
   platforms: [all]
   connections:
     requires: [figma]

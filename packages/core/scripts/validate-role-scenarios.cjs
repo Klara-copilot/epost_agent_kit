@@ -197,14 +197,14 @@ function detectIntent(prompt) {
     return { intent: 'kit', command: '/kit:add-skill' };
   }
 
-  // Multi-intent: plan + build -> orchestrator
+  // Multi-intent: plan + build -> project-manager (orchestrator)
   // Exception: if "spec" is present, plan intent dominates (specs are plans, not builds)
   if (hits.has('plan') && hits.has('build')) {
     if (/\bspec\b/i.test(lower)) {
       // "create a spec" -> plan, not orchestrator
       hits.delete('build');
     } else {
-      return { intent: 'multi', command: 'epost-orchestrator' };
+      return { intent: 'multi', command: 'epost-project-manager' };
     }
   }
 
@@ -356,36 +356,37 @@ const ROLE_PLATFORMS = {
 
 const scenarios = [
   // iOS Developer (1-5)
+  // Note: ios-development, ios-ui-lib are in platform-ios package (not core) — knownGaps
   {
     id: 1, role: 'iOS Developer',
     prompt: 'Add Face ID login to the settings screen',
     expectedRoute: '/cook',
-    expectedAgent: 'epost-ios-developer',
-    expectedSkills: ['ios-development', 'ios-ui-lib'],
-    knownGaps: [],
+    expectedAgent: null,
+    expectedSkills: [],
+    knownGaps: ['ios-development', 'ios-ui-lib'],  // platform-ios package, not installed in kit
   },
   {
     id: 2, role: 'iOS Developer',
     prompt: 'The app crashes on iPad when rotating',
     expectedRoute: '/fix',
-    expectedAgent: 'epost-ios-developer',
-    expectedSkills: ['ios-development', 'debugging'],
-    knownGaps: [],
+    expectedAgent: 'epost-debugger',
+    expectedSkills: ['debug'],
+    knownGaps: ['ios-development'],  // platform-ios package
   },
   {
     id: 3, role: 'iOS Developer',
     prompt: 'Run the unit tests for the auth module',
     expectedRoute: '/test',
     expectedAgent: null,
-    expectedSkills: ['ios-development'],
-    knownGaps: [],
+    expectedSkills: [],
+    knownGaps: ['ios-development'],  // platform-ios package
   },
   {
     id: 4, role: 'iOS Developer',
     prompt: 'Plan a new push notification system',
     expectedRoute: '/plan',
-    expectedAgent: 'epost-architect',
-    expectedSkills: ['planning'],
+    expectedAgent: 'epost-planner',
+    expectedSkills: ['plan'],
     knownGaps: [],
   },
   {
@@ -401,40 +402,40 @@ const scenarios = [
     id: 6, role: 'Android Developer',
     prompt: 'Build a settings screen with Compose',
     expectedRoute: '/cook',
-    expectedAgent: 'epost-android-developer',
-    expectedSkills: ['android-development'],
-    knownGaps: [],
+    expectedAgent: null,
+    expectedSkills: [],
+    knownGaps: ['android-development'],  // platform-android package
   },
   {
     id: 7, role: 'Android Developer',
     prompt: 'Fix the Room migration crash on update',
     expectedRoute: '/fix',
-    expectedAgent: 'epost-android-developer',
-    expectedSkills: ['android-development', 'debugging'],
-    knownGaps: [],
+    expectedAgent: 'epost-debugger',
+    expectedSkills: ['debug'],
+    knownGaps: ['android-development'],  // platform-android package
   },
   {
     id: 8, role: 'Android Developer',
     prompt: 'Add TalkBack support to the checkout flow',
     expectedRoute: '/fix:a11y',
-    expectedAgent: 'epost-android-developer',
-    expectedSkills: ['android-development', 'android-a11y'],
+    expectedAgent: 'epost-a11y-specialist',
+    expectedSkills: ['android-a11y'],
     knownGaps: [],
   },
   {
     id: 9, role: 'Android Developer',
     prompt: 'Test the payment Compose UI',
     expectedRoute: '/test',
-    expectedAgent: 'epost-android-developer',
-    expectedSkills: ['android-development'],
-    knownGaps: [],
+    expectedAgent: null,
+    expectedSkills: [],
+    knownGaps: ['android-development'],  // platform-android package
   },
   {
     id: 10, role: 'Android Developer',
     prompt: 'Plan offline-first sync for the mobile app',
     expectedRoute: '/plan',
-    expectedAgent: 'epost-architect',
-    expectedSkills: ['planning'],
+    expectedAgent: 'epost-planner',
+    expectedSkills: ['plan'],
     knownGaps: [],
   },
   // Web Developer (11-15)
@@ -442,33 +443,33 @@ const scenarios = [
     id: 11, role: 'Web Developer',
     prompt: 'Create a dashboard page with data tables',
     expectedRoute: '/cook',
-    expectedAgent: 'epost-web-developer',
-    expectedSkills: ['web-frontend'],
-    knownGaps: [],
+    expectedAgent: null,
+    expectedSkills: [],
+    knownGaps: ['web-frontend'],  // platform-web package
   },
   {
     id: 12, role: 'Web Developer',
     prompt: 'The API route returns 500 on POST',
     expectedRoute: '/fix',
-    expectedAgent: 'epost-web-developer',
-    expectedSkills: ['web-api-routes'],
-    knownGaps: [],
+    expectedAgent: null,
+    expectedSkills: [],
+    knownGaps: ['web-api-routes'],  // platform-web package; debug not triggered by "500" keyword
   },
   {
     id: 13, role: 'Web Developer',
     prompt: 'Write Playwright tests for login flow',
     expectedRoute: '/test',
-    expectedAgent: 'epost-web-developer',
-    expectedSkills: ['web-frontend'],
-    knownGaps: [],
+    expectedAgent: null,
+    expectedSkills: [],
+    knownGaps: ['web-frontend'],  // platform-web package
   },
   {
     id: 14, role: 'Web Developer',
     prompt: 'Document the Button component from Figma',
     expectedRoute: '/docs:component',
     expectedAgent: 'epost-muji',
-    expectedSkills: ['web-figma'],
-    knownGaps: [],  // web-ui-lib-dev has "components" keyword but "component" (singular) doesn't substring-match
+    expectedSkills: ['figma', 'ui-lib-dev'],
+    knownGaps: [],
   },
   {
     id: 15, role: 'Web Developer',
@@ -483,65 +484,65 @@ const scenarios = [
     id: 16, role: 'Backend Developer',
     prompt: 'Add a REST endpoint for user preferences',
     expectedRoute: '/cook',
-    expectedAgent: 'epost-web-developer',
-    expectedSkills: ['web-api-routes', 'backend-javaee', 'backend-databases'],
-    knownGaps: [],
+    expectedAgent: null,
+    expectedSkills: [],
+    knownGaps: ['web-api-routes', 'backend-javaee'],  // platform-web/backend packages
   },
   {
     id: 17, role: 'Backend Developer',
     prompt: 'Fix the Hibernate N+1 query in OrderService',
     expectedRoute: '/fix',
-    expectedAgent: null,
-    expectedSkills: ['backend-javaee', 'backend-databases', 'debugging'],
-    knownGaps: [],
+    expectedAgent: 'epost-debugger',
+    expectedSkills: ['debug'],
+    knownGaps: ['backend-javaee'],  // platform-backend package
   },
   {
     id: 18, role: 'Backend Developer',
     prompt: 'Write Arquillian tests for the new endpoint',
     expectedRoute: '/test',
     expectedAgent: null,
-    expectedSkills: ['backend-javaee', 'backend-databases'],
-    knownGaps: [],
+    expectedSkills: [],
+    knownGaps: ['backend-javaee'],  // platform-backend package
   },
   {
     id: 19, role: 'Backend Developer',
     prompt: 'Plan migration from EJB to CDI',
     expectedRoute: '/plan',
-    expectedAgent: 'epost-architect',
-    expectedSkills: ['planning', 'backend-javaee'],
-    knownGaps: [],
+    expectedAgent: 'epost-planner',
+    expectedSkills: ['plan'],
+    knownGaps: ['backend-javaee'],  // platform-backend package
   },
   {
     id: 20, role: 'Backend Developer',
     prompt: 'Debug the MongoDB connection pool exhaustion',
     expectedRoute: '/debug',
     expectedAgent: 'epost-debugger',
-    expectedSkills: ['debugging', 'backend-databases'],
+    expectedSkills: ['debug'],
     knownGaps: [],
   },
-  // Architect (21-25)
+  // Planner/Architect (21-25)
   {
     id: 21, role: 'Architect',
     prompt: 'Plan biometric login for iOS and Android',
     expectedRoute: '/plan',
-    expectedAgent: 'epost-architect',
-    expectedSkills: ['ios-development', 'android-development', 'planning'],
-    knownGaps: [],
+    expectedAgent: 'epost-planner',
+    expectedSkills: ['plan'],
+    knownGaps: ['ios-development', 'android-development'],  // platform packages
   },
   {
     id: 22, role: 'Architect',
     prompt: 'Design the API contract for Smart Send v2',
     expectedRoute: '/plan',
-    expectedAgent: null,
-    expectedSkills: ['planning', 'domain-b2b'],
-    knownGaps: [],
+    expectedAgent: 'epost-planner',
+    expectedSkills: ['plan'],
+    knownGaps: ['domain-b2b'],  // domain package, not installed in kit
   },
   {
     id: 23, role: 'Architect',
     prompt: 'Create a spec for real-time notifications across all platforms',
     expectedRoute: '/plan',
-    expectedAgent: null,
-    expectedSkills: ['planning'],
+    expectedAgent: 'epost-planner',
+    expectedSkills: ['plan'],
     knownGaps: [],
   },
   {
@@ -556,9 +557,9 @@ const scenarios = [
     id: 25, role: 'Architect',
     prompt: 'Review the monitoring module architecture',
     expectedRoute: '/review:code',
-    expectedAgent: 'epost-reviewer',
-    expectedSkills: ['code-review', 'domain-b2b'],
-    knownGaps: [],
+    expectedAgent: 'epost-code-reviewer',
+    expectedSkills: ['code-review'],
+    knownGaps: ['domain-b2b'],  // domain package
   },
   // A11y Specialist (26-30)
   {
@@ -631,7 +632,7 @@ const scenarios = [
     prompt: 'Add a /perf command for benchmarking',
     expectedRoute: '/kit:add-command',
     expectedAgent: null,
-    expectedSkills: ['kit-commands'],
+    expectedSkills: ['kit-cli'],  // kit-commands removed; kit-cli covers CLI dev
     knownGaps: [],
   },
   {
@@ -662,9 +663,9 @@ const scenarios = [
   {
     id: 38, role: 'Cross-Role',
     prompt: 'Plan and build a login page',
-    expectedRoute: 'epost-orchestrator',
+    expectedRoute: 'epost-project-manager',
     expectedAgent: null,
-    expectedSkills: ['planning'],
+    expectedSkills: ['plan'],
     knownGaps: [],
   },
   {
