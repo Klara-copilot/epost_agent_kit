@@ -77,7 +77,7 @@ Lesson capture triggers automatically when:
 
 ## Detection Engine
 
-The detection script (`packages/core/scripts/detect-improvements.cjs`) analyzes accumulated metrics:
+Analyzes accumulated metrics from `.epost-data/improvements/sessions.jsonl`:
 
 | Detection | Method | Recommendation |
 |-----------|--------|----------------|
@@ -87,8 +87,7 @@ The detection script (`packages/core/scripts/detect-improvements.cjs`) analyzes 
 | Rework patterns | Avg fixIterations >2 over recent sessions | Review verification process |
 | Unused skills | Loaded but unreferenced 10+ sessions | Optimize or remove |
 
-Run manually: `node packages/core/scripts/detect-improvements.cjs`
-Run via command: `/review-improvements`
+Run via command: `/review --improvements`
 
 ## Hooks
 

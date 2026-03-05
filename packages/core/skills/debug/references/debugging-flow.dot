@@ -2,7 +2,6 @@
 // Authoritative process definition — prose in SKILL.md supports, doesn't replace.
 //
 // Render: dot -Tsvg debugging-flow.dot -o debugging-flow.svg
-// Or use: node packages/core/scripts/render-graphs.js
 
 digraph debugging_flow {
     rankdir=TB;

@@ -57,14 +57,7 @@ scripts:
   - set-active-plan.cjs
   - complete-plan.cjs
   - archive-plan.cjs
-  - agent-profiler.cjs
-  - check-coverage.cjs
-  - scan-secrets.cjs
-  - detect-improvements.cjs
   - generate-skill-index.cjs
-  - validate-skill-connections.cjs
-  - validate-command-descriptions.cjs
-  - validate-role-scenarios.cjs
 
 files:
   agents/: agents/

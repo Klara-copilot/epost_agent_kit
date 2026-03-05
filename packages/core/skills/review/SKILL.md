@@ -43,10 +43,7 @@ Analyze `$ARGUMENTS` keywords:
 
 When dispatching review-improvements, run inline instead of forking (uses haiku model, restricted tools):
 
-1. Run detection script:
-```bash
-node packages/core/scripts/detect-improvements.cjs 2>/dev/null || node .claude/scripts/detect-improvements.cjs
-```
+1. Read session metrics from `.epost-data/improvements/sessions.jsonl`
 
 2. Read `.epost-data/improvements/sessions.jsonl`
 3. Present findings grouped by severity (high → medium → low)

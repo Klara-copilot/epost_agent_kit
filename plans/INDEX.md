@@ -48,6 +48,7 @@ See [PLAN_FORMAT.md](PLAN_FORMAT.md) for standardized plan template.
 | ID | Title | Agent | Date | File |
 |----|-------|-------|------|------|
 | PLAN-0052 | Team Workflows: Rules-Based Agent Orchestration | epost-project-manager | 2026-03-05 | [260305-1601-team-workflows/plan.md](260305-1601-team-workflows/plan.md) |
+| PLAN-0053 | Cleanup Scripts — Keep Only Developer-Facing | epost-architect | 2026-03-05 | [260305-1702-cleanup-scripts/plan.md](260305-1702-cleanup-scripts/plan.md) |
 | PLAN-0001 | Phase 01: Docs Completion | docs-manager | 2026-02-06 | [reports/docs-manager-260206-1139-phase-01-docs-completion.md](reports/docs-manager-260206-1139-phase-01-docs-completion.md) |
 | PLAN-0002 | Phase 05: Complex Commands | fullstack-developer | 2026-02-06 | [reports/fullstack-developer-260206-1202-phase-05-complex-commands.md](reports/fullstack-developer-260206-1202-phase-05-complex-commands.md) |
 | PLAN-0003 | Phase 07: Update & Uninstall | fullstack-developer | 2026-02-06 | [reports/fullstack-developer-260206-1208-phase07-update-uninstall.md](reports/fullstack-developer-260206-1208-phase07-update-uninstall.md) |
