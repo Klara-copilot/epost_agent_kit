@@ -2,10 +2,10 @@
   "version": "1.0.0",
   "updated": "2026-03-05",
   "counts": {
-    "active": 22,
+    "active": 23,
     "completed": 24,
     "archived": 0,
-    "total": 46
+    "total": 47
   },
   "plans": [
     {
@@ -780,6 +780,16 @@
       "authors": ["epost-architect"],
       "tags": ["versioning", "packages", "release", "automation", "cli"],
       "file": "260305-1224-unified-package-versioning/plan.md"
+    },
+    {
+      "id": "PLAN-0049",
+      "title": "Align Agent Team Roles with ClaudeKit",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-05",
+      "authors": ["epost-architect"],
+      "tags": ["agents", "roles", "restructure", "claudekit"],
+      "file": "260305-1253-align-agents-with-claudekit/plan.md"
     }
   ]
 }
