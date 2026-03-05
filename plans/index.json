@@ -2,10 +2,10 @@
   "version": "1.0.0",
   "updated": "2026-03-05",
   "counts": {
-    "active": 19,
+    "active": 20,
     "completed": 24,
     "archived": 0,
-    "total": 43
+    "total": 44
   },
   "plans": [
     {
@@ -736,6 +736,23 @@
         "migration"
       ],
       "file": "../../plans/260305-1024-remove-embedded-cli/plan.md"
+    },
+    {
+      "id": "PLAN-0046",
+      "title": "GitHub Release Process — Implementation",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-05",
+      "authors": [
+        "epost-implementer"
+      ],
+      "tags": [
+        "release",
+        "ci-cd",
+        "github-actions",
+        "versioning"
+      ],
+      "file": "plans/reports/epost-implementer-260305-1126-github-release-process.md"
     }
   ]
 }

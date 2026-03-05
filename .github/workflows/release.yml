@@ -1,0 +1,102 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: write
+
+jobs:
+  validate-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Extract version from tag
+        id: version
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/v}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Version: $VERSION"
+
+      - name: Validate package YAML files
+        run: |
+          echo "Validating package YAML..."
+          ERRORS=0
+          for pkg in packages/*/package.yaml; do
+            if [ ! -f "$pkg" ]; then
+              echo "Missing: $pkg"
+              ERRORS=$((ERRORS + 1))
+              continue
+            fi
+            if ! head -5 "$pkg" | grep -q "^name:"; then
+              echo "Invalid format (missing 'name:' field): $pkg"
+              ERRORS=$((ERRORS + 1))
+              continue
+            fi
+            echo "Valid: $pkg"
+          done
+          if [ $ERRORS -gt 0 ]; then
+            echo "Package validation failed: $ERRORS error(s)"
+            exit 1
+          fi
+          echo "All packages valid."
+
+      - name: Validate version in metadata + CHANGELOG
+        run: |
+          chmod +x scripts/validate-release-version.sh
+          scripts/validate-release-version.sh ${{ steps.version.outputs.version }}
+
+      - name: Build release artifact
+        run: |
+          chmod +x scripts/build-release.sh
+          scripts/build-release.sh ${{ steps.version.outputs.version }}
+
+      - name: Extract release notes from CHANGELOG
+        id: release-notes
+        run: |
+          VERSION=${{ steps.version.outputs.version }}
+
+          NOTES=$(awk "
+            /^## \[$VERSION\]/{flag=1; next}
+            /^## \[/{ if(flag) exit }
+            flag
+          " CHANGELOG.md)
+
+          echo "notes<<EOF" >> $GITHUB_OUTPUT
+          echo "$NOTES" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+          echo "Extracted release notes (first 200 chars):"
+          echo "$NOTES" | head -c 200
+
+      - name: Verify artifact exists
+        run: |
+          ARTIFACT="epost_agent_kit-${{ steps.version.outputs.version }}.tar.gz"
+          if [ ! -f "$ARTIFACT" ]; then
+            echo "Artifact not found: $ARTIFACT"
+            exit 1
+          fi
+          ls -lh "$ARTIFACT"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.version.outputs.version }}
+          body: ${{ steps.release-notes.outputs.notes }}
+          files: epost_agent_kit-${{ steps.version.outputs.version }}.tar.gz
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Release complete
+        run: |
+          echo "Release created successfully!"
+          echo "https://github.com/${{ github.repository }}/releases/tag/v${{ steps.version.outputs.version }}"

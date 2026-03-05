@@ -1,7 +1,7 @@
 {
   "cliVersion": "0.1.0",
   "target": "claude",
-  "kitVersion": "1.0.0",
+  "kitVersion": "2.0.0",
   "installedPackages": [
     "core",
     "a11y",

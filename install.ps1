@@ -1,159 +1,116 @@
 # ============================================================================
-# epost-kit CLI - Windows PowerShell Installation Script
+# epost_agent_kit installer for Windows (PowerShell)
 # ============================================================================
-# This script installs epost-kit CLI from local source at project scope.
+# Downloads the latest release from GitHub and installs epost-kit packages.
 #
 # Usage:
 #   powershell -ExecutionPolicy Bypass -File install.ps1
 #
 # Requirements:
 #   - PowerShell 5.1+
-#   - Node.js >=18.0.0
-#   - npm
-#   - Must run from epost-agent-kit\ root directory
+#   - Node.js >=18.0.0 (for epost-kit CLI)
 # ============================================================================
 
-# Output helper functions
+$ErrorActionPreference = "Stop"
+
+$Repo = "Klara-copilot/epost_agent_kit"
+$VersionUrl = "https://api.github.com/repos/$Repo/releases/latest"
+$InstallDir = if ($env:INSTALL_DIR) { $env:INSTALL_DIR } else { Join-Path $env:USERPROFILE ".epost" }
+$ExtractDir = Join-Path $env:TEMP "epost_install_$([System.Guid]::NewGuid().ToString('N').Substring(0,8))"
+
 function Write-Info  { param([string]$Msg) Write-Host "[INFO] $Msg" -ForegroundColor Cyan }
 function Write-Ok    { param([string]$Msg) Write-Host "[OK]   $Msg" -ForegroundColor Green }
 function Write-Err   { param([string]$Msg) Write-Host "[ERR]  $Msg" -ForegroundColor Red }
 function Write-Warn  { param([string]$Msg) Write-Host "[WARN] $Msg" -ForegroundColor Yellow }
 
-# Save original directory for cleanup
-$OriginalDir = Get-Location
-
-# ============================================================================
-# 1. Validate working directory
-# ============================================================================
-
-if (-not (Test-Path "epost-agent-cli")) {
-    Write-Err "Must run from epost-agent-kit\ root directory"
-    Write-Err "Expected epost-agent-cli\ subdirectory not found"
-    exit 1
-}
-
-Write-Info "Working directory validated"
-
-# ============================================================================
-# 2. Detect and validate Node.js
-# ============================================================================
-
-if (-not (Get-Command node -ErrorAction SilentlyContinue)) {
-    Write-Err "Node.js not found"
-    Write-Warn "Install options:"
-    Write-Warn "  - https://nodejs.org/ (official installer)"
-    Write-Warn "  - nvm-windows: https://github.com/coreybutler/nvm-windows"
-    Write-Warn "  - volta: https://volta.sh/"
-    exit 1
-}
-
-$nodeVerRaw = (node -v) -replace '^v', ''
 try {
-    $nodeVer = [version]$nodeVerRaw
-} catch {
-    Write-Err "Could not parse Node.js version: $nodeVerRaw"
-    exit 1
+    # ========================================================================
+    # 1. Get latest release download URL
+    # ========================================================================
+
+    Write-Info "Fetching latest release info from GitHub..."
+
+    $Response = Invoke-WebRequest -Uri $VersionUrl -UseBasicParsing
+    $ReleaseData = $Response.Content | ConvertFrom-Json
+    $Asset = $ReleaseData.assets | Where-Object { $_.name -like "*.tar.gz" } | Select-Object -First 1
+
+    if (-not $Asset) {
+        Write-Err "Failed to find .tar.gz asset in latest release"
+        Write-Err "Check: https://github.com/$Repo/releases/latest"
+        exit 1
+    }
+
+    $ReleaseUrl = $Asset.browser_download_url
+    $Artifact = $Asset.name
+    Write-Ok "Found release: $Artifact"
+
+    # ========================================================================
+    # 2. Download artifact
+    # ========================================================================
+
+    Write-Info "Downloading $Artifact..."
+    New-Item -ItemType Directory -Force -Path $ExtractDir | Out-Null
+    $DownloadPath = Join-Path $ExtractDir $Artifact
+    Invoke-WebRequest -Uri $ReleaseUrl -OutFile $DownloadPath
+    Write-Ok "Downloaded: $Artifact"
+
+    # ========================================================================
+    # 3. Extract
+    # ========================================================================
+
+    Write-Info "Extracting..."
+    # tar is available on Windows 10+ (build 17063+)
+    tar xzf $DownloadPath -C $ExtractDir
+
+    $ExtractedDir = Get-ChildItem -Directory -Path $ExtractDir -Filter "epost_agent_kit-*" | Select-Object -First 1
+
+    if (-not $ExtractedDir) {
+        Write-Err "Could not find extracted directory (expected epost_agent_kit-X.Y.Z/)"
+        exit 1
+    }
+
+    Write-Ok "Extracted: $($ExtractedDir.Name)"
+
+    # ========================================================================
+    # 4. Install
+    # ========================================================================
+
+    Write-Info "Installing to $InstallDir..."
+    New-Item -ItemType Directory -Force -Path $InstallDir | Out-Null
+
+    Copy-Item -Path "$($ExtractedDir.FullName)\packages" -Destination $InstallDir -Recurse -Force
+    Copy-Item -Path "$($ExtractedDir.FullName)\.epost-metadata.json" -Destination $InstallDir -Force
+
+    if (Test-Path "$($ExtractedDir.FullName)\profiles") {
+        Copy-Item -Path "$($ExtractedDir.FullName)\profiles" -Destination $InstallDir -Recurse -Force
+    }
+    if (Test-Path "$($ExtractedDir.FullName)\templates") {
+        Copy-Item -Path "$($ExtractedDir.FullName)\templates" -Destination $InstallDir -Recurse -Force
+    }
+
+    Write-Ok "Installed to $InstallDir"
+
+    # ========================================================================
+    # 5. Done
+    # ========================================================================
+
+    Write-Host ""
+    Write-Host "Installation complete!" -ForegroundColor Green
+    Write-Host ""
+    Write-Host "  Next steps:" -ForegroundColor Cyan
+    Write-Host "    Install the CLI globally:"
+    Write-Host "      npm install -g epost-agent-kit-cli"
+    Write-Host ""
+    Write-Host "    Or use via npx:"
+    Write-Host "      npx epost-agent-kit-cli init"
+    Write-Host ""
+    Write-Host "    Then run in your project:"
+    Write-Host "      epost-kit init"
+    Write-Host ""
+
+} finally {
+    # Cleanup temp dir
+    if (Test-Path $ExtractDir) {
+        Remove-Item -Path $ExtractDir -Recurse -Force -ErrorAction SilentlyContinue
+    }
 }
-
-if ($nodeVer -lt [version]"18.0.0") {
-    Write-Err "Node.js 18+ required (found v$nodeVerRaw)"
-    exit 1
-}
-Write-Ok "Node.js v$nodeVerRaw"
-
-# ============================================================================
-# 3. Validate npm
-# ============================================================================
-
-if (-not (Get-Command npm -ErrorAction SilentlyContinue)) {
-    Write-Err "npm not found (should come with Node.js)"
-    exit 1
-}
-$npmVer = npm -v
-Write-Ok "npm $npmVer"
-
-# ============================================================================
-# 4. Install dependencies
-# ============================================================================
-
-Write-Info "Installing dependencies..."
-Set-Location "epost-agent-cli"
-
-npm install
-if ($LASTEXITCODE -ne 0) {
-    Write-Err "npm install failed (exit code $LASTEXITCODE)"
-    Set-Location $OriginalDir
-    exit 1
-}
-Write-Ok "Dependencies installed"
-
-# ============================================================================
-# 5. Build TypeScript
-# ============================================================================
-
-Write-Info "Building CLI..."
-npm run build
-if ($LASTEXITCODE -ne 0) {
-    Write-Err "npm run build failed (exit code $LASTEXITCODE)"
-    Set-Location $OriginalDir
-    exit 1
-}
-Write-Ok "Build complete"
-
-# ============================================================================
-# 6. Link binary
-# ============================================================================
-
-Write-Info "Linking epost-kit..."
-npm link
-if ($LASTEXITCODE -ne 0) {
-    Write-Err "npm link failed (exit code $LASTEXITCODE)"
-    Write-Warn "Try running PowerShell as Administrator if permission denied"
-    Set-Location $OriginalDir
-    exit 1
-}
-Write-Ok "epost-kit linked"
-
-# ============================================================================
-# 7. Verify installation
-# ============================================================================
-
-Write-Info "Verifying installation..."
-
-# Get expected version from package.json
-$packageJson = Get-Content "epost-agent-cli\package.json" | ConvertFrom-Json
-$expectedVersion = $packageJson.version
-
-try {
-    $installedVersion = npx epost-kit --version 2>$null
-} catch {
-    $installedVersion = ""
-}
-
-if ($installedVersion -eq $expectedVersion) {
-    Write-Ok "epost-kit v$installedVersion installed successfully"
-} elseif ($installedVersion) {
-    Write-Warn "Version check: expected $expectedVersion, got '$installedVersion'"
-    Write-Warn "Installation may have succeeded, but verification returned unexpected version"
-} else {
-    Write-Warn "Could not verify installation (npx epost-kit --version returned empty)"
-}
-
-# ============================================================================
-# 8. Print usage instructions and restore directory
-# ============================================================================
-
-Set-Location $OriginalDir
-
-Write-Host ""
-Write-Host "Installation complete!" -ForegroundColor Green
-Write-Host ""
-Write-Host "  Usage:" -ForegroundColor Cyan
-Write-Host "    npx epost-kit --help     Show available commands"
-Write-Host "    npx epost-kit --version  Show installed version"
-Write-Host ""
-Write-Host "  Location:" -ForegroundColor Cyan
-Write-Host "    node_modules\.bin\epost-kit"
-Write-Host ""
-
-exit 0

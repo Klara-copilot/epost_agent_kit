@@ -26,35 +26,40 @@ npx epost-kit install --target cursor
 npx epost-kit install --target copilot
 ```
 
-#### Local Development Installation
+#### Download Latest Release
 
-For local development and testing:
+Download and install packages directly from GitHub:
 
-**macOS:**
+**macOS/Linux:**
 ```bash
-# From epost-agent-kit/ root directory
-./install-macos.sh
+bash <(curl -s https://raw.githubusercontent.com/Klara-copilot/epost_agent_kit/master/install.sh)
 ```
 
 **Windows PowerShell:**
 ```powershell
-# From epost-agent-kit\ root directory
 powershell -ExecutionPolicy Bypass -File install.ps1
 ```
 
 **Windows CMD:**
 ```cmd
-REM From epost-agent-kit\ root directory
 install.cmd
 ```
 
 Requirements:
-- Node.js >=18.0.0
-- npm
+- curl (macOS/Linux) or PowerShell 5.1+ (Windows)
+- Node.js >=18.0.0 (for `epost-kit` CLI)
 
-After installation, verify with:
+After installation, run:
 ```bash
-npx epost-kit --version  # Should output: 0.1.0
+npm install -g epost-agent-kit-cli
+epost-kit init
+```
+
+#### From npm (CLI)
+
+```bash
+npm install -g epost-agent-kit-cli
+npx epost-agent-kit-cli init
 ```
 
 ### Basic Usage

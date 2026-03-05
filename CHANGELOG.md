@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+(No entries yet)
+
+## [2.0.0] - 2026-03-05
+
 ### Knowledge Layer
 - Added `knowledge-base`, `knowledge-retrieval`, `knowledge-capture` skills to core package
 - Added knowledge-first search patterns to 9 existing skills (code-review, debugging, planning, research, docs-seeker, error-recovery, problem-solving, repomix, sequential-thinking)
@@ -28,6 +32,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Removed `web/backend-development` skill (replaced by `web/api-routes` in platform-web)
 - Added `web/api-routes` skill for Next.js API route patterns
 - Updated skill indexes with knowledge skills and package-specific entries
+- Major skill consolidation: variants (cook-fast, fix-deep, etc.) merged into parent skills via flags
+- Removed epost-agent-cli embedded subdirectory; standalone CLI is now separate repo
+- A11y workflow refactor: audit-a11y, fix-a11y, review-a11y merged into parent skills with flags
 
 ### CLI
 - Added runtime skill-index.json generation during `epost-kit init`
@@ -90,5 +97,6 @@ Initial release of the epost_agent_kit ecosystem.
 
 See package-specific CHANGELOGs in `packages/*/CHANGELOG.md` for detailed changes.
 
-[Unreleased]: https://github.com/Klara-copilot/epost_agent_kit/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/Klara-copilot/epost_agent_kit/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/Klara-copilot/epost_agent_kit/releases/tag/v2.0.0
 [1.0.0]: https://github.com/Klara-copilot/epost_agent_kit/releases/tag/v1.0.0
