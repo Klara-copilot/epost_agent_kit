@@ -1,5 +1,5 @@
 name: domains
-version: "1.0.0"
+version: "2.0.0"
 description: "Business domain knowledge: B2B modules, B2C consumer patterns"
 layer: 2
 platforms: [all]

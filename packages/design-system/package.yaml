@@ -1,5 +1,5 @@
 name: design-system
-version: "1.0.0"
+version: "2.0.0"
 description: "Cross-platform design system agent, Figma integration, and UI library skills"
 layer: 2
 platforms: [all]

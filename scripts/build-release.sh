@@ -2,9 +2,22 @@
 set -e
 
 # Usage: scripts/build-release.sh [VERSION] [--dry-run]
+# If VERSION not provided, reads from ./VERSION file
 # Example: scripts/build-release.sh 2.0.0
+# Example: scripts/build-release.sh (reads from VERSION file)
 
-VERSION="${1:?Version not provided. Usage: $0 <VERSION> [--dry-run]}"
+# Read version from CLI arg or VERSION file
+if [ -n "${1:-}" ] && [[ ! "$1" =~ ^--.* ]]; then
+  VERSION="$1"
+else
+  if [ -f VERSION ]; then
+    VERSION=$(cat VERSION)
+  else
+    echo "Error: Version not provided and VERSION file not found"
+    echo "Usage: $0 [VERSION] [--dry-run]"
+    exit 1
+  fi
+fi
 
 # Validate version format
 if ! [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
@@ -15,7 +28,16 @@ fi
 BUILD_DIR="epost_agent_kit-${VERSION}"
 ARTIFACT="${BUILD_DIR}.tar.gz"
 
-if [ "$2" = "--dry-run" ]; then
+# Check for --dry-run flag (either position 1 or 2 depending on VERSION source)
+DRY_RUN=false
+for arg in "$@"; do
+  if [ "$arg" = "--dry-run" ]; then
+    DRY_RUN=true
+    break
+  fi
+done
+
+if [ "$DRY_RUN" = true ]; then
   echo "Dry run: Would create $ARTIFACT"
   exit 0
 fi
@@ -41,6 +63,7 @@ done
 
 cp README.md "$BUILD_DIR/"
 cp CHANGELOG.md "$BUILD_DIR/"
+cp VERSION "$BUILD_DIR/"
 cp .epost-metadata.json "$BUILD_DIR/"
 
 # Create tarball
