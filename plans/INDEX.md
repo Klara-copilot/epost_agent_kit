@@ -38,6 +38,7 @@ See [PLAN_FORMAT.md](PLAN_FORMAT.md) for standardized plan template.
 | PLAN-0045 | Remove Embedded CLI and Relink Global epost-kit | epost-architect | 2026-03-05 | [../../plans/260305-1024-remove-embedded-cli/plan.md](../../plans/260305-1024-remove-embedded-cli/plan.md) |
 | PLAN-0046 | GitHub Release Process — Implementation | epost-implementer | 2026-03-05 | [reports/epost-implementer-260305-1126-github-release-process.md](reports/epost-implementer-260305-1126-github-release-process.md) |
 | PLAN-0047 | Fix /docs --init: Flag, KB Alignment, Web Bias | epost-architect | 2026-03-05 | [260305-1153-docs-init-fixes/plan.md](260305-1153-docs-init-fixes/plan.md) |
+| PLAN-0048 | Unified Package Versioning Strategy | epost-architect | 2026-03-05 | [260305-1224-unified-package-versioning/plan.md](260305-1224-unified-package-versioning/plan.md) |
 
 ## Completed
 

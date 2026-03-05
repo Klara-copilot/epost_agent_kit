@@ -2,10 +2,10 @@
   "version": "1.0.0",
   "updated": "2026-03-05",
   "counts": {
-    "active": 21,
+    "active": 22,
     "completed": 24,
     "archived": 0,
-    "total": 45
+    "total": 46
   },
   "plans": [
     {
@@ -770,6 +770,16 @@
         "fix"
       ],
       "file": "260305-1153-docs-init-fixes/plan.md"
+    },
+    {
+      "id": "PLAN-0048",
+      "title": "Unified Package Versioning Strategy",
+      "type": "design",
+      "status": "active",
+      "created": "2026-03-05",
+      "authors": ["epost-architect"],
+      "tags": ["versioning", "packages", "release", "automation", "cli"],
+      "file": "260305-1224-unified-package-versioning/plan.md"
     }
   ]
 }
