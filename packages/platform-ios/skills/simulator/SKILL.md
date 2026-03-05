@@ -3,7 +3,7 @@ name: simulator
 description: "(ePost) List, boot, shutdown, and manage iOS simulators using XcodeBuildMCP or xcrun simctl"
 user-invocable: true
 context: fork
-agent: epost-implementer
+agent: epost-fullstack-developer
 allowed-tools:
   - Read
   - Grep

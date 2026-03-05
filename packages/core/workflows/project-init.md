@@ -7,7 +7,7 @@ User wants to start a new project.
 
 ### 1. Bootstrap
 **Command**: `/bootstrap [project description]`
-**Agent**: epost-implementer (enhanced)
+**Agent**: epost-fullstack-developer (enhanced)
 **Output**: New project structure
 
 The implementer agent:
@@ -18,7 +18,7 @@ The implementer agent:
 - Sets up configuration
 
 ### 2. Initial Documentation
-**Agent**: epost-documenter (enhanced)
+**Agent**: epost-docs-manager (enhanced)
 **Output**: Initial documentation suite
 
 The documenter agent:
@@ -37,9 +37,9 @@ The documenter agent:
 ```mermaid
 graph LR
     A[New Project] --> B[/bootstrap command]
-    B --> C[epost-implementer]
+    B --> C[epost-fullstack-developer]
     C --> D[Project structure created]
-    D --> E[epost-documenter]
+    D --> E[epost-docs-manager]
     E --> E1[Initial docs created]
     E1 --> F[/git-commit command]
     F --> G[epost-git-manager]

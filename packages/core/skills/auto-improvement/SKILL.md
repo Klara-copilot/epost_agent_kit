@@ -4,7 +4,7 @@ description: Use when reviewing session performance, analyzing improvement trend
 user-invocable: false
 
 metadata:
-  agent-affinity: [epost-orchestrator, epost-reviewer, epost-debugger]
+  agent-affinity: [epost-project-manager, epost-code-reviewer, epost-debugger]
   keywords: [metrics, improvement, lessons, trends, detection, rework, session]
   platforms: [all]
   triggers: ["improvement report", "session metrics", "detect patterns", "rework analysis"]

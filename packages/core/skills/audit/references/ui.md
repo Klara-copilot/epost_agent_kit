@@ -16,7 +16,7 @@ metadata:
     - "review this component"
     - "check component quality"
     - "muji review"
-  agent-affinity: [epost-muji, epost-reviewer]
+  agent-affinity: [epost-muji, epost-code-reviewer]
   connections:
     requires: [code-review]
     enhances: [web-ui-lib-dev, ios-ui-lib, android-ui-lib]

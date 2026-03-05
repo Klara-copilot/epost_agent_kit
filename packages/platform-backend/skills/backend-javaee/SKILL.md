@@ -13,10 +13,10 @@ metadata:
     - wildfly
     - jpa
   agent-affinity:
-    - epost-implementer
+    - epost-fullstack-developer
     - epost-tester
     - epost-debugger
-    - epost-reviewer
+    - epost-code-reviewer
   platforms:
     - backend
 ---

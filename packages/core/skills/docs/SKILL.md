@@ -3,7 +3,7 @@ name: docs
 description: "(ePost) Documentation workflow — auto-detects init, update, or component"
 user-invocable: true
 context: fork
-agent: epost-documenter
+agent: epost-docs-manager
 metadata:
   argument-hint: "[--init | --migrate | --scan | --verify | --batch [category]]"
   connections:

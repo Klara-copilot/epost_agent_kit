@@ -19,28 +19,28 @@ Each scenario has:
 
 ### Scenario 1: Add Feature
 - **Prompt:** "Add Face ID login to the settings screen"
-- **Route:** `/cook` -> `epost-implementer`
+- **Route:** `/cook` -> `epost-fullstack-developer`
 - **Skills:** `ios-development`, `ios-ui-lib`
 - **Rationale:** "Add" is a build intent signal word. Platform detected from iOS context (Face ID, settings screen implies .swift files).
 - **Variant:** `/cook Add Face ID login to the settings screen`
 
 ### Scenario 2: Fix Crash
 - **Prompt:** "The app crashes on iPad when rotating"
-- **Route:** `/fix` -> `epost-implementer`
+- **Route:** `/fix` -> `epost-fullstack-developer`
 - **Skills:** `ios-development`, `debugging`
 - **Rationale:** "crashes" is a fix intent signal. iPad rotation implies iOS platform.
 - **Variant:** `/fix The app crashes on iPad when rotating`
 
 ### Scenario 3: Run Tests
 - **Prompt:** "Run the unit tests for the auth module"
-- **Route:** `/test` -> `epost-implementer`
+- **Route:** `/test` -> `epost-fullstack-developer`
 - **Skills:** `ios-development`
 - **Rationale:** "Run...tests" is a test intent. Platform detected from context (iOS project).
 - **Variant:** `/test auth module`
 
 ### Scenario 4: Plan Feature
 - **Prompt:** "Plan a new push notification system"
-- **Route:** `/plan` -> `epost-architect`
+- **Route:** `/plan` -> `epost-planner`
 - **Skills:** `ios-development`, `planning`
 - **Rationale:** "Plan" is an explicit plan intent signal.
 - **Variant:** `/plan push notification system`
@@ -58,14 +58,14 @@ Each scenario has:
 
 ### Scenario 6: Build UI
 - **Prompt:** "Build a settings screen with Compose"
-- **Route:** `/cook` -> `epost-implementer`
+- **Route:** `/cook` -> `epost-fullstack-developer`
 - **Skills:** `android-development`, `android-ui-lib`
 - **Rationale:** "Build" is a build intent. "Compose" triggers android platform detection.
 - **Variant:** `/cook settings screen with Compose`
 
 ### Scenario 7: Fix Migration
 - **Prompt:** "Fix the Room migration crash on update"
-- **Route:** `/fix` -> `epost-implementer`
+- **Route:** `/fix` -> `epost-fullstack-developer`
 - **Skills:** `android-development`, `debugging`
 - **Rationale:** "Fix" + "crash" is a fix intent. "Room" is an Android-specific keyword.
 - **Variant:** `/fix Room migration crash on update`
@@ -79,14 +79,14 @@ Each scenario has:
 
 ### Scenario 9: Test UI
 - **Prompt:** "Test the payment Compose UI"
-- **Route:** `/test` -> `epost-implementer`
+- **Route:** `/test` -> `epost-fullstack-developer`
 - **Skills:** `android-development`
 - **Rationale:** "Test" is test intent. "Compose" triggers android platform.
 - **Variant:** `/test payment Compose UI`
 
 ### Scenario 10: Plan Architecture
 - **Prompt:** "Plan offline-first sync for the mobile app"
-- **Route:** `/plan` -> `epost-architect`
+- **Route:** `/plan` -> `epost-planner`
 - **Skills:** `android-development`, `planning`
 - **Rationale:** "Plan" is plan intent. "mobile app" + android context.
 - **Variant:** `/plan offline-first sync`
@@ -97,21 +97,21 @@ Each scenario has:
 
 ### Scenario 11: Create Page
 - **Prompt:** "Create a dashboard page with data tables"
-- **Route:** `/cook` -> `epost-implementer`
+- **Route:** `/cook` -> `epost-fullstack-developer`
 - **Skills:** `web-frontend`, `web-nextjs`, `web-ui-lib`
 - **Rationale:** "Create" is a build intent. "dashboard page" implies web/.tsx files.
 - **Variant:** `/cook dashboard page with data tables`
 
 ### Scenario 12: Fix API Route
 - **Prompt:** "The API route returns 500 on POST"
-- **Route:** `/fix` -> `epost-implementer`
+- **Route:** `/fix` -> `epost-fullstack-developer`
 - **Skills:** `web-api-routes`, `debugging`
 - **Rationale:** "500" error signal triggers fix intent. "API route" detects web platform.
 - **Variant:** `/fix API route 500 on POST`
 
 ### Scenario 13: Write Tests
 - **Prompt:** "Write Playwright tests for login flow"
-- **Route:** `/test` -> `epost-implementer`
+- **Route:** `/test` -> `epost-fullstack-developer`
 - **Skills:** `web-frontend`
 - **Rationale:** "Write...tests" is test intent. "Playwright" is a web testing tool.
 - **Variant:** `/test Playwright tests for login flow`
@@ -136,28 +136,28 @@ Each scenario has:
 
 ### Scenario 16: Add Endpoint
 - **Prompt:** "Add a REST endpoint for user preferences"
-- **Route:** `/cook` -> `epost-implementer`
+- **Route:** `/cook` -> `epost-fullstack-developer`
 - **Skills:** `backend-javaee`, `backend-databases`
 - **Rationale:** "Add" is build intent. "REST endpoint" detects backend platform.
 - **Variant:** `/cook REST endpoint for user preferences`
 
 ### Scenario 17: Fix Query
 - **Prompt:** "Fix the Hibernate N+1 query in OrderService"
-- **Route:** `/fix` -> `epost-implementer`
+- **Route:** `/fix` -> `epost-fullstack-developer`
 - **Skills:** `backend-javaee`, `debugging`
 - **Rationale:** "Fix" is fix intent. "Hibernate" is backend-specific.
 - **Variant:** `/fix Hibernate N+1 query in OrderService`
 
 ### Scenario 18: Write Tests
 - **Prompt:** "Write Arquillian tests for the new endpoint"
-- **Route:** `/test` -> `epost-implementer`
+- **Route:** `/test` -> `epost-fullstack-developer`
 - **Skills:** `backend-javaee`
 - **Rationale:** "Write...tests" is test intent. "Arquillian" is backend test framework.
 - **Variant:** `/test Arquillian tests for new endpoint`
 
 ### Scenario 19: Plan Migration
 - **Prompt:** "Plan migration from EJB to CDI"
-- **Route:** `/plan` -> `epost-architect`
+- **Route:** `/plan` -> `epost-planner`
 - **Skills:** `backend-javaee`, `planning`
 - **Rationale:** "Plan" is plan intent. "EJB", "CDI" are backend-specific.
 - **Variant:** `/plan EJB to CDI migration`
@@ -175,35 +175,35 @@ Each scenario has:
 
 ### Scenario 21: Cross-Platform Plan
 - **Prompt:** "Plan biometric login for iOS and Android"
-- **Route:** `/plan` -> `epost-architect`
+- **Route:** `/plan` -> `epost-planner`
 - **Skills:** `ios-development`, `android-development`, `planning`
 - **Rationale:** "Plan" is plan intent. Multi-platform (iOS + Android) routes to architect.
 - **Variant:** `/plan biometric login for iOS and Android`
 
 ### Scenario 22: Deep API Design
 - **Prompt:** "Design the API contract for Smart Send v2"
-- **Route:** `/plan-deep` -> `epost-architect`
+- **Route:** `/plan-deep` -> `epost-planner`
 - **Skills:** `backend-javaee`, `domain-b2b`, `planning`
 - **Rationale:** "Design" is plan intent. "Smart Send" is a B2B domain module. Complex design warrants deep plan.
 - **Variant:** `/plan-deep API contract for Smart Send v2`
 
 ### Scenario 23: Parallel Multi-Platform
 - **Prompt:** "Create a spec for real-time notifications across all platforms"
-- **Route:** `/plan-parallel` -> `epost-architect`
+- **Route:** `/plan-parallel` -> `epost-planner`
 - **Skills:** `web-frontend`, `ios-development`, `android-development`, `planning`
 - **Rationale:** "spec" is plan intent. "across all platforms" triggers parallel plan.
 - **Variant:** `/plan-parallel real-time notifications`
 
 ### Scenario 24: Decision Doc
 - **Prompt:** "Write a decision doc for state management"
-- **Route:** doc-coauthoring workflow -> `epost-architect`
+- **Route:** doc-coauthoring workflow -> `epost-planner`
 - **Skills:** `doc-coauthoring`
 - **Rationale:** "decision doc" maps to doc-coauthoring skill triggers.
 - **Variant:** (No direct command — uses doc-coauthoring skill)
 
 ### Scenario 25: Review Architecture
 - **Prompt:** "Review the monitoring module architecture"
-- **Route:** `/review-code` -> `epost-reviewer`
+- **Route:** `/review-code` -> `epost-code-reviewer`
 - **Skills:** `domain-b2b`, `code-review`
 - **Rationale:** "Review" is review intent. "monitoring module" is a B2B domain module.
 - **Variant:** `/review-code monitoring module architecture`
@@ -281,9 +281,9 @@ Each scenario has:
 
 ### Scenario 35: Kit Question
 - **Prompt:** "Which agents handle iOS tasks?"
-- **Route:** `epost-orchestrator` (direct response)
+- **Route:** `epost-project-manager` (direct response)
 - **Skills:** `kit-agents`
-- **Rationale:** Kit question pattern ("which agent...") routes to epost-orchestrator.
+- **Rationale:** Kit question pattern ("which agent...") routes to epost-project-manager.
 - **Variant:** (No command — handled by orchestrator agent)
 
 ---
@@ -306,7 +306,7 @@ Each scenario has:
 
 ### Scenario 38: Multi-Intent
 - **Prompt:** "Plan and build a login page"
-- **Route:** `epost-orchestrator` (multi-intent)
+- **Route:** `epost-project-manager` (multi-intent)
 - **Skills:** `web-frontend`, `planning`
 - **Rationale:** "Plan and build" contains two intent signals. Multi-intent routes to orchestrator.
 - **Variant:** N/A (orchestrator decomposes into `/plan` then `/cook`)
@@ -331,11 +331,11 @@ Each scenario has:
 
 | Role | Scenarios | Commands Tested | Agents Tested |
 |------|-----------|----------------|---------------|
-| iOS Developer | 1-5 | /cook, /fix, /test, /plan, /audit-a11y | epost-implementer, epost-architect, epost-a11y-specialist |
-| Android Developer | 6-10 | /cook, /fix, /fix-a11y, /test, /plan | epost-implementer, epost-a11y-specialist, epost-architect |
-| Web Developer | 11-15 | /cook, /fix, /test, /docs-component, /fix-a11y | epost-implementer, epost-muji, epost-a11y-specialist |
-| Backend Developer | 16-20 | /cook, /fix, /test, /plan, /debug | epost-implementer, epost-architect, epost-debugger |
-| Architect | 21-25 | /plan, /plan-deep, /plan-parallel, /review-code | epost-architect, epost-reviewer |
+| iOS Developer | 1-5 | /cook, /fix, /test, /plan, /audit-a11y | epost-fullstack-developer, epost-planner, epost-a11y-specialist |
+| Android Developer | 6-10 | /cook, /fix, /fix-a11y, /test, /plan | epost-fullstack-developer, epost-a11y-specialist, epost-planner |
+| Web Developer | 11-15 | /cook, /fix, /test, /docs-component, /fix-a11y | epost-fullstack-developer, epost-muji, epost-a11y-specialist |
+| Backend Developer | 16-20 | /cook, /fix, /test, /plan, /debug | epost-fullstack-developer, epost-planner, epost-debugger |
+| Architect | 21-25 | /plan, /plan-deep, /plan-parallel, /review-code | epost-planner, epost-code-reviewer |
 | A11y Specialist | 26-30 | /audit-a11y, /fix-a11y, /review-a11y, /audit-close-a11y | epost-a11y-specialist |
-| Kit Maintainer | 31-35 | /kit-add-skill, /kit-add-agent, /kit-optimize-skill, /kit-add-command | epost-kit-designer, epost-orchestrator |
-| Cross-Role | 36-40 | /git-commit, /git-push, /cook | epost-researcher, epost-orchestrator |
+| Kit Maintainer | 31-35 | /kit-add-skill, /kit-add-agent, /kit-optimize-skill, /kit-add-command | epost-kit-designer, epost-project-manager |
+| Cross-Role | 36-40 | /git-commit, /git-push, /cook | epost-researcher, epost-project-manager |

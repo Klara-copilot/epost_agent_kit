@@ -4,7 +4,7 @@ description: Use when working with .swift files, Xcode projects, SwiftUI/UIKit, 
 user-invocable: false
 
 metadata:
-  agent-affinity: [epost-implementer, epost-tester, epost-debugger, epost-reviewer]
+  agent-affinity: [epost-fullstack-developer, epost-tester, epost-debugger, epost-code-reviewer]
   keywords: [ios, swift, swiftui, uikit, xcode, iphone, ipad, mobile]
   platforms: [ios]
   triggers: [".swift", ".xcodeproj", ".xcworkspace", "ios", "iphone", "ipad"]

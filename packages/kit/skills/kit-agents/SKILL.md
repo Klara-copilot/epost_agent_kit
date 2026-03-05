@@ -10,7 +10,7 @@ metadata:
     - agent-list
     - subagent
   agent-affinity:
-    - epost-implementer
+    - epost-fullstack-developer
     - epost-kit-designer
   platforms:
     - all
@@ -96,20 +96,24 @@ Skills support nested directories. Claude Code auto-discovers `SKILL.md` files a
 
 ```
 .claude/
-├── agents/                           # 13 specialized agents
-│   ├── epost-orchestrator.md         # Task router & project manager
-│   ├── epost-architect.md            # Architecture planning
-│   ├── epost-implementer.md          # Code implementation
-│   ├── epost-reviewer.md             # Code review
+├── agents/                           # 17 specialized agents
+│   ├── epost-project-manager.md      # Progress tracking & roadmaps
+│   ├── epost-planner.md              # Planning & research coordination
+│   ├── epost-fullstack-developer.md  # Fullstack development
+│   ├── epost-code-reviewer.md        # Quality assurance & security
 │   ├── epost-debugger.md             # Root cause debugging
 │   ├── epost-tester.md               # Test orchestration
 │   ├── epost-researcher.md           # Technology research
-│   ├── epost-documenter.md           # Documentation management
+│   ├── epost-docs-manager.md         # Auto-updating documentation
 │   ├── epost-git-manager.md          # Git workflow automation
 │   ├── epost-brainstormer.md         # Creative ideation
 │   ├── epost-kit-designer.md         # Kit authoring specialist
 │   ├── epost-a11y-specialist.md      # Multi-platform accessibility (WCAG 2.1 AA)
-│   └── epost-muji.md                 # MUJI UI library
+│   ├── epost-muji.md                 # MUJI UI library
+│   ├── epost-code-simplifier.md      # Code simplification
+│   ├── epost-journal-writer.md       # Development journals
+│   ├── epost-mcp-manager.md          # MCP integration
+│   └── epost-ui-ux-designer.md       # UI/UX design
 ├── skills/                           # Domain knowledge (flat layout)
 │   ├── kit-agents/                   # Ecosystem hub (this file)
 │   ├── kit-agent-development/        # Agent creation guide
@@ -156,7 +160,7 @@ Skills support nested directories. Claude Code auto-discovers `SKILL.md` files a
 
 | Component | Pattern | Example |
 |-----------|---------|---------|
-| Agent files | `epost-<role>.md` | `epost-architect.md` |
+| Agent files | `epost-<role>.md` | `epost-planner.md` |
 | Commands | `<category>/<action>.md` | `web/cook.md` |
 | Skills | `<name>/SKILL.md` | `web-nextjs/SKILL.md` |
 | Kit skills | `kit-<topic>/SKILL.md` | `kit-agent-development/SKILL.md` |

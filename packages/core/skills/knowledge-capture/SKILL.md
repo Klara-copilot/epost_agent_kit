@@ -5,7 +5,7 @@ user-invocable: false
 disable-model-invocation: true
 
 metadata:
-  agent-affinity: [epost-debugger, epost-implementer, epost-researcher, epost-reviewer, epost-architect]
+  agent-affinity: [epost-debugger, epost-fullstack-developer, epost-researcher, epost-code-reviewer, epost-planner]
   keywords: [capture, learn, persist, record, post-mortem, retrospective]
   platforms: [all]
   triggers: ["capture learnings", "save pattern", "record finding", "what did we learn"]

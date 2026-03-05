@@ -10,7 +10,7 @@ metadata:
     - touch-target
   agent-affinity:
     - epost-a11y-specialist
-    - epost-implementer
+    - epost-fullstack-developer
   platforms:
     - android
   connections:

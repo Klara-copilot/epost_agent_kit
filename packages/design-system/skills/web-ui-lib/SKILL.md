@@ -4,7 +4,7 @@ description: "Use when referencing klara-theme component APIs, props, variants, 
 user-invocable: false
 
 metadata:
-  agent-affinity: [epost-muji, epost-implementer]
+  agent-affinity: [epost-muji, epost-fullstack-developer]
   keywords: [ui-lib, components, design-tokens, integration]
   platforms: [web]
 ---

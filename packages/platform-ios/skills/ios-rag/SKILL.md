@@ -4,7 +4,7 @@ description: Use when searching iOS codebase for Swift views, UIKit/SwiftUI patt
 user-invocable: false
 
 metadata:
-  agent-affinity: [epost-a11y-specialist, epost-muji, epost-implementer]
+  agent-affinity: [epost-a11y-specialist, epost-muji, epost-fullstack-developer]
   keywords: [rag, vector-search, ios, swift, swiftui, uikit, design-system]
   platforms: [ios]
   triggers: ["search swift", "find view", "ios pattern", "theme token"]

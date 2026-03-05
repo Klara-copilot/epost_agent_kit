@@ -29,7 +29,7 @@ The debugger agent:
 - Suggests targeted fix
 
 ### 3. Fix Implementation
-**Agent**: epost-implementer (enhanced)
+**Agent**: epost-fullstack-developer (enhanced)
 **Output**: Fixed code with regression test
 
 The implementer agent:
@@ -49,7 +49,7 @@ The tester agent:
 
 ### 5. Code Review
 **Command**: `/review`
-**Agent**: epost-reviewer (enhanced)
+**Agent**: epost-code-reviewer (enhanced)
 **Output**: Fix quality verification
 
 The reviewer agent:
@@ -71,13 +71,13 @@ graph LR
     D --> E[/debug command]
     E --> F[epost-debugger]
     F --> G[Root cause identified]
-    G --> H[epost-implementer]
+    G --> H[epost-fullstack-developer]
     H --> I[/test command]
     I --> J[epost-tester]
     J --> K[Tests pass?]
     K -->|No| H
     K -->|Yes| L[/review command]
-    L --> M[epost-reviewer]
+    L --> M[epost-code-reviewer]
     M --> N[/git-commit command]
     N --> O[epost-git-manager]
     O --> P[Fixed and committed]

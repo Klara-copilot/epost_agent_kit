@@ -4,7 +4,7 @@ description: Use when you need prior art, past decisions, or existing patterns â
 user-invocable: false
 
 metadata:
-  agent-affinity: [epost-architect, epost-implementer, epost-debugger, epost-researcher]
+  agent-affinity: [epost-planner, epost-fullstack-developer, epost-debugger, epost-researcher]
   keywords: [retrieve, search, knowledge, context, rag, lookup, prior-art]
   platforms: [all]
   triggers: ["what do we know about", "check knowledge", "prior art", "previous decision"]

@@ -12,7 +12,7 @@ metadata:
     - semantic-html
   agent-affinity:
     - epost-a11y-specialist
-    - epost-implementer
+    - epost-fullstack-developer
   platforms:
     - web
   connections:

@@ -4,7 +4,7 @@ description: Use when working with translations, locale routing, next-intl confi
 user-invocable: false
 
 metadata:
-  agent-affinity: [epost-implementer]
+  agent-affinity: [epost-fullstack-developer]
   keywords: [i18n, translation, locale, next-intl, internationalization, language]
   platforms: [web]
   triggers: ["translation", "locale", "i18n", "useTranslations", "getTranslations", "next-intl"]

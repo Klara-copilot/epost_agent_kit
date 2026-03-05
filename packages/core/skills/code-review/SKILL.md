@@ -4,7 +4,7 @@ description: Use when reviewing code, checking quality before commit, or auditin
 tier: core
 
 metadata:
-  agent-affinity: [epost-reviewer, epost-implementer]
+  agent-affinity: [epost-code-reviewer, epost-fullstack-developer]
   keywords: [review, code-quality, security, performance, testing, verification]
   platforms: [all]
   triggers: ["/review", "code review", "review code"]

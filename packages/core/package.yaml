@@ -8,16 +8,20 @@ dependencies: []
 
 provides:
   agents:
-    - epost-orchestrator
-    - epost-architect
-    - epost-implementer
-    - epost-reviewer
+    - epost-project-manager
+    - epost-planner
+    - epost-fullstack-developer
+    - epost-code-reviewer
     - epost-debugger
     - epost-tester
     - epost-researcher
-    - epost-documenter
+    - epost-docs-manager
     - epost-git-manager
     - epost-brainstormer
+    - epost-code-simplifier
+    - epost-journal-writer
+    - epost-mcp-manager
+    - epost-ui-ux-designer
   skills:
     - core
     - code-review

@@ -4,7 +4,7 @@ description: Use when working with authentication, sessions, OAuth providers, fe
 user-invocable: false
 
 metadata:
-  agent-affinity: [epost-implementer]
+  agent-affinity: [epost-fullstack-developer]
   keywords: [auth, session, oauth, nextauth, feature-flag, jwt]
   platforms: [web]
   triggers: ["session", "auth", "oauth", "login", "feature flag", "provider"]

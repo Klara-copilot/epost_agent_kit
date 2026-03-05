@@ -5,8 +5,8 @@ user-invocable: false
 
 metadata:
   agent-affinity:
-    - epost-implementer
-    - epost-orchestrator
+    - epost-fullstack-developer
+    - epost-project-manager
   keywords:
     - module
     - inbox

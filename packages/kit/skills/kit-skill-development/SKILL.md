@@ -10,8 +10,8 @@ metadata:
     - frontmatter
     - progressive-disclosure
   agent-affinity:
-    - epost-implementer
-    - epost-architect
+    - epost-fullstack-developer
+    - epost-planner
   platforms:
     - all
   connections:

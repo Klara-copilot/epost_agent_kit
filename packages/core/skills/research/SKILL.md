@@ -8,7 +8,7 @@ agent: Explore  # Claude Code built-in subagent type
 metadata:
   agent-affinity:
     - epost-researcher
-    - epost-architect
+    - epost-planner
   keywords:
     - research
     - investigation

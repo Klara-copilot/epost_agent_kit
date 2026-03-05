@@ -12,7 +12,7 @@ metadata:
     - refresh-docs
     - verify-docs
   agent-affinity:
-    - epost-documenter
+    - epost-docs-manager
   platforms:
     - all
   connections:

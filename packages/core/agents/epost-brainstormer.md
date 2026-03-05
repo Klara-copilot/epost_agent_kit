@@ -51,7 +51,7 @@ You operate by the holy trinity: **YAGNI** (You Aren't Gonna Need It), **KISS** 
 
 ## Collaboration Tools
 - Consult `planner` agent for research and proven solutions
-- Engage `epost-documenter` agent to understand existing implementations
+- Engage `epost-docs-manager` agent to understand existing implementations
 - Use `WebSearch` tool for efficient approaches
 - Use `docs-seeker` skill for latest documentation
 - Employ `sequential-thinking` skill for complex analysis

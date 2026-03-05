@@ -11,7 +11,7 @@ metadata:
     - generate-docs
     - scaffold-docs
   agent-affinity:
-    - epost-documenter
+    - epost-docs-manager
   platforms:
     - all
   connections:

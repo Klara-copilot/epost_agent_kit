@@ -5,7 +5,7 @@ user-invocable: false
 tier: core
 
 metadata:
-  agent-affinity: [epost-architect, epost-implementer, epost-debugger, epost-tester, epost-reviewer, epost-orchestrator]
+  agent-affinity: [epost-planner, epost-fullstack-developer, epost-debugger, epost-tester, epost-code-reviewer, epost-project-manager]
   keywords: [platform, discovery, skill-index, context, conventions, lazy-loading]
   platforms: [all]
   triggers: []

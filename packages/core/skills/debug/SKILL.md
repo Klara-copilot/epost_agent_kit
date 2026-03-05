@@ -9,7 +9,7 @@ metadata:
   argument-hint: "[issue description or error log]"
   agent-affinity:
     - epost-debugger
-    - epost-implementer
+    - epost-fullstack-developer
   keywords:
     - debug
     - error

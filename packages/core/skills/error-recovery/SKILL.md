@@ -2,7 +2,7 @@
 name: error-recovery
 description: Use when operations fail transiently — timeouts, network errors, retries, circuit breakers, graceful degradation
 metadata:
-  agent-affinity: [epost-implementer, epost-debugger, epost-tester]
+  agent-affinity: [epost-fullstack-developer, epost-debugger, epost-tester]
   keywords: [error, retry, fallback, circuit-breaker, backoff, resilience, failure, exponential, degradation]
   platforms: [all]
   triggers: [error, exception, timeout, retry, fallback]

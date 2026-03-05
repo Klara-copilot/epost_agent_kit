@@ -12,7 +12,7 @@ metadata:
     - migration
     - connection-pool
   agent-affinity:
-    - epost-implementer
+    - epost-fullstack-developer
     - epost-debugger
   platforms:
     - backend

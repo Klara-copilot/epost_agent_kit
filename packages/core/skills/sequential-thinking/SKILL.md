@@ -3,7 +3,7 @@ name: sequential-thinking
 description: Use when facing a complex problem that needs step-by-step breakdown, branching analysis, or iterative reasoning
 
 metadata:
-  agent-affinity: [epost-debugger, epost-architect, epost-implementer]
+  agent-affinity: [epost-debugger, epost-planner, epost-fullstack-developer]
   keywords: [sequential, thinking, analysis, step-by-step, reasoning, logic, stuck, complex, bug]
   platforms: [all]
   triggers: ["complex problem", "step by step", "analyze"]

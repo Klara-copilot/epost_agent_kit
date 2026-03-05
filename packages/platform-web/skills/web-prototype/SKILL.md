@@ -4,7 +4,7 @@ description: "Use when converting an external prototype, mockup, or codebase int
 user-invocable: false
 
 metadata:
-  agent-affinity: [epost-implementer]
+  agent-affinity: [epost-fullstack-developer]
   keywords: [convert, prototype, migrate, rewrite, transform, external, mockup]
   platforms: [web]
   triggers: ["/convert", "convert to klara-theme", "make it consistent"]

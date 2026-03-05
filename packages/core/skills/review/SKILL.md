@@ -3,7 +3,7 @@ name: review
 description: "(ePost) Review workflow — auto-detects code, a11y, or improvements"
 user-invocable: true
 context: fork
-agent: epost-reviewer
+agent: epost-code-reviewer
 metadata:
   argument-hint: "[--code | --a11y | --improvements]"
   connections:

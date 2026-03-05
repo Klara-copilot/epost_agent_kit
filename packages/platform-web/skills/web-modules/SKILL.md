@@ -4,7 +4,7 @@ description: "Use when integrating a component into a B2B module — adding scre
 user-invocable: false
 
 metadata:
-  agent-affinity: [epost-implementer]
+  agent-affinity: [epost-fullstack-developer]
   keywords: [integrate, module, screen, page, api, store, hook, bind]
   platforms: [web]
   triggers: ["add to module", "integrate into", "create screen", "add page", "bind api"]

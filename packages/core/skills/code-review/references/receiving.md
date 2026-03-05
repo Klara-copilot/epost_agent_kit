@@ -4,7 +4,7 @@ description: "Use when receiving code review feedback, processing reviewer comme
 user-invocable: false
 
 metadata:
-  agent-affinity: [epost-implementer, epost-debugger, epost-tester]
+  agent-affinity: [epost-fullstack-developer, epost-debugger, epost-tester]
   keywords: [feedback, review-comment, suggestion, change-request, reviewer, nit, fix-this]
   platforms: [all]
   connections:

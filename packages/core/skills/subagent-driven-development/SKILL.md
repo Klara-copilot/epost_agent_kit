@@ -4,7 +4,7 @@ description: "Use when executing implementation plans with multiple independent 
 user-invocable: false
 
 metadata:
-  agent-affinity: [epost-orchestrator, epost-implementer, epost-architect]
+  agent-affinity: [epost-project-manager, epost-fullstack-developer, epost-planner]
   keywords: [parallel, subagent, dispatch, implementation-loop, two-stage-review]
   platforms: [all]
   connections:

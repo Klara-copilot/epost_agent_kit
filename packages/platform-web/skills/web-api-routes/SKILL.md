@@ -4,7 +4,7 @@ description: Use when working with route.ts files, API endpoints, server actions
 user-invocable: false
 
 metadata:
-  agent-affinity: [epost-implementer]
+  agent-affinity: [epost-fullstack-developer]
   keywords: [api, rest, fetchbuilder, caller, server-action, route, endpoint]
   platforms: [web]
   triggers: ["route.ts", "api/", "server action", "endpoint", "caller", "fetchbuilder"]

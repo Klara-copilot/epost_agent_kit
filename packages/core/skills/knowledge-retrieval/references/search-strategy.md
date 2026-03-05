@@ -169,7 +169,7 @@ jq '.skills[] | select(.triggers[] | contains("/debug"))' .claude/skills/skill-i
 
 **Find by agent**:
 ```bash
-jq '.skills[] | select(.["agent-affinity"][] | contains("epost-implementer"))' .claude/skills/skill-index.json
+jq '.skills[] | select(.["agent-affinity"][] | contains("epost-fullstack-developer"))' .claude/skills/skill-index.json
 ```
 
 **Get skill path**:

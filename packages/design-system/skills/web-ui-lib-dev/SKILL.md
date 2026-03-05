@@ -4,7 +4,7 @@ description: Use when building, auditing, or documenting klara-theme components 
 user-invocable: false
 
 metadata:
-  agent-affinity: [epost-muji, epost-implementer]
+  agent-affinity: [epost-muji, epost-fullstack-developer]
   keywords: [klara-theme, components, pipeline, audit, storybook]
   platforms: [web]
   connections:

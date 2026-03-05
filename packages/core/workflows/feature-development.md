@@ -7,7 +7,7 @@ User wants to add a new feature.
 
 ### 1. Plan Creation
 **Command**: `/plan [feature description]`
-**Agent**: epost-architect (enhanced)
+**Agent**: epost-planner (enhanced)
 **Output**: `plans/YYMMDD-feature.md` with YAML frontmatter
 
 The architect agent:
@@ -18,7 +18,7 @@ The architect agent:
 
 ### 2. Implementation
 **Command**: `/cook plans/YYMMDD-feature.md`
-**Agent**: epost-implementer (enhanced)
+**Agent**: epost-fullstack-developer (enhanced)
 **Output**: Working feature with tests
 
 The implementer agent:
@@ -41,7 +41,7 @@ The tester agent:
 
 ### 4. Code Review
 **Command**: `/review`
-**Agent**: epost-reviewer (enhanced)
+**Agent**: epost-code-reviewer (enhanced)
 **Output**: Security and quality report
 
 The reviewer agent:
@@ -51,7 +51,7 @@ The reviewer agent:
 - Validates documentation updates
 
 ### 5. Documentation
-**Agent**: epost-documenter (enhanced)
+**Agent**: epost-docs-manager (enhanced)
 **Output**: Updated docs
 
 The documenter agent:
@@ -74,18 +74,18 @@ The git-manager agent:
 ```mermaid
 graph LR
     A[User Request] --> B[/plan command]
-    B --> C[epost-architect]
+    B --> C[epost-planner]
     C --> C1[3 researchers in parallel]
     C1 --> D[Plan created with file ownership]
     D --> E[/cook command]
-    E --> F[epost-implementer]
+    E --> F[epost-fullstack-developer]
     F --> G[/test command]
     G --> H[epost-tester]
     H --> I{Tests pass?}
     I -->|No| F
     I -->|Yes| J[/review command]
-    J --> K[epost-reviewer]
-    K --> L[epost-documenter]
+    J --> K[epost-code-reviewer]
+    K --> L[epost-docs-manager]
     L --> M[/git-commit command]
     M --> N[epost-git-manager]
     N --> O[Committed]

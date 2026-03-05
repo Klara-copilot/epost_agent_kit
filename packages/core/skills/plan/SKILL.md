@@ -3,12 +3,12 @@ name: plan
 description: "(ePost) Create implementation plan — auto-detects complexity"
 user-invocable: true
 context: fork
-agent: epost-architect
+agent: epost-planner
 metadata:
   argument-hint: "[feature or task description]"
   agent-affinity:
-    - epost-architect
-    - epost-orchestrator
+    - epost-planner
+    - epost-project-manager
   keywords:
     - plan
     - planning

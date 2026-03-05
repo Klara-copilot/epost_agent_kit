@@ -9,7 +9,7 @@ metadata:
     - system-prompt
     - agent-frontmatter
   agent-affinity:
-    - epost-implementer
+    - epost-fullstack-developer
   platforms:
     - all
   connections:

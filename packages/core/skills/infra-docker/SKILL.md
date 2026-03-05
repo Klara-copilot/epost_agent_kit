@@ -4,7 +4,7 @@ description: Use when working with Dockerfiles, docker-compose, containers, or c
 user-invocable: false
 
 metadata:
-  agent-affinity: [epost-implementer, epost-architect]
+  agent-affinity: [epost-fullstack-developer, epost-planner]
   keywords: [docker, container, dockerfile, compose, deployment, devops]
   platforms: [all]
   triggers: ["Dockerfile", "docker-compose.yml", "container", "docker"]

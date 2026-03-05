@@ -10,7 +10,7 @@ metadata:
     - dynamic-type
   agent-affinity:
     - epost-a11y-specialist
-    - epost-implementer
+    - epost-fullstack-developer
   platforms:
     - ios
   connections:

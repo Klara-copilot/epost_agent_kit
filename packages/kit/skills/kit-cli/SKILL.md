@@ -10,7 +10,7 @@ metadata:
     - vitest
     - epost-kit
   agent-affinity:
-    - epost-implementer
+    - epost-fullstack-developer
     - epost-tester
     - epost-debugger
   platforms:

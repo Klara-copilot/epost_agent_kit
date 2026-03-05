@@ -4,7 +4,7 @@ description: Use when searching web codebase for components, design tokens, Next
 user-invocable: false
 
 metadata:
-  agent-affinity: [epost-muji, epost-implementer, epost-architect, epost-researcher]
+  agent-affinity: [epost-muji, epost-fullstack-developer, epost-planner, epost-researcher]
   keywords: [rag, vector-search, klara-theme, luz-next, web, components, design-tokens, patterns, implementation]
   platforms: [web]
   triggers: [search components, find component, klara-theme, design token, luz_next, web pattern, implementation]

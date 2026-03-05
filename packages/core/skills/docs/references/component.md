@@ -42,9 +42,9 @@ Document a klara-theme component by extracting Figma data and creating prop mapp
 
 ## Process
 
-1. **Route**: Command routes to `epost-documenter`
+1. **Route**: Command routes to `epost-docs-manager`
 2. **Detect**: Documenter detects klara-theme context
-3. **Delegate**: Delegates to `epost-implementer` with:
+3. **Delegate**: Delegates to `epost-fullstack-developer` with:
    - `componentKey`: The component to document
    - `workflow`: `document-component`
 4. **Execute**: Implementer follows `web-ui-lib-dev/references/document-component.md` skill aspect:

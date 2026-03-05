@@ -3,7 +3,7 @@ name: get-started
 description: "(ePost) Onboard to a project — detect state, then orchestrate researcher → documenter → implementer pipeline"
 user-invocable: true
 context: fork
-agent: epost-orchestrator
+agent: epost-project-manager
 metadata:
   argument-hint: "[project path or question]"
   keywords:
@@ -150,13 +150,13 @@ Agent(
 WAIT for Agent to complete, then READ {RESEARCH_REPORT}.
 **Then immediately proceed to Phase 2 — do NOT stop here.**
 
-### Phase 2 — Documentation (epost-documenter)
+### Phase 2 — Documentation (epost-docs-manager)
 
 Use the Agent tool to dispatch docs agent with mode derived from DOCS_STATE:
 
 ```
 Agent(
-  subagent_type: "epost-documenter"
+  subagent_type: "epost-docs-manager"
   description: "Generate/update KB docs"
   prompt: """
   Read the researcher report at: {RESEARCH_REPORT}
@@ -176,14 +176,14 @@ Agent(
 WAIT for Agent to complete.
 **Then immediately proceed to Phase 3 — do NOT stop here.**
 
-### Phase 3 — Environment Setup & Run (epost-implementer)
+### Phase 3 — Environment Setup & Run (epost-fullstack-developer)
 
 Use the Agent tool to dispatch implementer to prepare the environment and get the project running.
 The implementer should **actively install missing tools** — not just report them.
 
 ```
 Agent(
-  subagent_type: "epost-implementer"
+  subagent_type: "epost-fullstack-developer"
   description: "Setup env, install deps, build, run project"
   prompt: """
   Read the researcher report at: {RESEARCH_REPORT}

@@ -4,7 +4,7 @@ description: Use when extracting Figma data, mapping design tokens to code, or c
 user-invocable: false
 
 metadata:
-  agent-affinity: [epost-muji, epost-implementer]
+  agent-affinity: [epost-muji, epost-fullstack-developer]
   keywords: [figma, design, tokens, mcp, figma-to-code]
   platforms: [web]
 ---

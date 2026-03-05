@@ -11,7 +11,7 @@ metadata:
     - theme
   agent-affinity:
     - epost-muji
-    - epost-implementer
+    - epost-fullstack-developer
   platforms:
     - ios
   connections:

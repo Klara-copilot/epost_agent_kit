@@ -3,7 +3,7 @@ name: android-development
 description: Use when working with .kt/.kts files, Gradle builds, Jetpack Compose, or Android-specific features
 
 metadata:
-  agent-affinity: [epost-implementer, epost-tester, epost-debugger, epost-reviewer]
+  agent-affinity: [epost-fullstack-developer, epost-tester, epost-debugger, epost-code-reviewer]
   keywords: [android, kotlin, jetpack-compose, mvvm, hilt, room, retrofit]
   platforms: [android]
   triggers: [".kt", ".kts", "build.gradle", "AndroidManifest.xml", "android"]

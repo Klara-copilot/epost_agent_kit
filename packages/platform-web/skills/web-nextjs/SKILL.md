@@ -4,7 +4,7 @@ description: Use when working with Next.js App Router, Server Components, Server
 user-invocable: false
 
 metadata:
-  agent-affinity: [epost-implementer]
+  agent-affinity: [epost-fullstack-developer]
   keywords: [nextjs, next, app-router, server-components, server-actions, routing, middleware]
   platforms: [web]
   triggers: ["next.js", "nextjs", "app router", "server component", "middleware", "layout.tsx", "page.tsx"]

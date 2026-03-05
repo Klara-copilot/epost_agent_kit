@@ -10,7 +10,7 @@ On every user prompt involving a dev task, sense context before acting:
 
 ### Prompt Classification
 - **Dev task** (action verbs: cook, fix, plan, test, debug, etc.) → route via intent map below
-- **Kit question** ("which agent", "list skills", "our conventions") → route to `epost-orchestrator`
+- **Kit question** ("which agent", "list skills", "our conventions") → route to `epost-project-manager`
 - **External tech question** ("how does React...", "what is gRPC") → route to `epost-researcher`
 - **Conversational** (greetings, opinions, clarifications) → respond directly, no routing
 
@@ -41,4 +41,4 @@ On every user prompt involving a dev task, sense context before acting:
 ### Rules
 - If user types a slash command explicitly → execute it directly, skip routing
 - If ambiguous → use context boost to break tie; if still ambiguous → ask user (max 1 question)
-- If multi-intent ("plan and build X") → delegate to `epost-orchestrator`
+- If multi-intent ("plan and build X") → delegate to `epost-project-manager`

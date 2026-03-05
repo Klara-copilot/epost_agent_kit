@@ -11,7 +11,7 @@ metadata:
     - lint
   agent-affinity:
     - epost-kit-designer
-    - epost-reviewer
+    - epost-code-reviewer
   platforms:
     - all
   connections:
