@@ -45,6 +45,28 @@
             "command": "node .claude/hooks/privacy-block.cjs"
           }
         ]
+      },
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/post-edit-skill-reminder.cjs"
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/cook-after-plan-reminder.cjs"
+          }
+        ]
       }
     ],
     "Stop": [

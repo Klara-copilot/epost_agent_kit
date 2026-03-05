@@ -11,6 +11,8 @@
  * Core detection logic extracted to lib/project-detector.cjs for OpenCode plugin reuse.
  */
 
+try {
+
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
@@ -220,6 +222,40 @@ async function main() {
       console.log(`Use AskUserQuestion to verify: "Context was compacted. Please confirm approval to continue."`);
     }
 
+    // Stale skill-index.json detection (kit-repo context only)
+    // Trigger: packages/ directory exists in CWD
+    try {
+      const packagesDir = path.join(process.cwd(), 'packages');
+      if (fs.existsSync(packagesDir)) {
+        const skillIndexPath = path.join(process.cwd(), 'packages', 'core', 'skills', 'skill-index.json');
+        if (fs.existsSync(skillIndexPath)) {
+          const indexMtime = fs.statSync(skillIndexPath).mtimeMs;
+          // Find newest SKILL.md under packages/
+          const findNewestSkillMd = (dir) => {
+            let newest = 0;
+            try {
+              const entries = fs.readdirSync(dir, { withFileTypes: true });
+              for (const entry of entries) {
+                const full = path.join(dir, entry.name);
+                if (entry.isDirectory()) {
+                  const sub = findNewestSkillMd(full);
+                  if (sub > newest) newest = sub;
+                } else if (entry.isFile() && entry.name === 'SKILL.md') {
+                  const mtime = fs.statSync(full).mtimeMs;
+                  if (mtime > newest) newest = mtime;
+                }
+              }
+            } catch { /* silent */ }
+            return newest;
+          };
+          const newestSkillMtime = findNewestSkillMd(packagesDir);
+          if (newestSkillMtime > indexMtime) {
+            console.log(`\n⚠️ skill-index.json may be stale — run: node .claude/scripts/generate-skill-index.cjs`);
+          }
+        }
+      }
+    } catch { /* silent — skip if any error */ }
+
     // Auto-inject coding level guidelines (if not disabled)
     const codingLevel = config.codingLevel ?? -1;
     const guidelines = getCodingLevelGuidelines(codingLevel);
@@ -242,3 +278,18 @@ async function main() {
 }
 
 main();
+
+} catch (e) {
+  // Minimal crash logging — only Node builtins, no lib/ deps
+  try {
+    const fs = require('fs');
+    const p = require('path');
+    const logDir = p.join(__dirname, '.logs');
+    if (!fs.existsSync(logDir)) fs.mkdirSync(logDir, { recursive: true });
+    fs.appendFileSync(
+      p.join(logDir, 'hook-log.jsonl'),
+      JSON.stringify({ ts: new Date().toISOString(), hook: p.basename(__filename, '.cjs'), status: 'crash', error: e.message }) + '\n'
+    );
+  } catch (_) {}
+  process.exit(0); // fail-open
+}

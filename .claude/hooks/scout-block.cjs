@@ -113,5 +113,16 @@ try {
 } catch (error) {
   // Fail-open for unexpected errors
   console.error('WARN: Hook error, allowing operation -', error.message);
+  // Crash logging — only Node builtins
+  try {
+    const _fs = require('fs');
+    const _p = require('path');
+    const logDir = _p.join(__dirname, '.logs');
+    if (!_fs.existsSync(logDir)) _fs.mkdirSync(logDir, { recursive: true });
+    _fs.appendFileSync(
+      _p.join(logDir, 'hook-log.jsonl'),
+      JSON.stringify({ ts: new Date().toISOString(), hook: _p.basename(__filename, '.cjs'), status: 'crash', error: error.message }) + '\n'
+    );
+  } catch (_) {}
   process.exit(0);
 }

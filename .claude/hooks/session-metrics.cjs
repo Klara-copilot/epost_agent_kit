@@ -10,6 +10,8 @@
  * Failure mode: Silent — never blocks session exit
  */
 
+try {
+
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
@@ -64,10 +66,16 @@ function rotateIfNeeded() {
   } catch { /* silent */ }
 }
 
-function main() {
+const { parseTranscript } = require('./lib/transcript-parser.cjs');
+
+async function main() {
   try {
-    // Read stdin (Stop hook payload) — not used yet but consumed to avoid broken pipe
-    try { fs.readFileSync(0, 'utf-8'); } catch { /* ok */ }
+    // Read stdin (Stop hook payload)
+    let payload = {};
+    try {
+      const raw = fs.readFileSync(0, 'utf-8').trim();
+      if (raw) payload = JSON.parse(raw);
+    } catch { /* ok */ }
 
     // Ensure data directory
     fs.mkdirSync(DATA_DIR, { recursive: true });
@@ -82,6 +90,21 @@ function main() {
     // Gather git stats
     const git = getGitDiffStats();
     const branch = execSafe('git branch --show-current') || session?.branch || 'unknown';
+
+    // Transcript scan — extract tool counts and subagent count
+    let toolStats = null;
+    if (payload.transcript_path) {
+      try {
+        const transcriptData = await parseTranscript(payload.transcript_path);
+        // Count tools by name
+        const toolCounts = {};
+        for (const tool of transcriptData.tools) {
+          toolCounts[tool.name] = (toolCounts[tool.name] || 0) + 1;
+        }
+        const subagentCount = transcriptData.agents.length;
+        toolStats = { tools: toolCounts, subagentCount };
+      } catch { /* silent — skip on parse error */ }
+    }
 
     // Build metrics entry — merge breadcrumbs from prompt hook if available
     const breadcrumbs = session || {};
@@ -100,7 +123,8 @@ function main() {
         unused: []
       },
       knowledge: { retrieved: 0, captured: 0, staleHits: 0 },
-      routing: breadcrumbs.routing || { intent: null, command: null, platform: null }
+      routing: breadcrumbs.routing || { intent: null, command: null, platform: null },
+      ...(toolStats || {})
     };
 
     // Rotate if needed, then append
@@ -118,3 +142,18 @@ function main() {
 }
 
 main();
+
+} catch (e) {
+  // Minimal crash logging — only Node builtins, no lib/ deps
+  try {
+    const fs = require('fs');
+    const p = require('path');
+    const logDir = p.join(__dirname, '.logs');
+    if (!fs.existsSync(logDir)) fs.mkdirSync(logDir, { recursive: true });
+    fs.appendFileSync(
+      p.join(logDir, 'hook-log.jsonl'),
+      JSON.stringify({ ts: new Date().toISOString(), hook: p.basename(__filename, '.cjs'), status: 'crash', error: e.message }) + '\n'
+    );
+  } catch (_) {}
+  process.exit(0); // fail-open
+}
