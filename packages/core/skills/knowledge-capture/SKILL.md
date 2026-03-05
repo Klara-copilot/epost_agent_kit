@@ -1,6 +1,6 @@
 ---
 name: knowledge-capture
-description: Use after completing a task — capture learnings, save patterns, record post-mortems to docs/
+description: (ePost) Use after completing a task — capture learnings, save patterns, record post-mortems to docs/
 user-invocable: false
 disable-model-invocation: true
 

@@ -1,6 +1,6 @@
 ---
 name: web-nextjs
-description: Use when working with Next.js App Router, Server Components, Server Actions, or page/layout routing
+description: (ePost) Use when working with Next.js App Router, Server Components, Server Actions, or page/layout routing
 user-invocable: false
 
 metadata:

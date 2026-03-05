@@ -1,6 +1,6 @@
 ---
 name: android-a11y
-description: Use when Android accessibility issues arise — TalkBack, contentDescription, touch targets, focus order, contrast in Compose or Views/XML
+description: (ePost) Use when Android accessibility issues arise — TalkBack, contentDescription, touch targets, focus order, contrast in Compose or Views/XML
 user-invocable: false
 metadata:
   keywords:

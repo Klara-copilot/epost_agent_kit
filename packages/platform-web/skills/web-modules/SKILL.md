@@ -1,6 +1,6 @@
 ---
 name: web-modules
-description: "Use when integrating a component into a B2B module — adding screens, binding APIs, wiring stores, setting up routes"
+description: "(ePost) Use when integrating a component into a B2B module — adding screens, binding APIs, wiring stores, setting up routes"
 user-invocable: false
 
 metadata:

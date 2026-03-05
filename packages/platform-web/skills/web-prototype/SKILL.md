@@ -1,6 +1,6 @@
 ---
 name: web-prototype
-description: "Use when converting an external prototype, mockup, or codebase into production code with your design system"
+description: "(ePost) Use when converting an external prototype, mockup, or codebase into production code with your design system"
 user-invocable: false
 
 metadata:

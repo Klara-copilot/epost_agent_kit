@@ -1,6 +1,6 @@
 ---
 name: web-api-routes
-description: Use when working with route.ts files, API endpoints, server actions, or web backend logic in the monorepo
+description: (ePost) Use when working with route.ts files, API endpoints, server actions, or web backend logic in the monorepo
 user-invocable: false
 
 metadata:

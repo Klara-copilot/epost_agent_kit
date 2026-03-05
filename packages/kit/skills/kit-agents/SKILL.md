@@ -1,6 +1,6 @@
 ---
 name: kit-agents
-description: Use when creating, modifying, or auditing agents, skills, commands, hooks, or planning kit ecosystem changes
+description: (ePost) Use when creating, modifying, or auditing agents, skills, commands, hooks, or planning kit ecosystem changes
 user-invocable: false
 metadata:
   keywords:

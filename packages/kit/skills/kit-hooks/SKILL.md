@@ -1,6 +1,6 @@
 ---
 name: kit-hooks
-description: This skill should be used when the user asks to "create a hook", "add a hook", "write a PreToolUse hook", "implement a SessionStart hook", "block tool access", "validate tool use", "add automation on stop", or mentions hook events (PreToolUse, PostToolUse, Stop, SubagentStop, SessionStart, SessionEnd, UserPromptSubmit, PreCompact, Notification). Provides guidance for creating hooks in the epost_agent_kit package system.
+description: (ePost) This skill should be used when the user asks to "create a hook", "add a hook", "write a PreToolUse hook", "implement a SessionStart hook", "block tool access", "validate tool use", "add automation on stop", or mentions hook events (PreToolUse, PostToolUse, Stop, SubagentStop, SessionStart, SessionEnd, UserPromptSubmit, PreCompact, Notification). Provides guidance for creating hooks in the epost_agent_kit package system.
 user-invocable: false
   connections:
     enhances: [kit-agents]

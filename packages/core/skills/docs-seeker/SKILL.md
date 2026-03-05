@@ -1,6 +1,6 @@
 ---
 name: docs-seeker
-description: Use when you need API docs, library references, or framework documentation for an unfamiliar package
+description: (ePost) Use when you need API docs, library references, or framework documentation for an unfamiliar package
 
 metadata:
   agent-affinity: [epost-researcher, epost-fullstack-developer, epost-mcp-manager]

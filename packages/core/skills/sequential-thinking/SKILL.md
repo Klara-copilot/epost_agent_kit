@@ -1,6 +1,6 @@
 ---
 name: sequential-thinking
-description: Use when facing a complex problem that needs step-by-step breakdown, branching analysis, or iterative reasoning
+description: (ePost) Use when facing a complex problem that needs step-by-step breakdown, branching analysis, or iterative reasoning
 
 metadata:
   agent-affinity: [epost-debugger, epost-planner, epost-fullstack-developer, epost-brainstormer]

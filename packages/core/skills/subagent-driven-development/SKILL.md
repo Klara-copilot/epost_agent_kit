@@ -1,6 +1,6 @@
 ---
 name: subagent-driven-development
-description: "Use when executing implementation plans with multiple independent tasks that benefit from per-task subagent dispatch and two-stage review."
+description: "(ePost) Use when executing implementation plans with multiple independent tasks that benefit from per-task subagent dispatch and two-stage review."
 user-invocable: false
 
 metadata:

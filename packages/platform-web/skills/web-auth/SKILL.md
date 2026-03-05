@@ -1,6 +1,6 @@
 ---
 name: web-auth
-description: Use when working with authentication, sessions, OAuth providers, feature flags, or provider nesting
+description: (ePost) Use when working with authentication, sessions, OAuth providers, feature flags, or provider nesting
 user-invocable: false
 
 metadata:

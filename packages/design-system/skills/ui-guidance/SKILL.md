@@ -1,6 +1,6 @@
 ---
 name: ui-guidance
-description: "Use when guiding other teams on UI component integration, resolving design-code conflicts, reviewing UI implementation accuracy, or consulting on design system usage across platforms"
+description: "(ePost) Use when guiding other teams on UI component integration, resolving design-code conflicts, reviewing UI implementation accuracy, or consulting on design system usage across platforms"
 user-invocable: false
 context: fork
 agent: epost-muji

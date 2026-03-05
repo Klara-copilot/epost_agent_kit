@@ -1,6 +1,6 @@
 ---
 name: web-rag
-description: Use when searching web codebase for components, design tokens, Next.js patterns, or any luz_next implementation via vector search
+description: (ePost) Use when searching web codebase for components, design tokens, Next.js patterns, or any luz_next implementation via vector search
 user-invocable: false
 
 metadata:

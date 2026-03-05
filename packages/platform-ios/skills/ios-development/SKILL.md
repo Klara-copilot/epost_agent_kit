@@ -1,6 +1,6 @@
 ---
 name: ios-development
-description: Use when working with .swift files, Xcode projects, SwiftUI/UIKit, or iOS-specific features
+description: (ePost) Use when working with .swift files, Xcode projects, SwiftUI/UIKit, or iOS-specific features
 user-invocable: false
 
 metadata:

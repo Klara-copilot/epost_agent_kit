@@ -1,6 +1,6 @@
 ---
 name: infra-docker
-description: Use when working with Dockerfiles, docker-compose, containers, or containerized deployments
+description: (ePost) Use when working with Dockerfiles, docker-compose, containers, or containerized deployments
 user-invocable: false
 
 metadata:

@@ -1,6 +1,6 @@
 ---
 name: code-review
-description: Use when reviewing code, checking quality before commit, or auditing changed files for issues
+description: (ePost) Use when reviewing code, checking quality before commit, or auditing changed files for issues
 tier: core
 
 metadata:
