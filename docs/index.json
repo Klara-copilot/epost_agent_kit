@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "1.0.0",
+  "description": "epost_agent_kit project documentation registry (v2.0.0)",
+  "updatedAt": "2026-03-05",
+  "categories": {
+    "decision": "Architectural choices and reasoning (ADRs)",
+    "architecture": "System structure, libs, data flow",
+    "pattern": "Reusable code patterns with examples",
+    "convention": "Coding rules and constraints",
+    "feature": "Deep-dive guides for specific features",
+    "finding": "Discovered gotchas and debug insights"
+  },
+  "entries": [
+    {
+      "id": "ARCH-0001",
+      "title": "System Architecture: Agents & Skill Ecosystem",
+      "category": "architecture",
+      "status": "current",
+      "audience": ["agent", "human"],
+      "path": "docs/architecture/ARCH-0001-system-architecture.md",
+      "tags": ["agents", "skills", "delegation", "multi-platform", "packages"],
+      "agentHint": "check before designing new agents or understanding skill coordination patterns",
+      "related": ["PATTERN-0001", "FEAT-0001", "CONV-0001"]
+    },
+    {
+      "id": "PATTERN-0001",
+      "title": "Agent Framework & Skill Development",
+      "category": "pattern",
+      "status": "accepted",
+      "audience": ["agent", "human"],
+      "path": "docs/patterns/PATTERN-0001-agent-framework.md",
+      "tags": ["agents", "skills", "frontmatter", "development", "kit-authoring"],
+      "agentHint": "check before creating new agents or skills, or modifying frontmatter",
+      "related": ["ARCH-0001", "CONV-0001"]
+    },
+    {
+      "id": "FEAT-0001",
+      "title": "Skill Ecosystem: 67 Skills Across 4 Packages",
+      "category": "feature",
+      "status": "current",
+      "audience": ["agent", "human"],
+      "path": "docs/features/FEAT-0001-skill-ecosystem.md",
+      "tags": ["skills", "catalog", "packages", "discovery", "consolidation"],
+      "agentHint": "check before routing to a skill, or searching for available capabilities",
+      "related": ["ARCH-0001", "PATTERN-0001"]
+    },
+    {
+      "id": "CONV-0001",
+      "title": "Package Structure & Source of Truth",
+      "category": "convention",
+      "status": "accepted",
+      "audience": ["agent", "human"],
+      "path": "docs/conventions/CONV-0001-package-structure.md",
+      "tags": ["packages", "structure", "initialization", "editing", "source-of-truth"],
+      "agentHint": "check before editing agents/skills/hooks, or understanding what gets generated vs committed",
+      "related": ["ARCH-0001", "PATTERN-0001"]
+    },
+    {
+      "id": "CONV-0002",
+      "title": "Release Process & Distribution (v2.0.0)",
+      "category": "convention",
+      "status": "accepted",
+      "audience": ["agent", "human"],
+      "path": "docs/conventions/CONV-0002-release-process.md",
+      "tags": ["release", "versioning", "github-actions", "distribution", "automation"],
+      "agentHint": "check before cutting a release or setting up CI/CD automation",
+      "related": ["CONV-0001"]
+    }
+  ]
+}

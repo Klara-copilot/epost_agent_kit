@@ -2,10 +2,10 @@
   "version": "1.0.0",
   "updated": "2026-03-05",
   "counts": {
-    "active": 20,
+    "active": 21,
     "completed": 24,
     "archived": 0,
-    "total": 44
+    "total": 45
   },
   "plans": [
     {
@@ -753,6 +753,23 @@
         "versioning"
       ],
       "file": "plans/reports/epost-implementer-260305-1126-github-release-process.md"
+    },
+    {
+      "id": "PLAN-0047",
+      "title": "Fix /docs --init: Flag, KB Alignment, Web Bias",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-05",
+      "authors": [
+        "epost-architect"
+      ],
+      "tags": [
+        "docs",
+        "init",
+        "knowledge-base",
+        "fix"
+      ],
+      "file": "260305-1153-docs-init-fixes/plan.md"
     }
   ]
 }
