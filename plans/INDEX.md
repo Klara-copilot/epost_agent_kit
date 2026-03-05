@@ -41,6 +41,7 @@ See [PLAN_FORMAT.md](PLAN_FORMAT.md) for standardized plan template.
 | PLAN-0048 | Unified Package Versioning Strategy | epost-architect | 2026-03-05 | [260305-1224-unified-package-versioning/plan.md](260305-1224-unified-package-versioning/plan.md) |
 | PLAN-0049 | Align Agent Team Roles with ClaudeKit | epost-architect | 2026-03-05 | [260305-1253-align-agents-with-claudekit/plan.md](260305-1253-align-agents-with-claudekit/plan.md) |
 | PLAN-0050 | Agent Ecosystem Redesign: Responsibilities, Skills, Routing & Workflows | epost-architect | 2026-03-05 | [260305-1322-agent-redesign-audit/plan.md](260305-1322-agent-redesign-audit/plan.md) |
+| PLAN-0051 | Muji Agent Skill Redesign: Cross-Platform Design System Team | epost-architect | 2026-03-05 | [260305-1348-muji-skill-redesign/plan.md](260305-1348-muji-skill-redesign/plan.md) |
 
 ## Completed
 

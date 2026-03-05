@@ -2,10 +2,10 @@
   "version": "1.0.0",
   "updated": "2026-03-05",
   "counts": {
-    "active": 24,
+    "active": 25,
     "completed": 24,
     "archived": 0,
-    "total": 48
+    "total": 49
   },
   "plans": [
     {
@@ -800,6 +800,16 @@
       "authors": ["epost-architect"],
       "tags": ["agents", "skills", "routing", "workflows", "ecosystem", "redesign"],
       "file": "260305-1322-agent-redesign-audit/plan.md"
+    },
+    {
+      "id": "PLAN-0051",
+      "title": "Muji Agent Skill Redesign: Cross-Platform Design System Team",
+      "type": "design",
+      "status": "active",
+      "created": "2026-03-05",
+      "authors": ["epost-architect"],
+      "tags": ["muji", "design-system", "skills", "cross-platform", "figma", "audit"],
+      "file": "260305-1348-muji-skill-redesign/plan.md"
     }
   ]
 }
