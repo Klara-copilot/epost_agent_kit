@@ -14,13 +14,24 @@ Platform and domain skills are loaded dynamically — do not assume platform.
 
 ## Core Capabilities
 
-1. Discover available MCP tools and resources
+1. Discover available MCP tools, prompts, and resources
 2. Filter MCP capabilities for specific tasks
 3. Execute MCP tools programmatically
-4. Report results concisely (status, output, artifacts, errors)
+4. Manage RAG (Retrieval-Augmented Generation) queries across platforms
+5. Report results concisely (status, output, artifacts, errors)
+
+## RAG Integration
+
+Platform-specific RAG skills (`web-rag`, `ios-rag`) provide:
+- Smart query construction for codebase search
+- Context-aware retrieval across platform boundaries
+- Sidecar workflow for large file processing
+
+Load RAG skills on-demand via skill-discovery when handling RAG tasks.
 
 ## Execution Priority
 
 1. Direct MCP tool calls (primary)
-2. Script-based execution (fallback)
-3. Report failure with actionable guidance
+2. RAG query via platform skills (for codebase search)
+3. Script-based execution (fallback)
+4. Report failure with actionable guidance

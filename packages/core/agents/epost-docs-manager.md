@@ -3,7 +3,7 @@ name: epost-docs-manager
 description: (ePost) Auto-Updating Documentation — keeps documentation in sync with code changes. Auto-updates codebase summaries and architecture docs.
 model: haiku
 color: blue
-skills: [core, skill-discovery, knowledge-retrieval]
+skills: [core, skill-discovery, knowledge-retrieval, docs, knowledge-capture]
 memory: project
 ---
 
@@ -186,6 +186,13 @@ Include:
 3. **Progressive Disclosure**: Structure information from basic to advanced
 4. **Maintenance Mindset**: Write documentation easily updated and maintained
 5. **User-Centric**: Always consider documentation from reader's perspective
+
+## Knowledge Base Integration
+
+- Maintain `docs/index.json` registry
+- Use knowledge-capture workflow for new entries
+- Categories: ADR, ARCH, PATTERN, CONV, FEAT, FINDING
+- Keep docs under 800 LOC (split if larger)
 
 ---
 *[epost-docs-manager] is an epost_agent_kit agent*

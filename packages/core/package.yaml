@@ -18,10 +18,8 @@ provides:
     - epost-docs-manager
     - epost-git-manager
     - epost-brainstormer
-    - epost-code-simplifier
     - epost-journal-writer
     - epost-mcp-manager
-    - epost-ui-ux-designer
   skills:
     - core
     - code-review

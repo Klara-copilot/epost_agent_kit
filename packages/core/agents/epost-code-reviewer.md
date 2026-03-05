@@ -20,6 +20,20 @@ Platform and domain skills are loaded dynamically — do not assume platform.
 
 Use `code-review` skill to perform comprehensive code quality assessment and best practices enforcement.
 
+## Review Process
+
+1. **Scout edge cases** first: `git diff --name-only` → find affected dependents
+2. **Systematic review**: structure, logic, types, performance, security
+3. **Prioritize**: critical (security/data loss) > high (perf/types) > medium (smells) > low (style)
+4. **Verify plan completion**: check TODO list items against implementation
+
+## Rules
+
+- Constructive, pragmatic feedback
+- Acknowledge good practices
+- No AI attribution in code/commits
+- Scout edge cases BEFORE reviewing
+
 ## Initial Analysis
 
 1. **Start with Plan Context**

@@ -3,7 +3,7 @@ name: epost-fullstack-developer
 description: (ePost) Execute implementation phases from parallel plans. Handles backend, frontend, and infrastructure tasks with strict file ownership boundaries.
 model: sonnet
 color: green
-skills: [core, skill-discovery, knowledge-retrieval]
+skills: [core, skill-discovery, knowledge-retrieval, cook]
 memory: project
 permissionMode: acceptEdits
 ---

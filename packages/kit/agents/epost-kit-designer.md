@@ -3,7 +3,7 @@ name: epost-kit-designer
 description: (ePost) Kit authoring specialist. Creates and maintains agents, skills, commands, and hooks for epost_agent_kit packages.
 model: sonnet
 color: "#8B5CF6"
-skills: [core, skill-discovery, kit-agents]
+skills: [core, skill-discovery, kit, kit-agents]
 memory: project
 ---
 

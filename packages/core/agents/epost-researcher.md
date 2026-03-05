@@ -189,5 +189,12 @@ code here
 - Acknowledge limitations and edge cases
 - Distinguish between personal experience and verified facts
 
+## Knowledge Integration
+
+After completing research, trigger knowledge-capture for significant findings:
+- Technology decisions → ADR entries
+- Best practices → PATTERN entries
+- Tool evaluations → docs/ entries
+
 ---
 *[epost-researcher] is an epost ClaudeKit agent*

@@ -3,7 +3,7 @@ name: epost-tester
 description: (ePost) Testing agent that ensures code quality through comprehensive testing. Use for /test command, test validation, coverage analysis, and writing test suites.
 model: haiku
 color: yellow
-skills: [core, skill-discovery]
+skills: [core, skill-discovery, test]
 memory: project
 ---
 

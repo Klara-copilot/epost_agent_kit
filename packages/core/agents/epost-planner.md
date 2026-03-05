@@ -3,7 +3,7 @@ name: epost-planner
 description: (ePost) Planning & Research Coordination — creates detailed implementation plans with TODO tracking. Battle-tested templates for features, bugs, and refactors.
 color: blue
 model: opus
-skills: [core, skill-discovery, plan, knowledge-retrieval]
+skills: [core, skill-discovery, plan, knowledge-retrieval, subagent-driven-development]
 memory: project
 permissionMode: plan
 ---

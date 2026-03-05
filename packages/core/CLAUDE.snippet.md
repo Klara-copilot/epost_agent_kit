@@ -30,6 +30,10 @@ On every user prompt involving a dev task, sense context before acting:
 | Convert | convert, prototype, migrate | `/convert` |
 | A11y | a11y, accessibility, wcag | `/fix --a11y` or `/review --a11y` |
 | Onboard | get started, begin, onboard, new to project, what is this | `/get-started` |
+| Journal | journal, postmortem, what went wrong, failure log | `epost-journal-writer` (direct) |
+| Simplify | simplify, refactor, clean up, reduce complexity | `/cook` (simplification mode) |
+| MCP | mcp, tools, discover tools, rag query | `epost-mcp-manager` (direct) |
+| Design | design, ui, ux, wireframe, screenshot to code, visual asset | `epost-muji` (direct) |
 
 ### Context Boost Rules
 - TypeScript/build errors detected → always route to `/fix` first
