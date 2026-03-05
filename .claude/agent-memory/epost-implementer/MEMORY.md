@@ -2,7 +2,7 @@
 
 ## Project Patterns
 
-### CLI (epost-agent-cli)
+### CLI (epost-agent-kit-cli)
 - `TargetName` type lives in `src/core/target-adapter.ts` — extend when adding IDE targets
 - When extending `TargetName`, must also update: `src/types/index.ts`, `src/core/ownership.ts`, `src/core/config-loader.ts`, `src/core/template-manager.ts`, `src/cli.ts`
 - `ClaudeAdapter` handles all non-github-copilot targets — new editors default to `.claude/` install dir
@@ -18,5 +18,5 @@
 - Always verify baseline failures before attributing to your changes: `git stash && npm test`
 
 ### Index Updates
-- Plan INDEX: `epost-agent-cli/plans/INDEX.md` and `epost-agent-cli/plans/index.json`
+- Plan INDEX: `plans/INDEX.md` and `plans/index.json`
 - Reports go to: `plans/reports/` (project root, not inside epost-agent-cli)

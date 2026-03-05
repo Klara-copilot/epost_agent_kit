@@ -1,7 +1,7 @@
 ---
 title: "Generalize /get-started for any project type"
 description: "Remove Java/Maven-specific examples from get-started skill, make all guidance project-agnostic"
-status: pending
+status: draft
 priority: P1
 effort: 1h
 branch: master

@@ -9,7 +9,7 @@ metadata:
   platforms: [all]
   triggers: ["what do we know about", "check knowledge", "prior art", "previous decision"]
   connections:
-    enhances: [research, planning]
+    enhances: [research, plan]
 ---
 
 # Knowledge Retrieval Skill

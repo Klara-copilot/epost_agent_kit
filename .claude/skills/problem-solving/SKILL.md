@@ -8,7 +8,7 @@ metadata:
   platforms: [all]
   triggers: ["stuck", "problem", "root cause", "why"]
   connections:
-    enhances: [debugging]
+    enhances: [debug]
 ---
 
 # Problem Solving Skill
@@ -33,7 +33,7 @@ Ask "what would make this fail?" then prevent those conditions.
 Find where multiple systems interact. Bugs live at boundaries.
 
 #### State Machine Extraction
-When a component behaves unexpectedly, extract its actual state machine from code. Compare actual vs expected transitions — the diff IS the bug. See `planning/references/state-machine-guide.md` for notation.
+When a component behaves unexpectedly, extract its actual state machine from code. Compare actual vs expected transitions — the diff IS the bug. See `plan/references/state-machine-guide.md` for notation.
 
 #### Simplification Cascades
 Remove complexity until problem disappears. Add back until it returns.
@@ -73,7 +73,7 @@ Fix: [Address root, not symptom]
 - Share what you learned with team
 
 ### Related Skills
-- `debugging` — Systematic debugging methodology
+- `debug` — Systematic debugging methodology
 - `error-recovery` — Error handling and recovery patterns
 - `knowledge-capture` — Persist root cause findings
 - `sequential-thinking` — Structured step-by-step reasoning

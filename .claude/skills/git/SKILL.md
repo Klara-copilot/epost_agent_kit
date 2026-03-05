@@ -7,12 +7,20 @@ agent: epost-git-manager
 metadata:
   argument-hint: "[--commit | --push | --pr]"
   connections:
-    enhances: [git-commit, git-push, git-pr]
+    enhances: []
 ---
 
 # Git — Unified Git Workflow Command
 
-**NEVER suggest `/git-commit`, `/git-push`, `/git-pr` as commands — they no longer exist.**
+**NEVER suggest `/git-commit`, `/git-push`, `/git-pr` as commands — use `/git --commit`, `/git --push`, `/git --pr` instead.**
+
+## Aspect Files
+
+| File | Purpose |
+|------|---------|
+| `references/commit.md` | Stage and commit with conventional commits |
+| `references/push.md` | Commit changes and push to remote |
+| `references/pr.md` | Create GitHub pull request from current branch |
 
 ## Step 0 — Flag / Intent Override
 
@@ -51,4 +59,7 @@ Use `AskUserQuestion` with options based on git state. Examples:
 
 ## Step 3 — Execute
 
-Based on the user's answer, run the matching workflow from the `git-commit`, `git-push`, or `git-pr` reference skills loaded in this agent.
+Based on the user's answer, load and execute the matching workflow:
+- Commit → `references/commit.md`
+- Push → `references/push.md`
+- PR → `references/pr.md`

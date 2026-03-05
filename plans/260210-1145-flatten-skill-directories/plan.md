@@ -1,7 +1,7 @@
 ---
 title: "Flatten skill directories for agentskills.io name compliance"
 description: "Move 10 nested skills to flat structure matching their prefixed names"
-status: complete
+status: completed
 priority: P1
 effort: 1.5h
 branch: fix/skill-migration

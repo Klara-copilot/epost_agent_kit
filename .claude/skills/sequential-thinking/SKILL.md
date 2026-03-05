@@ -8,7 +8,7 @@ metadata:
   platforms: [all]
   triggers: ["complex problem", "step by step", "analyze"]
   connections:
-    enhances: [debugging]
+    enhances: [debug]
 ---
 
 # Sequential Thinking Skill
@@ -66,6 +66,6 @@ Conclusion: [Accept/Reject/Uncertain]
 - Document your reasoning trail
 
 ### Related Skills
-- `debugging` — Systematic debugging methodology
+- `debug` — Systematic debugging methodology
 - `problem-solving` — Root cause analysis techniques
-- `planning` — Implementation planning and task breakdown
+- `plan` — Implementation planning and task breakdown

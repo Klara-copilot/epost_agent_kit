@@ -3,22 +3,713 @@
   "target": "claude",
   "kitVersion": "1.0.0",
   "installedPackages": [
-    "core"
+    "core",
+    "a11y",
+    "kit",
+    "design-system"
   ],
-  "installedAt": "2026-03-04T05:51:38.257Z",
+  "installedAt": "2026-03-04T20:07:17.526Z",
   "files": {
-    ".claude/skills/scout-deep/SKILL.md": {
-      "path": ".claude/skills/scout-deep/SKILL.md",
-      "checksum": "cecd9b3ed3812099810da8572d735806ed66e008d8fd741de84c3f454fb3effe",
-      "installedAt": "2026-03-04T05:51:37.310Z",
+    ".claude/agents/epost-architect.md": {
+      "path": ".claude/agents/epost-architect.md",
+      "checksum": "cc003454412f0ba723217fef4e3b53a0d6773b74dd0ba26558483b262cef121c",
+      "installedAt": "2026-03-04T20:07:16.186Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
     },
-    ".claude/skills/scout-fast/SKILL.md": {
-      "path": ".claude/skills/scout-fast/SKILL.md",
-      "checksum": "0b573d41257bc7f6dbe4a243f774f018568b4460afabc06162a3e24a6c459b48",
-      "installedAt": "2026-03-04T05:51:37.310Z",
+    ".claude/agents/epost-brainstormer.md": {
+      "path": ".claude/agents/epost-brainstormer.md",
+      "checksum": "ca2179d681399b68d674f85efae3a9629b84020d0a6ecef57cbe5e3da18d4b31",
+      "installedAt": "2026-03-04T20:07:16.187Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/agents/epost-debugger.md": {
+      "path": ".claude/agents/epost-debugger.md",
+      "checksum": "97a57e286d0f7d8bfefa8f3c146d16d9a498ae67160c56cc0ba0fac3b5d1f9ca",
+      "installedAt": "2026-03-04T20:07:16.187Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/agents/epost-documenter.md": {
+      "path": ".claude/agents/epost-documenter.md",
+      "checksum": "4ee3b9a80ec48c526bb210f870d6d524697e9a977e81f07dc5da5cdf0b947743",
+      "installedAt": "2026-03-04T20:07:16.187Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/agents/epost-git-manager.md": {
+      "path": ".claude/agents/epost-git-manager.md",
+      "checksum": "9d6e422f1aad2d1127a0817545d0063100e6dab9935eb3feb40dfd62db1a4f73",
+      "installedAt": "2026-03-04T20:07:16.188Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/agents/epost-implementer.md": {
+      "path": ".claude/agents/epost-implementer.md",
+      "checksum": "8f6b9f5fc5bbc749a4d9029c94e9762aaaf7cff9e652cd8413617c2ad5e80042",
+      "installedAt": "2026-03-04T20:07:16.188Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/agents/epost-orchestrator.md": {
+      "path": ".claude/agents/epost-orchestrator.md",
+      "checksum": "3e04da31e068a08a10ea89350bfd9b63fa9beee8d0f64cb6cc3be1d2836684ad",
+      "installedAt": "2026-03-04T20:07:16.190Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/agents/epost-researcher.md": {
+      "path": ".claude/agents/epost-researcher.md",
+      "checksum": "02c0bec1127d4fc2096f0009e3907503ab0a3f2d5de6eb83028443d5d94a68e5",
+      "installedAt": "2026-03-04T20:07:16.190Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/agents/epost-reviewer.md": {
+      "path": ".claude/agents/epost-reviewer.md",
+      "checksum": "ca31dd49649a1eadfb852ddeb25fa6f98efe7889f0b74a7a4b4f0d82bd71bed1",
+      "installedAt": "2026-03-04T20:07:16.193Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/agents/epost-tester.md": {
+      "path": ".claude/agents/epost-tester.md",
+      "checksum": "bd5c483b2e678e68189d1cdda294b6ba49c6ece8964435f39f88426405bc3dc7",
+      "installedAt": "2026-03-04T20:07:16.194Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/.DS_Store": {
+      "path": ".claude/skills/.DS_Store",
+      "checksum": "204b47fe24e23de7064402ec4afd2fa2e81689f581f3c6ba273e25f803727bb9",
+      "installedAt": "2026-03-04T20:07:16.457Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/audit/SKILL.md": {
+      "path": ".claude/skills/audit/SKILL.md",
+      "checksum": "0788f1f9e856b63b5389ff51150687b1da5072391d08627845fa756827fa0bb8",
+      "installedAt": "2026-03-04T20:07:16.458Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/audit/references/a11y.md": {
+      "path": ".claude/skills/audit/references/a11y.md",
+      "checksum": "c6ac0387ad627b040635fd2fdba328111acf1425de34b463ad0f61883d7e03bb",
+      "installedAt": "2026-03-04T20:07:16.458Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/audit/references/close-a11y.md": {
+      "path": ".claude/skills/audit/references/close-a11y.md",
+      "checksum": "77dfcbe1170531fb41343879a0cc0b78ade8f3a78a93ed0638dc5ca7484d0aa9",
+      "installedAt": "2026-03-04T20:07:16.458Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/audit/references/ui.md": {
+      "path": ".claude/skills/audit/references/ui.md",
+      "checksum": "34759c5e0b297731e2513990069b9ce3868cee625f6f68604f93cb15707870c4",
+      "installedAt": "2026-03-04T20:07:16.458Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/auto-improvement/SKILL.md": {
+      "path": ".claude/skills/auto-improvement/SKILL.md",
+      "checksum": "b79e3b30c6f35412f43a4c20f6efeaf26e860c3c58a6dc1e0b655548bbacf292",
+      "installedAt": "2026-03-04T20:07:16.458Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/bootstrap/SKILL.md": {
+      "path": ".claude/skills/bootstrap/SKILL.md",
+      "checksum": "4653b5c3b8c76665a3db9bb1fc2cbb4814a458f18f1e5772fb8a97f6ee1b1164",
+      "installedAt": "2026-03-04T20:07:16.458Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/bootstrap/references/fast-mode.md": {
+      "path": ".claude/skills/bootstrap/references/fast-mode.md",
+      "checksum": "588df22d05abcb456c9880e93f1e424d65aa69a8c2fe9241e26651e5dcc95b8b",
+      "installedAt": "2026-03-04T20:07:16.458Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/bootstrap/references/parallel-mode.md": {
+      "path": ".claude/skills/bootstrap/references/parallel-mode.md",
+      "checksum": "1168bb89d7ea9ae9452b820717179ff84acf47ed23c7a21f8568e38931c29ce6",
+      "installedAt": "2026-03-04T20:07:16.458Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/code-review/SKILL.md": {
+      "path": ".claude/skills/code-review/SKILL.md",
+      "checksum": "12d987764c40b21fe5d61a505435a333614588224c0b0bc6fd0ec03e3f708f54",
+      "installedAt": "2026-03-04T20:07:16.458Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/code-review/references/receiving.md": {
+      "path": ".claude/skills/code-review/references/receiving.md",
+      "checksum": "965950fe426ae22563e176a5cbe14593876d35af05420e366c79a56639267b1e",
+      "installedAt": "2026-03-04T20:07:16.458Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/code-review/references/review-flow.dot": {
+      "path": ".claude/skills/code-review/references/review-flow.dot",
+      "checksum": "456a84275ed70d0b0c9149893c3e2624ef2159e0cc413193f377606d663fa30c",
+      "installedAt": "2026-03-04T20:07:16.458Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/convert/SKILL.md": {
+      "path": ".claude/skills/convert/SKILL.md",
+      "checksum": "db06c41d80d389550c93eecc64a6cc204bb8522036a4e745e5ba2ed6d081db61",
+      "installedAt": "2026-03-04T20:07:16.458Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/cook/SKILL.md": {
+      "path": ".claude/skills/cook/SKILL.md",
+      "checksum": "741ac14d620884d12503eb8784895c8cd6f1dcc30477e9b3a2426cb3c5f109a3",
+      "installedAt": "2026-03-04T20:07:16.458Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/cook/references/fast-mode.md": {
+      "path": ".claude/skills/cook/references/fast-mode.md",
+      "checksum": "c061395e3adfc10bdebcf5a1cf250f67c0688959a64443a6c5337133894bbaef",
+      "installedAt": "2026-03-04T20:07:16.459Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/cook/references/parallel-mode.md": {
+      "path": ".claude/skills/cook/references/parallel-mode.md",
+      "checksum": "a615e8162aafc8985ac00b2f68471f4626636c978048bbec3c03b3e2c420eca1",
+      "installedAt": "2026-03-04T20:07:16.459Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/core/.DS_Store": {
+      "path": ".claude/skills/core/.DS_Store",
+      "checksum": "7d38abb508cba40ebb05b7c4fd3fc949fa15fe46365aa1381d9ed0e570d02717",
+      "installedAt": "2026-03-04T20:07:16.459Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/core/SKILL.md": {
+      "path": ".claude/skills/core/SKILL.md",
+      "checksum": "dedbf9ba490e05fff4eef71bc628b473bfdcb6891d0c92a62950df95ea6f8c0a",
+      "installedAt": "2026-03-04T20:07:16.459Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/core/references/decision-boundaries.md": {
+      "path": ".claude/skills/core/references/decision-boundaries.md",
+      "checksum": "3903282c1dea9f4082236ea36324a1fbb9ad3df7c61acad10e169f8b3208dd70",
+      "installedAt": "2026-03-04T20:07:16.459Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/core/references/documentation-standards.md": {
+      "path": ".claude/skills/core/references/documentation-standards.md",
+      "checksum": "c6cab6676684154a0fb7c4d7825a837fdec8df48823378ac94438d4cb31e4539",
+      "installedAt": "2026-03-04T20:07:16.459Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/core/references/environment-safety.md": {
+      "path": ".claude/skills/core/references/environment-safety.md",
+      "checksum": "f4a688000841a0c5102e8ba1ec2e677eba1305531588ccd319b6ada570cc775f",
+      "installedAt": "2026-03-04T20:07:16.459Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/core/references/external-tools-usage.md": {
+      "path": ".claude/skills/core/references/external-tools-usage.md",
+      "checksum": "0a7a96c11940b25fdde18b8d02aca58dee658ccf969816f9735bf5f4e87d34f2",
+      "installedAt": "2026-03-04T20:07:16.459Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/core/references/verification-checklist.md": {
+      "path": ".claude/skills/core/references/verification-checklist.md",
+      "checksum": "cc9c3cb64700adf4931c60cc8aa5c98ed076dc228e2eafabd6916b56123ae4ae",
+      "installedAt": "2026-03-04T20:07:16.459Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/data-store/SKILL.md": {
+      "path": ".claude/skills/data-store/SKILL.md",
+      "checksum": "897b23ea44621c94a71d3892ff0d1c14a9497148c309120df356cf7e44277065",
+      "installedAt": "2026-03-04T20:07:16.459Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/debug/SKILL.md": {
+      "path": ".claude/skills/debug/SKILL.md",
+      "checksum": "f6c752aee7d32e42b1ffe87a6e459b9260110454c4855f6820c9a428716483f6",
+      "installedAt": "2026-03-04T20:07:16.459Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/debug/references/condition-based-waiting.md": {
+      "path": ".claude/skills/debug/references/condition-based-waiting.md",
+      "checksum": "e5dbfd02cb4244c253fe571fa4f56a3d03e255e3a549815fb9d4d9fbd7e4d441",
+      "installedAt": "2026-03-04T20:07:16.459Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/debug/references/debugging-flow.dot": {
+      "path": ".claude/skills/debug/references/debugging-flow.dot",
+      "checksum": "a52c257ce004404ff66e2a06ff6746aba0bb99e76982650b9ce77f424ab6a5ff",
+      "installedAt": "2026-03-04T20:07:16.459Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/doc-coauthoring/SKILL.md": {
+      "path": ".claude/skills/doc-coauthoring/SKILL.md",
+      "checksum": "6c31feeb441daac50db5a0ca660315bb0ed4472e4174def8b09be62165e8a41d",
+      "installedAt": "2026-03-04T20:07:16.459Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/docs/SKILL.md": {
+      "path": ".claude/skills/docs/SKILL.md",
+      "checksum": "8389fb436185cefa60a19de9b288ac6ec82e23c11b754671014e36bc9e84f9e2",
+      "installedAt": "2026-03-04T20:07:16.460Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/docs/references/component.md": {
+      "path": ".claude/skills/docs/references/component.md",
+      "checksum": "4fba238d1bce453ead707f0649923d009a377850b0632528b130dbb141872226",
+      "installedAt": "2026-03-04T20:07:16.460Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/docs/references/init.md": {
+      "path": ".claude/skills/docs/references/init.md",
+      "checksum": "fcadaec2e3c841f9a4059d9308dc98a5f6bbc91b66946be1a42a8df4297daed7",
+      "installedAt": "2026-03-04T20:07:16.460Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/docs/references/update.md": {
+      "path": ".claude/skills/docs/references/update.md",
+      "checksum": "62caa7b655635560cbf071871f79c0082878221e29459fda6e68afe73fc3da17",
+      "installedAt": "2026-03-04T20:07:16.460Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/docs-seeker/SKILL.md": {
+      "path": ".claude/skills/docs-seeker/SKILL.md",
+      "checksum": "b61950483672bd2f463c9a0a771521d3062728af6e08286a65b5de234e48f98b",
+      "installedAt": "2026-03-04T20:07:16.460Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/epost/SKILL.md": {
+      "path": ".claude/skills/epost/SKILL.md",
+      "checksum": "8b8f2b80b7b7cc5d935e9faeb3676eaa4823b8b5a695f6f1ea59d101bedd523f",
+      "installedAt": "2026-03-04T20:07:16.460Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/epost/references/hub-context.md": {
+      "path": ".claude/skills/epost/references/hub-context.md",
+      "checksum": "cce53f7a7626faeeabaa13a891d425628ca96f98e319f9ac04b3b647985fc5e9",
+      "installedAt": "2026-03-04T20:07:16.460Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/error-recovery/SKILL.md": {
+      "path": ".claude/skills/error-recovery/SKILL.md",
+      "checksum": "3ef69313845988ba78d66868fe3907aa98379939384779ac67334de136c09826",
+      "installedAt": "2026-03-04T20:07:16.460Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/fix/SKILL.md": {
+      "path": ".claude/skills/fix/SKILL.md",
+      "checksum": "a157e8bc6793b85d5e7dae0989320f13d796cae76a51eae53af18dd3e3d40fb4",
+      "installedAt": "2026-03-04T20:07:16.460Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/fix/references/a11y-mode.md": {
+      "path": ".claude/skills/fix/references/a11y-mode.md",
+      "checksum": "9ee1e4c45684b847c54942333988c511c846a5dfa5f342ebc5f82aac8efd5274",
+      "installedAt": "2026-03-04T20:07:16.460Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/fix/references/ci-mode.md": {
+      "path": ".claude/skills/fix/references/ci-mode.md",
+      "checksum": "0adcd73dace4c70c3a5cc20c71d49e0e57d796e7ac71f3ee1a17cd5d05bcc2c7",
+      "installedAt": "2026-03-04T20:07:16.460Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/fix/references/deep-mode.md": {
+      "path": ".claude/skills/fix/references/deep-mode.md",
+      "checksum": "a20b057b81247f7f9aa6f9c70223e837234d442d8989470df951afc3e82849c8",
+      "installedAt": "2026-03-04T20:07:16.460Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/fix/references/ui-mode.md": {
+      "path": ".claude/skills/fix/references/ui-mode.md",
+      "checksum": "9ab3e363f838bb701164dadc01724b25271c6d019169e511dd757c634f923735",
+      "installedAt": "2026-03-04T20:07:16.460Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/get-started/SKILL.md": {
+      "path": ".claude/skills/get-started/SKILL.md",
+      "checksum": "8eb90ca09c03265419b31a53cf91b8276675638fe3f1ca4032dcf66e4c17d6b9",
+      "installedAt": "2026-03-04T20:07:16.460Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/git/SKILL.md": {
+      "path": ".claude/skills/git/SKILL.md",
+      "checksum": "5904760f715a0fd0cc17937e291d13ac239226a03322459563c38cf0d79c4127",
+      "installedAt": "2026-03-04T20:07:16.460Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/git/references/commit.md": {
+      "path": ".claude/skills/git/references/commit.md",
+      "checksum": "c1ed099e1cacbdc00f02e9014d7518147fe8b7e1ff435721cc3bdfab8952c6c2",
+      "installedAt": "2026-03-04T20:07:16.460Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/git/references/pr.md": {
+      "path": ".claude/skills/git/references/pr.md",
+      "checksum": "ea3c6c0bbf4ca744e30c451e05a2d5fd2e5a2eb1439289862644c90f99f4cf49",
+      "installedAt": "2026-03-04T20:07:16.460Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/git/references/push.md": {
+      "path": ".claude/skills/git/references/push.md",
+      "checksum": "5c49fb88b2d969e2d5bd020c3c31d7ac6ed2c7628d2451273afc1eeff9036d44",
+      "installedAt": "2026-03-04T20:07:16.460Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/infra-cloud/SKILL.md": {
+      "path": ".claude/skills/infra-cloud/SKILL.md",
+      "checksum": "1591c4d9447e132c6327eda6a8229bd42a864421e7cc6e0324d633fd4fef4231",
+      "installedAt": "2026-03-04T20:07:16.460Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/infra-cloud/references/gcp-patterns.md": {
+      "path": ".claude/skills/infra-cloud/references/gcp-patterns.md",
+      "checksum": "4b0a43664f5442c09c721a0a86d2f40843a3e0a567bcdacadf3c74eac29fed5c",
+      "installedAt": "2026-03-04T20:07:16.461Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/infra-docker/SKILL.md": {
+      "path": ".claude/skills/infra-docker/SKILL.md",
+      "checksum": "d8e75ad812487c69621feb28deb1ad6b1c03cdba4378d236c7ebad5cec0b92bc",
+      "installedAt": "2026-03-04T20:07:16.461Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/knowledge-capture/SKILL.md": {
+      "path": ".claude/skills/knowledge-capture/SKILL.md",
+      "checksum": "615c8771866070e1c8c44e98c61da0c1403f65e5e8daf3e447fedbff6bb1439d",
+      "installedAt": "2026-03-04T20:07:16.461Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/knowledge-retrieval/SKILL.md": {
+      "path": ".claude/skills/knowledge-retrieval/SKILL.md",
+      "checksum": "969c6a608c86b220674f2ba07443e3c8dccaa49d675fd794c314cdc72d92dfa1",
+      "installedAt": "2026-03-04T20:07:16.461Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/knowledge-retrieval/references/knowledge-base.md": {
+      "path": ".claude/skills/knowledge-retrieval/references/knowledge-base.md",
+      "checksum": "427649cb0ca856f58faab6608bb8b9a4edc832939f5854ede486413210a044ce",
+      "installedAt": "2026-03-04T20:07:16.461Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/knowledge-retrieval/references/priority-matrix.md": {
+      "path": ".claude/skills/knowledge-retrieval/references/priority-matrix.md",
+      "checksum": "5418325435eca4a6e299643190a319c98fb9a8382d77b5c7fc36c2a7d6eccea6",
+      "installedAt": "2026-03-04T20:07:16.461Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/knowledge-retrieval/references/search-strategy.md": {
+      "path": ".claude/skills/knowledge-retrieval/references/search-strategy.md",
+      "checksum": "a19a154938f42051ca2bef75d1608ad4774570f6d975572e300aaf80e0804aa3",
+      "installedAt": "2026-03-04T20:07:16.461Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/plan/SKILL.md": {
+      "path": ".claude/skills/plan/SKILL.md",
+      "checksum": "87273e24a5b51448a3788a80083d12f8ac00ddff7f89aef5569ba399fc7838e8",
+      "installedAt": "2026-03-04T20:07:16.461Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/plan/references/deep-mode.md": {
+      "path": ".claude/skills/plan/references/deep-mode.md",
+      "checksum": "3c2fe2d17ea787535a5ab1b8cf53966d57683fbb777bbe5f42c1f801481a63bf",
+      "installedAt": "2026-03-04T20:07:16.461Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/plan/references/fast-mode.md": {
+      "path": ".claude/skills/plan/references/fast-mode.md",
+      "checksum": "c62f8c8bf17d9b8ef2061a93d07903e53fe42ec1eda6a1377b128a1383b9c977",
+      "installedAt": "2026-03-04T20:07:16.461Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/plan/references/parallel-mode.md": {
+      "path": ".claude/skills/plan/references/parallel-mode.md",
+      "checksum": "b44f686cc713b1750c2da8444eedf784542b5e79d07d74d95a8da8f9618a5be6",
+      "installedAt": "2026-03-04T20:07:16.461Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/plan/references/planning-flow.dot": {
+      "path": ".claude/skills/plan/references/planning-flow.dot",
+      "checksum": "8acb98eef6db04aaf9b9de1aac6c6e156d33afea691b3f100a1364fd3fbfb254",
+      "installedAt": "2026-03-04T20:07:16.461Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/plan/references/state-machine-guide.md": {
+      "path": ".claude/skills/plan/references/state-machine-guide.md",
+      "checksum": "9de89b59f4fbeade7fc94c59a798ac265c773b1de6af3adb8da7a83721d61391",
+      "installedAt": "2026-03-04T20:07:16.461Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/plan/references/validate-mode.md": {
+      "path": ".claude/skills/plan/references/validate-mode.md",
+      "checksum": "4bd1f06006f7e84fb334b294ea08e4375759afda205b62460d78e3437b4ec0e0",
+      "installedAt": "2026-03-04T20:07:16.461Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/problem-solving/SKILL.md": {
+      "path": ".claude/skills/problem-solving/SKILL.md",
+      "checksum": "5d1c32849c320a9c77eb716182b6953a24da1d2390f457e3d27a095925115ea0",
+      "installedAt": "2026-03-04T20:07:16.461Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/repomix/SKILL.md": {
+      "path": ".claude/skills/repomix/SKILL.md",
+      "checksum": "a0cec9a42ba051330f8d51c274300f8eb9ebc6280b46c41fbdbc7d8d117c4faf",
+      "installedAt": "2026-03-04T20:07:16.461Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/research/SKILL.md": {
+      "path": ".claude/skills/research/SKILL.md",
+      "checksum": "f448a3f58899dc5ae6bf830b45804f3747917e17934054e00857ef00fde286a6",
+      "installedAt": "2026-03-04T20:07:16.461Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/review/SKILL.md": {
+      "path": ".claude/skills/review/SKILL.md",
+      "checksum": "836296e54562d4b89e2344d509c331fd77eb8f81b45a36b2161b8ddbf3f0cb5e",
+      "installedAt": "2026-03-04T20:07:16.461Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/review/references/a11y.md": {
+      "path": ".claude/skills/review/references/a11y.md",
+      "checksum": "3d64b66f39e628bb03144f219ded707d2ee0cb5b5fb1e6ba3a5b197986ad69a6",
+      "installedAt": "2026-03-04T20:07:16.461Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/review/references/code.md": {
+      "path": ".claude/skills/review/references/code.md",
+      "checksum": "458a7eb9c00250fed483a8c2c6549e030c05160dc877628dc8415982c337056d",
+      "installedAt": "2026-03-04T20:07:16.462Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/review/references/improvements.md": {
+      "path": ".claude/skills/review/references/improvements.md",
+      "checksum": "44bf47ceef1545921170098144ce2675c0ceb6a008127216e82198cd9a92af8f",
+      "installedAt": "2026-03-04T20:07:16.462Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/scout/SKILL.md": {
+      "path": ".claude/skills/scout/SKILL.md",
+      "checksum": "d951294f7b27771f9ef4d25538a131b4334891f45d4f2777cadf54f6b78a18c4",
+      "installedAt": "2026-03-04T20:07:16.462Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/sequential-thinking/SKILL.md": {
+      "path": ".claude/skills/sequential-thinking/SKILL.md",
+      "checksum": "bb561706d2249346648648625548ccd1b85c873e8304216d0b0b219e77578070",
+      "installedAt": "2026-03-04T20:07:16.462Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/simulator/SKILL.md": {
+      "path": ".claude/skills/simulator/SKILL.md",
+      "checksum": "ae404bd055fbf7c3c863f1ff64b16b96e620aa51d3cde4b9abd59ec1ec638274",
+      "installedAt": "2026-03-04T20:07:16.462Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/skill-discovery/SKILL.md": {
+      "path": ".claude/skills/skill-discovery/SKILL.md",
+      "checksum": "fc6e93cea26f51538490736c4e16544387318bbc0a6200beb26788f72ab2edbc",
+      "installedAt": "2026-03-04T20:07:16.462Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/skill-index.json": {
+      "path": ".claude/skills/skill-index.json",
+      "checksum": "cd0b4234dff24b9198cda2ccaf56858239ea7ab26b3c990324fa3a54022fcc5b",
+      "installedAt": "2026-03-04T20:07:17.435Z",
+      "version": "1.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/subagent-driven-development/SKILL.md": {
+      "path": ".claude/skills/subagent-driven-development/SKILL.md",
+      "checksum": "6b1fa3188fe761d494083fa6d438a26f784d276af7cdbb8db13b84e4511dffa1",
+      "installedAt": "2026-03-04T20:07:16.462Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/subagent-driven-development/references/code-quality-reviewer-prompt.md": {
+      "path": ".claude/skills/subagent-driven-development/references/code-quality-reviewer-prompt.md",
+      "checksum": "258119283c62b30c71d6aa84d7f054644d8f1628f77057bee1a27e62044cb995",
+      "installedAt": "2026-03-04T20:07:16.462Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/subagent-driven-development/references/implementer-prompt.md": {
+      "path": ".claude/skills/subagent-driven-development/references/implementer-prompt.md",
+      "checksum": "9893c1fc6751a7b95c14416eddffff4887cd7ff699f4a333cfeb07d81a4fcad8",
+      "installedAt": "2026-03-04T20:07:16.462Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/subagent-driven-development/references/spec-reviewer-prompt.md": {
+      "path": ".claude/skills/subagent-driven-development/references/spec-reviewer-prompt.md",
+      "checksum": "a2e6c7e982d399813dcb85b588face4d00a1651c9646750a57b4d057f686d53c",
+      "installedAt": "2026-03-04T20:07:16.462Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "core"
+    },
+    ".claude/skills/test/SKILL.md": {
+      "path": ".claude/skills/test/SKILL.md",
+      "checksum": "4098b9c84b4effe20d646526955e46fd59ae5675007fe20513c0a29ddf04f80d",
+      "installedAt": "2026-03-04T20:07:16.462Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -26,7 +717,7 @@
     ".claude/.ck.json": {
       "path": ".claude/.ck.json",
       "checksum": "1bf7f54a5921781a5cbed6f168f8d00fbdc7ac663d445fba86b217df8599e436",
-      "installedAt": "2026-03-04T05:51:38.071Z",
+      "installedAt": "2026-03-04T20:07:17.035Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
@@ -34,18 +725,538 @@
     ".claude/.ckignore": {
       "path": ".claude/.ckignore",
       "checksum": "dd2c75e3a0e5d16f65ed4a5a5bb6b4d05656be2c666c4e7d409c41c2781490e6",
-      "installedAt": "2026-03-04T05:51:38.074Z",
+      "installedAt": "2026-03-04T20:07:17.038Z",
       "version": "2.0.0",
       "modified": false,
       "package": "core"
     },
-    ".claude/skills/skill-index.json": {
-      "path": ".claude/skills/skill-index.json",
-      "checksum": "d21196fcd0456144b20fc30f7e2c94cea612f2907da3d2916df223ecbea90faf",
-      "installedAt": "2026-03-04T05:51:38.117Z",
+    ".claude/agents/epost-a11y-specialist.md": {
+      "path": ".claude/agents/epost-a11y-specialist.md",
+      "checksum": "4c265f7daf710db71f236d6be404933e74d249fd5ad4f7c2c01bb0f68555855f",
+      "installedAt": "2026-03-04T20:07:17.045Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "a11y"
+    },
+    ".claude/skills/a11y/SKILL.md": {
+      "path": ".claude/skills/a11y/SKILL.md",
+      "checksum": "38c635fd96805b7f1f0f1e2d252ce59f72df383655f40e905970cee2cfef048e",
+      "installedAt": "2026-03-04T20:07:17.223Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "a11y"
+    },
+    ".claude/skills/android-a11y/.DS_Store": {
+      "path": ".claude/skills/android-a11y/.DS_Store",
+      "checksum": "52454f08b20542031e909d02705cd37d4f55bc14f01896c9a9479100b7fe9f7b",
+      "installedAt": "2026-03-04T20:07:17.223Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "a11y"
+    },
+    ".claude/skills/android-a11y/SKILL.md": {
+      "path": ".claude/skills/android-a11y/SKILL.md",
+      "checksum": "b0a91f591b560edbd3fea3e8e3b2a9cf741c07e0d18b47aa8526a6c6a2c6c724",
+      "installedAt": "2026-03-04T20:07:17.223Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "a11y"
+    },
+    ".claude/skills/android-a11y/references/android-content-descriptions.md": {
+      "path": ".claude/skills/android-a11y/references/android-content-descriptions.md",
+      "checksum": "af1c255f66e0f2f1634905949a4fc7c9b14abd0540fb2ee5b3ee13705c91fd54",
+      "installedAt": "2026-03-04T20:07:17.223Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "a11y"
+    },
+    ".claude/skills/android-a11y/references/android-contrast.md": {
+      "path": ".claude/skills/android-a11y/references/android-contrast.md",
+      "checksum": "6135ca5c7c414b4b5fd6b87a3f99cabc0b3b6bcce970f421d365a8b4a10876e6",
+      "installedAt": "2026-03-04T20:07:17.223Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "a11y"
+    },
+    ".claude/skills/android-a11y/references/android-focus-semantics.md": {
+      "path": ".claude/skills/android-a11y/references/android-focus-semantics.md",
+      "checksum": "298ca77feac6a2fd5f66c6e0db78f23f71880c12e95db88841004437c212f15e",
+      "installedAt": "2026-03-04T20:07:17.223Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "a11y"
+    },
+    ".claude/skills/android-a11y/references/android-headings.md": {
+      "path": ".claude/skills/android-a11y/references/android-headings.md",
+      "checksum": "878d289b049a111351dc358ab85e04681bc285a5e69182df8fe320373e9e524c",
+      "installedAt": "2026-03-04T20:07:17.223Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "a11y"
+    },
+    ".claude/skills/android-a11y/references/android-touch-targets.md": {
+      "path": ".claude/skills/android-a11y/references/android-touch-targets.md",
+      "checksum": "75ff10f5a936ca32df286a666e6019ffb43513fc1990ae7285488d4e5abcb8f2",
+      "installedAt": "2026-03-04T20:07:17.224Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "a11y"
+    },
+    ".claude/skills/android-a11y/references/android-views-xml-a11y.md": {
+      "path": ".claude/skills/android-a11y/references/android-views-xml-a11y.md",
+      "checksum": "825b05ad949f6c4cd9fb72036ed0e4f00750967bd4c09cfc0715407bfbd44126",
+      "installedAt": "2026-03-04T20:07:17.224Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "a11y"
+    },
+    ".claude/skills/ios-a11y/.DS_Store": {
+      "path": ".claude/skills/ios-a11y/.DS_Store",
+      "checksum": "52454f08b20542031e909d02705cd37d4f55bc14f01896c9a9479100b7fe9f7b",
+      "installedAt": "2026-03-04T20:07:17.224Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "a11y"
+    },
+    ".claude/skills/ios-a11y/SKILL.md": {
+      "path": ".claude/skills/ios-a11y/SKILL.md",
+      "checksum": "07e17d5575680cf0f2b2bca98881d8dc56080f38cee876071ec6126d0e9049b2",
+      "installedAt": "2026-03-04T20:07:17.224Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "a11y"
+    },
+    ".claude/skills/ios-a11y/references/a11y-buttons.md": {
+      "path": ".claude/skills/ios-a11y/references/a11y-buttons.md",
+      "checksum": "d6ed7b24ce24cc686854989f083c6f819d609802d16b231ad8a90a5ebc581d88",
+      "installedAt": "2026-03-04T20:07:17.224Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "a11y"
+    },
+    ".claude/skills/ios-a11y/references/a11y-colors-contrast.md": {
+      "path": ".claude/skills/ios-a11y/references/a11y-colors-contrast.md",
+      "checksum": "d3e4c5c325292eae76628eb8c555ee567322813f81cabcb49fcdea20a2aab858",
+      "installedAt": "2026-03-04T20:07:17.225Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "a11y"
+    },
+    ".claude/skills/ios-a11y/references/a11y-core.md": {
+      "path": ".claude/skills/ios-a11y/references/a11y-core.md",
+      "checksum": "9eff6c2510b25df10b3d9ecbcc8354186ed82e3bc007d11aa95b909902ad5e60",
+      "installedAt": "2026-03-04T20:07:17.225Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "a11y"
+    },
+    ".claude/skills/ios-a11y/references/a11y-focus.md": {
+      "path": ".claude/skills/ios-a11y/references/a11y-focus.md",
+      "checksum": "f11001631cec79ab4015050d0dce5200a7a198a688e7541467a76e68786512fd",
+      "installedAt": "2026-03-04T20:07:17.225Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "a11y"
+    },
+    ".claude/skills/ios-a11y/references/a11y-forms.md": {
+      "path": ".claude/skills/ios-a11y/references/a11y-forms.md",
+      "checksum": "f920bfb8e567319ad2ad71429ff7d42469fac035ff0d4d269eeadba1a849b367",
+      "installedAt": "2026-03-04T20:07:17.225Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "a11y"
+    },
+    ".claude/skills/ios-a11y/references/a11y-headings.md": {
+      "path": ".claude/skills/ios-a11y/references/a11y-headings.md",
+      "checksum": "c364af7858ccf8e2ee987c5b796da590259cd1a01f52d6d99316ebb795bdb91f",
+      "installedAt": "2026-03-04T20:07:17.225Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "a11y"
+    },
+    ".claude/skills/ios-a11y/references/a11y-testing.md": {
+      "path": ".claude/skills/ios-a11y/references/a11y-testing.md",
+      "checksum": "724c0ca0b4d20338e1d0e9d4845528b0284be845018efd7b5bba3789f6ce1122",
+      "installedAt": "2026-03-04T20:07:17.225Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "a11y"
+    },
+    ".claude/skills/web-a11y/.DS_Store": {
+      "path": ".claude/skills/web-a11y/.DS_Store",
+      "checksum": "7d38abb508cba40ebb05b7c4fd3fc949fa15fe46365aa1381d9ed0e570d02717",
+      "installedAt": "2026-03-04T20:07:17.226Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "a11y"
+    },
+    ".claude/skills/web-a11y/SKILL.md": {
+      "path": ".claude/skills/web-a11y/SKILL.md",
+      "checksum": "b6f6c445edf5e277a03e59491fdb7ccfc251b19ad02d40e70440c695d343f0d7",
+      "installedAt": "2026-03-04T20:07:17.226Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "a11y"
+    },
+    ".claude/skills/web-a11y/references/web-aria.md": {
+      "path": ".claude/skills/web-a11y/references/web-aria.md",
+      "checksum": "50ff154708f56a9299fa3851acf57583aef189563c0964e0908bdd73c269e938",
+      "installedAt": "2026-03-04T20:07:17.226Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "a11y"
+    },
+    ".claude/skills/web-a11y/references/web-contrast.md": {
+      "path": ".claude/skills/web-a11y/references/web-contrast.md",
+      "checksum": "7f96a5e147549a0420297fe59a4793fb21ba508f322e1aca1bea9ba1ec428d56",
+      "installedAt": "2026-03-04T20:07:17.227Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "a11y"
+    },
+    ".claude/skills/web-a11y/references/web-forms.md": {
+      "path": ".claude/skills/web-a11y/references/web-forms.md",
+      "checksum": "4e0c704b24c0ea6b85c295236082dab35e00c54fa9702e93a2fb61fc49053072",
+      "installedAt": "2026-03-04T20:07:17.227Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "a11y"
+    },
+    ".claude/skills/web-a11y/references/web-keyboard-focus.md": {
+      "path": ".claude/skills/web-a11y/references/web-keyboard-focus.md",
+      "checksum": "ae83de0631a28b00ff53fee3dc3ee217aa241f937cd04b3a9a4bb31056cae027",
+      "installedAt": "2026-03-04T20:07:17.227Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "a11y"
+    },
+    ".claude/skills/web-a11y/references/web-semantic-html.md": {
+      "path": ".claude/skills/web-a11y/references/web-semantic-html.md",
+      "checksum": "9d621df92ab99e54549f169e1843b1ddb5164c26c59b5fcc0fdebfc6147ce3f4",
+      "installedAt": "2026-03-04T20:07:17.228Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "a11y"
+    },
+    ".claude/skills/web-a11y/references/web-wcag-reference.md": {
+      "path": ".claude/skills/web-a11y/references/web-wcag-reference.md",
+      "checksum": "d5275748595c954783a6f0e3a354c428e301a9ce9aa523456ee2c166e748dd17",
+      "installedAt": "2026-03-04T20:07:17.228Z",
+      "version": "2.0.0",
+      "modified": false,
+      "package": "a11y"
+    },
+    ".claude/agents/epost-kit-designer.md": {
+      "path": ".claude/agents/epost-kit-designer.md",
+      "checksum": "8de9b434fa187b5f48e8b5db62755faf63d275c3a139300b098be9b827641b79",
+      "installedAt": "2026-03-04T20:07:17.242Z",
+      "version": "1.1.0",
+      "modified": false,
+      "package": "kit"
+    },
+    ".claude/skills/kit/SKILL.md": {
+      "path": ".claude/skills/kit/SKILL.md",
+      "checksum": "1c4f20a75fdea007065f0cf8b83588a82246c759ed6b6b1cc1a15a2facd5c15e",
+      "installedAt": "2026-03-04T20:07:17.332Z",
+      "version": "1.1.0",
+      "modified": false,
+      "package": "kit"
+    },
+    ".claude/skills/kit/references/add-agent.md": {
+      "path": ".claude/skills/kit/references/add-agent.md",
+      "checksum": "dacc49d6a4bd44f81ab14b40dc30bccb86c4d00d73122705e4a7d6e3c8b54851",
+      "installedAt": "2026-03-04T20:07:17.332Z",
+      "version": "1.1.0",
+      "modified": false,
+      "package": "kit"
+    },
+    ".claude/skills/kit/references/add-hook.md": {
+      "path": ".claude/skills/kit/references/add-hook.md",
+      "checksum": "ecff0c252d2c5a25dd20a694e09f152e28f552f0201f94ecd8d211f9a4f6667e",
+      "installedAt": "2026-03-04T20:07:17.332Z",
+      "version": "1.1.0",
+      "modified": false,
+      "package": "kit"
+    },
+    ".claude/skills/kit/references/add-skill.md": {
+      "path": ".claude/skills/kit/references/add-skill.md",
+      "checksum": "4a766095b2d92efe2b94de11250a249cb75866ad4e300a1866573a792da7f263",
+      "installedAt": "2026-03-04T20:07:17.333Z",
+      "version": "1.1.0",
+      "modified": false,
+      "package": "kit"
+    },
+    ".claude/skills/kit/references/optimize.md": {
+      "path": ".claude/skills/kit/references/optimize.md",
+      "checksum": "ea48d29b765693a6c25dd178c5dfa42759fbf63b9383c428b4c29f0d972837ac",
+      "installedAt": "2026-03-04T20:07:17.333Z",
+      "version": "1.1.0",
+      "modified": false,
+      "package": "kit"
+    },
+    ".claude/skills/kit-agent-development/SKILL.md": {
+      "path": ".claude/skills/kit-agent-development/SKILL.md",
+      "checksum": "846250ae36bf2c7b7846f82e0710c729294edba010d1e34dab4e7bda3005cdd6",
+      "installedAt": "2026-03-04T20:07:17.333Z",
+      "version": "1.1.0",
+      "modified": false,
+      "package": "kit"
+    },
+    ".claude/skills/kit-agent-development/references/agent-creation-guide.md": {
+      "path": ".claude/skills/kit-agent-development/references/agent-creation-guide.md",
+      "checksum": "f68880d8ad08b588ef257cacc17a6b32aaff483838612e87dc80724d29d400b6",
+      "installedAt": "2026-03-04T20:07:17.333Z",
+      "version": "1.1.0",
+      "modified": false,
+      "package": "kit"
+    },
+    ".claude/skills/kit-agents/SKILL.md": {
+      "path": ".claude/skills/kit-agents/SKILL.md",
+      "checksum": "da1d5e639837267c3910b7cd81c9d4bd99209f53bc4a03fbd505e9fa01ca8477",
+      "installedAt": "2026-03-04T20:07:17.333Z",
+      "version": "1.1.0",
+      "modified": false,
+      "package": "kit"
+    },
+    ".claude/skills/kit-agents/references/mental-model.md": {
+      "path": ".claude/skills/kit-agents/references/mental-model.md",
+      "checksum": "a2be42544109ba2c54dc3a36a54727c98fc0bc8d30d4b99a8b283087f3bf6dde",
+      "installedAt": "2026-03-04T20:07:17.334Z",
+      "version": "1.1.0",
+      "modified": false,
+      "package": "kit"
+    },
+    ".claude/skills/kit-cli/SKILL.md": {
+      "path": ".claude/skills/kit-cli/SKILL.md",
+      "checksum": "6a535825e92759828aac7e1bd7388a53edd8fb0394f09573244f2b57db5e4fc7",
+      "installedAt": "2026-03-04T20:07:17.334Z",
+      "version": "1.1.0",
+      "modified": false,
+      "package": "kit"
+    },
+    ".claude/skills/kit-hooks/SKILL.md": {
+      "path": ".claude/skills/kit-hooks/SKILL.md",
+      "checksum": "f978648eff99f7b07ddd89a9b72c79c5afb92f817bf0ca71ba8b51e64765e140",
+      "installedAt": "2026-03-04T20:07:17.334Z",
+      "version": "1.1.0",
+      "modified": false,
+      "package": "kit"
+    },
+    ".claude/skills/kit-hooks/references/hook-patterns.md": {
+      "path": ".claude/skills/kit-hooks/references/hook-patterns.md",
+      "checksum": "a8aa7dece235216834b37121af1f4d8002f9f6bc7e3527fcd74b84c1c96de89b",
+      "installedAt": "2026-03-04T20:07:17.334Z",
+      "version": "1.1.0",
+      "modified": false,
+      "package": "kit"
+    },
+    ".claude/skills/kit-skill-development/SKILL.md": {
+      "path": ".claude/skills/kit-skill-development/SKILL.md",
+      "checksum": "dabc058499018bd9895d3eec7bfb36e38cd60c0bd247df215462c5cd5a440ef8",
+      "installedAt": "2026-03-04T20:07:17.334Z",
+      "version": "1.1.0",
+      "modified": false,
+      "package": "kit"
+    },
+    ".claude/skills/kit-skill-development/references/cso-principles.md": {
+      "path": ".claude/skills/kit-skill-development/references/cso-principles.md",
+      "checksum": "ae332bce410c106c614b6675eceaa6932cef3b609bfe150e6632a981a56f85c4",
+      "installedAt": "2026-03-04T20:07:17.334Z",
+      "version": "1.1.0",
+      "modified": false,
+      "package": "kit"
+    },
+    ".claude/skills/kit-skill-development/references/persuasion-principles.md": {
+      "path": ".claude/skills/kit-skill-development/references/persuasion-principles.md",
+      "checksum": "9d77d232b9699cf5899ebee3a47ac4345728ac90cfd5d802af8db4b25aea0ab8",
+      "installedAt": "2026-03-04T20:07:17.334Z",
+      "version": "1.1.0",
+      "modified": false,
+      "package": "kit"
+    },
+    ".claude/skills/kit-skill-development/references/skill-authoring-guide.md": {
+      "path": ".claude/skills/kit-skill-development/references/skill-authoring-guide.md",
+      "checksum": "0afd8ca386643a326b6449cb4ab3e6b2396fff20f62911adb7172d584289579a",
+      "installedAt": "2026-03-04T20:07:17.334Z",
+      "version": "1.1.0",
+      "modified": false,
+      "package": "kit"
+    },
+    ".claude/skills/kit-skill-development/references/skill-eval.md": {
+      "path": ".claude/skills/kit-skill-development/references/skill-eval.md",
+      "checksum": "1e9b4c92fc4f80f8a4296af83ebf924f174d2f9710def1eca1957b44e2a313ed",
+      "installedAt": "2026-03-04T20:07:17.334Z",
+      "version": "1.1.0",
+      "modified": false,
+      "package": "kit"
+    },
+    ".claude/skills/kit-skill-development/references/skill-structure.md": {
+      "path": ".claude/skills/kit-skill-development/references/skill-structure.md",
+      "checksum": "fef836e7c5ad46c3b4230021c69c94c5f893f4dc9956d23c0f87850b5999e73d",
+      "installedAt": "2026-03-04T20:07:17.335Z",
+      "version": "1.1.0",
+      "modified": false,
+      "package": "kit"
+    },
+    ".claude/skills/kit-verify/SKILL.md": {
+      "path": ".claude/skills/kit-verify/SKILL.md",
+      "checksum": "e73e67cc4e72102bc81d7e5969dda8326b3decc8678700654c983c82d42e743f",
+      "installedAt": "2026-03-04T20:07:17.335Z",
+      "version": "1.1.0",
+      "modified": false,
+      "package": "kit"
+    },
+    ".claude/agents/epost-muji.md": {
+      "path": ".claude/agents/epost-muji.md",
+      "checksum": "49d96d7806b1e3f0b04408d0172ddb997cbdb2d02776e6fc897d2a2defd35417",
+      "installedAt": "2026-03-04T20:07:17.339Z",
       "version": "1.0.0",
       "modified": false,
-      "package": "core"
+      "package": "design-system"
+    },
+    ".claude/skills/web-figma/SKILL.md": {
+      "path": ".claude/skills/web-figma/SKILL.md",
+      "checksum": "ed8be16340e90099a881b74948e336e89ed037f87619384331819f551951fb20",
+      "installedAt": "2026-03-04T20:07:17.413Z",
+      "version": "1.0.0",
+      "modified": false,
+      "package": "design-system"
+    },
+    ".claude/skills/web-figma/references/extraction-procedure.md": {
+      "path": ".claude/skills/web-figma/references/extraction-procedure.md",
+      "checksum": "dc0d688fc21ccd2c5734acc35b103903e5cf8dedd17fc43ce0a8781c4c9ad9de",
+      "installedAt": "2026-03-04T20:07:17.413Z",
+      "version": "1.0.0",
+      "modified": false,
+      "package": "design-system"
+    },
+    ".claude/skills/web-figma-variables/SKILL.md": {
+      "path": ".claude/skills/web-figma-variables/SKILL.md",
+      "checksum": "19452fa823c9a41466c115f3db09c510bef032c1283f3f79f5f7ed818fe9ca2f",
+      "installedAt": "2026-03-04T20:07:17.413Z",
+      "version": "1.0.0",
+      "modified": false,
+      "package": "design-system"
+    },
+    ".claude/skills/web-figma-variables/assets/figma-variables.json": {
+      "path": ".claude/skills/web-figma-variables/assets/figma-variables.json",
+      "checksum": "c59445a889dc4d05e5e980f3127e131b2d2956d74695d8a327a3048ab1cd5fae",
+      "installedAt": "2026-03-04T20:07:17.420Z",
+      "version": "1.0.0",
+      "modified": false,
+      "package": "design-system"
+    },
+    ".claude/skills/web-figma-variables/references/inconsistencies-improvements.md": {
+      "path": ".claude/skills/web-figma-variables/references/inconsistencies-improvements.md",
+      "checksum": "d949ba312449dac0ca95dd1a1ee5c5c59eb1e9ea1fb1fa719562db73c255c2a3",
+      "installedAt": "2026-03-04T20:07:17.420Z",
+      "version": "1.0.0",
+      "modified": false,
+      "package": "design-system"
+    },
+    ".claude/skills/web-figma-variables/references/variables-architecture.md": {
+      "path": ".claude/skills/web-figma-variables/references/variables-architecture.md",
+      "checksum": "fe77135ff21a9dd11deb8469ca2cc974e5c9945af36aab8eb2ee6f3adc0ee1e9",
+      "installedAt": "2026-03-04T20:07:17.420Z",
+      "version": "1.0.0",
+      "modified": false,
+      "package": "design-system"
+    },
+    ".claude/skills/web-ui-lib/.DS_Store": {
+      "path": ".claude/skills/web-ui-lib/.DS_Store",
+      "checksum": "52454f08b20542031e909d02705cd37d4f55bc14f01896c9a9479100b7fe9f7b",
+      "installedAt": "2026-03-04T20:07:17.420Z",
+      "version": "1.0.0",
+      "modified": false,
+      "package": "design-system"
+    },
+    ".claude/skills/web-ui-lib/SKILL.md": {
+      "path": ".claude/skills/web-ui-lib/SKILL.md",
+      "checksum": "657ff306db0b4afb6363f65681cddacd64fccdd5651c5d270cd8f34fa2fad365",
+      "installedAt": "2026-03-04T20:07:17.420Z",
+      "version": "1.0.0",
+      "modified": false,
+      "package": "design-system"
+    },
+    ".claude/skills/web-ui-lib/references/components.md": {
+      "path": ".claude/skills/web-ui-lib/references/components.md",
+      "checksum": "9bd63127a688cd281800f857a22fcd4aec3eec8dffbd951d7a292e28eda829d9",
+      "installedAt": "2026-03-04T20:07:17.420Z",
+      "version": "1.0.0",
+      "modified": false,
+      "package": "design-system"
+    },
+    ".claude/skills/web-ui-lib/references/contributing.md": {
+      "path": ".claude/skills/web-ui-lib/references/contributing.md",
+      "checksum": "215b69e733c44f0f392892864b430f909a000ea44f79ff8b27f15e1893b34b52",
+      "installedAt": "2026-03-04T20:07:17.420Z",
+      "version": "1.0.0",
+      "modified": false,
+      "package": "design-system"
+    },
+    ".claude/skills/web-ui-lib/references/design-system.md": {
+      "path": ".claude/skills/web-ui-lib/references/design-system.md",
+      "checksum": "8d6933e0bb563ac00fb8b216f9b416ed05b04be3cb3f15cd28b9dc43f1435fc1",
+      "installedAt": "2026-03-04T20:07:17.421Z",
+      "version": "1.0.0",
+      "modified": false,
+      "package": "design-system"
+    },
+    ".claude/skills/web-ui-lib/references/integration.md": {
+      "path": ".claude/skills/web-ui-lib/references/integration.md",
+      "checksum": "9745d972a852b7cee5a1c8d8dab2b7ff52abd976ed289e4a9eda94166c4f6581",
+      "installedAt": "2026-03-04T20:07:17.421Z",
+      "version": "1.0.0",
+      "modified": false,
+      "package": "design-system"
+    },
+    ".claude/skills/web-ui-lib-dev/SKILL.md": {
+      "path": ".claude/skills/web-ui-lib-dev/SKILL.md",
+      "checksum": "343cd9f3edc05bb6ef53a8a1a258c597924180f8d7973260550527de26d0b304",
+      "installedAt": "2026-03-04T20:07:17.421Z",
+      "version": "1.0.0",
+      "modified": false,
+      "package": "design-system"
+    },
+    ".claude/skills/web-ui-lib-dev/references/audit-ui.md": {
+      "path": ".claude/skills/web-ui-lib-dev/references/audit-ui.md",
+      "checksum": "44372d44eedc7e1dca8c1efd788e1dfa63cb7fbdbf9b693f15cbdf3785b6a571",
+      "installedAt": "2026-03-04T20:07:17.421Z",
+      "version": "1.0.0",
+      "modified": false,
+      "package": "design-system"
+    },
+    ".claude/skills/web-ui-lib-dev/references/document-component.md": {
+      "path": ".claude/skills/web-ui-lib-dev/references/document-component.md",
+      "checksum": "617ae6b9102d9c6921550669d3f96ce8040aa21a652cbd39814189eb762041ed",
+      "installedAt": "2026-03-04T20:07:17.421Z",
+      "version": "1.0.0",
+      "modified": false,
+      "package": "design-system"
+    },
+    ".claude/skills/web-ui-lib-dev/references/fix-findings.md": {
+      "path": ".claude/skills/web-ui-lib-dev/references/fix-findings.md",
+      "checksum": "e31340788a3c4d5b930b5866ba36d9380037f461de100a616886cb70ca11a22e",
+      "installedAt": "2026-03-04T20:07:17.421Z",
+      "version": "1.0.0",
+      "modified": false,
+      "package": "design-system"
+    },
+    ".claude/skills/web-ui-lib-dev/references/implement-component.md": {
+      "path": ".claude/skills/web-ui-lib-dev/references/implement-component.md",
+      "checksum": "e1cdd9f990642f5b9f6fa91f007a3c83cfd836be972826c4852579a864bdc4f6",
+      "installedAt": "2026-03-04T20:07:17.421Z",
+      "version": "1.0.0",
+      "modified": false,
+      "package": "design-system"
+    },
+    ".claude/skills/web-ui-lib-dev/references/plan-feature.md": {
+      "path": ".claude/skills/web-ui-lib-dev/references/plan-feature.md",
+      "checksum": "af1cd74fc6054d4e58555ca74f084aeee353bee4e6625b10a3f7d8a50364fb43",
+      "installedAt": "2026-03-04T20:07:17.421Z",
+      "version": "1.0.0",
+      "modified": false,
+      "package": "design-system"
     }
   }
 }

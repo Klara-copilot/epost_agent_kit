@@ -1,7 +1,7 @@
 ---
 title: "Broad Skill Discovery Across Agent Ecosystem"
 description: "Create shared skill-discovery skill and wire it into generalist agents"
-status: pending
+status: draft
 priority: P2
 effort: 3h
 branch: master

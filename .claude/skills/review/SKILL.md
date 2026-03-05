@@ -7,7 +7,7 @@ agent: epost-reviewer
 metadata:
   argument-hint: "[--code | --a11y | --improvements]"
   connections:
-    enhances: [review-code, review-a11y, review-improvements]
+    enhances: []
 ---
 
 # Review — Unified Review Command
@@ -16,20 +16,28 @@ Auto-detect and execute the appropriate review workflow.
 
 ## Step 0 — Flag Override
 
-If `$ARGUMENTS` starts with `--code`: dispatch `review-code` directly.
-If `$ARGUMENTS` starts with `--a11y`: dispatch `review-a11y` directly.
-If `$ARGUMENTS` starts with `--improvements`: run review-improvements inline (see below).
+If `$ARGUMENTS` starts with `--code`: load `references/code.md` and execute.
+If `$ARGUMENTS` starts with `--a11y`: load `references/a11y.md` and execute.
+If `$ARGUMENTS` starts with `--improvements`: run improvements inline (see below).
 Otherwise: continue to Auto-Detection.
+
+## Aspect Files
+
+| File | Purpose |
+|------|---------|
+| `references/code.md` | Ultrathink edge cases, then parallel verify with reviewers |
+| `references/a11y.md` | Review accessibility compliance (WCAG 2.1 AA) |
+| `references/improvements.md` | Review auto-improvement metrics, detect patterns |
 
 ## Auto-Detection
 
 Analyze `$ARGUMENTS` keywords:
 
-| Keyword match | Dispatch |
-|--------------|----------|
-| "a11y", "accessibility", "wcag" | `review-a11y` |
-| "improvements", "metrics", "patterns" | Run review-improvements inline |
-| Default (no keyword match) | `review-code` |
+| Keyword match | Load Reference |
+|--------------|----------------|
+| "a11y", "accessibility", "wcag" | `references/a11y.md` |
+| "improvements", "metrics", "patterns" | Run improvements inline (see below) |
+| Default (no keyword match) | `references/code.md` |
 
 ## Review-Improvements (Inline)
 
@@ -48,4 +56,4 @@ node packages/core/scripts/detect-improvements.cjs 2>/dev/null || node .claude/s
 
 ## Execution
 
-For `review-code` and `review-a11y`: load the reference documentation for the dispatched variant and execute its workflow.
+For code and a11y reviews: load the reference file and execute its workflow. For improvements: execute inline per the Review-Improvements section above.

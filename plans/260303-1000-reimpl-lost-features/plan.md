@@ -1,7 +1,7 @@
 ---
 title: "Re-implement lost features from working tree"
 description: "Recover and commit improvements overridden by partial re-init"
-status: pending
+status: draft
 priority: P1
 effort: 2h
 branch: master

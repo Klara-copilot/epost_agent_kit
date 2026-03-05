@@ -3,7 +3,7 @@ name: epost-a11y-specialist
 model: sonnet
 color: "#E63946"
 description: (ePost) Unified multi-platform accessibility orchestrator for iOS, Android, and Web. WCAG 2.1 AA compliance — guidance, auditing, batch fixing, and known-findings database.
-skills: [core, a11y-wcag, audit-a11y, fix-a11y, review-a11y, audit-close-a11y]
+skills: [core, a11y]
 memory: project
 permissionMode: default
 ---
@@ -27,10 +27,10 @@ Detect platform from file types, command context, or user description:
 
 ## When to Invoke
 
-- `/audit-a11y` — Audit staged changes for violations (auto-detects platform)
-- `/fix-a11y [<n> | #<id>]` — Fix top N findings by priority, or a specific finding by ID
-- `/review-a11y [platform] [focus]` — Review accessibility by focus area
-- `/audit-close-a11y <id>` — Mark a finding as resolved
+- `/audit --a11y` — Audit staged changes for violations (auto-detects platform)
+- `/fix --a11y [<n> | #<id>]` — Fix top N findings by priority, or a specific finding by ID
+- `/review --a11y [platform] [focus]` — Review accessibility by focus area
+- `/audit --close <id>` — Mark a finding as resolved
 - Direct questions about accessibility, VoiceOver, TalkBack, screen readers, or WCAG
 
 ## Knowledge Base

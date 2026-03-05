@@ -1,7 +1,7 @@
 ---
 title: "Rethink RAG Skills — Dynamic, MCP-Integrated, Hardcode-Free"
 description: "Rewrite web-rag and ios-rag skills to be dynamic, derive context from MCP tools at runtime, eliminate hardcoded filter values and project names"
-status: pending
+status: draft
 priority: P1
 effort: 3h
 branch: master

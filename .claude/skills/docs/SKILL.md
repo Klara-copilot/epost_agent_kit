@@ -7,8 +7,8 @@ agent: epost-documenter
 metadata:
   argument-hint: "[--migrate | --scan | --verify | --batch [category]]"
   connections:
-    enhances: [docs-init, docs-update, docs-component]
-    requires: [knowledge-base]
+    enhances: []
+    requires: [knowledge-retrieval]
 ---
 
 # Docs — Unified Documentation Command
@@ -17,11 +17,19 @@ Auto-detect and execute the appropriate documentation workflow.
 
 ## Step 0 — Flag Override
 
-If `$ARGUMENTS` starts with `--migrate`: dispatch `docs-init` with migrate mode.
-If `$ARGUMENTS` starts with `--scan`: dispatch `docs-update` with scan mode.
-If `$ARGUMENTS` starts with `--verify`: dispatch `docs-update` with verify mode.
-If `$ARGUMENTS` starts with `--batch`: dispatch `docs-component` with batch mode. Pass remaining args as category filter.
+If `$ARGUMENTS` starts with `--migrate`: load `references/init.md`, execute in migrate mode.
+If `$ARGUMENTS` starts with `--scan`: load `references/update.md`, execute in scan mode.
+If `$ARGUMENTS` starts with `--verify`: load `references/update.md`, execute in verify mode.
+If `$ARGUMENTS` starts with `--batch`: load `references/component.md`, execute in batch mode. Pass remaining args as category filter.
 Otherwise: continue to Auto-Detection.
+
+## Aspect Files
+
+| File | Purpose |
+|------|---------|
+| `references/init.md` | Scan codebase and generate structured KB documentation |
+| `references/update.md` | Update existing documentation or scan for staleness |
+| `references/component.md` | Document a klara-theme component (Figma data + prop mapping) |
 
 ## Auto-Detection
 
@@ -31,12 +39,12 @@ Otherwise: continue to Auto-Detection.
 
 ### Decision Matrix
 
-| Condition | Dispatch |
-|-----------|----------|
-| `docs/index.json` absent | `docs-init` — initialize documentation |
-| Args match a component key AND `libs/klara-theme/` exists | `docs-component` — document that component |
-| `docs/index.json` present (default) | `docs-update` — update existing docs |
+| Condition | Load Reference |
+|-----------|---------------|
+| `docs/index.json` absent | `references/init.md` — initialize documentation |
+| Args match a component key AND `libs/klara-theme/` exists | `references/component.md` — document that component |
+| `docs/index.json` present (default) | `references/update.md` — update existing docs |
 
 ## Execution
 
-Load the reference documentation for the dispatched variant and execute its workflow.
+Load the reference file and execute its workflow.

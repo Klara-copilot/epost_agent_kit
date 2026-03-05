@@ -1,7 +1,7 @@
 ---
 title: "Audit & review report persistence"
 description: "All a11y commands write timestamped reports to .epost-data/a11y/fixes/ subfolders"
-status: done
+status: completed
 priority: P2
 effort: 1h
 branch: master

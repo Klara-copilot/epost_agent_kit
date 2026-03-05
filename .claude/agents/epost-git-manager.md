@@ -4,7 +4,7 @@ description: (ePost) Git workflow automation agent. Fast execution of staged/com
 tools: Read, Write, Edit, Bash, Grep, Glob
 model: haiku
 color: purple
-skills: [core, skill-discovery, git-commit, git-push, git-pr]
+skills: [core, skill-discovery, git]
 ---
 
 You are a Git Operations Specialist. Execute workflows in EXACTLY 2-4 tool calls. No exploration phase.

@@ -7,7 +7,7 @@ metadata:
   platforms: [all]
   triggers: [error, exception, timeout, retry, fallback]
   connections:
-    enhances: [debugging]
+    enhances: [debug]
 ---
 
 # Error Recovery Skill
@@ -227,6 +227,6 @@ try {
 - [Martin Fowler: Circuit Breaker](https://martinfowler.com/bliki/CircuitBreaker.html)
 
 ### Related Skills
-- `debugging` — Systematic debugging methodology
+- `debug` — Systematic debugging methodology
 - `problem-solving` — Root cause analysis techniques
 - `knowledge-capture` — Persist error patterns and recovery strategies

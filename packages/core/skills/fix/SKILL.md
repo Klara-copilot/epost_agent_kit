@@ -6,9 +6,6 @@ context: fork
 agent: epost-debugger
 metadata:
   argument-hint: "[issue description]"
-  connections:
-    conflicts: [fix-deep]
-    enhances: [fix-deep, fix-ci, fix-ui]
 ---
 
 # Fix — Unified Fix Command
@@ -17,10 +14,20 @@ Fix issues with automatic error type detection. Absorbs `:fast`, `:test`, `:type
 
 ## Step 0 — Flag Override
 
-If `$ARGUMENTS` starts with `--ci`: skip auto-detection, dispatch `fix-ci` directly. Remaining args are the issue description.
-If `$ARGUMENTS` starts with `--deep`: skip auto-detection, dispatch `fix-deep` directly.
-If `$ARGUMENTS` starts with `--ui`: skip auto-detection, dispatch `fix-ui` directly.
+If `$ARGUMENTS` starts with `--ci`: skip auto-detection, load `references/ci-mode.md` and execute. Remaining args are the issue description.
+If `$ARGUMENTS` starts with `--deep`: skip auto-detection, load `references/deep-mode.md` and execute.
+If `$ARGUMENTS` starts with `--ui`: skip auto-detection, load `references/ui-mode.md` and execute.
+If `$ARGUMENTS` starts with `--a11y`: skip auto-detection, load `references/a11y-mode.md` and execute.
 Otherwise: continue to Error Type Auto-Detection.
+
+## Aspect Files
+
+| File | Purpose |
+|------|---------|
+| `references/deep-mode.md` | Systematic deep fix with full investigation |
+| `references/ci-mode.md` | Fix CI pipeline failures |
+| `references/ui-mode.md` | Fix UI/layout issues |
+| `references/a11y-mode.md` | Fix accessibility findings from known-findings.json |
 
 ## Error Type Auto-Detection
 
@@ -56,7 +63,7 @@ For cases where auto-detection isn't enough, use flags:
 - `/fix --deep` — full systematic investigation with documentation
 - `/fix --ci` — CI pipeline debugging (reads CI logs, reproduces locally)
 - `/fix --ui` — visual/layout issues (CSS, a11y check, cross-browser)
-- `/a11y --fix` — accessibility findings from `.epost-data/a11y/known-findings.json`
+- `/fix --a11y` — accessibility findings from `.epost-data/a11y/known-findings.json`
 
 <issue>$ARGUMENTS</issue>
 

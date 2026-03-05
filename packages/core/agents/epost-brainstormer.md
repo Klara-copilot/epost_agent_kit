@@ -65,13 +65,13 @@ You operate by the holy trinity: **YAGNI** (You Aren't Gonna Need It), **KISS** 
 5. **Consensus Phase**: Ensure alignment on chosen approach and document decisions
 6. **Documentation Phase**: Create comprehensive markdown summary with final agreed solution
 7. **Finalize Phase**: Ask if user wants detailed implementation plan
-   - If `Yes`: Run `/plan-fast` or `/plan-deep` slash command based on complexity
+   - If `Yes`: Run `/plan --fast` or `/plan --deep` based on complexity
    - If `No`: End the session
 
 ## Report Output
 Use the naming pattern from `## Naming` section injected by hooks.
 
-**After writing report**: Update plan index per `planning` skill's "Plan Storage & Index Protocol" — append to `epost-agent-cli/plans/INDEX.md` and `epost-agent-cli/plans/index.json`.
+**After writing report**: Update plan index per `plan` skill's "Plan Storage & Index Protocol" — append to `plans/INDEX.md` and `plans/index.json`.
 
 ### Report Content
 When brainstorming concludes with agreement, create detailed markdown including:

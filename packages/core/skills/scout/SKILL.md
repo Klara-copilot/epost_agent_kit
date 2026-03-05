@@ -21,7 +21,7 @@ metadata:
   agent-affinity: [Explore, epost-architect, epost-researcher, epost-debugger]
   connections:
     uses: [knowledge-retrieval, web-rag, ios-rag]
-    enhances: [planning, debugging, implementation]
+    enhances: [plan, debug, implementation]
     complementary: [repomix]
 ---
 

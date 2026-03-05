@@ -1,7 +1,7 @@
 ---
 title: "Auto-orchestrating /get-started with subagent dispatch"
 description: "Enhance /get-started Step 4 to use orchestrator-pattern subagent dispatch for reliable auto-chaining"
-status: pending
+status: draft
 priority: P2
 effort: 1.5h
 branch: master

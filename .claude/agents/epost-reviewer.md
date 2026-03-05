@@ -299,7 +299,7 @@ When assigned platform-specific code review:
 - Respect project standards in `./.claude/rules/development-rules.md` and `./docs/code-standards.md`
 - **[IMPORTANT]** Verify all tasks in plan TODO list are completed
 - **[IMPORTANT]** Update plan file with task status and next steps
-- **After writing report**: Update plan index per `planning` skill's "Plan Storage & Index Protocol" — append to `epost-agent-cli/plans/INDEX.md` and `epost-agent-cli/plans/index.json`
+- **After writing report**: Update plan index per `plan` skill's "Plan Storage & Index Protocol" — append to `plans/INDEX.md` and `plans/index.json`
 
 ---
 *epost-reviewer is a ClaudeKit agent for comprehensive code quality and security assessment*

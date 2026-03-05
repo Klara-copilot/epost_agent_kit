@@ -105,5 +105,5 @@ Run via command: `/review-improvements`
 - `knowledge-retrieval` — Search existing knowledge before acting
 - `knowledge-base` — Knowledge system structure and conventions
 - `verification-before-completion` — Verification failures tracked for rework detection
-- `debugging` — Error metrics auto-captured by session-metrics hook
+- `debug` — Error metrics auto-captured by session-metrics hook
 - `code-review` — Convention violations auto-detected across sessions

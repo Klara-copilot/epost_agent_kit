@@ -30,7 +30,7 @@ On activation, discover and load:
 - `kit-agent-development` — when creating/modifying agents
 - `kit-skill-development` — when creating/modifying skills
 - `kit-hooks` — when creating/modifying hooks
-- `kit-cli` — when working on epost-agent-cli code
+- `kit-cli` — when working on epost-agent-kit-cli code
 
 ## Workflow
 

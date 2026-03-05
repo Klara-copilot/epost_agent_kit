@@ -82,6 +82,31 @@ function main() {
       process.exit(1);
     }
 
+    // Stamp plan.md frontmatter with status: active
+    const planMd = path.join(absolutePath, 'plan.md');
+    if (fs.existsSync(planMd)) {
+      try {
+        let content = fs.readFileSync(planMd, 'utf8');
+        const today = new Date().toISOString().slice(0, 10);
+
+        // Update or insert status: active
+        if (/^status:/m.test(content)) {
+          content = content.replace(/^(status):.*$/m, '$1: active');
+        } else {
+          content = content.replace(/^---\n/, '---\nstatus: active\n');
+        }
+        // Update or insert updated date
+        if (/^updated:/m.test(content)) {
+          content = content.replace(/^(updated):.*$/m, `$1: ${today}`);
+        } else {
+          content = content.replace(/^---\n/, `---\nupdated: ${today}\n`);
+        }
+        fs.writeFileSync(planMd, content);
+      } catch (e) {
+        console.error('Warning: Could not update plan.md frontmatter: ' + e.message);
+      }
+    }
+
     // Print confirmation
     console.log('Active plan set to: ' + absolutePath);
     process.exit(0);

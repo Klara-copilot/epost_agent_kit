@@ -1,11 +1,11 @@
 {
-  "generated": "2026-03-04T05:51:38.113Z",
+  "generated": "2026-03-04T19:54:35.452Z",
   "version": "1.0.0",
-  "count": 100,
+  "count": 67,
   "skills": [
     {
       "name": "a11y",
-      "description": "(ePost) Accessibility workflow \u2014 auto-detects audit, fix, review, or close",
+      "description": "(ePost) Accessibility workflow — auto-detects audit, fix, review, or close",
       "keywords": [],
       "platforms": [
         "all"
@@ -16,44 +16,13 @@
         "extends": [],
         "requires": [],
         "conflicts": [],
-        "enhances": [
-          "audit-a11y",
-          "fix-a11y",
-          "review-a11y",
-          "audit-close-a11y"
-        ]
+        "enhances": []
       },
       "path": "a11y/SKILL.md"
     },
     {
-      "name": "a11y-wcag",
-      "description": "Use when accessibility, WCAG, POUR, or a11y compliance is relevant across any platform",
-      "keywords": [
-        "a11y",
-        "accessibility",
-        "wcag",
-        "aria",
-        "screen-reader",
-        "pour"
-      ],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [
-        "epost-a11y-specialist"
-      ],
-      "connections": {
-        "extends": [],
-        "requires": [],
-        "conflicts": [],
-        "enhances": []
-      },
-      "path": "a11y-wcag/SKILL.md"
-    },
-    {
       "name": "android-a11y",
-      "description": "Use when Android accessibility issues arise \u2014 TalkBack, contentDescription, touch targets, focus order, contrast in Compose or Views/XML",
+      "description": "Use when Android accessibility issues arise — TalkBack, contentDescription, touch targets, focus order, contrast in Compose or Views/XML",
       "keywords": [
         "talkback",
         "android-accessibility",
@@ -142,40 +111,6 @@
       "path": "android-ui-lib/SKILL.md"
     },
     {
-      "name": "audit-a11y",
-      "description": "(ePost) Audit staged changes for WCAG 2.1 AA accessibility violations",
-      "keywords": [],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [],
-      "connections": {
-        "extends": [],
-        "requires": [],
-        "conflicts": [],
-        "enhances": []
-      },
-      "path": "audit-a11y/SKILL.md"
-    },
-    {
-      "name": "audit-close-a11y",
-      "description": "(ePost) Mark an accessibility finding as resolved",
-      "keywords": [],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [],
-      "connections": {
-        "extends": [],
-        "requires": [],
-        "conflicts": [],
-        "enhances": []
-      },
-      "path": "audit-close-a11y/SKILL.md"
-    },
-    {
       "name": "auto-improvement",
       "description": "Use when reviewing session performance, analyzing improvement trends, or understanding the metrics-capture-detection pipeline",
       "keywords": [
@@ -241,7 +176,7 @@
     },
     {
       "name": "backend-javaee",
-      "description": "Use when working with Jakarta EE \u2014 JAX-RS endpoints, CDI/EJB services, JPA/Hibernate, WildFly deployment",
+      "description": "Use when working with Jakarta EE — JAX-RS endpoints, CDI/EJB services, JPA/Hibernate, WildFly deployment",
       "keywords": [
         "javaee",
         "jakarta",
@@ -272,7 +207,7 @@
     },
     {
       "name": "bootstrap",
-      "description": "(ePost) Scaffold new projects or modules \u2014 auto-detects scope",
+      "description": "(ePost) Scaffold new projects or modules — auto-detects scope",
       "keywords": [],
       "platforms": [
         "all"
@@ -283,54 +218,9 @@
         "extends": [],
         "requires": [],
         "conflicts": [],
-        "enhances": [
-          "bootstrap-fast",
-          "bootstrap-parallel"
-        ]
+        "enhances": []
       },
       "path": "bootstrap/SKILL.md"
-    },
-    {
-      "name": "bootstrap-fast",
-      "description": "(ePost) Linear bootstrap for single-module projects",
-      "keywords": [],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [],
-      "connections": {
-        "extends": [
-          "bootstrap"
-        ],
-        "requires": [],
-        "conflicts": [
-          "bootstrap-parallel"
-        ],
-        "enhances": []
-      },
-      "path": "bootstrap-fast/SKILL.md"
-    },
-    {
-      "name": "bootstrap-parallel",
-      "description": "(ePost) Parallel bootstrap for multi-module projects",
-      "keywords": [],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [],
-      "connections": {
-        "extends": [
-          "bootstrap"
-        ],
-        "requires": [],
-        "conflicts": [
-          "bootstrap-fast"
-        ],
-        "enhances": []
-      },
-      "path": "bootstrap-parallel/SKILL.md"
     },
     {
       "name": "code-review",
@@ -359,10 +249,7 @@
         "extends": [],
         "requires": [],
         "conflicts": [],
-        "enhances": [
-          "review-code",
-          "review-improvements"
-        ]
+        "enhances": []
       },
       "path": "code-review/SKILL.md"
     },
@@ -387,7 +274,7 @@
     },
     {
       "name": "cook",
-      "description": "(ePost) Implement features \u2014 auto-detects platform",
+      "description": "(ePost) Implement features — auto-detects platform",
       "keywords": [],
       "platforms": [
         "all"
@@ -401,48 +288,6 @@
         "enhances": []
       },
       "path": "cook/SKILL.md"
-    },
-    {
-      "name": "cook-fast",
-      "description": "(ePost) Direct implementation \u2014 skip plan question",
-      "keywords": [],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [],
-      "connections": {
-        "extends": [
-          "cook"
-        ],
-        "requires": [],
-        "conflicts": [
-          "cook-parallel"
-        ],
-        "enhances": []
-      },
-      "path": "cook-fast/SKILL.md"
-    },
-    {
-      "name": "cook-parallel",
-      "description": "(ePost) Parallel implementation for multi-module features",
-      "keywords": [],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [],
-      "connections": {
-        "extends": [
-          "cook"
-        ],
-        "requires": [],
-        "conflicts": [
-          "cook-fast"
-        ],
-        "enhances": []
-      },
-      "path": "cook-parallel/SKILL.md"
     },
     {
       "name": "core",
@@ -480,7 +325,7 @@
     },
     {
       "name": "debug",
-      "description": "Use when something is broken \u2014 errors, bugs, crashes, exceptions, unexpected behavior, stack traces",
+      "description": "Use when something is broken — errors, bugs, crashes, exceptions, unexpected behavior, stack traces",
       "keywords": [
         "debug",
         "error",
@@ -512,10 +357,7 @@
         "requires": [],
         "conflicts": [],
         "enhances": [
-          "fix",
-          "fix-deep",
-          "fix-ci",
-          "fix-ui"
+          "fix"
         ]
       },
       "path": "debug/SKILL.md"
@@ -556,7 +398,7 @@
     },
     {
       "name": "docs",
-      "description": "(ePost) Documentation workflow \u2014 auto-detects init, update, or component",
+      "description": "(ePost) Documentation workflow — auto-detects init, update, or component",
       "keywords": [],
       "platforms": [
         "all"
@@ -565,63 +407,11 @@
       "agent-affinity": [],
       "connections": {
         "extends": [],
-        "requires": [
-          "knowledge-base"
-        ],
+        "requires": [],
         "conflicts": [],
-        "enhances": [
-          "docs-init",
-          "docs-update",
-          "docs-component"
-        ]
+        "enhances": []
       },
       "path": "docs/SKILL.md"
-    },
-    {
-      "name": "docs-component",
-      "description": "(ePost) Document a klara-theme component (Figma data + prop mapping)",
-      "keywords": [],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [],
-      "connections": {
-        "extends": [],
-        "requires": [
-          "web-ui-lib",
-          "web-figma"
-        ],
-        "conflicts": [],
-        "enhances": []
-      },
-      "path": "docs-component/SKILL.md"
-    },
-    {
-      "name": "docs-init",
-      "description": "(ePost) Scan codebase and generate structured KB documentation",
-      "keywords": [
-        "docs-init",
-        "documentation",
-        "generate-docs",
-        "scaffold-docs"
-      ],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [
-        "epost-documenter"
-      ],
-      "connections": {
-        "extends": [],
-        "requires": [
-          "knowledge-base"
-        ],
-        "conflicts": [],
-        "enhances": []
-      },
-      "path": "docs-init/SKILL.md"
     },
     {
       "name": "docs-seeker",
@@ -660,37 +450,8 @@
       "path": "docs-seeker/SKILL.md"
     },
     {
-      "name": "docs-update",
-      "description": "(ePost) Update existing documentation or scan for staleness",
-      "keywords": [
-        "docs-update",
-        "documentation",
-        "stale-docs",
-        "refresh-docs",
-        "verify-docs"
-      ],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [
-        "epost-documenter"
-      ],
-      "connections": {
-        "extends": [],
-        "requires": [
-          "knowledge-base"
-        ],
-        "conflicts": [],
-        "enhances": [
-          "knowledge-retrieval"
-        ]
-      },
-      "path": "docs-update/SKILL.md"
-    },
-    {
       "name": "domain-b2b",
-      "description": "Use when working in a B2B module \u2014 Inbox, Monitoring, Composer, Smart Send, Communities, Archive, Contacts, Organization",
+      "description": "Use when working in a B2B module — Inbox, Monitoring, Composer, Smart Send, Communities, Archive, Contacts, Organization",
       "keywords": [
         "module",
         "inbox",
@@ -727,7 +488,7 @@
     },
     {
       "name": "domain-b2c",
-      "description": "Use when working on the consumer epost app \u2014 B2C mail, documents, notifications on iOS or Android",
+      "description": "Use when working on the consumer epost app — B2C mail, documents, notifications on iOS or Android",
       "keywords": [],
       "platforms": [
         "all"
@@ -744,7 +505,7 @@
     },
     {
       "name": "epost",
-      "description": "(ePost) Smart hub v2 \u2014 context-aware entry point with semantic intent detection, workflow chaining, and contextual discovery",
+      "description": "(ePost) Smart hub v2 — context-aware entry point with semantic intent detection, workflow chaining, and contextual discovery",
       "keywords": [],
       "platforms": [
         "all"
@@ -761,7 +522,7 @@
     },
     {
       "name": "error-recovery",
-      "description": "Use when operations fail transiently \u2014 timeouts, network errors, retries, circuit breakers, graceful degradation",
+      "description": "Use when operations fail transiently — timeouts, network errors, retries, circuit breakers, graceful degradation",
       "keywords": [
         "error",
         "retry",
@@ -800,7 +561,7 @@
     },
     {
       "name": "fix",
-      "description": "(ePost) Fix issues \u2014 auto-detects error type and platform",
+      "description": "(ePost) Fix issues — auto-detects error type and platform",
       "keywords": [],
       "platforms": [
         "all"
@@ -810,96 +571,14 @@
       "connections": {
         "extends": [],
         "requires": [],
-        "conflicts": [
-          "fix-deep"
-        ],
-        "enhances": [
-          "fix-deep",
-          "fix-ci",
-          "fix-ui"
-        ]
+        "conflicts": [],
+        "enhances": []
       },
       "path": "fix/SKILL.md"
     },
     {
-      "name": "fix-a11y",
-      "description": "(ePost) Fix accessibility findings \u2014 by ID (#<id>) or top N by priority (<n>)",
-      "keywords": [],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [],
-      "connections": {
-        "extends": [],
-        "requires": [],
-        "conflicts": [],
-        "enhances": []
-      },
-      "path": "fix-a11y/SKILL.md"
-    },
-    {
-      "name": "fix-ci",
-      "description": "(ePost) Fix CI pipeline failures",
-      "keywords": [],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [],
-      "connections": {
-        "extends": [
-          "fix"
-        ],
-        "requires": [],
-        "conflicts": [],
-        "enhances": []
-      },
-      "path": "fix-ci/SKILL.md"
-    },
-    {
-      "name": "fix-deep",
-      "description": "(ePost) Systematic deep fix with full investigation",
-      "keywords": [],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [],
-      "connections": {
-        "extends": [
-          "fix"
-        ],
-        "requires": [],
-        "conflicts": [
-          "fix"
-        ],
-        "enhances": []
-      },
-      "path": "fix-deep/SKILL.md"
-    },
-    {
-      "name": "fix-ui",
-      "description": "(ePost) Fix UI/layout issues",
-      "keywords": [],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [],
-      "connections": {
-        "extends": [
-          "fix"
-        ],
-        "requires": [],
-        "conflicts": [],
-        "enhances": []
-      },
-      "path": "fix-ui/SKILL.md"
-    },
-    {
       "name": "get-started",
-      "description": "(ePost) Onboard to a project \u2014 detect state, then orchestrate researcher \u2192 documenter \u2192 implementer pipeline",
+      "description": "(ePost) Onboard to a project — detect state, then orchestrate researcher → documenter → implementer pipeline",
       "keywords": [
         "onboard",
         "get-started",
@@ -919,16 +598,13 @@
         "extends": [],
         "requires": [],
         "conflicts": [],
-        "enhances": [
-          "docs-init",
-          "docs-update"
-        ]
+        "enhances": []
       },
       "path": "get-started/SKILL.md"
     },
     {
       "name": "git",
-      "description": "(ePost) Git workflow \u2014 auto-detects commit, push, or PR",
+      "description": "(ePost) Git workflow — auto-detects commit, push, or PR",
       "keywords": [],
       "platforms": [
         "all"
@@ -939,96 +615,13 @@
         "extends": [],
         "requires": [],
         "conflicts": [],
-        "enhances": [
-          "git-commit",
-          "git-push",
-          "git-pr"
-        ]
+        "enhances": []
       },
       "path": "git/SKILL.md"
     },
     {
-      "name": "git-commit",
-      "description": "(ePost) Stage and commit with conventional commits",
-      "keywords": [],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [],
-      "connections": {
-        "extends": [],
-        "requires": [],
-        "conflicts": [],
-        "enhances": []
-      },
-      "path": "git-commit/SKILL.md"
-    },
-    {
-      "name": "git-pr",
-      "description": "(ePost) Create GitHub pull request from current branch",
-      "keywords": [],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [],
-      "connections": {
-        "extends": [],
-        "requires": [],
-        "conflicts": [],
-        "enhances": []
-      },
-      "path": "git-pr/SKILL.md"
-    },
-    {
-      "name": "git-push",
-      "description": "(ePost) Commit changes and push to remote",
-      "keywords": [],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [],
-      "connections": {
-        "extends": [],
-        "requires": [],
-        "conflicts": [],
-        "enhances": []
-      },
-      "path": "git-push/SKILL.md"
-    },
-    {
-      "name": "hub-context",
-      "description": "Use when routing user prompts to the right skill or agent. Senses git state, detects platform, classifies intent, and applies context boosts before dispatching.",
-      "keywords": [
-        "context",
-        "hub",
-        "routing",
-        "git-state",
-        "platform-detection",
-        "error-signals"
-      ],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [
-        "epost-orchestrator"
-      ],
-      "connections": {
-        "extends": [],
-        "requires": [],
-        "conflicts": [],
-        "enhances": [
-          "skill-discovery"
-        ]
-      },
-      "path": "hub-context/SKILL.md"
-    },
-    {
       "name": "infra-cloud",
-      "description": "Use when working with GCP infrastructure \u2014 Terraform, Cloud Build, Cloud Run, GKE, deployment pipelines",
+      "description": "Use when working with GCP infrastructure — Terraform, Cloud Build, Cloud Run, GKE, deployment pipelines",
       "keywords": [
         "gcp",
         "terraform",
@@ -1087,7 +680,7 @@
     },
     {
       "name": "ios-a11y",
-      "description": "Use when iOS accessibility issues arise \u2014 VoiceOver, UIKit/SwiftUI labels, traits, focus, Dynamic Type, contrast",
+      "description": "Use when iOS accessibility issues arise — VoiceOver, UIKit/SwiftUI labels, traits, focus, Dynamic Type, contrast",
       "keywords": [
         "voiceover",
         "ios-accessibility",
@@ -1215,7 +808,7 @@
     },
     {
       "name": "kit",
-      "description": "(ePost) Kit authoring \u2014 create agents, skills, hooks, or optimize",
+      "description": "(ePost) Kit authoring — create agents, skills, hooks, or optimize",
       "keywords": [],
       "platforms": [
         "all"
@@ -1229,71 +822,9 @@
           "kit-skill-development"
         ],
         "conflicts": [],
-        "enhances": [
-          "kit-add-agent",
-          "kit-add-skill",
-          "kit-add-hook",
-          "kit-optimize-skill"
-        ]
+        "enhances": []
       },
       "path": "kit/SKILL.md"
-    },
-    {
-      "name": "kit-add-agent",
-      "description": "(ePost) Create a new agent definition",
-      "keywords": [],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [],
-      "connections": {
-        "extends": [],
-        "requires": [
-          "kit-agent-development"
-        ],
-        "conflicts": [],
-        "enhances": []
-      },
-      "path": "kit-add-agent/SKILL.md"
-    },
-    {
-      "name": "kit-add-hook",
-      "description": "(ePost) Create a new hook for Claude Code automation",
-      "keywords": [],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [],
-      "connections": {
-        "extends": [],
-        "requires": [
-          "kit-hooks"
-        ],
-        "conflicts": [],
-        "enhances": []
-      },
-      "path": "kit-add-hook/SKILL.md"
-    },
-    {
-      "name": "kit-add-skill",
-      "description": "(ePost) Create a new skill definition",
-      "keywords": [],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [],
-      "connections": {
-        "extends": [],
-        "requires": [
-          "kit-skill-development"
-        ],
-        "conflicts": [],
-        "enhances": []
-      },
-      "path": "kit-add-skill/SKILL.md"
     },
     {
       "name": "kit-agent-development",
@@ -1349,7 +880,7 @@
     },
     {
       "name": "kit-cli",
-      "description": "Use when developing the epost-kit CLI \u2014 Commander.js commands, @inquirer/prompts, vitest tests, TypeScript patterns",
+      "description": "Use when developing the epost-kit CLI — Commander.js commands, @inquirer/prompts, vitest tests, TypeScript patterns",
       "keywords": [
         "cli",
         "commander",
@@ -1392,25 +923,6 @@
         ]
       },
       "path": "kit-hooks/SKILL.md"
-    },
-    {
-      "name": "kit-optimize-skill",
-      "description": "(ePost) Optimize an existing agent skill automatically",
-      "keywords": [],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [],
-      "connections": {
-        "extends": [],
-        "requires": [
-          "kit-skill-development"
-        ],
-        "conflicts": [],
-        "enhances": []
-      },
-      "path": "kit-optimize-skill/SKILL.md"
     },
     {
       "name": "kit-skill-development",
@@ -1469,44 +981,8 @@
       "path": "kit-verify/SKILL.md"
     },
     {
-      "name": "knowledge-base",
-      "description": "Use when recording ADRs, saving debug findings, persisting patterns, or referencing past decisions in docs/",
-      "keywords": [
-        "knowledge",
-        "adr",
-        "decision",
-        "pattern",
-        "learning",
-        "memory",
-        "persist",
-        "capture"
-      ],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [
-        "ADR",
-        "decision record",
-        "learned pattern",
-        "save finding"
-      ],
-      "agent-affinity": [
-        "epost-architect",
-        "epost-debugger",
-        "epost-documenter",
-        "epost-implementer"
-      ],
-      "connections": {
-        "extends": [],
-        "requires": [],
-        "conflicts": [],
-        "enhances": []
-      },
-      "path": "knowledge-base/SKILL.md"
-    },
-    {
       "name": "knowledge-capture",
-      "description": "Use after completing a task \u2014 capture learnings, save patterns, record post-mortems to docs/",
+      "description": "Use after completing a task — capture learnings, save patterns, record post-mortems to docs/",
       "keywords": [
         "capture",
         "learn",
@@ -1533,9 +1009,7 @@
       ],
       "connections": {
         "extends": [],
-        "requires": [
-          "knowledge-base"
-        ],
+        "requires": [],
         "conflicts": [],
         "enhances": []
       },
@@ -1543,7 +1017,7 @@
     },
     {
       "name": "knowledge-retrieval",
-      "description": "Use when you need prior art, past decisions, or existing patterns \u2014 checks docs/, skills, and RAG before external sources",
+      "description": "Use when you need prior art, past decisions, or existing patterns — checks docs/, skills, and RAG before external sources",
       "keywords": [
         "retrieve",
         "search",
@@ -1581,7 +1055,7 @@
     },
     {
       "name": "plan",
-      "description": "(ePost) Create implementation plan \u2014 auto-detects complexity",
+      "description": "(ePost) Create implementation plan — auto-detects complexity",
       "keywords": [
         "plan",
         "planning",
@@ -1610,103 +1084,13 @@
         "extends": [],
         "requires": [],
         "conflicts": [],
-        "enhances": [
-          "plan-fast",
-          "plan-deep",
-          "plan-parallel",
-          "plan-validate"
-        ]
+        "enhances": []
       },
       "path": "plan/SKILL.md"
     },
     {
-      "name": "plan-deep",
-      "description": "(ePost) Deep plan with sequential research and comprehensive analysis",
-      "keywords": [],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [],
-      "connections": {
-        "extends": [
-          "plan"
-        ],
-        "requires": [],
-        "conflicts": [
-          "plan-fast",
-          "plan-parallel"
-        ],
-        "enhances": []
-      },
-      "path": "plan-deep/SKILL.md"
-    },
-    {
-      "name": "plan-fast",
-      "description": "(ePost) Quick plan from codebase analysis only, no research",
-      "keywords": [],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [],
-      "connections": {
-        "extends": [
-          "plan"
-        ],
-        "requires": [],
-        "conflicts": [
-          "plan-deep",
-          "plan-parallel"
-        ],
-        "enhances": []
-      },
-      "path": "plan-fast/SKILL.md"
-    },
-    {
-      "name": "plan-parallel",
-      "description": "(ePost) Dependency-aware plan with file ownership matrix for parallel execution",
-      "keywords": [],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [],
-      "connections": {
-        "extends": [
-          "plan"
-        ],
-        "requires": [],
-        "conflicts": [
-          "plan-fast",
-          "plan-deep"
-        ],
-        "enhances": []
-      },
-      "path": "plan-parallel/SKILL.md"
-    },
-    {
-      "name": "plan-validate",
-      "description": "(ePost) Validate plan with critical questions interview",
-      "keywords": [],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [],
-      "connections": {
-        "extends": [
-          "plan"
-        ],
-        "requires": [],
-        "conflicts": [],
-        "enhances": []
-      },
-      "path": "plan-validate/SKILL.md"
-    },
-    {
       "name": "problem-solving",
-      "description": "Use when stuck, facing a complex bug, or need root cause analysis \u2014 5 whys, bisection, inversion techniques",
+      "description": "Use when stuck, facing a complex bug, or need root cause analysis — 5 whys, bisection, inversion techniques",
       "keywords": [
         "problem-solving",
         "root-cause",
@@ -1741,37 +1125,6 @@
         ]
       },
       "path": "problem-solving/SKILL.md"
-    },
-    {
-      "name": "receiving-code-review",
-      "description": "Use when receiving code review feedback, processing reviewer comments, or responding to suggested changes from human or automated reviewers.",
-      "keywords": [
-        "feedback",
-        "review-comment",
-        "suggestion",
-        "change-request",
-        "reviewer",
-        "nit",
-        "fix-this"
-      ],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [
-        "epost-implementer",
-        "epost-debugger",
-        "epost-tester"
-      ],
-      "connections": {
-        "extends": [],
-        "requires": [],
-        "conflicts": [],
-        "enhances": [
-          "code-review"
-        ]
-      },
-      "path": "receiving-code-review/SKILL.md"
     },
     {
       "name": "repomix",
@@ -1842,7 +1195,7 @@
     },
     {
       "name": "review",
-      "description": "(ePost) Review workflow \u2014 auto-detects code, a11y, or improvements",
+      "description": "(ePost) Review workflow — auto-detects code, a11y, or improvements",
       "keywords": [],
       "platforms": [
         "all"
@@ -1853,70 +1206,13 @@
         "extends": [],
         "requires": [],
         "conflicts": [],
-        "enhances": [
-          "review-code",
-          "review-a11y",
-          "review-improvements"
-        ]
+        "enhances": []
       },
       "path": "review/SKILL.md"
     },
     {
-      "name": "review-a11y",
-      "description": "(ePost) Review accessibility compliance (WCAG 2.1 AA)",
-      "keywords": [],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [],
-      "connections": {
-        "extends": [],
-        "requires": [],
-        "conflicts": [],
-        "enhances": []
-      },
-      "path": "review-a11y/SKILL.md"
-    },
-    {
-      "name": "review-code",
-      "description": "(ePost) Ultrathink edge cases, then parallel verify with reviewers",
-      "keywords": [],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [],
-      "connections": {
-        "extends": [],
-        "requires": [
-          "code-review"
-        ],
-        "conflicts": [],
-        "enhances": []
-      },
-      "path": "review-code/SKILL.md"
-    },
-    {
-      "name": "review-improvements",
-      "description": "(ePost) Review auto-improvement metrics, detect patterns, surface recommendations",
-      "keywords": [],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [],
-      "connections": {
-        "extends": [],
-        "requires": [],
-        "conflicts": [],
-        "enhances": []
-      },
-      "path": "review-improvements/SKILL.md"
-    },
-    {
       "name": "scout",
-      "description": "(ePost) Explore codebase \u2014 find files, patterns, RAG + grep search across platforms",
+      "description": "(ePost) Explore codebase — find files, patterns, RAG + grep search across platforms",
       "keywords": [
         "explore",
         "search",
@@ -1967,7 +1263,7 @@
     },
     {
       "name": "scout-deep",
-      "description": "Deep codebase search using RAG + grep \u2014 exhaustive semantic + exact match results",
+      "description": "Deep codebase search using RAG + grep — exhaustive semantic + exact match results",
       "keywords": [
         "deep",
         "thorough",
@@ -2006,7 +1302,7 @@
     },
     {
       "name": "scout-fast",
-      "description": "Quick codebase search using grep only \u2014 no RAG, no semantic search",
+      "description": "Quick codebase search using grep only — no RAG, no semantic search",
       "keywords": [
         "quick",
         "fast",
@@ -2155,7 +1451,7 @@
     },
     {
       "name": "test",
-      "description": "(ePost) Run tests \u2014 auto-detects platform",
+      "description": "(ePost) Run tests — auto-detects platform",
       "keywords": [],
       "platforms": [
         "all"
@@ -2171,50 +1467,8 @@
       "path": "test/SKILL.md"
     },
     {
-      "name": "verification-before-completion",
-      "description": "Use when about to claim completion, express satisfaction with work, or state that a task is done. Triggers on phrases like 'done', 'complete', 'finished', 'ready', 'all set', 'looks good'.",
-      "keywords": [
-        "done",
-        "complete",
-        "finished",
-        "ready",
-        "verified",
-        "passing",
-        "success",
-        "all-set",
-        "looks-good"
-      ],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [
-        "all"
-      ],
-      "connections": {
-        "extends": [],
-        "requires": [],
-        "conflicts": [],
-        "enhances": [
-          "cook",
-          "cook-fast",
-          "cook-parallel",
-          "fix",
-          "fix-deep",
-          "plan",
-          "plan-fast",
-          "plan-deep",
-          "plan-parallel",
-          "bootstrap",
-          "bootstrap-fast",
-          "bootstrap-parallel"
-        ]
-      },
-      "path": "verification-before-completion/SKILL.md"
-    },
-    {
       "name": "web-a11y",
-      "description": "Use when web accessibility issues arise \u2014 ARIA roles, keyboard navigation, focus trapping, alt text, contrast, screen readers",
+      "description": "Use when web accessibility issues arise — ARIA roles, keyboard navigation, focus trapping, alt text, contrast, screen readers",
       "keywords": [
         "keyboard",
         "aria",
@@ -2437,7 +1691,7 @@
     },
     {
       "name": "web-modules",
-      "description": "Use when integrating a component into a B2B module \u2014 adding screens, binding APIs, wiring stores, setting up routes",
+      "description": "Use when integrating a component into a B2B module — adding screens, binding APIs, wiring stores, setting up routes",
       "keywords": [
         "integrate",
         "module",
@@ -2668,7 +1922,7 @@
     },
     {
       "name": "audit",
-      "description": "(ePost) Audit workflow \u2014 auto-detects UI component, a11y, or code audit",
+      "description": "(ePost) Audit workflow — auto-detects UI component, a11y, or code audit",
       "keywords": [
         "audit",
         "review",
@@ -2698,61 +1952,12 @@
       "connections": {
         "extends": [],
         "requires": [],
+        "conflicts": [],
         "enhances": [
-          "audit-ui",
-          "audit-a11y",
           "code-review"
         ]
       },
       "path": "audit/SKILL.md"
-    },
-    {
-      "name": "audit-ui",
-      "description": "Use when auditing a UI library component for quality, token usage, patterns, performance, security, or cross-platform consistency \u2014 variant of /audit dispatched by epost-muji",
-      "keywords": [
-        "audit",
-        "review",
-        "ui-lib",
-        "component",
-        "muji",
-        "tokens",
-        "quality",
-        "cross-platform",
-        "patterns",
-        "security"
-      ],
-      "platforms": [
-        "web",
-        "ios",
-        "android"
-      ],
-      "triggers": [
-        "audit component",
-        "review component",
-        "audit ui",
-        "muji review",
-        "check component quality"
-      ],
-      "agent-affinity": [
-        "epost-muji",
-        "epost-reviewer"
-      ],
-      "connections": {
-        "extends": [],
-        "requires": [
-          "code-review"
-        ],
-        "enhances": [
-          "web-ui-lib-dev",
-          "ios-ui-lib",
-          "android-ui-lib"
-        ],
-        "uses": [
-          "web-rag",
-          "ios-rag"
-        ]
-      },
-      "path": "audit-ui/SKILL.md"
     }
   ]
 }

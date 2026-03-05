@@ -1,7 +1,7 @@
 ---
 title: "Audit UI-Lib Component Skill (Cross-Platform)"
 description: "Muji senior reviewer skill for auditing new member UI component code across web, iOS, Android"
-status: pending
+status: draft
 priority: P1
 effort: 6h
 branch: master

@@ -1,7 +1,7 @@
 ---
 title: "RAG Query Expansion API — Serve Mappings via MCP"
 description: "Add API endpoint + MCP tool to both RAG servers so agents fetch component-mappings & synonym-groups dynamically instead of hardcoded in kit skills"
-status: pending
+status: draft
 priority: P2
 effort: 3h
 branch: master

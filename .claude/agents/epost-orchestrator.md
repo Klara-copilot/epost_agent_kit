@@ -4,7 +4,7 @@ description: (ePost) Top-level task router and project manager. Routes tasks to 
 tools: Read, Glob, Grep, Bash, Edit, Write, Agent
 model: sonnet
 color: green
-skills: [core, skill-discovery, hub-context]
+skills: [core, skill-discovery, epost]
 memory: project
 ---
 
@@ -83,8 +83,8 @@ When a user request is ambiguous or non-technical, act as the human-friendly ent
   - Update `effort` field if scope changes
 
 ### 7. Plan Index Maintenance
-- After agents write reports, update `epost-agent-cli/plans/INDEX.md` and `epost-agent-cli/plans/index.json`
-- Follow "Plan Storage & Index Protocol" in `planning` skill
+- After agents write reports, update `plans/INDEX.md` and `plans/index.json`
+- Follow "Plan Storage & Index Protocol" in `plan` skill
 - Verify index counts match actual report files
 
 ### 8. Documentation Coordination
@@ -131,10 +131,10 @@ When the `/epost` smart hub delegates to the orchestrator, it provides a structu
 
 | Intent Chain | Execution |
 |-------------|-----------|
-| [Plan, Build] | Run `/plan-fast` → wait for plan → run `/cook-fast` with plan |
-| [Fix, Git] | Run `/fix` → wait for fix → run `/git-commit` |
-| [Test, Review] | Run platform test → wait for results → run `/review-code` |
-| [Plan, Build, Test] | Run `/plan-fast` → `/cook-fast` → platform `/test` |
+| [Plan, Build] | Run `/plan --fast` → wait for plan → run `/cook --fast` with plan |
+| [Fix, Git] | Run `/fix` → wait for fix → run `/git --commit` |
+| [Test, Review] | Run platform test → wait for results → run `/review --code` |
+| [Plan, Build, Test] | Run `/plan --fast` → `/cook --fast` → platform `/test` |
 
 #### When to Abort Chain
 

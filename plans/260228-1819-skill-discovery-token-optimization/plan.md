@@ -1,7 +1,7 @@
 ---
 title: "Skill Discovery Token Optimization — Lazy Loading Strategy"
 description: "Replace eager skill loading with discovery-driven lazy loading to cut agent startup tokens by 40-60%"
-status: complete
+status: completed
 priority: P1
 effort: 5h
 branch: master

@@ -141,8 +141,6 @@ Skills support nested directories. Claude Code auto-discovers `SKILL.md` files a
 │   ├── android-a11y/                 # Android accessibility
 │   ├── backend-javaee/               # Jakarta EE patterns
 │   ├── a11y/                         # Cross-platform a11y foundation
-│   ├── planning/                     # Planning methodology
-│   ├── debugging/                    # Debug methodology
 │   ├── knowledge-base/               # Knowledge base management
 │   ├── knowledge-retrieval/          # Knowledge lookup
 │   └── ...                           # (other cross-cutting skills)

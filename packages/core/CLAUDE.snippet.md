@@ -23,12 +23,12 @@ On every user prompt involving a dev task, sense context before acting:
 | Plan | plan, design, architect, spec, roadmap | `/plan` |
 | Test | test, coverage, validate, verify | `/test` |
 | Debug | debug, trace, inspect, diagnose | `/debug` |
-| Review | review, check code, audit | `/review-code` |
-| Git | commit, push, pr, merge, done, ship | `/git-commit`, `/git-push`, `/git-pr` |
-| Docs | docs, document, write docs | `/docs-init` or `/docs-update` |
+| Review | review, check code, audit | `/review --code` |
+| Git | commit, push, pr, merge, done, ship | `/git --commit`, `/git --push`, `/git --pr` |
+| Docs | docs, document, write docs | `/docs` |
 | Scaffold | bootstrap, init, scaffold, new project, new module | `/bootstrap` |
 | Convert | convert, prototype, migrate | `/convert` |
-| A11y | a11y, accessibility, wcag | `/fix-a11y` or `/review-a11y` |
+| A11y | a11y, accessibility, wcag | `/fix --a11y` or `/review --a11y` |
 | Onboard | get started, begin, onboard, new to project, what is this | `/get-started` |
 
 ### Context Boost Rules

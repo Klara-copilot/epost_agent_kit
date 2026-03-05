@@ -55,7 +55,7 @@ Platform and domain skills are loaded dynamically — do not assume platform.
 
 Use the naming pattern from the `## Naming` section injected by hooks. The pattern includes full path and computed date.
 
-**After writing report**: Update plan index per `planning` skill's "Plan Storage & Index Protocol" — append to `epost-agent-cli/plans/INDEX.md` and `epost-agent-cli/plans/index.json`.
+**After writing report**: Update plan index per `plan` skill's "Plan Storage & Index Protocol" — append to `plans/INDEX.md` and `plans/index.json`.
 
 ## File Ownership Rules (CRITICAL)
 
@@ -78,7 +78,7 @@ At task start, use `skill-discovery` to detect platform and load the right skill
 - `.kt/.kts` files → load `android-development`, `android-ui-lib` skills
 - `.tsx/.ts/.jsx` files → load `web-frontend`, `web-nextjs` skills
 - `.java` + `pom.xml` → load `backend-javaee`, `backend-databases` skills
-- `epost-agent-cli/` path → load `kit-cli` skill
+- `epost-agent-kit-cli/` path or `src/domains/` structure → load `kit-cli` skill
 
 Use the same process (plan → implement → verify) regardless of platform.
 Adapt implementation patterns, build commands, and testing approach based on loaded skills.

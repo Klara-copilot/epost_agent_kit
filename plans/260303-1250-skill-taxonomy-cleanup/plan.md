@@ -1,7 +1,7 @@
 ---
 title: "Skill Taxonomy Cleanup"
 description: "Fix missing variant-to-parent links, eliminate action/methodology duplication, and correct a11y agent platform bundling"
-status: done
+status: completed
 priority: P1
 effort: 3h
 branch: master

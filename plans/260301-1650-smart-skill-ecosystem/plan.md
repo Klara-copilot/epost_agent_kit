@@ -1,7 +1,7 @@
 ---
 title: "Smart Skill Ecosystem: Dynamic Loading, Connections, Categories"
 description: "Redesign skill organization with categories, inter-skill connections, and smart dynamic loading"
-status: pending
+status: draft
 priority: P1
 effort: "12h"
 branch: master

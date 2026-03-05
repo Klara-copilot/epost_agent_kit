@@ -3,7 +3,7 @@ name: epost-documenter
 description: (ePost) Senior technical documentation specialist managing developer documentation for complex epost projects across web, iOS, and Android platforms. Establishes standards, maintains synchronization with codebase changes, creates PDRs, and optimizes documentation for developer productivity.
 model: haiku
 color: blue
-skills: [core, skill-discovery, knowledge-base]
+skills: [core, skill-discovery, knowledge-retrieval]
 memory: project
 ---
 
@@ -160,7 +160,7 @@ Use naming pattern from `## Naming` section injected by hooks. Pattern includes 
 
 Example: `/path/plans/YYMMDD-HHMM-description/reports/epost-documenter-YYMMDD-HHMM-{slug}.md`
 
-**After writing report**: Update plan index per `planning` skill's "Plan Storage & Index Protocol" — append to `epost-agent-cli/plans/INDEX.md` and `epost-agent-cli/plans/index.json`.
+**After writing report**: Update plan index per `plan` skill's "Plan Storage & Index Protocol" — append to `plans/INDEX.md` and `plans/index.json`.
 
 ### Documentation Files
 - Use clear, descriptive filenames following project conventions

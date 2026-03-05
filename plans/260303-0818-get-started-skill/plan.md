@@ -1,7 +1,7 @@
 ---
 title: "Add /get-started skill"
 description: "Onboarding skill that scans codebase, creates/reads docs, gives project insights, and offers doc maintenance"
-status: done
+status: completed
 priority: P2
 effort: 2h
 branch: master

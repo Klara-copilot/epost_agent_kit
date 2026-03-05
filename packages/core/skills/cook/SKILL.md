@@ -14,9 +14,16 @@ Implement features with automatic platform detection.
 
 ## Step 0 — Flag Override
 
-If `$ARGUMENTS` starts with `--fast`: skip auto-detection, dispatch `cook-fast` directly. Remaining args are the task description.
-If `$ARGUMENTS` starts with `--parallel`: skip auto-detection, dispatch `cook-parallel` directly. Remaining args are the task description.
+If `$ARGUMENTS` starts with `--fast`: skip auto-detection, load `references/fast-mode.md` and execute directly. Remaining args are the task description.
+If `$ARGUMENTS` starts with `--parallel`: skip auto-detection, load `references/parallel-mode.md` and execute directly. Remaining args are the task description.
 Otherwise: continue to Platform Detection.
+
+## Aspect Files
+
+| File | Purpose |
+|------|---------|
+| `references/fast-mode.md` | Direct implementation — skip plan question, implement immediately |
+| `references/parallel-mode.md` | Parallel implementation for multi-module features |
 
 ## Platform Detection
 

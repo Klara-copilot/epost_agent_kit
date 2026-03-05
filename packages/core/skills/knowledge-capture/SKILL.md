@@ -374,7 +374,7 @@ Before finalizing entry:
 
 - `knowledge-base` — Knowledge system structure and conventions
 - `knowledge-retrieval` — Search and retrieve existing knowledge
-- `debugging` — Debugging methodology (source of findings)
+- `debug` — Debugging methodology (source of findings)
 - `code-review` — Review process (source of conventions)
 - `research` — Research methodology (source of decisions)
 - `auto-improvement` — Auto-triggered when significance threshold met on session Stop

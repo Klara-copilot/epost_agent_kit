@@ -22,59 +22,49 @@ provides:
     - core
     - code-review
     - debugging
-    - planning
     - problem-solving
     - error-recovery
     - repomix
     - docs-seeker
     - sequential-thinking
     - research
-    - knowledge-base
     - knowledge-retrieval
     - knowledge-capture
     - doc-coauthoring
     - infra-cloud
     - infra-docker
     - data-store
-    - hub-context
-    - verification-before-completion
-    - receiving-code-review
     - subagent-driven-development
     - skill-discovery
     - auto-improvement
     - cook
-    - cook-fast
-    - cook-parallel
     - fix
-    - fix-deep
-    - fix-ci
-    - fix-ui
     - plan
-    - plan-fast
-    - plan-deep
-    - plan-parallel
-    - plan-validate
     - test
     - debug
     - scout
     - convert
     - epost
     - bootstrap
-    - bootstrap-fast
-    - bootstrap-parallel
     - git
-    - git-commit
-    - git-push
-    - git-pr
     - review
-    - review-code
-    - review-improvements
     - docs
-    - docs-init
-    - docs-update
-    - docs-component
-    - a11y
+    - audit
     - get-started
+scripts:
+  - get-active-plan.cjs
+  - set-active-plan.cjs
+  - complete-plan.cjs
+  - archive-plan.cjs
+  - agent-profiler.cjs
+  - check-coverage.cjs
+  - scan-secrets.cjs
+  - detect-improvements.cjs
+  - generate-skill-index.cjs
+  - validate-skill-connections.cjs
+  - validate-command-descriptions.cjs
+  - validate-role-scenarios.cjs
+
 files:
   agents/: agents/
   skills/: skills/
@@ -89,7 +79,6 @@ files:
 
 renames:
   skills:
-    core-a11y: a11y
     databases: infra-docker
 
 settings_strategy: base

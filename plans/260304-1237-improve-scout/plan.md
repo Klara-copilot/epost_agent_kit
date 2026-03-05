@@ -1,7 +1,7 @@
 ---
 title: "Improve /scout with Smart Routing, RAG & Query Expansion"
 description: "Upgrade scout, sync RAG query expansion data into kit skills, improve knowledge-retrieval awareness"
-status: complete
+status: completed
 priority: P1
 effort: 5h (2h done + 3h remaining)
 branch: master

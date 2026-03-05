@@ -1,7 +1,7 @@
 ---
 title: "Fix hooks diagnostic issues"
 description: "Fix 4 hook problems from diagnostic report (2 critical, 2 moderate)"
-status: pending
+status: draft
 priority: P1
 effort: 30m
 branch: master

@@ -7,7 +7,7 @@ agent: epost-implementer
 metadata:
   argument-hint: "[project or module description]"
   connections:
-    enhances: [bootstrap-fast, bootstrap-parallel]
+    enhances: []
 ---
 
 # Bootstrap — Unified Scaffolding Command
@@ -16,9 +16,16 @@ Scaffold new projects or modules with automatic scope detection.
 
 ## Step 0 — Flag Override
 
-If `$ARGUMENTS` starts with `--fast`: skip auto-detection, dispatch `bootstrap-fast` directly. Remaining args are the task description.
-If `$ARGUMENTS` starts with `--parallel`: skip auto-detection, dispatch `bootstrap-parallel` directly. Remaining args are the task description.
+If `$ARGUMENTS` starts with `--fast`: skip auto-detection, load `references/fast-mode.md` and execute. Remaining args are the task description.
+If `$ARGUMENTS` starts with `--parallel`: skip auto-detection, load `references/parallel-mode.md` and execute. Remaining args are the task description.
 Otherwise: continue to Scope Auto-Detection.
+
+## Aspect Files
+
+| File | Purpose |
+|------|---------|
+| `references/fast-mode.md` | Linear bootstrap for single-module projects |
+| `references/parallel-mode.md` | Parallel bootstrap for multi-module projects |
 
 ## Scope Auto-Detection
 
@@ -41,10 +48,10 @@ Otherwise: continue to Scope Auto-Detection.
 8. Create docs (README.md, project-overview-pdr.md)
 9. Git commit (DO NOT push)
 
-## Complexity → Variant
+## Complexity → Mode
 
-- Single-module project → `:fast` (linear)
-- Multi-module project → `:parallel` (concurrent)
+- Single-module project → `--fast` (linear)
+- Multi-module project → `--parallel` (concurrent)
 
 <request>$ARGUMENTS</request>
 

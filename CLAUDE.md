@@ -8,7 +8,7 @@ This file provides guidance to Claude Code when working with code in this reposi
 
 ## Installed Profile: ``
 
-**Packages**: core
+**Packages**: core, a11y, kit, design-system
 
 **Installed by**: epost-kit v0.1.0 on 2026-03-04
 
@@ -51,12 +51,12 @@ On every user prompt involving a dev task, sense context before acting:
 | Plan | plan, design, architect, spec, roadmap | `/plan` |
 | Test | test, coverage, validate, verify | `/test` |
 | Debug | debug, trace, inspect, diagnose | `/debug` |
-| Review | review, check code, audit | `/review-code` |
-| Git | commit, push, pr, merge, done, ship | `/git-commit`, `/git-push`, `/git-pr` |
-| Docs | docs, document, write docs | `/docs-init` or `/docs-update` |
+| Review | review, check code, audit | `/review --code` |
+| Git | commit, push, pr, merge, done, ship | `/git --commit`, `/git --push`, `/git --pr` |
+| Docs | docs, document, write docs | `/docs` |
 | Scaffold | bootstrap, init, scaffold, new project, new module | `/bootstrap` |
 | Convert | convert, prototype, migrate | `/convert` |
-| A11y | a11y, accessibility, wcag | `/fix-a11y` or `/review-a11y` |
+| A11y | a11y, accessibility, wcag | `/fix --a11y` or `/review --a11y` |
 | Onboard | get started, begin, onboard, new to project, what is this | `/get-started` |
 
 ### Context Boost Rules
@@ -70,6 +70,46 @@ On every user prompt involving a dev task, sense context before acting:
 - If user types a slash command explicitly → execute it directly, skip routing
 - If ambiguous → use context boost to break tie; if still ambiguous → ask user (max 1 question)
 - If multi-intent ("plan and build X") → delegate to `epost-orchestrator`
+
+---
+
+
+## Accessibility (WCAG 2.1 AA)
+
+### Agent
+- `epost-a11y-specialist` — Multi-platform accessibility orchestrator (iOS, Android, Web)
+
+### Skills
+- `a11y` — Cross-platform WCAG 2.1 AA foundation (POUR, scoring)
+- `ios-a11y` — iOS (VoiceOver, UIKit-primary, SwiftUI) *(extends ios/\*)*
+- `android-a11y` — Android (Compose, Views/XML, TalkBack) *(extends android/\*)*
+- `web-a11y` — Web (ARIA, keyboard, screen readers) *(extends web/\*)*
+
+---
+
+
+## Kit Authoring Tools
+
+### Skills
+- `kit-agents` — Agent ecosystem reference and naming conventions
+- `kit-agent-development` — Agent frontmatter, system prompts, triggering patterns
+- `kit-skill-development` — Skill authoring, progressive disclosure, validation
+- `kit-hooks` — Hook event types, I/O contract, creation workflow
+- `kit-cli` — epost-kit CLI development (Commander.js, TypeScript)
+
+---
+
+
+## Design System
+
+### Agent
+- `epost-muji` — MUJI UI library agent for design system development, component knowledge, Figma-to-code pipeline
+
+### Skills
+- `web-figma` — Figma MCP tool patterns and design token extraction
+- `web-figma-variables` — Vien 2.0 design system variable architecture (1,059 variables, 42 collections)
+- `web-ui-lib` — Web UI library component catalog (React/Next.js)
+- `web-ui-lib-dev` — klara-theme development pipeline (plan, implement, audit, fix, document)
 
 ---
 

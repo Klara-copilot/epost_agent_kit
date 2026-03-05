@@ -18,7 +18,7 @@ metadata:
   platforms: [all]
   agent-affinity: [epost-muji, epost-reviewer, epost-a11y-specialist]
   connections:
-    enhances: [audit-ui-component, audit-a11y, code-review]
+    enhances: [code-review]
 ---
 
 # Audit — Unified Audit Command
@@ -27,10 +27,19 @@ Auto-detect and execute the appropriate audit workflow.
 
 ## Step 0 — Flag Override
 
-If `$ARGUMENTS` starts with `--ui`: delegate to **epost-muji** with `audit-ui-component` skill. Pass remaining args (component name + platform flags).
-If `$ARGUMENTS` starts with `--a11y`: dispatch `audit-a11y`. Pass remaining args as platform hint.
+If `$ARGUMENTS` starts with `--ui`: delegate to **epost-muji**, load `references/ui.md`. Pass remaining args (component name + platform flags).
+If `$ARGUMENTS` starts with `--a11y`: load `references/a11y.md` and execute. Pass remaining args as platform hint.
+If `$ARGUMENTS` starts with `--close`: load `references/close-a11y.md` and execute. Pass remaining args as finding ID.
 If `$ARGUMENTS` starts with `--code`: dispatch `code-review` inline.
 Otherwise: continue to Auto-Detection.
+
+## Aspect Files
+
+| File | Purpose |
+|------|---------|
+| `references/ui.md` | Audit UI component (Senior Muji Reviewer) |
+| `references/a11y.md` | Audit staged changes for WCAG 2.1 AA violations |
+| `references/close-a11y.md` | Mark an accessibility finding as resolved |
 
 ## Auto-Detection
 
@@ -38,8 +47,9 @@ Analyze `$ARGUMENTS` keywords and context:
 
 | Signal | Dispatch |
 |--------|----------|
-| Component name (`Epost*`, UI keyword), "component", "ui-lib", "design system", "token", "klara", "muji" | `--ui` → **epost-muji** with `audit-ui-component` |
-| "a11y", "accessibility", "wcag", "voiceover", "talkback" | `--a11y` → `audit-a11y` |
+| Component name (`Epost*`, UI keyword), "component", "ui-lib", "design system", "token", "klara", "muji" | `--ui` → `references/ui.md` via **epost-muji** |
+| "a11y", "accessibility", "wcag", "voiceover", "talkback" | `--a11y` → `references/a11y.md` |
+| "close", "resolve", "finding" | `--close` → `references/close-a11y.md` |
 | "code", "security", "performance", staged changes without component signal | `--code` → `code-review` |
 | Ambiguous | Ask: UI component audit, a11y audit, or code audit? |
 
@@ -54,10 +64,11 @@ When delegating to epost-muji, detect target platforms:
 
 ## Variant Summary
 
-| Flag | Agent | Skill | Scope |
-|------|-------|-------|-------|
-| `--ui` | epost-muji | `audit-ui-component` | Design system components (web/iOS/Android) |
-| `--a11y` | epost-a11y-specialist | `audit-a11y` | WCAG 2.1 AA violations |
+| Flag | Agent | Reference | Scope |
+|------|-------|-----------|-------|
+| `--ui` | epost-muji | `references/ui.md` | Design system components (web/iOS/Android) |
+| `--a11y` | epost-a11y-specialist | `references/a11y.md` | WCAG 2.1 AA violations |
+| `--close` | epost-a11y-specialist | `references/close-a11y.md` | Mark finding as resolved |
 | `--code` | epost-reviewer | `code-review` | General code quality, security, performance |
 
 ## Examples

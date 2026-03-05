@@ -35,7 +35,7 @@ Check request keywords → git diff extensions → CWD path:
 | `.kt/.kts`, "Android", "Kotlin", "Compose" | android | `android-development`, `android-ui-lib` |
 | `.tsx/.ts/.jsx/.scss`, "React", "Next.js", "web" | web | `web-frontend`, `web-nextjs` |
 | `.java` + `pom.xml`, "Java EE", "WildFly", "backend" | backend | `backend-javaee`, `backend-databases` |
-| `epost-agent-cli/` path, "CLI", "kit cli" | cli | `kit-cli` |
+| `epost-agent-kit-cli/` path, "CLI", "kit cli" | cli | `kit-cli` |
 | `.css/.scss` + design tokens, "Figma", "klara" | design | `web-figma`, `web-ui-lib` |
 
 Multiple platforms: ask user (max 1 question). If 80%+ files = one platform, use that.
@@ -51,7 +51,7 @@ Scan the user request for these patterns:
 
 | Signal Words | Task Type | Likely Skills |
 |-------------|-----------|---------------|
-| error, stack trace, crash, bug, failing | debugging | problem-solving, error-recovery |
+| error, stack trace, crash, bug, failing | debug | problem-solving, error-recovery |
 | docs, library, API reference, how to use | research | docs-seeker, research |
 | ADR, prior art, existing pattern, similar | knowledge | knowledge-base, knowledge-retrieval |
 | write docs, spec, proposal, RFC | documentation | doc-coauthoring |
@@ -139,7 +139,7 @@ Integrate loaded skill knowledge into your current task:
 | any agent | Android task (.kt) | android-development, android-ui-lib |
 | any agent | Web task (.tsx/.ts) | web-frontend, web-nextjs |
 | any agent | Backend task (.java) | backend-javaee, backend-databases |
-| any agent | CLI task (epost-agent-cli/) | kit-cli |
+| any agent | CLI task (epost-agent-kit-cli/) | kit-cli |
 | debugger | stuck on bug | sequential-thinking, problem-solving |
 | implementer | API timeout | error-recovery |
 | architect | plan with research | research, docs-seeker |

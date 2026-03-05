@@ -4,11 +4,11 @@ description: "Use when executing implementation plans with multiple independent 
 user-invocable: false
 
 metadata:
-  agent-affinity: [epost-orchestrator, epost-implementer]
+  agent-affinity: [epost-orchestrator, epost-implementer, epost-architect]
   keywords: [parallel, subagent, dispatch, implementation-loop, two-stage-review]
   platforms: [all]
   connections:
-    enhances: [planning]
+    enhances: [plan]
 ---
 
 # Subagent-Driven Development
@@ -64,4 +64,4 @@ Every task gets TWO independent reviews, in order:
 ### Related Skills
 - `verification-before-completion` — Verify each task before marking done
 - `code-review` — Quality review patterns
-- `planning` — Plan structure that feeds task dispatch
+- `plan` — Plan structure that feeds task dispatch

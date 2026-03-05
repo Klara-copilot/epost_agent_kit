@@ -1,7 +1,7 @@
 ---
 title: "Copilot adapter integration + additional packages in init"
 description: "Wire copilot adapter into init flow and add post-profile additional package selection"
-status: done
+status: completed
 priority: P2
 effort: 3h
 branch: master
