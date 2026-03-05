@@ -23,3 +23,8 @@
 {"ts":"2026-03-05T13:41:31.342Z","hook":"scout-block","status":"crash","error":"path should be a `path.relative()`d string, but got \"/Users/than/Projects/epost_agent_kit/.claude/settings.json\""}
 {"ts":"2026-03-05T13:41:48.538Z","hook":"scout-block","status":"crash","error":"path should be a `path.relative()`d string, but got \"/Users/than/Projects/epost_agent_kit/packages/kit/hooks/packages-guard.cjs\""}
 {"ts":"2026-03-05T13:41:52.096Z","hook":"scout-block","status":"crash","error":"path should be a `path.relative()`d string, but got \"/Users/than/Projects/epost_agent_kit/packages/core/hooks/*.cjs\""}
+{"ts":"2026-03-05T13:42:11.210Z","hook":"scout-block","status":"crash","error":"path should be a `path.relative()`d string, but got \"/Users/than/Projects/epost_agent_kit/packages/core/hooks/cook-after-plan-reminder.cjs\""}
+{"ts":"2026-03-05T13:42:16.643Z","hook":"scout-block","status":"crash","error":"path should be a `path.relative()`d string, but got \"/Users/than/Projects/epost_agent_kit/packages/core/settings.json\""}
+{"ts":"2026-03-05T13:42:20.236Z","hook":"scout-block","status":"crash","error":"path should be a `path.relative()`d string, but got \"/Users/than/Projects/epost_agent_kit/.claude/settings.json\""}
+{"ts":"2026-03-05T13:42:24.091Z","hook":"scout-block","status":"crash","error":"path should be a `path.relative()`d string, but got \"/Users/than/Projects/epost_agent_kit/packages/kit/settings.json\""}
+{"ts":"2026-03-05T13:42:27.440Z","hook":"scout-block","status":"crash","error":"path should be a `path.relative()`d string, but got \"/Users/than/Projects/epost_agent_kit/packages/kit/package.yaml\""}
