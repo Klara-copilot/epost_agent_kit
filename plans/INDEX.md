@@ -40,6 +40,7 @@ See [PLAN_FORMAT.md](PLAN_FORMAT.md) for standardized plan template.
 | PLAN-0047 | Fix /docs --init: Flag, KB Alignment, Web Bias | epost-architect | 2026-03-05 | [260305-1153-docs-init-fixes/plan.md](260305-1153-docs-init-fixes/plan.md) |
 | PLAN-0048 | Unified Package Versioning Strategy | epost-architect | 2026-03-05 | [260305-1224-unified-package-versioning/plan.md](260305-1224-unified-package-versioning/plan.md) |
 | PLAN-0049 | Align Agent Team Roles with ClaudeKit | epost-architect | 2026-03-05 | [260305-1253-align-agents-with-claudekit/plan.md](260305-1253-align-agents-with-claudekit/plan.md) |
+| PLAN-0050 | Agent Ecosystem Redesign: Responsibilities, Skills, Routing & Workflows | epost-architect | 2026-03-05 | [260305-1322-agent-redesign-audit/plan.md](260305-1322-agent-redesign-audit/plan.md) |
 
 ## Completed
 

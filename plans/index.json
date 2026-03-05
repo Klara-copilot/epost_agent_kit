@@ -2,10 +2,10 @@
   "version": "1.0.0",
   "updated": "2026-03-05",
   "counts": {
-    "active": 23,
+    "active": 24,
     "completed": 24,
     "archived": 0,
-    "total": 47
+    "total": 48
   },
   "plans": [
     {
@@ -790,6 +790,16 @@
       "authors": ["epost-architect"],
       "tags": ["agents", "roles", "restructure", "claudekit"],
       "file": "260305-1253-align-agents-with-claudekit/plan.md"
+    },
+    {
+      "id": "PLAN-0050",
+      "title": "Agent Ecosystem Redesign: Responsibilities, Skills, Routing & Workflows",
+      "type": "design",
+      "status": "active",
+      "created": "2026-03-05",
+      "authors": ["epost-architect"],
+      "tags": ["agents", "skills", "routing", "workflows", "ecosystem", "redesign"],
+      "file": "260305-1322-agent-redesign-audit/plan.md"
     }
   ]
 }
