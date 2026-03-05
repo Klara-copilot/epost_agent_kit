@@ -84,7 +84,34 @@ Verify:
 grep "## \[2.0.0\]" CHANGELOG.md
 ```
 
-### 4. Validate Versions
+### 4. Update Documentation Content
+
+Update `docs/` to reflect release changes. Use the knowledge-base structure:
+
+**Create/update documentation entries** as needed:
+- **Architecture changes** → `docs/architecture/ARCH-NNNN-*.md`
+- **New patterns/conventions** → `docs/patterns/PATTERN-NNNN-*.md` or `docs/conventions/CONV-NNNN-*.md`
+- **Major features** → `docs/features/FEAT-NNNN-*.md`
+- **Debug findings** → `docs/findings/FINDING-NNNN-*.md`
+
+**Update index.json** if documentation entries added:
+```bash
+# Manual: Add entries to docs/index.json entries array
+# Each entry: id, title, category, status, audience, path, tags, agentHint, related
+```
+
+**Examples for v2.0.0**:
+- Already documented: ARCH-0001 (system architecture), CONV-0001 (package structure), CONV-0002 (release process)
+- Updated: ARCH-0001 clarified package topology and profiles
+- Added: docs/index.json per knowledge-base.md spec
+
+Verify documentation:
+```bash
+find docs -name "*.md" -type f | wc -l
+grep -c '"id":' docs/index.json
+```
+
+### 5. Validate Versions
 
 ```bash
 scripts/validate-release-version.sh 2.0.0
@@ -99,7 +126,7 @@ OK CHANGELOG.md: [2.0.0] found
 All version checks passed.
 ```
 
-### 5. Test Build Locally (Optional)
+### 6. Test Build Locally (Optional)
 
 ```bash
 scripts/build-release.sh 2.0.0
@@ -107,14 +134,19 @@ tar tzf epost_agent_kit-2.0.0.tar.gz | head -20
 rm epost_agent_kit-2.0.0.tar.gz
 ```
 
-### 6. Commit Changes
+### 7. Commit Changes
 
 ```bash
-git add .epost-metadata.json CHANGELOG.md
-git commit -m "chore(release): v2.0.0"
+git add .epost-metadata.json CHANGELOG.md docs/
+git commit -m "chore(release): v2.0.0
+
+- Update kitVersion to 2.0.0
+- Update CHANGELOG.md with release notes
+- Update docs/ with new/modified documentation entries
+"
 ```
 
-### 7. Sync Install Scripts to CLI Repo (If Updated)
+### 8. Sync Install Scripts to CLI Repo (If Updated)
 
 If install scripts were modified:
 
@@ -127,7 +159,7 @@ git push origin master
 cd ../epost_agent_kit
 ```
 
-### 8. Create Git Tag
+### 9. Create Git Tag
 
 ```bash
 git tag -a v2.0.0 -m "Release version 2.0.0"
@@ -138,14 +170,14 @@ Verify:
 git tag -l v2.0.0
 ```
 
-### 9. Push Changes and Tag
+### 10. Push Changes and Tag
 
 ```bash
 git push origin master
 git push origin v2.0.0
 ```
 
-### 10. Wait for GitHub Actions
+### 11. Wait for GitHub Actions
 
 The release workflow automatically:
 1. Validates `packages/*/package.yaml` files
@@ -159,7 +191,7 @@ Check progress at:
 
 Wait ~2-3 minutes for completion.
 
-### 11. Verify Release on GitHub
+### 12. Verify Release on GitHub
 
 1. Go to [Releases page](https://github.com/Klara-copilot/epost_agent_kit/releases)
 2. Click `v2.0.0`
@@ -172,23 +204,27 @@ Wait ~2-3 minutes for completion.
 ## Quick Reference
 
 ```bash
-# 1. Update files
+# 1. Update version files
 # Edit .epost-metadata.json: kitVersion -> "2.0.0"
 # Edit CHANGELOG.md: move [Unreleased] -> [2.0.0]
 
-# 2. Validate
+# 2. Update documentation (if architectural changes)
+# Edit docs/architecture/ARCH-*.md, docs/conventions/CONV-*.md, etc.
+# Update docs/index.json if entries added
+
+# 3. Validate versions
 scripts/validate-release-version.sh 2.0.0
 
-# 3. Commit
-git add .epost-metadata.json CHANGELOG.md
+# 4. Commit all changes
+git add .epost-metadata.json CHANGELOG.md docs/
 git commit -m "chore(release): v2.0.0"
 
-# 4. Tag and push
+# 5. Create tag and push
 git tag -a v2.0.0 -m "Release version 2.0.0"
 git push origin master
 git push origin v2.0.0
 
-# 5. Check GitHub Actions
+# 6. Check GitHub Actions
 # https://github.com/Klara-copilot/epost_agent_kit/actions
 ```
 
