@@ -45,13 +45,15 @@
             "command": "node .claude/hooks/privacy-block.cjs"
           }
         ]
-      },
+      }
+    ],
+    "SubagentStop": [
       {
-        "matcher": "Write|Edit",
+        "matcher": "*",
         "hooks": [
           {
             "type": "command",
-            "command": "node .claude/hooks/packages-guard.cjs"
+            "command": "node .claude/hooks/cook-after-plan-reminder.cjs"
           }
         ]
       }

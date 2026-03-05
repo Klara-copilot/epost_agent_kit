@@ -28,3 +28,13 @@
 {"ts":"2026-03-05T13:42:20.236Z","hook":"scout-block","status":"crash","error":"path should be a `path.relative()`d string, but got \"/Users/than/Projects/epost_agent_kit/.claude/settings.json\""}
 {"ts":"2026-03-05T13:42:24.091Z","hook":"scout-block","status":"crash","error":"path should be a `path.relative()`d string, but got \"/Users/than/Projects/epost_agent_kit/packages/kit/settings.json\""}
 {"ts":"2026-03-05T13:42:27.440Z","hook":"scout-block","status":"crash","error":"path should be a `path.relative()`d string, but got \"/Users/than/Projects/epost_agent_kit/packages/kit/package.yaml\""}
+{"ts":"2026-03-05T13:43:18.500Z","hook":"scout-block","status":"crash","error":"path should be a `path.relative()`d string, but got \"/Users/than/Projects/epost_agent_kit/packages/core/hooks/session-init.cjs\""}
+{"ts":"2026-03-05T13:43:19.425Z","hook":"scout-block","status":"crash","error":"path should be a `path.relative()`d string, but got \"/Users/than/Projects/epost_agent_kit/.claude/hooks/*.cjs\""}
+{"ts":"2026-03-05T13:43:22.285Z","hook":"scout-block","status":"crash","error":"path should be a `path.relative()`d string, but got \"/Users/than/Projects/epost_agent_kit/packages/core/hooks/session-init.cjs\""}
+{"ts":"2026-03-05T13:43:28.148Z","hook":"scout-block","status":"crash","error":"path should be a `path.relative()`d string, but got \"/Users/than/Projects/epost_agent_kit/packages/core/hooks/session-init.cjs\""}
+{"ts":"2026-03-05T13:43:40.533Z","hook":"scout-block","status":"crash","error":"path should be a `path.relative()`d string, but got \"/Users/than/Projects/epost_agent_kit/packages/core/hooks/cook-after-plan-reminder.cjs\""}
+{"ts":"2026-03-05T13:43:43.813Z","hook":"scout-block","status":"crash","error":"path should be a `path.relative()`d string, but got \"/Users/than/Projects/epost_agent_kit/packages/core/hooks/cook-after-plan-reminder.cjs\""}
+{"ts":"2026-03-05T13:43:46.220Z","hook":"scout-block","status":"crash","error":"path should be a `path.relative()`d string, but got \"/Users/than/Projects/epost_agent_kit/packages/core/settings.json\""}
+{"ts":"2026-03-05T13:43:50.926Z","hook":"scout-block","status":"crash","error":"path should be a `path.relative()`d string, but got \"/Users/than/Projects/epost_agent_kit/packages/core/settings.json\""}
+{"ts":"2026-03-05T13:43:53.099Z","hook":"scout-block","status":"crash","error":"path should be a `path.relative()`d string, but got \"/Users/than/Projects/epost_agent_kit/.claude/settings.json\""}
+{"ts":"2026-03-05T13:43:59.527Z","hook":"scout-block","status":"crash","error":"path should be a `path.relative()`d string, but got \"/Users/than/Projects/epost_agent_kit/.claude/settings.json\""}

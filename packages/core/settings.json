@@ -45,7 +45,18 @@
             "command": "node .claude/hooks/privacy-block.cjs"
           }
         ]
-      },
+      }
+    ],
+    "SubagentStop": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/cook-after-plan-reminder.cjs"
+          }
+        ]
+      }
     ],
     "Stop": [
       {
