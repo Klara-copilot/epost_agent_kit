@@ -36,7 +36,7 @@ Check request keywords → git diff extensions → CWD path:
 | `.tsx/.ts/.jsx/.scss`, "React", "Next.js", "web" | web | `web-frontend`, `web-nextjs` |
 | `.java` + `pom.xml`, "Java EE", "WildFly", "backend" | backend | `backend-javaee`, `backend-databases` |
 | `epost-agent-kit-cli/` path, `src/domains/`, "CLI", "kit cli" | cli | `kit-cli` |
-| `.css/.scss` + design tokens, "Figma", "klara" | design | `web-figma`, `web-ui-lib` |
+| `.css/.scss` + design tokens, "Figma", "klara" | design | `figma`, `web-ui-lib` |
 
 Multiple platforms: ask user (max 1 question). If 80%+ files = one platform, use that.
 
@@ -59,7 +59,7 @@ Scan the user request for these patterns:
 | step by step, complex, analyze, root cause | reasoning | sequential-thinking, problem-solving |
 | repo overview, codebase summary | exploration | repomix |
 | a11y, accessibility, WCAG, VoiceOver | accessibility | a11y + platform-a11y variant |
-| Figma, design tokens, components, theme | design system | web-figma, web-ui-lib |
+| Figma, design tokens, components, theme | design system | figma, web-ui-lib |
 | Docker, container, GCP, Terraform | infrastructure | infra-docker, infra-cloud |
 | B2B module, inbox, monitoring, composer | domain | domain-b2b |
 | get started, onboard, begin, new to project | onboarding | get-started |
@@ -146,5 +146,5 @@ Integrate loaded skill knowledge into your current task:
 | any agent | a11y + iOS | a11y, ios-a11y |
 | any agent | a11y + Android | a11y, android-a11y |
 | any agent | a11y + Web | a11y, web-a11y |
-| any agent | Figma / design system | web-figma, web-ui-lib |
+| any agent | Figma / design system | figma, web-ui-lib |
 | any agent | kit authoring | kit-skill-development, kit-agent-development |

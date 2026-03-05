@@ -6,7 +6,7 @@ disable-model-invocation: true
 metadata:
   argument-hint: "<componentKey> [nodeId]"
   connections:
-    requires: [web-ui-lib, web-figma]
+    requires: [web-ui-lib, figma]
 ---
 
 # /docs-component
@@ -47,8 +47,8 @@ Document a klara-theme component by extracting Figma data and creating prop mapp
 3. **Delegate**: Delegates to `epost-fullstack-developer` with:
    - `componentKey`: The component to document
    - `workflow`: `document-component`
-4. **Execute**: Implementer follows `web-ui-lib-dev/references/document-component.md` skill aspect:
-   - Extract Figma data via `web-figma/references/extraction-procedure.md`
+4. **Execute**: Implementer follows `ui-lib-dev/references/document-component.md` skill aspect:
+   - Extract Figma data via `figma/references/extraction-procedure.md`
    - Cross-reference with codebase
    - Write `<componentKey>.figma.json`
    - Write `<componentKey>.mapping.json`
@@ -63,7 +63,7 @@ Document a klara-theme component by extracting Figma data and creating prop mapp
 
 ## Related
 
-- Skill: `.claude/skills/web-ui-lib-dev/references/document-component.md`
-- Extraction: `.claude/skills/web-figma/references/extraction-procedure.md`
+- Skill: `.claude/skills/ui-lib-dev/references/document-component.md`
+- Extraction: `.claude/skills/figma/references/extraction-procedure.md`
 - Manifest: `libs/klara-theme/figma-data/manifest.json`
 - Schemas: `libs/klara-theme/figma-data/schema/`

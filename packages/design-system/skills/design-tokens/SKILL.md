@@ -1,14 +1,14 @@
 ---
-name: web-figma-variables
-description: Use when working with Vien 2.0 Figma variables, design tokens, semantic colors, or multi-brand theming
+name: design-tokens
+description: "Use when working with Vien 2.0 design tokens, Figma variables, semantic colors, multi-brand theming, or translating tokens to platform-native formats (CSS variables, Swift constants, Kotlin theme objects)"
 user-invocable: false
 
 metadata:
   agent-affinity: [epost-muji]
   keywords: [figma, variables, tokens, design-system, semantic]
-  platforms: [web]
+  platforms: [all]
   connections:
-    requires: [web-figma]
+    requires: [figma]
 ---
 
 # Figma Variables Architecture Skill

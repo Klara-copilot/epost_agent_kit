@@ -45,7 +45,7 @@ skill-index alone — it relies on routing context or agent `skills:` lists).
 | 11 | Create a dashboard page... | PASS | PASS | PASS | PASS |
 | 12 | The API route returns 500... | PASS | PASS | PASS | PASS |
 | 13 | Write Playwright tests... | PASS | PASS | PASS | PASS |
-| 14 | Document the Button... | PASS | PASS (gap: web-ui-lib-dev) | PASS | PASS |
+| 14 | Document the Button... | PASS | PASS (gap: ui-lib-dev) | PASS | PASS |
 | 15 | Make the nav keyboard... | PASS | PASS (gap: a11y, web-a11y) | skip | PASS |
 
 ### Backend Developer (16-20)
@@ -123,7 +123,7 @@ via agent `skills:` lists or platform detection instead.
 | planning | #22, #23 | `design`, `spec`, `architecture`, `roadmap` |
 | research | #37 | `how does`, `compare`, `best practice` |
 | web-a11y | #15, #28 | `keyboard`, `aria`, `focus`, `web-accessibility` |
-| web-ui-lib-dev | #14 | `component`, `document component`, `figma pipeline` |
+| ui-lib-dev | #14 | `component`, `document component`, `figma pipeline` |
 
 ## Action Items
 

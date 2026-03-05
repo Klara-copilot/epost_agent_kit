@@ -134,9 +134,11 @@ Skills support nested directories. Claude Code auto-discovers `SKILL.md` files a
 │   ├── git-pr/                       # Git PR creation
 │   ├── web-nextjs/                   # Next.js patterns
 │   ├── web-frontend/                 # React/frontend patterns
-│   ├── web-figma/                    # Figma MCP + extraction
-│   ├── web-ui-lib/                   # UI component library
-│   ├── web-ui-lib-dev/               # klara-theme pipeline
+│   ├── figma/                        # Figma MCP + extraction (all platforms)
+│   ├── design-tokens/                # Vien 2.0 token architecture (all platforms)
+│   ├── web-ui-lib/                   # UI component library (web, in platform-web)
+│   ├── ui-lib-dev/                   # UI library pipeline (all platforms)
+│   ├── ui-guidance/                  # Integration consulting & conflict resolution
 │   ├── web-a11y/                     # Web accessibility (WCAG 2.1 AA)
 │   ├── ios-development/              # Swift/SwiftUI patterns
 │   ├── ios-a11y/                     # iOS accessibility

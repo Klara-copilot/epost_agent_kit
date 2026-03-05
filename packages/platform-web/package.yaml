@@ -19,6 +19,7 @@ provides:
     - web-i18n
     - web-auth
     - web-testing
+    - web-ui-lib
 files:
   skills/: skills/
 

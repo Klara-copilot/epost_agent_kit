@@ -11,10 +11,10 @@ provides:
   agents:
     - epost-muji
   skills:
-    - web-figma
-    - web-figma-variables
-    - web-ui-lib
-    - web-ui-lib-dev
+    - figma
+    - design-tokens
+    - ui-lib-dev
+    - ui-guidance
   commands: []
 
 files:

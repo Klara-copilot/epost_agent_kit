@@ -19,7 +19,7 @@ metadata:
   agent-affinity: [epost-muji, epost-code-reviewer]
   connections:
     requires: [code-review]
-    enhances: [web-ui-lib-dev, ios-ui-lib, android-ui-lib]
+    enhances: [ui-lib-dev, ios-ui-lib, android-ui-lib]
     uses: [web-rag, ios-rag]
 ---
 

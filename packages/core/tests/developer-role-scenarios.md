@@ -119,7 +119,7 @@ Each scenario has:
 ### Scenario 14: Document Component
 - **Prompt:** "Document the Button component from Figma"
 - **Route:** `/docs-component` -> `epost-muji`
-- **Skills:** `web-figma`, `web-ui-lib-dev`
+- **Skills:** `figma`, `ui-lib-dev`
 - **Rationale:** "Document" is docs intent. "component from Figma" routes to specialized docs:component.
 - **Variant:** `/docs-component Button`
 
