@@ -8,12 +8,12 @@ metadata:
   argument-hint: "[--init | --migrate | --scan | --verify | --batch [category]]"
   connections:
     enhances: []
-    requires: [knowledge-retrieval, knowledge-base]
+    requires: [knowledge-retrieval]
 ---
 
 # Docs — Unified Documentation Command
 
-Auto-detect and execute the appropriate documentation workflow following `knowledge-base.md` structure.
+Auto-detect and execute the appropriate documentation workflow following `knowledge-retrieval/references/knowledge-base.md` structure.
 
 ## Step 0 — Flag Override
 

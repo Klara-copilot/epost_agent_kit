@@ -35,7 +35,7 @@ Check request keywords → git diff extensions → CWD path:
 | `.kt/.kts`, "Android", "Kotlin", "Compose" | android | `android-development`, `android-ui-lib` |
 | `.tsx/.ts/.jsx/.scss`, "React", "Next.js", "web" | web | `web-frontend`, `web-nextjs` |
 | `.java` + `pom.xml`, "Java EE", "WildFly", "backend" | backend | `backend-javaee`, `backend-databases` |
-| `epost-agent-kit-cli/` path, "CLI", "kit cli" | cli | `kit-cli` |
+| `epost-agent-kit-cli/` path, `src/domains/`, "CLI", "kit cli" | cli | `kit-cli` |
 | `.css/.scss` + design tokens, "Figma", "klara" | design | `web-figma`, `web-ui-lib` |
 
 Multiple platforms: ask user (max 1 question). If 80%+ files = one platform, use that.

@@ -23,7 +23,6 @@ provides:
   skills:
     - core
     - code-review
-    - debugging
     - problem-solving
     - error-recovery
     - repomix
@@ -73,7 +72,6 @@ files:
   hooks/: hooks/
   scripts/: scripts/
   output-styles/: output-styles/
-  workflows/: workflows/
   assets/: assets/
   settings.json: settings.json
   .ck.json: .ck.json

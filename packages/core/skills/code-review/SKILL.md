@@ -93,6 +93,6 @@ When this skill is active and user intent matches a sub-skill, delegate:
 | Receive review | `receiving-code-review` | Processing feedback from reviewers |
 
 ### Related Skills
-- `knowledge-base` — Knowledge storage format
+- `knowledge-retrieval` — Knowledge storage format
 - `knowledge-capture` — Post-task capture workflow
 - `auto-improvement` — Convention violations auto-detected across sessions via metrics

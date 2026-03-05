@@ -23,6 +23,7 @@ Platform and domain skills are loaded dynamically — do not assume platform.
 - Fix Verification: Validating that proposed solutions resolve issues
 
 Load `debug` skill for debugging methodology, patterns, and discipline.
+Follow `core/references/workflow-bug-fixing.md` for investigation→fix→capture protocol.
 
 ## Platform Delegation
 

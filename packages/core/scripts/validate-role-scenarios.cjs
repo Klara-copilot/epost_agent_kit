@@ -305,10 +305,10 @@ function discoverSkills(prompt, projectPlatforms) {
 
   // Remove always-loaded or meta skills (not scenario-relevant)
   const ignoredSkills = [
-    'core', 'hub-context', 'skill-discovery', 'error-recovery',
-    'sequential-thinking', 'problem-solving', 'verification-before-completion',
-    'receiving-code-review', 'subagent-driven-development',
-    'knowledge-base', 'knowledge-capture', 'knowledge-retrieval', 'repomix',
+    'core', 'skill-discovery', 'error-recovery',
+    'sequential-thinking', 'problem-solving',
+    'subagent-driven-development',
+    'knowledge-capture', 'knowledge-retrieval', 'repomix',
   ];
   for (const s of ignoredSkills) found.delete(s);
 

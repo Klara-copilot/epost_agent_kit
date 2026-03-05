@@ -53,6 +53,62 @@ Otherwise: continue to Complexity Auto-Detection.
 | `references/state-machine-guide.md` | State machine notation, patterns, and validation checklist |
 | `references/planning-flow.dot` | Planning flow diagram |
 
+## Plan Output Contract
+
+Every plan is a **directory** with a `plan.md` overview and one phase file per phase:
+
+```
+plans/{YYMMDD-HHMM-slug}/
+  plan.md                    — overview, phases table with file links, success criteria
+  phase-{N}-{slug}.md        — tasks, files to change, validation per phase
+```
+
+**plan.md frontmatter** (required fields):
+```yaml
+---
+title: "Short description"
+status: draft | active | completed | archived
+created: YYYY-MM-DD
+updated: YYYY-MM-DD
+effort: Xh
+phases: N
+platforms: [all | ios | android | web | backend]
+breaking: true | false
+---
+```
+
+**phase file frontmatter** (required fields):
+```yaml
+---
+phase: N
+title: "Phase title"
+effort: Xh
+depends: []   # phase numbers this phase depends on
+---
+```
+
+**Phases table in plan.md must link to phase files:**
+```markdown
+| # | Phase | Effort | Status | File |
+|---|-------|--------|--------|------|
+| 1 | Name | 2h | pending | [phase-1](./phase-1-slug.md) |
+```
+
+## Plan Lifecycle
+
+```
+draft → active → completed → archived
+```
+
+| Action | Command |
+|--------|---------|
+| Activate | `node .claude/scripts/set-active-plan.cjs plans/{slug}` |
+| Complete | `node .claude/scripts/complete-plan.cjs plans/{slug}` |
+| Archive | `node .claude/scripts/archive-plan.cjs plans/{slug}` |
+| Board | `plans/README.md` — updated by scripts automatically |
+
+Always run `set-active-plan.cjs` after creating a plan directory.
+
 ## Complexity Auto-Detection
 
 1. **Simple** (1 module, clear scope, < 5 files) → load `references/fast-mode.md`
@@ -130,14 +186,9 @@ See `references/state-machine-guide.md` for notation, patterns, and validation c
 - Include database migrations if needed
 - Note breaking changes
 - Consider testing strategy
-- Think about documentation updates
-- Always create YAML frontmatter with all required fields
-- Link phases with dependencies clearly
 - Estimate conservatively, track actuals
-- Mark file ownership for parallel execution safety
-- Use Parallelization Info section only for `/plan-parallel` variant
-
-Use `knowledge-retrieval` to consult prior decisions before planning. Use `knowledge-capture` to persist learnings after.
+- Mark file ownership for parallel execution safety (parallel mode)
+- Use `knowledge-retrieval` before planning, `knowledge-capture` after
 
 ## Mode Reference
 

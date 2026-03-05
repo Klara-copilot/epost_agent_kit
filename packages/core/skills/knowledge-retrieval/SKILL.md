@@ -155,7 +155,7 @@ When a query spans platforms, coordinate RAG queries:
 
 ## Related Skills
 
-- `knowledge-base` — Knowledge system structure
+- `knowledge-retrieval/references/knowledge-base.md` — Knowledge system structure
 - `knowledge-capture` — Persist new learnings
 - `docs-seeker` — External documentation retrieval
 - `research` — Deep multi-source investigation

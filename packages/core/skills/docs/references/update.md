@@ -16,7 +16,7 @@ metadata:
   platforms:
     - all
   connections:
-    requires: [knowledge-base]
+    requires: [knowledge-retrieval]
     enhances: [knowledge-retrieval]
 ---
 

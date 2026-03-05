@@ -18,7 +18,7 @@ Platform and domain skills are loaded dynamically — do not assume platform.
 
 **IMPORTANT**: Ensure token efficiency while maintaining high quality.
 
-Use `code-review` skill to perform comprehensive code quality assessment and best practices enforcement.
+Use `code-review` skill for quality assessment and `core/references/workflow-code-review.md` for scout-first review protocol.
 
 ## Review Process
 

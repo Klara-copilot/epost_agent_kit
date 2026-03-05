@@ -9,8 +9,12 @@
 const fs = require('fs');
 const path = require('path');
 
-const SKILLS_DIR = process.argv[2] || path.join(__dirname, '../skills');
-const OUTPUT_FILE = path.join(SKILLS_DIR, 'skill-index.json');
+// Support multiple skill directories: pass comma-separated paths or default to ../skills
+const SKILLS_DIRS = (process.argv[2] || path.join(__dirname, '../skills'))
+  .split(',')
+  .map(d => d.trim());
+const OUTPUT_DIR = process.argv[3] || SKILLS_DIRS[0];
+const OUTPUT_FILE = path.join(OUTPUT_DIR, 'skill-index.json');
 
 /**
  * Category taxonomy — maps skill names to categories
@@ -23,6 +27,9 @@ const CATEGORY_MAP = {
   'web-modules': 'frontend-web',
   'web-prototype': 'frontend-web',
   'web-rag': 'frontend-web',
+  'web-auth': 'frontend-web',
+  'web-i18n': 'frontend-web',
+  'web-testing': 'frontend-web',
 
   // mobile-development
   'ios-development': 'mobile-development',
@@ -36,73 +43,50 @@ const CATEGORY_MAP = {
   'backend-databases': 'backend-development',
 
   // design-system
-  'web-figma': 'design-system',
-  'web-figma-variables': 'design-system',
+  'figma': 'design-system',
+  'design-tokens': 'design-system',
+  'ui-lib-dev': 'design-system',
+  'ui-guidance': 'design-system',
   'web-ui-lib': 'design-system',
-  'web-ui-lib-dev': 'design-system',
 
   // accessibility
   'a11y': 'accessibility',
   'ios-a11y': 'accessibility',
   'android-a11y': 'accessibility',
   'web-a11y': 'accessibility',
-  'audit-a11y': 'accessibility',
-  'audit-close-a11y': 'accessibility',
-  'fix-a11y': 'accessibility',
-  'review-a11y': 'accessibility',
 
   // development-tools (workflow skills)
   'cook': 'development-tools',
-  'cook-fast': 'development-tools',
-  'cook-parallel': 'development-tools',
   'fix': 'development-tools',
-  'fix-deep': 'development-tools',
-  'fix-ci': 'development-tools',
-  'fix-ui': 'development-tools',
   'plan': 'development-tools',
-  'plan-fast': 'development-tools',
-  'plan-deep': 'development-tools',
-  'plan-parallel': 'development-tools',
-  'plan-validate': 'development-tools',
   'test': 'development-tools',
   'debug': 'development-tools',
   'scout': 'development-tools',
   'bootstrap': 'development-tools',
-  'bootstrap-fast': 'development-tools',
-  'bootstrap-parallel': 'development-tools',
-  'git-commit': 'development-tools',
-  'git-push': 'development-tools',
-  'git-pr': 'development-tools',
-  'review-code': 'development-tools',
-  'review-improvements': 'development-tools',
-  'docs-init': 'development-tools',
-  'docs-update': 'development-tools',
-  'docs-component': 'development-tools',
+  'git': 'development-tools',
+  'review': 'development-tools',
+  'audit': 'development-tools',
+  'docs': 'development-tools',
   'convert': 'development-tools',
   'simulator': 'development-tools',
   'epost': 'development-tools',
   'auto-improvement': 'development-tools',
+  'get-started': 'development-tools',
 
   // analysis-reasoning
   'core': 'analysis-reasoning',
   'code-review': 'analysis-reasoning',
-  'debugging': 'analysis-reasoning',
-  'planning': 'analysis-reasoning',
   'problem-solving': 'analysis-reasoning',
   'error-recovery': 'analysis-reasoning',
   'sequential-thinking': 'analysis-reasoning',
   'research': 'analysis-reasoning',
   'docs-seeker': 'analysis-reasoning',
   'doc-coauthoring': 'analysis-reasoning',
-  'knowledge-base': 'analysis-reasoning',
   'knowledge-retrieval': 'analysis-reasoning',
   'knowledge-capture': 'analysis-reasoning',
   'repomix': 'analysis-reasoning',
-  'hub-context': 'analysis-reasoning',
   'skill-discovery': 'analysis-reasoning',
   'data-store': 'analysis-reasoning',
-  'verification-before-completion': 'analysis-reasoning',
-  'receiving-code-review': 'analysis-reasoning',
   'subagent-driven-development': 'analysis-reasoning',
 
   // infrastructure
@@ -110,20 +94,13 @@ const CATEGORY_MAP = {
   'infra-docker': 'infrastructure',
 
   // kit-authoring
+  'kit': 'kit-authoring',
   'kit-agents': 'kit-authoring',
   'kit-agent-development': 'kit-authoring',
   'kit-skill-development': 'kit-authoring',
-  'kit-commands': 'kit-authoring',
   'kit-hooks': 'kit-authoring',
   'kit-cli': 'kit-authoring',
-  'kit-add-agent': 'kit-authoring',
-  'kit-add-skill': 'kit-authoring',
-  'kit-add-command': 'kit-authoring',
-  'kit-add-hook': 'kit-authoring',
-  'kit-optimize-skill': 'kit-authoring',
-  'cli-cook': 'kit-authoring',
-  'cli-doctor': 'kit-authoring',
-  'cli-test': 'kit-authoring',
+  'kit-verify': 'kit-authoring',
 
   // business-domains
   'domain-b2b': 'business-domains',
@@ -150,66 +127,34 @@ const CONNECTION_MAP = {
   'backend-databases': { enhances: ['backend-javaee'] },
 
   // Design system requires
-  'web-ui-lib-dev':     { requires: ['web-ui-lib', 'web-figma'] },
-  'web-figma-variables': { requires: ['web-figma'] },
-  'docs-component':     { requires: ['web-ui-lib', 'web-figma'] },
+  'ui-lib-dev':     { requires: ['figma'] },
+  'design-tokens':  { requires: ['figma'] },
 
   // Knowledge enhances
-  'problem-solving':     { enhances: ['debugging'] },
-  'sequential-thinking': { enhances: ['debugging'] },
-  'error-recovery':      { enhances: ['debugging'] },
+  'problem-solving':     { enhances: ['debug'] },
+  'sequential-thinking': { enhances: ['debug'] },
+  'error-recovery':      { enhances: ['debug'] },
   'docs-seeker':         { enhances: ['research'] },
-  'knowledge-retrieval': { enhances: ['research', 'planning'] },
-  'knowledge-capture':   { requires: ['knowledge-base'] },
-
-  // Kit requires
-  'kit-add-agent':     { requires: ['kit-agent-development'] },
-  'kit-add-skill':     { requires: ['kit-skill-development'] },
-  'kit-add-command':   { requires: ['kit-commands'] },
-  'kit-add-hook':      { requires: ['kit-hooks'] },
-  'kit-optimize-skill': { requires: ['kit-skill-development'] },
-
-  // Workflow variant conflicts
-  'cook-fast':     { conflicts: ['cook-parallel'] },
-  'cook-parallel': { conflicts: ['cook-fast'] },
-  'plan-fast':     { conflicts: ['plan-deep', 'plan-parallel'] },
-  'plan-deep':     { conflicts: ['plan-fast', 'plan-parallel'] },
-  'plan-parallel': { conflicts: ['plan-fast', 'plan-deep'] },
-  'bootstrap-fast':     { conflicts: ['bootstrap-parallel'] },
-  'bootstrap-parallel': { conflicts: ['bootstrap-fast'] },
-  'fix':      { conflicts: ['fix-deep'] },
-  'fix-deep': { conflicts: ['fix'] },
+  'knowledge-retrieval': { enhances: ['research', 'plan'] },
+  'knowledge-capture':   { requires: ['knowledge-retrieval'] },
 
   // RAG enhances
   'web-rag': { enhances: ['web-frontend'] },
   'ios-rag': { enhances: ['ios-development'] },
 
   // Cross-cutting enhances
-  'receiving-code-review':         { enhances: ['code-review'] },
-  'subagent-driven-development':   { enhances: ['planning'] },
-  'hub-context':                   { enhances: ['skill-discovery'] },
-  'verification-before-completion': { enhances: ['code-review'] },
+  'subagent-driven-development':   { enhances: ['plan'] },
   'auto-improvement':              { enhances: ['skill-discovery'] },
-  'data-store':                    { enhances: ['knowledge-base'] },
+  'data-store':                    { enhances: ['knowledge-retrieval'] },
   'repomix':                       { enhances: ['research'] },
-  'doc-coauthoring':               { enhances: ['planning'] },
+  'doc-coauthoring':               { enhances: ['plan'] },
 
-  // Workflow → base skill enhances
-  'cook':          { enhances: ['planning'] },
-  'fix-ci':        { enhances: ['debugging'] },
-  'fix-ui':        { enhances: ['debugging'] },
-  'debug':         { enhances: ['debugging'] },
-  'test':          { enhances: ['code-review'] },
-  'review-code':   { enhances: ['code-review'] },
-  'plan':          { enhances: ['planning'] },
-  'plan-validate': { enhances: ['planning'] },
-  'scout':         { enhances: ['research'] },
-
-  // A11y workflow skills extend base
-  'audit-a11y':       { extends: ['a11y'] },
-  'audit-close-a11y': { extends: ['a11y'] },
-  'fix-a11y':         { extends: ['a11y'] },
-  'review-a11y':      { extends: ['a11y'] },
+  // Workflow enhances
+  'cook':    { enhances: ['plan'] },
+  'debug':   { enhances: ['fix'] },
+  'test':    { enhances: ['code-review'] },
+  'scout':   { enhances: ['research'] },
+  'audit':   { enhances: ['review'] },
 };
 
 /**
@@ -300,8 +245,15 @@ function findSkillFiles(dir, fileList = []) {
 function generateSkillIndex() {
   const startTime = Date.now();
 
-  console.log('Scanning for SKILL.md files...');
-  const skillFiles = findSkillFiles(SKILLS_DIR);
+  console.log(`Scanning ${SKILLS_DIRS.length} skill director${SKILLS_DIRS.length > 1 ? 'ies' : 'y'}...`);
+  const skillFiles = [];
+  for (const dir of SKILLS_DIRS) {
+    if (fs.existsSync(dir)) {
+      findSkillFiles(dir, skillFiles);
+    } else {
+      console.warn(`  Skipping missing directory: ${dir}`);
+    }
+  }
   console.log(`Found ${skillFiles.length} skill files`);
 
   const skills = [];
@@ -313,18 +265,18 @@ function generateSkillIndex() {
       const metadata = extractFrontmatter(content);
 
       if (!metadata) {
-        errors.push(`No frontmatter: ${path.relative(SKILLS_DIR, filePath)}`);
+        errors.push(`No frontmatter: ${path.relative(OUTPUT_DIR, filePath)}`);
         continue;
       }
 
       // Validate required fields
       if (!metadata.name) {
-        errors.push(`Missing 'name': ${path.relative(SKILLS_DIR, filePath)}`);
+        errors.push(`Missing 'name': ${path.relative(OUTPUT_DIR, filePath)}`);
         continue;
       }
 
       // Build skill entry with relative path
-      const relativePath = path.relative(SKILLS_DIR, filePath);
+      const relativePath = path.relative(OUTPUT_DIR, filePath);
       const name = metadata.name;
       const connections = CONNECTION_MAP[name] || {};
       const skill = {
@@ -347,7 +299,7 @@ function generateSkillIndex() {
 
       skills.push(skill);
     } catch (error) {
-      errors.push(`Error processing ${path.relative(SKILLS_DIR, filePath)}: ${error.message}`);
+      errors.push(`Error processing ${path.relative(OUTPUT_DIR, filePath)}: ${error.message}`);
     }
   }
 

@@ -10,14 +10,14 @@ This file provides guidance to Claude Code when working with code in this reposi
 
 **Packages**: core, a11y, kit, design-system
 
-**Installed by**: epost-kit v0.1.0 on 2026-03-04
+**Installed by**: epost-kit v0.1.0 on 2026-03-05
 
 ---
 
 ## Claude Code Agent System
 
 ### Configuration
-- **Agents**: `.claude/agents/` — 13 agents
+- **Agents**: `.claude/agents/` — 20 agents
 - **Commands**: `.claude/commands/` — Slash commands
 - **Skills**: `.claude/skills/` — Passive knowledge
 

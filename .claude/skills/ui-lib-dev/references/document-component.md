@@ -19,7 +19,7 @@ Read `libs/klara-theme/CLAUDE.md` for component patterns and documentation conve
 
 ### 1. Extract Figma Data
 
-Use the `web-figma` skill extraction procedure:
+Use the `figma` skill extraction procedure:
 - Provide `<componentKey>` and nodeId (if available)
 - If nodeId missing, handle user interaction for selection
 - Receive back: `design_context`, `variable_defs`, `screenshot`, `nodeId`

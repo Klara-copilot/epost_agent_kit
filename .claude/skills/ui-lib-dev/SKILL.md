@@ -1,14 +1,14 @@
 ---
-name: web-ui-lib-dev
-description: Use when building, auditing, or documenting klara-theme components through the Figma-to-code pipeline
+name: ui-lib-dev
+description: "Use when building, auditing, or documenting UI library components through the Figma-to-code pipeline across web, iOS, or Android platforms"
 user-invocable: false
 
 metadata:
-  agent-affinity: [epost-muji, epost-implementer]
+  agent-affinity: [epost-muji, epost-fullstack-developer]
   keywords: [klara-theme, components, pipeline, audit, storybook]
-  platforms: [web]
+  platforms: [all]
   connections:
-    requires: [web-ui-lib, web-figma]
+    requires: [figma]
 ---
 
 # klara-theme Skill
@@ -45,7 +45,7 @@ libs/klara-theme/.ai-agents/ui/<feature>/
 ### Key Resources
 
 - **Component patterns**: `libs/klara-theme/CLAUDE.md`
-- **Figma extraction**: `web-figma` skill
+- **Figma extraction**: `figma` skill
 - **Token system**: `libs/klara-theme/_tokens/` (3-layer: primitives, themes, components)
 - **Schemas**: `libs/klara-theme/figma-data/schema/`
 - **Manifest**: `libs/klara-theme/figma-data/manifest.json`
@@ -67,4 +67,18 @@ libs/klara-theme/.ai-agents/ui/<feature>/
 ## Related Documents
 
 - `libs/klara-theme/CLAUDE.md` — Component patterns, tokens, conventions
-- `.claude/skills/web/figma/SKILL.md` — Figma MCP integration
+- `figma` skill — Figma MCP integration
+
+## Platform-Specific Pipelines
+
+The pipeline stages apply to all platforms. Platform differences:
+
+| Stage | Web | iOS | Android |
+|-------|-----|-----|---------|
+| Source | `libs/klara-theme/` | `ios_theme_ui/` | `android_theme_ui/theme/` |
+| Components | React + TypeScript | SwiftUI | Jetpack Compose |
+| Tokens | CSS custom properties | Swift constants | Kotlin theme objects |
+| Stories/Docs | Storybook | Xcode Previews | Compose Previews |
+| Artifacts | `.ai-agents/ui/` | `.ai-agents/ui/` | `.ai-agents/ui/` |
+
+Load platform-specific ui-lib skill (web-ui-lib, ios-ui-lib, android-ui-lib) via skill-discovery for component API reference.

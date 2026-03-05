@@ -9,6 +9,7 @@ metadata:
   agent-affinity:
     - epost-researcher
     - epost-planner
+    - epost-mcp-manager
   keywords:
     - research
     - investigation

@@ -15,6 +15,8 @@ Platform and domain skills are loaded dynamically — do not assume platform.
 
 Load `plan` skill for planning workflow and templates.
 Load `subagent-driven-development` skill for researcher dispatch patterns.
+Follow `core/references/orchestration.md` for delegation context and parallel execution rules.
+Follow `core/references/workflow-feature-development.md` for plan→implement handoff protocol.
 
 **IMPORTANT**: Analyze skills at `.claude/skills/*` and activate skills needed during the task.
 **IMPORTANT**: Ensure token efficiency while maintaining quality.

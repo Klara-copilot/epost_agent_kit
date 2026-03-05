@@ -42,7 +42,15 @@ On every user prompt involving a dev task, sense context before acting:
 - Merge conflicts → suggest fix/resolve
 - Feature branch with no changes → boost Plan or Build
 
+### Multi-Step Workflow Detection
+- Multi-intent ("plan and build X") → `epost-project-manager` → `workflow-feature-development`
+- Bug report with context → `epost-debugger` → `workflow-bug-fixing`
+- New project/module → `workflow-project-init`
+- Architecture question ("should we migrate...") → `epost-brainstormer` → `workflow-architecture-review`
+- Parallel work (3+ independent tasks) → `subagent-driven-development` skill
+
 ### Rules
 - If user types a slash command explicitly → execute it directly, skip routing
 - If ambiguous → use context boost to break tie; if still ambiguous → ask user (max 1 question)
 - If multi-intent ("plan and build X") → delegate to `epost-project-manager`
+- All agent delegations follow `core/references/orchestration.md` protocol

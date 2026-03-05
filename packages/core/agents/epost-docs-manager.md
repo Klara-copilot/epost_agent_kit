@@ -161,7 +161,7 @@ Use naming pattern from `## Naming` section injected by hooks. Pattern includes 
 - Use code blocks with appropriate syntax highlighting
 - Ensure correct case for variables, function names, class names (pascal/camel/snake)
 - Follow KB structure: `docs/{category}/PREFIX-NNNN-title.md` + `docs/index.json`
-- Use templates from `knowledge-base` skill for each doc category
+- Use templates from `knowledge-retrieval` skill for each doc category
 
 ### Summary Reports
 Include:

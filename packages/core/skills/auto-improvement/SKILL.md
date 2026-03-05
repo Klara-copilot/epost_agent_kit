@@ -103,7 +103,7 @@ Run via command: `/review-improvements`
 - `data-store` — `.epost-data/` convention for persistent agent data
 - `knowledge-capture` — Post-task capture workflow (triggered by lesson-capture hook)
 - `knowledge-retrieval` — Search existing knowledge before acting
-- `knowledge-base` — Knowledge system structure and conventions
+- `knowledge-retrieval` — Knowledge system structure and conventions
 - `verification-before-completion` — Verification failures tracked for rework detection
 - `debug` — Error metrics auto-captured by session-metrics hook
 - `code-review` — Convention violations auto-detected across sessions

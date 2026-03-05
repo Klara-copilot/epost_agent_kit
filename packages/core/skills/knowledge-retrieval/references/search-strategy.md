@@ -398,5 +398,4 @@ When RAG results are insufficient:
 ## Related References
 
 - `priority-matrix.md` — When to use which source
-- `knowledge-base/references/sidecar-format-spec.md` — Index schema
-- `knowledge-base/references/knowledge-capture-guide.md` — Capture new findings
+- `knowledge-base.md` — Knowledge system structure, index schema, capture guidelines

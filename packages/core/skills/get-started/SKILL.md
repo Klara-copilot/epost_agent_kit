@@ -168,7 +168,7 @@ Agent(
   - DOCS_STATE = "flat"  → run docs-init --migrate workflow: convert flat docs to KB structure
   - DOCS_STATE = "kb"    → run docs-update --verify workflow: check all entries, flag STALE/BROKEN/GAP
 
-  Apply templates from knowledge-base skill. Keep all files under 800 LOC.
+  Apply templates from knowledge-retrieval skill. Keep all files under 800 LOC.
   Update docs/index.json after all changes.
   """
 )

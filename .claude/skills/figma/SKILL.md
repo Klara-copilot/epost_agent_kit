@@ -1,12 +1,12 @@
 ---
-name: web-figma
-description: Use when extracting Figma data, mapping design tokens to code, or comparing implementation against Figma designs
+name: figma
+description: "Use when extracting Figma data, mapping design tokens to code, or comparing implementation against Figma designs across any platform (web, iOS, Android)"
 user-invocable: false
 
 metadata:
-  agent-affinity: [epost-muji, epost-implementer]
+  agent-affinity: [epost-muji, epost-fullstack-developer]
   keywords: [figma, design, tokens, mcp, figma-to-code]
-  platforms: [web]
+  platforms: [all]
 ---
 
 # Figma Integration Skill
@@ -113,7 +113,7 @@ If differences found, categorize as:
 ## Related Resources
 
 - **klara-theme docs**: `libs/klara-theme/CLAUDE.md`
-- **ui-lib-dev skill**: `web-ui-lib-dev` — Component pipeline (plan, implement, audit, fix, document)
+- **ui-lib-dev skill**: `ui-lib-dev` — Component pipeline (plan, implement, audit, fix, document)
 - **Schemas**: `libs/klara-theme/figma-data/schema/`
   - `component-data.schema.json` — Figma component data structure
   - `component-mapping.schema.json` — Prop mapping structure
