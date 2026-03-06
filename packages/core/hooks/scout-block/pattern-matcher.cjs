@@ -130,6 +130,16 @@ function matchPath(matcher, testPath) {
     normalized = normalized.slice(2);
   }
 
+  // ignore package requires a relative path — convert absolute paths
+  if (path.isAbsolute(normalized)) {
+    normalized = path.relative(process.cwd(), normalized);
+    // If path is outside cwd, relative() starts with '../' — ignore can't match it, so allow
+    if (normalized.startsWith('../')) {
+      return { blocked: false };
+    }
+    normalized = normalized.replace(/\\/g, '/');
+  }
+
   // Check if path is ignored (blocked)
   const blocked = matcher.ig.ignores(normalized);
 
