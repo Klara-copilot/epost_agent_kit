@@ -262,6 +262,12 @@ Structured approval workflow with user decision gates:
 [Dependencies unblocked, follow-up review phases, updated plan status]
 ```
 
+## Report Format
+
+Use `code-review/references/report-template.md` when writing code review reports.
+
+Required elements: standard header (Date, Agent, Plan if applicable, Status), Executive Summary, Score, Findings table (ID/Severity/File:Line/Issue/Fix), Severity Summary, Verdict (`APPROVE` | `FIX-AND-RESUBMIT` | `REDESIGN`), Unresolved questions.
+
 ## Important Guidelines
 
 - **IMPORTANT**: Sacrifice grammar for concision when writing reports

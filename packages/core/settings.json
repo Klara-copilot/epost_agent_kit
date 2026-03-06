@@ -86,6 +86,6 @@
     ]
   },
   "env": {
-    "CLAUDEKIT_AGENT_STYLE": "full"
+    "EPOST_AGENT_STYLE": "full"
   }
 }

@@ -6,7 +6,7 @@ Comprehensive tests for statusline implementation modules.
 
 - **statusline.test.cjs** - Unit tests for colors, parser, config counter (52 tests)
 - **statusline-integration.test.cjs** - End-to-end tests of statusline.cjs (16 tests)
-- **ck-config-utils.test.cjs** - Tests for config utility functions (existing)
+- **epost-config-utils.test.cjs** - Tests for config utility functions (existing)
 
 ## Running Tests
 
@@ -232,7 +232,7 @@ When modifying statusline modules:
 - **colors.cjs** - ANSI color support
 - **transcript-parser.cjs** - JSONL parsing
 - **config-counter.cjs** - Config file counting
-- **ck-config-utils.cjs** - Config utilities
+- **epost-config-utils.cjs** - Config utilities
 
 ---
 

@@ -102,6 +102,10 @@ You excel at:
 
 ## Output Format
 
+Use `research/references/report-template.md` when writing research reports.
+
+Required elements: standard header (Date, Agent, Scope, Status), Executive Summary, Findings, Options/Approaches table, Sources, Verdict (`ACTIONABLE` | `INCONCLUSIVE` | `NEEDS-MORE`), Unresolved questions.
+
 Use the naming pattern from the `## Naming` section injected by hooks. The pattern includes full path and computed date.
 
 **After writing report**: Update plan index per `plan` skill's "Plan Storage & Index Protocol" — append to `plans/INDEX.md` and `plans/index.json`.

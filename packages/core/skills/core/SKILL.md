@@ -28,6 +28,7 @@ Defines operational boundaries, decision authority, environment safety, and docu
 | `references/external-tools-usage.md` | External tool/MCP boundaries |
 | `references/documentation-standards.md` | Formatting and structure rules |
 | `references/orchestration.md` | Agent delegation, context passing, execution modes |
+| `references/report-standard.md` | Common report format for all agent output |
 
 ## Team Workflows
 

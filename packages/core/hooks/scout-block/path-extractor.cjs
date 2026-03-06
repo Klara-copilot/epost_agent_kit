@@ -53,11 +53,15 @@ function extractFromCommand(command) {
   const paths = [];
 
   // First, extract quoted strings (preserve spaces in paths)
+  // Skip regex patterns (e.g. grep -v "node_modules\|.git") — they contain \| alternation
   const quotedPattern = /["']([^"']+)["']/g;
   let match;
   while ((match = quotedPattern.exec(command)) !== null) {
-    if (looksLikePath(match[1])) {
-      paths.push(normalizeExtractedPath(match[1]));
+    const str = match[1];
+    // Skip regex alternation patterns (grep search terms, not paths)
+    if (str.includes('\\|') || (str.includes('|') && !str.includes('/'))) continue;
+    if (looksLikePath(str)) {
+      paths.push(normalizeExtractedPath(str));
     }
   }
 

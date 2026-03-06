@@ -170,6 +170,12 @@ describe("Feature", () => {
 });
 ```
 
+## Report Format
+
+Use `test/references/report-template.md` when writing test reports.
+
+Required elements: standard header (Date, Agent, Plan if applicable, Status), Executive Summary, Results table (Check/Result/Evidence), Coverage section, Failures Detail, Verdict (`PASS` | `FAIL` | `PARTIAL`), Unresolved questions.
+
 ## Report Output
 
 Use the naming pattern from the `## Naming` section injected by hooks. The pattern includes full path and computed date.

@@ -53,6 +53,12 @@ Default: **Fast** (unless complexity warrants Deep).
 - Keep `plan.md` under 80 lines
 - Phase files follow standard 12-section order
 
+## Report Format
+
+Use `plan/references/report-template.md` when writing plan summary reports.
+
+Required elements: standard header (Date, Agent, Plan, Status), Executive Summary, Plan Details, Verdict (`READY` | `NEEDS-RESEARCH` | `BLOCKED`), Unresolved questions.
+
 ## Completion
 
 When done, report:

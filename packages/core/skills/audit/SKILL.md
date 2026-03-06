@@ -18,7 +18,7 @@ metadata:
   platforms: [all]
   agent-affinity: [epost-muji, epost-code-reviewer, epost-a11y-specialist]
   connections:
-    enhances: [code-review]
+    enhances: [code-review, ui-lib-dev]
 ---
 
 # Audit — Unified Audit Command

@@ -22,6 +22,8 @@ provides:
 files:
   agents/: agents/
   skills/: skills/
+  hooks/: hooks/
+  settings.json: settings.json
 
-settings_strategy: skip
+settings_strategy: merge
 claude_snippet: CLAUDE.snippet.md

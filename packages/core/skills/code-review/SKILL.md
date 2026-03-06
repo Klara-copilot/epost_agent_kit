@@ -92,6 +92,17 @@ When this skill is active and user intent matches a sub-skill, delegate:
 | Verify completion | `verification-before-completion` | Before claiming task done |
 | Receive review | `receiving-code-review` | Processing feedback from reviewers |
 
+## Output Format
+
+Use `references/report-template.md` for all code review reports.
+
+Key requirements:
+- Header: Date, Agent, Plan (if applicable), Status
+- Executive Summary first
+- Findings table with ID, Severity, File:Line, Issue, Fix
+- Verdict: `APPROVE` | `FIX-AND-RESUBMIT` | `REDESIGN`
+- Unresolved questions footer always present
+
 ### Related Skills
 - `knowledge-retrieval` — Knowledge storage format
 - `knowledge-capture` — Post-task capture workflow

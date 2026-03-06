@@ -3,7 +3,7 @@ name: research
 description: (ePost) Use when user asks to research, compare options, find best practices, or investigate a technology
 user-invocable: false
 context: fork
-agent: Explore  # Claude Code built-in subagent type
+agent: epost-researcher
 
 metadata:
   agent-affinity:
@@ -32,89 +32,110 @@ metadata:
 
 # Research Skill
 
+## Delegation — REQUIRED
+
+This skill MUST run via the `epost-researcher` agent, not inline.
+
+**When research intent is detected:**
+1. Use the **Task tool** to spawn `epost-researcher`
+2. Pass the research topic + scope + report path (`plans/reports/research-{date}-{slug}.md`)
+3. Do NOT conduct research inline in the main conversation
+
+---
+
 ## Purpose
-Multi-source information gathering and validation.
+Multi-source information gathering and synthesis. Provide strategic technical intelligence that enables informed decision-making.
+
+Honoring **YAGNI**, **KISS**, and **DRY**. Be honest, be brutal, straight to the point, concise.
 
 ## When Active
-User asks for research, best practices, comparison.
+User asks for research, best practices, comparison, technology evaluation, solution design.
 
-## Expertise
+---
 
-### Source Evaluation
-- Check documentation currency
-- Verify author credibility
-- Cross-reference claims
-- Identify outdated info
+## Research Phases
 
-### Information Synthesis
-- Combine multiple sources
-- Identify consensus views
-- Note conflicting opinions
-- Extract key patterns
+### Phase 1: Scope Definition
 
-### Cross-Validation
-- Verify across sources
-- Check official docs first
-- Test code examples
-- Community validation
+Clearly define scope before searching:
+- Identify key terms and concepts to investigate
+- Determine recency requirements (how current must information be)
+- Establish evaluation criteria for sources
+- Set boundaries for research depth
 
-### Documentation Navigation
-- Finding relevant sections
-- Understanding API references
-- Following linked guides
-- Reading examples
+### Phase 2: Information Gathering
 
-### Code Example Discovery
-- GitHub repos
-- CodeSandbox demos
-- Official examples
-- Stack Overflow snippets
+Multi-source search strategy (max **5 parallel searches** — think carefully before each):
 
-### Trend Analysis
-- Recent developments
-- Deprecation notices
-- New best practices
-- Community direction
+1. **Search**: Use `WebSearch` tool with precise queries
+   - Include terms like "best practices", "2024/2025", "security", "performance"
+   - Craft multiple related queries and run in parallel
+   - Prioritize official docs, GitHub repos, authoritative blogs
 
-## Research Process
+2. **Deep content analysis**: For GitHub repos found, use `docs-seeker` to read them
+   - Focus on README, API references, changelogs, release notes
+   - Review version-specific information
 
-1. **Define**: What are we researching?
-2. **Search**: Multiple sources (docs, blogs, repos)
-3. **Evaluate**: Source credibility and recency
-4. **Synthesize**: Combine findings
-5. **Validate**: Cross-check across sources
-6. **Document**: Organized findings
+3. **Cross-reference validation**:
+   - Verify across multiple independent sources
+   - Check publication dates for currency
+   - Identify consensus vs. controversial approaches
+   - Note conflicting information
+
+### Phase 3: Analysis and Synthesis
+
+- Identify common patterns and best practices
+- Evaluate pros and cons of different approaches
+- Assess maturity and stability of technologies
+- Recognize security implications and performance considerations
+- Determine compatibility and integration requirements
+
+### Phase 4: Report Generation
+
+Save report to path provided by caller (`plans/reports/research-{date}-{slug}.md`).
+
+Use `references/report-template.md` for output structure. Report must:
+- Include timestamp of when research was conducted
+- Provide table of contents for longer reports
+- Use code blocks with appropriate syntax highlighting
+- Include diagrams (mermaid or ASCII art) where helpful
+- Conclude with specific, actionable next steps
+- List unresolved questions at the end
+
+---
 
 ## Source Priority
 
 1. Official documentation (highest)
 2. Official examples/tutorials
 3. Well-known community resources
-4. GitHub repositories with activity
+4. GitHub repositories with recent activity
 5. Stack Overflow (for specific issues)
 
-## Output Format
+---
 
-```markdown
-# Research: [Topic]
+## Quality Standards
 
-## Summary
-[2-3 sentence overview]
+| Standard | Requirement |
+|---|---|
+| **Accuracy** | Verified across multiple sources |
+| **Currency** | Prefer last 12 months; note when using older material |
+| **Completeness** | Cover all aspects requested |
+| **Actionability** | Practical, implementable recommendations |
+| **Clarity** | Define technical terms, provide examples |
+| **Attribution** | Always cite sources with links and dates |
 
-## Key Findings
-- [Finding 1]
-- [Finding 2]
+---
 
-## Sources
-- [Source 1](url) - [key takeaway]
-- [Source 2](url) - [key takeaway]
+## Special Considerations
 
-## Recommendations
-[Based on research]
+- **Security topics**: Check for recent CVEs and security advisories
+- **Performance topics**: Look for benchmarks and real-world case studies
+- **New technologies**: Assess community adoption and support levels
+- **APIs**: Verify endpoint availability and authentication requirements
+- **Older technologies**: Always note deprecation warnings and migration paths
 
-## Caveats
-[Any limitations or concerns]
-```
+---
 
 ## Advanced Techniques
 
@@ -142,34 +163,7 @@ User asks for research, best practices, comparison.
 - Check example handles error cases
 - Look for performance implications
 
-## Research Output Template
-
-```markdown
-# Research: [Topic]
-
-## Question
-[What you were researching]
-
-## Summary
-[2-3 sentence overview]
-
-## Key Findings
-- [Finding 1] - sources: [Source A, Source B]
-- [Finding 2] - sources: [Source C]
-
-## Sources Reviewed
-- [Source 1](url) - [Date] - [key takeaway]
-- [Source 2](url) - [Date] - [key takeaway]
-
-## Recommendations
-[Based on research and cross-validation]
-
-## Confidence Level
-[High/Medium/Low] - based on source consistency
-
-## Caveats
-[Limitations, version-specific info, or conflicting opinions]
-```
+---
 
 ## Best Practices
 - Prioritize official docs
@@ -180,6 +174,9 @@ User asks for research, best practices, comparison.
 - Cross-validate findings
 - Document contradictions
 - Track confidence level per finding
+- Sacrifice grammar for concision in reports
+
+---
 
 ## Knowledge-First Research
 
@@ -192,6 +189,8 @@ Before external research, check internal knowledge:
 Use `knowledge-retrieval` skill for the full priority chain.
 
 Use `knowledge-capture` skill to persist learnings after this task.
+
+---
 
 ## Sub-Skill Routing
 

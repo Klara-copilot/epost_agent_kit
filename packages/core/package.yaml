@@ -67,8 +67,8 @@ files:
   output-styles/: output-styles/
   assets/: assets/
   settings.json: settings.json
-  .ck.json: .ck.json
-  .ckignore: .ckignore
+  .epost-kit.json: .epost-kit.json
+  .epost-ignore: .epost-ignore
 
 renames:
   skills:

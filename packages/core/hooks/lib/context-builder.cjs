@@ -18,7 +18,7 @@ const {
   getReportsPath,
   resolveNamingPattern,
   normalizePath
-} = require('./ck-config-utils.cjs');
+} = require('./epost-config-utils.cjs');
 
 // ═══════════════════════════════════════════════════════════════════════════
 // HELPER FUNCTIONS

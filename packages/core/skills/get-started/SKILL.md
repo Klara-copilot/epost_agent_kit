@@ -2,8 +2,7 @@
 name: get-started
 description: "(ePost) Onboard to a project — detect state, then orchestrate researcher → documenter → implementer pipeline"
 user-invocable: true
-context: fork
-agent: epost-project-manager
+context: inline
 metadata:
   argument-hint: "[project path or question]"
   keywords:

@@ -1,6 +1,6 @@
 /**
- * Tests for ck-config-utils edge case handling
- * Run: node .claude/hooks/lib/__tests__/ck-config-utils.test.cjs
+ * Tests for epost-config-utils edge case handling
+ * Run: node .claude/hooks/lib/__tests__/epost-config-utils.test.cjs
  */
 
 const path = require('path');
@@ -22,7 +22,7 @@ const {
   writeSessionState,
   readSessionState,
   getSessionTempPath
-} = require('../ck-config-utils.cjs');
+} = require('../epost-config-utils.cjs');
 
 let passed = 0;
 let failed = 0;

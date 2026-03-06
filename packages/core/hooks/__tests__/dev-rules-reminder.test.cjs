@@ -32,7 +32,7 @@ function runHook(inputData, options = {}) {
       env: {
         ...process.env,
         CLAUDE_ENV_FILE: '',
-        CK_DEBUG: options.debug ? '1' : '',
+        EPOST_DEBUG: options.debug ? '1' : '',
         ...options.env
       }
     });

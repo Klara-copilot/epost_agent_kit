@@ -19,3 +19,4 @@ metadata:
 | Design System | references/design-system.md | Spacing, colors, typography, token system |
 | Integration | references/integration.md | Theme provider, composition, state patterns |
 | Contributing | references/contributing.md | Proposing components back to MUJI |
+| Component Authoring | references/component-authoring.md | Conventions for building klara-theme components |

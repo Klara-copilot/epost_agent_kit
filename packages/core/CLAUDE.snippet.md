@@ -18,12 +18,13 @@ On every user prompt involving a dev task, sense context before acting:
 
 | Intent | Signal Words | Routes To |
 |--------|-------------|-----------|
-| Build | cook, implement, build, create, add, make, continue | `/cook` |
-| Fix | fix, broken, error, crash, failing, what's wrong | `/fix` |
-| Plan | plan, design, architect, spec, roadmap | `/plan` |
-| Test | test, coverage, validate, verify | `/test` |
-| Debug | debug, trace, inspect, diagnose | `/debug` |
-| Review | review, check code, audit | `/review --code` |
+| Build | cook, implement, build, create, add, make, continue | Spawn `epost-fullstack-developer` via Task tool |
+| Fix | fix, broken, error, crash, failing, what's wrong | Spawn `epost-debugger` via Task tool |
+| Plan | plan, design, architect, spec, roadmap | Spawn `epost-planner` via Task tool (`/plan` skill) |
+| Research | research, investigate, compare, best practices | Spawn `epost-researcher` via Task tool |
+| Test | test, coverage, validate, verify | Spawn `epost-tester` via Task tool |
+| Debug | debug, trace, inspect, diagnose | Spawn `epost-debugger` via Task tool |
+| Review | review, check code, audit | Spawn `epost-code-reviewer` via Task tool |
 | Git | commit, push, pr, merge, done, ship | `/git --commit`, `/git --push`, `/git --pr` |
 | Docs | docs, document, write docs | `/docs` |
 | Scaffold | bootstrap, init, scaffold, new project, new module | `/bootstrap` |
@@ -31,9 +32,11 @@ On every user prompt involving a dev task, sense context before acting:
 | A11y | a11y, accessibility, wcag | `/fix --a11y` or `/review --a11y` |
 | Onboard | get started, begin, onboard, new to project, what is this | `/get-started` |
 | Journal | journal, postmortem, what went wrong, failure log | `epost-journal-writer` (direct) |
-| Simplify | simplify, refactor, clean up, reduce complexity | `/cook` (simplification mode) |
+| Simplify | simplify, refactor, clean up, reduce complexity | Spawn `epost-fullstack-developer` via Task tool |
 | MCP | mcp, tools, discover tools, rag query | `epost-mcp-manager` (direct) |
 | Design | design, ui, ux, wireframe, screenshot to code, visual asset | `epost-muji` (direct) |
+
+> **Delegation rule**: When routing to a skill with `context: fork`, use the **Task tool** to spawn the skill's `agent:` value. Never execute fork-context skills inline.
 
 ### Context Boost Rules
 - TypeScript/build errors detected → always route to `/fix` first
@@ -44,6 +47,7 @@ On every user prompt involving a dev task, sense context before acting:
 
 ### Multi-Step Workflow Detection
 - Multi-intent ("plan and build X") → `epost-project-manager` → `workflow-feature-development`
+- Research then plan ("research X, then plan") → `epost-project-manager` → spawns epost-researcher (report) → epost-planner reads report → creates plan
 - Bug report with context → `epost-debugger` → `workflow-bug-fixing`
 - New project/module → `workflow-project-init`
 - Architecture question ("should we migrate...") → `epost-brainstormer` → `workflow-architecture-review`

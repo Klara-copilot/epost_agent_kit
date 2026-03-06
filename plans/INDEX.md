@@ -42,13 +42,14 @@ See [PLAN_FORMAT.md](PLAN_FORMAT.md) for standardized plan template.
 | PLAN-0049 | Align Agent Team Roles with ClaudeKit | epost-architect | 2026-03-05 | [260305-1253-align-agents-with-claudekit/plan.md](260305-1253-align-agents-with-claudekit/plan.md) |
 | PLAN-0050 | Agent Ecosystem Redesign: Responsibilities, Skills, Routing & Workflows | epost-architect | 2026-03-05 | [260305-1322-agent-redesign-audit/plan.md](260305-1322-agent-redesign-audit/plan.md) |
 | PLAN-0051 | Muji Agent Skill Redesign: Cross-Platform Design System Team | epost-architect | 2026-03-05 | [260305-1348-muji-skill-redesign/plan.md](260305-1348-muji-skill-redesign/plan.md) |
-
 ## Completed
 
 | ID | Title | Agent | Date | File |
 |----|-------|-------|------|------|
+| PLAN-0057 | Muji Audit Standards: Enforceable klara-theme Checklist & Scoring | epost-fullstack-developer | 2026-03-06 | [reports/epost-fullstack-developer-260306-0631-muji-audit-standards.md](reports/epost-fullstack-developer-260306-0631-muji-audit-standards.md) |
 | PLAN-0052 | Team Workflows: Rules-Based Agent Orchestration | epost-project-manager | 2026-03-05 | [260305-1601-team-workflows/plan.md](260305-1601-team-workflows/plan.md) |
 | PLAN-0053 | Cleanup Scripts — Keep Only Developer-Facing | epost-architect | 2026-03-05 | [260305-1702-cleanup-scripts/plan.md](260305-1702-cleanup-scripts/plan.md) |
+| PLAN-0055 | Agent Report Templates | epost-fullstack-developer | 2026-03-06 | [260305-2359-agent-report-templates/plan.md](260305-2359-agent-report-templates/plan.md) |
 | PLAN-0001 | Phase 01: Docs Completion | docs-manager | 2026-02-06 | [reports/docs-manager-260206-1139-phase-01-docs-completion.md](reports/docs-manager-260206-1139-phase-01-docs-completion.md) |
 | PLAN-0002 | Phase 05: Complex Commands | fullstack-developer | 2026-02-06 | [reports/fullstack-developer-260206-1202-phase-05-complex-commands.md](reports/fullstack-developer-260206-1202-phase-05-complex-commands.md) |
 | PLAN-0003 | Phase 07: Update & Uninstall | fullstack-developer | 2026-02-06 | [reports/fullstack-developer-260206-1208-phase07-update-uninstall.md](reports/fullstack-developer-260206-1208-phase07-update-uninstall.md) |
@@ -71,3 +72,4 @@ See [PLAN_FORMAT.md](PLAN_FORMAT.md) for standardized plan template.
 ## Archived
 
 _No archived plans._
+| PLAN-0056 | Klara-Theme Conventions Research | epost-researcher | 2026-03-06 | [reports/epost-researcher-260306-0625-klara-theme-conventions.md](reports/epost-researcher-260306-0625-klara-theme-conventions.md) |

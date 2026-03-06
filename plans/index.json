@@ -1,11 +1,11 @@
 {
   "version": "1.0.0",
-  "updated": "2026-03-05",
+  "updated": "2026-03-06",
   "counts": {
-    "active": 26,
+    "active": 28,
     "completed": 25,
     "archived": 0,
-    "total": 51
+    "total": 53
   },
   "plans": [
     {
@@ -494,7 +494,7 @@
     },
     {
       "id": "PLAN-0030",
-      "title": "RAG Query Expansion API — Serve Mappings via MCP",
+      "title": "RAG Query Expansion API \u2014 Serve Mappings via MCP",
       "type": "implementation",
       "status": "active",
       "created": "2026-03-04",
@@ -513,7 +513,7 @@
     },
     {
       "id": "PLAN-0032",
-      "title": "Rethink RAG Skills — Dynamic, MCP-Integrated",
+      "title": "Rethink RAG Skills \u2014 Dynamic, MCP-Integrated",
       "type": "implementation",
       "status": "active",
       "created": "2026-03-04",
@@ -550,7 +550,7 @@
     },
     {
       "id": "PLAN-0034",
-      "title": "Merge Planning Skills + Add Subagent-Driven-Development — Implementation",
+      "title": "Merge Planning Skills + Add Subagent-Driven-Development \u2014 Implementation",
       "type": "report",
       "status": "completed",
       "created": "2026-03-04",
@@ -585,7 +585,7 @@
     },
     {
       "id": "PLAN-0036",
-      "title": "Merge Debugging Skills — Implementation",
+      "title": "Merge Debugging Skills \u2014 Implementation",
       "type": "report",
       "status": "active",
       "agent": "epost-implementer",
@@ -611,7 +611,7 @@
     },
     {
       "id": "PLAN-0038",
-      "title": "Merge Planning Skills — Cleanup & Validation",
+      "title": "Merge Planning Skills \u2014 Cleanup & Validation",
       "type": "report",
       "status": "active",
       "created": "2026-03-04",
@@ -668,7 +668,7 @@
     },
     {
       "id": "PLAN-0042",
-      "title": "Skill Consolidation — Implementation",
+      "title": "Skill Consolidation \u2014 Implementation",
       "type": "report",
       "status": "completed",
       "created": "2026-03-05",
@@ -739,7 +739,7 @@
     },
     {
       "id": "PLAN-0046",
-      "title": "GitHub Release Process — Implementation",
+      "title": "GitHub Release Process \u2014 Implementation",
       "type": "implementation",
       "status": "active",
       "created": "2026-03-05",
@@ -777,8 +777,16 @@
       "type": "design",
       "status": "active",
       "created": "2026-03-05",
-      "authors": ["epost-architect"],
-      "tags": ["versioning", "packages", "release", "automation", "cli"],
+      "authors": [
+        "epost-architect"
+      ],
+      "tags": [
+        "versioning",
+        "packages",
+        "release",
+        "automation",
+        "cli"
+      ],
       "file": "260305-1224-unified-package-versioning/plan.md"
     },
     {
@@ -787,8 +795,15 @@
       "type": "implementation",
       "status": "active",
       "created": "2026-03-05",
-      "authors": ["epost-architect"],
-      "tags": ["agents", "roles", "restructure", "claudekit"],
+      "authors": [
+        "epost-architect"
+      ],
+      "tags": [
+        "agents",
+        "roles",
+        "restructure",
+        "claudekit"
+      ],
       "file": "260305-1253-align-agents-with-claudekit/plan.md"
     },
     {
@@ -797,8 +812,17 @@
       "type": "design",
       "status": "active",
       "created": "2026-03-05",
-      "authors": ["epost-architect"],
-      "tags": ["agents", "skills", "routing", "workflows", "ecosystem", "redesign"],
+      "authors": [
+        "epost-architect"
+      ],
+      "tags": [
+        "agents",
+        "skills",
+        "routing",
+        "workflows",
+        "ecosystem",
+        "redesign"
+      ],
       "file": "260305-1322-agent-redesign-audit/plan.md"
     },
     {
@@ -807,8 +831,17 @@
       "type": "design",
       "status": "active",
       "created": "2026-03-05",
-      "authors": ["epost-architect"],
-      "tags": ["muji", "design-system", "skills", "cross-platform", "figma", "audit"],
+      "authors": [
+        "epost-architect"
+      ],
+      "tags": [
+        "muji",
+        "design-system",
+        "skills",
+        "cross-platform",
+        "figma",
+        "audit"
+      ],
       "file": "260305-1348-muji-skill-redesign/plan.md"
     },
     {
@@ -817,19 +850,91 @@
       "type": "implementation",
       "status": "completed",
       "created": "2026-03-05",
-      "authors": ["epost-project-manager"],
-      "tags": ["workflows", "orchestration", "agents", "rules", "team-coordination"],
+      "authors": [
+        "epost-project-manager"
+      ],
+      "tags": [
+        "workflows",
+        "orchestration",
+        "agents",
+        "rules",
+        "team-coordination"
+      ],
       "file": "260305-1601-team-workflows/plan.md"
     },
     {
       "id": "PLAN-0053",
-      "title": "Cleanup Scripts — Keep Only Developer-Facing",
+      "title": "Cleanup Scripts \u2014 Keep Only Developer-Facing",
       "type": "implementation",
       "status": "active",
       "created": "2026-03-05",
-      "authors": ["epost-architect"],
-      "tags": ["scripts", "cleanup", "package-yaml", "developer-facing"],
+      "authors": [
+        "epost-architect"
+      ],
+      "tags": [
+        "scripts",
+        "cleanup",
+        "package-yaml",
+        "developer-facing"
+      ],
       "file": "260305-1702-cleanup-scripts/plan.md"
+    },
+    {
+      "id": "PLAN-0055",
+      "title": "Agent Report Templates",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-06",
+      "authors": [
+        "epost-fullstack-developer"
+      ],
+      "tags": [
+        "templates",
+        "reports",
+        "agents",
+        "delegation",
+        "standards"
+      ],
+      "file": "260305-2359-agent-report-templates/plan.md"
+    },
+    {
+      "id": "PLAN-0056",
+      "title": "Klara-Theme Conventions Research",
+      "type": "research",
+      "status": "complete",
+      "created": "2026-03-06",
+      "authors": [
+        "epost-researcher"
+      ],
+      "tags": [
+        "klara-theme",
+        "ui-lib",
+        "conventions",
+        "muji",
+        "design-system",
+        "audit-standards"
+      ],
+      "file": "reports/epost-researcher-260306-0625-klara-theme-conventions.md"
+    },
+    {
+      "id": "PLAN-0057",
+      "title": "Muji Audit Standards: Enforceable klara-theme Checklist & Scoring",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-06",
+      "authors": [
+        "epost-planner"
+      ],
+      "tags": [
+        "muji",
+        "audit",
+        "klara-theme",
+        "ui-lib",
+        "standards",
+        "checklist",
+        "design-system"
+      ],
+      "file": "260306-0631-muji-audit-standards/plan.md"
     }
   ]
 }

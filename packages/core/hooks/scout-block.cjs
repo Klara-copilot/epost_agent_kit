@@ -2,7 +2,7 @@
 /**
  * scout-block.cjs - Cross-platform hook for blocking directory access
  *
- * Blocks access to directories listed in .claude/.ckignore
+ * Blocks access to directories listed in .claude/.epost-ignore
  * Uses gitignore-spec compliant pattern matching via 'ignore' package
  *
  * Blocking Rules:
@@ -12,7 +12,7 @@
  *   - Allowed: npm build, go build, cargo build, make, mvn, gradle, docker build, kubectl, terraform
  *
  * Configuration:
- * - Edit .claude/.ckignore to customize blocked patterns (one per line, # for comments)
+ * - Edit .claude/.epost-ignore to customize blocked patterns (one per line, # for comments)
  * - Supports negation patterns (!) to allow specific paths
  *
  * Exit Codes:
@@ -74,7 +74,7 @@ try {
     toolInput,
     options: {
       claudeDir,
-      ckignorePath: path.join(claudeDir, '.ckignore'),
+      epostIgnorePath: path.join(claudeDir, '.epost-ignore'),
       checkBroadPatterns: true
     }
   });
