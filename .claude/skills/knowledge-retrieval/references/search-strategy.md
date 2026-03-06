@@ -169,7 +169,7 @@ jq '.skills[] | select(.triggers[] | contains("/debug"))' .claude/skills/skill-i
 
 **Find by agent**:
 ```bash
-jq '.skills[] | select(.["agent-affinity"][] | contains("epost-implementer"))' .claude/skills/skill-index.json
+jq '.skills[] | select(.["agent-affinity"][] | contains("epost-fullstack-developer"))' .claude/skills/skill-index.json
 ```
 
 **Get skill path**:
@@ -398,5 +398,4 @@ When RAG results are insufficient:
 ## Related References
 
 - `priority-matrix.md` — When to use which source
-- `knowledge-base/references/sidecar-format-spec.md` — Index schema
-- `knowledge-base/references/knowledge-capture-guide.md` — Capture new findings
+- `knowledge-base.md` — Knowledge system structure, index schema, capture guidelines

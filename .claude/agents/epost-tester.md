@@ -3,7 +3,7 @@ name: epost-tester
 description: (ePost) Testing agent that ensures code quality through comprehensive testing. Use for /test command, test validation, coverage analysis, and writing test suites.
 model: haiku
 color: yellow
-skills: [core, skill-discovery]
+skills: [core, skill-discovery, test]
 memory: project
 ---
 
@@ -106,17 +106,13 @@ When assigned a platform-specific task:
 
 ## Coverage Enforcement
 
-After running tests, automatically enforce coverage thresholds:
+After running tests, enforce coverage thresholds:
 
-1. **Run Coverage Gate**
-   ```bash
-   node .claude/scripts/check-coverage.cjs
-   ```
+1. **Check project coverage** using the project's own test runner (e.g., `npm test --coverage`, `bun test --coverage`)
 
 2. **Enforcement Rules**
    - If coverage < 80%: HALT pipeline, report gap
    - If line coverage < 85%: WARN (target for core logic)
-   - Exit code 1 triggers pipeline failure
 
 3. **No Bypass**
    - Never use fake data or mocks to inflate coverage
@@ -173,6 +169,12 @@ describe("Feature", () => {
   });
 });
 ```
+
+## Report Format
+
+Use `test/references/report-template.md` when writing test reports.
+
+Required elements: standard header (Date, Agent, Plan if applicable, Status), Executive Summary, Results table (Check/Result/Evidence), Coverage section, Failures Detail, Verdict (`PASS` | `FAIL` | `PARTIAL`), Unresolved questions.
 
 ## Report Output
 

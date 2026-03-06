@@ -21,8 +21,11 @@ const {
   getGitRoot,
   resolvePlanPath,
   getReportsPath,
-  normalizePath
+  normalizePath,
+  isHookEnabled
 } = require('./lib/epost-config-utils.cjs');
+
+if (!isHookEnabled('subagent-init')) process.exit(0);
 
 /**
  * Get agent-specific context from config

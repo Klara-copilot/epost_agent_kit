@@ -1,6 +1,6 @@
 ---
 name: kit-verify
-description: Use when preparing a release, running pre-init checks, auditing kit health, or when asked to "verify", "audit kit", "pre-release check"
+description: (ePost) Use when preparing a release, running pre-init checks, auditing kit health, or when asked to "verify", "audit kit", "pre-release check"
 user-invocable: false
 metadata:
   keywords:
@@ -11,7 +11,7 @@ metadata:
     - lint
   agent-affinity:
     - epost-kit-designer
-    - epost-reviewer
+    - epost-code-reviewer
   platforms:
     - all
   connections:

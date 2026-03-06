@@ -1,6 +1,6 @@
 ---
 name: web-a11y
-description: Use when web accessibility issues arise — ARIA roles, keyboard navigation, focus trapping, alt text, contrast, screen readers
+description: (ePost) Use when web accessibility issues arise — ARIA roles, keyboard navigation, focus trapping, alt text, contrast, screen readers
 user-invocable: false
 metadata:
   keywords:
@@ -12,7 +12,7 @@ metadata:
     - semantic-html
   agent-affinity:
     - epost-a11y-specialist
-    - epost-implementer
+    - epost-fullstack-developer
   platforms:
     - web
   connections:

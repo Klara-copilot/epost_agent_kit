@@ -1,6 +1,6 @@
 ---
 name: design-tokens
-description: "Use when working with Vien 2.0 design tokens, Figma variables, semantic colors, multi-brand theming, or translating tokens to platform-native formats (CSS variables, Swift constants, Kotlin theme objects)"
+description: "(ePost) Use when working with Vien 2.0 design tokens, Figma variables, semantic colors, multi-brand theming, or translating tokens to platform-native formats (CSS variables, Swift constants, Kotlin theme objects)"
 user-invocable: false
 
 metadata:

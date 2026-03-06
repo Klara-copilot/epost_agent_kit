@@ -9,7 +9,7 @@ metadata:
     requires: [code-review]
 ---
 
-**Ultrathink** to exhaustively list ALL potential edge cases, then dispatch parallel `epost-reviewer` agents to verify: <scope>$ARGUMENTS</scope>
+**Ultrathink** to exhaustively list ALL potential edge cases, then dispatch parallel `epost-code-reviewer` agents to verify: <scope>$ARGUMENTS</scope>
 
 **IMPORTANT:** Activate needed skills. Ensure token efficiency. Sacrifice grammar for concision.
 
@@ -64,13 +64,13 @@ Only proceed to categorization and quality review after spec compliance passes.
 ### 2. Categorize & Assign
 
 Group edge cases by similar scope for parallel verification:
-- Each category → one `epost-reviewer` agent
+- Each category → one `epost-code-reviewer` agent
 - Max 6 categories (merge small ones)
 - Each reviewer gets specific edge cases to VERIFY, not discover
 
 ### 3. Parallel Verification
 
-Launch N `epost-reviewer` subagents simultaneously:
+Launch N `epost-code-reviewer` subagents simultaneously:
 - Pass: category name, list of edge cases, relevant files
 - Task: **VERIFY** if each edge case is properly handled in code
 - Report: which edge cases are handled vs unhandled
@@ -118,7 +118,7 @@ Collect all verification reports:
 ### 6. Re-Review (1 pass only)
 
 After debugger fixes, run a single verification pass — do NOT re-run full discovery:
-- Re-dispatch one `epost-reviewer` agent with the original unhandled edge cases + fixed files
+- Re-dispatch one `epost-code-reviewer` agent with the original unhandled edge cases + fixed files
 - Task: confirm each was resolved (handled / still unhandled / introduced regression)
 
 **IF re-review passes** (all previously unhandled edge cases now handled):
@@ -150,7 +150,7 @@ User: /review-code auth module
    - Token handling (5 cases)
    - Session management (3 cases)
 
-3. Parallel → 3 epost-reviewers verify simultaneously
+3. Parallel → 3 epost-code-reviewers verify simultaneously
 
 4. Aggregate → 8 handled, 3 unhandled, 1 partial
 

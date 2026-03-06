@@ -16,10 +16,10 @@ metadata:
     - "review this component"
     - "check component quality"
     - "muji review"
-  agent-affinity: [epost-muji, epost-reviewer]
+  agent-affinity: [epost-muji, epost-code-reviewer]
   connections:
     requires: [code-review]
-    enhances: [web-ui-lib-dev, ios-ui-lib, android-ui-lib]
+    enhances: [ui-lib-dev, ios-ui-lib, android-ui-lib]
     uses: [web-rag, ios-rag]
 ---
 
@@ -53,10 +53,10 @@ Default platform: **all** (audit all three, then cross-platform consistency).
 
 ### Step 2: Load Platform Checklist(s)
 
-Load the matching reference file(s):
-- web → `references/checklist-web.md`
-- ios → `references/checklist-ios.md`
-- android → `references/checklist-android.md`
+Load the matching checklist:
+- web: `references/checklist-web.md` (rules from `ui-lib-dev/references/audit-standards.md`)
+- ios: `references/checklist-ios.md` (future)
+- android: `references/checklist-android.md` (future)
 
 ### Step 3: Audit — 6 Categories Per Platform
 

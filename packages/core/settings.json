@@ -27,7 +27,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node .claude/hooks/dev-rules-reminder.cjs"
+            "command": "node .claude/hooks/context-reminder.cjs"
           }
         ]
       }
@@ -53,7 +53,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node .claude/hooks/cook-after-plan-reminder.cjs"
+            "command": "node .claude/hooks/subagent-stop-reminder.cjs"
           }
         ]
       }

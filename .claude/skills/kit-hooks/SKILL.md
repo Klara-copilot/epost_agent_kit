@@ -1,6 +1,6 @@
 ---
 name: kit-hooks
-description: This skill should be used when the user asks to "create a hook", "add a hook", "write a PreToolUse hook", "implement a SessionStart hook", "block tool access", "validate tool use", "add automation on stop", or mentions hook events (PreToolUse, PostToolUse, Stop, SubagentStop, SessionStart, SessionEnd, UserPromptSubmit, PreCompact, Notification). Provides guidance for creating hooks in the epost_agent_kit package system.
+description: (ePost) This skill should be used when the user asks to "create a hook", "add a hook", "write a PreToolUse hook", "implement a SessionStart hook", "block tool access", "validate tool use", "add automation on stop", or mentions hook events (PreToolUse, PostToolUse, Stop, SubagentStop, SessionStart, SessionEnd, UserPromptSubmit, PreCompact, Notification). Provides guidance for creating hooks in the epost_agent_kit package system.
 user-invocable: false
   connections:
     enhances: [kit-agents]
@@ -118,18 +118,26 @@ Hooks live in `packages/core/hooks/` and are generated to `.claude/hooks/`:
 
 ```
 packages/core/hooks/
-├── session-init.cjs          # SessionStart: project detection
-├── subagent-init.cjs         # SubagentStart: context injection
-├── dev-rules-reminder.cjs    # UserPromptSubmit: rules + plan context
-├── scout-block.cjs           # PreToolUse: block node_modules/dist/.git
-├── privacy-block.cjs         # PreToolUse: block .env/secrets
+├── session-init.cjs            # SessionStart: project detection, env vars, plan resolution
+├── subagent-init.cjs           # SubagentStart: compact context injection to Task agents
+├── context-reminder.cjs        # UserPromptSubmit: session context + rules (deduplicated)
+├── scout-block.cjs             # PreToolUse: block node_modules/dist/.git per .epost-ignore
+├── privacy-block.cjs           # PreToolUse: block .env/secrets unless APPROVED: prefix
+├── subagent-stop-reminder.cjs  # SubagentStop: post-agent reminders (planner → /cook)
+├── session-metrics.cjs         # Stop: record session duration/git stats → .epost-data/
+├── lesson-capture.cjs          # Stop: evaluate significance, prompt knowledge capture
 └── notifications/
-    └── notify.cjs            # Stop: desktop notification
+    └── notify.cjs              # Stop: Discord/Telegram notification
+
+packages/kit/hooks/
+├── kit-session-check.cjs       # SessionStart: check skill-index.json staleness
+├── kit-write-guard.cjs         # PreToolUse: block writes to .claude/ in kit-repo context
+└── kit-post-edit-reminder.cjs  # PostToolUse: skill index + re-init + stale ref scan
 ```
 
 Configuration files:
-- `.ck.json` — Hook config (plan naming, project type, validation rules)
-- `.ckignore` — Scout-block patterns (gitignore-spec format)
+- `.epost-kit.json` — Hook config (plan naming, project type, hook toggles, validation rules)
+- `.epost-ignore` — Scout-block patterns (gitignore-spec format)
 
 ## Creating a New Hook
 

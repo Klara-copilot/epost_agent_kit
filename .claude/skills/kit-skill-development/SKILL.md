@@ -1,6 +1,6 @@
 ---
 name: kit-skill-development
-description: This skill should be used when the user wants to "create a skill", "add a skill to plugin", "write a new skill", "improve skill description", "organize skill content", or needs guidance on skill structure, progressive disclosure, or skill development best practices for Claude Code plugins.
+description: (ePost) This skill should be used when the user wants to "create a skill", "add a skill to plugin", "write a new skill", "improve skill description", "organize skill content", or needs guidance on skill structure, progressive disclosure, or skill development best practices for Claude Code plugins.
 disable-model-invocation: true
 metadata:
   keywords:
@@ -10,8 +10,8 @@ metadata:
     - frontmatter
     - progressive-disclosure
   agent-affinity:
-    - epost-implementer
-    - epost-architect
+    - epost-fullstack-developer
+    - epost-planner
   platforms:
     - all
   connections:

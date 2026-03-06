@@ -1,8 +1,8 @@
 ---
 name: error-recovery
-description: Use when operations fail transiently — timeouts, network errors, retries, circuit breakers, graceful degradation
+description: (ePost) Use when operations fail transiently — timeouts, network errors, retries, circuit breakers, graceful degradation
 metadata:
-  agent-affinity: [epost-implementer, epost-debugger, epost-tester]
+  agent-affinity: [epost-fullstack-developer, epost-debugger, epost-tester]
   keywords: [error, retry, fallback, circuit-breaker, backoff, resilience, failure, exponential, degradation]
   platforms: [all]
   triggers: [error, exception, timeout, retry, fallback]
@@ -198,10 +198,7 @@ if (!fs.existsSync(requiredFile)) {
 
 ```javascript
 // In subagent execution
-const profiler = require('./.claude/scripts/agent-profiler.cjs');
 const circuitBreaker = new CircuitBreaker(3, 60000);
-
-profiler.startTimer('web-implementer');
 
 try {
   const result = await circuitBreaker.execute(async () => {
@@ -210,11 +207,8 @@ try {
       3
     );
   });
-  profiler.endTimer('web-implementer');
   return result;
 } catch (error) {
-  profiler.endTimer('web-implementer');
-
   // Fallback to simpler implementation
   console.warn('Complex implementation failed, using simpler approach');
   return await simpleImplementation(spec);

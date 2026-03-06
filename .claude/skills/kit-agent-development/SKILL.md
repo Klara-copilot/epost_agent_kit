@@ -1,6 +1,6 @@
 ---
 name: kit-agent-development
-description: This skill should be used when the user asks to "create an agent", "add an agent", "write a subagent", "agent frontmatter", "when to use description", "agent examples", "agent tools", "agent colors", "autonomous agent", or needs guidance on agent structure, system prompts, triggering conditions, or agent development best practices for Claude Code plugins.
+description: (ePost) This skill should be used when the user asks to "create an agent", "add an agent", "write a subagent", "agent frontmatter", "when to use description", "agent examples", "agent tools", "agent colors", "autonomous agent", or needs guidance on agent structure, system prompts, triggering conditions, or agent development best practices for Claude Code plugins.
 disable-model-invocation: true
 metadata:
   keywords:
@@ -9,7 +9,7 @@ metadata:
     - system-prompt
     - agent-frontmatter
   agent-affinity:
-    - epost-implementer
+    - epost-fullstack-developer
   platforms:
     - all
   connections:

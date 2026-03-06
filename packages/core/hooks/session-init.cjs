@@ -22,8 +22,11 @@ const {
   writeSessionState,
   resolvePlanPath,
   getReportsPath,
-  resolveNamingPattern
+  resolveNamingPattern,
+  isHookEnabled
 } = require('./lib/epost-config-utils.cjs');
+
+if (!isHookEnabled('session-init')) process.exit(0);
 
 // Import shared project detection logic
 const {

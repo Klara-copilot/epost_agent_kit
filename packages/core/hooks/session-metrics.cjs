@@ -15,6 +15,9 @@ try {
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
+const { isHookEnabled } = require('./lib/epost-config-utils.cjs');
+
+if (!isHookEnabled('session-metrics')) process.exit(0);
 
 const DATA_DIR = path.join(process.cwd(), '.epost-data', 'improvements');
 const SESSIONS_FILE = path.join(DATA_DIR, 'sessions.jsonl');

@@ -3,7 +3,7 @@ name: audit
 description: "(ePost) Audit workflow — auto-detects UI component, a11y, or code audit"
 user-invocable: true
 context: fork
-agent: epost-reviewer
+agent: epost-code-reviewer
 metadata:
   argument-hint: "[--ui <ComponentName> [--platform web|ios|android|all] | --a11y [platform] | --code]"
   keywords: [audit, review, component, a11y, accessibility, code, quality, ui-lib, muji, tokens]
@@ -16,9 +16,9 @@ metadata:
     - "code audit"
     - "component audit"
   platforms: [all]
-  agent-affinity: [epost-muji, epost-reviewer, epost-a11y-specialist]
+  agent-affinity: [epost-muji, epost-code-reviewer, epost-a11y-specialist]
   connections:
-    enhances: [code-review]
+    enhances: [code-review, ui-lib-dev]
 ---
 
 # Audit — Unified Audit Command
@@ -69,7 +69,7 @@ When delegating to epost-muji, detect target platforms:
 | `--ui` | epost-muji | `references/ui.md` | Design system components (web/iOS/Android) |
 | `--a11y` | epost-a11y-specialist | `references/a11y.md` | WCAG 2.1 AA violations |
 | `--close` | epost-a11y-specialist | `references/close-a11y.md` | Mark finding as resolved |
-| `--code` | epost-reviewer | `code-review` | General code quality, security, performance |
+| `--code` | epost-code-reviewer | `code-review` | General code quality, security, performance |
 
 ## Examples
 

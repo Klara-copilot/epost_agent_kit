@@ -3,7 +3,7 @@ name: epost-a11y-specialist
 model: sonnet
 color: "#E63946"
 description: (ePost) Unified multi-platform accessibility orchestrator for iOS, Android, and Web. WCAG 2.1 AA compliance — guidance, auditing, batch fixing, and known-findings database.
-skills: [core, a11y]
+skills: [core, skill-discovery, a11y]
 memory: project
 permissionMode: default
 ---

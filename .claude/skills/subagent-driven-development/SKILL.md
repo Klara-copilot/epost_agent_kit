@@ -1,10 +1,10 @@
 ---
 name: subagent-driven-development
-description: "Use when executing implementation plans with multiple independent tasks that benefit from per-task subagent dispatch and two-stage review."
+description: "(ePost) Use when executing implementation plans with multiple independent tasks that benefit from per-task subagent dispatch and two-stage review."
 user-invocable: false
 
 metadata:
-  agent-affinity: [epost-orchestrator, epost-implementer, epost-architect]
+  agent-affinity: [epost-project-manager, epost-fullstack-developer, epost-planner]
   keywords: [parallel, subagent, dispatch, implementation-loop, two-stage-review]
   platforms: [all]
   connections:

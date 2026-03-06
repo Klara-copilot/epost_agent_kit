@@ -21,6 +21,18 @@ When invoked via `/epost` hub or as default coordinator:
 3. Track progress across multi-step workflows
 4. Verify completion criteria are met
 
+Follow `core/references/orchestration.md` for delegation context passing and execution mode selection.
+
+## Team Workflows
+
+Route multi-step requests to the appropriate workflow:
+- Feature development: planner → fullstack-developer → tester → code-reviewer → docs-manager → git-manager
+- Bug fixing: debugger → fullstack-developer → tester → code-reviewer → git-manager
+- Architecture review: brainstormer → researcher(s) → planner → journal-writer
+- Code review: code-reviewer (scout-first, then quality audit)
+
+See `core/references/workflow-*.md` for detailed step-by-step protocols.
+
 ## Progress Tracking
 
 - Read active plan from `plans/` directory

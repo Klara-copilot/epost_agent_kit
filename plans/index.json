@@ -2,10 +2,10 @@
   "version": "1.0.0",
   "updated": "2026-03-06",
   "counts": {
-    "active": 28,
+    "active": 29,
     "completed": 25,
     "archived": 0,
-    "total": 53
+    "total": 54
   },
   "plans": [
     {
@@ -935,6 +935,24 @@
         "design-system"
       ],
       "file": "260306-0631-muji-audit-standards/plan.md"
+    },
+    {
+      "id": "PLAN-0058",
+      "title": "Port Agent Teams from claudekit",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-06",
+      "authors": [
+        "epost-planner"
+      ],
+      "tags": [
+        "agent-teams",
+        "hooks",
+        "orchestration",
+        "port",
+        "claudekit"
+      ],
+      "file": "260306-1117-agent-teams-port/plan.md"
     }
   ]
 }

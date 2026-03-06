@@ -13,6 +13,9 @@ try {
 
 const fs = require('fs');
 const path = require('path');
+const { isHookEnabled } = require('./lib/epost-config-utils.cjs');
+
+if (!isHookEnabled('lesson-capture')) process.exit(0);
 
 const DATA_DIR = path.join(process.cwd(), '.epost-data', 'improvements');
 const SESSIONS_FILE = path.join(DATA_DIR, 'sessions.jsonl');

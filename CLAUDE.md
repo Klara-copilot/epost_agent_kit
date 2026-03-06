@@ -97,8 +97,8 @@ On every user prompt involving a dev task, sense context before acting:
 
 ### Skills
 - `a11y` — Cross-platform WCAG 2.1 AA foundation (POUR, scoring)
-- `ios-a11y` — iOS (VoiceOver, UIKit-primary, SwiftUI) *(extends ios/\*)*
-- `android-a11y` — Android (Compose, Views/XML, TalkBack) *(extends android/\*)*
+- `ios-a11y` — iOS (VoiceOver, UIKit-primary, SwiftUI) *(extends a11y)*
+- `android-a11y` — Android (Compose, Views/XML, TalkBack) *(extends a11y)*
 - `web-a11y` — Web (ARIA, keyboard, screen readers) *(extends web/\*)*
 
 ---

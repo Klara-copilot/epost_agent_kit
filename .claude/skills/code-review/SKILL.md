@@ -1,10 +1,10 @@
 ---
 name: code-review
-description: Use when reviewing code, checking quality before commit, or auditing changed files for issues
+description: (ePost) Use when reviewing code, checking quality before commit, or auditing changed files for issues
 tier: core
 
 metadata:
-  agent-affinity: [epost-reviewer, epost-implementer]
+  agent-affinity: [epost-code-reviewer, epost-fullstack-developer]
   keywords: [review, code-quality, security, performance, testing, verification]
   platforms: [all]
   triggers: ["/review", "code review", "review code"]
@@ -92,7 +92,18 @@ When this skill is active and user intent matches a sub-skill, delegate:
 | Verify completion | `verification-before-completion` | Before claiming task done |
 | Receive review | `receiving-code-review` | Processing feedback from reviewers |
 
+## Output Format
+
+Use `references/report-template.md` for all code review reports.
+
+Key requirements:
+- Header: Date, Agent, Plan (if applicable), Status
+- Executive Summary first
+- Findings table with ID, Severity, File:Line, Issue, Fix
+- Verdict: `APPROVE` | `FIX-AND-RESUBMIT` | `REDESIGN`
+- Unresolved questions footer always present
+
 ### Related Skills
-- `knowledge-base` — Knowledge storage format
+- `knowledge-retrieval` — Knowledge storage format
 - `knowledge-capture` — Post-task capture workflow
 - `auto-improvement` — Convention violations auto-detected across sessions via metrics

@@ -15,6 +15,8 @@ Platform and domain skills are loaded dynamically — do not assume platform.
 
 Load `plan` skill for planning workflow and templates.
 Load `subagent-driven-development` skill for researcher dispatch patterns.
+Follow `core/references/orchestration.md` for delegation context and parallel execution rules.
+Follow `core/references/workflow-feature-development.md` for plan→implement handoff protocol.
 
 **IMPORTANT**: Analyze skills at `.claude/skills/*` and activate skills needed during the task.
 **IMPORTANT**: Ensure token efficiency while maintaining quality.
@@ -50,6 +52,12 @@ Default: **Fast** (unless complexity warrants Deep).
 - Every `plan.md` MUST have YAML frontmatter
 - Keep `plan.md` under 80 lines
 - Phase files follow standard 12-section order
+
+## Report Format
+
+Use `plan/references/report-template.md` when writing plan summary reports.
+
+Required elements: standard header (Date, Agent, Plan, Status), Executive Summary, Plan Details, Verdict (`READY` | `NEEDS-RESEARCH` | `BLOCKED`), Unresolved questions.
 
 ## Completion
 

@@ -9,6 +9,14 @@
             "command": "node .claude/hooks/session-init.cjs"
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/kit-session-check.cjs"
+          }
+        ]
       }
     ],
     "SubagentStart": [
@@ -27,7 +35,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node .claude/hooks/dev-rules-reminder.cjs"
+            "command": "node .claude/hooks/context-reminder.cjs"
           }
         ]
       }
@@ -45,6 +53,15 @@
             "command": "node .claude/hooks/privacy-block.cjs"
           }
         ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/kit-write-guard.cjs"
+          }
+        ]
       }
     ],
     "SubagentStop": [
@@ -53,7 +70,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node .claude/hooks/cook-after-plan-reminder.cjs"
+            "command": "node .claude/hooks/subagent-stop-reminder.cjs"
           }
         ]
       }
@@ -75,6 +92,17 @@
           }
         ]
       }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/kit-post-edit-reminder.cjs"
+          }
+        ]
+      }
     ]
   },
   "permissions": {
@@ -86,6 +114,6 @@
     ]
   },
   "env": {
-    "CLAUDEKIT_AGENT_STYLE": "full"
+    "EPOST_AGENT_STYLE": "full"
   }
 }

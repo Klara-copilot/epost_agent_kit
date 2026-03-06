@@ -18,7 +18,7 @@ Platform and domain skills are loaded dynamically — do not assume platform.
 
 **IMPORTANT**: Ensure token efficiency while maintaining high quality.
 
-Use `code-review` skill to perform comprehensive code quality assessment and best practices enforcement.
+Use `code-review` skill for quality assessment and `core/references/workflow-code-review.md` for scout-first review protocol.
 
 ## Review Process
 
@@ -261,6 +261,12 @@ Structured approval workflow with user decision gates:
 ### Next Steps
 [Dependencies unblocked, follow-up review phases, updated plan status]
 ```
+
+## Report Format
+
+Use `code-review/references/report-template.md` when writing code review reports.
+
+Required elements: standard header (Date, Agent, Plan if applicable, Status), Executive Summary, Score, Findings table (ID/Severity/File:Line/Issue/Fix), Severity Summary, Verdict (`APPROVE` | `FIX-AND-RESUBMIT` | `REDESIGN`), Unresolved questions.
 
 ## Important Guidelines
 

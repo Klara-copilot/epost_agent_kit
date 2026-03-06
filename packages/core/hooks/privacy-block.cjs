@@ -16,6 +16,9 @@
 
 const fs = require('fs');
 const path = require('path');
+const { isHookEnabled } = require('./lib/epost-config-utils.cjs');
+
+if (!isHookEnabled('privacy')) process.exit(0);
 
 // Import shared privacy checking logic
 const {

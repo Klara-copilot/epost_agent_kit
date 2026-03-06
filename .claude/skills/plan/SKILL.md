@@ -3,12 +3,12 @@ name: plan
 description: "(ePost) Create implementation plan — auto-detects complexity"
 user-invocable: true
 context: fork
-agent: epost-architect
+agent: epost-planner
 metadata:
   argument-hint: "[feature or task description]"
   agent-affinity:
-    - epost-architect
-    - epost-orchestrator
+    - epost-planner
+    - epost-project-manager
   keywords:
     - plan
     - planning
@@ -31,6 +31,17 @@ metadata:
 ---
 
 # Plan — Unified Planning Command
+
+## Delegation — REQUIRED
+
+This skill MUST run via the `epost-planner` agent, not inline.
+
+**When `/plan` or planning intent is detected:**
+1. Use the **Task tool** to spawn `epost-planner`
+2. Pass the full user request + active context (branch, plan dir, CWD)
+3. Do NOT execute planning steps inline in the main conversation
+
+---
 
 Create implementation plans with automatic complexity detection.
 

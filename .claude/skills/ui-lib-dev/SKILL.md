@@ -1,11 +1,11 @@
 ---
 name: ui-lib-dev
-description: "Use when building, auditing, or documenting UI library components through the Figma-to-code pipeline across web, iOS, or Android platforms"
+description: "(ePost) Use when building, auditing, or documenting UI library components through the Figma-to-code pipeline across web, iOS, or Android platforms"
 user-invocable: false
 
 metadata:
   agent-affinity: [epost-muji, epost-fullstack-developer]
-  keywords: [klara-theme, components, pipeline, audit, storybook]
+  keywords: [klara-theme, component, components, pipeline, audit, storybook]
   platforms: [all]
   connections:
     requires: [figma]
@@ -32,6 +32,7 @@ Each stage has a dedicated aspect file with detailed steps, inputs, outputs, and
 | `references/audit-ui.md` | Audit implementation against plan and Figma | `audit-report.json` |
 | `references/fix-findings.md` | Resolve audit findings | `PATCH.diff` or `fix-notes.json` |
 | `references/document-component.md` | Document component with Figma data | `.figma.json` + `.mapping.json` |
+| `references/audit-standards.md` | Enforceable klara-theme rules (35 rules, 6 categories) | Pass/fail criteria per rule |
 
 ## Quick Reference
 

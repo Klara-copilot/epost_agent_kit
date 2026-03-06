@@ -1,10 +1,10 @@
 ---
 name: auto-improvement
-description: Use when reviewing session performance, analyzing improvement trends, or understanding the metrics-capture-detection pipeline
+description: (ePost) Use when reviewing session performance, analyzing improvement trends, or understanding the metrics-capture-detection pipeline
 user-invocable: false
 
 metadata:
-  agent-affinity: [epost-orchestrator, epost-reviewer, epost-debugger]
+  agent-affinity: [epost-project-manager, epost-code-reviewer, epost-debugger]
   keywords: [metrics, improvement, lessons, trends, detection, rework, session]
   platforms: [all]
   triggers: ["improvement report", "session metrics", "detect patterns", "rework analysis"]
@@ -77,7 +77,7 @@ Lesson capture triggers automatically when:
 
 ## Detection Engine
 
-The detection script (`packages/core/scripts/detect-improvements.cjs`) analyzes accumulated metrics:
+Analyzes accumulated metrics from `.epost-data/improvements/sessions.jsonl`:
 
 | Detection | Method | Recommendation |
 |-----------|--------|----------------|
@@ -87,8 +87,7 @@ The detection script (`packages/core/scripts/detect-improvements.cjs`) analyzes 
 | Rework patterns | Avg fixIterations >2 over recent sessions | Review verification process |
 | Unused skills | Loaded but unreferenced 10+ sessions | Optimize or remove |
 
-Run manually: `node packages/core/scripts/detect-improvements.cjs`
-Run via command: `/review-improvements`
+Run via command: `/review --improvements`
 
 ## Hooks
 
@@ -103,7 +102,7 @@ Run via command: `/review-improvements`
 - `data-store` — `.epost-data/` convention for persistent agent data
 - `knowledge-capture` — Post-task capture workflow (triggered by lesson-capture hook)
 - `knowledge-retrieval` — Search existing knowledge before acting
-- `knowledge-base` — Knowledge system structure and conventions
+- `knowledge-retrieval` — Knowledge system structure and conventions
 - `verification-before-completion` — Verification failures tracked for rework detection
 - `debug` — Error metrics auto-captured by session-metrics hook
 - `code-review` — Convention violations auto-detected across sessions

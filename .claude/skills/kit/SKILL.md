@@ -3,7 +3,7 @@ name: kit
 description: "(ePost) Kit authoring — create agents, skills, hooks, or optimize"
 user-invocable: true
 context: fork
-agent: epost-implementer
+agent: epost-fullstack-developer
 metadata:
   argument-hint: "[--add-agent | --add-skill | --add-hook | --optimize] [name]"
   connections:

@@ -1,6 +1,6 @@
 ---
 name: kit-cli
-description: Use when developing the epost-kit CLI — cac commands, @inquirer/prompts, vitest tests, TypeScript patterns
+description: (ePost) Use when developing the epost-kit CLI — cac commands, @inquirer/prompts, vitest tests, TypeScript patterns
 user-invocable: false
 metadata:
   keywords:
@@ -9,8 +9,9 @@ metadata:
     - inquirer
     - vitest
     - epost-kit
+    - command
   agent-affinity:
-    - epost-implementer
+    - epost-fullstack-developer
     - epost-tester
     - epost-debugger
   platforms:

@@ -2,7 +2,7 @@
  * Shared utilities for epost-kit hooks
  *
  * Contains config loading, path sanitization, and common constants
- * used by session-init.cjs and dev-rules-reminder.cjs
+ * used by session-init.cjs and context-reminder.cjs
  */
 
 const fs = require('fs');
@@ -16,6 +16,11 @@ const GLOBAL_CONFIG_PATH = path.join(os.homedir(), '.claude', '.epost-kit.json')
 const CONFIG_PATH = LOCAL_CONFIG_PATH;
 
 const DEFAULT_CONFIG = {
+  privacyBlock: true,  // top-level for privacy-checker backward compat
+  statusline: 'full',
+  skills: {
+    research: { useGemini: true }
+  },
   hooks: {
     scout: {
       enabled: true,
@@ -26,7 +31,13 @@ const DEFAULT_CONFIG = {
     },
     packagesGuard: {
       enabled: true
-    }
+    },
+    'session-init': true,
+    'subagent-init': true,
+    'context-reminder': true,
+    'subagent-stop-reminder': true,
+    'lesson-capture': true,
+    'session-metrics': true
   },
   plan: {
     namingFormat: '{date}-{issue}-{slug}',
@@ -482,7 +493,10 @@ function loadConfig(options = {}) {
       plan: merged.plan || DEFAULT_CONFIG.plan,
       paths: merged.paths || DEFAULT_CONFIG.paths,
       docs: merged.docs || DEFAULT_CONFIG.docs,
-      hooks: deepMerge(DEFAULT_CONFIG.hooks, merged.hooks || {})
+      hooks: deepMerge(DEFAULT_CONFIG.hooks, merged.hooks || {}),
+      privacyBlock: merged.privacyBlock ?? DEFAULT_CONFIG.privacyBlock,
+      statusline: merged.statusline ?? DEFAULT_CONFIG.statusline,
+      skills: deepMerge(DEFAULT_CONFIG.skills, merged.skills || {})
     };
 
     if (includeLocale) {
@@ -516,6 +530,9 @@ function getDefaultConfig(includeProject = true, includeAssertions = true, inclu
     paths: { ...DEFAULT_CONFIG.paths },
     docs: { ...DEFAULT_CONFIG.docs },
     hooks: { ...DEFAULT_CONFIG.hooks },
+    privacyBlock: DEFAULT_CONFIG.privacyBlock,
+    statusline: DEFAULT_CONFIG.statusline,
+    skills: { ...DEFAULT_CONFIG.skills },
     codingLevel: -1  // Default: disabled (no injection, saves tokens)
   };
   if (includeLocale) {
@@ -725,6 +742,28 @@ function resolveNamingPattern(planConfig, gitBranch) {
 }
 
 /**
+ * Check if a hook is enabled via config
+ *
+ * Supports two config patterns:
+ *   - Flat boolean: hooks['session-init'] = true/false
+ *   - Nested object: hooks['scout'] = { enabled: true/false, ... }
+ *
+ * Undefined = enabled by default (opt-out model)
+ *
+ * @param {string} hookName - Hook name to check (e.g., 'session-init', 'scout')
+ * @returns {boolean} True if hook is enabled (default: true)
+ */
+function isHookEnabled(hookName) {
+  const config = loadConfig({ includeProject: false, includeAssertions: false, includeLocale: false });
+  const hooks = config.hooks || {};
+  const val = hooks[hookName];
+  if (val === undefined || val === null) return true;  // default: enabled
+  if (typeof val === 'boolean') return val;
+  if (typeof val === 'object') return val.enabled !== false;
+  return true;
+}
+
+/**
  * Get current git branch (safe execution)
  * @param {string|null} cwd - Working directory to run git command from (optional)
  * @returns {string|null} Current branch name or null
@@ -771,5 +810,6 @@ module.exports = {
   validateNamingPattern,
   resolveNamingPattern,
   getGitBranch,
-  getGitRoot
+  getGitRoot,
+  isHookEnabled
 };

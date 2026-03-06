@@ -47,10 +47,10 @@ Each scenario has:
 
 ### Scenario 5: A11y Audit
 - **Prompt:** "Check accessibility on the onboarding flow"
-- **Route:** `/audit-a11y` -> `epost-a11y-specialist`
+- **Route:** `/audit --a11y` -> `epost-a11y-specialist`
 - **Skills:** `ios-a11y`, `a11y`
 - **Rationale:** "accessibility" is an a11y intent signal. Platform detected from context.
-- **Variant:** `/audit-a11y onboarding flow`
+- **Variant:** `/audit --a11y onboarding flow`
 
 ---
 
@@ -72,10 +72,10 @@ Each scenario has:
 
 ### Scenario 8: A11y Fix
 - **Prompt:** "Add TalkBack support to the checkout flow"
-- **Route:** `/fix-a11y` -> `epost-a11y-specialist`
+- **Route:** `/fix --a11y` -> `epost-a11y-specialist`
 - **Skills:** `android-a11y`, `a11y`
-- **Rationale:** "TalkBack" is an Android accessibility signal. "Add...support" for a11y routes to `/fix-a11y`.
-- **Variant:** `/fix-a11y TalkBack support on checkout flow`
+- **Rationale:** "TalkBack" is an Android accessibility signal. "Add...support" for a11y routes to `/fix --a11y`.
+- **Variant:** `/fix --a11y TalkBack support on checkout flow`
 
 ### Scenario 9: Test UI
 - **Prompt:** "Test the payment Compose UI"
@@ -125,10 +125,10 @@ Each scenario has:
 
 ### Scenario 15: A11y Fix
 - **Prompt:** "Make the nav keyboard accessible"
-- **Route:** `/fix-a11y` -> `epost-a11y-specialist`
+- **Route:** `/fix --a11y` -> `epost-a11y-specialist`
 - **Skills:** `web-a11y`, `a11y`
 - **Rationale:** "keyboard accessible" is a web a11y signal.
-- **Variant:** `/fix-a11y keyboard navigation on nav`
+- **Variant:** `/fix --a11y keyboard navigation on nav`
 
 ---
 
@@ -214,38 +214,38 @@ Each scenario has:
 
 ### Scenario 26: Audit Staged
 - **Prompt:** "Audit the staged changes for a11y issues"
-- **Route:** `/audit-a11y` -> `epost-a11y-specialist`
+- **Route:** `/audit --a11y` -> `epost-a11y-specialist`
 - **Skills:** `a11y` + platform-specific a11y (auto-detected from staged files)
 - **Rationale:** "Audit" + "a11y" direct match. Platform auto-detected from staged file extensions.
-- **Variant:** `/audit-a11y`
+- **Variant:** `/audit --a11y`
 
 ### Scenario 27: Fix Top N
 - **Prompt:** "Fix the top 3 accessibility findings"
-- **Route:** `/fix-a11y 3` -> `epost-a11y-specialist`
+- **Route:** `/fix --a11y 3` -> `epost-a11y-specialist`
 - **Skills:** `a11y` + platform-specific a11y
-- **Rationale:** "Fix" + "accessibility findings" routes to fix:a11y. "top 3" passes as argument.
-- **Variant:** `/fix-a11y 3`
+- **Rationale:** "Fix" + "accessibility findings" routes to fix --a11y. "top 3" passes as argument.
+- **Variant:** `/fix --a11y 3`
 
 ### Scenario 28: Review Keyboard
 - **Prompt:** "Review keyboard navigation across the app"
-- **Route:** `/review-a11y` -> `epost-a11y-specialist`
+- **Route:** `/review --a11y` -> `epost-a11y-specialist`
 - **Skills:** `web-a11y`, `a11y`
 - **Rationale:** "Review" + "keyboard navigation" is web a11y review intent.
-- **Variant:** `/review-a11y keyboard navigation`
+- **Variant:** `/review --a11y keyboard navigation`
 
 ### Scenario 29: Close Finding
 - **Prompt:** "Close finding #A11Y-042 as resolved"
-- **Route:** `/audit-close-a11y #A11Y-042` -> `epost-a11y-specialist`
+- **Route:** `/audit --close #A11Y-042` -> `epost-a11y-specialist`
 - **Skills:** `a11y`
-- **Rationale:** "Close finding" + ID pattern routes to audit-close command.
-- **Variant:** `/audit-close-a11y #A11Y-042`
+- **Rationale:** "Close finding" + ID pattern routes to audit --close command.
+- **Variant:** `/audit --close #A11Y-042`
 
 ### Scenario 30: VoiceOver Check
 - **Prompt:** "Check VoiceOver support on the profile screen"
-- **Route:** `/review-a11y` -> `epost-a11y-specialist`
+- **Route:** `/review --a11y` -> `epost-a11y-specialist`
 - **Skills:** `ios-a11y`, `a11y`
 - **Rationale:** "Check" + "VoiceOver" routes to a11y review. VoiceOver is iOS-specific.
-- **Variant:** `/review-a11y VoiceOver on profile screen`
+- **Variant:** `/review --a11y VoiceOver on profile screen`
 
 ---
 
@@ -331,11 +331,11 @@ Each scenario has:
 
 | Role | Scenarios | Commands Tested | Agents Tested |
 |------|-----------|----------------|---------------|
-| iOS Developer | 1-5 | /cook, /fix, /test, /plan, /audit-a11y | epost-fullstack-developer, epost-planner, epost-a11y-specialist |
-| Android Developer | 6-10 | /cook, /fix, /fix-a11y, /test, /plan | epost-fullstack-developer, epost-a11y-specialist, epost-planner |
-| Web Developer | 11-15 | /cook, /fix, /test, /docs-component, /fix-a11y | epost-fullstack-developer, epost-muji, epost-a11y-specialist |
+| iOS Developer | 1-5 | /cook, /fix, /test, /plan, /audit --a11y | epost-fullstack-developer, epost-planner, epost-a11y-specialist |
+| Android Developer | 6-10 | /cook, /fix, /fix --a11y, /test, /plan | epost-fullstack-developer, epost-a11y-specialist, epost-planner |
+| Web Developer | 11-15 | /cook, /fix, /test, /docs-component, /fix --a11y | epost-fullstack-developer, epost-muji, epost-a11y-specialist |
 | Backend Developer | 16-20 | /cook, /fix, /test, /plan, /debug | epost-fullstack-developer, epost-planner, epost-debugger |
 | Architect | 21-25 | /plan, /plan-deep, /plan-parallel, /review-code | epost-planner, epost-code-reviewer |
-| A11y Specialist | 26-30 | /audit-a11y, /fix-a11y, /review-a11y, /audit-close-a11y | epost-a11y-specialist |
+| A11y Specialist | 26-30 | /audit --a11y, /fix --a11y, /review --a11y, /audit --close | epost-a11y-specialist |
 | Kit Maintainer | 31-35 | /kit-add-skill, /kit-add-agent, /kit-optimize-skill, /kit-add-command | epost-kit-designer, epost-project-manager |
 | Cross-Role | 36-40 | /git-commit, /git-push, /cook | epost-researcher, epost-project-manager |

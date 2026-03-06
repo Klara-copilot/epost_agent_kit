@@ -3,7 +3,7 @@ name: cook
 description: "(ePost) Implement features — auto-detects platform"
 user-invocable: true
 context: fork
-agent: epost-implementer
+agent: epost-fullstack-developer
 metadata:
   argument-hint: "[feature description or plan file]"
 ---

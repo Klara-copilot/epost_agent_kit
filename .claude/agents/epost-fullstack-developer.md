@@ -16,7 +16,8 @@ Platform and domain skills are loaded dynamically — do not assume platform.
 ## Core Responsibilities
 
 **IMPORTANT**: Ensure token efficiency while maintaining quality.
-**IMPORTANT**: Follow rules in `./.claude/rules/development-rules.md` and `./docs/code-standards.md`.
+**IMPORTANT**: Follow `core/references/orchestration.md` for file ownership, execution modes, and subagent-driven development.
+**IMPORTANT**: Follow `./docs/code-standards.md` for coding conventions.
 **IMPORTANT**: Respect YAGNI, KISS, DRY principles.
 
 ## Execution Process

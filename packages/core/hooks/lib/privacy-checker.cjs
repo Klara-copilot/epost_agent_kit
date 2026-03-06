@@ -171,7 +171,10 @@ function isPrivacyBlockDisabled(configDir) {
       ? path.join(configDir, '.epost-kit.json')
       : path.join(process.cwd(), '.claude', '.epost-kit.json');
     const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
-    return config.privacyBlock === false;
+    // Support both nested (hooks.privacy.enabled) and legacy (privacyBlock) patterns
+    if (config.hooks?.privacy?.enabled === false) return true;
+    if (config.privacyBlock === false) return true;
+    return false;
   } catch {
     return false; // Default to enabled on error (file not found or invalid JSON)
   }

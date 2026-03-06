@@ -1,10 +1,10 @@
 ---
 name: web-ui-lib
-description: "Use when referencing klara-theme component APIs, props, variants, spacing tokens, or theme provider patterns"
+description: "(ePost) Use when referencing klara-theme component APIs, props, variants, spacing tokens, or theme provider patterns"
 user-invocable: false
 
 metadata:
-  agent-affinity: [epost-muji, epost-implementer]
+  agent-affinity: [epost-muji, epost-fullstack-developer]
   keywords: [ui-lib, components, design-tokens, integration]
   platforms: [web]
 ---
@@ -19,3 +19,4 @@ metadata:
 | Design System | references/design-system.md | Spacing, colors, typography, token system |
 | Integration | references/integration.md | Theme provider, composition, state patterns |
 | Contributing | references/contributing.md | Proposing components back to MUJI |
+| Component Authoring | references/component-authoring.md | Conventions for building klara-theme components |

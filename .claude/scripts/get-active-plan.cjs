@@ -19,7 +19,7 @@ if (major < 18) {
 
 const fs = require('fs');
 const path = require('path');
-const { readSessionState } = require('../hooks/lib/ck-config-utils.cjs');
+const { readSessionState } = require('../hooks/lib/epost-config-utils.cjs');
 
 /**
  * Read status from plan.md frontmatter
@@ -84,9 +84,9 @@ function findActivePlanByFrontmatter(plansDir) {
  */
 function main() {
   // Get session ID from environment
-  const sessionId = process.env.CK_SESSION_ID;
+  const sessionId = process.env.EPOST_SESSION_ID;
   if (!sessionId) {
-    console.error('Warning: CK_SESSION_ID not set');
+    console.error('Warning: EPOST_SESSION_ID not set');
     console.log('none');
     process.exit(0);
   }

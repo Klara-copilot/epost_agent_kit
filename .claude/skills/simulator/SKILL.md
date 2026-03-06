@@ -1,8 +1,23 @@
 ---
 name: simulator
 description: "(ePost) List, boot, shutdown, and manage iOS simulators using XcodeBuildMCP or xcrun simctl"
-user-invocable: false
-disable-model-invocation: true
+user-invocable: true
+context: fork
+agent: epost-fullstack-developer
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
+  - mcp__xcodebuildmcp__list_sims
+  - mcp__xcodebuildmcp__boot_sim
+  - mcp__xcodebuildmcp__open_sim
+  - mcp__xcodebuildmcp__install_app_sim
+  - mcp__xcodebuildmcp__launch_app_sim
+  - mcp__xcodebuildmcp__stop_app_sim
+  - mcp__xcodebuildmcp__screenshot
+  - mcp__xcodebuildmcp__describe_ui
+  - mcp__xcodebuildmcp__doctor
 metadata:
   argument-hint: "[--list | --boot | --shutdown | --install | --launch | --screenshot]"
 ---

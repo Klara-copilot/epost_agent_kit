@@ -9,7 +9,7 @@ metadata:
   argument-hint: "[issue description or error log]"
   agent-affinity:
     - epost-debugger
-    - epost-implementer
+    - epost-fullstack-developer
   keywords:
     - debug
     - error
@@ -211,7 +211,7 @@ See `verification-before-completion` skill for anti-rationalization table, red f
 | Fix UI issues | `fix-ui` | `/fix-ui`, visual bugs, layout broken |
 
 ### Related Skills
-- `knowledge-base` — Knowledge storage format and `docs/` directory
+- `knowledge-retrieval` — Knowledge storage format and `docs/` directory
 - `knowledge-capture` — Post-task capture workflow
 - `problem-solving` — Root cause analysis techniques
 - `error-recovery` — Error handling and recovery patterns
