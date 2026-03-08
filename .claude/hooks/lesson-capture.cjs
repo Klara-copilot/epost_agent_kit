@@ -9,8 +9,13 @@
  * Failure mode: Silent — outputs {"ok": true} if nothing significant
  */
 
+try {
+
 const fs = require('fs');
 const path = require('path');
+const { isHookEnabled } = require('./lib/epost-config-utils.cjs');
+
+if (!isHookEnabled('lesson-capture')) process.exit(0);
 
 const DATA_DIR = path.join(process.cwd(), '.epost-data', 'improvements');
 const SESSIONS_FILE = path.join(DATA_DIR, 'sessions.jsonl');
@@ -123,3 +128,18 @@ function main() {
 }
 
 main();
+
+} catch (e) {
+  // Minimal crash logging — only Node builtins, no lib/ deps
+  try {
+    const fs = require('fs');
+    const p = require('path');
+    const logDir = p.join(__dirname, '.logs');
+    if (!fs.existsSync(logDir)) fs.mkdirSync(logDir, { recursive: true });
+    fs.appendFileSync(
+      p.join(logDir, 'hook-log.jsonl'),
+      JSON.stringify({ ts: new Date().toISOString(), hook: p.basename(__filename, '.cjs'), status: 'crash', error: e.message }) + '\n'
+    );
+  } catch (_) {}
+  process.exit(0); // fail-open
+}

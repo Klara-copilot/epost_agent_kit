@@ -3,7 +3,7 @@ name: epost
 description: "(ePost) Smart hub v2 — context-aware entry point with semantic intent detection, workflow chaining, and contextual discovery"
 user-invocable: true
 context: fork
-agent: epost-orchestrator
+agent: epost-project-manager
 metadata:
   argument-hint: "[what you want to do, or leave blank for contextual menu]"
 ---
@@ -38,12 +38,12 @@ Otherwise, classify the request using **semantic intent categories**:
 | **Git** | commit, push, pr, merge, branch, release, done, ship | Has staged changes → boost | `/git` (auto-detects action) |
 | **Docs** | docs, document, write docs, readme | — | `/docs` (auto-detects init vs update) |
 | **Explore** | scout, search, find, explore, where is, show me | — | `/scout` skill |
-| **Knowledge** | which agent, list agents/skills/commands, what's our, convention, kit, our agents, our skills, what rag | Internal ref | `epost-orchestrator` |
-| **Components** | what components, search components, find component, design tokens | RAG query | `epost-orchestrator` |
+| **Knowledge** | which agent, list agents/skills/commands, what's our, convention, kit, our agents, our skills, what rag | Internal ref | `epost-project-manager` |
+| **Components** | what components, search components, find component, design tokens | RAG query | `epost-project-manager` |
 | **Research** | research, what is [external tech], how does [external tech], best practice for [tech] | External tech ref | `epost-researcher` |
 | **A11y** | a11y, accessibility, wcag, screen reader, voiceover | — | `/a11y` (auto-detects variant) |
 | **Brainstorm** | brainstorm, evaluate, compare, think about options, weigh | — | `epost-brainstormer` |
-| **Guide** | guide, help me, how do I, wizard | — | Show discovery menu or `epost-orchestrator` |
+| **Guide** | guide, help me, how do I, wizard | — | Show discovery menu or `epost-project-manager` |
 | **Convert** | convert, prototype, migrate | — | `/convert` |
 | **Bootstrap** | bootstrap, init, scaffold new | — | `/bootstrap` (auto-detects scope) |
 
@@ -111,7 +111,7 @@ Check for compound requests via conjunctions:
 | "test and review" | [Test, Review] | → orchestrator |
 | "plan, implement, and test the feature" | [Plan, Build, Test] | → orchestrator |
 
-**If multi-intent detected** → delegate to `epost-orchestrator` with a structured handoff (see Orchestrator Delegation below).
+**If multi-intent detected** → delegate to `epost-project-manager` with a structured handoff (see Orchestrator Delegation below).
 
 #### Single Intent Routing
 
@@ -211,7 +211,7 @@ No active work detected on `{branch}`.
 
 ## Orchestrator Delegation
 
-When delegating to `epost-orchestrator`, provide a structured handoff:
+When delegating to `epost-project-manager`, provide a structured handoff:
 
 ```markdown
 ## Hub Handoff

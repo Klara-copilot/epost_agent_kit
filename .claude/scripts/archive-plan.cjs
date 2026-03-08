@@ -14,7 +14,7 @@
 const path = require('path');
 const fs = require('fs');
 
-const { normalizePath } = require('../hooks/lib/ck-config-utils.cjs');
+const { normalizePath } = require('../hooks/lib/epost-config-utils.cjs');
 
 const TODAY = new Date().toISOString().slice(0, 10);
 

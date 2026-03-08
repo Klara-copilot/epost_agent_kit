@@ -66,6 +66,13 @@ Add `methodology` to the JSON envelope before writing output.
 
 **Delegation intake:** If this workflow was invoked via a Task tool delegation (not a direct `/audit --ui` call), read the delegation context block at the start of your task for scope, expectations, output format, and report-back target. Use `scope.file_list` as your file list, `scope.platform` as your platform flag, and send your report to `calling_agent` when done.
 
+**Delegation block missing or incomplete?** If invoked via Task tool but `Scope:`, `Mode:`, and `Output path:` fields are absent:
+- Auto-detect mode per Step 1 (Mode Detection) using file path patterns
+- Use all files mentioned in prompt as scope
+- Generate output path: `reports/{YYMMDD-HHMM}-{slug}-ui-audit/muji-ui-audit.md`
+- Append to `coverageGaps`: "Delegation block missing — auto-detected {mode} mode"
+- Continue with full workflow (do not abbreviate)
+
 Before mode detection or any other check:
 
 1. Resolve audit scope first:
@@ -118,6 +125,16 @@ Before reading any component file, build the platform component catalog. This po
 Store result as `componentCatalog: Set<string>` — used in Step 1d (REUSE) to determine what klara equivalents exist.
 
 Then identify the component files to audit and read their source code, props/API surface, and any existing tests.
+
+---
+
+### Step 1.5: KB Load Checkpoint
+
+Verify Step 1 completed successfully before proceeding to any rule checks:
+- `componentCatalog` is non-empty (at least 1 component from FEAT-0001)
+- `knowledgeTiersUsed` includes `"L1-docs"` or `"L2-RAG"`
+- If both empty: retry KB load once, then proceed with `coverageGaps += "KB unavailable — auditing without component catalog"`
+- Log in Methodology: `"KB: loaded ({N} entries)"` or `"KB: degraded ({reason})"`
 
 ---
 

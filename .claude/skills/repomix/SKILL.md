@@ -1,9 +1,9 @@
 ---
 name: repomix
-description: Use when you need a full codebase overview, repo summary, or are unfamiliar with a repository structure
+description: (ePost) Use when you need a full codebase overview, repo summary, or are unfamiliar with a repository structure
 
 metadata:
-  agent-affinity: [epost-researcher, epost-architect]
+  agent-affinity: [epost-researcher, epost-planner]
   keywords: [repomix, codebase, summary, analysis, repo, overview]
   platforms: [all]
   triggers: ["repomix", "codebase summary", "repo overview"]

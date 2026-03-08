@@ -4,9 +4,30 @@ How to search each knowledge source effectively.
 
 ## Level 1: docs/ Search
 
-### Index Query
+### Step 1 — Discover All Registries
 
-**File**: `docs/index.json`
+**Discover registries:**
+```
+Glob: **/docs/index.json
+```
+
+Read each result to understand its scope (project, library, package) from its `description` field. The structure will be self-evident from the paths returned.
+
+**Priority rule**: Prefer the registry whose path is closest to the files being worked on. For cross-cutting concerns, query all registries.
+
+**No registry found?** Prompt the user:
+> No `docs/index.json` found. Run `/docs` to initialize a knowledge base. This enables consistent knowledge retrieval across sessions and agents.
+
+---
+
+### Step 2 — Query Registries
+
+Run these queries against each discovered `docs/index.json`:
+
+**Filter by agentHint relevance** (most useful — start here):
+```bash
+jq '.entries[] | select(.agentHint | test("routing|pages"; "i"))' docs/index.json
+```
 
 **Filter by category**:
 ```bash
@@ -16,11 +37,6 @@ jq '.entries[] | select(.category == "pattern")' docs/index.json
 **Filter by tag**:
 ```bash
 jq '.entries[] | select(.tags[] | contains("react"))' docs/index.json
-```
-
-**Filter by agentHint relevance**:
-```bash
-jq '.entries[] | select(.agentHint | test("routing|pages"; "i"))' docs/index.json
 ```
 
 **Filter by status**:
@@ -47,7 +63,7 @@ jq -r '.entries[] | select(.id == "ADR-0001") | .related[]' docs/index.json
 jq '.entries[] | select(.id | IN("PATTERN-003", "FINDING-012"))' docs/index.json
 ```
 
-### Content Search
+### Content Search (fallback when index query returns nothing)
 
 **Grep across all entries**:
 ```bash
@@ -169,7 +185,7 @@ jq '.skills[] | select(.triggers[] | contains("/debug"))' .claude/skills/skill-i
 
 **Find by agent**:
 ```bash
-jq '.skills[] | select(.["agent-affinity"][] | contains("epost-implementer"))' .claude/skills/skill-index.json
+jq '.skills[] | select(.["agent-affinity"][] | contains("epost-fullstack-developer"))' .claude/skills/skill-index.json
 ```
 
 **Get skill path**:
@@ -398,5 +414,4 @@ When RAG results are insufficient:
 ## Related References
 
 - `priority-matrix.md` — When to use which source
-- `knowledge-base/references/sidecar-format-spec.md` — Index schema
-- `knowledge-base/references/knowledge-capture-guide.md` — Capture new findings
+- `knowledge-base.md` — Knowledge system structure, index schema, capture guidelines

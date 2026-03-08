@@ -32,7 +32,8 @@ Each stage has a dedicated aspect file with detailed steps, inputs, outputs, and
 | `references/audit-ui.md` | Audit implementation against plan and Figma | `audit-report.json` |
 | `references/fix-findings.md` | Resolve audit findings | `PATCH.diff` or `fix-notes.json` |
 | `references/document-component.md` | Document component with Figma data | `.figma.json` + `.mapping.json` |
-| `references/audit-standards.md` | Enforceable klara-theme rules (35 rules, 6 categories) | Pass/fail criteria per rule |
+| `references/audit-standards.md` | Enforceable klara-theme rules (all sections: KBLOAD, STRUCT, PROPS, TOKEN, BIZ, A11Y, TEST, SEC, PERF, LDRY, EMBED) | Pass/fail criteria per rule |
+| `references/guidance.md` | Integration consulting workflow, design-code conflict resolution | Fix suggestions, consumer guidance checklist |
 
 ## Before Using This Skill — Load Live KB (Mandatory)
 

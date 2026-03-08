@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 /**
- * Test script for .ckignore functionality
- * Tests that scout-block.sh respects .ckignore patterns
+ * Test script for .epost-ignore functionality
+ * Tests that scout-block.sh respects .epost-ignore patterns
  */
 
 const { execSync } = require('child_process');
@@ -10,14 +10,14 @@ const fs = require('fs');
 const path = require('path');
 
 const scriptPath = path.join(__dirname, '..', 'scout-block', 'scout-block.sh');
-const ckignorePath = path.join(__dirname, '..', '..', '.ckignore');
-const ckignoreBackupPath = ckignorePath + '.backup';
+const epostIgnorePath = path.join(__dirname, '..', '..', '.epost-ignore');
+const epostIgnoreBackupPath = epostIgnorePath + '.backup';
 
-// Backup original .ckignore if exists
+// Backup original .epost-ignore if exists
 let originalCkignore = null;
-if (fs.existsSync(ckignorePath)) {
-  originalCkignore = fs.readFileSync(ckignorePath, 'utf-8');
-  fs.copyFileSync(ckignorePath, ckignoreBackupPath);
+if (fs.existsSync(epostIgnorePath)) {
+  originalCkignore = fs.readFileSync(epostIgnorePath, 'utf-8');
+  fs.copyFileSync(epostIgnorePath, epostIgnoreBackupPath);
 }
 
 function runTest(name, input, expected) {
@@ -39,25 +39,25 @@ function runTest(name, input, expected) {
 }
 
 function writeCkignore(patterns) {
-  fs.writeFileSync(ckignorePath, patterns.join('\n') + '\n');
+  fs.writeFileSync(epostIgnorePath, patterns.join('\n') + '\n');
 }
 
 function restoreCkignore() {
   if (originalCkignore !== null) {
-    fs.writeFileSync(ckignorePath, originalCkignore);
-    if (fs.existsSync(ckignoreBackupPath)) {
-      fs.unlinkSync(ckignoreBackupPath);
+    fs.writeFileSync(epostIgnorePath, originalCkignore);
+    if (fs.existsSync(epostIgnoreBackupPath)) {
+      fs.unlinkSync(epostIgnoreBackupPath);
     }
   }
 }
 
-console.log('Testing .ckignore functionality...\n');
+console.log('Testing .epost-ignore functionality...\n');
 
 let passed = 0;
 let failed = 0;
 
-// Test 1: Default patterns work (with existing .ckignore)
-console.log('--- Test 1: Default patterns from .ckignore ---');
+// Test 1: Default patterns work (with existing .epost-ignore)
+console.log('--- Test 1: Default patterns from .epost-ignore ---');
 let result = runTest(
   'node_modules blocked (default)',
   { tool_name: 'Read', tool_input: { file_path: 'node_modules/pkg.json' } },
@@ -72,7 +72,7 @@ if (result.success) {
 }
 
 // Test 2: Custom pattern - only block 'vendor' directory
-console.log('\n--- Test 2: Custom .ckignore with only "vendor" ---');
+console.log('\n--- Test 2: Custom .epost-ignore with only "vendor" ---');
 writeCkignore(['# Custom ignore', 'vendor']);
 
 result = runTest(
@@ -89,7 +89,7 @@ if (result.success) {
 }
 
 result = runTest(
-  'node_modules ALLOWED when not in .ckignore',
+  'node_modules ALLOWED when not in .epost-ignore',
   { tool_name: 'Read', tool_input: { file_path: 'node_modules/pkg.json' } },
   'ALLOWED'
 );
@@ -187,7 +187,7 @@ if (result.success) {
   failed++;
 }
 
-// Restore original .ckignore
+// Restore original .epost-ignore
 restoreCkignore();
 
 console.log(`\nResults: ${passed} passed, ${failed} failed`);

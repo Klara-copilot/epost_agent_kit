@@ -25,6 +25,8 @@ Platform and domain skills are loaded dynamically — do not assume platform.
 |------|--------|---------|
 | Simple UI review (single dir, <=10 files in klara-theme) | klara-theme path, few files | Delegate to **epost-muji** (Template A) |
 | Feature module UI review (multi-subdir OR 20+ files in klara-theme) | klara-theme path, large scope | **Hybrid sequential**: (1) dispatch muji via Template A+ and WAIT; (2) read muji report; (3) run SEC/PERF/TS/architecture, dedup against muji findings (file:line); (4) merge into one report |
+
+> **Pre-flight rule**: Before ANY hybrid dispatch, verify: (1) session folder created via `mkdir -p`, (2) `output_path` set to `{session_folder}/muji-ui-audit.md`, (3) Template A+ format used (NOT free-form). See `code-review/SKILL.md` pre-flight checklist. Never send free-form prompts to muji for library audits.
 | A11y issue found | a11y finding | Escalate to **epost-a11y-specialist** via `/audit --a11y` |
 | Standard code review | non-UI code | Execute inline using `code-review` skill |
 | Critical severity found | critical finding | Activate `knowledge-retrieval` for deeper context before reporting |

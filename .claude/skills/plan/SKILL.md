@@ -3,12 +3,12 @@ name: plan
 description: "(ePost) Create implementation plan — auto-detects complexity"
 user-invocable: true
 context: fork
-agent: epost-architect
+agent: epost-planner
 metadata:
   argument-hint: "[feature or task description]"
   agent-affinity:
-    - epost-architect
-    - epost-orchestrator
+    - epost-planner
+    - epost-project-manager
   keywords:
     - plan
     - planning
@@ -31,6 +31,17 @@ metadata:
 ---
 
 # Plan — Unified Planning Command
+
+## Delegation — REQUIRED
+
+This skill MUST run via the `epost-planner` agent, not inline.
+
+**When `/plan` or planning intent is detected:**
+1. Use the **Task tool** to spawn `epost-planner`
+2. Pass the full user request + active context (branch, plan dir, CWD)
+3. Do NOT execute planning steps inline in the main conversation
+
+---
 
 Create implementation plans with automatic complexity detection.
 
@@ -107,7 +118,11 @@ draft → active → completed → archived
 | Archive | `node .claude/scripts/archive-plan.cjs plans/{slug}` |
 | Board | `plans/README.md` — updated by scripts automatically |
 
-Always run `set-active-plan.cjs` after creating a plan directory.
+**MANDATORY final step** — after writing all plan files, run:
+```bash
+node .claude/scripts/set-active-plan.cjs plans/{slug}
+```
+This stamps `status: active` in `plan.md` and registers the plan in session state so `/cook` picks it up automatically. Do NOT skip this step.
 
 ## Complexity Auto-Detection
 

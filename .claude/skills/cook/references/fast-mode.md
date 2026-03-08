@@ -32,8 +32,6 @@ After implementation, run all checks before testing:
 
 1. **Type Check** — No compilation errors
 2. **Lint** — No lint violations
-3. **Security Scan** — No secrets detected (`node .claude/scripts/scan-secrets.cjs`)
-4. **Coverage Gate** — 80%+ coverage (`node .claude/scripts/check-coverage.cjs`)
 
 If any check fails → fix immediately before proceeding.
 

@@ -1,8 +1,8 @@
 {
-  "generated": "2026-03-08T10:14:45.364Z",
+  "generated": "2026-03-08T14:40:09.646Z",
   "version": "1.0.0",
   "count": 14,
-  "total": 35,
+  "total": 32,
   "skills": [
     {
       "name": "audit",
@@ -33,14 +33,14 @@
       ],
       "agent-affinity": [
         "epost-muji",
-        "epost-reviewer",
+        "epost-code-reviewer",
         "epost-a11y-specialist"
       ],
       "path": "audit/SKILL.md"
     },
     {
       "name": "auto-improvement",
-      "description": "Use when reviewing session performance, analyzing improvement trends, or understanding the metrics-capture-detection pipeline",
+      "description": "(ePost) Use when reviewing session performance, analyzing improvement trends, or understanding the metrics-capture-detection pipeline",
       "keywords": [
         "metrics",
         "improvement",
@@ -60,8 +60,8 @@
         "rework analysis"
       ],
       "agent-affinity": [
-        "epost-orchestrator",
-        "epost-reviewer",
+        "epost-project-manager",
+        "epost-code-reviewer",
         "epost-debugger"
       ],
       "path": "auto-improvement/SKILL.md"
@@ -79,7 +79,7 @@
     },
     {
       "name": "code-review",
-      "description": "Use when reviewing code, checking quality before commit, or auditing changed files for issues",
+      "description": "(ePost) Use when reviewing code, checking quality before commit, or auditing changed files for issues",
       "keywords": [
         "review",
         "code-quality",
@@ -97,8 +97,8 @@
         "review code"
       ],
       "agent-affinity": [
-        "epost-reviewer",
-        "epost-implementer"
+        "epost-code-reviewer",
+        "epost-fullstack-developer"
       ],
       "path": "code-review/SKILL.md"
     },
@@ -126,7 +126,7 @@
     },
     {
       "name": "core",
-      "description": "Use when any agent modifies files, makes architectural decisions, or needs safety and documentation rules",
+      "description": "(ePost) Use when any agent modifies files, makes architectural decisions, or needs safety and documentation rules",
       "keywords": [],
       "platforms": [
         "all"
@@ -137,7 +137,7 @@
     },
     {
       "name": "data-store",
-      "description": "Use when an agent needs to persist or retrieve project-level data across sessions via .epost-data/",
+      "description": "(ePost) Use when an agent needs to persist or retrieve project-level data across sessions via .epost-data/",
       "keywords": [],
       "platforms": [
         "all"
@@ -173,41 +173,13 @@
       ],
       "agent-affinity": [
         "epost-debugger",
-        "epost-implementer"
+        "epost-fullstack-developer"
       ],
       "path": "debug/SKILL.md"
     },
     {
-      "name": "debugging",
-      "description": "Systematic debugging methodology with root cause analysis and fix validation",
-      "keywords": [
-        "debug",
-        "error",
-        "bug",
-        "troubleshoot",
-        "root-cause",
-        "stack-trace",
-        "logging"
-      ],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [
-        "/debug",
-        "error",
-        "bug",
-        "crash",
-        "exception"
-      ],
-      "agent-affinity": [
-        "epost-debugger",
-        "epost-implementer"
-      ],
-      "path": "debugging/SKILL.md"
-    },
-    {
       "name": "doc-coauthoring",
-      "description": "Use when user wants to write a doc, proposal, spec, RFC, PRD, or decision record collaboratively",
+      "description": "(ePost) Use when user wants to write a doc, proposal, spec, RFC, PRD, or decision record collaboratively",
       "keywords": [
         "documentation",
         "writing",
@@ -228,14 +200,14 @@
       ],
       "triggers": [],
       "agent-affinity": [
-        "epost-documenter",
-        "epost-architect"
+        "epost-docs-manager",
+        "epost-planner"
       ],
       "path": "doc-coauthoring/SKILL.md"
     },
     {
       "name": "docs",
-      "description": "(ePost) Documentation workflow — auto-detects init, update, or component",
+      "description": "(ePost) Documentation workflow — auto-detects init, update, reorganize, migrate, or component",
       "keywords": [],
       "platforms": [
         "all"
@@ -246,7 +218,7 @@
     },
     {
       "name": "docs-seeker",
-      "description": "Use when you need API docs, library references, or framework documentation for an unfamiliar package",
+      "description": "(ePost) Use when you need API docs, library references, or framework documentation for an unfamiliar package",
       "keywords": [
         "docs",
         "documentation",
@@ -268,7 +240,8 @@
       ],
       "agent-affinity": [
         "epost-researcher",
-        "epost-implementer"
+        "epost-fullstack-developer",
+        "epost-mcp-manager"
       ],
       "path": "docs-seeker/SKILL.md"
     },
@@ -285,7 +258,7 @@
     },
     {
       "name": "error-recovery",
-      "description": "Use when operations fail transiently — timeouts, network errors, retries, circuit breakers, graceful degradation",
+      "description": "(ePost) Use when operations fail transiently — timeouts, network errors, retries, circuit breakers, graceful degradation",
       "keywords": [
         "error",
         "retry",
@@ -308,7 +281,7 @@
         "fallback"
       ],
       "agent-affinity": [
-        "epost-implementer",
+        "epost-fullstack-developer",
         "epost-debugger",
         "epost-tester"
       ],
@@ -358,7 +331,7 @@
     },
     {
       "name": "infra-cloud",
-      "description": "Use when working with GCP infrastructure — Terraform, Cloud Build, Cloud Run, GKE, deployment pipelines",
+      "description": "(ePost) Use when working with GCP infrastructure — Terraform, Cloud Build, Cloud Run, GKE, deployment pipelines",
       "keywords": [
         "gcp",
         "terraform",
@@ -372,14 +345,14 @@
       ],
       "triggers": [],
       "agent-affinity": [
-        "epost-architect",
-        "epost-implementer"
+        "epost-planner",
+        "epost-fullstack-developer"
       ],
       "path": "infra-cloud/SKILL.md"
     },
     {
       "name": "infra-docker",
-      "description": "Use when working with Dockerfiles, docker-compose, containers, or containerized deployments",
+      "description": "(ePost) Use when working with Dockerfiles, docker-compose, containers, or containerized deployments",
       "keywords": [
         "docker",
         "container",
@@ -398,44 +371,14 @@
         "docker"
       ],
       "agent-affinity": [
-        "epost-implementer",
-        "epost-architect"
+        "epost-fullstack-developer",
+        "epost-planner"
       ],
       "path": "infra-docker/SKILL.md"
     },
     {
-      "name": "knowledge-base",
-      "description": "Project knowledge management — ADRs, learned patterns, debug findings, decision history. Use when agents need to persist knowledge for future sessions.",
-      "keywords": [
-        "knowledge",
-        "adr",
-        "decision",
-        "pattern",
-        "learning",
-        "memory",
-        "persist",
-        "capture"
-      ],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [
-        "ADR",
-        "decision record",
-        "learned pattern",
-        "save finding"
-      ],
-      "agent-affinity": [
-        "epost-architect",
-        "epost-debugger",
-        "epost-documenter",
-        "epost-implementer"
-      ],
-      "path": "knowledge-base/SKILL.md"
-    },
-    {
       "name": "knowledge-capture",
-      "description": "Use after completing a task — capture learnings, save patterns, record post-mortems to docs/",
+      "description": "(ePost) Use after completing a task — capture learnings, save patterns, record post-mortems to docs/",
       "keywords": [
         "capture",
         "learn",
@@ -455,16 +398,17 @@
       ],
       "agent-affinity": [
         "epost-debugger",
-        "epost-implementer",
+        "epost-fullstack-developer",
         "epost-researcher",
-        "epost-reviewer",
-        "epost-architect"
+        "epost-code-reviewer",
+        "epost-planner",
+        "epost-journal-writer"
       ],
       "path": "knowledge-capture/SKILL.md"
     },
     {
       "name": "knowledge-retrieval",
-      "description": "Use when you need prior art, past decisions, or existing patterns — checks docs/, skills, and RAG before external sources",
+      "description": "(ePost) Use when you need prior art, past decisions, or existing patterns — checks docs/, skills, and RAG before external sources",
       "keywords": [
         "retrieve",
         "search",
@@ -484,10 +428,11 @@
         "previous decision"
       ],
       "agent-affinity": [
-        "epost-architect",
-        "epost-implementer",
+        "epost-planner",
+        "epost-fullstack-developer",
         "epost-debugger",
-        "epost-researcher"
+        "epost-researcher",
+        "epost-code-reviewer"
       ],
       "path": "knowledge-retrieval/SKILL.md"
     },
@@ -515,39 +460,14 @@
         "implementation plan"
       ],
       "agent-affinity": [
-        "epost-architect",
-        "epost-orchestrator"
+        "epost-planner",
+        "epost-project-manager"
       ],
       "path": "plan/SKILL.md"
     },
     {
-      "name": "planning",
-      "description": "Transform requirements into actionable plans with task breakdown and risk assessment",
-      "keywords": [
-        "plan",
-        "planning",
-        "requirements",
-        "tasks",
-        "estimation",
-        "roadmap"
-      ],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [
-        "/plan",
-        "create plan",
-        "implementation plan"
-      ],
-      "agent-affinity": [
-        "epost-architect",
-        "epost-orchestrator"
-      ],
-      "path": "planning/SKILL.md"
-    },
-    {
       "name": "problem-solving",
-      "description": "Use when stuck, facing a complex bug, or need root cause analysis — 5 whys, bisection, inversion techniques",
+      "description": "(ePost) Use when stuck, facing a complex bug, or need root cause analysis — 5 whys, bisection, inversion techniques",
       "keywords": [
         "problem-solving",
         "root-cause",
@@ -570,14 +490,15 @@
       ],
       "agent-affinity": [
         "epost-debugger",
-        "epost-implementer",
-        "epost-architect"
+        "epost-fullstack-developer",
+        "epost-planner",
+        "epost-brainstormer"
       ],
       "path": "problem-solving/SKILL.md"
     },
     {
       "name": "repomix",
-      "description": "Use when you need a full codebase overview, repo summary, or are unfamiliar with a repository structure",
+      "description": "(ePost) Use when you need a full codebase overview, repo summary, or are unfamiliar with a repository structure",
       "keywords": [
         "repomix",
         "codebase",
@@ -596,13 +517,13 @@
       ],
       "agent-affinity": [
         "epost-researcher",
-        "epost-architect"
+        "epost-planner"
       ],
       "path": "repomix/SKILL.md"
     },
     {
       "name": "research",
-      "description": "Use when user asks to research, compare options, find best practices, or investigate a technology",
+      "description": "(ePost) Use when user asks to research, compare options, find best practices, or investigate a technology",
       "keywords": [
         "research",
         "investigation",
@@ -626,7 +547,8 @@
       ],
       "agent-affinity": [
         "epost-researcher",
-        "epost-architect"
+        "epost-planner",
+        "epost-mcp-manager"
       ],
       "path": "research/SKILL.md"
     },
@@ -676,7 +598,7 @@
       ],
       "agent-affinity": [
         "Explore",
-        "epost-architect",
+        "epost-planner",
         "epost-researcher",
         "epost-debugger"
       ],
@@ -684,7 +606,7 @@
     },
     {
       "name": "sequential-thinking",
-      "description": "Use when facing a complex problem that needs step-by-step breakdown, branching analysis, or iterative reasoning",
+      "description": "(ePost) Use when facing a complex problem that needs step-by-step breakdown, branching analysis, or iterative reasoning",
       "keywords": [
         "sequential",
         "thinking",
@@ -706,8 +628,9 @@
       ],
       "agent-affinity": [
         "epost-debugger",
-        "epost-architect",
-        "epost-implementer"
+        "epost-planner",
+        "epost-fullstack-developer",
+        "epost-brainstormer"
       ],
       "path": "sequential-thinking/SKILL.md"
     },
@@ -724,7 +647,7 @@
     },
     {
       "name": "skill-discovery",
-      "description": "Use at the START of every task to discover and load relevant skills you don't already have. Detects platform, task type, and domain signals then loads matching skills from the index on demand.",
+      "description": "(ePost) Use at the START of every task to discover and load relevant skills you don't already have. Detects platform, task type, and domain signals then loads matching skills from the index on demand.",
       "keywords": [
         "platform",
         "discovery",
@@ -738,18 +661,18 @@
       ],
       "triggers": [],
       "agent-affinity": [
-        "epost-architect",
-        "epost-implementer",
+        "epost-planner",
+        "epost-fullstack-developer",
         "epost-debugger",
         "epost-tester",
-        "epost-reviewer",
-        "epost-orchestrator"
+        "epost-code-reviewer",
+        "epost-project-manager"
       ],
       "path": "skill-discovery/SKILL.md"
     },
     {
       "name": "subagent-driven-development",
-      "description": "Use when executing implementation plans with multiple independent tasks that benefit from per-task subagent dispatch and two-stage review.",
+      "description": "(ePost) Use when executing implementation plans with multiple independent tasks that benefit from per-task subagent dispatch and two-stage review.",
       "keywords": [
         "parallel",
         "subagent",
@@ -762,9 +685,9 @@
       ],
       "triggers": [],
       "agent-affinity": [
-        "epost-orchestrator",
-        "epost-implementer",
-        "epost-architect"
+        "epost-project-manager",
+        "epost-fullstack-developer",
+        "epost-planner"
       ],
       "path": "subagent-driven-development/SKILL.md"
     },

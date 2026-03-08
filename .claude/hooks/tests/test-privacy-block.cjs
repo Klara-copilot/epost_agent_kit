@@ -8,7 +8,7 @@ const path = require('path');
 const fs = require('fs');
 
 const HOOK_PATH = path.join(__dirname, '..', 'privacy-block.cjs');
-const CK_CONFIG_PATH = path.join(__dirname, '..', '.ck.json');
+const CK_CONFIG_PATH = path.join(__dirname, '..', '.epost-kit.json');
 
 async function runHook(hookData, cwd = undefined) {
   return new Promise((resolve) => {
@@ -261,7 +261,7 @@ async function main() {
     }
   }
 
-  // Config toggle tests - requires temp directory with .claude/.ck.json
+  // Config toggle tests - requires temp directory with .claude/.epost-kit.json
   console.log('\n\x1b[1m--- Config Toggle (privacyBlock setting) ---\x1b[0m');
   const os = require('os');
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'privacy-test-'));
@@ -271,7 +271,7 @@ async function main() {
   for (const test of configToggleTests) {
     // Write test config
     fs.writeFileSync(
-      path.join(tmpClaudeDir, '.ck.json'),
+      path.join(tmpClaudeDir, '.epost-kit.json'),
       JSON.stringify(test.config)
     );
 

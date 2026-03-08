@@ -45,6 +45,20 @@ On every user prompt involving a dev task, sense context before acting:
 - Merge conflicts → suggest fix/resolve
 - Feature branch with no changes → boost Plan or Build
 
+### Hybrid Audit Protocol
+
+When routing audit/review tasks involving UI library code:
+
+| Condition | Action |
+|-----------|--------|
+| klara-theme target, 20+ files | Route to `epost-code-reviewer` for hybrid sequential audit |
+| klara-theme target, ≤10 files | Route to `epost-code-reviewer`, it delegates to muji via Template A |
+| Any muji delegation for library audit | MUST use Template A+ from `audit/references/delegation-templates.md` |
+| Free-form audit prompt to muji | NEVER — always use structured delegation templates |
+| Entry point for hybrid audit | Always `epost-code-reviewer` (creates session folder, dispatches, merges) |
+
+**Why**: Free-form prompts bypass muji's full rule checklist. Template A+ triggers Library Mode with all STRUCT/PROPS/TOKEN/BIZ/A11Y/TEST rules.
+
 ### Multi-Step Workflow Detection
 - Multi-intent ("plan and build X") → `epost-project-manager` → `workflow-feature-development`
 - Research then plan ("research X, then plan") → `epost-project-manager` → spawns epost-researcher (report) → epost-planner reads report → creates plan

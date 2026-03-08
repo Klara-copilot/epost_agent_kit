@@ -2,8 +2,7 @@
 name: get-started
 description: "(ePost) Onboard to a project — detect state, then orchestrate researcher → documenter → implementer pipeline"
 user-invocable: true
-context: fork
-agent: epost-orchestrator
+context: inline
 metadata:
   argument-hint: "[project path or question]"
   keywords:
@@ -109,7 +108,7 @@ Read project markers only (do NOT create files):
 
 Define shared report path before dispatching:
 ```
-RESEARCH_REPORT = plans/reports/get-started-{YYYYMMDD}-research.md
+RESEARCH_REPORT = reports/get-started-{YYYYMMDD}-research.md
 ```
 
 Record the detected docs state from Step 2 as `DOCS_STATE`:
@@ -150,13 +149,13 @@ Agent(
 WAIT for Agent to complete, then READ {RESEARCH_REPORT}.
 **Then immediately proceed to Phase 2 — do NOT stop here.**
 
-### Phase 2 — Documentation (epost-documenter)
+### Phase 2 — Documentation (epost-docs-manager)
 
 Use the Agent tool to dispatch docs agent with mode derived from DOCS_STATE:
 
 ```
 Agent(
-  subagent_type: "epost-documenter"
+  subagent_type: "epost-docs-manager"
   description: "Generate/update KB docs"
   prompt: """
   Read the researcher report at: {RESEARCH_REPORT}
@@ -168,7 +167,7 @@ Agent(
   - DOCS_STATE = "flat"  → run docs-init --migrate workflow: convert flat docs to KB structure
   - DOCS_STATE = "kb"    → run docs-update --verify workflow: check all entries, flag STALE/BROKEN/GAP
 
-  Apply templates from knowledge-base skill. Keep all files under 800 LOC.
+  Apply templates from knowledge-retrieval skill. Keep all files under 800 LOC.
   Update docs/index.json after all changes.
   """
 )
@@ -176,14 +175,14 @@ Agent(
 WAIT for Agent to complete.
 **Then immediately proceed to Phase 3 — do NOT stop here.**
 
-### Phase 3 — Environment Setup & Run (epost-implementer)
+### Phase 3 — Environment Setup & Run (epost-fullstack-developer)
 
 Use the Agent tool to dispatch implementer to prepare the environment and get the project running.
 The implementer should **actively install missing tools** — not just report them.
 
 ```
 Agent(
-  subagent_type: "epost-implementer"
+  subagent_type: "epost-fullstack-developer"
   description: "Setup env, install deps, build, run project"
   prompt: """
   Read the researcher report at: {RESEARCH_REPORT}
@@ -266,5 +265,5 @@ Complete these steps to finish setup:
 - **MUST run all 4 phases** — do NOT stop, present choices, or ask user between phases
 - **Fast detection** — Steps 1–3 are lightweight scan only, < 15s
 - **Sequential dispatch** — use Agent tool for each phase, wait for completion before next
-- **Shared report** — researcher writes to `plans/reports/`, other agents read from it
+- **Shared report** — researcher writes to `reports/`, other agents read from it
 - Only stop early if the user has a specific question (answer from what was read, suggest `/scout` for deeper exploration)

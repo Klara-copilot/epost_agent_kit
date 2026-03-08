@@ -1,6 +1,6 @@
 ---
 name: ui-guidance
-description: "(ePost) Use when guiding other teams on UI component integration, resolving design-code conflicts, reviewing UI implementation accuracy, or consulting on design system usage across platforms"
+description: "DEPRECATED — Use ui-lib-dev skill instead. Content merged into ui-lib-dev/references/guidance.md."
 user-invocable: false
 context: fork
 agent: epost-muji

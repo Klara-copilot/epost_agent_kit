@@ -11,16 +11,16 @@ metadata:
     - generate-docs
     - scaffold-docs
   agent-affinity:
-    - epost-documenter
+    - epost-docs-manager
   platforms:
     - all
   connections:
-    requires: [knowledge-base]
+    requires: [knowledge-retrieval]
 ---
 
 # Docs: Init
 
-Scan codebase and generate structured Knowledge Base documentation following the `knowledge-base` skill format.
+Scan codebase and generate structured Knowledge Base documentation following the `knowledge-retrieval` skill format.
 
 ## Usage
 ```
@@ -32,6 +32,19 @@ Scan codebase and generate structured Knowledge Base documentation following the
 
 - `$ARGUMENTS` contains `--migrate` → **Migration Mode**
 - Otherwise → **Generation Mode**
+
+## Index Update Rule (applies to ALL modes)
+
+After any mode completes:
+
+| Index | When to update | What to update |
+|-------|---------------|----------------|
+| `docs/index.json` | After generating or migrating any doc file | `entries[]` (all generated/migrated entries), `updatedAt` |
+| `reports/index.json` | After writing the task completion report | Append entry per `core/references/index-protocol.md` |
+
+**Never finish without a complete `docs/index.json`.** Every generated or migrated file must have a corresponding entry before you stop.
+
+---
 
 ## Generation Mode
 
@@ -57,7 +70,7 @@ docs/
 
 ### 3. Auto-Generate Documents
 
-Use templates from `knowledge-base` skill. Generate based on detected signals:
+Use templates from `knowledge-retrieval` skill. Generate based on detected signals:
 
 #### ADRs (from major dependencies)
 For each major framework/library detected (e.g., Next.js, Redux, Hibernate):
@@ -160,7 +173,7 @@ Read all files in `docs/*.md` (top-level only, not subdirectories).
 | Other `.md` files | Classify by content → appropriate category | varies |
 
 ### 3. Reformat Content
-- Apply KB templates from `knowledge-base` skill
+- Apply KB templates from `knowledge-retrieval` skill
 - Add `## Status`, `## Tags` sections where appropriate
 - Split large files if > 800 LOC
 

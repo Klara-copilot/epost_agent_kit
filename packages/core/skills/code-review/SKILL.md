@@ -108,6 +108,16 @@ Pass `output_path: {session_folder}/muji-ui-audit.md` (or `a11y-audit.md`) in ea
 
 **Hybrid audit — sequential (feature module, klara-theme 20+ files):**
 1. Resolve reports root + run `mkdir -p {session_folder}` (see Session folder block above)
+
+**Pre-flight checklist (verify ALL before dispatch):**
+- [ ] Session folder created: `mkdir -p {session_folder}` executed, path confirmed
+- [ ] `output_path` set: `{session_folder}/muji-ui-audit.md`
+- [ ] Delegation format: Template A+ from `audit/references/delegation-templates.md` (NOT free-form)
+- [ ] Template fields filled: `Scope:`, `Component(s):`, `Mode: library`, `Platform:`, `Output path:`
+
+If any item missing: STOP, fix it, then proceed. Do not dispatch with incomplete setup.
+Log: "Pre-flight: {pass | fixed: {items}}" in report Methodology section.
+
 2. Dispatch muji via Template A+ — `output_path: {session_folder}/muji-ui-audit.md`
 3. WAIT for muji to complete
 4. Read `{session_folder}/muji-ui-audit.md`. Extract:

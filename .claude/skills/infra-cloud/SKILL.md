@@ -1,10 +1,10 @@
 ---
 name: infra-cloud
-description: "Use when working with GCP infrastructure — Terraform, Cloud Build, Cloud Run, GKE, deployment pipelines"
+description: "(ePost) Use when working with GCP infrastructure — Terraform, Cloud Build, Cloud Run, GKE, deployment pipelines"
 user-invocable: false
 
 metadata:
-  agent-affinity: [epost-architect, epost-implementer]
+  agent-affinity: [epost-planner, epost-fullstack-developer]
   keywords: [gcp, terraform, cloud-build, cloud-run, gke, infrastructure]
   platforms: [all]
 ---

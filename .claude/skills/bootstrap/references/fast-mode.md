@@ -13,7 +13,7 @@ Linear bootstrap — skip mode detection, go straight to single-module flow.
 
 ### 2. Research & Planning
 - Use `epost-researcher` (max 5 sources) to explore tech stack
-- Use `epost-architect` to create implementation plan at `./plans/`
+- Use `epost-planner` to create implementation plan at `./plans/`
 
 ### 3. Design (if UI project)
 - Use `epost-muji` for design guidelines at `./docs/design-guidelines.md`
@@ -24,7 +24,7 @@ Linear bootstrap — skip mode detection, go straight to single-module flow.
 
 ### 5. Testing & Review
 - Use `epost-tester` to run tests; use `epost-debugger` to fix failures
-- Use `epost-reviewer` for code review; iterate until clean
+- Use `epost-code-reviewer` for code review; iterate until clean
 
 ### 6. Documentation
 - Create/update: `README.md`, `project-overview-pdr.md`, `code-standards.md`

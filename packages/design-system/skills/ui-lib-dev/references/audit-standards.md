@@ -2,11 +2,34 @@
 
 Authoritative, enforceable rules for klara-theme component audits. Each rule has a unique ID, severity, pass criterion, and fail criterion. Used by epost-muji during `audit --ui` to evaluate web components.
 
+Also used by `ui-guidance` when consulting on component integration — load this file before answering integration or design-code conflict questions.
+
 **Severity scale:**
 - `critical` — breaks library contract, theming, or isolation
 - `high` — convention violation affecting consistency
 - `medium` — quality gap, maintainability concern
 - `low` — style preference, minor improvement
+
+---
+
+## Section 0: Live KB Load Gate (KBLOAD) — Always First
+
+Before applying any rule below, load the current klara-theme standards from the live KB. This ensures audit checks match the current library version, not cached assumptions.
+
+**Steps:**
+1. Read `libs/klara-theme/docs/index.json` (klara-theme KB registry — NOT `docs/index.json` at project root)
+2. Load **FEAT-0001** → build `componentCatalog: Set<string>` (current component list)
+3. Load task-relevant CONV-* entries → extract current naming conventions, token names, required props
+4. If component in scope has a FEAT-* entry: load it → treat documented patterns as conventions, not violations
+5. If `index.json` missing: fallback to `Glob libs/klara-theme/docs/**/*.md`, then read directly
+
+**Gate**: Do NOT run STRUCT, PROPS, or TOKEN checks until KB loaded (or degraded-mode logged).
+
+| Rule ID | Rule | Severity | Pass | Fail |
+|---------|------|----------|------|------|
+| KBLOAD-001 | `libs/klara-theme/docs/index.json` read and `componentCatalog` populated | critical | Non-empty catalog built from FEAT-0001 | File missing AND no fallback found — log "KB unavailable" |
+| KBLOAD-002 | At least one CONV-* entry loaded for audit scope | high | Relevant CONV entries loaded | No CONV entries loaded — audit proceeds but flag as coverage gap |
+| KBLOAD-003 | Component-specific FEAT-* entry loaded (if component in scope) | medium | FEAT entry found and loaded | No FEAT entry — note "no KB entry" as docs gap; do not block audit |
 
 ---
 
@@ -66,6 +89,10 @@ Authoritative, enforceable rules for klara-theme component audits. Each rule has
 
 ## Section 5: Accessibility (A11Y)
 
+**Delegation rule**: A11Y findings require WCAG expertise beyond the surface checks below.
+- **Standalone audit** (not a sub-agent): After collecting violations, delegate A11Y review to **epost-a11y-specialist** via `/audit --a11y`. Pass `finding_ids` from this section. Also use epost-a11y-specialist for integration guidance questions involving keyboard nav, screen readers, or contrast.
+- **As sub-agent** (dispatched via Task tool): Collect all A11Y violations in `## A11Y Findings (for escalation)` section with `finding_id`, `rule_id`, `file:line`, `issue`. The calling agent (code-reviewer) handles delegation to epost-a11y-specialist.
+
 | Rule ID | Rule | Severity | Pass | Fail |
 |---------|------|----------|------|------|
 | A11Y-001 | `theme-ui-label` attribute on root element | high | `theme-ui-label="component-name"` present | Missing attribute |
@@ -90,6 +117,7 @@ Authoritative, enforceable rules for klara-theme component audits. Each rule has
 ## Section 7: Security (SEC) — Library Mode Conditional
 
 **Activation gate**: Component imports fetch/axios/localStorage OR props include URL/apiKey/endpoint OR imports AI SDK. Skip if none match.
+**Standalone-component exception**: Pure presentational component with no network, no storage, no external API surface → skip SEC entirely. BIZ rules (Section 4) already enforce isolation.
 
 | Rule ID | Rule | Severity | Pass | Fail |
 |---------|------|----------|------|------|
@@ -104,6 +132,7 @@ Authoritative, enforceable rules for klara-theme component audits. Each rule has
 ## Section 8: Performance (PERF) — Library Mode Conditional
 
 **Activation gate**: 10+ files in scope OR any file >300 LOC. Skip if neither.
+**Standalone-component exception**: Single isolated component <300 LOC → skip PERF-001 through PERF-003. Apply PERF-004 (mock data isolation) always.
 
 | Rule ID | Rule | Severity | Pass | Fail |
 |---------|------|----------|------|------|
@@ -116,6 +145,8 @@ Authoritative, enforceable rules for klara-theme component audits. Each rule has
 
 ## Section 9: Library DRY (LDRY) — Always in Library Mode
 
+**Scope note**: LDRY applies to the component directory and its immediate dependencies. For a single standalone component with no `_utils/` subdirectory, only LDRY-003 (POC maturity) applies. LDRY-001 and LDRY-002 require at least 2 files in scope to be meaningful.
+
 | Rule ID | Rule | Severity | Pass | Fail |
 |---------|------|----------|------|------|
 | LDRY-001 | No identical utility function bodies in 2+ files | medium | Shared utils in _utils/ | Same function body copy-pasted across files |
@@ -124,11 +155,31 @@ Authoritative, enforceable rules for klara-theme component audits. Each rule has
 
 ---
 
+## Section 10: Embedded Components (EMBED)
+
+When a component renders other components internally (embedded/children), verify those components are library-approved — not overriding library internals or importing external UI libs.
+
+**RAG lookup required**: Before running EMBED checks, query RAG for the component's known embedded component set:
+1. `ToolSearch("web-rag")` → discover `mcp__web-rag-system__*` tools
+2. Call `query` with "{component-name} embedded components tokens used" → surface known patterns
+3. If RAG unavailable: `Grep libs/klara-theme/src/lib/components/{component}/ --glob "*.tsx" --pattern "^import"` to find embedded components
+
+| Rule ID | Rule | Severity | Pass | Fail |
+|---------|------|----------|------|------|
+| EMBED-001 | All embedded components are from `klara-theme` or `libs/common/` — no external UI libs (MUI, Ant Design, etc.) | critical | Only library-internal or lib-approved components embedded | External UI library component embedded inside klara component |
+| EMBED-002 | Embedded components used via their public API (props) only — no direct DOM manipulation of embedded component internals | critical | Embedded component API used as documented | `document.querySelector` on embedded component's DOM, or accessing private refs |
+| EMBED-003 | Embedded component tokens/variants match current library catalog (verified via RAG/KB) | high | Token names and variant values match FEAT-* entry for embedded component | Hardcoded variant string that no longer exists in embedded component's API |
+| EMBED-004 | No overriding embedded component styles via `!important`, direct class injection, or CSS targeting internal structure | high | Style customization via documented `className`/`style` props only | `.my-wrapper .embedded-component__internal { }` — targets internal structure |
+| EMBED-005 | Children slots use types declared by the parent component — no arbitrary JSX trees passed where a specific component type is expected | medium | Children match documented slot types (e.g., `MenuItem[]` for Menu) | Arbitrary JSX passed to a typed slot prop |
+
+---
+
 ## Mode Applicability
 
 | Section | Library Mode | Consumer Mode | Notes |
 |---------|-------------|---------------|-------|
-| INTEGRITY | Y | Y | Always first — blocks on direct library edits |
+| KBLOAD | Y | Y | Always first — blocks STRUCT/PROPS/TOKEN until loaded |
+| INTEGRITY | Y | Y | Always after KBLOAD — blocks on direct library edits |
 | PLACE | Y | Y | Different criteria per mode |
 | REUSE | - | Y | Consumer-only |
 | TW | Y | Y | Both modes parse tailwind.config.ts |
@@ -136,9 +187,10 @@ Authoritative, enforceable rules for klara-theme component audits. Each rule has
 | REACT | - | Y | Consumer-only |
 | POC | - | Y | Consumer-only (but LDRY-003 covers POC in library) |
 | STRUCT-TEST | Y | - | Library-only (A11Y, TEST apply to both) |
-| SEC | Y (conditional) | Y | Conditional on: localStorage/fetch/apiKey/AI imports |
-| PERF | Y (conditional) | Y | Conditional on: 10+ files OR file >300 LOC |
-| LDRY | Y | - | Library-only; LDRY-003 covers POC for library |
+| SEC | Y (conditional) | Y | Conditional on: localStorage/fetch/apiKey/AI imports; skip for standalone presentational |
+| PERF | Y (conditional) | Y | Conditional on: 10+ files OR file >300 LOC; skip PERF-001–003 for standalone <300 LOC |
+| LDRY | Y | - | Library-only; standalone: LDRY-003 only unless 2+ files in scope |
+| EMBED | Y | Y | Both modes; RAG lookup required for EMBED-003 |
 
 **Mode detection**: file inside `libs/klara-theme/` or `libs/common/` → Library mode. File importing from those paths but living in app/feature code → Consumer mode.
 

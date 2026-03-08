@@ -46,6 +46,7 @@ See [PLAN_FORMAT.md](PLAN_FORMAT.md) for standardized plan template.
 | PLAN-0059 | Klara-Theme Consumer Code Audit Expansion | epost-planner | 2026-03-07 | [260307-0116-klara-consumer-audit/plan.md](260307-0116-klara-consumer-audit/plan.md) |
 | PLAN-0061 | Update epost-muji and epost-a11y-specialist Agents | epost-planner | 2026-03-07 | [260307-1230-update-muji-a11y-agents/plan.md](260307-1230-update-muji-a11y-agents/plan.md) |
 | PLAN-0062 | Add Methodology Transparency to Audit & Review Reports | epost-planner | 2026-03-07 | [260307-1446-audit-review-methodology-transparency/plan.md](260307-1446-audit-review-methodology-transparency/plan.md) |
+| PLAN-0063 | Hybrid Audit Reliability + Audit Standards Overhaul | epost-planner | 2026-03-08 | [260308-2150-hybrid-audit-reliability-standards/plan.md](260308-2150-hybrid-audit-reliability-standards/plan.md) |
 
 ## Completed
 

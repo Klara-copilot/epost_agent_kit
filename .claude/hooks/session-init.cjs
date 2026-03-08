@@ -11,6 +11,8 @@
  * Core detection logic extracted to lib/project-detector.cjs for OpenCode plugin reuse.
  */
 
+try {
+
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
@@ -20,8 +22,12 @@ const {
   writeSessionState,
   resolvePlanPath,
   getReportsPath,
-  resolveNamingPattern
-} = require('./lib/ck-config-utils.cjs');
+  resolveNamingPattern,
+  isHookEnabled,
+  getResearchConfig
+} = require('./lib/epost-config-utils.cjs');
+
+if (!isHookEnabled('session-init')) process.exit(0);
 
 // Import shared project detection logic
 const {
@@ -47,6 +53,21 @@ async function main() {
     const envFile = process.env.CLAUDE_ENV_FILE;
     const source = data.source || 'unknown';
     const sessionId = data.session_id || null;
+
+    // Load project-scoped secrets (.claude/.env) — gitignored, never committed
+    const dotEnvPath = path.join(process.cwd(), '.claude', '.env');
+    if (fs.existsSync(dotEnvPath)) {
+      const lines = fs.readFileSync(dotEnvPath, 'utf-8').split('\n');
+      for (const line of lines) {
+        const trimmed = line.trim();
+        if (!trimmed || trimmed.startsWith('#')) continue;
+        const eq = trimmed.indexOf('=');
+        if (eq === -1) continue;
+        const key = trimmed.slice(0, eq).trim();
+        const val = trimmed.slice(eq + 1).trim().replace(/^["']|["']$/g, '');
+        if (key && !process.env[key]) process.env[key] = val; // shell env takes priority
+      }
+    }
 
     const config = loadConfig();
 
@@ -100,63 +121,72 @@ async function main() {
 
     if (envFile) {
       // Session & plan config
-      writeEnv(envFile, 'CK_SESSION_ID', sessionId || '');
-      writeEnv(envFile, 'CK_PLAN_NAMING_FORMAT', config.plan.namingFormat);
-      writeEnv(envFile, 'CK_PLAN_DATE_FORMAT', config.plan.dateFormat);
-      writeEnv(envFile, 'CK_PLAN_ISSUE_PREFIX', config.plan.issuePrefix || '');
-      writeEnv(envFile, 'CK_PLAN_REPORTS_DIR', config.plan.reportsDir);
+      writeEnv(envFile, 'EPOST_SESSION_ID', sessionId || '');
+      writeEnv(envFile, 'EPOST_PLAN_NAMING_FORMAT', config.plan.namingFormat);
+      writeEnv(envFile, 'EPOST_PLAN_DATE_FORMAT', config.plan.dateFormat);
+      writeEnv(envFile, 'EPOST_PLAN_ISSUE_PREFIX', config.plan.issuePrefix || '');
+      writeEnv(envFile, 'EPOST_PLAN_REPORTS_DIR', config.plan.reportsDir);
 
       // NEW: Resolved naming pattern for DRY file naming in agents
       // Example: "251212-1830-GH-88-{slug}" or "251212-1830-{slug}"
-      // Agents use: `{agent-type}-$CK_NAME_PATTERN.md` and substitute {slug}
-      writeEnv(envFile, 'CK_NAME_PATTERN', namePattern);
+      // Agents use: `{agent-type}-$EPOST_NAME_PATTERN.md` and substitute {slug}
+      writeEnv(envFile, 'EPOST_NAME_PATTERN', namePattern);
 
       // Plan resolution
-      writeEnv(envFile, 'CK_ACTIVE_PLAN', resolved.resolvedBy === 'session' ? resolved.path : '');
-      writeEnv(envFile, 'CK_SUGGESTED_PLAN', resolved.resolvedBy === 'branch' ? resolved.path : '');
+      writeEnv(envFile, 'EPOST_ACTIVE_PLAN', resolved.resolvedBy === 'session' ? resolved.path : '');
+      writeEnv(envFile, 'EPOST_SUGGESTED_PLAN', resolved.resolvedBy === 'branch' ? resolved.path : '');
 
       // Paths - use absolute paths based on CWD for subdirectory workflow support (Issue #327)
-      writeEnv(envFile, 'CK_GIT_ROOT', staticEnv.gitRoot || '');
-      writeEnv(envFile, 'CK_REPORTS_PATH', path.join(baseDir, reportsPath));
-      writeEnv(envFile, 'CK_DOCS_PATH', path.join(baseDir, config.paths.docs));
-      writeEnv(envFile, 'CK_PLANS_PATH', path.join(baseDir, config.paths.plans));
-      writeEnv(envFile, 'CK_PROJECT_ROOT', process.cwd());
+      writeEnv(envFile, 'EPOST_GIT_ROOT', staticEnv.gitRoot || '');
+      writeEnv(envFile, 'EPOST_REPORTS_PATH', path.join(baseDir, reportsPath));
+      writeEnv(envFile, 'EPOST_DOCS_PATH', path.join(baseDir, config.paths.docs));
+      writeEnv(envFile, 'EPOST_PLANS_PATH', path.join(baseDir, config.paths.plans));
+      writeEnv(envFile, 'EPOST_PROJECT_ROOT', process.cwd());
 
       // Project detection
-      writeEnv(envFile, 'CK_PROJECT_TYPE', detections.type || '');
-      writeEnv(envFile, 'CK_PACKAGE_MANAGER', detections.pm || '');
-      writeEnv(envFile, 'CK_FRAMEWORK', detections.framework || '');
+      writeEnv(envFile, 'EPOST_PROJECT_TYPE', detections.type || '');
+      writeEnv(envFile, 'EPOST_PACKAGE_MANAGER', detections.pm || '');
+      writeEnv(envFile, 'EPOST_FRAMEWORK', detections.framework || '');
 
       // NEW: Static environment info (so other hooks don't need to recompute)
-      writeEnv(envFile, 'CK_NODE_VERSION', staticEnv.nodeVersion);
-      writeEnv(envFile, 'CK_PYTHON_VERSION', staticEnv.pythonVersion || '');
-      writeEnv(envFile, 'CK_OS_PLATFORM', staticEnv.osPlatform);
-      writeEnv(envFile, 'CK_GIT_URL', staticEnv.gitUrl || '');
-      writeEnv(envFile, 'CK_GIT_BRANCH', staticEnv.gitBranch || '');
-      writeEnv(envFile, 'CK_USER', staticEnv.user);
-      writeEnv(envFile, 'CK_LOCALE', staticEnv.locale);
-      writeEnv(envFile, 'CK_TIMEZONE', staticEnv.timezone);
-      writeEnv(envFile, 'CK_CLAUDE_SETTINGS_DIR', staticEnv.claudeSettingsDir);
+      writeEnv(envFile, 'EPOST_NODE_VERSION', staticEnv.nodeVersion);
+      writeEnv(envFile, 'EPOST_PYTHON_VERSION', staticEnv.pythonVersion || '');
+      writeEnv(envFile, 'EPOST_OS_PLATFORM', staticEnv.osPlatform);
+      writeEnv(envFile, 'EPOST_GIT_URL', staticEnv.gitUrl || '');
+      writeEnv(envFile, 'EPOST_GIT_BRANCH', staticEnv.gitBranch || '');
+      writeEnv(envFile, 'EPOST_USER', staticEnv.user);
+      writeEnv(envFile, 'EPOST_LOCALE', staticEnv.locale);
+      writeEnv(envFile, 'EPOST_TIMEZONE', staticEnv.timezone);
+      writeEnv(envFile, 'EPOST_CLAUDE_SETTINGS_DIR', staticEnv.claudeSettingsDir);
 
       // Locale config
       if (config.locale?.thinkingLanguage) {
-        writeEnv(envFile, 'CK_THINKING_LANGUAGE', config.locale.thinkingLanguage);
+        writeEnv(envFile, 'EPOST_THINKING_LANGUAGE', config.locale.thinkingLanguage);
       }
       if (config.locale?.responseLanguage) {
-        writeEnv(envFile, 'CK_RESPONSE_LANGUAGE', config.locale.responseLanguage);
+        writeEnv(envFile, 'EPOST_RESPONSE_LANGUAGE', config.locale.responseLanguage);
       }
 
       // Plan validation config (for /plan:validate, /plan:deep, /plan:parallel)
       const validation = config.plan?.validation || {};
-      writeEnv(envFile, 'CK_VALIDATION_MODE', validation.mode || 'prompt');
-      writeEnv(envFile, 'CK_VALIDATION_MIN_QUESTIONS', validation.minQuestions || 3);
-      writeEnv(envFile, 'CK_VALIDATION_MAX_QUESTIONS', validation.maxQuestions || 8);
-      writeEnv(envFile, 'CK_VALIDATION_FOCUS_AREAS', (validation.focusAreas || ['assumptions', 'risks', 'tradeoffs', 'architecture']).join(','));
+      writeEnv(envFile, 'EPOST_VALIDATION_MODE', validation.mode || 'prompt');
+      writeEnv(envFile, 'EPOST_VALIDATION_MIN_QUESTIONS', validation.minQuestions || 3);
+      writeEnv(envFile, 'EPOST_VALIDATION_MAX_QUESTIONS', validation.maxQuestions || 8);
+      writeEnv(envFile, 'EPOST_VALIDATION_FOCUS_AREAS', (validation.focusAreas || ['assumptions', 'risks', 'tradeoffs', 'architecture']).join(','));
 
       // Coding level config (for output style selection)
       const codingLevel = config.codingLevel ?? 5;
-      writeEnv(envFile, 'CK_CODING_LEVEL', codingLevel);
-      writeEnv(envFile, 'CK_CODING_LEVEL_STYLE', getCodingLevelStyleName(codingLevel));
+      writeEnv(envFile, 'EPOST_CODING_LEVEL', codingLevel);
+      writeEnv(envFile, 'EPOST_CODING_LEVEL_STYLE', getCodingLevelStyleName(codingLevel));
+
+      // Research engine config
+      const researchCfg = getResearchConfig(config);
+      writeEnv(envFile, 'EPOST_RESEARCH_ENGINE', researchCfg.engine);
+      writeEnv(envFile, 'EPOST_GEMINI_MODEL', researchCfg.geminiModel);
+
+      // Propagate API keys from .claude/.env to subagent shells
+      if (process.env.GEMINI_API_KEY) writeEnv(envFile, 'GEMINI_API_KEY', process.env.GEMINI_API_KEY);
+      if (process.env.PERPLEXITY_API_KEY) writeEnv(envFile, 'PERPLEXITY_API_KEY', process.env.PERPLEXITY_API_KEY);
     }
 
     // Write current session marker for session-metrics Stop hook
@@ -203,6 +233,14 @@ async function main() {
 
     console.log(`Session ${source}. ${buildContextOutput(config, detections, resolved, staticEnv.gitRoot)}`);
 
+    // Research engine context line
+    const researchCfg = getResearchConfig(config);
+    if (researchCfg.engine === 'gemini') {
+      console.log(`Research engine: gemini (model: ${researchCfg.geminiModel})`);
+    } else {
+      console.log(`Research engine: websearch`);
+    }
+
     // Info: Show git root when running from subdirectory (Issue #327: now supported)
     if (staticEnv.gitRoot && staticEnv.gitRoot !== process.cwd()) {
       console.log(`📁 Subdirectory mode: Plans/docs will be created in current directory`);
@@ -242,3 +280,18 @@ async function main() {
 }
 
 main();
+
+} catch (e) {
+  // Minimal crash logging — only Node builtins, no lib/ deps
+  try {
+    const fs = require('fs');
+    const p = require('path');
+    const logDir = p.join(__dirname, '.logs');
+    if (!fs.existsSync(logDir)) fs.mkdirSync(logDir, { recursive: true });
+    fs.appendFileSync(
+      p.join(logDir, 'hook-log.jsonl'),
+      JSON.stringify({ ts: new Date().toISOString(), hook: p.basename(__filename, '.cjs'), status: 'crash', error: e.message }) + '\n'
+    );
+  } catch (_) {}
+  process.exit(0); // fail-open
+}

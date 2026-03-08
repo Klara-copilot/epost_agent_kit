@@ -1,6 +1,6 @@
 ---
 name: core
-description: Use when any agent modifies files, makes architectural decisions, or needs safety and documentation rules
+description: (ePost) Use when any agent modifies files, makes architectural decisions, or needs safety and documentation rules
 user-invocable: false
 tier: core
 ---
@@ -27,6 +27,18 @@ Defines operational boundaries, decision authority, environment safety, and docu
 | `references/environment-safety.md` | Pre-execution verification rules |
 | `references/external-tools-usage.md` | External tool/MCP boundaries |
 | `references/documentation-standards.md` | Formatting and structure rules |
+| `references/orchestration.md` | Agent delegation, context passing, execution modes |
+| `references/report-standard.md` | Common report format for all agent output |
+
+## Team Workflows
+
+| Workflow | File | When |
+|----------|------|------|
+| Feature Development | `references/workflow-feature-development.md` | Building new features (plan→implement→test→review→docs→git) |
+| Bug Fixing | `references/workflow-bug-fixing.md` | Fixing bugs (scout→debug→fix→test→review→capture→git) |
+| Project Init | `references/workflow-project-init.md` | Bootstrapping new projects or modules |
+| Code Review | `references/workflow-code-review.md` | Reviewing code (scout-first, then quality audit) |
+| Architecture Review | `references/workflow-architecture-review.md` | Evaluating trade-offs (brainstorm→research→decide→document) |
 
 ## Quick Reference
 

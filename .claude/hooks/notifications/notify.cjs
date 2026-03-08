@@ -153,4 +153,4 @@ async function main() {
   process.exit(0);
 }
 
-main();
+main().catch(() => process.exit(0));
