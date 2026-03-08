@@ -9,7 +9,7 @@ metadata:
   platforms: [all]
   triggers: ["/review", "code review", "review code"]
   connections:
-    enhances: [review, review-improvements]
+    enhances: [review]
 ---
 
 # Code Review Skill
@@ -23,13 +23,13 @@ User uses /review, asks for code review, or before committing code.
 ## Expertise
 
 ### Review Process
-1. Read the plan file and understand requirements
-2. Scope resolution (before git diff):
+1. Scope resolution (before git diff):
    - If user provided file paths, component name, or `--files` list → **explicit scope**: use those directly, skip git diff
    - Otherwise → **implicit scope**: identify changed files via `git diff` or `git log`
+2. Read the plan file if one exists — understand requirements before reviewing
 3. Systematic review: structure, logic, types, performance, security
 4. Categorize findings: Critical > High > Medium > Low
-5. Update plan TODO status
+5. Update plan TODO status if plan exists
 
 ### Systematic Review
 - **Structure**: File organization, module boundaries
@@ -37,11 +37,7 @@ User uses /review, asks for code review, or before committing code.
 - **State Machines**: For stateful components — all states have exits, error/timeout handled, transitions guarded, no implicit hidden states, concurrent mutations safe
 - **Types**: Type safety, missing type checks
 - **Performance**: N+1 queries, unnecessary renders, inefficient loops
-- **Security**: Input validation, auth checks, data exposure (OWASP Top 10: A01 access control, A02 crypto, A03 injection, A04 insecure design, A05 misconfiguration, A07 auth failures — full list at owasp.org/Top10)
-
-### Verification Before Completion
-
-See `verification-before-completion` skill for the full gate protocol.
+- **Security**: Input validation, auth checks, data exposure (OWASP Top 10: A01 access control, A02 crypto, A03 injection, A04 insecure design, A05 misconfiguration, A07 auth failures)
 
 ### Severity Classification
 - **Critical**: Security vulnerabilities, data loss, breaking changes
@@ -57,7 +53,7 @@ After initial review, the reviewer decides based on findings:
 |---------|--------|
 | Critical severity found | Escalate to `/audit --code` — activate `knowledge-retrieval` for deeper context before reporting |
 | Task is UI code review/audit (components, tokens, design system) | Delegate to **epost-muji** — runs `/audit --ui` with klara-theme standards + INTEGRITY gate |
-| Task is about a11y (accessibility, WCAG, VoiceOver, TalkBack, keyboard nav, screen reader) | Delegate to **epost-a11y-specialist** — runs `/audit --a11y` or `/review --a11y` with full WCAG 2.1 AA rules |
+| Task is about a11y (accessibility, WCAG, VoiceOver, TalkBack, keyboard nav, screen reader) | Delegate to **epost-a11y-specialist** — runs `/audit --a11y` with full WCAG 2.1 AA rules |
 | High severity, UI component finding | Escalate to `/audit --ui` → **epost-muji** for full component audit |
 | High severity, a11y issue | Escalate to `/audit --a11y` — a11y specialist audits with WCAG rules |
 | Medium/Low only | Complete inline, no escalation needed |
@@ -108,16 +104,12 @@ Pass `output_path: {session_folder}/muji-ui-audit.md` (or `a11y-audit.md`) in ea
 
 **Hybrid audit — sequential (feature module, klara-theme 20+ files):**
 1. Resolve reports root + run `mkdir -p {session_folder}` (see Session folder block above)
-
-**Pre-flight checklist (verify ALL before dispatch):**
-- [ ] Session folder created: `mkdir -p {session_folder}` executed, path confirmed
-- [ ] `output_path` set: `{session_folder}/muji-ui-audit.md`
-- [ ] Delegation format: Template A+ from `audit/references/delegation-templates.md` (NOT free-form)
-- [ ] Template fields filled: `Scope:`, `Component(s):`, `Mode: library`, `Platform:`, `Output path:`
-
-If any item missing: STOP, fix it, then proceed. Do not dispatch with incomplete setup.
-Log: "Pre-flight: {pass | fixed: {items}}" in report Methodology section.
-
+   - **Pre-flight (verify ALL before proceeding to step 2):**
+     - [ ] Session folder created: `mkdir -p {session_folder}` executed, path confirmed
+     - [ ] `output_path` set: `{session_folder}/muji-ui-audit.md`
+     - [ ] Delegation format: Template A+ from `audit/references/delegation-templates.md` (NOT free-form)
+     - [ ] Template fields filled: `Scope:`, `Component(s):`, `Mode: library`, `Platform:`, `Output path:`
+     - If any missing: fix before proceeding. Log: "Pre-flight: {pass | fixed: {items}}" in Methodology.
 2. Dispatch muji via Template A+ — `output_path: {session_folder}/muji-ui-audit.md`
 3. WAIT for muji to complete
 4. Read `{session_folder}/muji-ui-audit.md`. Extract:
@@ -134,10 +126,9 @@ Log: "Pre-flight: {pass | fixed: {items}}" in report Methodology section.
 
 **Critical escalation (deeper code audit):**
 - Fill Template C with: files, trigger finding, original review path
-- This is self-dispatch (same agent, deeper pass with knowledge-retrieval)
-- No Task tool needed — escalate inline:
+- Self-dispatch (same agent, deeper pass with knowledge-retrieval) — no Task tool needed:
   1. Load `knowledge-retrieval` skill (already in agent skills list)
-  2. Execute search strategy: L1 docs/ (conventions, findings) -> L2 RAG (implementations) -> L4 Grep fallback
+  2. Execute search strategy: L1 docs/ (conventions, findings) → L2 RAG (implementations) → L4 Grep fallback
   3. Document KB layers used in report Methodology section
   4. Re-examine files with retrieved context; update findings
 
@@ -159,58 +150,13 @@ After specialist reports arrive:
 
 **Report consolidation**: After all specialist reports are merged into your report, the final deliverable is YOUR single report file. Sub-agent reports are source material — do not surface them as separate deliverables to the user unless explicitly requested.
 
-## Patterns
-
-### Code Review Template
-```markdown
-# Code Review: [Feature]
-
-## Summary
-[Overall assessment]
-
-## Critical Issues
-- [Issue] - [Severity]
-
-## Findings by Category
-- Structure: [findings]
-- Logic: [findings]
-- Types: [findings]
-
-## Recommendations
-- [Action item]
-- [Action item]
-
-## Approval: [Approved/Needs Revision]
-```
-
-## Best Practices
-- Review for intent first, details second
-- Suggest improvements with examples
-- Praise good patterns
-- Balance strictness with pragmatism
-- Check tests alongside code changes
-
-Use `knowledge-capture` skill to persist learnings after this task.
-
-## Sub-Skill Routing
-
-When this skill is active and user intent matches a sub-skill, delegate:
-
-| Intent | Sub-Skill | When |
-|--------|-----------|------|
-| Review code | `review --code` | `/review --code`, "review my code" |
-| Review improvements | `review --improvements` | `/review --improvements`, improvement suggestions |
-| Run tests | `test` | `/test`, "run tests", "check coverage" |
-| Verify completion | `verification-before-completion` | Before claiming task done |
-| Receive review | `receiving-code-review` | Processing feedback from reviewers |
-
 ## Output Format
 
 Use `references/report-template.md` for all code review reports.
 
 Key requirements:
 - **Session folder structure**: For any audit involving sub-agents: `reports/{YYMMDD-HHMM}-{slug}-audit/` — `mkdir -p` before dispatching. Main report = `report.md`. Sub-agent reports alongside (`muji-ui-audit.md`, `a11y-audit.md`). Inline-only: flat `reports/{date}-{slug}-code-review.md`.
-- **One main report per session** — `report.md` is the single surface for the user. Sub-agent `.md` files are source material referenced from `report.md`, not separate deliverables.
+- **One main report per session** — `report.md` is the single surface for the user. Sub-agent `.md` files are source material.
 - Header: Date, Agent, Plan (if applicable), Status
 - Executive Summary first
 - **Methodology** section (required): docs loaded, KB layers used, tools used, files scanned, coverage gaps
@@ -220,6 +166,6 @@ Key requirements:
 - Unresolved questions footer always present
 
 ### Related Skills
-- `knowledge-retrieval` — Knowledge storage format
-- `knowledge-capture` — Post-task capture workflow
-- `auto-improvement` — Convention violations auto-detected across sessions via metrics
+- `knowledge-retrieval` — activated on Critical escalation
+- `knowledge-capture` — use after task to persist learnings
+- `auto-improvement` — session metrics and improvement trends

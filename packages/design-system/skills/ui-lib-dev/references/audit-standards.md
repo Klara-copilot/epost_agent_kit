@@ -2,7 +2,7 @@
 
 Authoritative, enforceable rules for klara-theme component audits. Each rule has a unique ID, severity, pass criterion, and fail criterion. Used by epost-muji during `audit --ui` to evaluate web components.
 
-Also used by `ui-guidance` when consulting on component integration — load this file before answering integration or design-code conflict questions.
+Also used for integration guidance — see `references/guidance.md` for consumer integration consulting workflow.
 
 **Severity scale:**
 - `critical` — breaks library contract, theming, or isolation
@@ -12,7 +12,13 @@ Also used by `ui-guidance` when consulting on component integration — load thi
 
 ---
 
-## Section 0: Live KB Load Gate (KBLOAD) — Always First
+# Library Mode Rules
+
+Apply when the file under audit lives inside `libs/klara-theme/` or `libs/common/`.
+
+---
+
+## KBLOAD: Live KB Load Gate — Always First
 
 Before applying any rule below, load the current klara-theme standards from the live KB. This ensures audit checks match the current library version, not cached assumptions.
 
@@ -28,12 +34,12 @@ Before applying any rule below, load the current klara-theme standards from the 
 | Rule ID | Rule | Severity | Pass | Fail |
 |---------|------|----------|------|------|
 | KBLOAD-001 | `libs/klara-theme/docs/index.json` read and `componentCatalog` populated | critical | Non-empty catalog built from FEAT-0001 | File missing AND no fallback found — log "KB unavailable" |
-| KBLOAD-002 | At least one CONV-* entry loaded for audit scope | high | Relevant CONV entries loaded | No CONV entries loaded — audit proceeds but flag as coverage gap |
-| KBLOAD-003 | Component-specific FEAT-* entry loaded (if component in scope) | medium | FEAT entry found and loaded | No FEAT entry — note "no KB entry" as docs gap; do not block audit |
+| KBLOAD-002 | At least one CONV-* entry loaded for audit scope | high | Relevant CONV entries loaded | No CONV entries loaded — flag as coverage gap |
+| KBLOAD-003 | Component-specific FEAT-* entry loaded (if component in scope) | medium | FEAT entry found and loaded | No FEAT entry — note "no KB entry" as docs gap; do not block |
 
 ---
 
-## Section 1: Component Structure (STRUCT)
+## STRUCT: Component Structure
 
 | Rule ID | Rule | Severity | Pass | Fail |
 |---------|------|----------|------|------|
@@ -46,7 +52,7 @@ Before applying any rule below, load the current klara-theme standards from the 
 
 ---
 
-## Section 2: Props & Naming (PROPS)
+## PROPS: Props & Naming
 
 | Rule ID | Rule | Severity | Pass | Fail |
 |---------|------|----------|------|------|
@@ -61,7 +67,7 @@ Before applying any rule below, load the current klara-theme standards from the 
 
 ---
 
-## Section 3: Token & Style (TOKEN)
+## TOKEN: Token & Style
 
 | Rule ID | Rule | Severity | Pass | Fail |
 |---------|------|----------|------|------|
@@ -75,7 +81,7 @@ Before applying any rule below, load the current klara-theme standards from the 
 
 ---
 
-## Section 4: Business Isolation (BIZ)
+## BIZ: Business Isolation
 
 | Rule ID | Rule | Severity | Pass | Fail |
 |---------|------|----------|------|------|
@@ -83,15 +89,15 @@ Before applying any rule below, load the current klara-theme standards from the 
 | BIZ-002 | No API calls or data fetching | critical | No fetch, axios, useSWR, useQuery | Any network call in component |
 | BIZ-003 | No state management beyond local UI state | critical | Only useState, useRef for local UI | Redux, Zustand, global stores imported |
 | BIZ-004 | Theming via BrandedWrapper/InverseWrapper/ThemedBox only | high | Uses provided wrapper components | Custom CSS var injection, manual theme switching |
-| BIZ-005 | No app-layer lifecycle (changelog, development docs inside component dir) | medium | Only library files in directory | `CHANGELOG.md`, development guides, app-specific docs |
+| BIZ-005 | No app-layer lifecycle artifacts in component dir | medium | Only library files in directory | `CHANGELOG.md`, development guides, app-specific docs |
 
 ---
 
-## Section 5: Accessibility (A11Y)
+## A11Y: Accessibility
 
 **Delegation rule**: A11Y findings require WCAG expertise beyond the surface checks below.
 - **Standalone audit** (not a sub-agent): After collecting violations, delegate A11Y review to **epost-a11y-specialist** via `/audit --a11y`. Pass `finding_ids` from this section. Also use epost-a11y-specialist for integration guidance questions involving keyboard nav, screen readers, or contrast.
-- **As sub-agent** (dispatched via Task tool): Collect all A11Y violations in `## A11Y Findings (for escalation)` section with `finding_id`, `rule_id`, `file:line`, `issue`. The calling agent (code-reviewer) handles delegation to epost-a11y-specialist.
+- **As sub-agent** (dispatched via Task tool): Collect all A11Y violations in `## A11Y Findings (for escalation)` section with `finding_id`, `rule_id`, `file:line`, `issue`. The calling agent (code-reviewer) handles delegation.
 
 | Rule ID | Rule | Severity | Pass | Fail |
 |---------|------|----------|------|------|
@@ -103,7 +109,7 @@ Before applying any rule below, load the current klara-theme standards from the 
 
 ---
 
-## Section 6: Testing & Documentation (TEST)
+## TEST: Testing & Documentation
 
 | Rule ID | Rule | Severity | Pass | Fail |
 |---------|------|----------|------|------|
@@ -114,10 +120,10 @@ Before applying any rule below, load the current klara-theme standards from the 
 
 ---
 
-## Section 7: Security (SEC) — Library Mode Conditional
+## SEC: Security — Conditional
 
 **Activation gate**: Component imports fetch/axios/localStorage OR props include URL/apiKey/endpoint OR imports AI SDK. Skip if none match.
-**Standalone-component exception**: Pure presentational component with no network, no storage, no external API surface → skip SEC entirely. BIZ rules (Section 4) already enforce isolation.
+**Standalone-component exception**: Pure presentational component with no network, no storage, no external API surface → skip SEC entirely. BIZ rules already enforce isolation.
 
 | Rule ID | Rule | Severity | Pass | Fail |
 |---------|------|----------|------|------|
@@ -129,10 +135,10 @@ Before applying any rule below, load the current klara-theme standards from the 
 
 ---
 
-## Section 8: Performance (PERF) — Library Mode Conditional
+## PERF: Performance — Conditional
 
 **Activation gate**: 10+ files in scope OR any file >300 LOC. Skip if neither.
-**Standalone-component exception**: Single isolated component <300 LOC → skip PERF-001 through PERF-003. Apply PERF-004 (mock data isolation) always.
+**Standalone-component exception**: Single isolated component <300 LOC → skip PERF-001 through PERF-003. Apply PERF-004 always.
 
 | Rule ID | Rule | Severity | Pass | Fail |
 |---------|------|----------|------|------|
@@ -143,9 +149,9 @@ Before applying any rule below, load the current klara-theme standards from the 
 
 ---
 
-## Section 9: Library DRY (LDRY) — Always in Library Mode
+## LDRY: Library DRY
 
-**Scope note**: LDRY applies to the component directory and its immediate dependencies. For a single standalone component with no `_utils/` subdirectory, only LDRY-003 (POC maturity) applies. LDRY-001 and LDRY-002 require at least 2 files in scope to be meaningful.
+**Scope note**: LDRY applies to the component directory and immediate dependencies. For a single standalone component with no `_utils/` subdirectory, only LDRY-003 (POC maturity) applies. LDRY-001 and LDRY-002 require at least 2 files in scope to be meaningful.
 
 | Rule ID | Rule | Severity | Pass | Fail |
 |---------|------|----------|------|------|
@@ -155,60 +161,44 @@ Before applying any rule below, load the current klara-theme standards from the 
 
 ---
 
-## Section 10: Embedded Components (EMBED)
+## EMBED: Embedded Components
 
-When a component renders other components internally (embedded/children), verify those components are library-approved — not overriding library internals or importing external UI libs.
+When a component renders other components internally, verify those components are library-approved — not overriding library internals or importing external UI libs.
 
-**RAG lookup required**: Before running EMBED checks, query RAG for the component's known embedded component set:
+**RAG lookup**: Before running EMBED checks, query RAG for known embedded component patterns:
 1. `ToolSearch("web-rag")` → discover `mcp__web-rag-system__*` tools
-2. Call `query` with "{component-name} embedded components tokens used" → surface known patterns
-3. If RAG unavailable: `Grep libs/klara-theme/src/lib/components/{component}/ --glob "*.tsx" --pattern "^import"` to find embedded components
+2. Call `query` with "{component-name} embedded components tokens used"
+3. If RAG unavailable: `Grep libs/klara-theme/src/lib/components/{component}/ --glob "*.tsx" --pattern "^import"`
 
 | Rule ID | Rule | Severity | Pass | Fail |
 |---------|------|----------|------|------|
-| EMBED-001 | All embedded components are from `klara-theme` or `libs/common/` — no external UI libs (MUI, Ant Design, etc.) | critical | Only library-internal or lib-approved components embedded | External UI library component embedded inside klara component |
-| EMBED-002 | Embedded components used via their public API (props) only — no direct DOM manipulation of embedded component internals | critical | Embedded component API used as documented | `document.querySelector` on embedded component's DOM, or accessing private refs |
-| EMBED-003 | Embedded component tokens/variants match current library catalog (verified via RAG/KB) | high | Token names and variant values match FEAT-* entry for embedded component | Hardcoded variant string that no longer exists in embedded component's API |
-| EMBED-004 | No overriding embedded component styles via `!important`, direct class injection, or CSS targeting internal structure | high | Style customization via documented `className`/`style` props only | `.my-wrapper .embedded-component__internal { }` — targets internal structure |
-| EMBED-005 | Children slots use types declared by the parent component — no arbitrary JSX trees passed where a specific component type is expected | medium | Children match documented slot types (e.g., `MenuItem[]` for Menu) | Arbitrary JSX passed to a typed slot prop |
+| EMBED-001 | All embedded components are from `klara-theme` or `libs/common/` — no external UI libs (MUI, Ant Design, etc.) | critical | Only library-internal or lib-approved components embedded | External UI library component inside klara component |
+| EMBED-002 | Embedded components used via their public API (props) only — no direct DOM manipulation of embedded component internals | critical | Embedded component API used as documented | `document.querySelector` on embedded component's DOM |
+| EMBED-003 | Embedded component tokens/variants match current library catalog (verified via RAG/KB) | high | Token names and variant values match FEAT-* entry for embedded component | Hardcoded variant string that no longer exists in embedded component API |
+| EMBED-004 | No overriding embedded component styles via `!important`, direct class injection, or CSS targeting internal structure | high | Style customization via documented `className`/`style` props only | `.wrapper .embedded-component__internal { }` |
+| EMBED-005 | Children slots use types declared by the parent — no arbitrary JSX passed where a specific type is expected | medium | Children match documented slot types | Arbitrary JSX passed to a typed slot prop |
 
 ---
 
-## Mode Applicability
+# Consumer Mode Rules
 
-| Section | Library Mode | Consumer Mode | Notes |
-|---------|-------------|---------------|-------|
-| KBLOAD | Y | Y | Always first — blocks STRUCT/PROPS/TOKEN until loaded |
-| INTEGRITY | Y | Y | Always after KBLOAD — blocks on direct library edits |
-| PLACE | Y | Y | Different criteria per mode |
-| REUSE | - | Y | Consumer-only |
-| TW | Y | Y | Both modes parse tailwind.config.ts |
-| DRY | - | Y | Consumer-only; gates REUSE false positives |
-| REACT | - | Y | Consumer-only |
-| POC | - | Y | Consumer-only (but LDRY-003 covers POC in library) |
-| STRUCT-TEST | Y | - | Library-only (A11Y, TEST apply to both) |
-| SEC | Y (conditional) | Y | Conditional on: localStorage/fetch/apiKey/AI imports; skip for standalone presentational |
-| PERF | Y (conditional) | Y | Conditional on: 10+ files OR file >300 LOC; skip PERF-001–003 for standalone <300 LOC |
-| LDRY | Y | - | Library-only; standalone: LDRY-003 only unless 2+ files in scope |
-| EMBED | Y | Y | Both modes; RAG lookup required for EMBED-003 |
-
-**Mode detection**: file inside `libs/klara-theme/` or `libs/common/` → Library mode. File importing from those paths but living in app/feature code → Consumer mode.
+Apply when the file under audit lives in `app/`, `features/`, `pages/`, or any path that *imports from* `klara-theme` but does not live inside it.
 
 ---
 
-## Section 0: Library Integrity (INTEGRITY) — Critical Gate
+## INTEGRITY: Library Integrity — Critical Gate
 
-Runs before all other checks. If any INT-1 or INT-2 violation is found, set `block: true` and stop the audit.
+Runs before all other consumer checks. If any INT-1 or INT-2 violation is found, set `block: true` and stop the audit.
 
 | Rule ID | Rule | Severity | Pass | Fail |
 |---------|------|----------|------|------|
-| INT-1 | No direct edits to `klara-theme/` or `common/` library files from consumer code — use composition and props instead | critical | Consumer code never modifies library source files | Any `klara-theme/` or `common/` file modified by consumer PR/commit |
+| INT-1 | No direct edits to `klara-theme/` or `common/` library files from consumer code | critical | Consumer code never modifies library source files | Any `klara-theme/` or `common/` file modified by consumer PR/commit |
 | INT-2 | No copy-paste of library component source into consumer code | critical | Consumer code imports from klara-theme; does not duplicate it | Block of code copied verbatim from library source |
 | INT-3 | No wrapping library components with non-composable style overrides that break theme | warning | Overrides use provided className/style props or composition patterns | Direct DOM class injection, `!important` hacks on library internals |
 
 ---
 
-## Section 1: Component Placement (PLACE)
+## PLACE: Component Placement
 
 | Rule ID | Rule | Severity | Pass | Fail |
 |---------|------|----------|------|------|
@@ -222,13 +212,13 @@ Runs before all other checks. If any INT-1 or INT-2 violation is found, set `blo
 
 ---
 
-## Section 2: Klara-Theme Reuse (REUSE)
+## REUSE: Klara-Theme Reuse
 
 Absence of a klara equivalent is a **violation**, not a contribution opportunity. If klara provides the component, use it.
 
 | Rule ID | Rule | Severity | Pass | Fail |
 |---------|------|----------|------|------|
-| RU-1 | Button variants — use `<Button variant="...">` not custom button divs or styled anchors | high | All click/submit interactions use klara `Button` with appropriate variant | Custom `<div onClick>` or `<a>` styled as button instead of `Button` component |
+| RU-1 | Button variants — use `<Button variant="...">` not custom button divs or styled anchors | high | All click/submit interactions use klara `Button` | Custom `<div onClick>` or `<a>` styled as button |
 | RU-2 | Form inputs — use klara `Input`/`Select`/`Checkbox`/`Radio`, not raw `<input>`/`<select>` | high | All form fields use klara input components | Raw HTML form elements without klara wrapper |
 | RU-3 | Modal/Dialog — use klara `Modal` or `Dialog`, not custom overlay divs | high | All modal surfaces use klara modal primitives | Custom `position: fixed` overlay or portal implementation |
 | RU-4 | Typography — use klara `Text`/`Heading` components, not raw `<p>`/`<h1>`–`<h6>` with manual styles | medium | Text rendered via klara typography components | Raw HTML tags with hardcoded font/size classes |
@@ -239,85 +229,111 @@ Absence of a klara equivalent is a **violation**, not a contribution opportunity
 
 ---
 
-## Section 3: Tailwind Compliance (TW)
+## TW: Tailwind Compliance
 
 Parse `tailwind.config.ts` before running this section. Extract theme scale values to validate against.
 
 | Rule ID | Rule | Severity | Pass | Fail |
 |---------|------|----------|------|------|
-| TW-1 | No arbitrary values `[123px]` when an equivalent theme scale value exists — parse config and flag | high | Tailwind classes use theme-defined scale (e.g., `p-4` not `p-[16px]`) | Arbitrary bracket values when config defines the equivalent token |
+| TW-1 | No arbitrary values `[123px]` when an equivalent theme scale value exists | high | Tailwind classes use theme-defined scale (`p-4` not `p-[16px]`) | Arbitrary bracket values when config defines the equivalent token |
 | TW-2 | No arbitrary colors `[#ff0000]` or `[rgb(...)]` when a design token exists | critical | All colors via semantic token classes | Arbitrary color values in class list |
 | TW-3 | No `style={}` inline styles when an equivalent Tailwind class exists | high | Styling via className only | `style={{ marginTop: '8px' }}` when `mt-2` exists |
-| TW-4 | Layout — use established flex/grid patterns; flag `absolute`/`fixed` positioning used as layout hacks | medium | Positioning used for overlays/modals only; standard layout via flex/grid | `absolute` positioning used to align sibling elements instead of flex gap |
+| TW-4 | Layout — use flex/grid patterns; flag `absolute`/`fixed` used as layout hacks | medium | Positioning used for overlays/modals only; standard layout via flex/grid | `absolute` used to align sibling elements instead of flex gap |
 | TW-5 | No `!important` via `!` prefix unless in a documented override scenario | high | No `!` prefix classes | `!text-red-500`, `!mt-0` without documented justification |
 
 ---
 
-## Section 4: DRY Gating
+## DRY: DRY Gating
 
 Scan the **whole feature directory** before running REUSE checks. Patterns found in 2+ files are conventions, not violations.
 
 | Rule ID | Rule | Severity | Pass | Fail |
 |---------|------|----------|------|------|
-| DRY-1 | If a UI pattern appears in 2+ files in the feature, treat it as an established convention — suppress downstream REUSE flags for that pattern | info | Pattern recognized as convention; REUSE finding suppressed with note | REUSE flag raised on a pattern used consistently across the feature |
+| DRY-1 | If a UI pattern appears in 2+ files in the feature, treat it as an established convention — suppress downstream REUSE flags | info | Pattern recognized as convention; REUSE finding suppressed with note | REUSE flag raised on a pattern used consistently across the feature |
 | DRY-2 | Repeated style combinations applied 3+ times → extract to a shared component or utility class | medium | Common style combos extracted | Same multi-class string repeated 3+ times across files |
 | DRY-3 | Repeated logic hooks duplicated in 2+ files → extract to a shared hook | medium | Common logic in a shared hook | Hook body copy-pasted between components |
 
 ---
 
-## Section 5: React Best Practices (REACT)
+## REACT: React Best Practices
 
 | Rule ID | Rule | Severity | Pass | Fail |
 |---------|------|----------|------|------|
 | RE-1 | No inline object/array literals in JSX props — causes unnecessary re-renders | high | Objects/arrays defined outside render or memoized | `<Comp style={{ color: 'red' }}>` or `<Comp items={[...]}>`  in render |
 | RE-2 | `useEffect` dependencies are complete and minimal — no missing or over-specified deps | high | Effect deps match all values referenced inside | ESLint exhaustive-deps violations; stale closure bugs |
-| RE-3 | No `useState` for values derivable from props or other state — use `useMemo`/computed values | medium | Derived values computed via `useMemo` or inline expression | `useState` initialized from a prop, never independently updated |
+| RE-3 | No `useState` for values derivable from props or other state | medium | Derived values computed via `useMemo` or inline expression | `useState` initialized from a prop, never independently updated |
 | RE-4 | All list renders have stable, unique `key` props — no index keys on dynamic lists | high | Keys are stable identifiers (ID, slug) | `key={index}` on a list that can reorder or filter |
 | RE-5 | Prop drilling beyond 2 levels — suggest context or composition instead | medium | Deep data passed via context or component composition | Same prop threaded through 3+ component layers |
-| RE-6 | Large components (>200 lines) — suggest decomposition into smaller components | medium | Component files under 200 lines of JSX/logic | Single file >200 lines mixing concerns |
+| RE-6 | Large components (>200 lines) — suggest decomposition | medium | Component files under 200 lines of JSX/logic | Single file >200 lines mixing concerns |
 | RE-7 | No direct DOM manipulation — use React state and refs correctly | high | DOM interaction via `ref.current` only when unavoidable | `document.querySelector` or `document.getElementById` inside component |
-| RE-8 | Error boundaries present around async data components — unhandled rejections crash trees | high | Async data components wrapped in `ErrorBoundary` | No error boundary around components that fetch or throw |
+| RE-8 | Error boundaries present around async data components | high | Async data components wrapped in `ErrorBoundary` | No error boundary around components that fetch or throw |
 
 ---
 
-## Section 6: Production Maturity (POC)
+## POC: Production Maturity
 
 | Rule ID | Rule | Severity | Pass | Fail |
 |---------|------|----------|------|------|
-| POC-1 | No hardcoded API URLs or environment-specific strings | critical | All URLs from environment variables or config | `"https://api.staging.example.com"` or `"http://localhost:3000"` literal in code |
+| POC-1 | No hardcoded API URLs or environment-specific strings | critical | All URLs from environment variables or config | `"https://api.staging.example.com"` literal in code |
 | POC-2 | No `console.log`, `console.error`, `debugger` statements | high | Clean console — logging via structured logger only | `console.log('DEBUG:', data)` left in production code |
-| POC-3 | No `TODO`/`FIXME`/`HACK` comments — file issues instead | medium | No inline TODO markers | `// TODO: fix this later` or `// HACK: workaround` |
+| POC-3 | No `TODO`/`FIXME`/`HACK` comments — file issues instead | medium | No inline TODO markers | `// TODO: fix this later` in source |
 | POC-4 | No placeholder text (`Lorem ipsum`, `test123`, `fake@email.com`) | high | All visible strings are real or internationalized | Placeholder content visible in UI |
 | POC-5 | No commented-out code blocks longer than 3 lines | medium | Dead code removed, not commented | Multi-line commented blocks left in source |
 | POC-6 | No `any` TypeScript type overuse — max 1 per file, documented with justification | high | Types are specific; `any` used sparingly with comment | `as any`, `any[]`, `: any` repeated throughout file |
-| POC-7 | All async operations have error handling — unguarded promises cause silent failures | critical | Every `async/await` wrapped in try/catch or `.catch()` | `await fetch(...)` with no error handler |
+| POC-7 | All async operations have error handling | critical | Every `async/await` wrapped in try/catch or `.catch()` | `await fetch(...)` with no error handler |
 
 ---
 
-## Consumer Scoring Formulas
-
-```
-placementScore    = (passed_PL_rules / 7) * 10
-reuseRate         = (klara_components_used / total_reusable_ui_elements) * 10
-twComplianceRate  = (classes_using_project_tokens / total_tw_classes) * 10
-reactScore        = (passed_RE_rules / 8) * 10
-pocScore          = (7 - poc_indicator_count) / 7 * 10
-```
-
----
-
-## Props Enhancements (Consumer Mode)
+## Consumer Props Enhancements
 
 Additional PROPS rules that apply when auditing consumer code:
 
 | Rule ID | Rule | Severity | Pass | Fail |
 |---------|------|----------|------|------|
-| PP-E1 | All required props are passed — scan the component's TypeScript Props interface and flag any required prop missing at call sites | high | All non-optional props provided at every usage | Required prop omitted at a call site (TypeScript would error) |
+| PP-E1 | All required props are passed — scan the component's TypeScript Props interface and flag any required prop missing at call sites | high | All non-optional props provided at every usage | Required prop omitted at a call site |
 | PP-E2 | Props are passed with correct types — no string-where-number, no wrong enum value | high | Prop types match interface at all call sites | `<Comp count="5">` where `count: number` |
 
 ---
 
-## Anti-Patterns
+# Mode Applicability
+
+| Section | Library Mode | Consumer Mode | Notes |
+|---------|-------------|---------------|-------|
+| KBLOAD | Y | Y | Always first — blocks STRUCT/PROPS/TOKEN until loaded |
+| INTEGRITY | — | Y | Consumer only — blocks on direct library edits |
+| STRUCT, PROPS, TOKEN, BIZ | Y | — | Library only |
+| A11Y | Y | Y | Both modes; delegate to epost-a11y-specialist for full WCAG |
+| TEST | Y | — | Library only (figma artifacts, stories) |
+| PLACE | — | Y | Consumer only |
+| REUSE | — | Y | Consumer only |
+| TW | Y | Y | Both modes parse tailwind.config.ts |
+| DRY | — | Y | Consumer only; gates REUSE false positives |
+| REACT | — | Y | Consumer only |
+| POC | — | Y | Consumer only (LDRY-003 covers POC for library code) |
+| SEC | Y (conditional) | Y | Skip for standalone presentational components |
+| PERF | Y (conditional) | Y | Skip PERF-001–003 for standalone component <300 LOC |
+| LDRY | Y | — | Library only; LDRY-003 only for single standalone component |
+| EMBED | Y | Y | Both modes; RAG lookup required for EMBED-003 |
+
+**Mode detection**: file inside `libs/klara-theme/` or `libs/common/` → Library mode. File importing from those paths but living in `app/`, `features/`, `pages/` → Consumer mode.
+
+---
+
+# Consumer Scoring Formulas
+
+```
+placementScore    = (passed_PL_rules / total_PL_rules) * 10
+reuseRate         = (klara_components_used / total_reusable_ui_elements) * 10
+twComplianceRate  = (classes_using_project_tokens / total_tw_classes) * 10
+reactScore        = (passed_RE_rules / total_RE_rules) * 10
+pocScore          = (total_POC_rules - poc_indicator_count) / total_POC_rules * 10
+```
+
+Update denominators when rules are added/removed.
+
+---
+
+# Anti-Patterns
 
 Known violations from production component analysis:
 

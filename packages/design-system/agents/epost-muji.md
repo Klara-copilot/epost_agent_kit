@@ -3,7 +3,7 @@ name: epost-muji
 model: sonnet
 color: "#FF1493"
 description: "(ePost) Design system specialist + UI/UX designer. Component knowledge, Figma-to-code pipeline, screenshot-to-code conversion, visual asset generation."
-skills: [core, skill-discovery, figma, design-tokens, ui-lib-dev, ui-guidance, audit, knowledge-retrieval]
+skills: [core, skill-discovery, figma, design-tokens, ui-lib-dev, audit, knowledge-retrieval]
 memory: project
 handoffs:
   - label: Implement component

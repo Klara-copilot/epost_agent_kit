@@ -1,12 +1,12 @@
 {
   "generated": "2026-03-05T09:50:43.516Z",
   "version": "2.0.0",
-  "count": 47,
+  "count": 46,
   "categories": {
     "accessibility": 4,
     "development-tools": 16,
     "analysis-reasoning": 14,
-    "design-system": 4,
+    "design-system": 3,
     "infrastructure": 2,
     "kit-authoring": 7
   },
@@ -1318,43 +1318,6 @@
         "conflicts": []
       },
       "path": "test/SKILL.md"
-    },
-    {
-      "name": "ui-guidance",
-      "description": "Use when guiding other teams on UI component integration, resolving design-code conflicts, reviewing UI implementation accuracy, or consulting on design system usage across platforms",
-      "category": "design-system",
-      "tier": "discoverable",
-      "keywords": [
-        "ui",
-        "guidance",
-        "integration",
-        "design-code",
-        "conflict",
-        "review",
-        "consulting"
-      ],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [
-        "how to integrate",
-        "design conflict",
-        "ui review",
-        "component guidance",
-        "token usage"
-      ],
-      "agent-affinity": [
-        "epost-muji",
-        "epost-fullstack-developer",
-        "epost-code-reviewer"
-      ],
-      "connections": {
-        "extends": [],
-        "requires": [],
-        "enhances": [],
-        "conflicts": []
-      },
-      "path": "../../design-system/skills/ui-guidance/SKILL.md"
     },
     {
       "name": "ui-lib-dev",
