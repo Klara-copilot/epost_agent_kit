@@ -117,9 +117,7 @@ function main() {
   if (messages.length === 0) process.exit(0);
 
   const response = {
-    hookSpecificOutput: {
-      additionalContext: messages.join('\n\n')
-    }
+    additionalContext: messages.join('\n\n')
   };
   process.stdout.write(JSON.stringify(response) + '\n');
   process.exit(0);

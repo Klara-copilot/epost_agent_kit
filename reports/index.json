@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "1.0.0",
+  "updatedAt": "2026-03-08",
+  "entries": [
+    {
+      "id": "fullstack-developer-260307-1635-research-engine",
+      "type": "plan",
+      "agent": "epost-fullstack-developer",
+      "title": "Implementation: Research engine with switchable backend (Gemini / Perplexity)",
+      "verdict": "READY",
+      "files": {
+        "agent": "reports/epost-fullstack-developer-260307-1635-research-engine.md",
+        "human": "reports/epost-fullstack-developer-260307-1635-research-engine.md"
+      },
+      "plan": "plans/260307-1600-research-engine/plan.md",
+      "created": "2026-03-07 16:35"
+    },
+    {
+      "id": "epost-planner-260308-0837-deepen-audit-delegation",
+      "type": "plan",
+      "agent": "epost-planner",
+      "title": "Plan: Deepen Audit Flow Delegation",
+      "verdict": "READY",
+      "files": {
+        "agent": "reports/epost-planner-260308-0837-deepen-audit-delegation.md",
+        "human": "reports/epost-planner-260308-0837-deepen-audit-delegation.md"
+      },
+      "plan": "plans/260308-0837-deepen-audit-delegation/plan.md",
+      "created": "2026-03-08 08:37"
+    },
+    {
+      "id": "epost-fullstack-developer-260308-1007-audit-delegation-phase-1",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "Phase 1: Audit delegation templates (Templates A–E, delegation protocol)",
+      "verdict": "completed",
+      "files": {
+        "agent": "reports/epost-fullstack-developer-260308-1007-audit-delegation-phase-1.md",
+        "human": "reports/epost-fullstack-developer-260308-1007-audit-delegation-phase-1.md"
+      },
+      "plan": "plans/260308-0837-deepen-audit-delegation/plan.md",
+      "created": "2026-03-08 10:07"
+    },
+    {
+      "id": "epost-fullstack-developer-260308-1010-phase-2-code-reviewer-escalation",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "Phase 2: Code-reviewer escalation protocol (Dispatch Protocol + Post-Delegation Report Merging)",
+      "verdict": "completed",
+      "files": {
+        "agent": "reports/epost-fullstack-developer-260308-1010-phase-2-code-reviewer-escalation.md",
+        "human": "reports/epost-fullstack-developer-260308-1010-phase-2-code-reviewer-escalation.md"
+      },
+      "plan": "plans/260308-0837-deepen-audit-delegation/plan.md",
+      "created": "2026-03-08 10:10"
+    },
+    {
+      "id": "epost-fullstack-developer-260308-1011-phase3-specialist-receiving-protocol",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "Phase 3: Specialist receiving protocol — Delegated Audit Intake for muji + a11y-specialist",
+      "verdict": "completed",
+      "files": {
+        "agent": "reports/epost-fullstack-developer-260308-1011-phase3-specialist-receiving-protocol.md",
+        "human": "reports/epost-fullstack-developer-260308-1011-phase3-specialist-receiving-protocol.md"
+      },
+      "plan": "plans/260308-0837-deepen-audit-delegation/plan.md",
+      "created": "2026-03-08 10:11"
+    },
+    {
+      "id": "epost-fullstack-developer-260308-1011-muji-docs-mcp-delegation",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "Phase 4: Muji docs & MCP delegation — Templates D/E + Docs & MCP Delegation section",
+      "verdict": "completed",
+      "files": {
+        "agent": "reports/epost-fullstack-developer-260308-1011-muji-docs-mcp-delegation.md",
+        "human": "reports/epost-fullstack-developer-260308-1011-muji-docs-mcp-delegation.md"
+      },
+      "plan": "plans/260308-0837-deepen-audit-delegation/plan.md",
+      "created": "2026-03-08 10:11"
+    },
+    {
+      "id": "epost-planner-260308-1426-audit-flow-optimization",
+      "type": "plan",
+      "agent": "epost-planner",
+      "title": "Plan: Optimize Audit & Code-Review Flows",
+      "verdict": "READY",
+      "files": {
+        "agent": "plans/reports/epost-planner-260308-1426-audit-flow-optimization.md",
+        "human": "plans/reports/epost-planner-260308-1426-audit-flow-optimization.md"
+      },
+      "plan": "plans/260308-1426-audit-flow-optimization/plan.md",
+      "created": "2026-03-08 14:26"
+    }
+  ]
+}

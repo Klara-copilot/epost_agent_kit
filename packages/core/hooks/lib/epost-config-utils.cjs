@@ -19,7 +19,10 @@ const DEFAULT_CONFIG = {
   privacyBlock: true,  // top-level for privacy-checker backward compat
   statusline: 'full',
   skills: {
-    research: { useGemini: true }
+    research: {
+      engine: 'websearch',
+      gemini: { model: 'gemini-2.5-flash-preview-04-17' }
+    }
   },
   hooks: {
     scout: {
@@ -59,7 +62,8 @@ const DEFAULT_CONFIG = {
   },
   paths: {
     docs: 'docs',
-    plans: 'plans'
+    plans: 'plans',
+    reports: 'reports'
   },
   docs: {
     maxLoc: 800  // Maximum lines of code per doc file before warning
@@ -447,6 +451,9 @@ function sanitizeConfig(config, projectRoot) {
     if (!sanitizePath(result.paths.plans, projectRoot)) {
       result.paths.plans = DEFAULT_CONFIG.paths.plans;
     }
+    if (!sanitizePath(result.paths.reports, projectRoot)) {
+      result.paths.reports = DEFAULT_CONFIG.paths.reports;
+    }
   }
 
   if (result.locale) {
@@ -584,17 +591,18 @@ function writeEnv(envFile, key, value) {
  */
 function getReportsPath(planPath, resolvedBy, planConfig, pathsConfig, baseDir = null) {
   const reportsDir = normalizePath(planConfig?.reportsDir) || 'reports';
-  const plansDir = normalizePath(pathsConfig?.plans) || 'plans';
+  const rootReportsDir = normalizePath(pathsConfig?.reports) || 'reports';
 
   let reportPath;
   // Only use plan-specific reports path if explicitly active (session state)
   // Issue #327: Validate normalized path to prevent whitespace-only paths creating invalid directories
   const normalizedPlanPath = planPath && resolvedBy === 'session' ? normalizePath(planPath) : null;
   if (normalizedPlanPath) {
+    // Plan-specific reports nest under the active plan directory
     reportPath = `${normalizedPlanPath}/${reportsDir}`;
   } else {
-    // Default path for no plan or suggested (branch-matched) plans
-    reportPath = `${plansDir}/${reportsDir}`;
+    // Default: root-level reports/ sibling of plans/
+    reportPath = rootReportsDir;
   }
 
   // Return absolute path if baseDir provided
@@ -764,6 +772,22 @@ function isHookEnabled(hookName) {
 }
 
 /**
+ * Get research engine configuration with validation and defaults
+ *
+ * @param {Object} config - Loaded epost-kit config
+ * @returns {{ engine: string, geminiModel: string }}
+ */
+function getResearchConfig(config) {
+  const skills = config?.skills?.research || {};
+  const VALID_ENGINES = ['gemini', 'websearch'];
+  const engine = VALID_ENGINES.includes(skills.engine) ? skills.engine : 'websearch';
+  return {
+    engine,
+    geminiModel: skills.gemini?.model || 'gemini-2.5-flash-preview-04-17'
+  };
+}
+
+/**
  * Get current git branch (safe execution)
  * @param {string|null} cwd - Working directory to run git command from (optional)
  * @returns {string|null} Current branch name or null
@@ -811,5 +835,6 @@ module.exports = {
   resolveNamingPattern,
   getGitBranch,
   getGitRoot,
-  isHookEnabled
+  isHookEnabled,
+  getResearchConfig
 };

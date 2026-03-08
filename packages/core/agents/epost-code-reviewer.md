@@ -31,11 +31,21 @@ Platform and domain skills are loaded dynamically — do not assume platform.
 
 ## Pre-Audit KB Load (Mandatory — before reading any source file)
 
-1. Check `docs/index.json` for a FEAT-* entry matching the component/module name
-2. If found: load the FEAT doc + any linked CONV-* docs — treat documented patterns as intentional conventions, not violations
+Two separate KB registries — load both when UI code is in scope:
+
+**For klara-theme / UI components (web):**
+1. Read `libs/klara-theme/docs/index.json` — the klara-theme component KB (distinct from project docs)
+2. Load FEAT-0001 (component catalog) + any FEAT/CONV entry matching the target component
+3. Treat documented patterns as intentional conventions, not violations
+4. If missing: fallback to `Glob libs/klara-theme/docs/**/*.md`
+
+**For project-level modules (features, pages, services):**
+1. Check `docs/index.json` (project root) for a FEAT-* or CONV-* entry matching the module name
+2. If found: load it — treat as documented conventions
 3. If not found: note "no KB entry" as a docs gap finding (do not block audit)
+
 4. Compare documented API surface (props, variants, exports) against actual source — flag divergences as stale-doc findings in report under ## Docs Findings
-5. RAG query (hybrid pass only): call `ToolSearch("web-rag")` → query prior findings and security patterns for this module → append "L2-RAG" or "L2-RAG-unavailable" to methodology
+5. RAG query (hybrid pass only): call `ToolSearch("web-rag")` → query prior findings and security patterns → append "L2-RAG" or "L2-RAG-unavailable" to methodology
 
 ## Skill References
 
@@ -74,7 +84,9 @@ Explicit scope signals:
 
 - **IMPORTANT**: Sacrifice grammar for concision in reports
 - List unresolved questions at end of every report
-- Save dual-output per review: `$EPOST_REPORTS_PATH/{date}-{slug}-code-review.md` (human-readable, per `code-review/references/report-template.md`) + `{date}-{slug}-code-review.json` (machine-readable JSON). Two files, one report — different audiences
+- **With sub-agents (hybrid/delegated)**: create session folder `$EPOST_REPORTS_PATH/{date}-{slug}-audit/`; main report = `report.md` inside; sub-agent reports alongside (`muji-ui-audit.md`, `a11y-audit.md`)
+- **Inline-only (no sub-agents)**: flat file `$EPOST_REPORTS_PATH/{date}-{slug}-code-review.md`
+- No JSON report file — findings tracked in `known-findings.json` for UI; code review findings are in the `.md`
 - After saving: append report to `reports/index.json` per `core/references/index-protocol.md`
 
 ---

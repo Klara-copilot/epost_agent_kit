@@ -34,6 +34,28 @@ Each stage has a dedicated aspect file with detailed steps, inputs, outputs, and
 | `references/document-component.md` | Document component with Figma data | `.figma.json` + `.mapping.json` |
 | `references/audit-standards.md` | Enforceable klara-theme rules (35 rules, 6 categories) | Pass/fail criteria per rule |
 
+## Before Using This Skill — Load Live KB (Mandatory)
+
+klara-theme has a structured knowledge base in `libs/klara-theme/docs/`. Always read the registry first — each entry has an `agentHint` that tells you when it applies.
+
+**Step 1 — Read the registry:**
+```
+libs/klara-theme/docs/index.json
+```
+
+**Step 2 — Load by pipeline stage:**
+
+| Pipeline Stage | Load these entries |
+|---------------|--------------------|
+| Any stage (baseline) | **CONV-0001** component structure, **FEAT-0001** component catalog |
+| Plan feature | **ARCH-0001** architecture, **CONV-0003** props naming, **CONV-0006** tokens, **CONV-0007** BIZ isolation |
+| Implement component | **CONV-0001**, **CONV-0003**, **CONV-0005** translations, **CONV-0006** tokens |
+| Audit UI | **CONV-0001** through **CONV-0007** (all conventions), **FEAT-0001** catalog |
+| Fix findings | Load the entry that corresponds to the violated convention (use finding `ruleId` prefix: STRUCT→CONV-0001, PROPS→CONV-0003, TOKEN→CONV-0006, BIZ→CONV-0007, A11Y→CONV-0004) |
+| Document component | **FEAT-0001** catalog, **CONV-0001** structure |
+
+If `index.json` is missing, fall back to: `Glob libs/klara-theme/docs/**/*.md` and read directly.
+
 ## Quick Reference
 
 ### Input/Output Directory
@@ -45,11 +67,9 @@ libs/klara-theme/.ai-agents/ui/<feature>/
 
 ### Key Resources
 
-- **Component patterns**: `libs/klara-theme/CLAUDE.md`
 - **Figma extraction**: `figma` skill
 - **Token system**: `libs/klara-theme/_tokens/` (3-layer: primitives, themes, components)
 - **Schemas**: `libs/klara-theme/figma-data/schema/`
-- **Manifest**: `libs/klara-theme/figma-data/manifest.json`
 
 ### Build Commands
 

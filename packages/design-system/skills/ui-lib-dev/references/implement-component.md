@@ -7,7 +7,7 @@ description: Implementing a klara-theme component or layout from plan artifacts.
 
 ## Context
 
-Read `libs/klara-theme/CLAUDE.md` for component patterns, naming conventions, design tokens, and Storybook standards.
+Load `web-ui-lib` skill — triggers `docs/index.json` KB discovery. For this stage load: CONV-0001 (structure), CONV-0003 (props), CONV-0005 (translations), CONV-0006 (tokens).
 
 ## Inputs (required)
 
@@ -22,9 +22,7 @@ Read `libs/klara-theme/CLAUDE.md` for component patterns, naming conventions, de
 ### 1. Pre-Implementation Check
 
 - Read all plan artifacts
-- Query Web RAG for existing implementations to avoid duplication:
-  - `@web-rag-system status`
-  - `@web-rag-system query "<target> existing implementation" filters={"type":["component","layout"]} top_k=10`
+- Delegate RAG search to `epost-mcp-manager`: query = `"<target> existing implementation"`, scope = web, type = component/layout
 - Review existing component patterns in codebase
 
 ### 2. Implement Component

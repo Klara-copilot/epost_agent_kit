@@ -108,7 +108,7 @@ Read project markers only (do NOT create files):
 
 Define shared report path before dispatching:
 ```
-RESEARCH_REPORT = plans/reports/get-started-{YYYYMMDD}-research.md
+RESEARCH_REPORT = reports/get-started-{YYYYMMDD}-research.md
 ```
 
 Record the detected docs state from Step 2 as `DOCS_STATE`:
@@ -265,5 +265,5 @@ Complete these steps to finish setup:
 - **MUST run all 4 phases** — do NOT stop, present choices, or ask user between phases
 - **Fast detection** — Steps 1–3 are lightweight scan only, < 15s
 - **Sequential dispatch** — use Agent tool for each phase, wait for completion before next
-- **Shared report** — researcher writes to `plans/reports/`, other agents read from it
+- **Shared report** — researcher writes to `reports/`, other agents read from it
 - Only stop early if the user has a specific question (answer from what was read, suggest `/scout` for deeper exploration)

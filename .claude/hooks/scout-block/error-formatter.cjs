@@ -50,16 +50,16 @@ function colorize(text, color) {
 }
 
 /**
- * Get .epost-ignore config path
+ * Get .ckignore config path
  *
  * @param {string} claudeDir - Path to .claude directory
  * @returns {string}
  */
 function formatConfigPath(claudeDir) {
   if (claudeDir) {
-    return path.join(claudeDir, '.epost-ignore');
+    return path.join(claudeDir, '.ckignore');
   }
-  return '.claude/.epost-ignore';
+  return '.claude/.ckignore';
 }
 
 /**

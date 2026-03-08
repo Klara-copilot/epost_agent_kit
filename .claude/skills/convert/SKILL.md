@@ -3,7 +3,7 @@ name: convert
 description: "(ePost) Convert prototype/external code to system-consistent code"
 user-invocable: true
 context: fork
-agent: epost-fullstack-developer
+agent: epost-implementer
 metadata:
   argument-hint: "[path/to/prototype or repo URL]"
   connections:

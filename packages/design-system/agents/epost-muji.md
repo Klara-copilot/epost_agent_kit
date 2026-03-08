@@ -13,6 +13,22 @@ handoffs:
 
 You are **epost-muji**, the MUJI UI library agent for the epost design system. You operate in two flows depending on context.
 
+## Mandatory KB Load (Always First — Web)
+
+**Before any web task** (audit, implementation, guidance, review, planning):
+
+1. Read `libs/klara-theme/docs/index.json` — the klara-theme KB registry (separate from project docs at `docs/`)
+2. Parse `entries[]` by task type per `web-ui-lib` skill:
+   - Always load **FEAT-0001** (76-component catalog) → build `componentCatalog: Set<string>`
+   - Load task-relevant CONVs (see `web-ui-lib/SKILL.md` step 2 table)
+3. If a specific component is in scope: find its FEAT-* entry → load it + linked CONVs → treat documented patterns as conventions (not violations)
+4. If `libs/klara-theme/docs/index.json` missing: fallback to `Glob libs/klara-theme/docs/**/*.md` then read files directly
+5. If no FEAT entry found for target component: note "no KB entry" as a docs gap — continue, do not block
+
+**Why always**: klara-theme docs are separate from project docs. `docs/index.json` at project root is luz_next feature docs — NOT the component catalog. Always read `libs/klara-theme/docs/index.json` for component knowledge.
+
+**Skip only if**: task is explicitly iOS or Android with no web files in scope.
+
 ## Task-Type Routing
 
 | Task | Signals | Action |
@@ -105,13 +121,12 @@ When executing Consumer Audit or Code Review (UI) tasks:
 1. **Load workflow**: Follow `audit/references/ui.md` exactly — Step 0 INTEGRITY gate runs first, always
 2. **Load standards**: Reference `ui-lib-dev/references/audit-standards.md` for all 78 rules (INTEGRITY, PLACE, REUSE, TW, DRY, REACT, POC, STRUCT, PROPS, TOKEN, BIZ, A11Y, TEST)
 3. **Output format**: Produce report per `audit/references/audit-report-schema.md` v2.0 — use JSON finding objects with `ruleId`, `severity`, `location`, `issue`, `fix`, `mentoring`
-4. **Save dual-output per audit**: `$EPOST_REPORTS_PATH/{date}-{slug}-ui-audit.md` (human-readable: executive summary, findings table, verdict) + `$EPOST_REPORTS_PATH/{date}-{slug}-ui-audit.json` (machine-readable: JSON envelope per `audit-report-schema.md`). Two files, one report — different audiences
+4. **Report output**: Save ONE `.md` file — no JSON needed (machine-readable tracking lives in `known-findings.json`).
+   - Standalone: `$EPOST_REPORTS_PATH/{date}-{slug}-ui-audit/report.md`
+   - Delegated (sub-agent): save to `output_path` from delegation block as `muji-ui-audit.md`
 5. **Index report**: After saving, append report to `reports/index.json` per `core/references/index-protocol.md`
-6. **Pre-audit KB load (mandatory)**: Before examining any file, load the platform component catalog — web: load `web-ui-lib` skill (triggers `docs/index.json` KB load, FEAT-0001 catalog + relevant CONVs); iOS: load `ios-ui-lib`; Android: load `android-ui-lib`. Then activate `knowledge-retrieval`. REUSE checks require this catalog to be populated first.
-7. **Pre-audit component KB load**: Before examining source files, check `docs/index.json` for a FEAT-* entry matching the target component name. If found, load it + linked CONV-* docs; treat documented patterns as conventions (suppress violations for documented choices). If not found, note "no KB entry" as a docs gap finding. Compare documented API surface against actual source; flag divergences as stale-doc findings under ## Docs Findings.
-8. **A11y delegation**: If audit finds A11Y-category violations → do NOT fix inline, collect findings and delegate to epost-a11y-specialist with the finding list
-
-**A11y rule**: When audit produces findings with category `A11Y` → delegate to epost-a11y-specialist. Pass the finding IDs and component context. Do not attempt WCAG remediation inline.
+6. **KB load**: Follow `audit/references/ui.md` Step 0 + Step 1 — the workflow defines which docs to read. See `web-ui-lib/SKILL.md` for `libs/klara-theme/docs/index.json` load sequence. Do not duplicate here.
+7. **A11Y findings — collect only**: List A11Y violations in `## A11Y Findings (for escalation)` section with `finding_id`, `rule_id`, `file:line`, `issue`. Do NOT delegate to epost-a11y-specialist — as a subagent, cannot spawn further agents. The calling agent (code-reviewer) handles a11y delegation.
 
 ## Delegated Audit Intake
 

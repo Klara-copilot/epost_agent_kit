@@ -12,11 +12,11 @@ metadata:
     - refresh-docs
     - verify-docs
   agent-affinity:
-    - epost-docs-manager
+    - epost-documenter
   platforms:
     - all
   connections:
-    requires: [knowledge-retrieval]
+    requires: [knowledge-base]
     enhances: [knowledge-retrieval]
 ---
 

@@ -1,20 +1,45 @@
+---
+name: fix-ui-mode
+description: "(ePost) Fix UI component findings from known-findings DB"
+user-invocable: false
+context: fork
+agent: epost-muji
+metadata:
+  argument-hint: "<ComponentName> [--finding-id <id>] [--top <n>]"
+---
+
 # Fix UI Mode
 
-Direct UI fix — skip auto-detection, debug visual/layout problems.
+Invoked when: `fix --ui <ComponentName> [--finding-id <id>] [--top <n>]`
 
-<issue>$ARGUMENTS</issue>
+## Steps
 
-## Process
+1. Load `.epost-data/ui/known-findings.json`
+   - If file not found: report "no UI findings DB — run `/audit --ui` first" and stop
+2. Select finding(s):
+   - `--finding-id <id>`: load that specific finding
+   - `--top <n>`: load top N unresolved by severity + priority
+   - No flag: load all unresolved findings for named component
+3. Delegate to epost-muji via Task tool with:
+   - Finding objects from DB
+   - Component name + `file_pattern`
+   - Mode: fix (apply surgical changes)
+   - Boundaries: fix ONLY the flagged rule violation — no refactoring
+4. Receive fix result from epost-muji:
+   - Unified diff
+   - Lines changed
+   - Confidence (high|medium|low)
+5. Save diff to `.epost-data/ui/fixes/patches/finding-{id}-{date}.diff`
+6. Update `known-findings.json`: set `fix_applied: true`, `fix_applied_date: today`
+7. Output confirmation (JSON + prose summary)
+8. Suggest: "Run `/audit --close --ui <id>` to mark as fully resolved after verification"
 
-1. **Reproduce** — identify the UI issue (screenshot, browser DevTools, description)
-2. **Identify root cause** — inspect CSS, component structure, state management
-3. **Fix** — apply the minimal correct fix (CSS, component logic, or layout)
-4. **Check a11y** — verify the fix doesn't break accessibility (contrast, focus, ARIA)
-5. **Cross-browser** — verify fix works across target browsers if applicable
+## Boundaries
 
-## Rules
+- Fix ONE rule violation per finding — no opportunistic improvements
+- Do not run a full re-audit after fixing
+- If fix requires structural change (STRUCT category) — report instead of fixing, suggest redesign
 
-- Fix root causes, not symptoms
-- Check accessibility impact of all UI changes
-- Prefer CSS fixes over JavaScript workarounds
-- Test responsive behavior if layout is affected
+## Schema Reference
+
+See `audit/references/ui-known-findings-schema.md` for field definitions and resolution state machine.

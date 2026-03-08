@@ -1,9 +1,9 @@
 ---
 name: problem-solving
-description: (ePost) Use when stuck, facing a complex bug, or need root cause analysis — 5 whys, bisection, inversion techniques
+description: Use when stuck, facing a complex bug, or need root cause analysis — 5 whys, bisection, inversion techniques
 
 metadata:
-  agent-affinity: [epost-debugger, epost-fullstack-developer, epost-planner, epost-brainstormer]
+  agent-affinity: [epost-debugger, epost-implementer, epost-architect]
   keywords: [problem-solving, root-cause, analysis, debugging, 5-whys, bisection, crash, error, stuck]
   platforms: [all]
   triggers: ["stuck", "problem", "root cause", "why"]

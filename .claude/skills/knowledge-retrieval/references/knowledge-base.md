@@ -4,7 +4,7 @@ description: Use when recording ADRs, saving debug findings, persisting patterns
 user-invocable: false
 
 metadata:
-  agent-affinity: [epost-planner, epost-debugger, epost-docs-manager, epost-fullstack-developer]
+  agent-affinity: [epost-architect, epost-debugger, epost-documenter, epost-implementer]
   keywords: [knowledge, adr, decision, pattern, learning, memory, persist, capture]
   platforms: [all]
   triggers: ["ADR", "decision record", "learned pattern", "save finding"]

@@ -52,3 +52,9 @@ Reference `android-a11y` skill references:
 ## Constraints
 
 Same as iOS audit mode — valid JSON only, precise line numbers, match known findings.
+
+Include `methodology` object in output (same schema as iOS audit mode):
+- `filesScanned` — all `.kt`/`.kts`/`.xml` files read
+- `knowledgeTiersUsed` — L1 known-findings, L2 RAG, L3 android-a11y skill
+- `standardsSource` — `android-a11y/SKILL.md`, `audit/references/android-audit-mode.md`, `WCAG 2.1 AA`
+- `coverageGaps` — e.g. `"RAG unavailable — Grep fallback used"` or `"Compose-only rules loaded, no XML rules needed"`

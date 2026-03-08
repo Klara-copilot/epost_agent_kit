@@ -11,16 +11,16 @@ metadata:
     - generate-docs
     - scaffold-docs
   agent-affinity:
-    - epost-docs-manager
+    - epost-documenter
   platforms:
     - all
   connections:
-    requires: [knowledge-retrieval]
+    requires: [knowledge-base]
 ---
 
 # Docs: Init
 
-Scan codebase and generate structured Knowledge Base documentation following the `knowledge-retrieval` skill format.
+Scan codebase and generate structured Knowledge Base documentation following the `knowledge-base` skill format.
 
 ## Usage
 ```
@@ -57,7 +57,7 @@ docs/
 
 ### 3. Auto-Generate Documents
 
-Use templates from `knowledge-retrieval` skill. Generate based on detected signals:
+Use templates from `knowledge-base` skill. Generate based on detected signals:
 
 #### ADRs (from major dependencies)
 For each major framework/library detected (e.g., Next.js, Redux, Hibernate):
@@ -160,7 +160,7 @@ Read all files in `docs/*.md` (top-level only, not subdirectories).
 | Other `.md` files | Classify by content → appropriate category | varies |
 
 ### 3. Reformat Content
-- Apply KB templates from `knowledge-retrieval` skill
+- Apply KB templates from `knowledge-base` skill
 - Add `## Status`, `## Tags` sections where appropriate
 - Split large files if > 800 LOC
 

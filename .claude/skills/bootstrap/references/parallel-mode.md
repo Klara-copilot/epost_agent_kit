@@ -13,7 +13,7 @@ Parallel bootstrap — skip mode detection, split into independent modules immed
 
 ### 2. Research & Planning
 - Use 2 `epost-researcher` subagents (max 5 sources each) for idea validation + tech stack
-- Use `epost-planner` to create implementation plan with parallel phases at `./plans/`
+- Use `epost-architect` to create implementation plan with parallel phases at `./plans/`
 
 ### 3. Design (if UI project)
 - Use `epost-muji` for design guidelines at `./docs/design-guidelines.md`
@@ -25,7 +25,7 @@ Parallel bootstrap — skip mode detection, split into independent modules immed
 
 ### 5. Testing & Review
 - Use `epost-tester` to run tests; use `epost-debugger` to fix failures
-- Use `epost-code-reviewer` for code review; iterate until clean
+- Use `epost-reviewer` for code review; iterate until clean
 
 ### 6. Documentation
 - Create/update: `README.md`, `project-overview-pdr.md`, `code-standards.md`, `system-architecture.md`

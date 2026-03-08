@@ -21,7 +21,8 @@ const {
   resolvePlanPath,
   writeSessionState,
   readSessionState,
-  getSessionTempPath
+  getSessionTempPath,
+  getResearchConfig
 } = require('../epost-config-utils.cjs');
 
 let passed = 0;
@@ -185,26 +186,26 @@ test('getGitRoot returns path when in git repo', () => {
 
 console.log('\n=== getReportsPath with baseDir tests (Issue #291) ===\n');
 
-test('getReportsPath returns absolute path when baseDir provided', () => {
+test('getReportsPath returns root-level reports path when baseDir provided', () => {
   const planConfig = { reportsDir: 'reports' };
-  const pathsConfig = { plans: 'plans' };
+  const pathsConfig = { plans: 'plans', reports: 'reports' };
   const baseDir = '/home/user/project';
 
   const result = getReportsPath(null, null, planConfig, pathsConfig, baseDir);
-  assertEquals(result, '/home/user/project/plans/reports');
+  assertEquals(result, '/home/user/project/reports');
 });
 
-test('getReportsPath returns relative path when no baseDir', () => {
+test('getReportsPath returns relative root-level path when no baseDir', () => {
   const planConfig = { reportsDir: 'reports' };
-  const pathsConfig = { plans: 'plans' };
+  const pathsConfig = { plans: 'plans', reports: 'reports' };
 
   const result = getReportsPath(null, null, planConfig, pathsConfig);
-  assertEquals(result, 'plans/reports/');
+  assertEquals(result, 'reports/');
 });
 
 test('getReportsPath uses plan path for session-resolved plans', () => {
   const planConfig = { reportsDir: 'reports' };
-  const pathsConfig = { plans: 'plans' };
+  const pathsConfig = { plans: 'plans', reports: 'reports' };
   const baseDir = '/home/user/project';
 
   const result = getReportsPath('plans/my-plan', 'session', planConfig, pathsConfig, baseDir);
@@ -213,11 +214,11 @@ test('getReportsPath uses plan path for session-resolved plans', () => {
 
 test('getReportsPath ignores plan path for branch-resolved plans', () => {
   const planConfig = { reportsDir: 'reports' };
-  const pathsConfig = { plans: 'plans' };
+  const pathsConfig = { plans: 'plans', reports: 'reports' };
   const baseDir = '/home/user/project';
 
   const result = getReportsPath('plans/my-plan', 'branch', planConfig, pathsConfig, baseDir);
-  assertEquals(result, '/home/user/project/plans/reports');
+  assertEquals(result, '/home/user/project/reports');
 });
 
 console.log('\n=== getGitRoot/getGitBranch with cwd parameter (Issue #291) ===\n');
@@ -306,40 +307,40 @@ test('escapeShellValue returns non-string as-is', () => {
 
 console.log('\n=== getReportsPath edge cases ===\n');
 
-test('getReportsPath with empty reportsDir falls back to "reports"', () => {
-  const planConfig = { reportsDir: '' };
+test('getReportsPath with empty paths.reports falls back to "reports"', () => {
+  const planConfig = { reportsDir: 'reports' };
+  const pathsConfig = { plans: 'plans', reports: '' };
+  const baseDir = '/home/user/project';
+
+  const result = getReportsPath(null, null, planConfig, pathsConfig, baseDir);
+  assertEquals(result, '/home/user/project/reports');
+});
+
+test('getReportsPath with null paths.reports falls back to "reports"', () => {
+  const planConfig = { reportsDir: 'reports' };
+  const pathsConfig = { plans: 'plans', reports: null };
+  const baseDir = '/home/user/project';
+
+  const result = getReportsPath(null, null, planConfig, pathsConfig, baseDir);
+  assertEquals(result, '/home/user/project/reports');
+});
+
+test('getReportsPath with custom paths.reports uses that path', () => {
+  const planConfig = { reportsDir: 'reports' };
+  const pathsConfig = { plans: 'plans', reports: 'out/reports' };
+  const baseDir = '/home/user/project';
+
+  const result = getReportsPath(null, null, planConfig, pathsConfig, baseDir);
+  assertEquals(result, '/home/user/project/out/reports');
+});
+
+test('getReportsPath with missing paths.reports falls back to "reports"', () => {
+  const planConfig = { reportsDir: 'reports' };
   const pathsConfig = { plans: 'plans' };
   const baseDir = '/home/user/project';
 
   const result = getReportsPath(null, null, planConfig, pathsConfig, baseDir);
-  assertEquals(result, '/home/user/project/plans/reports');
-});
-
-test('getReportsPath with null reportsDir falls back to "reports"', () => {
-  const planConfig = { reportsDir: null };
-  const pathsConfig = { plans: 'plans' };
-  const baseDir = '/home/user/project';
-
-  const result = getReportsPath(null, null, planConfig, pathsConfig, baseDir);
-  assertEquals(result, '/home/user/project/plans/reports');
-});
-
-test('getReportsPath with empty plansDir falls back to "plans"', () => {
-  const planConfig = { reportsDir: 'reports' };
-  const pathsConfig = { plans: '' };
-  const baseDir = '/home/user/project';
-
-  const result = getReportsPath(null, null, planConfig, pathsConfig, baseDir);
-  assertEquals(result, '/home/user/project/plans/reports');
-});
-
-test('getReportsPath with null plansDir falls back to "plans"', () => {
-  const planConfig = { reportsDir: 'reports' };
-  const pathsConfig = { plans: null };
-  const baseDir = '/home/user/project';
-
-  const result = getReportsPath(null, null, planConfig, pathsConfig, baseDir);
-  assertEquals(result, '/home/user/project/plans/reports');
+  assertEquals(result, '/home/user/project/reports');
 });
 
 console.log('\n=== sanitizeConfig tests ===\n');
@@ -768,6 +769,40 @@ test('resolvePlanPath falls back to branch if no session state', () => {
 
   // Should fall through to branch or return null
   assertEquals(result.resolvedBy === 'branch' || result.resolvedBy === null, true);
+});
+
+console.log('\n=== getResearchConfig tests ===\n');
+
+test('default config returns engine=websearch with default gemini model', () => {
+  const result = getResearchConfig({});
+  assertEquals(result.engine, 'websearch');
+  assertEquals(result.geminiModel, 'gemini-2.5-flash-preview-04-17');
+});
+
+test('engine: gemini returns gemini', () => {
+  const result = getResearchConfig({ skills: { research: { engine: 'gemini' } } });
+  assertEquals(result.engine, 'gemini');
+});
+
+test('engine: perplexity (invalid) falls back to websearch', () => {
+  const result = getResearchConfig({ skills: { research: { engine: 'perplexity' } } });
+  assertEquals(result.engine, 'websearch');
+});
+
+test('invalid engine falls back to websearch', () => {
+  const result = getResearchConfig({ skills: { research: { engine: 'invalid-engine' } } });
+  assertEquals(result.engine, 'websearch');
+});
+
+test('custom gemini model is returned', () => {
+  const result = getResearchConfig({ skills: { research: { engine: 'gemini', gemini: { model: 'gemini-3-flash' } } } });
+  assertEquals(result.geminiModel, 'gemini-3-flash');
+});
+
+test('null config returns websearch defaults', () => {
+  const result = getResearchConfig(null);
+  assertEquals(result.engine, 'websearch');
+  assertEquals(result.geminiModel, 'gemini-2.5-flash-preview-04-17');
 });
 
 // Summary

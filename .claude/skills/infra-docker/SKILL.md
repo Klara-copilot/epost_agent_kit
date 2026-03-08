@@ -1,10 +1,10 @@
 ---
 name: infra-docker
-description: (ePost) Use when working with Dockerfiles, docker-compose, containers, or containerized deployments
+description: Use when working with Dockerfiles, docker-compose, containers, or containerized deployments
 user-invocable: false
 
 metadata:
-  agent-affinity: [epost-fullstack-developer, epost-planner]
+  agent-affinity: [epost-implementer, epost-architect]
   keywords: [docker, container, dockerfile, compose, deployment, devops]
   platforms: [all]
   triggers: ["Dockerfile", "docker-compose.yml", "container", "docker"]

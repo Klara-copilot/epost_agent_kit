@@ -2,7 +2,7 @@
 /**
  * scout-block.cjs - Cross-platform hook for blocking directory access
  *
- * Blocks access to directories listed in .claude/.epost-ignore
+ * Blocks access to directories listed in .claude/.ckignore
  * Uses gitignore-spec compliant pattern matching via 'ignore' package
  *
  * Blocking Rules:
@@ -12,7 +12,7 @@
  *   - Allowed: npm build, go build, cargo build, make, mvn, gradle, docker build, kubectl, terraform
  *
  * Configuration:
- * - Edit .claude/.epost-ignore to customize blocked patterns (one per line, # for comments)
+ * - Edit .claude/.ckignore to customize blocked patterns (one per line, # for comments)
  * - Supports negation patterns (!) to allow specific paths
  *
  * Exit Codes:
@@ -33,23 +33,11 @@ const {
   isAllowedCommand
 } = require('./lib/scout-checker.cjs');
 
-// Import config utils to respect .epost-kit.json settings
-const { loadConfig } = require('./lib/epost-config-utils.cjs');
-
 // Import formatters (kept local as they're Claude-specific output)
 const { formatBlockedError } = require('./scout-block/error-formatter.cjs');
 const { formatBroadPatternError } = require('./scout-block/broad-pattern-detector.cjs');
 
 try {
-  // Load config — respects .epost-kit.json hooks.scout settings
-  const config = loadConfig({ includeProject: false, includeAssertions: false, includeLocale: false });
-  const scoutConfig = config.hooks?.scout ?? {};
-
-  // Allow disabling scout-block via config: { "hooks": { "scout": { "enabled": false } } }
-  if (scoutConfig.enabled === false) {
-    process.exit(0);
-  }
-
   // Read stdin synchronously
   const hookInput = fs.readFileSync(0, 'utf-8');
 
@@ -80,19 +68,13 @@ try {
   const toolName = data.tool_name || 'unknown';
   const claudeDir = path.dirname(__dirname); // Go up from hooks/ to .claude/
 
-  // Resolve ignore file path from config (supports absolute or relative to cwd)
-  const ignoreFileRaw = scoutConfig.ignoreFile || '.claude/.epost-ignore';
-  const epostIgnorePath = path.isAbsolute(ignoreFileRaw)
-    ? ignoreFileRaw
-    : path.join(process.cwd(), ignoreFileRaw);
-
   // Use shared scout checker
   const result = checkScoutBlock({
     toolName,
     toolInput,
     options: {
       claudeDir,
-      epostIgnorePath,
+      ckignorePath: path.join(claudeDir, '.ckignore'),
       checkBroadPatterns: true
     }
   });
@@ -131,16 +113,5 @@ try {
 } catch (error) {
   // Fail-open for unexpected errors
   console.error('WARN: Hook error, allowing operation -', error.message);
-  // Crash logging — only Node builtins
-  try {
-    const _fs = require('fs');
-    const _p = require('path');
-    const logDir = _p.join(__dirname, '.logs');
-    if (!_fs.existsSync(logDir)) _fs.mkdirSync(logDir, { recursive: true });
-    _fs.appendFileSync(
-      _p.join(logDir, 'hook-log.jsonl'),
-      JSON.stringify({ ts: new Date().toISOString(), hook: _p.basename(__filename, '.cjs'), status: 'crash', error: error.message }) + '\n'
-    );
-  } catch (_) {}
   process.exit(0);
 }

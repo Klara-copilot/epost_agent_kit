@@ -1,6 +1,8 @@
 # Code Review Report Template
 
-Use this template when writing a code review report.
+**One report per review session.** If multiple scopes are covered in the same task, group findings by scope in one report — do NOT create separate report files per scope.
+
+**Human-facing file** (`{date}-{slug}-code-review.md`). Pair with a JSON agent file (`{date}-{slug}-code-review.json`) for machine-readable findings.
 
 ---
 
@@ -20,9 +22,29 @@ Use this template when writing a code review report.
 
 ---
 
-## Files Reviewed
+## Methodology
 
-- `{path/to/file.ts}` ({N} lines) — {what was checked}
+> Format per `core/references/report-standard.md` Methodology section.
+
+| | |
+|--|--|
+| **Docs Loaded** | `{path/to/docs/index.json}` — FEAT-{N} ({component name}), CONV-{N} ({convention name}); or "None found" |
+| **KB Layers** | L1 docs/ ({found/not found}), L2 RAG ({available/unavailable}), L3 Skills ({skill names}), L4 Grep ({used/not needed}) |
+| **Tools Used** | {e.g. Grep (pattern matching), Glob (file discovery), Read (source analysis), Task (delegation)} |
+| **Files Scanned** | `{path/to/file.ts}` ({N} lines) — {what was checked} |
+| **Standards Source** | `code-review/SKILL.md`, `docs/conventions/{CONV-NNNN}.md` |
+| **Coverage Gaps** | {e.g. "RAG unavailable — Grep fallback used" or "None"} |
+
+## Delegation Log
+
+> Format per `core/references/report-standard.md` Delegation Log section.
+
+| Agent | Scope | Template | Verdict | Findings |
+|-------|-------|----------|---------|----------|
+| epost-muji | `{path/}` | Template A / A+ | pass / fix-and-reaudit / redesign | {N} |
+| epost-a11y-specialist | `{path/}` | Template B | block_pr: true/false | {N} |
+
+_(Omit section if no delegation occurred)_
 
 ## Score
 

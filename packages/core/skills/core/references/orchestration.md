@@ -9,7 +9,7 @@ Every subagent invocation MUST include:
 ```
 Task: [specific task description]
 Work context: [project path]
-Reports: [plans/reports/ path]
+Reports: [reports/ path]
 Plans: [plans/ path]
 Platform: [detected platform or "all"]
 Active plan: [plan path if exists, or "none"]
@@ -86,7 +86,7 @@ This gives each task a clean context window and two-stage review.
 
 ## Report Output
 
-- Location: `plans/reports/{agent}-{date}-{slug}.md`
+- Location: `reports/{agent}-{date}-{slug}.md`
 - Naming: kebab-case, descriptive, self-documenting
 - Content: concise, bullets over paragraphs, unresolved questions at end
 - Max: 150 lines (research reports), 80 lines (status reports)

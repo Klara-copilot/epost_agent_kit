@@ -5,7 +5,7 @@ user-invocable: false
 tier: core
 
 metadata:
-  agent-affinity: [epost-project-manager]
+  agent-affinity: [epost-orchestrator]
   keywords: [context, hub, routing, git-state, platform-detection, error-signals]
   platforms: [all]
   triggers: []
@@ -106,7 +106,7 @@ The routing engine uses context to boost intent categories:
 
 ### Prompt Classification
 - **Dev task** (action verbs: cook, fix, plan, test, debug, etc.) → route via intent map
-- **Kit question** ("which agent", "list commands", "our conventions") → `epost-project-manager`
+- **Kit question** ("which agent", "list commands", "our conventions") → `epost-orchestrator`
 - **External tech question** ("how does React...", "what is gRPC") → `epost-researcher`
 - **Conversational** (greetings, opinions, clarifications) → respond directly, no routing
 
@@ -130,7 +130,7 @@ The routing engine uses context to boost intent categories:
 ### Routing Rules
 - If user types a slash command explicitly → execute it directly, skip routing
 - If ambiguous → use context boost to break tie; if still ambiguous → ask user (max 1 question)
-- If multi-intent ("plan and build X") → delegate to `epost-project-manager`
+- If multi-intent ("plan and build X") → delegate to `epost-orchestrator`
 - Platform detection delegates to `skill-discovery` — never hardcode platform logic here
 
 ## Rules

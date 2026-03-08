@@ -34,12 +34,16 @@ Use this template when writing a research findings report.
 |--------|------|------|---------------|
 | {option} | | | |
 
-## Sources Analyzed
+## Methodology
 
-### Local Files
-- `{path/to/file}` — {what it revealed}
+| | |
+|--|--|
+| **Files Scanned** | `{path/to/file}` — {what it revealed} |
+| **Knowledge Tiers** | L1 docs/ ({found/not found}), L2 RAG ({available/unavailable}), L5 Context7 ({used/unavailable}), WebSearch ({used/skipped}) |
+| **Standards Source** | Official docs: {URLs}, community: {sources} |
+| **Coverage Gaps** | {e.g. "Context7 returned no results for X — fell back to WebSearch" or "None"} |
 
-### External
+### External Sources
 - [{title}]({url}) — {key takeaway}
 
 ---

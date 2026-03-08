@@ -18,7 +18,7 @@ metadata:
     - "show me the code"
     - "what does this file do"
   platforms: [web, ios, android, backend]
-  agent-affinity: [Explore, epost-planner, epost-researcher, epost-debugger]
+  agent-affinity: [Explore, epost-architect, epost-researcher, epost-debugger]
   connections:
     uses: [knowledge-retrieval, web-rag, ios-rag]
     enhances: [plan, debug, implementation]

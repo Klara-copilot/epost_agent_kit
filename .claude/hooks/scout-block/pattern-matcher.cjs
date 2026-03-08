@@ -2,7 +2,7 @@
 /**
  * pattern-matcher.cjs - Gitignore-spec compliant pattern matching
  *
- * Uses 'ignore' package for .epost-ignore parsing and path matching.
+ * Uses 'ignore' package for .ckignore parsing and path matching.
  * Supports negation patterns (!) for allowlisting.
  */
 
@@ -10,7 +10,7 @@ const Ignore = require('./vendor/ignore.cjs');
 const fs = require('fs');
 const path = require('path');
 
-// Default patterns if .epost-ignore doesn't exist or is empty
+// Default patterns if .ckignore doesn't exist or is empty
 // Only includes directories with HEAVY file counts (1000+ files typical)
 const DEFAULT_PATTERNS = [
   // JavaScript/TypeScript - package dependencies & build outputs
@@ -34,19 +34,19 @@ const DEFAULT_PATTERNS = [
 ];
 
 /**
- * Load patterns from .epost-ignore file
+ * Load patterns from .ckignore file
  * Falls back to DEFAULT_PATTERNS if file doesn't exist or is empty
  *
- * @param {string} epostIgnorePath - Path to .epost-ignore file
+ * @param {string} ckignorePath - Path to .ckignore file
  * @returns {string[]} Array of patterns
  */
-function loadPatterns(epostIgnorePath) {
-  if (!epostIgnorePath || !fs.existsSync(epostIgnorePath)) {
+function loadPatterns(ckignorePath) {
+  if (!ckignorePath || !fs.existsSync(ckignorePath)) {
     return DEFAULT_PATTERNS;
   }
 
   try {
-    const content = fs.readFileSync(epostIgnorePath, 'utf-8');
+    const content = fs.readFileSync(ckignorePath, 'utf-8');
     const patterns = content
       .split('\n')
       .map(line => line.trim())
@@ -54,7 +54,7 @@ function loadPatterns(epostIgnorePath) {
 
     return patterns.length > 0 ? patterns : DEFAULT_PATTERNS;
   } catch (error) {
-    console.error('WARN: Failed to read .epost-ignore:', error.message);
+    console.error('WARN: Failed to read .ckignore:', error.message);
     return DEFAULT_PATTERNS;
   }
 }
@@ -63,7 +63,7 @@ function loadPatterns(epostIgnorePath) {
  * Create a matcher from patterns
  * Normalizes patterns to match anywhere in the path tree
  *
- * @param {string[]} patterns - Array of patterns from .epost-ignore
+ * @param {string[]} patterns - Array of patterns from .ckignore
  * @returns {Object} Matcher object with ig instance and pattern info
  */
 function createMatcher(patterns) {
@@ -130,16 +130,6 @@ function matchPath(matcher, testPath) {
     normalized = normalized.slice(2);
   }
 
-  // ignore package requires a relative path — convert absolute paths
-  if (path.isAbsolute(normalized)) {
-    normalized = path.relative(process.cwd(), normalized);
-    // If path is outside cwd, relative() starts with '../' — ignore can't match it, so allow
-    if (normalized.startsWith('../')) {
-      return { blocked: false };
-    }
-    normalized = normalized.replace(/\\/g, '/');
-  }
-
   // Check if path is ignored (blocked)
   const blocked = matcher.ig.ignores(normalized);
 
@@ -155,7 +145,7 @@ function matchPath(matcher, testPath) {
 /**
  * Find which original pattern matched (for error messages)
  *
- * @param {string[]} originalPatterns - Original patterns from .epost-ignore
+ * @param {string[]} originalPatterns - Original patterns from .ckignore
  * @param {string} path - The path that was blocked
  * @returns {string} The pattern that matched
  */

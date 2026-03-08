@@ -118,7 +118,11 @@ draft → active → completed → archived
 | Archive | `node .claude/scripts/archive-plan.cjs plans/{slug}` |
 | Board | `plans/README.md` — updated by scripts automatically |
 
-Always run `set-active-plan.cjs` after creating a plan directory.
+**MANDATORY final step** — after writing all plan files, run:
+```bash
+node .claude/scripts/set-active-plan.cjs plans/{slug}
+```
+This stamps `status: active` in `plan.md` and registers the plan in session state so `/cook` picks it up automatically. Do NOT skip this step.
 
 ## Complexity Auto-Detection
 

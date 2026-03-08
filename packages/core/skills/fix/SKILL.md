@@ -26,7 +26,7 @@ Otherwise: continue to Error Type Auto-Detection.
 |------|---------|
 | `references/deep-mode.md` | Systematic deep fix with full investigation |
 | `references/ci-mode.md` | Fix CI pipeline failures |
-| `references/ui-mode.md` | Fix UI/layout issues |
+| `references/ui-mode.md` | Fix UI component findings from known-findings DB | Loads fix/references/ui-mode.md | epost-muji |
 | `references/a11y-mode.md` | Fix accessibility findings from known-findings.json |
 
 ## Error Type Auto-Detection
@@ -62,7 +62,7 @@ Same as `/cook` — detect from changed files or `$ARGUMENTS` platform hint.
 For cases where auto-detection isn't enough, use flags:
 - `/fix --deep` — full systematic investigation with documentation
 - `/fix --ci` — CI pipeline debugging (reads CI logs, reproduces locally)
-- `/fix --ui` — visual/layout issues (CSS, a11y check, cross-browser)
+- `/fix --ui` — UI component findings from `.epost-data/ui/known-findings.json` (delegates to epost-muji)
 - `/fix --a11y` — accessibility findings from `.epost-data/a11y/known-findings.json`
 
 <issue>$ARGUMENTS</issue>

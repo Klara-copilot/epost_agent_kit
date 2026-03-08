@@ -1,11 +1,11 @@
 ---
 name: skill-discovery
-description: (ePost) Use at the START of every task to discover and load relevant skills you don't already have. Detects platform, task type, and domain signals then loads matching skills from the index on demand.
+description: Use at the START of every task to discover and load relevant skills you don't already have. Detects platform, task type, and domain signals then loads matching skills from the index on demand.
 user-invocable: false
 tier: core
 
 metadata:
-  agent-affinity: [epost-planner, epost-fullstack-developer, epost-debugger, epost-tester, epost-code-reviewer, epost-project-manager]
+  agent-affinity: [epost-architect, epost-implementer, epost-debugger, epost-tester, epost-reviewer, epost-orchestrator]
   keywords: [platform, discovery, skill-index, context, conventions, lazy-loading]
   platforms: [all]
   triggers: []
@@ -36,7 +36,7 @@ Check request keywords → git diff extensions → CWD path:
 | `.tsx/.ts/.jsx/.scss`, "React", "Next.js", "web" | web | `web-frontend`, `web-nextjs` |
 | `.java` + `pom.xml`, "Java EE", "WildFly", "backend" | backend | `backend-javaee`, `backend-databases` |
 | `epost-agent-kit-cli/` path, `src/domains/`, "CLI", "kit cli" | cli | `kit-cli` |
-| `.css/.scss` + design tokens, "Figma", "klara" | design | `figma`, `web-ui-lib` |
+| `.css/.scss` + design tokens, "Figma", "klara" | design | `web-figma`, `web-ui-lib` |
 
 Multiple platforms: ask user (max 1 question). If 80%+ files = one platform, use that.
 
@@ -53,13 +53,13 @@ Scan the user request for these patterns:
 |-------------|-----------|---------------|
 | error, stack trace, crash, bug, failing | debug | problem-solving, error-recovery |
 | docs, library, API reference, how to use | research | docs-seeker, research |
-| ADR, prior art, existing pattern, similar | knowledge | knowledge-retrieval |
+| ADR, prior art, existing pattern, similar | knowledge | knowledge-base, knowledge-retrieval |
 | write docs, spec, proposal, RFC | documentation | doc-coauthoring |
 | retry, timeout, circuit breaker, fallback | resilience | error-recovery |
 | step by step, complex, analyze, root cause | reasoning | sequential-thinking, problem-solving |
 | repo overview, codebase summary | exploration | repomix |
 | a11y, accessibility, WCAG, VoiceOver | accessibility | a11y + platform-a11y variant |
-| Figma, design tokens, components, theme | design system | figma, web-ui-lib |
+| Figma, design tokens, components, theme | design system | web-figma, web-ui-lib |
 | Docker, container, GCP, Terraform | infrastructure | infra-docker, infra-cloud |
 | B2B module, inbox, monitoring, composer | domain | domain-b2b |
 | get started, onboard, begin, new to project | onboarding | get-started |
@@ -92,7 +92,7 @@ For each matched skill:
   1. EXTENDS: Prepend parent(s) to load list. Max 3 hops.
      Example: ios-a11y extends a11y → load a11y first, then ios-a11y
   2. REQUIRES: Add required skills to load list.
-     Example: ui-lib-dev requires figma → auto-add
+     Example: kit-add-agent requires kit-agent-development → auto-add
   3. CONFLICTS: If two matched skills conflict, keep higher-priority one.
      Warn: "Dropped {lower} — conflicts with {higher}"
 ```
@@ -124,23 +124,12 @@ Do NOT auto-load enhancers. Only suggest them.
 ## Step 4: Apply Discovered Knowledge
 
 Integrate loaded skill knowledge into your current task:
-- **Planner**: Platform constraints in plan phases, framework-specific steps
-- **Fullstack Developer**: Code patterns, testing approach, UI components
+- **Architect**: Platform constraints in plan phases, framework-specific steps
+- **Implementer**: Code patterns, testing approach, UI components
 - **Debugger**: Platform debugging tools, common pitfalls, logging patterns
 - **Tester**: Test frameworks, assertion patterns, coverage tools
-- **Code Reviewer**: Platform conventions, anti-patterns, security concerns
-- **Design System**: Component APIs, platform token mapping, Figma extraction, UI audit patterns
-- **Project Manager**: Route to correct specialist, inform task decomposition
-
-## Agent Discovery Hints
-
-Some agents have distinct operational flows (e.g., muji's Library Development vs Consumer Guidance). When an agent's system prompt defines flows with explicit skill lists:
-
-1. Read agent's system prompt for flow definitions and their triggers
-2. Detect which flow matches the current task context
-3. Load that flow's skills instead of generic platform matching
-
-This overrides Steps 1-2 when a clear flow match exists. Falls back to standard discovery if no flow matches.
+- **Reviewer**: Platform conventions, anti-patterns, security concerns
+- **Orchestrator**: Route to correct specialist, inform task decomposition
 
 ## Quick Reference: Common Discovery Paths
 
@@ -152,14 +141,10 @@ This overrides Steps 1-2 when a clear flow match exists. Falls back to standard 
 | any agent | Backend task (.java) | backend-javaee, backend-databases |
 | any agent | CLI task (epost-agent-kit-cli/) | kit-cli |
 | debugger | stuck on bug | sequential-thinking, problem-solving |
-| fullstack-developer | API timeout | error-recovery |
-| planner | plan with research | research, docs-seeker |
+| implementer | API timeout | error-recovery |
+| architect | plan with research | research, docs-seeker |
 | any agent | a11y + iOS | a11y, ios-a11y |
 | any agent | a11y + Android | a11y, android-a11y |
 | any agent | a11y + Web | a11y, web-a11y |
-| any agent | Figma / design system | figma, web-ui-lib |
-| epost-muji | component dev (Figma pipeline) | figma, design-tokens, ui-lib-dev |
-| epost-muji | consumer asks about usage | {platform}-ui-lib via platform detection |
-| epost-muji | UI audit / review | audit (pre-loaded), ui-guidance |
-| epost-muji | token translation question | design-tokens (pre-loaded) |
+| any agent | Figma / design system | web-figma, web-ui-lib |
 | any agent | kit authoring | kit-skill-development, kit-agent-development |

@@ -1,16 +1,16 @@
 ---
 name: knowledge-capture
-description: (ePost) Use after completing a task — capture learnings, save patterns, record post-mortems to docs/
+description: Use after completing a task — capture learnings, save patterns, record post-mortems to docs/
 user-invocable: false
 disable-model-invocation: true
 
 metadata:
-  agent-affinity: [epost-debugger, epost-fullstack-developer, epost-researcher, epost-code-reviewer, epost-planner, epost-journal-writer]
+  agent-affinity: [epost-debugger, epost-implementer, epost-researcher, epost-reviewer, epost-architect]
   keywords: [capture, learn, persist, record, post-mortem, retrospective]
   platforms: [all]
   triggers: ["capture learnings", "save pattern", "record finding", "what did we learn"]
   connections:
-    requires: [knowledge-retrieval]
+    requires: [knowledge-base]
 ---
 
 # Knowledge Capture Skill
@@ -44,7 +44,7 @@ Post-task workflow for capturing learnings and persisting knowledge to `docs/` d
 ### 2. Categorize
 **Which category fits?**
 
-See `knowledge-retrieval/references/knowledge-base.md` for schema, categories, and significance thresholds.
+See `knowledge-base` for schema, categories, and significance thresholds.
 
 ### 3. Check Existing
 **Already documented?**
@@ -84,7 +84,7 @@ related: [ADR-0001, PATTERN-005, FINDING-012]
 
 ### ADR (Architecture Decision)
 
-**Full template in**: `knowledge-retrieval/references/knowledge-base.md`
+**Full template in**: `knowledge-base/references/adr-patterns.md`
 
 ```markdown
 ---
@@ -372,7 +372,8 @@ Before finalizing entry:
 
 ## Related Skills
 
-- `knowledge-retrieval` — Knowledge system structure, conventions, and search
+- `knowledge-base` — Knowledge system structure and conventions
+- `knowledge-retrieval` — Search and retrieve existing knowledge
 - `debug` — Debugging methodology (source of findings)
 - `code-review` — Review process (source of conventions)
 - `research` — Research methodology (source of decisions)
@@ -380,4 +381,7 @@ Before finalizing entry:
 
 ## References
 
-- `knowledge-retrieval/references/knowledge-base.md` — Knowledge system overview, ADR templates, capture guidelines
+- `knowledge-base/SKILL.md` — Knowledge system overview
+- `knowledge-base/references/adr-patterns.md` — ADR template and lifecycle
+- `knowledge-base/references/knowledge-capture-guide.md` — Detailed capture guidelines
+- `knowledge-base/references/sidecar-format-spec.md` — Data format specifications

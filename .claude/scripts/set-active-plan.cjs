@@ -12,7 +12,7 @@ const path = require('path');
 const fs = require('fs');
 
 // Import session state utilities
-const { readSessionState, writeSessionState, normalizePath } = require('../hooks/lib/epost-config-utils.cjs');
+const { readSessionState, writeSessionState, normalizePath } = require('../hooks/lib/ck-config-utils.cjs');
 
 /**
  * Main execution
@@ -49,9 +49,9 @@ function main() {
   }
 
   // Get session ID from environment
-  const sessionId = process.env.EPOST_SESSION_ID;
+  const sessionId = process.env.CK_SESSION_ID;
   if (!sessionId) {
-    console.error('Warning: EPOST_SESSION_ID not set. Session state may not persist.');
+    console.error('Warning: CK_SESSION_ID not set. Session state may not persist.');
     console.error('Active plan set locally but may not be available to subagents.');
     process.exit(1);
   }

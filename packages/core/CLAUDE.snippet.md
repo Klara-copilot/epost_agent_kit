@@ -26,7 +26,7 @@ On every user prompt involving a dev task, sense context before acting:
 | Debug | debug, trace, inspect, diagnose | Spawn `epost-debugger` via Task tool |
 | Review | review, check code, audit | Spawn `epost-code-reviewer` via Task tool |
 | Git | commit, push, pr, merge, done, ship | `/git --commit`, `/git --push`, `/git --pr` |
-| Docs | docs, document, write docs | `/docs` |
+| Docs | docs, document, write docs, migrate docs, reorganize docs, scan docs, orphaned files, KB structure, docs audit, knowledge base | Spawn `epost-docs-manager` via Task tool |
 | Scaffold | bootstrap, init, scaffold, new project, new module | `/bootstrap` |
 | Convert | convert, prototype, migrate | `/convert` |
 | A11y | a11y, accessibility, wcag | `/fix --a11y` or `/review --a11y` |
@@ -58,3 +58,34 @@ On every user prompt involving a dev task, sense context before acting:
 - If ambiguous → use context boost to break tie; if still ambiguous → ask user (max 1 question)
 - If multi-intent ("plan and build X") → delegate to `epost-project-manager`
 - All agent delegations follow `core/references/orchestration.md` protocol
+
+---
+
+## Using Agents in Copilot Chat
+
+If you are GitHub Copilot (not Claude Code), you cannot spawn agents via Task tool.
+Instead: **suggest the right `@agent` for the user to invoke in Copilot Chat.**
+
+When the user asks you something, respond by suggesting: "Use `@agent-name` for this — here's how:"
+
+| User asks... | Suggest |
+|-------------|---------|
+| "Help me understand this project / module / file" | `@epost-researcher` |
+| "I'm new to React/Next.js, explain how X works" | `@epost-researcher` |
+| "Plan a new feature / page / module" | `@epost-planner` |
+| "Implement / build / create / add this" | `@epost-fullstack-developer` |
+| "Fix this error / bug / crash" | `@epost-debugger` |
+| "Review my code before committing" | `@epost-code-reviewer` |
+| "Check accessibility / a11y / keyboard nav" | `@epost-a11y-specialist` |
+| "Write / update documentation" | `@epost-docs-manager` |
+| "Design a component / UI / layout" | `@epost-muji` |
+| "What agent should I use for X?" | Answer directly using this table |
+
+**Starter prompts to share with users:**
+- `@epost-researcher I'm new here. Explain this project and its structure.`
+- `@epost-planner Plan a new [feature] for this project.`
+- `@epost-fullstack-developer Implement phase 1 of the plan at plans/[plan-dir].`
+- `@epost-debugger Fix this error: [paste error]`
+
+**Self-guide rule**: If a user asks you (base Copilot) to do a task that an agent handles better, say:
+"For this I'd recommend `@epost-[agent]` — it has deeper context for [reason]. Want me to draft the prompt?"

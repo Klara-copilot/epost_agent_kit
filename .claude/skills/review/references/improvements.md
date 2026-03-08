@@ -3,7 +3,7 @@ name: review-improvements
 description: "(ePost) Review auto-improvement metrics, detect patterns, surface recommendations"
 user-invocable: false
 disable-model-invocation: true
-allowed-tools: Read, Write, Bash(ls *), Bash(wc *), Bash(date *)
+allowed-tools: Read, Write, Bash(node packages/core/scripts/detect-improvements.cjs), Bash(node .claude/scripts/detect-improvements.cjs), Bash(ls *), Bash(wc *), Bash(date *)
 ---
 
 # Review Improvements
@@ -12,7 +12,12 @@ Run the detection engine to analyze session metrics and surface improvement oppo
 
 ## Steps
 
-1. Read session data:
+1. Run the detection script:
+```bash
+node packages/core/scripts/detect-improvements.cjs 2>/dev/null || node .claude/scripts/detect-improvements.cjs
+```
+
+2. Read raw session data:
 ```
 .epost-data/improvements/sessions.jsonl
 ```
@@ -64,7 +69,7 @@ After presenting findings, generate a summary report:
 {breakdown of intent/platform/command usage}
 
 ## Findings
-{improvement patterns detected from sessions.jsonl}
+{detection engine findings from step 1}
 
 ## Recommendations
 {actionable improvements based on patterns}

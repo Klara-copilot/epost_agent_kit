@@ -10,8 +10,6 @@
  *   0 - Success (non-blocking, allows continuation)
  */
 
-try {
-
 const fs = require('fs');
 const path = require('path');
 const {
@@ -21,11 +19,8 @@ const {
   getGitRoot,
   resolvePlanPath,
   getReportsPath,
-  normalizePath,
-  isHookEnabled
-} = require('./lib/epost-config-utils.cjs');
-
-if (!isHookEnabled('subagent-init')) process.exit(0);
+  normalizePath
+} = require('./lib/ck-config-utils.cjs');
 
 /**
  * Get agent-specific context from config
@@ -77,14 +72,14 @@ async function main() {
     const baseDir = effectiveCwd;
 
     // Debug logging for path resolution troubleshooting
-    if (process.env.EPOST_DEBUG) {
+    if (process.env.CK_DEBUG) {
       console.error(`[subagent-init] effectiveCwd=${effectiveCwd}, gitRoot=${gitRoot}, baseDir=${baseDir}`);
     }
     const namePattern = resolveNamingPattern(config.plan, gitBranch);
 
     // Resolve plan and reports path - use absolute paths based on CWD (Issue #327)
     // Use session_id from payload to resolve active plan context (Issue #321)
-    const sessionId = payload.session_id || process.env.EPOST_SESSION_ID || null;
+    const sessionId = payload.session_id || process.env.CK_SESSION_ID || null;
     const resolved = resolvePlanPath(sessionId, config);
     const reportsPath = getReportsPath(resolved.path, resolved.resolvedBy, config.plan, config.paths, baseDir);
     const activePlan = resolved.resolvedBy === 'session' ? resolved.path : '';
@@ -170,18 +165,3 @@ async function main() {
 }
 
 main();
-
-} catch (e) {
-  // Minimal crash logging — only Node builtins, no lib/ deps
-  try {
-    const fs = require('fs');
-    const p = require('path');
-    const logDir = p.join(__dirname, '.logs');
-    if (!fs.existsSync(logDir)) fs.mkdirSync(logDir, { recursive: true });
-    fs.appendFileSync(
-      p.join(logDir, 'hook-log.jsonl'),
-      JSON.stringify({ ts: new Date().toISOString(), hook: p.basename(__filename, '.cjs'), status: 'crash', error: e.message }) + '\n'
-    );
-  } catch (_) {}
-  process.exit(0); // fail-open
-}

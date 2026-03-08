@@ -6,7 +6,7 @@
  * Tests the full workflow of path resolution across all hooks:
  * - session-init.cjs
  * - subagent-init.cjs
- * - context-reminder.cjs
+ * - dev-rules-reminder.cjs
  */
 
 const { describe, it } = require('node:test');
@@ -95,9 +95,9 @@ describe('Issue #327: Path Resolution Integration', () => {
       }, { cwd: subdirPath });
       assert.strictEqual(subagentResult.exitCode, 0, 'subagent-init should succeed');
 
-      // Run context-reminder from subdirectory
-      const devRulesResult = await runHook('context-reminder.cjs', { user_prompt: 'test' }, { cwd: subdirPath });
-      assert.strictEqual(devRulesResult.exitCode, 0, 'context-reminder should succeed');
+      // Run dev-rules-reminder from subdirectory
+      const devRulesResult = await runHook('dev-rules-reminder.cjs', { user_prompt: 'test' }, { cwd: subdirPath });
+      assert.strictEqual(devRulesResult.exitCode, 0, 'dev-rules-reminder should succeed');
 
       // Verify subagent output includes subdirectory path
       const subagentContext = subagentResult.output?.hookSpecificOutput?.additionalContext || '';
@@ -294,7 +294,7 @@ describe('Issue #327: Path Resolution Integration', () => {
 
     it('all hooks fail-open on errors', async () => {
       // Send invalid JSON to each hook
-      const hooks = ['session-init.cjs', 'subagent-init.cjs', 'context-reminder.cjs'];
+      const hooks = ['session-init.cjs', 'subagent-init.cjs', 'dev-rules-reminder.cjs'];
 
       for (const hookName of hooks) {
         const hookPath = path.join(HOOKS_DIR, hookName);

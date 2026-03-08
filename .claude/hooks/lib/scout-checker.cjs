@@ -74,7 +74,7 @@ function isAllowedCommand(command) {
  * @param {string} params.toolName - Name of tool (Bash, Glob, Read, etc.)
  * @param {Object} params.toolInput - Tool input with file_path, path, pattern, command
  * @param {Object} [params.options]
- * @param {string} [params.options.epost-ignorePath] - Path to .epost-ignore file
+ * @param {string} [params.options.ckignorePath] - Path to .ckignore file
  * @param {string} [params.options.claudeDir] - Path to .claude or .opencode directory
  * @param {boolean} [params.options.checkBroadPatterns] - Check for overly broad glob patterns (default: true)
  * @returns {{
@@ -89,7 +89,7 @@ function isAllowedCommand(command) {
  */
 function checkScoutBlock({ toolName, toolInput, options = {} }) {
   const {
-    epostIgnorePath,
+    ckignorePath,
     claudeDir = path.join(process.cwd(), '.claude'),
     checkBroadPatterns = true
   } = options;
@@ -113,8 +113,8 @@ function checkScoutBlock({ toolName, toolInput, options = {} }) {
     }
   }
 
-  // Resolve .epost-ignore path
-  const resolvedCkignorePath = epostIgnorePath || path.join(claudeDir, '.epost-ignore');
+  // Resolve .ckignore path
+  const resolvedCkignorePath = ckignorePath || path.join(claudeDir, '.ckignore');
 
   // Load patterns and create matcher
   const patterns = loadPatterns(resolvedCkignorePath);

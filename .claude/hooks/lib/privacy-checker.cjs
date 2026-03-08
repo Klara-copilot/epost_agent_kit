@@ -161,20 +161,17 @@ function extractPaths(toolInput) {
 }
 
 /**
- * Load .epost-kit.json config to check if privacy block is disabled
- * @param {string} [configDir] - Directory containing .epost-kit.json (defaults to .claude in cwd)
+ * Load .ck.json config to check if privacy block is disabled
+ * @param {string} [configDir] - Directory containing .ck.json (defaults to .claude in cwd)
  * @returns {boolean} true if privacy block should be skipped
  */
 function isPrivacyBlockDisabled(configDir) {
   try {
     const configPath = configDir
-      ? path.join(configDir, '.epost-kit.json')
-      : path.join(process.cwd(), '.claude', '.epost-kit.json');
+      ? path.join(configDir, '.ck.json')
+      : path.join(process.cwd(), '.claude', '.ck.json');
     const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
-    // Support both nested (hooks.privacy.enabled) and legacy (privacyBlock) patterns
-    if (config.hooks?.privacy?.enabled === false) return true;
-    if (config.privacyBlock === false) return true;
-    return false;
+    return config.privacyBlock === false;
   } catch {
     return false; // Default to enabled on error (file not found or invalid JSON)
   }
@@ -214,7 +211,7 @@ function buildPromptData(filePath) {
  * @param {Object} params.toolInput - Tool input with file_path, path, command, etc.
  * @param {Object} [params.options]
  * @param {boolean} [params.options.disabled] - Skip checks if true
- * @param {string} [params.options.configDir] - Directory for .epost-kit.json config
+ * @param {string} [params.options.configDir] - Directory for .ck.json config
  * @param {boolean} [params.options.allowBash] - Allow Bash tool without blocking (default: true)
  * @returns {{
  *   blocked: boolean,

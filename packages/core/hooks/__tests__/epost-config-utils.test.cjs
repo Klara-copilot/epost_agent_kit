@@ -350,7 +350,7 @@ describe('epost-config-utils.cjs', () => {
   describe('getReportsPath', () => {
 
     const planConfig = { reportsDir: 'reports' };
-    const pathsConfig = { plans: 'plans' };
+    const pathsConfig = { plans: 'plans', reports: 'reports' };
 
     it('uses plan-specific path for session-resolved plans', () => {
       const result = getReportsPath('plans/my-plan', 'session', planConfig, pathsConfig);
@@ -364,14 +364,14 @@ describe('epost-config-utils.cjs', () => {
       assert.ok(result.includes('reports'), 'Should include reports dir');
     });
 
-    it('uses default path for null plan', () => {
+    it('uses root-level reports path for null plan', () => {
       const result = getReportsPath(null, null, planConfig, pathsConfig);
-      assert.strictEqual(result, 'plans/reports/');
+      assert.strictEqual(result, 'reports/');
     });
 
     it('handles whitespace-only planPath (Issue #327)', () => {
       const result = getReportsPath('   ', 'session', planConfig, pathsConfig);
-      assert.strictEqual(result, 'plans/reports/', 'Should use default for whitespace');
+      assert.strictEqual(result, 'reports/', 'Should use default for whitespace');
     });
 
     it('returns absolute path when baseDir provided', () => {

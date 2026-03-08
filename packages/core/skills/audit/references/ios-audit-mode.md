@@ -33,7 +33,13 @@ Produce valid JSON only — no additional text outside JSON:
       "suggestion": "Add: button.accessibilityLabel = \"Close\""
     }
   ],
-  "regressions": 0
+  "regressions": 0,
+  "methodology": {
+    "filesScanned": ["ProfileViewController.swift", "SettingsView.swift"],
+    "knowledgeTiersUsed": ["L1-docs-findings", "L2-RAG", "L3-ios-a11y-skill"],
+    "standardsSource": ["ios-a11y/SKILL.md", "audit/references/ios-audit-mode.md", "WCAG 2.1 AA"],
+    "coverageGaps": ["RAG unavailable — used Grep fallback" ]
+  }
 }
 ```
 

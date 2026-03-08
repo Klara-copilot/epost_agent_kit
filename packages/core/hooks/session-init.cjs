@@ -23,7 +23,8 @@ const {
   resolvePlanPath,
   getReportsPath,
   resolveNamingPattern,
-  isHookEnabled
+  isHookEnabled,
+  getResearchConfig
 } = require('./lib/epost-config-utils.cjs');
 
 if (!isHookEnabled('session-init')) process.exit(0);
@@ -52,6 +53,21 @@ async function main() {
     const envFile = process.env.CLAUDE_ENV_FILE;
     const source = data.source || 'unknown';
     const sessionId = data.session_id || null;
+
+    // Load project-scoped secrets (.claude/.env) — gitignored, never committed
+    const dotEnvPath = path.join(process.cwd(), '.claude', '.env');
+    if (fs.existsSync(dotEnvPath)) {
+      const lines = fs.readFileSync(dotEnvPath, 'utf-8').split('\n');
+      for (const line of lines) {
+        const trimmed = line.trim();
+        if (!trimmed || trimmed.startsWith('#')) continue;
+        const eq = trimmed.indexOf('=');
+        if (eq === -1) continue;
+        const key = trimmed.slice(0, eq).trim();
+        const val = trimmed.slice(eq + 1).trim().replace(/^["']|["']$/g, '');
+        if (key && !process.env[key]) process.env[key] = val; // shell env takes priority
+      }
+    }
 
     const config = loadConfig();
 
@@ -162,6 +178,15 @@ async function main() {
       const codingLevel = config.codingLevel ?? 5;
       writeEnv(envFile, 'EPOST_CODING_LEVEL', codingLevel);
       writeEnv(envFile, 'EPOST_CODING_LEVEL_STYLE', getCodingLevelStyleName(codingLevel));
+
+      // Research engine config
+      const researchCfg = getResearchConfig(config);
+      writeEnv(envFile, 'EPOST_RESEARCH_ENGINE', researchCfg.engine);
+      writeEnv(envFile, 'EPOST_GEMINI_MODEL', researchCfg.geminiModel);
+
+      // Propagate API keys from .claude/.env to subagent shells
+      if (process.env.GEMINI_API_KEY) writeEnv(envFile, 'GEMINI_API_KEY', process.env.GEMINI_API_KEY);
+      if (process.env.PERPLEXITY_API_KEY) writeEnv(envFile, 'PERPLEXITY_API_KEY', process.env.PERPLEXITY_API_KEY);
     }
 
     // Write current session marker for session-metrics Stop hook
@@ -207,6 +232,14 @@ async function main() {
     } catch { /* silent — non-critical */ }
 
     console.log(`Session ${source}. ${buildContextOutput(config, detections, resolved, staticEnv.gitRoot)}`);
+
+    // Research engine context line
+    const researchCfg = getResearchConfig(config);
+    if (researchCfg.engine === 'gemini') {
+      console.log(`Research engine: gemini (model: ${researchCfg.geminiModel})`);
+    } else {
+      console.log(`Research engine: websearch`);
+    }
 
     // Info: Show git root when running from subdirectory (Issue #327: now supported)
     if (staticEnv.gitRoot && staticEnv.gitRoot !== process.cwd()) {

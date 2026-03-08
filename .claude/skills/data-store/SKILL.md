@@ -1,6 +1,6 @@
 ---
 name: data-store
-description: (ePost) Use when an agent needs to persist or retrieve project-level data across sessions via .epost-data/
+description: Use when an agent needs to persist or retrieve project-level data across sessions via .epost-data/
 user-invocable: false
 ---
 

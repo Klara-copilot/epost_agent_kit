@@ -1,11 +1,11 @@
 {
   "version": "1.0.0",
-  "updated": "2026-03-06",
+  "updated": "2026-03-08",
   "counts": {
-    "active": 29,
+    "active": 36,
     "completed": 25,
     "archived": 0,
-    "total": 54
+    "total": 62
   },
   "plans": [
     {
@@ -494,7 +494,7 @@
     },
     {
       "id": "PLAN-0030",
-      "title": "RAG Query Expansion API \u2014 Serve Mappings via MCP",
+      "title": "RAG Query Expansion API — Serve Mappings via MCP",
       "type": "implementation",
       "status": "active",
       "created": "2026-03-04",
@@ -513,7 +513,7 @@
     },
     {
       "id": "PLAN-0032",
-      "title": "Rethink RAG Skills \u2014 Dynamic, MCP-Integrated",
+      "title": "Rethink RAG Skills — Dynamic, MCP-Integrated",
       "type": "implementation",
       "status": "active",
       "created": "2026-03-04",
@@ -550,7 +550,7 @@
     },
     {
       "id": "PLAN-0034",
-      "title": "Merge Planning Skills + Add Subagent-Driven-Development \u2014 Implementation",
+      "title": "Merge Planning Skills + Add Subagent-Driven-Development — Implementation",
       "type": "report",
       "status": "completed",
       "created": "2026-03-04",
@@ -585,7 +585,7 @@
     },
     {
       "id": "PLAN-0036",
-      "title": "Merge Debugging Skills \u2014 Implementation",
+      "title": "Merge Debugging Skills — Implementation",
       "type": "report",
       "status": "active",
       "agent": "epost-implementer",
@@ -611,7 +611,7 @@
     },
     {
       "id": "PLAN-0038",
-      "title": "Merge Planning Skills \u2014 Cleanup & Validation",
+      "title": "Merge Planning Skills — Cleanup & Validation",
       "type": "report",
       "status": "active",
       "created": "2026-03-04",
@@ -668,7 +668,7 @@
     },
     {
       "id": "PLAN-0042",
-      "title": "Skill Consolidation \u2014 Implementation",
+      "title": "Skill Consolidation — Implementation",
       "type": "report",
       "status": "completed",
       "created": "2026-03-05",
@@ -739,7 +739,7 @@
     },
     {
       "id": "PLAN-0046",
-      "title": "GitHub Release Process \u2014 Implementation",
+      "title": "GitHub Release Process — Implementation",
       "type": "implementation",
       "status": "active",
       "created": "2026-03-05",
@@ -864,7 +864,7 @@
     },
     {
       "id": "PLAN-0053",
-      "title": "Cleanup Scripts \u2014 Keep Only Developer-Facing",
+      "title": "Cleanup Scripts — Keep Only Developer-Facing",
       "type": "implementation",
       "status": "active",
       "created": "2026-03-05",
@@ -953,6 +953,159 @@
         "claudekit"
       ],
       "file": "260306-1117-agent-teams-port/plan.md"
+    },
+    {
+      "id": "PLAN-0059",
+      "title": "Klara-Theme Consumer Code Audit Expansion",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-07",
+      "authors": [
+        "epost-planner"
+      ],
+      "tags": [
+        "audit",
+        "klara-theme",
+        "consumer",
+        "ui-lib",
+        "muji",
+        "design-system"
+      ],
+      "file": "260307-0116-klara-consumer-audit/plan.md"
+    },
+    {
+      "id": "PLAN-0060",
+      "title": "Update epost-code-reviewer Agent and Related Code",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-07",
+      "authors": [
+        "epost-planner"
+      ],
+      "tags": [
+        "agent",
+        "code-review",
+        "cleanup",
+        "kit"
+      ],
+      "file": "260307-1159-update-code-reviewer/plan.md"
+    },
+    {
+      "id": "PLAN-0061",
+      "title": "Update epost-muji and epost-a11y-specialist Agents",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-07",
+      "authors": [
+        "epost-planner"
+      ],
+      "tags": [
+        "agents",
+        "muji",
+        "a11y",
+        "delegation",
+        "knowledge-retrieval",
+        "routing"
+      ],
+      "file": "260307-1230-update-muji-a11y-agents/plan.md"
+    },
+    {
+      "id": "PLAN-0062",
+      "title": "Add Methodology Transparency to Audit & Review Reports",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-07",
+      "authors": [
+        "epost-planner"
+      ],
+      "tags": [
+        "reports",
+        "audit",
+        "review",
+        "methodology",
+        "transparency",
+        "templates"
+      ],
+      "file": "260307-1446-audit-review-methodology-transparency/plan.md"
+    },
+    {
+      "id": "PLAN-0063",
+      "title": "Deepen Audit Flow Delegation",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-08",
+      "authors": [
+        "epost-planner"
+      ],
+      "tags": [
+        "audit",
+        "delegation",
+        "ui-lib",
+        "muji",
+        "a11y",
+        "code-review",
+        "orchestration"
+      ],
+      "file": "260308-0837-deepen-audit-delegation/plan.md"
+    },
+    {
+      "id": "PLAN-0064",
+      "title": "Fix Audit Routing, Missing Dimensions, and Pre-Audit KB Load",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-08",
+      "authors": [
+        "epost-planner"
+      ],
+      "tags": [
+        "audit",
+        "routing",
+        "security",
+        "performance",
+        "delegation",
+        "code-reviewer",
+        "muji",
+        "kb-load"
+      ],
+      "file": "260308-1339-audit-routing-dimension-gaps/plan.md"
+    },
+    {
+      "id": "PLAN-0065",
+      "title": "Optimize Audit & Code-Review Flows",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-08",
+      "authors": [
+        "epost-planner"
+      ],
+      "tags": [
+        "audit",
+        "code-review",
+        "report-templates",
+        "dedup",
+        "consumer-standards",
+        "agent-wiring"
+      ],
+      "file": "260308-1426-audit-flow-optimization/plan.md"
+    },
+    {
+      "id": "PLAN-0063",
+      "title": "Research: A11y vs UI Component Command Parity",
+      "type": "research",
+      "status": "completed",
+      "created": "2026-03-08",
+      "authors": [
+        "epost-researcher"
+      ],
+      "tags": [
+        "audit",
+        "ui",
+        "a11y",
+        "command-parity",
+        "research"
+      ],
+      "file": "reports/epost-researcher-260308-1439-audit-ui-a11y-parity.md",
+      "summary": "Full audit of command structure parity between a11y and UI workflows. Identifies 3 missing commands (/fix --ui, /review --ui, /audit --close --ui), data layer gap (no known-findings DB), and 7-10 day implementation plan to achieve parity."
     }
   ]
 }

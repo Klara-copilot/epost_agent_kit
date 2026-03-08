@@ -7,7 +7,7 @@ description: Planning a new klara-theme UI feature. Gathers context, produces 6 
 
 ## Context
 
-Read `libs/klara-theme/CLAUDE.md` for component patterns, design tokens, and conventions.
+Load `web-ui-lib` skill — triggers `docs/index.json` KB discovery. For this stage load: CONV-0001 (structure), CONV-0003 (props), CONV-0006 (tokens), FEAT-0001 (component catalog).
 
 ## Inputs (required)
 
@@ -21,9 +21,7 @@ Read `libs/klara-theme/CLAUDE.md` for component patterns, design tokens, and con
 ### 1. Gather Context
 
 - Read all input files for the feature
-- Query Web RAG for existing implementations:
-  - `@web-rag-system status`
-  - `@web-rag-system query "<component> props and variants" filters={"type":["component","utility"]} top_k=10`
+- Delegate RAG search to `epost-mcp-manager`: query = `"<component> props and variants"`, scope = web, type = component/utility
 - Check existing components in `libs/klara-theme/src/lib/components/` for reuse opportunities
 
 ### 2. Produce Plan Artifacts

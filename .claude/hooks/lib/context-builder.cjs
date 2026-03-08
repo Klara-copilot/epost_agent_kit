@@ -2,7 +2,7 @@
 /**
  * context-builder.cjs - Context/reminder building for session injection
  *
- * Extracted from context-reminder.cjs for reuse in both Claude hooks and OpenCode plugins.
+ * Extracted from dev-rules-reminder.cjs for reuse in both Claude hooks and OpenCode plugins.
  * Builds session context, rules, paths, and plan information.
  *
  * @module context-builder
@@ -18,7 +18,7 @@ const {
   getReportsPath,
   resolveNamingPattern,
   normalizePath
-} = require('./epost-config-utils.cjs');
+} = require('./ck-config-utils.cjs');
 
 // ═══════════════════════════════════════════════════════════════════════════
 // HELPER FUNCTIONS

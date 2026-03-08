@@ -30,18 +30,6 @@ Detect platform per `skill-discovery` protocol.
 3. Run appropriate test commands
 4. Report results with pass/fail counts and coverage
 
-## Output Format
-
-Use `references/report-template.md` for all test reports.
-
-Key requirements:
-- Header: Date, Agent, Plan (if applicable), Status
-- Executive Summary first
-- Results table with Check, Result (PASS/FAIL/SKIP), Evidence
-- Coverage section when coverage data available
-- Verdict: `PASS` | `FAIL` | `PARTIAL`
-- Unresolved questions footer always present
-
 <request>$ARGUMENTS</request>
 
 **IMPORTANT:** Analyze the skills catalog and activate needed skills for the detected platform.

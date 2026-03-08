@@ -14,7 +14,7 @@
 const path = require('path');
 const fs = require('fs');
 
-const { readSessionState, writeSessionState, normalizePath } = require('../hooks/lib/epost-config-utils.cjs');
+const { readSessionState, writeSessionState, normalizePath } = require('../hooks/lib/ck-config-utils.cjs');
 
 const TODAY = new Date().toISOString().slice(0, 10);
 
@@ -93,7 +93,7 @@ function updateIndexJson(indexPath) {
  * Clear session active plan
  */
 function clearSessionPlan(planAbsPath) {
-  const sessionId = process.env.EPOST_SESSION_ID;
+  const sessionId = process.env.CK_SESSION_ID;
   if (!sessionId) return;
 
   try {

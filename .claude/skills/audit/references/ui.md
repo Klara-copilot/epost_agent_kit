@@ -45,11 +45,158 @@ Default platform: **all** (audit all three, then cross-platform consistency).
 
 ## Audit Workflow
 
-### Step 1: Discover
+### Step 0 (pre): Track Methodology
 
-- Identify component files on the specified platform(s)
-- Use RAG if available (`web-rag`, `ios-rag`) to find related components for consistency reference
-- Read the component source code, props/API surface, and any existing tests
+Before starting, initialize methodology tracking (populate as you go):
+
+Track these fields per `core/references/report-standard.md` Methodology section.
+
+```
+filesScanned      = []          # append each file you read
+knowledgeTiersUsed = []         # append: "L1-docs", "L2-RAG", "L4-grep", etc.
+standardsSource   = []          # append: skill path, checklist name, external standard
+coverageGaps      = []          # append anything unavailable or skipped
+```
+
+Add `methodology` to the JSON envelope before writing output.
+
+---
+
+### Step 0: INTEGRITY Gate (Always First)
+
+**Delegation intake:** If this workflow was invoked via a Task tool delegation (not a direct `/audit --ui` call), read the delegation context block at the start of your task for scope, expectations, output format, and report-back target. Use `scope.file_list` as your file list, `scope.platform` as your platform flag, and send your report to `calling_agent` when done.
+
+Before mode detection or any other check:
+
+1. Resolve audit scope first:
+   - If files were explicitly named in the audit request → use those files directly as scope; **skip git diff**
+   - Otherwise → scan modified files via git diff or staged files
+2. If any modified file path contains `klara-theme/` or `common/` AND the author is consumer code (not a library team commit):
+   - Output finding: `{ ruleId: "INT-1", severity: "critical", issue: "Direct edit to library source detected" }`
+   - Set `block: true` in the report envelope
+   - **Stop audit** — do not proceed to mode detection or rule checks
+3. If no INTEGRITY violation, continue to Step 1
+
+### Step 1: Mode Detection
+
+Determine audit mode from the file being audited:
+
+| Signal | Mode |
+|--------|------|
+| File path contains `libs/klara-theme/` or `libs/common/` | **Library mode** |
+| File imports from `klara-theme` or `common` but lives in `app/`, `features/`, `pages/`, or `src/` outside libs | **Consumer mode** |
+| Ambiguous — no imports from klara | **Consumer mode** (default) |
+
+Set `auditMode` in the report envelope. Route to the correct step sequence below.
+
+**Library mode** → proceed to Step 1 (Discover + Load KB), then Steps 2–6 (STRUCT, PROPS, TOKEN, BIZ, A11Y, TEST)
+**Consumer mode** → proceed to Step 1 (Discover + Load KB), then Steps 1a–1g below
+
+---
+
+### Step 1: Discover + Load Component Catalog (Mandatory)
+
+Before reading any component file, build the platform component catalog. This powers REUSE checks — you cannot identify what klara equivalents exist without it.
+
+**Web:**
+1. Load `web-ui-lib` skill → read `libs/klara-theme/docs/index.json` (NOT project root `docs/` — klara-theme has its own KB); load FEAT-0001 catalog + task-relevant CONVs per the skill's step 2 table
+2. ToolSearch("web-rag") → discover `mcp__web-rag-system__*` tools
+3. Call `status` → confirm RAG available and module indexed
+4. Call `catalog` with module filter → component list
+5. Call `query` with component name → related components, prior patterns
+6. If RAG unavailable: fallback to `Glob libs/klara-theme/src/lib/**/*.tsx`
+7. Append "L2-RAG" or "L2-RAG-unavailable" to `knowledgeTiersUsed`
+
+**iOS:**
+1. Load `ios-ui-lib` skill → iOS theme component catalog
+2. ToolSearch("ios-rag") → discover iOS RAG MCP tools → call directly (same pattern as web above)
+
+**Android:**
+1. Load `android-ui-lib` skill → Android theme component catalog
+2. Grep for `@Composable` exports in the Android theme library
+
+Store result as `componentCatalog: Set<string>` — used in Step 1d (REUSE) to determine what klara equivalents exist.
+
+Then identify the component files to audit and read their source code, props/API surface, and any existing tests.
+
+---
+
+### Consumer Mode Steps
+
+#### Step 1a: PLACE Audit
+
+Check component placement/structure against PLACE rules (PL-1 through PL-7) from `audit-standards.md`.
+
+- Identify the file's location relative to `app/`, `features/`, `components/`, `pages/`
+- Check for circular imports (static analysis of import graph)
+- Check for index barrel files in public-facing directories
+- Flag each violation with location and remediation
+
+#### Step 1b: Read tailwind.config.ts
+
+Parse `tailwind.config.ts` (hard parse — read the file, extract `theme.extend` values):
+- Extract spacing scale, color tokens, font sizes, breakpoints
+- Build a lookup map: `{ "16px" → "p-4", "#FF0000" → null (no token) }`
+- Use this map in TW audit (Step 1d)
+
+#### Step 1c: DRY Baseline Scan
+
+Before running REUSE, scan the **whole feature directory** for existing patterns:
+- Collect all klara component usages across sibling files
+- Collect repeated style class combinations (3+ identical multi-class strings)
+- Collect repeated hook bodies
+- Build a `conventions` set: patterns appearing in 2+ files are accepted conventions
+
+#### Step 1d: REUSE Audit (with DRY Gating)
+
+Check klara-theme component adoption against REUSE rules (RU-1 through RU-8):
+- Use `componentCatalog` from Step 1 to determine which klara equivalents exist before flagging
+- Scan for raw HTML elements that have klara equivalents (button divs, raw inputs, overlays, etc.)
+- For each potential violation, check if the pattern is in the `conventions` set from Step 1c
+  - If yes: suppress the violation, add to `patternObservations` with note "convention in feature"
+  - If no: raise a REUSE finding (severity per audit-standards.md)
+- Track `klara_components_used` and `total_reusable_ui_elements` for reuseRate score
+
+#### Step 1e: TW Compliance Audit
+
+Check Tailwind usage against TW rules (TW-1 through TW-5) using the config map from Step 1b:
+- Scan all className strings and style props
+- For each arbitrary value `[...]`, check if config map has an equivalent token
+- For each arbitrary color, check if a semantic design token exists
+- Flag `style={}` props where a Tailwind class would suffice
+- Flag `!` prefix classes without documented justification
+
+#### Step 1f: REACT Audit
+
+Check React patterns against REACT rules (RE-1 through RE-8):
+- Scan for inline object/array literals in JSX props
+- Check useEffect dependency arrays (compare referenced values vs deps list)
+- Look for useState holding derived values
+- Check list renders for key props (flag index keys on dynamic lists)
+- Count prop drilling depth
+- Check component file line counts
+- Scan for `document.querySelector`, `document.getElementById`
+- Check async components for ErrorBoundary wrappers
+
+#### Step 1g: POC Detection
+
+Check production maturity against POC rules (POC-1 through POC-7):
+- Scan for hardcoded URLs (regex: `https?://[^\s"']+` in string literals)
+- Scan for `console.log`, `console.error`, `debugger`
+- Scan for `TODO`, `FIXME`, `HACK` comment markers
+- Scan for placeholder text patterns
+- Scan for commented-out code blocks (>3 consecutive commented lines)
+- Count `any` TypeScript usages per file
+- Scan for unguarded async operations (await without try/catch)
+- Build `pocIndicators[]` list for report
+
+#### Step 1h: Consumer Score Calculation
+
+Calculate scores per `ui-lib-dev/references/audit-standards.md` Consumer Scoring Formulas section.
+
+Populate `sectionRatings` in report with score + insight narrative per section.
+
+---
 
 ### Step 2: Load Platform Checklist(s)
 
@@ -65,41 +212,95 @@ Run each check against the loaded checklist. For each violation:
 - Assign severity: **critical / high / medium / low** (see schema)
 - Note location (file:line), issue, expected behavior, and a mentoring explanation
 
-| Category | What to Check |
-|----------|--------------|
-| **token** | No hardcoded colors/spacing/typography; all via platform token APIs |
-| **pattern** | Naming, structure, API shape matches platform conventions |
-| **performance** | No unnecessary re-renders/recompositions, correct memoization |
-| **security** | No secrets, safe rendering, validated inputs |
-| **a11y** | Labels, keyboard/VoiceOver/TalkBack, dynamic type, touch targets |
-| **testing** | Tests exist, cover variants and states, test behavior not internals |
+| Category | Rule IDs | What to Check |
+|----------|----------|--------------|
+| **STRUCT** | STRUCT-001–006 | Directory, required files, barrel exports, displayName |
+| **PROPS** | PROPS-001–007 | `I{Name}Props`, vocab, JSDoc, boolean flags |
+| **TOKEN** | TOKEN-001–006 | No hardcoded colors/spacing; semantic tokens; styles file |
+| **BIZ** | BIZ-001–005 | No domain types, no data fetching, no global state |
+| **A11Y** | A11Y-001–005 | Labels, keyboard, Radix UI, focus ring, disabled tokens |
+| **TEST** | TEST-001–004 | Tests exist, stories exist, Figma artifacts present |
+
+### Step 3b: SEC Audit (Library Mode — Conditional)
+
+**Gate**: Scan imports for `fetch`, `axios`, `localStorage`, `sessionStorage`, props named `url`/`apiKey`/`endpoint`, or AI SDK imports. If none found, skip.
+
+Run SEC-001 through SEC-005 from audit-standards.md. For each violation:
+- Assign ID format: `{PLATFORM}-SEC-{NNN}`
+- Critical/high severity findings require code snippet in report
+
+### Step 3c: PERF Audit (Library Mode — Conditional)
+
+**Gate**: 10+ files in audit scope OR any file >300 LOC. If neither, skip.
+
+Run PERF-001 through PERF-004 from audit-standards.md.
+- Count LOC per file (exclude blank lines and comments)
+- Check useMemo/useCallback coverage on expensive computations
+- Flag mock data in production exports
+
+### Step 3d: LIB-DRY Scan (Library Mode — Always)
+
+Run LDRY-001 through LDRY-003 from audit-standards.md.
+- Diff function bodies across files in scope (exact or near-identical)
+- Diff type/interface definitions across files
+- Scan for POC artifacts: console.log, TODO, hardcoded URLs, commented-out blocks >3 lines
 
 ### Step 4: Cross-Platform Consistency (--platform all)
 
-Load `references/cross-platform-consistency.md`. Check:
-- Same component name (`Epost*` prefix on all)
+Only run when `--platform all` is specified. Check:
+- Same component name (`Epost*` prefix on all platforms)
 - Same prop/parameter names for equivalent concepts
-- Semantic token coverage parity (if web has `theme.colors.error`, iOS and Android must too)
+- Semantic token coverage parity across platforms
 - Same variants (primary, secondary, ghost, etc.)
 
 ### Step 5: Generate Audit Report
 
-Output structured findings using the schema in `references/audit-report-schema.md`.
+Save report as **one `.md` file** — JSON is not needed; machine-readable data lives in `known-findings.json` (Step 5b).
+
+If invoked standalone (`/audit --ui`):
+- Output to: `$EPOST_REPORTS_PATH/{date}-{slug}-ui-audit/report.md`
+
+If invoked as sub-agent (delegated via Task tool from code-reviewer):
+- Output to: the `output_path` specified in the delegation block (inside the session folder)
+- Filename: `muji-ui-audit.md` (so code-reviewer can read it at a predictable path)
+
+### Step 5b: Persist Findings (always)
+
+After writing the Markdown report, persist findings to `.epost-data/ui/known-findings.json`:
+
+1. Check if `.epost-data/ui/known-findings.json` exists
+   - If not: create it with empty `findings: []` array (schema: `audit/references/ui-known-findings-schema.md`)
+2. For each finding in this audit with severity critical, high, or medium:
+   - Generate next available `id` (max existing id + 1, starting at 1 for empty DB)
+   - Map finding fields to schema: `rule_id`, `component`, `file_pattern`, `severity`, `mode`, `platform`, `title`, `code_pattern`, `fix_template`
+   - Set `source: "audit"`, `first_detected_date: today`, `resolved: false`, `fix_applied: false`
+   - Deduplication check: skip if entry with same `rule_id` AND `file_pattern` already exists with `resolved: false`
+   - Append to `findings` array
+3. Save updated JSON
+4. Report: "Persisted {N} findings to `.epost-data/ui/known-findings.json`"
+
+### Step 5c: A11Y Findings — Collect Only (No Delegation)
+
+If A11Y-category findings exist:
+- List them in report under `## A11Y Findings (for escalation)`
+- Include: `finding_id`, `rule_id`, `file:line`, `issue summary` for each
+- Do NOT delegate to epost-a11y-specialist — muji is typically a subagent and cannot spawn further agents
+- The calling agent (epost-code-reviewer) reads this section and handles the a11y delegation
 
 ### Step 6: Executive Summary
 
-- Table: findings by severity per platform
+Included in the report above (Summary + Verdict + Mentoring Points). No separate step needed.
+
 - **Verdict**: `pass` | `fix-and-reaudit` | `redesign`
   - pass: 0 critical, 0 high
   - fix-and-reaudit: any high, or 3+ medium
   - redesign: 2+ critical
-- Merge risk: briefly assess impact if merged as-is
-- Top 3 mentoring points for the author
+- Top 3 mentoring points: frame as lessons, not criticism
 
 ## Tone Guidelines
 
-- Direct and technical — no softening
-- Explain WHY each issue matters (the `mentoring` field in findings)
-- Use "Suggested Fix" code snippets for every critical/high finding
-- Structured Markdown: tables for summaries, code blocks for examples
-- Frame feedback as teaching: "The reason we use tokens here is..."
+- Direct and technical — no softening, no filler
+- Issue description explains WHAT is wrong; Fix says HOW to resolve it; keep them separate
+- Frame feedback as teaching in Mentoring Points, not in individual findings
+- Code snippets for critical/high findings only — medium and below use prose fix descriptions
+- Sacrifice grammar for concision in one-line summaries (Findings Index, A11Y table)

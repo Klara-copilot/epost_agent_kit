@@ -1,11 +1,11 @@
 ---
 name: doc-coauthoring
-description: (ePost) Use when user wants to write a doc, proposal, spec, RFC, PRD, or decision record collaboratively
+description: Use when user wants to write a doc, proposal, spec, RFC, PRD, or decision record collaboratively
 
 metadata:
   agent-affinity:
-    - epost-docs-manager
-    - epost-planner
+    - epost-documenter
+    - epost-architect
   keywords:
     - documentation
     - writing

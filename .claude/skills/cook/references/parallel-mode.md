@@ -18,6 +18,8 @@ Parallel implementation — split multi-module features across independent subsy
 
 1. **Type Check**: No compilation errors across all modules
 2. **Test Execution**: All unit + integration tests pass
+3. **Coverage Gate**: 80%+ coverage (`node .claude/scripts/check-coverage.cjs`)
+4. **Security Scan**: No secrets detected (`node .claude/scripts/scan-secrets.cjs`)
 
 ## Rules
 

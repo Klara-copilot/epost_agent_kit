@@ -23,6 +23,53 @@ Common output format for all epost agent reports.
 
 ---
 
+## Methodology
+
+| | |
+|--|--|
+| **Files Scanned** | `path/to/file.ts` (N lines), `path/to/other.ts` |
+| **Knowledge Tiers** | L1 docs/ (conventions loaded), L2 RAG (available / unavailable), L4 Grep (fallback used / not needed) |
+| **Standards Source** | `skill/references/file.md`, WCAG 2.1 AA, OWASP Top 10, `docs/conventions/CONV-NNNN.md` |
+| **Coverage Gaps** | RAG unavailable — fell back to Grep; no platform rules loaded; checklist X not found |
+
+---
+
+## Delegation Log
+
+Required when audit/review delegates to specialist agents. Omit section if no delegation.
+
+| Agent | Scope | Template | Verdict | Findings |
+|-------|-------|----------|---------|----------|
+| {agent-name} | `{path/}` | Template {A/B/C/D/E} | {verdict} | {N} |
+
+- Column "Findings" (not "Finding Count") — use integer count
+- One row per delegation, chronological order
+- Verdict uses the specialist's own verdict vocabulary (see Verdict Word table above)
+
+---
+
+## Executive Summary Specification
+
+All reports: 2-3 sentences, <200 words. Structure:
+1. What was reviewed/audited (scope + mode)
+2. Key finding or quality signal
+3. Outcome (verdict preview)
+
+For audit reports that include JSON: the `summary` object provides machine-readable counts. The Markdown Executive Summary provides the human narrative. Both must be present; they complement, not replace each other.
+
+---
+
+## Score Specification
+
+| Report Type | Format | Source |
+|-------------|--------|--------|
+| Code review | `X.X/10` — breakdown: correctness, security, performance, tests, style | Reviewer judgment |
+| UI audit (library) | `{PASS_COUNT}/{TOTAL_RULES}` | `audit-standards.md` rule count |
+| UI audit (consumer) | Per-section 0-10 scores | `audit-standards.md` consumer formulas |
+| A11y audit | WCAG level: A / AA / AAA conformance | Platform a11y rules |
+
+---
+
 {Body — agent-specific sections}
 
 ---
@@ -57,18 +104,32 @@ Common output format for all epost agent reports.
 | epost-planner | `READY` `NEEDS-RESEARCH` `BLOCKED` |
 | epost-researcher | `ACTIONABLE` `INCONCLUSIVE` `NEEDS-MORE` |
 | epost-code-reviewer | `APPROVE` `FIX-AND-RESUBMIT` `REDESIGN` |
+| epost-muji | `APPROVE` `FIX-AND-RESUBMIT` `BLOCKED` |
+| epost-a11y-specialist | `PASS` `FAIL` `FIX-AND-RESUBMIT` |
 | epost-tester | `PASS` `FAIL` `PARTIAL` |
 
 ---
 
 ## Per-Agent Templates
 
-| Agent | Template |
-|-------|---------|
-| epost-planner | `plan/references/report-template.md` |
-| epost-researcher | `research/references/report-template.md` |
-| epost-code-reviewer | `code-review/references/report-template.md` |
-| epost-tester | `test/references/report-template.md` |
+| Agent | Human template | Agent schema |
+|-------|---------------|--------------|
+| epost-planner | `plan/references/report-template.md` | — |
+| epost-researcher | `research/references/report-template.md` | — |
+| epost-code-reviewer | `code-review/references/report-template.md` | inline JSON findings |
+| epost-muji | `audit/references/audit-report-schema.md` (human section) | `audit/references/audit-report-schema.md` |
+| epost-a11y-specialist | a11y platform mode schema (human section) | a11y platform mode schema |
+| epost-tester | `test/references/report-template.md` | — |
+
+---
+
+## Index Maintenance
+
+After saving any report file, update `reports/index.json`.
+After saving a plan, update `plans/index.json`.
+After saving a doc, update `docs/index.json`.
+
+See `core/references/index-protocol.md` for schemas, field definitions, and agent responsibility matrix.
 
 ---
 
@@ -79,3 +140,6 @@ Common output format for all epost agent reports.
 - Verdict always the last section before unresolved questions
 - Unresolved questions footer always present (write "None" if empty)
 - No freeform status variants — use the 4 values above only
+- Every report produces two files: agent JSON + human Markdown (see index-protocol.md dual-file rule)
+- Methodology section is **required** for: audit, review, plan, research, test reports — omit for journal/brainstormer
+- Methodology must be filled with actual values — never leave template placeholders

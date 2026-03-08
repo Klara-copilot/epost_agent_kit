@@ -130,8 +130,13 @@ After debugger fixes, run a single verification pass — do NOT re-run full disc
 
 ### 7. Final Report
 
-- Summary of verification
-- Ask: "Commit? [Y/n]" → use `epost-git-manager`
+Use `code-review/references/report-template.md`. Fill **Methodology** section with actual values collected during review:
+- **Files Scanned** — every file read across all reviewer subagents
+- **Knowledge Tiers** — which L1–L5 levels were activated and available
+- **Standards Source** — `code-review/SKILL.md`, OWASP Top 10, any project conventions loaded
+- **Coverage Gaps** — what was unavailable (RAG, specific checklist, platform rules)
+
+Ask: "Commit? [Y/n]" → run `git add -p && git commit -m "..."` directly
 
 ## Example
 

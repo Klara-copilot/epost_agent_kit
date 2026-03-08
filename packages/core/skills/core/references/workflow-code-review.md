@@ -7,12 +7,21 @@ Scout-first review pattern. Edge-case detection before quality audit.
 ### 1. Scout Phase
 **Agent**: epost-code-reviewer (uses Explore subagent internally)
 
-- Scan changed files via `git diff`
+**Scope resolution (always first):**
+- If user provided explicit file paths, component name, or `--files` list → use those directly; **skip git diff**
+- Otherwise → scan changed files via `git diff`
+
 - Search for related code across codebase
 - Map dependencies that might be affected
 - Identify patterns that need cross-checking
 
 ### 2. Quality Audit
+
+**Klara-theme feature module (20+ files or multi-subdir)**:
+- Use hybrid sequential audit (not parallel)
+- Dispatch muji FIRST via Template A+, wait for completion
+- Read muji report, then run SEC/PERF/TS with dedup
+- See `code-review/SKILL.md` Dispatch Protocol for full 7-step sequence
 
 Review changed code for:
 

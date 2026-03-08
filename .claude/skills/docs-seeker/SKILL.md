@@ -1,9 +1,9 @@
 ---
 name: docs-seeker
-description: (ePost) Use when you need API docs, library references, or framework documentation for an unfamiliar package
+description: Use when you need API docs, library references, or framework documentation for an unfamiliar package
 
 metadata:
-  agent-affinity: [epost-researcher, epost-fullstack-developer, epost-mcp-manager]
+  agent-affinity: [epost-researcher, epost-implementer]
   keywords: [docs, documentation, search, context7, api-reference, library, research, best-practices]
   platforms: [all]
   triggers: ["documentation", "docs", "api reference", "how to use"]

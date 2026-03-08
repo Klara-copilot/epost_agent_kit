@@ -7,7 +7,7 @@ description: Auditing a klara-theme component implementation against its plan an
 
 ## Context
 
-Read `libs/klara-theme/CLAUDE.md` for component patterns and conventions.
+Load `web-ui-lib` skill — triggers `docs/index.json` KB discovery. For this pipeline stage load: CONV-0001 (structure), CONV-0003 (props), CONV-0006 (tokens).
 
 ## Inputs (required)
 
@@ -23,8 +23,7 @@ Read `libs/klara-theme/CLAUDE.md` for component patterns and conventions.
 
 - Read plan artifacts and implemented code
 - Optionally use Figma MCP for visual comparison: `figma/get_screenshot(nodeId)`
-- Cross-check patterns via Web RAG:
-  - `@web-rag-system query "<component> variants" filters={"type":["component","utility"]} top_k=8`
+- Delegate RAG search to `epost-mcp-manager`: query = `"<component> variants"`, scope = web, type = component/utility
 
 ### 2. Compare Plan vs Implementation
 

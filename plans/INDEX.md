@@ -43,6 +43,9 @@ See [PLAN_FORMAT.md](PLAN_FORMAT.md) for standardized plan template.
 | PLAN-0050 | Agent Ecosystem Redesign: Responsibilities, Skills, Routing & Workflows | epost-architect | 2026-03-05 | [260305-1322-agent-redesign-audit/plan.md](260305-1322-agent-redesign-audit/plan.md) |
 | PLAN-0051 | Muji Agent Skill Redesign: Cross-Platform Design System Team | epost-architect | 2026-03-05 | [260305-1348-muji-skill-redesign/plan.md](260305-1348-muji-skill-redesign/plan.md) |
 | PLAN-0058 | Port Agent Teams from claudekit | epost-planner | 2026-03-06 | [260306-1117-agent-teams-port/plan.md](260306-1117-agent-teams-port/plan.md) |
+| PLAN-0059 | Klara-Theme Consumer Code Audit Expansion | epost-planner | 2026-03-07 | [260307-0116-klara-consumer-audit/plan.md](260307-0116-klara-consumer-audit/plan.md) |
+| PLAN-0061 | Update epost-muji and epost-a11y-specialist Agents | epost-planner | 2026-03-07 | [260307-1230-update-muji-a11y-agents/plan.md](260307-1230-update-muji-a11y-agents/plan.md) |
+| PLAN-0062 | Add Methodology Transparency to Audit & Review Reports | epost-planner | 2026-03-07 | [260307-1446-audit-review-methodology-transparency/plan.md](260307-1446-audit-review-methodology-transparency/plan.md) |
 
 ## Completed
 
@@ -70,6 +73,8 @@ See [PLAN_FORMAT.md](PLAN_FORMAT.md) for standardized plan template.
 | PLAN-0016 | CLI Terminal UI Improvements | epost-architect | 2026-02-08 | [completed/plan-260208-1442-cli-terminal-ui-improvements.md](completed/plan-260208-1442-cli-terminal-ui-improvements.md) |
 | PLAN-0017 | Agent & Skill Ecosystem for CLI | epost-architect, epost-implementer | 2026-02-08 | [completed/plan-260208-1610-agent-skill-cli-ecosystem.md](completed/plan-260208-1610-agent-skill-cli-ecosystem.md) |
 | PLAN-0018 | Dedicated CLI Developer Agent | epost-implementer | 2026-02-08 | [completed/plan-260208-1625-cli-developer-agent.md](completed/plan-260208-1625-cli-developer-agent.md) |
+
+| PLAN-0060 | Update epost-code-reviewer Agent and Related Code | epost-planner | 2026-03-07 | [260307-1159-update-code-reviewer/plan.md](260307-1159-update-code-reviewer/plan.md) |
 
 ## Archived
 

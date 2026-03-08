@@ -7,7 +7,7 @@ description: Creating or updating component-data documentation for a klara-theme
 
 ## Context
 
-Read `libs/klara-theme/CLAUDE.md` for component patterns and documentation conventions.
+Load `web-ui-lib` skill — triggers `docs/index.json` KB discovery. For this stage load: FEAT-0001 (component catalog), CONV-0001 (structure).
 
 ## Inputs (required)
 
@@ -26,9 +26,7 @@ Use the `figma` skill extraction procedure:
 
 ### 2. Cross-Reference Codebase
 
-Query Web RAG for current implementation patterns:
-- `@web-rag-system status`
-- `@web-rag-system query "<componentKey> implementation"` — get codebase patterns
+Delegate RAG search to `epost-mcp-manager`: query = `"<componentKey> implementation"`, scope = web
 
 Optionally query Context7 for documentation patterns:
 - `@context7 query-docs` — documentation best practices

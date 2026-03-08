@@ -38,7 +38,7 @@ This skill MUST run via the `epost-researcher` agent, not inline.
 
 **When research intent is detected:**
 1. Use the **Task tool** to spawn `epost-researcher`
-2. Pass the research topic + scope + report path (`plans/reports/research-{date}-{slug}.md`)
+2. Pass the research topic + scope + report path (`reports/research-{date}-{slug}.md`)
 3. Do NOT conduct research inline in the main conversation
 
 ---
@@ -65,22 +65,45 @@ Clearly define scope before searching:
 
 ### Phase 2: Information Gathering
 
-Multi-source search strategy (max **5 parallel searches** — think carefully before each):
+**Check active engine** (set by session-init, default: `websearch`):
 
-1. **Search**: Use `WebSearch` tool with precise queries
-   - Include terms like "best practices", "2024/2025", "security", "performance"
-   - Craft multiple related queries and run in parallel
-   - Prioritize official docs, GitHub repos, authoritative blogs
+```bash
+echo $EPOST_RESEARCH_ENGINE   # gemini | websearch
+```
 
-2. **Deep content analysis**: For GitHub repos found, use `docs-seeker` to read them
-   - Focus on README, API references, changelogs, release notes
-   - Review version-specific information
+**Engine invocation (max 5 parallel queries — think carefully before each):**
 
-3. **Cross-reference validation**:
-   - Verify across multiple independent sources
-   - Check publication dates for currency
-   - Identify consensus vs. controversial approaches
-   - Note conflicting information
+#### Engine: gemini
+
+```bash
+echo "<research query>" | gemini -y -m "$EPOST_GEMINI_MODEL"
+```
+
+Availability check: `which gemini` — if not found, log coverage gap and fall back to WebSearch.
+
+#### Engine: websearch (default / fallback)
+
+Use Claude's built-in `WebSearch` tool with precise queries:
+- Include terms like "best practices", "2024/2025", "security", "performance"
+- Craft multiple related queries and run in parallel
+- Prioritize official docs, GitHub repos, authoritative blogs
+
+**Fallback chain:**
+1. Invoke configured engine
+2. If unavailable (binary missing / exit code 2): add to Methodology `coverageGaps[]`
+3. Fall back to `WebSearch` automatically — do not block or ask user
+
+See `references/engines.md` for full invocation details, model options, and exit codes.
+
+**Deep content analysis**: For GitHub repos found, use `docs-seeker` to read them
+- Focus on README, API references, changelogs, release notes
+- Review version-specific information
+
+**Cross-reference validation**:
+- Verify across multiple independent sources
+- Check publication dates for currency
+- Identify consensus vs. controversial approaches
+- Note conflicting information
 
 ### Phase 3: Analysis and Synthesis
 
@@ -92,9 +115,13 @@ Multi-source search strategy (max **5 parallel searches** — think carefully be
 
 ### Phase 4: Report Generation
 
-Save report to path provided by caller (`plans/reports/research-{date}-{slug}.md`).
+Save report to path provided by caller (`reports/research-{date}-{slug}.md`).
 
-Use `references/report-template.md` for output structure. Report must:
+Use `references/report-template.md` for output structure. Report Methodology section must include:
+- **Knowledge Tiers**: which engine was used (Gemini, Perplexity, WebSearch)
+- **Coverage Gaps**: if configured engine was unavailable and fallback fired
+
+Report must also:
 - Include timestamp of when research was conducted
 - Provide table of contents for longer reports
 - Use code blocks with appropriate syntax highlighting
@@ -196,11 +223,13 @@ Use `knowledge-capture` skill to persist learnings after this task.
 
 When this skill is active and user intent matches a sub-skill, delegate:
 
-| Intent | Sub-Skill | When |
-|--------|-----------|------|
+| Intent | Sub-Skill / Tool | When |
+|--------|-----------------|------|
 | Explore codebase | `scout` | `/scout`, "explore", "find in codebase" |
 | Search docs | `docs-seeker` | External documentation search |
 | Export context | `repomix` | `/repomix`, bundle code for external review |
+| Gemini search | `gemini` CLI via Bash | `$EPOST_RESEARCH_ENGINE = gemini` |
+| Web search | `WebSearch` tool | `$EPOST_RESEARCH_ENGINE = websearch` or fallback |
 
 ### Related Skills
 - `knowledge-retrieval` — Internal-first search protocol

@@ -320,4 +320,5 @@ Recommendation: Follow docs/ + RAG pattern
 ## Related References
 
 - `search-strategy.md` — How to query each source
-- `knowledge-base.md` — Knowledge system structure, capture guidelines, index schema
+- `knowledge-base/references/knowledge-capture-guide.md` — When to record findings
+- `knowledge-base/references/sidecar-format-spec.md` — Knowledge index schema

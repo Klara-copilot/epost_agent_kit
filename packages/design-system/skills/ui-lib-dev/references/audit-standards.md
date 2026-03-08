@@ -87,6 +87,184 @@ Authoritative, enforceable rules for klara-theme component audits. Each rule has
 
 ---
 
+## Section 7: Security (SEC) — Library Mode Conditional
+
+**Activation gate**: Component imports fetch/axios/localStorage OR props include URL/apiKey/endpoint OR imports AI SDK. Skip if none match.
+
+| Rule ID | Rule | Severity | Pass | Fail |
+|---------|------|----------|------|------|
+| SEC-001 | No API keys/secrets in localStorage/sessionStorage/hardcoded strings | critical | Credentials via env vars or secure store only | API key in localStorage, hardcoded secret string |
+| SEC-002 | External/AI data validated before type casting — no bare `as X` on unvalidated JSON | high | Runtime validation (zod, io-ts, type guard) before cast | `response.data as MyType` without validation |
+| SEC-003 | External endpoint must have origin allowlist or server-side proxy | high | Fetch routed through API route or allowlisted origins | Raw client-side fetch to user-supplied URL |
+| SEC-004 | `javascript:` scheme rejected in any URL-accepting prop or string builder | high | URL sanitized or scheme-checked before use | href/src prop accepts arbitrary string without scheme check |
+| SEC-005 | API credentials via headers, not query params | high | Auth in Authorization header or cookie | `?apiKey=xxx` in URL |
+
+---
+
+## Section 8: Performance (PERF) — Library Mode Conditional
+
+**Activation gate**: 10+ files in scope OR any file >300 LOC. Skip if neither.
+
+| Rule ID | Rule | Severity | Pass | Fail |
+|---------|------|----------|------|------|
+| PERF-001 | Component files <=500 LOC | medium | Under 500 lines | File exceeds 500 LOC — decompose |
+| PERF-002 | Hook files <=400 LOC | medium | Under 400 lines | File exceeds 400 LOC — split |
+| PERF-003 | Expensive computations wrapped in useMemo/useCallback | medium | Memoized where needed | Heavy computation in render path without memoization |
+| PERF-004 | Mock/demo data not in production index.ts | high | Mock data in .stories.tsx or __tests__/ only | >100 lines mock data exported from production module |
+
+---
+
+## Section 9: Library DRY (LDRY) — Always in Library Mode
+
+| Rule ID | Rule | Severity | Pass | Fail |
+|---------|------|----------|------|------|
+| LDRY-001 | No identical utility function bodies in 2+ files | medium | Shared utils in _utils/ | Same function body copy-pasted across files |
+| LDRY-002 | No identical type definitions in 2+ files | medium | Shared types in _types/ | Same interface/type duplicated across files |
+| LDRY-003 | POC maturity: no console.log, TODO, hardcoded URLs, commented-out blocks in library code | high | Clean production-ready code | POC artifacts left in library source |
+
+---
+
+## Mode Applicability
+
+| Section | Library Mode | Consumer Mode | Notes |
+|---------|-------------|---------------|-------|
+| INTEGRITY | Y | Y | Always first — blocks on direct library edits |
+| PLACE | Y | Y | Different criteria per mode |
+| REUSE | - | Y | Consumer-only |
+| TW | Y | Y | Both modes parse tailwind.config.ts |
+| DRY | - | Y | Consumer-only; gates REUSE false positives |
+| REACT | - | Y | Consumer-only |
+| POC | - | Y | Consumer-only (but LDRY-003 covers POC in library) |
+| STRUCT-TEST | Y | - | Library-only (A11Y, TEST apply to both) |
+| SEC | Y (conditional) | Y | Conditional on: localStorage/fetch/apiKey/AI imports |
+| PERF | Y (conditional) | Y | Conditional on: 10+ files OR file >300 LOC |
+| LDRY | Y | - | Library-only; LDRY-003 covers POC for library |
+
+**Mode detection**: file inside `libs/klara-theme/` or `libs/common/` → Library mode. File importing from those paths but living in app/feature code → Consumer mode.
+
+---
+
+## Section 0: Library Integrity (INTEGRITY) — Critical Gate
+
+Runs before all other checks. If any INT-1 or INT-2 violation is found, set `block: true` and stop the audit.
+
+| Rule ID | Rule | Severity | Pass | Fail |
+|---------|------|----------|------|------|
+| INT-1 | No direct edits to `klara-theme/` or `common/` library files from consumer code — use composition and props instead | critical | Consumer code never modifies library source files | Any `klara-theme/` or `common/` file modified by consumer PR/commit |
+| INT-2 | No copy-paste of library component source into consumer code | critical | Consumer code imports from klara-theme; does not duplicate it | Block of code copied verbatim from library source |
+| INT-3 | No wrapping library components with non-composable style overrides that break theme | warning | Overrides use provided className/style props or composition patterns | Direct DOM class injection, `!important` hacks on library internals |
+
+---
+
+## Section 1: Component Placement (PLACE)
+
+| Rule ID | Rule | Severity | Pass | Fail |
+|---------|------|----------|------|------|
+| PL-1 | Feature components in `features/<name>/components/`, not root `components/` | high | Component lives under its feature directory | Component in root `components/` but contains feature-specific logic |
+| PL-2 | Shared cross-feature components in `components/` with no feature imports | high | Shared component has zero imports from any `features/` path | Shared component imports from a specific feature |
+| PL-3 | Page-level components in `app/` or `pages/`, not in `components/` | medium | Route/page components live in `app/` or `pages/` directories | Page component placed in `components/` |
+| PL-4 | No business logic in presentational components | high | Presentational components accept data via props; no API calls, no store access | Presentational component calls API or reads from Redux |
+| PL-5 | Container/presenter split respected — containers fetch/transform, presenters render | medium | Clear separation between data layer and render layer | Mixed file does both fetching and complex rendering |
+| PL-6 | No circular imports between feature modules | critical | Import graph is a DAG; no cycles | Feature A imports Feature B which imports Feature A |
+| PL-7 | Index exports present for all public-facing component directories | medium | `index.ts` barrel file in every component directory that is imported externally | External code imports deep paths like `features/x/components/Button/Button.tsx` |
+
+---
+
+## Section 2: Klara-Theme Reuse (REUSE)
+
+Absence of a klara equivalent is a **violation**, not a contribution opportunity. If klara provides the component, use it.
+
+| Rule ID | Rule | Severity | Pass | Fail |
+|---------|------|----------|------|------|
+| RU-1 | Button variants — use `<Button variant="...">` not custom button divs or styled anchors | high | All click/submit interactions use klara `Button` with appropriate variant | Custom `<div onClick>` or `<a>` styled as button instead of `Button` component |
+| RU-2 | Form inputs — use klara `Input`/`Select`/`Checkbox`/`Radio`, not raw `<input>`/`<select>` | high | All form fields use klara input components | Raw HTML form elements without klara wrapper |
+| RU-3 | Modal/Dialog — use klara `Modal` or `Dialog`, not custom overlay divs | high | All modal surfaces use klara modal primitives | Custom `position: fixed` overlay or portal implementation |
+| RU-4 | Typography — use klara `Text`/`Heading` components, not raw `<p>`/`<h1>`–`<h6>` with manual styles | medium | Text rendered via klara typography components | Raw HTML tags with hardcoded font/size classes |
+| RU-5 | Icons — use klara `Icon` component, not inline SVG or `<img>` tags for icons | medium | All icons via klara Icon with named variant | Inline `<svg>` or `<img src="icon.png">` for UI icons |
+| RU-6 | Loading states — use klara `Spinner`/`Skeleton`, not custom loader divs or CSS animations | medium | All loading feedback uses klara loading components | Custom spinning CSS, DIY skeleton shimmer |
+| RU-7 | Toast/notification — use klara Toast system, not custom notification divs | high | All user feedback toasts use klara toast | Custom notification implementation with manual positioning |
+| RU-8 | Table/list — use klara `Table`/`List` if the data display matches component capability | low | Data tables use klara Table; simple lists use klara List | Custom table/list when klara equivalent covers the use case |
+
+---
+
+## Section 3: Tailwind Compliance (TW)
+
+Parse `tailwind.config.ts` before running this section. Extract theme scale values to validate against.
+
+| Rule ID | Rule | Severity | Pass | Fail |
+|---------|------|----------|------|------|
+| TW-1 | No arbitrary values `[123px]` when an equivalent theme scale value exists — parse config and flag | high | Tailwind classes use theme-defined scale (e.g., `p-4` not `p-[16px]`) | Arbitrary bracket values when config defines the equivalent token |
+| TW-2 | No arbitrary colors `[#ff0000]` or `[rgb(...)]` when a design token exists | critical | All colors via semantic token classes | Arbitrary color values in class list |
+| TW-3 | No `style={}` inline styles when an equivalent Tailwind class exists | high | Styling via className only | `style={{ marginTop: '8px' }}` when `mt-2` exists |
+| TW-4 | Layout — use established flex/grid patterns; flag `absolute`/`fixed` positioning used as layout hacks | medium | Positioning used for overlays/modals only; standard layout via flex/grid | `absolute` positioning used to align sibling elements instead of flex gap |
+| TW-5 | No `!important` via `!` prefix unless in a documented override scenario | high | No `!` prefix classes | `!text-red-500`, `!mt-0` without documented justification |
+
+---
+
+## Section 4: DRY Gating
+
+Scan the **whole feature directory** before running REUSE checks. Patterns found in 2+ files are conventions, not violations.
+
+| Rule ID | Rule | Severity | Pass | Fail |
+|---------|------|----------|------|------|
+| DRY-1 | If a UI pattern appears in 2+ files in the feature, treat it as an established convention — suppress downstream REUSE flags for that pattern | info | Pattern recognized as convention; REUSE finding suppressed with note | REUSE flag raised on a pattern used consistently across the feature |
+| DRY-2 | Repeated style combinations applied 3+ times → extract to a shared component or utility class | medium | Common style combos extracted | Same multi-class string repeated 3+ times across files |
+| DRY-3 | Repeated logic hooks duplicated in 2+ files → extract to a shared hook | medium | Common logic in a shared hook | Hook body copy-pasted between components |
+
+---
+
+## Section 5: React Best Practices (REACT)
+
+| Rule ID | Rule | Severity | Pass | Fail |
+|---------|------|----------|------|------|
+| RE-1 | No inline object/array literals in JSX props — causes unnecessary re-renders | high | Objects/arrays defined outside render or memoized | `<Comp style={{ color: 'red' }}>` or `<Comp items={[...]}>`  in render |
+| RE-2 | `useEffect` dependencies are complete and minimal — no missing or over-specified deps | high | Effect deps match all values referenced inside | ESLint exhaustive-deps violations; stale closure bugs |
+| RE-3 | No `useState` for values derivable from props or other state — use `useMemo`/computed values | medium | Derived values computed via `useMemo` or inline expression | `useState` initialized from a prop, never independently updated |
+| RE-4 | All list renders have stable, unique `key` props — no index keys on dynamic lists | high | Keys are stable identifiers (ID, slug) | `key={index}` on a list that can reorder or filter |
+| RE-5 | Prop drilling beyond 2 levels — suggest context or composition instead | medium | Deep data passed via context or component composition | Same prop threaded through 3+ component layers |
+| RE-6 | Large components (>200 lines) — suggest decomposition into smaller components | medium | Component files under 200 lines of JSX/logic | Single file >200 lines mixing concerns |
+| RE-7 | No direct DOM manipulation — use React state and refs correctly | high | DOM interaction via `ref.current` only when unavoidable | `document.querySelector` or `document.getElementById` inside component |
+| RE-8 | Error boundaries present around async data components — unhandled rejections crash trees | high | Async data components wrapped in `ErrorBoundary` | No error boundary around components that fetch or throw |
+
+---
+
+## Section 6: Production Maturity (POC)
+
+| Rule ID | Rule | Severity | Pass | Fail |
+|---------|------|----------|------|------|
+| POC-1 | No hardcoded API URLs or environment-specific strings | critical | All URLs from environment variables or config | `"https://api.staging.example.com"` or `"http://localhost:3000"` literal in code |
+| POC-2 | No `console.log`, `console.error`, `debugger` statements | high | Clean console — logging via structured logger only | `console.log('DEBUG:', data)` left in production code |
+| POC-3 | No `TODO`/`FIXME`/`HACK` comments — file issues instead | medium | No inline TODO markers | `// TODO: fix this later` or `// HACK: workaround` |
+| POC-4 | No placeholder text (`Lorem ipsum`, `test123`, `fake@email.com`) | high | All visible strings are real or internationalized | Placeholder content visible in UI |
+| POC-5 | No commented-out code blocks longer than 3 lines | medium | Dead code removed, not commented | Multi-line commented blocks left in source |
+| POC-6 | No `any` TypeScript type overuse — max 1 per file, documented with justification | high | Types are specific; `any` used sparingly with comment | `as any`, `any[]`, `: any` repeated throughout file |
+| POC-7 | All async operations have error handling — unguarded promises cause silent failures | critical | Every `async/await` wrapped in try/catch or `.catch()` | `await fetch(...)` with no error handler |
+
+---
+
+## Consumer Scoring Formulas
+
+```
+placementScore    = (passed_PL_rules / 7) * 10
+reuseRate         = (klara_components_used / total_reusable_ui_elements) * 10
+twComplianceRate  = (classes_using_project_tokens / total_tw_classes) * 10
+reactScore        = (passed_RE_rules / 8) * 10
+pocScore          = (7 - poc_indicator_count) / 7 * 10
+```
+
+---
+
+## Props Enhancements (Consumer Mode)
+
+Additional PROPS rules that apply when auditing consumer code:
+
+| Rule ID | Rule | Severity | Pass | Fail |
+|---------|------|----------|------|------|
+| PP-E1 | All required props are passed — scan the component's TypeScript Props interface and flag any required prop missing at call sites | high | All non-optional props provided at every usage | Required prop omitted at a call site (TypeScript would error) |
+| PP-E2 | Props are passed with correct types — no string-where-number, no wrong enum value | high | Prop types match interface at all call sites | `<Comp count="5">` where `count: number` |
+
+---
+
 ## Anti-Patterns
 
 Known violations from production component analysis:

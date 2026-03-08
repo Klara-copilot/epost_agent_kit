@@ -4,7 +4,7 @@ description: (ePost) Use when you need prior art, past decisions, or existing pa
 user-invocable: false
 
 metadata:
-  agent-affinity: [epost-planner, epost-fullstack-developer, epost-debugger, epost-researcher]
+  agent-affinity: [epost-planner, epost-fullstack-developer, epost-debugger, epost-researcher, epost-code-reviewer]
   keywords: [retrieve, search, knowledge, context, rag, lookup, prior-art]
   platforms: [all]
   triggers: ["what do we know about", "check knowledge", "prior art", "previous decision"]
@@ -42,17 +42,30 @@ Search sources in order, stop when sufficient context found:
 
 | Level | Source | Tool | When to Use |
 |-------|--------|------|-------------|
-| 1 | `docs/` | Read docs/index.json, filter by agentHint + tags | Decisions, conventions, findings, patterns |
+| 1 | `docs/` (multi-level) | Glob `**/docs/index.json`, then filter by agentHint + tags | Decisions, conventions, findings, patterns |
 | 2 | RAG systems | MCP `query` | Code, components, tokens, implementations |
 | 3 | Skills | Read skill-index.json | Methodology, procedures, guidelines |
 | 4 | Codebase | Grep, Glob, Read | Exact matches, files RAG missed |
 | 5 | External | Context7, WebSearch | Library APIs, latest external info |
 
+### Level 1 Multi-Level Discovery
+
+`docs/index.json` registries can exist at any level. Discover them all with a single glob, then read each to understand its scope from the `description` field:
+
+```
+Glob: **/docs/index.json
+```
+
+Use the registry closest to the files being worked on as primary. See `references/search-strategy.md` for query patterns.
+
+**No registry found?** Prompt the user:
+> No `docs/index.json` found. Run `/docs` to initialize one. This enables consistent, session-persistent knowledge retrieval for all agents.
+
 ## Search Protocol
 
 Search sources in order, stop when sufficient context found. See `references/search-strategy.md` for full retrieval chain, query examples, and source-specific techniques.
 
-**Key principle**: Start internal (docs/ index), then RAG, then skills, then codebase grep, then external (Context7/WebSearch). Stop as soon as you have sufficient context.
+**Key principle**: Start internal (docs/ index — all levels), then RAG, then skills, then codebase grep, then external (Context7/WebSearch). Stop as soon as you have sufficient context.
 
 ## Decision Matrix
 
@@ -138,7 +151,7 @@ When a query spans platforms, coordinate RAG queries:
 
 1. **Start internal**: Always check `docs/index.json` first
 2. **Use agentHint**: Match hints against current task for relevance
-3. **Skip irrelevant levels**: No RAG server? Skip to next level
+3. **Skip irrelevant levels**: No RAG server? Skip L2, go directly to L4 (Grep/Glob codebase search) — never block on RAG availability
 4. **Stop when sufficient**: Don't search all levels unnecessarily
 5. **Attribute sources**: Note where each finding came from
 6. **Validate staleness**: Check dates on knowledge entries

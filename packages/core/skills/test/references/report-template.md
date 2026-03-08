@@ -20,10 +20,14 @@ Use this template when writing a test/validation report.
 
 ---
 
-## Files Tested
+## Methodology
 
-- `{path/to/test.spec.ts}` — {suite name, N tests}
-- `{path/to/impl.ts}` — {implementation file checked}
+| | |
+|--|--|
+| **Files Scanned** | `{path/to/test.spec.ts}` ({suite name, N tests}), `{path/to/impl.ts}` (implementation checked) |
+| **Knowledge Tiers** | L1 docs/ ({found/not found}), L2 RAG ({available/unavailable}), L4 Grep ({used/not needed}) |
+| **Standards Source** | `test/SKILL.md`, project test conventions from `docs/conventions/`, platform test runner ({Jest/XCTest/JUnit}) |
+| **Coverage Gaps** | {e.g. "No coverage data available" or "Integration tests not in scope" or "None"} |
 
 ## Results
 

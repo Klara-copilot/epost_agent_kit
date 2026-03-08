@@ -16,9 +16,6 @@
 
 const fs = require('fs');
 const path = require('path');
-const { isHookEnabled } = require('./lib/epost-config-utils.cjs');
-
-if (!isHookEnabled('privacy')) process.exit(0);
 
 // Import shared privacy checking logic
 const {
@@ -135,21 +132,7 @@ function main() {
 
 // Run main only when executed directly (not when required for testing)
 if (require.main === module) {
-  try {
-    main();
-  } catch (e) {
-    // Minimal crash logging — only Node builtins, no lib/ deps
-    try {
-      const p = require('path');
-      const logDir = p.join(__dirname, '.logs');
-      if (!fs.existsSync(logDir)) fs.mkdirSync(logDir, { recursive: true });
-      fs.appendFileSync(
-        p.join(logDir, 'hook-log.jsonl'),
-        JSON.stringify({ ts: new Date().toISOString(), hook: p.basename(__filename, '.cjs'), status: 'crash', error: e.message }) + '\n'
-      );
-    } catch (_) {}
-    process.exit(0); // fail-open
-  }
+  main();
 }
 
 // Export functions for unit testing

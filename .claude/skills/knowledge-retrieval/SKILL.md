@@ -1,10 +1,10 @@
 ---
 name: knowledge-retrieval
-description: (ePost) Use when you need prior art, past decisions, or existing patterns — checks docs/, skills, and RAG before external sources
+description: Use when you need prior art, past decisions, or existing patterns — checks docs/, skills, and RAG before external sources
 user-invocable: false
 
 metadata:
-  agent-affinity: [epost-planner, epost-fullstack-developer, epost-debugger, epost-researcher]
+  agent-affinity: [epost-architect, epost-implementer, epost-debugger, epost-researcher]
   keywords: [retrieve, search, knowledge, context, rag, lookup, prior-art]
   platforms: [all]
   triggers: ["what do we know about", "check knowledge", "prior art", "previous decision"]
@@ -155,7 +155,7 @@ When a query spans platforms, coordinate RAG queries:
 
 ## Related Skills
 
-- `knowledge-retrieval/references/knowledge-base.md` — Knowledge system structure
+- `knowledge-base` — Knowledge system structure
 - `knowledge-capture` — Persist new learnings
 - `docs-seeker` — External documentation retrieval
 - `research` — Deep multi-source investigation
