@@ -85,11 +85,12 @@ After initial review, the reviewer decides based on findings:
 
 When escalation is triggered, use the delegation templates from `audit/references/delegation-templates.md`:
 
-**Session folder (always create first):**
-- Create `$EPOST_REPORTS_PATH/{date}-{slug}-audit/` before dispatching any sub-agent
-- All sub-agent reports go inside this folder
-- Your final merged report is `{folder}/report.md`
-- Sub-agent filenames: `muji-ui-audit.md`, `a11y-audit.md`, `docs-gaps.md`
+**Session folder (always create first, before any sub-agent dispatch):**
+```
+session_folder = reports/{YYMMDD-HHMM}-{slug}-audit/
+CREATE directory: mkdir -p {session_folder}
+```
+Pass `output_path: {session_folder}/muji-ui-audit.md` (or `a11y-audit.md`) in each delegation block.
 
 **UI escalation (simple — to epost-muji):**
 - Fill Template A with: files, component names, platform from file extensions
@@ -106,7 +107,7 @@ When escalation is triggered, use the delegation templates from `audit/reference
 - Merge under `## A11Y Audit (delegated to epost-a11y-specialist)` in your `report.md`
 
 **Hybrid audit — sequential (feature module, klara-theme 20+ files):**
-1. Create session folder: `$EPOST_REPORTS_PATH/{date}-{slug}-audit/`
+1. Resolve reports root + run `mkdir -p {session_folder}` (see Session folder block above)
 2. Dispatch muji via Template A+ — `output_path: {session_folder}/muji-ui-audit.md`
 3. WAIT for muji to complete
 4. Read `{session_folder}/muji-ui-audit.md`. Extract:
@@ -198,7 +199,7 @@ When this skill is active and user intent matches a sub-skill, delegate:
 Use `references/report-template.md` for all code review reports.
 
 Key requirements:
-- **Session folder structure**: For any audit involving sub-agents, create `$EPOST_REPORTS_PATH/{date}-{slug}-audit/`. Main report = `report.md` inside folder. Sub-agent reports alongside it (`muji-ui-audit.md`, `a11y-audit.md`). For simple (inline-only) code reviews with no sub-agents: flat file `{date}-{slug}-code-review.md` is fine.
+- **Session folder structure**: For any audit involving sub-agents: `reports/{YYMMDD-HHMM}-{slug}-audit/` — `mkdir -p` before dispatching. Main report = `report.md`. Sub-agent reports alongside (`muji-ui-audit.md`, `a11y-audit.md`). Inline-only: flat `reports/{date}-{slug}-code-review.md`.
 - **One main report per session** — `report.md` is the single surface for the user. Sub-agent `.md` files are source material referenced from `report.md`, not separate deliverables.
 - Header: Date, Agent, Plan (if applicable), Status
 - Executive Summary first

@@ -84,10 +84,27 @@ Explicit scope signals:
 
 - **IMPORTANT**: Sacrifice grammar for concision in reports
 - List unresolved questions at end of every report
-- **With sub-agents (hybrid/delegated)**: create session folder `$EPOST_REPORTS_PATH/{date}-{slug}-audit/`; main report = `report.md` inside; sub-agent reports alongside (`muji-ui-audit.md`, `a11y-audit.md`)
-- **Inline-only (no sub-agents)**: flat file `$EPOST_REPORTS_PATH/{date}-{slug}-code-review.md`
 - No JSON report file — findings tracked in `known-findings.json` for UI; code review findings are in the `.md`
 - After saving: append report to `reports/index.json` per `core/references/index-protocol.md`
+
+### Report Path Resolution (always do this first)
+
+```
+slug         = kebab-case component/module name (max 40 chars)
+date         = YYMMDD-HHMM (today)
+
+WITH sub-agents (hybrid audit, any delegation):
+  session_folder = reports/{date}-{slug}-audit/
+  CREATE directory: mkdir -p {session_folder}
+  Main report    → {session_folder}/report.md
+  Muji report    → {session_folder}/muji-ui-audit.md
+  A11y report    → {session_folder}/a11y-audit.md
+
+WITHOUT sub-agents (inline review only):
+  Write: reports/{date}-{slug}-code-review.md
+```
+
+**mkdir must happen BEFORE any sub-agent Task dispatch — sub-agents write to that path.**
 
 ---
 *epost-code-reviewer is an epost_agent_kit agent for comprehensive code quality and security assessment*
