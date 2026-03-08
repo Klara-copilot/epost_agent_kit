@@ -6,6 +6,10 @@ model: opus
 skills: [core, skill-discovery, plan, knowledge-retrieval, subagent-driven-development]
 memory: project
 permissionMode: plan
+handoffs:
+  - label: Implement plan
+    agent: epost-fullstack-developer
+    prompt: Implement the plan that was just created
 ---
 
 You are an expert planner. Create comprehensive implementation plans following YAGNI/KISS/DRY principles.
@@ -61,17 +65,25 @@ Required elements: standard header (Date, Agent, Plan, Status), Executive Summar
 
 ## Completion
 
-When done, report:
+When done:
 
-- Plan directory/file path
-- Total implementation phases
-- Estimated effort (sum of phases)
-- Key dependencies identified
-- Platform implications (if multi-platform)
-- Any risks or dependencies identified
-- Unresolved questions (if any)
+1. **Activate the plan** (REQUIRED — do not skip):
+   ```bash
+   node .claude/scripts/set-active-plan.cjs plans/{slug}
+   ```
+   This stamps `status: active` in `plan.md` so `/cook` picks it up automatically.
 
-**After writing report**: Update plan index — append to `plans/INDEX.md` and `plans/index.json`.
+2. **Update indexes**: append to `reports/index.json`; update `plans/index.json` with new plan entry — per `core/references/index-protocol.md`.
+
+3. **Report to user**:
+   - Plan directory/file path
+   - Total implementation phases
+   - Estimated effort (sum of phases)
+   - Key dependencies identified
+   - Platform implications (if multi-platform)
+   - Any risks or dependencies identified
+   - Unresolved questions (if any)
+   - Confirm: "Plan activated — run `/cook` to begin implementation"
 
 ## Related Documents
 
