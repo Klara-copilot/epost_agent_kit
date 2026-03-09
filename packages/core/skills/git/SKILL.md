@@ -27,6 +27,7 @@ metadata:
 If `$ARGUMENTS` contains `--commit` or user said "commit": execute commit workflow immediately.
 If `$ARGUMENTS` contains `--push` or user said "push": execute commit+push workflow immediately.
 If `$ARGUMENTS` contains `--pr` or user said "pr" / "pull request": execute PR workflow immediately.
+If `$ARGUMENTS` contains `--skip-build`: pass through to commit/push workflow — skips build verification gate (for WIP/draft commits).
 Otherwise: continue to Step 1.
 
 ## Step 1 — Detect State

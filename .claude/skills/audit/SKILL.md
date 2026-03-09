@@ -94,6 +94,14 @@ session_folder = reports/{YYMMDD-HHMM}-{slug}-audit/
    - `## A11Y Audit` (if ran) — link to `a11y-audit.md`
    - `## Code Review` — code-reviewer findings inline
    - Methodology section
+6.5. **Run build verification**:
+   ```bash
+   node .claude/hooks/lib/build-gate.cjs
+   ```
+   Append `## Build Verification` section to `{session_folder}/report.md`:
+   - Exit 0: `Build verification: ✓ PASS ({platform}, {duration_ms}ms)`
+   - Exit 1: `Build verification: ✗ FAIL — {error excerpt}` (advisory — does not block report)
+   - Exit 2: `Build verification: skipped (no build command detected)`
 7. **Write session.json** per `references/session-json-schema.md`
 8. **Update reports/index.json** per `core/references/index-protocol.md`
 
@@ -108,7 +116,8 @@ For non-hybrid dispatches (`--ui`, `--code`, `--a11y`):
 3. Fill all `{placeholders}` — include `Output path: {session_folder}/{filename}`
 4. Dispatch via **Agent tool** to the specialist agent
 5. **Wait** for specialist report
-6. Write `session.json` and update `reports/index.json`
+6. Run build verification: `node .claude/hooks/lib/build-gate.cjs` — append `## Build Verification` to report (advisory)
+7. Write `session.json` and update `reports/index.json`
 
 **Output contract**: `references/output-contract.md` is the single source of truth for paths and responsibilities.
 
