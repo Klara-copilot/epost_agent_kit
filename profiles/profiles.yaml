@@ -23,12 +23,6 @@ profiles:
     packages: [core, platform-android, domains, a11y]
     optional: [design-system]
 
-  mobile-b2c:
-    display_name: "Mobile Developer (iOS + Android)"
-    teams: [optimus]
-    packages: [core, platform-ios, platform-android, domains, a11y]
-    optional: [design-system]
-
   # ─── Backend/API Teams (Hacka, Kepler) ───
   backend-api:
     display_name: "Backend API Developer"
