@@ -178,52 +178,78 @@ WAIT for Agent to complete.
 ### Phase 3 — Environment Setup & Run (epost-fullstack-developer)
 
 Use the Agent tool to dispatch implementer to prepare the environment and get the project running.
-The implementer should **actively install missing tools** — not just report them.
+The implementer should **actively run steps** — not just report them. Go as far as possible automatically.
 
 ```
 Agent(
   subagent_type: "epost-fullstack-developer"
-  description: "Setup env, install deps, build, run project"
+  description: "Setup env, install deps, build, run project on simulator/device"
   prompt: """
   Read the researcher report at: {RESEARCH_REPORT}
 
-  Your job: get this project running locally. Actively fix missing tools — don't just report them.
+  Your job: get this project running locally. Run every step below. If a step requires sudo and
+  fails, SKIP it and continue — do NOT stop. Collect all sudo-blocked steps for the final report.
 
   ## Step 1 — Install missing tools
-  Check what's missing and install via Homebrew (macOS) or the project's wrapper scripts:
-  - If `mvn` not found but `./mvnw` exists → use `./mvnw` instead (no install needed)
-  - If `mvn` not found and no wrapper → run `brew install maven`
-  - If `node`/`npm` not found → run `brew install node`
-  - If `java` not found → run `brew install openjdk@{version from pom.xml}`
-  - If `docker` not found → note it but don't install (requires Docker Desktop)
-  - If other tools missing → attempt `brew install {tool}`
+  Check what's missing and install (WITHOUT sudo first — if blocked, skip and continue):
+  - `mvn` not found but `./mvnw` exists → use `./mvnw` (no install needed)
+  - `mvn` not found, no wrapper → `brew install maven`
+  - `node`/`npm` not found → `brew install node`
+  - `java` not found → `brew install openjdk@{version from pom.xml}`
+  - `docker` not found → note it, skip (requires Docker Desktop)
+  - `bundle` not found → `gem install bundler` (no sudo)
+  - `xcode-select` misconfigured → try `xcode-select -s /Applications/Xcode.app/Contents/Developer` (needs sudo — if blocked, skip and proceed)
 
   ## Step 2 — Install project dependencies
-  - Node: `npm install` or `yarn` or `bun install`
-  - Maven: `./mvnw dependency:resolve` or `mvn dependency:resolve`
+  - Node: `npm install` / `yarn` / `bun install`
+  - Ruby/Fastlane: `bundle install` (if Gemfile present)
+  - CocoaPods: `pod install` (if Podfile present)
+  - Maven: `./mvnw dependency:resolve`
   - Gradle: `./gradlew dependencies`
   - Swift: `swift package resolve`
-  - Skip if deps already present (node_modules/, target/, .m2/)
+  - Skip if already installed (node_modules/, Pods/, .m2/)
 
   ## Step 3 — Environment variables
-  - If `.env.example` exists but `.env` missing: copy `.env.example` to `.env`, list vars that need real values
-  - If no `.env.example`: check docs/configs for required env vars, list them
-  - Do NOT fill in real secrets — just ensure the file structure exists
+  - If `.env.example` exists but `.env` missing: copy `.env.example` → `.env`, list vars needing real values
+  - Do NOT fill in real secrets
 
   ## Step 4 — Build
-  - Run the build command (mvn package, npm run build, ./gradlew build, etc.)
-  - If build fails due to missing env/credentials (e.g., private registry auth), note the blocker clearly
-  - Skip if project is a library with no build step
+  - Web: `npm run build` (or yarn/bun equivalent)
+  - iOS: `xcodebuild -scheme '{scheme}' -destination 'platform=iOS Simulator,name=iPhone 16 Pro' -sdk iphonesimulator build`
+    - Use scheme from researcher report (prefer "Development" or "Dev" variant)
+    - If `fastlane` available: `fastlane ios DEV` (equivalent, cleaner)
+  - Android: `./gradlew assembleDebug`
+  - Backend: `./mvnw package -DskipTests`
+  - Note exact error if build fails
 
-  ## Step 5 — Start
-  - Run dev/start command if available
-  - Confirm startup (look for "ready", "listening on port", etc.)
-  - If can't start due to missing infra (DB, Docker, external service), note what's needed
-  - Skip if no start command or project requires container orchestration
+  ## Step 5 — Start (web/backend only)
+  - Web: run dev command, confirm "ready on port X"
+  - Backend: start server, confirm startup message
+  - Skip for iOS/Android (handled in Step 6/7)
+
+  ## Step 6 — Launch on iOS Simulator (iOS projects only)
+  Only if `*.xcodeproj` or `*.xcworkspace` found in Step 1 detection:
+  1. List available simulators: `xcrun simctl list devices available --json`
+  2. Boot target simulator: `xcrun simctl boot "iPhone 16 Pro"` (or use already-booted device)
+  3. Open Simulator app: `open -a Simulator`
+  4. Find built .app: search DerivedData for `{scheme}-*.app`
+  5. Install: `xcrun simctl install booted {app_path}`
+  6. Get bundle ID from Info.plist: `defaults read {app_path}/Info.plist CFBundleIdentifier`
+  7. Launch: `xcrun simctl launch booted {bundle_id}`
+  8. Confirm: `xcrun simctl get_app_container booted {bundle_id}` (exit 0 = running)
+  Note: For advanced simulator lifecycle management, use `/simulator` skill.
+
+  ## Step 7 — Launch on Android Emulator/Device (Android projects only)
+  Only if `build.gradle` or `build.gradle.kts` found:
+  1. Check connected devices: `adb devices`
+  2. If device connected: `./gradlew installDebug`, then `adb shell am start -n {package}/{main_activity}`
+  3. If no device: list AVDs with `emulator -list-avds`, boot first: `emulator -avd {avd_name} &`, wait for boot, then install
+  4. Confirm launch via `adb shell dumpsys activity | grep {package}`
 
   ## Output
-  For each step, report: what was done, what succeeded, what's blocked and why.
-  Be specific about blockers — e.g., "needs GCP Artifact Registry auth for internal Maven deps" not just "build failed".
+  For each step: what ran, what succeeded, what was blocked (sudo or otherwise) and why.
+  Final line: "App launch: running on {device/simulator name}" OR "Not launched — {reason}"
+  Manual steps (sudo required): {list, or "none"}
   """
 )
 ```
@@ -239,24 +265,24 @@ If the implementer reported blockers, include a **Setup Guide** with exact comma
 ## Onboarded: {project-name}
 
 **Tech Stack**: {from researcher}
-**Running**: {status from implementer — port, URL, or "not started"}
+**Running**: {status — simulator/device name and app status, or URL:port, or "not started"}
 
 ### What Was Done
-- {tools installed, deps resolved, build status}
+- {tools installed, deps resolved, build result, launch result}
 
 ### Docs
 {count} entries generated/updated in docs/index.json
 
-### Setup Guide (if blockers remain)
-Complete these steps to finish setup:
+### Manual Steps Required (if any)
+Steps that couldn't run automatically (need sudo or manual action):
 
-1. {e.g., "Install Docker Desktop: https://docker.com/products/docker-desktop"}
-2. {e.g., "Authenticate to GCP Artifact Registry: `gcloud auth configure-docker europe-west6-docker.pkg.dev`"}
-3. {e.g., "Set env vars in .env: JWT_SERVICE_HOST_PORT, LUZ_DOCS_VIEW_CONTROLLER_HOST_PORT"}
-4. {e.g., "Build: `./mvnw clean package`"}
-5. {e.g., "Run: `docker-compose up`"}
+1. {e.g., "Fix xcode-select: `sudo xcode-select -s /Applications/Xcode.app/Contents/Developer`"}
+2. {e.g., "Then build: `fastlane ios DEV` or `xcodebuild -scheme 'ePost Development' ...`"}
+3. {e.g., "Authenticate to GCP Artifact Registry: `gcloud auth configure-docker ...`"}
+(omit section entirely if no manual steps needed)
 
 ### Next Steps
+- `/simulator` — manage iOS simulators
 - `/{cook|fix|plan}` to start coding
 ```
 
