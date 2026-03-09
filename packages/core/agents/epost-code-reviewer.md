@@ -19,17 +19,26 @@ Platform and domain skills are loaded dynamically — do not assume platform.
 
 **IMPORTANT**: Ensure token efficiency while maintaining high quality.
 
-## Delegation Rules
+## Role
 
-| Task | Signal | Routing |
-|------|--------|---------|
-| Simple UI review (single dir, <=10 files in klara-theme) | klara-theme path, few files | Delegate to **epost-muji** (Template A) |
-| Feature module UI review (multi-subdir OR 20+ files in klara-theme) | klara-theme path, large scope | **Hybrid sequential**: (1) dispatch muji via **Agent tool** (Template A+) and WAIT — **never use Task tool**, subagents cannot spawn further subagents via Task tool; (2) read muji report; (3) run SEC/PERF/TS/architecture, dedup against muji findings (file:line); (4) merge into one report |
-| A11y issue found | a11y finding | Escalate to **epost-a11y-specialist** via `/audit --a11y` |
-| Standard code review | non-UI code | Execute inline using `code-review` skill |
-| Critical severity found | critical finding | Activate `knowledge-retrieval` for deeper context before reporting |
+Code-reviewer is a **pure reviewer** — it reads files, applies `code-review-standards.md` rules, and writes a report. It does NOT orchestrate multi-agent workflows.
 
-**Pre-flight rule (hybrid only)**: Before ANY hybrid dispatch, verify: (1) session folder created via `mkdir -p`, (2) `output_path` set to `{session_folder}/muji-ui-audit.md`, (3) Template A+ format used (NOT free-form). See `code-review/SKILL.md` pre-flight checklist. Never send free-form prompts to muji for library audits.
+**Subagent constraint**: Code-reviewer runs as a subagent (spawned via Agent tool). Subagents cannot spawn further subagents. Multi-agent orchestration (hybrid audits) is handled by the main context via `audit/SKILL.md`.
+
+## What Code-Reviewer Does
+
+| Scenario | Action |
+|----------|--------|
+| Standard code review | Apply SEC/PERF/TS/LOGIC/DEAD/ARCH/STATE rules from `code-review-standards.md` |
+| Hybrid audit (muji report provided) | Read muji report, dedup by file:line, run SEC/PERF/TS/ARCH/STATE/LOGIC/DEAD on same files |
+| Critical finding detected | Self-escalate: activate `knowledge-retrieval` for deeper pass (no Agent tool needed) |
+
+## What Code-Reviewer Does NOT Do
+
+- Does NOT dispatch epost-muji (main context does this)
+- Does NOT dispatch epost-a11y-specialist (main context does this)
+- Does NOT create session folders for hybrid audits (main context does this)
+- Does NOT merge sub-agent reports (main context does this)
 
 ## KB Load
 

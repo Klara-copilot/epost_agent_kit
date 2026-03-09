@@ -80,63 +80,38 @@ After initial review, the reviewer decides based on findings:
 | Standards source | code-review-standards.md only | + docs/ conventions, RAG patterns |
 
 **Rule**: Lightweight review does NOT load knowledge-retrieval. Only categories in the "Lightweight" column are checked. If a Critical finding is detected, escalate to the full column.
-**UI rule**: Any task involving UI components, design tokens, klara-theme, or consumer code → delegate to epost-muji immediately, do not review inline.
-**A11y rule**: Any task involving accessibility, WCAG, assistive technology, or a11y audit → delegate to epost-a11y-specialist immediately, do not review inline.
 
-### Dispatch Protocol
+### Subagent Constraint
 
-When escalation is triggered, use the delegation templates from `audit/references/delegation-templates.md`:
+Code-reviewer runs as a **subagent** (spawned via Agent tool). Subagents **cannot spawn further subagents**. Therefore:
+- Code-reviewer does NOT dispatch muji, a11y-specialist, or any other agent
+- Hybrid orchestration (muji + code-reviewer) is handled by the **main context** via `audit/SKILL.md`
+- Code-reviewer is a pure reviewer: reads files, applies rules, writes report
 
-**Session folder**: Create per `audit/references/output-contract.md` — `mkdir -p` BEFORE any dispatch.
-Pass `output_path: {session_folder}/muji-ui-audit.md` (or `a11y-audit.md`) in each delegation block.
+### When Invoked with Muji Report
 
-**UI escalation (simple — to epost-muji):**
-- Fill Template A with: files, component names, platform from file extensions
-- Dispatch via Agent tool to epost-muji; specify `output_path: {session_folder}/muji-ui-audit.md`
-- Wait for report (`.md` only — no JSON expected)
-- After receiving: check `## A11Y Findings` section → if present, proceed to A11Y escalation
-- Merge under `## UI Audit (delegated to epost-muji)` in your `report.md`
+If the caller provides a muji report path (hybrid audit):
+1. Read muji report at the provided path
+2. Extract `finding_locations`: Set of file:line already flagged by muji
+3. Run SEC/PERF/TS/ARCH/STATE/LOGIC/DEAD rules on the same files
+4. **Dedup**: skip any file:line already in muji's finding set
+5. Write report to the provided `output_path`
 
-**A11y escalation (to epost-a11y-specialist):**
-- Trigger: (1) direct a11y task, OR (2) muji report contains `## A11Y Findings` section
-- Fill Template B with: files, platform, muji's finding IDs (if from muji report)
-- Dispatch via Agent tool; specify `output_path: {session_folder}/a11y-audit.md`
-- Wait for report
-- Merge under `## A11Y Audit (delegated to epost-a11y-specialist)` in your `report.md`
+### Critical Escalation (self-dispatch, no Agent tool needed)
 
-**Hybrid audit — sequential (feature module, klara-theme 20+ files):**
+When a Critical finding is detected during review:
+1. Load `knowledge-retrieval` skill (already in agent skills list)
+2. Execute: L1 docs/ → L2 RAG → L4 Grep fallback
+3. Document KB layers used in Methodology
+4. Re-examine files with retrieved context; update findings
 
-Session folder and file names per `audit/references/output-contract.md`.
+### RAG Lookup (when reviewing)
 
-1. Create session folder: `Bash("mkdir -p reports/{YYMMDD-HHMM}-{slug}-audit/")`
-   - **Pre-flight (verify ALL before step 2):**
-     - [ ] `mkdir -p` executed successfully
-     - [ ] `output_path` = `{session_folder}/muji-ui-audit.md`
-     - [ ] Template A+ filled (NOT free-form) with all required fields
-     - If any missing: fix before proceeding.
-2. Dispatch muji via Template A+ — `output_path: {session_folder}/muji-ui-audit.md`
-3. WAIT for muji to complete
-4. Read muji report. Extract: `finding_locations` (Set of file:line), `verdict`, `a11y_findings` (if `## A11Y Findings` present)
-5. If a11y findings → dispatch a11y-specialist (Template B) — `output_path: {session_folder}/a11y-audit.md` — WAIT
-6. Run SEC/PERF/TS/architecture; skip file:line already in muji's set
-7. Write `{session_folder}/session.json` per `audit/references/session-json-schema.md`
-8. Write `{session_folder}/report.md` merging all findings. Verdict = `max(muji, a11y, own)`
-
-**Critical escalation (deeper code audit):**
-- Fill Template C with: files, trigger finding, original review path
-- Self-dispatch (same agent, deeper pass with knowledge-retrieval) — no Agent tool needed:
-  1. Load `knowledge-retrieval` skill (already in agent skills list)
-  2. Execute search strategy: L1 docs/ (conventions, findings) → L2 RAG (implementations) → L4 Grep fallback
-  3. Document KB layers used in report Methodology section
-  4. Re-examine files with retrieved context; update findings
-
-**RAG lookup (hybrid audit pass):**
 1. `ToolSearch("web-rag")` → discover `mcp__web-rag-system__*` tools
 2. Call `status` → confirm available
-3. Call `query` with module name + "prior findings security architecture" → surface known issues
-4. Call `query` with "SEC PERF TS {component}" → pull previously indexed findings
-5. If RAG unavailable: fallback to Grep on `reports/` for prior audit files
-6. Append "L2-RAG" or "L2-RAG-unavailable" to methodology
+3. Call `query` with module + "prior findings security architecture"
+4. If unavailable: fallback to Grep on `reports/` for prior audit files
+5. Append "L2-RAG" or "L2-RAG-unavailable" to methodology
 
 ### Post-Delegation Report Merging
 

@@ -40,16 +40,19 @@ Sub-agents do NOT create folders. They write to `output_path` provided by the ca
 
 ## Responsibility Matrix — Hybrid Audit
 
-| Responsibility | code-reviewer | muji (sub-agent) | a11y (sub-agent) |
-|---------------|:---:|:---:|:---:|
-| Create session folder (`mkdir -p`) | **YES** | no | no |
-| Write `report.md` | **YES** | no | no |
-| Write own sub-report | — | `muji-ui-audit.md` | `a11y-audit.md` |
-| Write `session.json` | **YES** | no | no |
-| Persist findings to `.epost-data/` | `code/` | `ui/` | `a11y/` |
-| Update `reports/index.json` | **YES** | no | no |
+**Orchestrator**: Main conversation (via `audit/SKILL.md`), NOT code-reviewer. Subagents cannot spawn further subagents.
 
-**Rule**: In hybrid audit, sub-agents write ONLY their own report file + their own known-findings DB. The orchestrator (code-reviewer) handles everything else.
+| Responsibility | Main context | code-reviewer (sub-agent) | muji (sub-agent) | a11y (sub-agent) |
+|---------------|:---:|:---:|:---:|:---:|
+| Create session folder (`mkdir -p`) | **YES** | no | no | no |
+| Dispatch sub-agents | **YES** | no | no | no |
+| Write merged `report.md` | **YES** | no | no | no |
+| Write own sub-report | — | `code-review-findings.md` | `muji-ui-audit.md` | `a11y-audit.md` |
+| Write `session.json` | **YES** | no | no | no |
+| Persist findings to `.epost-data/` | — | `code/` | `ui/` | `a11y/` |
+| Update `reports/index.json` | **YES** | no | no | no |
+
+**Rule**: In hybrid audit, sub-agents write ONLY their own report file + their own known-findings DB. The main context handles session folder, merging, session.json, and index.json.
 
 ## Responsibility Matrix — Standalone Audit
 

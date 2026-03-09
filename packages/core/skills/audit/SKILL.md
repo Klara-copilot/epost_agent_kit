@@ -2,8 +2,6 @@
 name: audit
 description: "(ePost) Audit workflow — auto-detects UI component, a11y, or code audit"
 user-invocable: true
-context: fork
-agent: epost-code-reviewer
 metadata:
   argument-hint: "[--ui <ComponentName> [--platform web|ios|android|all] | --a11y [platform] | --code]"
   keywords: [audit, review, component, a11y, accessibility, code, quality, ui-lib, muji, tokens]
@@ -46,27 +44,73 @@ Before executing any audit mode, activate `knowledge-retrieval` to load relevant
 
 **RAG unavailable?** Skip L2, go directly to L4 Grep/Glob. Never block the audit waiting for RAG.
 
-## Step 0 — Flag Override
+## Subagent Constraint
 
-If `$ARGUMENTS` starts with `--ui`: delegate to **epost-muji**, load `references/ui.md`. Pass remaining args (component name + platform flags).
-If `$ARGUMENTS` starts with `--a11y`: load `references/a11y.md` and execute. Pass remaining args as platform hint.
-If `$ARGUMENTS` starts with `--close --ui`: load `references/close-ui.md` and execute. Pass remaining args as finding ID.
-If `$ARGUMENTS` starts with `--close`: load `references/close-a11y.md` and execute. Pass remaining args as finding ID.
-If `$ARGUMENTS` starts with `--code`: dispatch `code-review` inline.
+**Subagents cannot spawn further subagents** — neither Agent tool nor Task tool is available in subagent context. Therefore, this skill runs **inline in the main conversation** (no `context: fork`). The main conversation is the orchestrator — it dispatches specialist agents and merges their results.
+
+## Step 0 — Flag Override + Mode Selection
+
+If `$ARGUMENTS` starts with `--ui`: **dispatch epost-muji** via Agent tool. Pass component name + platform flags + `references/ui.md` workflow.
+If `$ARGUMENTS` starts with `--a11y`: **dispatch epost-a11y-specialist** via Agent tool. Pass `references/a11y.md` + platform hint.
+If `$ARGUMENTS` starts with `--close --ui`: load `references/close-ui.md` and execute inline.
+If `$ARGUMENTS` starts with `--close`: load `references/close-a11y.md` and execute inline.
+If `$ARGUMENTS` starts with `--code`: **dispatch epost-code-reviewer** via Agent tool.
+If auto-detected as **hybrid** (see Hybrid Detection below): run Hybrid Orchestration.
 Otherwise: continue to Auto-Detection.
 
-## Delegation Protocol
+## Hybrid Detection
 
-When dispatching audit work to a specialist agent:
+Trigger hybrid mode when ALL conditions met:
+- Target contains klara-theme files (path contains `libs/klara-theme/` or `libs/common/`)
+- File count >= 20 OR multiple subdirectories in scope
+- No explicit `--ui` or `--code` flag (those force single-agent mode)
 
-1. Create session folder per `references/output-contract.md` — `mkdir -p` BEFORE any dispatch
-2. Select the matching template from `references/delegation-templates.md`
-3. Fill in all `{placeholders}` — include `Output path: {session_folder}/{filename}`
+## Hybrid Orchestration (main context)
+
+**This runs in the main conversation, NOT in a subagent.** The main context has Agent tool available.
+
+```
+session_folder = reports/{YYMMDD-HHMM}-{slug}-audit/
+```
+
+1. **Create session folder**: `Bash("mkdir -p {session_folder}")`
+2. **Dispatch epost-muji** via Agent tool with Template A+ from `references/delegation-templates.md`:
+   - Fill: Scope, Component(s), Mode: library, Platform, Output path: `{session_folder}/muji-ui-audit.md`
+   - WAIT for muji to complete
+3. **Read muji report** at `{session_folder}/muji-ui-audit.md`. Extract:
+   - `finding_locations`: Set of file:line flagged by muji
+   - `verdict`: muji's overall verdict
+   - `a11y_findings`: contents of `## A11Y Findings` section (if present)
+4. **If a11y findings exist**: dispatch epost-a11y-specialist via Agent tool (Template B):
+   - Output path: `{session_folder}/a11y-audit.md`
+   - WAIT for completion
+5. **Dispatch epost-code-reviewer** via Agent tool:
+   - Pass: file list, `{session_folder}/muji-ui-audit.md` path (for dedup), SEC/PERF/TS/ARCH/STATE/LOGIC scope
+   - Output path: `{session_folder}/code-review-findings.md`
+   - WAIT for completion
+6. **Merge reports** into `{session_folder}/report.md`:
+   - Executive Summary with overall verdict
+   - `## UI Audit` — muji verdict, finding count, link to `muji-ui-audit.md`
+   - `## A11Y Audit` (if ran) — link to `a11y-audit.md`
+   - `## Code Review` — code-reviewer findings inline
+   - Methodology section
+7. **Write session.json** per `references/session-json-schema.md`
+8. **Update reports/index.json** per `core/references/index-protocol.md`
+
+Verdict = `max(muji, a11y, code-reviewer)` where REDESIGN > FIX-AND-RESUBMIT > APPROVE.
+
+## Single-Agent Delegation Protocol
+
+For non-hybrid dispatches (`--ui`, `--code`, `--a11y`):
+
+1. Create session folder per `references/output-contract.md`
+2. Select template from `references/delegation-templates.md`
+3. Fill all `{placeholders}` — include `Output path: {session_folder}/{filename}`
 4. Dispatch via **Agent tool** to the specialist agent
-5. **Wait** for specialist report before continuing
-6. Incorporate specialist findings into your own report output
+5. **Wait** for specialist report
+6. Write `session.json` and update `reports/index.json`
 
-**Output contract**: `references/output-contract.md` is the single source of truth for all paths, file names, and agent responsibilities. All other files reference it — do not define output paths elsewhere.
+**Output contract**: `references/output-contract.md` is the single source of truth for paths and responsibilities.
 
 | Template | Specialist | When |
 |----------|-----------|------|

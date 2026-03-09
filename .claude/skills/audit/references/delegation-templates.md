@@ -2,7 +2,9 @@
 
 Structured handoff templates for dispatching audit work to specialist agents.
 
-**Usage:** Select the matching template, fill all `{placeholders}` from current audit context, dispatch via **Agent tool** (NOT Task tool — subagents cannot spawn further subagents via Task tool), wait for specialist report, then incorporate findings into your own report.
+**Usage:** These templates are dispatched by the **main conversation** (via `audit/SKILL.md`), NOT by subagents. Subagents cannot spawn further subagents — neither Agent tool nor Task tool is available in subagent context.
+
+Select the matching template, fill all `{placeholders}`, dispatch via **Agent tool**, wait for specialist report, then merge findings.
 
 **Session folder rule**: The calling agent (code-reviewer) creates the session folder via `mkdir -p reports/{date}-{slug}-audit/` BEFORE dispatching any sub-agent. Sub-agents write to the `Output path:` provided — they do NOT create the folder themselves.
 

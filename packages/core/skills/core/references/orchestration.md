@@ -72,6 +72,27 @@ Per task:
 
 This gives each task a clean context window and two-stage review.
 
+## Subagent Spawn Constraint
+
+Subagents (agents spawned via Agent tool) **cannot spawn further subagents**. Neither Agent tool nor Task tool is available in subagent context.
+
+**Implication**: Multi-agent workflows (hybrid audit, parallel research) must be orchestrated from the **main conversation context**, not from within a subagent.
+
+**Pattern**:
+```
+Main context → [Agent tool] → specialist-1 (independent subagent)
+Main context → [Agent tool] → specialist-2 (independent subagent)
+Main context reads both results and merges
+```
+
+**Anti-pattern** (will fail):
+```
+Main context → [Agent tool] → agent-A (subagent)
+                                 → [Agent tool] → agent-B  ❌ BLOCKED
+```
+
+Skills that orchestrate multi-agent workflows (e.g., `audit/SKILL.md` hybrid mode) must NOT use `context: fork` — they run inline in the main context.
+
 ## Escalation Rules
 
 | Situation | Action |
