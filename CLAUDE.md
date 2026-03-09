@@ -26,111 +26,77 @@ This file provides guidance to Claude Code when working with code in this reposi
 ---
 
 
-## Smart Routing
+## What This Is
 
-On every user prompt involving a dev task, sense context before acting:
-1. Check git state (branch, staged/unstaged files)
-2. Detect platform from changed file extensions (`.tsx`→web, `.swift`→ios, `.kt`→android, `.java`→backend)
-3. Check for active plans in `./plans/`
-4. Route to best-fit skill based on intent + context
-
-**This applies to every prompt — not just `/epost` invocations.**
-
-### Prompt Classification
-- **Dev task** (action verbs: cook, fix, plan, test, debug, etc.) → route via intent map below
-- **Kit question** ("which agent", "list skills", "our conventions") → route to `epost-project-manager`
-- **External tech question** ("how does React...", "what is gRPC") → route to `epost-researcher`
-- **Conversational** (greetings, opinions, clarifications) → respond directly, no routing
-
-### Intent → Skill Map
-
-| Intent | Signal Words | Routes To |
-|--------|-------------|-----------|
-| Build | cook, implement, build, create, add, make, continue | Spawn `epost-fullstack-developer` via Agent tool |
-| Fix | fix, broken, error, crash, failing, what's wrong | Spawn `epost-debugger` via Agent tool |
-| Plan | plan, design, architect, spec, roadmap | Spawn `epost-planner` via Agent tool (`/plan` skill) |
-| Research | research, investigate, compare, best practices | Spawn `epost-researcher` via Agent tool |
-| Test | test, coverage, validate, verify | Spawn `epost-tester` via Agent tool |
-| Debug | debug, trace, inspect, diagnose | Spawn `epost-debugger` via Agent tool |
-| Review | review, check code, audit | Spawn `epost-code-reviewer` via Agent tool |
-| Git | commit, push, pr, merge, done, ship | `/git --commit`, `/git --push`, `/git --pr` |
-| Docs | docs, document, write docs, migrate docs, reorganize docs, scan docs, orphaned files, KB structure, docs audit, knowledge base | Spawn `epost-docs-manager` via Agent tool |
-| Scaffold | bootstrap, init, scaffold, new project, new module | `/bootstrap` |
-| Convert | convert, prototype, migrate | `/convert` |
-| A11y | a11y, accessibility, wcag | `/fix --a11y` or `/review --a11y` |
-| Onboard | get started, begin, onboard, new to project, what is this | `/get-started` |
-| Journal | journal, postmortem, what went wrong, failure log | `epost-journal-writer` (direct) |
-| Simplify | simplify, refactor, clean up, reduce complexity | Spawn `epost-fullstack-developer` via Agent tool |
-| MCP | mcp, tools, discover tools, rag query | `epost-mcp-manager` (direct) |
-| Design | design, ui, ux, wireframe, screenshot to code, visual asset | `epost-muji` (direct) |
-
-> **Delegation rule**: When routing to a skill with `context: fork`, use the **Agent tool** to spawn the skill's `agent:` value. Never execute fork-context skills inline.
-
-### Context Boost Rules
-- TypeScript/build errors detected → always route to `/fix` first
-- Staged files present → boost Git or Review intent
-- Active plan file exists → boost Build intent ("continue" → `/cook`)
-- Merge conflicts → suggest fix/resolve
-- Feature branch with no changes → boost Plan or Build
-
-### Hybrid Audit Protocol
-
-**Subagent constraint**: Subagents cannot spawn further subagents. Hybrid audits are orchestrated by the **main conversation** (via `audit/SKILL.md`), not by code-reviewer.
-
-| Condition | Action |
-|-----------|--------|
-| klara-theme target, 20+ files | **Hybrid**: main context dispatches muji (Template A+) → WAIT → dispatches code-reviewer with muji report → merges |
-| klara-theme target, ≤10 files | Dispatch epost-muji directly (Template A) |
-| Any muji delegation for library audit | MUST use Template A+ from `audit/references/delegation-templates.md` |
-| Free-form audit prompt to muji | NEVER — always use structured delegation templates |
-| Entry point for hybrid audit | **Main conversation** via `/audit` skill (creates session folder, dispatches agents, merges) |
-
-**Why**: Free-form prompts bypass muji's full rule checklist. Template A+ triggers Library Mode with all STRUCT/PROPS/TOKEN/BIZ/A11Y/TEST rules.
-
-### Multi-Step Workflow Detection
-- Multi-intent ("plan and build X") → `epost-project-manager` → `workflow-feature-development`
-- Research then plan ("research X, then plan") → `epost-project-manager` → spawns epost-researcher (report) → epost-planner reads report → creates plan
-- Bug report with context → `epost-debugger` → `workflow-bug-fixing`
-- New project/module → `workflow-project-init`
-- Architecture question ("should we migrate...") → `epost-brainstormer` → `workflow-architecture-review`
-- Parallel work (3+ independent tasks) → `subagent-driven-development` skill
-
-### Rules
-- If user types a slash command explicitly → execute it directly, skip routing
-- If ambiguous → use context boost to break tie; if still ambiguous → ask user (max 1 question)
-- If multi-intent ("plan and build X") → delegate to `epost-project-manager`
-- All agent delegations follow `core/references/orchestration.md` protocol
+epost_agent_kit is a multi-agent development toolkit for Claude Code. Specialized agents load platform-specific skills on demand and follow shared orchestration rules. The main conversation is always the orchestrator — it dispatches agents via Agent tool and merges results.
 
 ---
 
-## Using Agents in Copilot Chat
+## Routing
 
-If you are GitHub Copilot (not Claude Code), you cannot spawn agents via Agent tool.
-Instead: **suggest the right `@agent` for the user to invoke in Copilot Chat.**
+On every user prompt, sense context before acting:
+1. Check git state (branch, staged/unstaged files)
+2. Detect platform from file extensions (`.tsx`→web, `.swift`→ios, `.kt`→android, `.java`→backend)
+3. Check for active plans in `./plans/`
+4. Route to best-fit agent based on intent + context
 
-When the user asks you something, respond by suggesting: "Use `@agent-name` for this — here's how:"
+### Prompt Classification
 
-| User asks... | Suggest |
-|-------------|---------|
-| "Help me understand this project / module / file" | `@epost-researcher` |
-| "I'm new to React/Next.js, explain how X works" | `@epost-researcher` |
-| "Plan a new feature / page / module" | `@epost-planner` |
-| "Implement / build / create / add this" | `@epost-fullstack-developer` |
-| "Fix this error / bug / crash" | `@epost-debugger` |
-| "Review my code before committing" | `@epost-code-reviewer` |
-| "Check accessibility / a11y / keyboard nav" | `@epost-a11y-specialist` |
-| "Write / update documentation" | `@epost-docs-manager` |
-| "Design a component / UI / layout" | `@epost-muji` |
-| "What agent should I use for X?" | Answer directly using this table |
+- **Dev task** (action/problem/question about code) → route via intent table below
+- **Kit question** ("which agent", "list skills", "our conventions") → `epost-project-manager`
+- **External tech question** ("how does React...", "what is gRPC") → `epost-researcher`
+- **Conversational** (greetings, opinions, clarifications) → respond directly
 
-**Starter prompts to share with users:**
-- `@epost-researcher I'm new here. Explain this project and its structure.`
-- `@epost-planner Plan a new [feature] for this project.`
-- `@epost-fullstack-developer Implement phase 1 of the plan at plans/[plan-dir].`
-- `@epost-debugger Fix this error: [paste error]`
+### Intent Map
 
-**Self-guide rule**: If a user asks you (base Copilot) to do a task that an agent handles better, say:
-"For this I'd recommend `@epost-[agent]` — it has deeper context for [reason]. Want me to draft the prompt?"
+| Intent | Natural prompts (examples) | Routes To |
+|--------|---------------------------|-----------|
+| Build / Create | "add a button", "implement login", "make X work", "continue the plan" | `epost-fullstack-developer` via Agent tool |
+| Fix / Debug | "something is broken", "this crashes", "why does X happen", "it's not working" | `epost-debugger` via Agent tool |
+| Plan / Design | "how should we build X", "let's plan", "what's the approach for" | `epost-planner` via Agent tool |
+| Research | "how does X work", "best practices for", "compare A vs B" | `epost-researcher` via Agent tool |
+| Review / Audit | "check my code", "is this good", "review before merge", "audit this" | `epost-code-reviewer` via Agent tool |
+| Test | "add tests", "is this covered", "validate this works" | `epost-tester` via Agent tool |
+| Docs | "document this", "update the docs", "write a spec" | `epost-docs-manager` via Agent tool |
+| Git | "commit", "push", "create a PR", "ship it", "done" | `/git` skill |
+| Onboard | "what is this project", "I'm new", "get started" | `/get-started` skill |
+
+**Fuzzy matching** — classify by verb type when no exact signal word:
+- Creation verbs (add, make, create, build, set up) → Build
+- Problem verbs (broken, wrong, failing, slow, crash) → Fix/Debug
+- Question verbs (how, why, what, should, compare) → Research or Plan
+- Quality verbs (check, review, improve, clean up, refactor, simplify) → Review
+- Still ambiguous → infer from git context (staged files → Review, active plan → Build, error in prompt → Fix)
+
+**Less common intents**: scaffold → `/bootstrap`, convert → `/convert`, journal → `epost-journal-writer`, MCP → `epost-mcp-manager`, design/UI → `epost-muji`
+
+### Routing Rules
+
+1. Explicit slash command → execute directly, skip routing
+2. TypeScript/build errors in context → route to Fix first
+3. Staged files → boost Review or Git intent
+4. Active plan exists → boost Build ("continue" → cook)
+5. Merge conflicts → suggest fix/resolve
+6. Ambiguous after context boost → ask user (max 1 question)
+7. All delegations follow `core/references/orchestration.md`
+
+---
+
+## Orchestration
+
+**Single intent** → spawn the matched agent directly via Agent tool.
+
+**Multi-intent** ("plan and build X", "research then implement") → spawn `epost-project-manager`, which decomposes and delegates sequentially.
+
+**Parallel work** (3+ independent tasks, cross-platform) → use `subagent-driven-development` skill from main context.
+
+**Subagent constraint**: Subagents cannot spawn further subagents. Multi-agent workflows must be orchestrated from the main conversation. Skills that need multi-agent dispatch must NOT use `context: fork`.
+
+**Hybrid audits** (klara-theme code): Orchestrated from main context via `/audit` skill. Dispatch muji (Template A+) first, then code-reviewer with muji's report. Never free-form prompt muji — use structured delegation templates from `audit/references/delegation-templates.md`.
+
+**Escalation**: 3 consecutive failures → surface findings to user. Ambiguous request → ask 1 question max.
+
+See `core/references/orchestration.md` for full protocol.
 
 ---
 
