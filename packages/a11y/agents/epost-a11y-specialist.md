@@ -26,7 +26,7 @@ handoffs:
 | Fix | "fix", "resolve", finding ID (#NNN), "top N" | `/fix --a11y` → `fix/references/a11y-mode.md` + platform fix file |
 | Review/Guidance | "how to", "review", "best practice", "should I" | `/review --a11y` → `review/references/a11y.md` + platform guidance file |
 | Close | "close", "resolved", "mark done" | `/audit --close` → `audit/references/close-a11y.md` |
-| Delegated audit | Task tool invocation with delegation context block | Parse intake → run scoped audit → report back |
+| Delegated audit | Agent tool invocation with delegation context block | Parse intake → run scoped audit → report back |
 
 ## Platform Detection
 
@@ -76,14 +76,14 @@ When executing Audit mode:
    - iOS (.swift) → `audit/references/ios-audit-mode.md`
    - Android (.kt/.kts/.xml) → `audit/references/android-audit-mode.md`
    - Web (.tsx/.ts/.jsx) → use web-a11y skill rules
-3. **Output format**: Produce structured JSON per ios/android audit mode schemas — `total_violations`, `critical_count`, `block_pr`, `violations[]`
-4. **Save findings**: Append new violations to `.epost-data/a11y/known-findings.json` after audit completes (create file if absent)
-5. **Save dual-output reports**:
-   - Agent file (structured JSON): `$EPOST_REPORTS_PATH/{date}-{slug}-a11y-audit.json` — machine-readable violations per audit mode schema (`total_violations`, `critical_count`, `block_pr`, `violations[]`); used by fix/close commands
-   - Human file (readable markdown): `$EPOST_REPORTS_PATH/{date}-{slug}-a11y-audit-review.md` — platform, WCAG coverage, findings table with POUR category, severity, fix guidance; for developers and reviewers
-6. **Index report**: After saving, append both files to `reports/index.json` per `core/references/index-protocol.md`
-5. **Pre-audit**: Activate `knowledge-retrieval` → L1 docs/ known-findings (check `.epost-data/a11y/known-findings.json`) → L2 RAG → L4 Grep/Glob if RAG unavailable
-6. **Regression check**: Cross-reference findings against known-findings database — flag `regression: true` if a resolved finding reappears
+3. **Pre-audit**: Activate `knowledge-retrieval` → L1 docs/ known-findings (check `.epost-data/a11y/known-findings.json`) → L2 RAG → L4 Grep/Glob if RAG unavailable
+4. **Output format**: Produce structured JSON per ios/android audit mode schemas — `total_violations`, `critical_count`, `block_pr`, `violations[]`
+5. **Save findings**: Append new violations to `.epost-data/a11y/known-findings.json` after audit completes (create file if absent). Set `source_agent: "epost-a11y-specialist"`, `source_report: "{report_path}"`, `first_detected_at: "{YYYY-MM-DDTHH:MM}"` on each finding.
+6. **Save reports** per `audit/references/output-contract.md`:
+   - Standalone: `mkdir -p reports/{YYMMDD-HHMM}-{slug}-a11y-audit/` → write `report.md` + `session.json`
+   - Delegated: write to `output_path` from delegation block (caller created folder)
+7. **Index report**: After saving, append entry to `reports/index.json` per `core/references/index-protocol.md`
+8. **Regression check**: Cross-reference findings against known-findings database — flag `regression: true` if a resolved finding reappears
 
 ## Cross-Delegation
 
@@ -93,7 +93,7 @@ When executing Audit mode:
 
 ## Delegated Audit Intake
 
-When invoked via Task tool from another agent (code-reviewer, muji):
+When invoked via Agent tool from another agent (code-reviewer, muji):
 
 1. **Parse delegation block** — extract: Scope (files), Platform, Context (from_ui_audit/from_code_review), Prior findings
 2. **Respect scope** — audit ONLY the files listed

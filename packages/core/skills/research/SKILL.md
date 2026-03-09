@@ -37,7 +37,7 @@ metadata:
 This skill MUST run via the `epost-researcher` agent, not inline.
 
 **When research intent is detected:**
-1. Use the **Task tool** to spawn `epost-researcher`
+1. Use the **Agent tool** to spawn `epost-researcher`
 2. Pass the research topic + scope + report path (`reports/research-{date}-{slug}.md`)
 3. Do NOT conduct research inline in the main conversation
 

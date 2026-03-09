@@ -35,20 +35,31 @@ Review changed code for:
 
 **Example**: Reviews PR → finds missing input validation on API endpoint → potential SQL injection in raw query → N+1 performance issue in user list → password stored in plain text logs → suggests extracting duplicate code to utility function
 
-### 3. Feedback Format
+### 3. Report Output
 
-```markdown
-## Review Summary
-- X issues found (Y critical, Z suggestions)
+Create session folder and write all output per **`audit/references/output-contract.md`** (single source of truth for all paths, files, and responsibilities).
 
-### Critical
-1. [file:line] Issue description + fix suggestion
+Report structure follows `code-review/references/report-template.md`: Executive Summary → Findings table → Methodology → Delegation Log → Verdict → Unresolved Questions.
 
-### Suggestions
-1. [file:line] Improvement idea
-```
+### 4. Persist Findings
 
-### 4. Receiving Review (Addressing Feedback)
+After writing `report.md`:
+
+1. **Code findings** (SEC/PERF/TS/LOGIC/DEAD) → `.epost-data/code/known-findings.json` per `code-review/references/code-known-findings-schema.md`
+2. **UI findings** — persisted by epost-muji to `.epost-data/ui/known-findings.json` (do not duplicate)
+3. **A11Y findings** — persisted by epost-a11y-specialist to `.epost-data/a11y/known-findings.json` (do not duplicate)
+
+Pre-scan for regressions before appending: same `rule_id` + `file_pattern` resolved → flag `regression: true` in report.
+
+### 5. Update Index
+
+Append one entry to `reports/index.json` per `core/references/index-protocol.md`:
+- `path`: session folder (e.g. `reports/260309-0521-smart-letter-composer-audit/`)
+- `files.report`: path to `report.md`
+- `files.session`: path to `session.json`
+- `verdict`: overall verdict
+
+### 6. Receiving Review (Addressing Feedback)
 
 When YOUR code is being reviewed:
 1. Read all feedback before responding
@@ -56,7 +67,7 @@ When YOUR code is being reviewed:
 3. Discuss suggestions — accept or explain why not
 4. Re-request review after fixes
 
-### 5. Knowledge Capture
+### 7. Knowledge Capture
 
 After review, if new patterns or conventions identified:
 - Record as CONV entry in `docs/` via `knowledge-capture`

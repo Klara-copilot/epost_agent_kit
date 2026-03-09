@@ -1,8 +1,10 @@
 # Audit Report Schema v2.0
 
-**Agent-facing file** (`{date}-{slug}-ui-audit.json`). Always pair with a human-readable review file (`{date}-{slug}-ui-audit-review.md`) containing executive summary, findings table, and verdict in markdown.
+**This is a field reference** — it defines the structure of findings and methodology within `report.md`. You do NOT produce a separate JSON file. Findings are written inline as Markdown tables. Machine-readable tracking lives in `known-findings.json` (per-domain) and `session.json` (per-session summary).
 
-## Finding Object
+For output paths and file naming: see `output-contract.md`.
+
+## Finding Object (inline Markdown structure)
 
 ```json
 {
@@ -25,7 +27,7 @@
 - Category: `INTEGRITY`, `PLACE`, `REUSE`, `TW`, `DRY`, `REACT`, `POC`, `STRUCT`, `PROPS`, `TOKEN`, `BIZ`, `A11Y`, `TEST`
 - NNN: zero-padded sequence within that category for this audit (e.g., `001`, `002`)
 
-## Report Envelope
+## Report Envelope (conceptual — rendered as Markdown sections, not JSON)
 
 ```json
 {

@@ -107,10 +107,17 @@
             "default": "manual",
             "description": "How this finding was discovered"
           },
-          "first_detected_date": {
+          "source_agent": {
+            "type": "string",
+            "description": "Agent that detected this finding (e.g. epost-a11y-specialist, epost-code-reviewer)"
+          },
+          "source_report": {
             "type": ["string", "null"],
-            "format": "date",
-            "description": "Date when finding was first detected (YYYY-MM-DD)"
+            "description": "Relative path to the report file that recorded this finding (e.g. reports/260308-2249-smart-letter-a11y-audit.md)"
+          },
+          "first_detected_at": {
+            "type": ["string", "null"],
+            "description": "ISO 8601 datetime when finding was first detected (YYYY-MM-DDTHH:MM)"
           }
         }
       }

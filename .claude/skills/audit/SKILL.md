@@ -59,13 +59,14 @@ Otherwise: continue to Auto-Detection.
 
 When dispatching audit work to a specialist agent:
 
-1. Select the matching template from `references/delegation-templates.md`
-2. Fill in all `{placeholders}` from current audit context
-3. Dispatch via Task tool to the specialist agent
-4. **Wait** for specialist report before continuing
-5. Incorporate specialist findings into your own report output
+1. Create session folder per `references/output-contract.md` — `mkdir -p` BEFORE any dispatch
+2. Select the matching template from `references/delegation-templates.md`
+3. Fill in all `{placeholders}` — include `Output path: {session_folder}/{filename}`
+4. Dispatch via **Agent tool** to the specialist agent
+5. **Wait** for specialist report before continuing
+6. Incorporate specialist findings into your own report output
 
-**Report consolidation**: After all specialist reports are merged into your report, the final deliverable is YOUR single report file. Sub-agent reports are source material — do not surface them as separate deliverables to the user unless explicitly requested.
+**Output contract**: `references/output-contract.md` is the single source of truth for all paths, file names, and agent responsibilities. All other files reference it — do not define output paths elsewhere.
 
 | Template | Specialist | When |
 |----------|-----------|------|
@@ -79,11 +80,13 @@ When dispatching audit work to a specialist agent:
 
 | File | Purpose |
 |------|---------|
+| `references/output-contract.md` | **Single source of truth** — all output paths, session folders, file names, agent responsibilities |
 | `references/ui.md` | Audit UI component (Senior Muji Reviewer) |
 | `references/a11y.md` | Audit staged changes for WCAG 2.1 AA violations |
 | `references/close-a11y.md` | Mark an accessibility finding as resolved |
 | `references/close-ui.md` | Close/resolve a UI finding in known-findings DB |
 | `references/ui-known-findings-schema.md` | Schema for `.epost-data/ui/known-findings.json` |
+| `references/session-json-schema.md` | Schema for `session.json` — per-session metadata written to every session folder |
 | `references/delegation-templates.md` | Structured handoff templates for specialist delegation |
 
 ## Auto-Detection

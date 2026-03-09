@@ -56,5 +56,6 @@ Create a new agent definition file following epost_agent_kit conventions.
 
 - Agent names MUST start with `epost-`
 - Description MUST include `<example>` blocks for triggering
-- Read-only agents (reviewer, researcher) use `permissionMode: plan`
+- Agents that write reports/plans use `permissionMode: default` + instruction-level "do not modify source code" constraint
+- `permissionMode: plan` blocks ALL writes including reports — only use for truly read-only agents with no file output
 - Follow YAGNI — don't add tools/skills the agent won't use

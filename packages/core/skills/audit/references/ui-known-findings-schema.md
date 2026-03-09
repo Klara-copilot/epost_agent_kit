@@ -39,7 +39,9 @@ Schema for `.epost-data/ui/known-findings.json` — the persistence layer for `/
   "fix_applied": false,
   "fix_applied_date": null,
   "source": "audit",
-  "first_detected_date": "YYYY-MM-DD"
+  "source_agent": "epost-muji",
+  "source_report": "reports/260308-2249-smart-letter-composer-audit/muji-ui-audit.md",
+  "first_detected_at": "2026-03-08T22:49"
 }
 ```
 
@@ -63,7 +65,9 @@ Schema for `.epost-data/ui/known-findings.json` — the persistence layer for `/
 | `fix_applied` | `boolean` | True when a fix has been applied (but not yet verified/resolved) |
 | `fix_applied_date` | `string \| null` | ISO date when fix was applied; null if not yet fixed |
 | `source` | `string` | See Source Enum below |
-| `first_detected_date` | `string` | ISO date when finding was first recorded |
+| `source_agent` | `string` | Agent that detected this finding (e.g. `epost-muji`, `epost-code-reviewer`) |
+| `source_report` | `string \| null` | Relative path to the report file that recorded this finding |
+| `first_detected_at` | `string` | ISO 8601 datetime when finding was first recorded (`YYYY-MM-DDTHH:MM`) |
 
 ## Enum Values
 

@@ -5,7 +5,7 @@ color: blue
 model: opus
 skills: [core, skill-discovery, plan, knowledge-retrieval, subagent-driven-development]
 memory: project
-permissionMode: plan
+permissionMode: default
 handoffs:
   - label: Implement plan
     agent: epost-fullstack-developer

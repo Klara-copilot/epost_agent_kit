@@ -18,25 +18,25 @@ On every user prompt involving a dev task, sense context before acting:
 
 | Intent | Signal Words | Routes To |
 |--------|-------------|-----------|
-| Build | cook, implement, build, create, add, make, continue | Spawn `epost-fullstack-developer` via Task tool |
-| Fix | fix, broken, error, crash, failing, what's wrong | Spawn `epost-debugger` via Task tool |
-| Plan | plan, design, architect, spec, roadmap | Spawn `epost-planner` via Task tool (`/plan` skill) |
-| Research | research, investigate, compare, best practices | Spawn `epost-researcher` via Task tool |
-| Test | test, coverage, validate, verify | Spawn `epost-tester` via Task tool |
-| Debug | debug, trace, inspect, diagnose | Spawn `epost-debugger` via Task tool |
-| Review | review, check code, audit | Spawn `epost-code-reviewer` via Task tool |
+| Build | cook, implement, build, create, add, make, continue | Spawn `epost-fullstack-developer` via Agent tool |
+| Fix | fix, broken, error, crash, failing, what's wrong | Spawn `epost-debugger` via Agent tool |
+| Plan | plan, design, architect, spec, roadmap | Spawn `epost-planner` via Agent tool (`/plan` skill) |
+| Research | research, investigate, compare, best practices | Spawn `epost-researcher` via Agent tool |
+| Test | test, coverage, validate, verify | Spawn `epost-tester` via Agent tool |
+| Debug | debug, trace, inspect, diagnose | Spawn `epost-debugger` via Agent tool |
+| Review | review, check code, audit | Spawn `epost-code-reviewer` via Agent tool |
 | Git | commit, push, pr, merge, done, ship | `/git --commit`, `/git --push`, `/git --pr` |
-| Docs | docs, document, write docs, migrate docs, reorganize docs, scan docs, orphaned files, KB structure, docs audit, knowledge base | Spawn `epost-docs-manager` via Task tool |
+| Docs | docs, document, write docs, migrate docs, reorganize docs, scan docs, orphaned files, KB structure, docs audit, knowledge base | Spawn `epost-docs-manager` via Agent tool |
 | Scaffold | bootstrap, init, scaffold, new project, new module | `/bootstrap` |
 | Convert | convert, prototype, migrate | `/convert` |
 | A11y | a11y, accessibility, wcag | `/fix --a11y` or `/review --a11y` |
 | Onboard | get started, begin, onboard, new to project, what is this | `/get-started` |
 | Journal | journal, postmortem, what went wrong, failure log | `epost-journal-writer` (direct) |
-| Simplify | simplify, refactor, clean up, reduce complexity | Spawn `epost-fullstack-developer` via Task tool |
+| Simplify | simplify, refactor, clean up, reduce complexity | Spawn `epost-fullstack-developer` via Agent tool |
 | MCP | mcp, tools, discover tools, rag query | `epost-mcp-manager` (direct) |
 | Design | design, ui, ux, wireframe, screenshot to code, visual asset | `epost-muji` (direct) |
 
-> **Delegation rule**: When routing to a skill with `context: fork`, use the **Task tool** to spawn the skill's `agent:` value. Never execute fork-context skills inline.
+> **Delegation rule**: When routing to a skill with `context: fork`, use the **Agent tool** to spawn the skill's `agent:` value. Never execute fork-context skills inline.
 
 ### Context Boost Rules
 - TypeScript/build errors detected → always route to `/fix` first
@@ -77,7 +77,7 @@ When routing audit/review tasks involving UI library code:
 
 ## Using Agents in Copilot Chat
 
-If you are GitHub Copilot (not Claude Code), you cannot spawn agents via Task tool.
+If you are GitHub Copilot (not Claude Code), you cannot spawn agents via Agent tool.
 Instead: **suggest the right `@agent` for the user to invoke in Copilot Chat.**
 
 When the user asks you something, respond by suggesting: "Use `@agent-name` for this — here's how:"

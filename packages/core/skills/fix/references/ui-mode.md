@@ -20,7 +20,7 @@ Invoked when: `fix --ui <ComponentName> [--finding-id <id>] [--top <n>]`
    - `--finding-id <id>`: load that specific finding
    - `--top <n>`: load top N unresolved by severity + priority
    - No flag: load all unresolved findings for named component
-3. Delegate to epost-muji via Task tool with:
+3. Delegate to epost-muji via Agent tool with:
    - Finding objects from DB
    - Component name + `file_pattern`
    - Mode: fix (apply surgical changes)

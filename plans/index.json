@@ -1,11 +1,11 @@
 {
   "version": "1.0.0",
-  "updated": "2026-03-08",
+  "updated": "2026-03-09",
   "counts": {
-    "active": 36,
+    "active": 37,
     "completed": 25,
     "archived": 0,
-    "total": 62
+    "total": 63
   },
   "plans": [
     {
@@ -1106,6 +1106,16 @@
       ],
       "file": "reports/epost-researcher-260308-1439-audit-ui-a11y-parity.md",
       "summary": "Full audit of command structure parity between a11y and UI workflows. Identifies 3 missing commands (/fix --ui, /review --ui, /audit --close --ui), data layer gap (no known-findings DB), and 7-10 day implementation plan to achieve parity."
+    },
+    {
+      "id": "PLAN-0064",
+      "title": "Audit session folder pattern — consolidate output paths",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-09",
+      "authors": ["epost-fullstack-developer"],
+      "tags": ["audit", "reports", "session-folder", "index-protocol"],
+      "file": "plans/260309-0521-audit-session-folder-pattern/plan.md"
     }
   ]
 }

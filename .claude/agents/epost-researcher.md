@@ -4,7 +4,7 @@ description: (ePost) Expert technology researcher specializing in software devel
 model: haiku
 color: purple
 skills: [core, skill-discovery, research, knowledge-retrieval]
-permissionMode: plan
+permissionMode: default
 handoffs:
   - label: Create plan from findings
     agent: epost-planner

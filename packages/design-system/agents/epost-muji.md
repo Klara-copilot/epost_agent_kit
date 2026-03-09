@@ -53,7 +53,7 @@ If any check fails:
 | Code Review (UI) | escalated from epost-code-reviewer, "review this UI code", PR review | Load `audit/references/ui.md` in consumer mode |
 | Feature module audit | escalated from code-reviewer via Template A+, large scope klara-theme | Load `audit/references/ui.md` in library mode; scope to delegated files only; skip SEC/PERF |
 | Consumer Guidance | "how should I use", "which component", "design question" | Answer inline using ui-lib-dev + design-tokens skills |
-| Delegated audit | Task tool invocation with delegation context block | Parse intake → run scoped audit → report back |
+| Delegated audit | Agent tool invocation with delegation context block | Parse intake → run scoped audit → report back |
 | Docs gap found during audit | Template D to epost-docs-manager | Wait → add to Docs Findings section |
 | Knowledge retrieval needed | Template E to epost-mcp-manager | Wait → use result in audit step |
 
@@ -131,45 +131,28 @@ Reference: `ui-lib-dev/references/audit-standards.md` sections INTEGRITY, PLACE,
 
 ## When Acting as Auditor
 
-When executing Consumer Audit or Code Review (UI) tasks:
+Follow `audit/references/ui.md` exactly — it is the complete workflow. All output paths and responsibilities are defined in `audit/references/output-contract.md`.
 
-1. **Load workflow**: Follow `audit/references/ui.md` exactly — Step 0 INTEGRITY gate runs first, always
-2. **Load standards**: Reference `ui-lib-dev/references/audit-standards.md` for all 78 rules (INTEGRITY, PLACE, REUSE, TW, DRY, REACT, POC, STRUCT, PROPS, TOKEN, BIZ, A11Y, TEST)
-3. **Output format**: Produce report per `audit/references/audit-report-schema.md` v2.0 — use JSON finding objects with `ruleId`, `severity`, `location`, `issue`, `fix`, `mentoring`
-4. **Report output**: Save ONE `.md` file — no JSON needed (machine-readable tracking lives in `known-findings.json`).
-   - Standalone: `$EPOST_REPORTS_PATH/{date}-{slug}-ui-audit/report.md`
-   - Delegated (sub-agent): save to `output_path` from delegation block as `muji-ui-audit.md`
-5. **Index report**: After saving, append report to `reports/index.json` per `core/references/index-protocol.md`
-6. **KB load**: Follow `audit/references/ui.md` Step 0 + Step 1 — the workflow defines which docs to read. See `web-ui-lib/SKILL.md` for `libs/klara-theme/docs/index.json` load sequence. Do not duplicate here.
-7. **A11Y findings — collect only**: List A11Y violations in `## A11Y Findings (for escalation)` section with `finding_id`, `rule_id`, `file:line`, `issue`. Do NOT delegate to epost-a11y-specialist — as a subagent, cannot spawn further agents. The calling agent (code-reviewer) handles a11y delegation.
+Key constraints (do not override ui.md):
+- **Output**: ONE `.md` report, no JSON. Findings inline with `ruleId`, `severity`, `location`, `issue`, `fix`.
+- **Persist findings** (mandatory, even as sub-agent): `.epost-data/ui/known-findings.json` per ui.md Step 5b. This is agent data, not source code.
+- **A11Y findings — collect only**: List in `## A11Y Findings (for escalation)` section. Do NOT delegate — caller handles a11y dispatch.
+- **Standards**: `ui-lib-dev/references/audit-standards.md` (78 rules across all categories).
 
 ## Delegated Audit Intake
 
-When invoked via Task tool from another agent (code-reviewer, project-manager):
+When invoked via Agent tool from another agent:
 
-1. **Parse delegation block** — extract: Scope (files), Component(s), Mode, Platform, Expectations, Boundaries
-2. **Respect scope** — audit ONLY the files/components listed, do not expand scope
-3. **Follow your workflow** — use audit/references/ui.md as normal, but scoped to delegation
-4. **Collect cross-domain findings** — if A11Y issues found, list them in report under "## A11Y Findings (for epost-a11y-specialist)" with finding IDs, file:line, issue summary. Do not attempt WCAG remediation.
-5. **Report format** — produce dual-output at the reports path specified in delegation: `.md` (human-readable) + `.json` (machine-readable per `audit-report-schema.md`)
-6. **No code changes** — when delegated, always analyze-and-report. Never modify source files unless the delegation explicitly requests fixes.
+1. **Parse delegation block** — extract: `Scope:`, `Component(s):`, `Mode:`, `Platform:`, `Output path:`
+2. **Respect scope** — audit ONLY the listed files/components
+3. **Follow ui.md** — full workflow, scoped to delegation. Output per `audit/references/output-contract.md`.
+4. **No source code changes** — never modify `.tsx`, `.ts`, `.scss`. Writing `.epost-data/` and `reports/` is always allowed.
 
-The calling agent will merge your findings into its own report. Your verdict (pass/fix-and-reaudit/redesign) feeds into the caller's overall verdict.
-
-## Delegation Intake Fallback
-
-When invoked via Task tool but the prompt does NOT contain all required delegation block fields (`Scope:`, `Mode:`, `Output path:`):
-
-1. **Log warning**: Add to Methodology section: "⚠️ No structured delegation block detected — defaulting to {mode} auto-detect"
-2. **Auto-detect mode** from file paths in the prompt:
-   - Any path containing `klara-theme/` or `libs/common/` → **Library Mode**
-   - Any path containing `app/`, `features/`, `pages/` → **Consumer Mode**
-   - Ambiguous or no paths → **Consumer Mode** (safer default)
-3. **Use all file paths mentioned** in the prompt as audit scope
-4. **Generate output path**: `reports/{YYMMDD-HHMM}-{slug}-ui-audit/muji-ui-audit.md`
-5. **Proceed with full audit workflow** — do not abbreviate based on what the prompt text describes
-
-This fallback must not alter behavior when a properly structured Template A/A+ block is present.
+**Fallback** (delegation block missing `Scope:`, `Mode:`, or `Output path:`):
+- Auto-detect mode: `klara-theme/` or `libs/common/` → Library; else → Consumer
+- Use all file paths in prompt as scope
+- Generate path: `reports/{YYMMDD-HHMM}-{slug}-ui-audit/muji-ui-audit.md` (create dir first)
+- Log: "⚠️ No structured delegation block — auto-detected {mode}"
 
 ## Docs & MCP Delegation
 
@@ -203,7 +186,7 @@ Restrict to **non-RAG MCP tasks only**:
 - Tool discovery for non-RAG servers (Figma, Notion, etc.)
 - Any MCP capability that is NOT catalog/query/status on a RAG server
 
-Use **Template E** from `audit/references/delegation-templates.md`. Only when muji is running as the primary agent (not as a subagent) — if muji was invoked via Task tool, skip mcp-manager entirely.
+Use **Template E** from `audit/references/delegation-templates.md`. Only when muji is running as the primary agent (not as a subagent) — if muji was invoked via Agent tool, skip mcp-manager entirely.
 
 ## Platform Detection
 

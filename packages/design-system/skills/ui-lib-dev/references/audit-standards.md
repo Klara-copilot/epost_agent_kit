@@ -12,6 +12,46 @@ Also used for integration guidance — see `references/guidance.md` for consumer
 
 ---
 
+## Rule Index
+
+### Library Mode (files inside `libs/klara-theme/` or `libs/common/`)
+
+| Category | Human Name | Rules | Count |
+|----------|-----------|-------|:-----:|
+| KBLOAD | Live KB Load Gate | KBLOAD-001..003 | 3 |
+| STRUCT | Component Structure | STRUCT-001..006 | 6 |
+| PROPS | Props & Naming | PROPS-001..008 | 8 |
+| TOKEN | Token & Style | TOKEN-001..007 | 7 |
+| BIZ | Business Isolation | BIZ-001..005 | 5 |
+| A11Y | Accessibility | A11Y-001..005 | 5 |
+| TEST | Testing & Documentation | TEST-001..004 | 4 |
+| SEC | Security (conditional) | SEC-001..005 | 5 |
+| PERF | Performance (conditional) | PERF-001..004 | 4 |
+| LDRY | Library DRY | LDRY-001..003 | 3 |
+| EMBED | Embedded Components | EMBED-001..005 | 5 |
+| | | **Total** | **55** |
+
+### Consumer Mode (files in `app/`, `features/`, `pages/` importing from klara-theme)
+
+| Category | Human Name | Rules | Count |
+|----------|-----------|-------|:-----:|
+| KBLOAD | Live KB Load Gate | KBLOAD-001..003 | 3 |
+| INT | Library Integrity (critical gate) | INT-1..3 | 3 |
+| PLACE | Component Placement | PL-1..7 | 7 |
+| REUSE | Klara-Theme Reuse | RU-1..8 | 8 |
+| TW | Tailwind Compliance | TW-1..5 | 5 |
+| DRY | DRY Gating | DRY-1..3 | 3 |
+| REACT | React Best Practices | RE-1..8 | 8 |
+| POC | Production Maturity | POC-1..7 | 7 |
+| PP | Consumer Props | PP-E1..E2 | 2 |
+| A11Y | Accessibility | A11Y-001..005 | 5 |
+| SEC | Security (conditional) | SEC-001..005 | 5 |
+| PERF | Performance (conditional) | PERF-001..004 | 4 |
+| EMBED | Embedded Components | EMBED-001..005 | 5 |
+| | | **Total** | **65** |
+
+---
+
 # Library Mode Rules
 
 Apply when the file under audit lives inside `libs/klara-theme/` or `libs/common/`.
@@ -97,7 +137,7 @@ Before applying any rule below, load the current klara-theme standards from the 
 
 **Delegation rule**: A11Y findings require WCAG expertise beyond the surface checks below.
 - **Standalone audit** (not a sub-agent): After collecting violations, delegate A11Y review to **epost-a11y-specialist** via `/audit --a11y`. Pass `finding_ids` from this section. Also use epost-a11y-specialist for integration guidance questions involving keyboard nav, screen readers, or contrast.
-- **As sub-agent** (dispatched via Task tool): Collect all A11Y violations in `## A11Y Findings (for escalation)` section with `finding_id`, `rule_id`, `file:line`, `issue`. The calling agent (code-reviewer) handles delegation.
+- **As sub-agent** (dispatched via Agent tool): Collect all A11Y violations in `## A11Y Findings (for escalation)` section with `finding_id`, `rule_id`, `file:line`, `issue`. The calling agent (code-reviewer) handles delegation.
 
 | Rule ID | Rule | Severity | Pass | Fail |
 |---------|------|----------|------|------|

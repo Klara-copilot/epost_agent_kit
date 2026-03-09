@@ -2,7 +2,9 @@
 
 Structured handoff templates for dispatching audit work to specialist agents.
 
-**Usage:** Select the matching template, fill all `{placeholders}` from current audit context, dispatch via Task tool, wait for specialist report, then incorporate findings into your own report.
+**Usage:** Select the matching template, fill all `{placeholders}` from current audit context, dispatch via **Agent tool** (NOT Task tool — subagents cannot spawn further subagents via Task tool), wait for specialist report, then incorporate findings into your own report.
+
+**Session folder rule**: The calling agent (code-reviewer) creates the session folder via `mkdir -p reports/{date}-{slug}-audit/` BEFORE dispatching any sub-agent. Sub-agents write to the `Output path:` provided — they do NOT create the folder themselves.
 
 ---
 
@@ -26,7 +28,7 @@ Boundaries:
 - If A11y findings emerge, collect them and note for a11y-specialist delegation
 
 Report back to: {calling_agent}
-Output path: {reports_path}
+Output path: {session_folder}/muji-ui-audit.md
 ```
 
 ---
@@ -45,8 +47,7 @@ Out of scope: Security (SEC), Performance (PERF), TypeScript depth — handled b
 Expectations:
 - Run Library mode steps per audit/references/ui.md
 - Apply audit-standards.md rules for Library mode only
-- Produce dual-output: `.md` (human-readable) + `.json` (machine-readable per audit-report-schema.md)
-- Save report to: `{reports_path}/{date}-{slug}-muji-ui-audit.md` (so code-reviewer can read it)
+- Produce `.md` report only (no separate JSON — findings tracked in `known-findings.json`)
 - Include `## Component Catalog` section in report: list of all discovered klara components
 - Include `## Docs Gaps` section: any missing/stale docs/index.json entries found
 
@@ -56,7 +57,7 @@ Boundaries:
 - If A11Y findings emerge, collect and note for a11y-specialist delegation
 
 Report back to: {calling_agent}
-Output path: {reports_path}
+Output path: {session_folder}/muji-ui-audit.md
 ```
 
 ---
@@ -81,6 +82,7 @@ Boundaries:
 - Do not refactor logic, rename variables, or reorganize code
 
 Report back to: {calling_agent}
+Output path: {session_folder}/a11y-audit.md
 ```
 
 ---

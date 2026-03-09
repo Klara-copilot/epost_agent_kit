@@ -64,12 +64,12 @@ Add `methodology` to the JSON envelope before writing output.
 
 ### Step 0: INTEGRITY Gate (Always First)
 
-**Delegation intake:** If this workflow was invoked via a Task tool delegation (not a direct `/audit --ui` call), read the delegation context block at the start of your task for scope, expectations, output format, and report-back target. Use `scope.file_list` as your file list, `scope.platform` as your platform flag, and send your report to `calling_agent` when done.
+**Delegation intake:** If this workflow was invoked via an Agent tool delegation (not a direct `/audit --ui` call), read the delegation context block at the start of your task for scope, expectations, output format, and report-back target. Use `scope.file_list` as your file list, `scope.platform` as your platform flag, and send your report to `calling_agent` when done.
 
-**Delegation block missing or incomplete?** If invoked via Task tool but `Scope:`, `Mode:`, and `Output path:` fields are absent:
+**Delegation block missing or incomplete?** If invoked via Agent tool but `Scope:`, `Mode:`, and `Output path:` fields are absent:
 - Auto-detect mode per Step 1 (Mode Detection) using file path patterns
 - Use all files mentioned in prompt as scope
-- Generate output path: `reports/{YYMMDD-HHMM}-{slug}-ui-audit/muji-ui-audit.md`
+- Generate output path: `reports/{YYMMDD-HHMM}-{slug}-ui-audit/report.md`
 - Append to `coverageGaps`: "Delegation block missing — auto-detected {mode} mode"
 - Continue with full workflow (do not abbreviate)
 
@@ -128,13 +128,28 @@ Then identify the component files to audit and read their source code, props/API
 
 ---
 
-### Step 1.5: KB Load Checkpoint
+### Step 1.5: KB Load Checkpoint + Coverage Map
 
 Verify Step 1 completed successfully before proceeding to any rule checks:
 - `componentCatalog` is non-empty (at least 1 component from FEAT-0001)
 - `knowledgeTiersUsed` includes `"L1-docs"` or `"L2-RAG"`
 - If both empty: retry KB load once, then proceed with `coverageGaps += "KB unavailable — auditing without component catalog"`
 - Log in Methodology: `"KB: loaded ({N} entries)"` or `"KB: degraded ({reason})"`
+
+**KB Coverage Map** — for each loaded CONV-* entry, explicitly map to the audit step it informs:
+
+| CONV Entry | Maps To | Checked? |
+|-----------|---------|---------|
+| CONV-0001 (7-file structure) | STRUCT | ☐ |
+| CONV-0002 (barrel exports) | STRUCT | ☐ |
+| CONV-0003 (I{Name}Props, JSDoc) | PROPS | ☐ |
+| CONV-0004 (theme-ui-label, disabled tokens) | A11Y | ☐ |
+| CONV-0005 (BIZ boundary) | BIZ | ☐ |
+| CONV-0006 (-styles.ts, semantic tokens) | TOKEN | ☐ |
+| CONV-0007 (prohibited patterns) | STRUCT + BIZ | ☐ |
+| CONV-NNN (any additional loaded entry) | → map manually | ☐ |
+
+Fill `Checked? = ✓` as each category is audited. Add any CONV entries from `index.json` not in this table. Include this table in the report's **Methodology** section — it proves KB was consumed, not just loaded.
 
 ---
 
@@ -237,6 +252,17 @@ Run each check against the loaded checklist. For each violation:
 | **BIZ** | BIZ-001–005 | No domain types, no data fetching, no global state |
 | **A11Y** | A11Y-001–005 | Labels, keyboard, Radix UI, focus ring, disabled tokens |
 | **TEST** | TEST-001–004 | Tests exist, stories exist, Figma artifacts present |
+| **EMBED** | EMBED-001–003 | Child/embedded components are from klara-theme or accepted; no overrides on embedded slots |
+
+**TOKEN — RAG verification for ambiguous values**: When a token class name is neither clearly arbitrary (e.g. `[10px]`) nor clearly invalid (e.g. raw hex), verify via RAG:
+1. `ToolSearch("web-rag")` → query `token:{value}` (e.g. `token:h-800`, `token:bg-alternate-100`)
+2. If RAG unavailable: Glob `libs/klara-theme/src/tokens/**` or `tailwind.config.ts` and grep for the value
+3. Report: `"L2-RAG-token"` or `"L4-grep-token"` in `knowledgeTiersUsed`
+
+**EMBED — RAG lookup for embedded components**: For each child/embedded component not in `componentCatalog`:
+1. `ToolSearch("web-rag")` → query `component:{name}` to check if it's a known klara-theme component
+2. If found: verify no prop overrides on library-controlled slots; flag overrides as EMBED-002
+3. If not found: flag as EMBED-001 (unrecognized embedded component — may be custom or external)
 
 ### Step 3b: SEC Audit (Library Mode — Conditional)
 
@@ -274,12 +300,20 @@ Only run when `--platform all` is specified. Check:
 
 Save report as **one `.md` file** — JSON is not needed; machine-readable data lives in `known-findings.json` (Step 5b).
 
-If invoked standalone (`/audit --ui`):
-- Output to: `$EPOST_REPORTS_PATH/{date}-{slug}-ui-audit/report.md`
+All output paths per **`audit/references/output-contract.md`**:
 
-If invoked as sub-agent (delegated via Task tool from code-reviewer):
-- Output to: the `output_path` specified in the delegation block (inside the session folder)
-- Filename: `muji-ui-audit.md` (so code-reviewer can read it at a predictable path)
+**Standalone** (`/audit --ui`):
+1. `Bash("mkdir -p reports/{YYMMDD-HHMM}-{slug}-ui-audit/")` — required before Write
+2. Write report to `{dir}/report.md`
+
+**Sub-agent** (delegated via Agent tool):
+- Write to `output_path` from delegation block (e.g. `{session_folder}/muji-ui-audit.md`)
+- Caller created the folder — do NOT create it again
+
+### Step 5a: Write session.json (standalone only)
+
+After writing `report.md`, write `session.json` to the same folder per `audit/references/session-json-schema.md`.
+In hybrid mode, the orchestrator (code-reviewer) writes session.json — muji does NOT.
 
 ### Step 5b: Persist Findings (always)
 
@@ -290,7 +324,7 @@ After writing the Markdown report, persist findings to `.epost-data/ui/known-fin
 2. For each finding in this audit with severity critical, high, or medium:
    - Generate next available `id` (max existing id + 1, starting at 1 for empty DB)
    - Map finding fields to schema: `rule_id`, `component`, `file_pattern`, `severity`, `mode`, `platform`, `title`, `code_pattern`, `fix_template`
-   - Set `source: "audit"`, `first_detected_date: today`, `resolved: false`, `fix_applied: false`
+   - Set `source: "audit"`, `source_agent: "epost-muji"`, `source_report: "{report_path}"`, `first_detected_at: "{YYYY-MM-DDTHH:MM}"`, `resolved: false`, `fix_applied: false`
    - Deduplication check: skip if entry with same `rule_id` AND `file_pattern` already exists with `resolved: false`
    - Append to `findings` array
 3. Save updated JSON

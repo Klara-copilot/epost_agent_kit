@@ -40,24 +40,32 @@ Maintained by: `epost-planner`, `epost-project-manager`
 
 ```json
 {
-  "schemaVersion": "1.0.0",
-  "updatedAt": "YYYY-MM-DD",
-  "entries": [{
-    "id": "260307-1409-slug",
+  "version": "1.0.0",
+  "updated": "YYYY-MM-DD",
+  "counts": {
+    "active": 0,
+    "completed": 0,
+    "archived": 0,
+    "total": 0
+  },
+  "plans": [{
+    "id": "PLAN-0001",
     "title": "Short plan title",
+    "type": "implementation | report | research",
     "status": "draft | active | completed | archived",
-    "path": "plans/260307-1409-slug/plan.md",
     "created": "YYYY-MM-DD",
-    "updated": "YYYY-MM-DD",
-    "platforms": ["web | ios | android | backend | kit | all"],
-    "effort": "Xh"
+    "authors": ["epost-planner"],
+    "tags": ["tag1"],
+    "file": "plans/260307-1409-slug/plan.md"
   }]
 }
 ```
 
+**Key names**: `"version"` (not `"schemaVersion"`), `"updated"` (not `"updatedAt"`), `"plans"` array (not `"entries"`), `"counts"` object for totals.
+
 `plans/README.md` is the human-readable board — updated automatically by lifecycle scripts (`set-active-plan.cjs`, `complete-plan.cjs`, `archive-plan.cjs`). Do NOT manually edit it.
 
-**Update rule**: Append entry after creating a plan directory. Update `updated` + `status` on lifecycle changes.
+**Update rule**: Append entry to `plans[]` after creating a plan directory. Increment relevant `counts` field. Update `updated` + `status` on lifecycle changes.
 
 ---
 
@@ -70,24 +78,24 @@ Maintained by: `epost-code-reviewer`, `epost-muji`, `epost-a11y-specialist`, `ep
   "schemaVersion": "1.0.0",
   "updatedAt": "YYYY-MM-DD",
   "entries": [{
-    "id": "code-reviewer-260307-1409-my-feature-code-review",
-    "type": "code-review | ui-audit | a11y-audit | research | plan | test",
+    "id": "260309-0521-smart-letter-composer-audit",
+    "type": "hybrid-audit | ui-audit | a11y-audit | code-review | research | plan | test",
     "agent": "epost-code-reviewer",
-    "title": "Code Review: My Feature",
-    "verdict": "APPROVE | FIX-AND-RESUBMIT | REDESIGN | ACTIONABLE | READY | PASS | FAIL",
+    "title": "SmartLetterComposer Full Audit",
+    "verdict": "FIX-AND-RESUBMIT",
+    "path": "reports/260309-0521-smart-letter-composer-audit/",
     "files": {
-      "agent": "reports/code-reviewer-260307-1409-my-feature-code-review.json",
-      "human": "reports/code-reviewer-260307-1409-my-feature-code-review.md"
+      "report": "reports/260309-0521-smart-letter-composer-audit/report.md",
+      "session": "reports/260309-0521-smart-letter-composer-audit/session.json"
     },
-    "plan": "plans/260307-1409-slug/plan.md",
-    "created": "YYYY-MM-DD HH:mm"
+    "created": "2026-03-09 05:21"
   }]
 }
 ```
 
-**Dual-file rule**: Every report produces two files — `agent` (JSON, structured) and `human` (Markdown, readable). Both paths go in `files`. If a report type only produces one file, use the same path for both.
+**Session folder rule**: `path` points to the session folder directory (trailing `/`). `files.report` is the main Markdown report. `files.session` is the `session.json` metadata file. Both live inside the session folder.
 
-**Update rule**: Append entry after writing both report files. Update `updatedAt`. Create `reports/index.json` if absent.
+**Update rule**: Append one entry per session (not per sub-agent report). Update `updatedAt`. Create `reports/index.json` if absent.
 
 ---
 

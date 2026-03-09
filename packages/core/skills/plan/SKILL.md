@@ -37,7 +37,7 @@ metadata:
 This skill MUST run via the `epost-planner` agent, not inline.
 
 **When `/plan` or planning intent is detected:**
-1. Use the **Task tool** to spawn `epost-planner`
+1. Use the **Agent tool** to spawn `epost-planner`
 2. Pass the full user request + active context (branch, plan dir, CWD)
 3. Do NOT execute planning steps inline in the main conversation
 

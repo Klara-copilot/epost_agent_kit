@@ -2,8 +2,29 @@
 
 **One report per audit session.** Multiple components or scopes → group by scope in one report, not separate files.
 
-**Human-facing file** — filename: `{agent}-{date}-{slug}-ui-audit.md`
-Pair with a machine-readable JSON envelope (`audit-report-schema.md`) if requested.
+## Session Folder Structure
+
+Every audit — including inline code reviews — writes to a session folder:
+
+```
+reports/{YYMMDD-HHMM}-{slug}-audit/        # hybrid (code-reviewer orchestrates)
+  session.json      # metadata: scope, agents, verdict, finding counts
+  report.md         # main merged report (code-reviewer owns)
+  muji-ui-audit.md  # muji pass
+  a11y-audit.md     # a11y pass
+
+reports/{YYMMDD-HHMM}-{slug}-ui-audit/     # standalone muji (no code-reviewer)
+  session.json
+  report.md
+
+reports/{YYMMDD-HHMM}-{slug}-code-review/  # inline code review (no sub-agents)
+  session.json
+  report.md
+```
+
+The main deliverable is always `report.md`. Sub-agent reports (`muji-ui-audit.md`, `a11y-audit.md`) are source material within the same folder.
+
+**Create the folder first:** `mkdir -p reports/{date}-{slug}-{type}/` before writing any file.
 
 ---
 
