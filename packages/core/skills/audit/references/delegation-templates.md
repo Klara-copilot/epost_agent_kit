@@ -64,6 +64,40 @@ Output path: {session_folder}/muji-ui-audit.md
 
 ---
 
+## Template A++: POC Organism Audit (→ epost-muji)
+
+```
+## Delegated POC Organism Audit
+
+Scope: {file_list}
+Component(s): {component_names}
+Mode: library
+Platform: {web | ios | android | all}
+Component Class: organism
+Maturity Tier: {poc | beta | stable}
+Audit focus: ORGANISM, STATE, MOCK, A11Y, TEST (DIALOG advisory-only)
+Out of scope: STRUCT-002, TOKEN-001, BIZ-001/002/003, STRUCT-005, TEST-004 (suppressed per maturity tier)
+
+Expectations:
+- Classify component per Step 0.5 (confirm organism classification)
+- Apply maturity tier per Step 0.6 — modulate blocking vs advisory
+- Load checklist-web-organism.md (NOT checklist-web.md)
+- Include mock boundary scan: verify MOCK_* naming, API contract mapping, export isolation
+- Produce .md report with phased roadmap verdict (Now / Before Beta / Before Stable)
+- Include ## Component Catalog and ## Docs Gaps sections
+
+Boundaries:
+- Analyze and report only — do not modify source files
+- Do not run SEC, PERF, or architecture checks — caller handles those
+- DIALOG-* rules are advisory only — include but do not raise as current findings
+- If A11Y findings emerge, collect and note for a11y-specialist delegation
+
+Report back to: {calling_agent}
+Output path: {session_folder}/muji-ui-audit.md
+```
+
+---
+
 ## Template B: A11y Audit (→ epost-a11y-specialist)
 
 ```

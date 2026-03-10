@@ -62,6 +62,73 @@ Add `methodology` to the JSON envelope before writing output.
 
 ---
 
+### Step 0.5: Component Classification
+
+Classify the target component by scanning its file tree before applying any rules.
+
+**Detection heuristics:**
+1. Count TypeScript files: `Glob("{component_path}/**/*.{tsx,ts}")`
+2. Count subdirectories: `Glob("{component_path}/*/")`
+3. Check for internal routing/view patterns: grep for `useState.*view`, route arrays, tab configs
+
+**Classification rules:**
+
+| Type | File Count | Subdirs | Pattern |
+|------|-----------|---------|---------|
+| atom | 1–3 | 0 | Single TSX, pure UI, no subdirs |
+| molecule | 2–5 | 0–1 | Minor composition, ≤1 subdir |
+| organism | 6+ | 2+ | Complex internal state, multiple subdirs |
+| application | any | 3+ | Full view-routing, multi-modal, mini-app inside libs/ |
+| consumer | any | any | Imports from klara, lives in apps/ (existing consumer mode) |
+
+Set `componentClass` in report envelope.
+
+**Routing table:**
+
+| Classification | Checklist | Notes |
+|---------------|-----------|-------|
+| atom, molecule | `checklist-web.md` | Current behavior, unchanged |
+| organism, application | `checklist-web-organism.md` | See Phase 2 |
+| consumer | Consumer mode steps (existing) | No change |
+
+---
+
+### Step 0.6: Maturity Tier
+
+Determine maturity tier (modulates blocking vs advisory severity).
+
+**Source priority:**
+1. Explicit `--poc`, `--beta`, or `--stable` flag in `$ARGUMENTS`
+2. Heuristic: presence of `MOCK_*` constants OR TODO density >5 OR no test files → `poc`
+3. Default: `stable`
+
+Set `maturityTier` in report envelope.
+
+**Severity modulation table:**
+
+| Rule Category | poc blocking | poc advisory | beta blocking | stable |
+|--------------|-------------|-------------|--------------|--------|
+| STRUCT-002 (7-file) | — | advisory | — | blocking |
+| TOKEN-001 (styles.ts) | — | advisory | blocking | blocking |
+| BIZ-001 (domain types) | — | advisory | — | N/A for organisms |
+| BIZ-002 (API calls) | — | advisory | advisory | blocking |
+| BIZ-003 (global state) | — | advisory | advisory | blocking |
+| TEST-004 (Figma) | — | advisory | advisory | blocking |
+| STRUCT-005 (displayName) | — | advisory | advisory | blocking |
+| ORGANISM-* (API surface) | blocking | — | blocking | blocking |
+| STATE-* (state boundary) | blocking | — | blocking | blocking |
+| MOCK-* (mock boundaries) | blocking | — | advisory | N/A |
+| DIALOG-* (future compat) | advisory | — | advisory | advisory |
+
+**Severity modulation instruction:** When applying any rule from the checklist:
+1. Look up rule ID in the table above
+2. `advisory` → cap severity at "low", prefix finding title with `[Advisory]`
+3. `—` → skip rule entirely; do not include in findings or score
+4. `blocking` → apply normal severity from checklist
+5. Advisory findings do NOT count toward verdict thresholds
+
+---
+
 ### Step 0: INTEGRITY Gate (Always First)
 
 **Delegation intake:** If this workflow was invoked via an Agent tool delegation (not a direct `/audit --ui` call), read the delegation context block at the start of your task for scope, expectations, output format, and report-back target. Use `scope.file_list` as your file list, `scope.platform` as your platform flag, and send your report to `calling_agent` when done.
@@ -232,10 +299,18 @@ Populate `sectionRatings` in report with score + insight narrative per section.
 
 ### Step 2: Load Platform Checklist(s)
 
-Load the matching checklist:
-- web: `references/checklist-web.md` (rules from `ui-lib-dev/references/audit-standards.md`)
-- ios: `references/checklist-ios.md` (future)
-- android: `references/checklist-android.md` (future)
+Load checklist based on `componentClass` (from Step 0.5):
+
+| componentClass | Checklist |
+|---------------|-----------|
+| atom, molecule | `references/checklist-web.md` (rules from `ui-lib-dev/references/audit-standards.md`) |
+| organism, application | `references/checklist-web-organism.md` |
+
+Also load maturity tier modulation (from Step 0.6) — apply severity overrides before scoring.
+
+Platform checklists (future):
+- ios: `references/checklist-ios.md`
+- android: `references/checklist-android.md`
 
 ### Step 3: Audit — 6 Categories Per Platform
 
@@ -263,6 +338,27 @@ Run each check against the loaded checklist. For each violation:
 1. `ToolSearch("web-rag")` → query `component:{name}` to check if it's a known klara-theme component
 2. If found: verify no prop overrides on library-controlled slots; flag overrides as EMBED-002
 3. If not found: flag as EMBED-001 (unrecognized embedded component — may be custom or external)
+
+**Organism/Application mode** — when `componentClass` is `organism` or `application`, replace the atom/molecule category table above with:
+
+| Category | Rule IDs | What to Check |
+|----------|----------|--------------|
+| **ORGANISM** | ORGANISM-001–006 | Public API surface, props, callbacks, env isolation, CSS containment |
+| **STATE** | STATE-001–005 | State boundaries, external state via props, side effects, mock isolation |
+| **MOCK** | MOCK-001–005 | Mock naming, API contract mapping, injection pattern, export isolation |
+| **DIALOG** | DIALOG-001–004 | Future: fixed positioning, viewport units, body manipulation, focus (advisory only) |
+| **A11Y** | A11Y-001–005 | Same as atom/molecule — always applies |
+| **TEST** | TEST-001–003 | Tests + stories (TEST-004 Figma filtered by maturity tier) |
+
+**Atom/molecule rule suppression for organisms:** The following rules from `checklist-web.md` are NOT applied when `componentClass` is `organism` or `application` (replaced by organism equivalents or N/A):
+- STRUCT-002 → replaced by ORGANISM-005 (compound entry point)
+- STRUCT-005 → N/A (organisms are view containers, not leaf components)
+- TOKEN-001 → N/A (organisms delegate styling to child atoms/molecules)
+- BIZ-001/002/003 → replaced by STATE-001 (organisms ARE domain-aware; boundary is at props)
+
+These rules do not appear in findings, score, or verdict for organisms.
+
+---
 
 ### Step 3b: SEC Audit (Library Mode — Conditional)
 

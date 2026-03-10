@@ -7,21 +7,18 @@ profiles:
   web-fullstack:
     display_name: "Web Fullstack Developer"
     teams: [miracle, helios, titan]
-    packages: [core, platform-web, platform-backend, domains, a11y]
-    optional: [design-system]
+    packages: [core, platform-web, platform-backend, domains, a11y, design-system]
 
   # ─── Mobile Teams (Optimus) ───
   ios-b2c:
     display_name: "iOS App Developer"
     teams: [optimus]
-    packages: [core, platform-ios, domains, a11y]
-    optional: [design-system]
+    packages: [core, platform-ios, domains, a11y, design-system]
 
   android-b2c:
     display_name: "Android App Developer"
     teams: [optimus]
-    packages: [core, platform-android, domains, a11y]
-    optional: [design-system]
+    packages: [core, platform-android, domains, a11y, design-system]
 
   # ─── Backend/API Teams (Hacka, Kepler) ───
   backend-api:

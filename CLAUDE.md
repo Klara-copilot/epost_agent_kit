@@ -58,7 +58,7 @@ On every user prompt, sense context before acting:
 | Review / Audit | "check my code", "is this good", "review before merge", "audit this" | `epost-code-reviewer` via Agent tool |
 | Test | "add tests", "is this covered", "validate this works" | `epost-tester` via Agent tool |
 | Docs | "document this", "update the docs", "write a spec" | `epost-docs-manager` via Agent tool |
-| Git | "commit", "push", "create a PR", "ship it", "done" | `/git` skill |
+| Git | "commit", "push", "create a PR", "ship it", "done" | `epost-git-manager` via Agent tool |
 | Onboard | "what is this project", "I'm new", "get started" | `/get-started` skill |
 
 **Fuzzy matching** — classify by verb type when no exact signal word:

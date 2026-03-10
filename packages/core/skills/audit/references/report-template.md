@@ -137,6 +137,40 @@ _(Omit section if no delegation occurred)_
 
 ---
 
+### POC Verdict — Phased Roadmap (when maturityTier != stable)
+
+Replace the binary verdict line with this phased roadmap when auditing `poc` or `beta` components:
+
+```markdown
+## Phased Roadmap
+
+### Now (POC → Stable POC)
+Blocking findings that must be fixed before POC demo/review.
+
+| ID | Severity | Summary | Fix |
+|----|----------|---------|-----|
+| ... | critical/high | ... | ... |
+
+### Before Beta
+Should-fix findings for production readiness. Currently advisory.
+
+| ID | Severity | Summary | Fix |
+|----|----------|---------|-----|
+| ... | medium | ... | ... |
+
+### Before Stable
+Nice-to-fix and advisory items. Address during hardening phase.
+
+| ID | Severity | Summary | Fix |
+|----|----------|---------|-----|
+| ... | low | ... | ... |
+```
+
+**Verdict line for POC:** `**POC Verdict: {N} blocking / {N} before-beta / {N} before-stable**`
+(replaces PASS / FIX-AND-REAUDIT / REDESIGN for poc/beta tiers)
+
+---
+
 ## Formatting Rules
 
 | Rule | Detail |

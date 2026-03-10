@@ -1,11 +1,11 @@
 {
   "version": "1.0.0",
-  "updated": "2026-03-10",
+  "updated": "2026-03-09",
   "counts": {
-    "active": 25,
+    "active": 27,
     "completed": 0,
     "archived": 39,
-    "total": 64
+    "total": 66
   },
   "plans": [
     {
@@ -707,6 +707,43 @@
         "organization"
       ],
       "file": "plans/260310-0834-audit-report-organization/plan.md"
+    },
+    {
+      "id": "PLAN-0070",
+      "title": "PreToolUse Hook: Auto-Run Build-Gate on Git Commit",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-10",
+      "authors": [
+        "epost-planner"
+      ],
+      "tags": [
+        "hooks",
+        "build-gate",
+        "pretooluse",
+        "git"
+      ],
+      "file": "plans/260310-0954-build-gate-pretooluse-hook/plan.md"
+    },
+    {
+      "id": "PLAN-0071",
+      "title": "Audit Organism/POC Mode — Classification, Maturity Tiers, Organism Checklist",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-09",
+      "authors": [
+        "epost-planner"
+      ],
+      "tags": [
+        "audit",
+        "organism",
+        "poc",
+        "maturity",
+        "checklist",
+        "muji",
+        "classification"
+      ],
+      "file": "plans/260309-audit-organism-poc-mode/plan.md"
     }
   ]
 }

@@ -93,6 +93,20 @@ Main context → [Agent tool] → agent-A (subagent)
 
 Skills that orchestrate multi-agent workflows (e.g., `audit/SKILL.md` hybrid mode) must NOT use `context: fork` — they run inline in the main context.
 
+## Skill Execution Mode
+
+When you load a skill, check its frontmatter before executing:
+
+| Frontmatter | How to execute |
+|-------------|---------------|
+| `context: fork` + `agent: {name}` | **MUST** spawn `{name}` via Agent tool. Do NOT execute inline. Do NOT use raw Bash. |
+| `context: inline` | Execute the skill content directly in the main conversation. |
+| No `context` field | Execute inline (default). |
+
+**Iron Law**: A skill with `context: fork` is a dispatch instruction, not a script to run yourself. Seeing `context: fork` means: stop, spawn the named agent, pass it the task.
+
+**Common failure mode**: Skipping the Skill tool entirely and running raw Bash/shell commands instead. This bypasses routing, skips build gates, skips all skill-level safety checks. Never do this for git, research, planning, or any workflow that has a dedicated agent.
+
 ## Escalation Rules
 
 | Situation | Action |
