@@ -34,7 +34,7 @@ Applies when `maturityTier = poc` or `beta`. MOCK-* rules are N/A for `stable`.
 
 - [ ] **MOCK-001** `medium` — All mock constants use `MOCK_` prefix (SCREAMING_SNAKE_CASE)
 - [ ] **MOCK-002** `high` — Every mock maps to a documented future API contract: JSDoc comment referencing expected endpoint/shape
-- [ ] **MOCK-003** `high` — Recipients, analytics, and external service data injected via props: not imported from mock files at render time
+- [ ] **MOCK-003** `high` — External entity data (e.g. contact lists, event payloads, service configs) injected via props: not imported from mock files at render time
 - [ ] **MOCK-004** `medium` — Mock data files export typed constants matching the expected API response shape (no `any`, no untyped objects)
 - [ ] **MOCK-005** `critical` — No mock data in production exports: `index.ts` barrel does not re-export mock files or `__mocks__/` contents
 
