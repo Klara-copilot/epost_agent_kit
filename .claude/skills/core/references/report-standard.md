@@ -123,6 +123,27 @@ For audit reports that include JSON: the `summary` object provides machine-reada
 
 ---
 
+## Output Location
+
+All reports go into a dated folder:
+
+```
+reports/{YYMMDD-HHMM}-{slug}/
+  report.md          — main deliverable
+  session.json       — (audit types only)
+  {sub-reports}      — (hybrid audits only)
+```
+
+Plan-scoped reports: `plans/{plan-dir}/reports/{YYMMDD-HHMM}-{slug}/`
+
+**Before writing any file**: `mkdir -p reports/{YYMMDD-HHMM}-{slug}/`
+
+Flat files in `reports/` root are **deprecated**. New reports always use the folder pattern.
+
+Note: audit session folders follow `audit/references/output-contract.md` which extends this base pattern with additional sub-agent files and `session.json`.
+
+---
+
 ## Index Maintenance
 
 After saving any report file, update `reports/index.json`.

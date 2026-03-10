@@ -1,11 +1,11 @@
 {
   "version": "1.0.0",
-  "updated": "2026-03-09",
+  "updated": "2026-03-10",
   "counts": {
-    "active": 37,
-    "completed": 25,
-    "archived": 0,
-    "total": 63
+    "active": 25,
+    "completed": 0,
+    "archived": 39,
+    "total": 64
   },
   "plans": [
     {
@@ -246,662 +246,10 @@
       "file": "reports/plan-260208-1337-changelog-plans-tracking.md"
     },
     {
-      "id": "PLAN-0016",
-      "title": "CLI Terminal UI Improvements",
-      "type": "implementation",
-      "status": "completed",
-      "created": "2026-02-08",
-      "authors": [
-        "epost-architect"
-      ],
-      "tags": [
-        "cli",
-        "ui",
-        "ux",
-        "onboarding",
-        "branding"
-      ],
-      "file": "completed/plan-260208-1442-cli-terminal-ui-improvements.md"
-    },
-    {
-      "id": "PLAN-0017",
-      "title": "Agent & Skill Ecosystem for CLI",
-      "type": "implementation",
-      "status": "completed",
-      "created": "2026-02-08",
-      "authors": [
-        "epost-architect",
-        "epost-implementer"
-      ],
-      "tags": [
-        "agents",
-        "skills",
-        "cli",
-        "commands",
-        "ecosystem"
-      ],
-      "file": "completed/plan-260208-1610-agent-skill-cli-ecosystem.md"
-    },
-    {
-      "id": "PLAN-0018",
-      "title": "Dedicated CLI Developer Agent",
-      "type": "implementation",
-      "status": "completed",
-      "created": "2026-02-08",
-      "authors": [
-        "epost-implementer"
-      ],
-      "tags": [
-        "agents",
-        "cli",
-        "platform-agent"
-      ],
-      "file": "completed/plan-260208-1625-cli-developer-agent.md"
-    },
-    {
-      "id": "PLAN-0019",
-      "title": "Skill Chain View Mode",
-      "type": "implementation",
-      "status": "active",
-      "created": "2026-03-03",
-      "authors": [
-        "epost-architect"
-      ],
-      "tags": [
-        "management-ui",
-        "visualization",
-        "canvas",
-        "skill-chain"
-      ],
-      "file": "../../tools/management-ui/plans/skill-chain-view/plan.md"
-    },
-    {
-      "id": "PLAN-0020",
-      "title": "Git Skills & Skill-Discovery Integration",
-      "type": "implementation",
-      "status": "active",
-      "created": "2026-03-03",
-      "authors": [
-        "epost-architect"
-      ],
-      "tags": [
-        "skills",
-        "git",
-        "skill-discovery",
-        "kit"
-      ],
-      "file": "active/plan-git-skill-discovery/plan.md"
-    },
-    {
-      "id": "PLAN-0021",
-      "title": "Re-implement Lost Features",
-      "type": "implementation",
-      "status": "active",
-      "created": "2026-03-03",
-      "authors": [
-        "epost-architect"
-      ],
-      "tags": [
-        "recovery",
-        "skills",
-        "cli",
-        "management-ui"
-      ],
-      "file": "../../plans/260303-1000-reimpl-lost-features/plan.md"
-    },
-    {
-      "id": "PLAN-0022",
-      "title": "Skill Discovery Chain Canvas",
-      "type": "implementation",
-      "status": "active",
-      "created": "2026-03-03",
-      "authors": [
-        "epost-architect"
-      ],
-      "tags": [
-        "management-ui",
-        "visualization",
-        "canvas",
-        "skill-discovery"
-      ],
-      "file": "../../tools/management-ui/plans/skill-discovery-canvas/plan.md"
-    },
-    {
-      "id": "PLAN-0023",
-      "title": "Dual-View Redesign: Agent-Centric + Skill-Centric",
-      "type": "implementation",
-      "status": "active",
-      "created": "2026-03-03",
-      "authors": [
-        "epost-architect"
-      ],
-      "tags": [
-        "management-ui",
-        "ux",
-        "canvas",
-        "views",
-        "agent-view",
-        "skill-view"
-      ],
-      "file": "../../tools/management-ui/plans/dual-view-redesign/plan.md"
-    },
-    {
-      "id": "PLAN-0024",
-      "title": "Skill Taxonomy Cleanup",
-      "type": "implementation",
-      "status": "completed",
-      "created": "2026-03-03",
-      "authors": [
-        "epost-architect"
-      ],
-      "tags": [
-        "skills",
-        "taxonomy",
-        "dedup",
-        "connections",
-        "hub-context"
-      ],
-      "file": "../../plans/260303-1250-skill-taxonomy-cleanup/plan.md"
-    },
-    {
-      "id": "PLAN-0025",
-      "title": "Init CLI Interactive UX Improvements",
-      "type": "implementation",
-      "status": "active",
-      "created": "2026-03-03",
-      "authors": [
-        "epost-implementer"
-      ],
-      "tags": [
-        "cli",
-        "init",
-        "ux",
-        "interactive",
-        "editor"
-      ],
-      "file": "../../plans/reports/epost-implementer-260303-1535-init-cli-ux-improvements.md"
-    },
-    {
-      "id": "PLAN-0026",
-      "title": "Auto-Orchestrating /get-started",
-      "type": "implementation",
-      "status": "active",
-      "created": "2026-03-04",
-      "authors": [
-        "epost-architect"
-      ],
-      "tags": [
-        "skill",
-        "onboarding",
-        "orchestration",
-        "subagent"
-      ],
-      "file": "../../plans/260304-0408-get-started-auto-orchestration/plan.md"
-    },
-    {
-      "id": "PLAN-0027",
-      "title": "Generalize /get-started for Any Project Type",
-      "type": "implementation",
-      "status": "active",
-      "created": "2026-03-04",
-      "authors": [
-        "epost-architect"
-      ],
-      "tags": [
-        "skill",
-        "onboarding",
-        "generalization"
-      ],
-      "file": "../../plans/260304-0659-generalize-get-started/plan.md"
-    },
-    {
-      "id": "PLAN-0028",
-      "title": "Improve /scout with Smart Routing & RAG",
-      "type": "implementation",
-      "status": "completed",
-      "created": "2026-03-04",
-      "authors": [
-        "epost-architect"
-      ],
-      "tags": [
-        "scout",
-        "rag",
-        "routing",
-        "skills",
-        "web-rag",
-        "ios-rag"
-      ],
-      "file": "../../plans/260304-1237-improve-scout/plan.md"
-    },
-    {
-      "id": "PLAN-0029",
-      "title": "Scout Phases 5-7: Query Expansion Sync",
-      "type": "report",
-      "status": "completed",
-      "created": "2026-03-04",
-      "authors": [
-        "epost-implementer"
-      ],
-      "tags": [
-        "scout",
-        "rag",
-        "query-expansion",
-        "ios-rag",
-        "web-rag",
-        "knowledge-retrieval"
-      ],
-      "file": "../../plans/reports/epost-implementer-260304-1321-improve-scout-phases-5-7.md"
-    },
-    {
-      "id": "PLAN-0030",
-      "title": "RAG Query Expansion API — Serve Mappings via MCP",
-      "type": "implementation",
-      "status": "active",
-      "created": "2026-03-04",
-      "authors": [
-        "epost-architect"
-      ],
-      "tags": [
-        "rag",
-        "mcp",
-        "web-rag",
-        "ios-rag",
-        "query-expansion",
-        "skills"
-      ],
-      "file": "../../plans/260304-1350-rag-expansion-api/plan.md"
-    },
-    {
-      "id": "PLAN-0032",
-      "title": "Rethink RAG Skills — Dynamic, MCP-Integrated",
-      "type": "implementation",
-      "status": "active",
-      "created": "2026-03-04",
-      "authors": [
-        "epost-architect"
-      ],
-      "tags": [
-        "rag",
-        "skills",
-        "web-rag",
-        "ios-rag",
-        "mcp",
-        "dynamic"
-      ],
-      "file": "../../plans/260304-1433-rethink-rag-skills/plan.md"
-    },
-    {
-      "id": "PLAN-0033",
-      "title": "Merge Planning Skills + Add Subagent-Driven-Development",
-      "type": "implementation",
-      "status": "active",
-      "created": "2026-03-04",
-      "authors": [
-        "epost-architect"
-      ],
-      "tags": [
-        "skills",
-        "planning",
-        "subagent",
-        "architect",
-        "dedup"
-      ],
-      "file": "../../plans/260304-1509-merge-planning-skills/plan.md"
-    },
-    {
-      "id": "PLAN-0034",
-      "title": "Merge Planning Skills + Add Subagent-Driven-Development — Implementation",
-      "type": "report",
-      "status": "completed",
-      "created": "2026-03-04",
-      "authors": [
-        "epost-implementer"
-      ],
-      "tags": [
-        "skills",
-        "planning",
-        "subagent",
-        "architect",
-        "dedup"
-      ],
-      "file": "../../plans/260304-1509-merge-planning-skills/reports/epost-implementer-260304-1515-merge-planning-skills.md"
-    },
-    {
-      "id": "PLAN-0035",
-      "title": "Merge Debugging Skills + Trim Agent Prompt",
-      "type": "implementation",
-      "status": "completed",
-      "created": "2026-03-04",
-      "authors": [
-        "epost-architect"
-      ],
-      "tags": [
-        "skills",
-        "debugging",
-        "dedup",
-        "agent"
-      ],
-      "file": "../../plans/260304-1527-merge-debugging-skills/plan.md"
-    },
-    {
-      "id": "PLAN-0036",
-      "title": "Merge Debugging Skills — Implementation",
-      "type": "report",
-      "status": "active",
-      "agent": "epost-implementer",
-      "date": "2026-03-04",
-      "path": "../../plans/260304-1509-merge-planning-skills/reports/epost-implementer-260304-1532-merge-debugging-skills.md"
-    },
-    {
-      "id": "PLAN-0037",
-      "title": "Enhance epost-kit verify CLI Command",
-      "type": "implementation",
-      "status": "active",
-      "created": "2026-03-04",
-      "authors": [
-        "epost-architect"
-      ],
-      "tags": [
-        "cli",
-        "verify",
-        "integrity",
-        "testing"
-      ],
-      "file": "../../plans/260304-1634-verify-cli-command/plan.md"
-    },
-    {
-      "id": "PLAN-0038",
-      "title": "Merge Planning Skills — Cleanup & Validation",
-      "type": "report",
-      "status": "active",
-      "created": "2026-03-04",
-      "authors": [
-        "epost-implementer"
-      ],
-      "tags": [
-        "skills",
-        "planning",
-        "cleanup",
-        "kit-agents"
-      ],
-      "file": "../../plans/260304-1509-merge-planning-skills/reports/epost-implementer-260304-1642-merge-planning-skills.md"
-    },
-    {
-      "id": "PLAN-0039",
-      "title": "Audit UI-Lib Component Skill (Cross-Platform)",
-      "type": "implementation",
-      "status": "active",
-      "created": "2026-03-04",
-      "authors": [
-        "epost-architect"
-      ],
-      "tags": [
-        "skill",
-        "code-review",
-        "audit",
-        "ui-lib",
-        "muji",
-        "cross-platform",
-        "web",
-        "ios",
-        "android"
-      ],
-      "file": "../../plans/260304-1718-audit-ui-lib-component/plan.md"
-    },
-    {
-      "id": "PLAN-0041",
-      "title": "Skill Consolidation: 99 Folders to ~50",
-      "type": "implementation",
-      "status": "active",
-      "created": "2026-03-05",
-      "authors": [
-        "epost-architect"
-      ],
-      "tags": [
-        "skills",
-        "consolidation",
-        "architecture",
-        "cleanup",
-        "flags"
-      ],
-      "file": "../../plans/260305-0204-skill-consolidation/plan.md"
-    },
-    {
-      "id": "PLAN-0042",
-      "title": "Skill Consolidation — Implementation",
-      "type": "report",
-      "status": "completed",
-      "created": "2026-03-05",
-      "authors": [
-        "epost-implementer"
-      ],
-      "tags": [
-        "skills",
-        "consolidation",
-        "cleanup",
-        "flags",
-        "references"
-      ],
-      "file": "../../plans/reports/epost-implementer-260305-0246-skill-consolidation.md"
-    },
-    {
-      "id": "PLAN-0043",
-      "title": "Update kit-skill-development with Anthropic skill-creator",
-      "type": "implementation",
-      "status": "active",
-      "created": "2026-03-05",
-      "authors": [
-        "epost-architect"
-      ],
-      "tags": [
-        "skills",
-        "kit",
-        "skill-creator",
-        "eval",
-        "benchmark",
-        "anthropic"
-      ],
-      "file": "../../plans/260305-0856-update-skill-creator/plan.md"
-    },
-    {
-      "id": "PLAN-0044",
-      "title": "Plan Skill Process Overhaul",
-      "type": "implementation",
-      "status": "active",
-      "created": "2026-03-05",
-      "authors": [
-        "epost-architect"
-      ],
-      "tags": [
-        "skills",
-        "plan",
-        "process",
-        "planning",
-        "checklist"
-      ],
-      "file": "../../plans/260305-0911-plan-skill-process-overhaul/plan.md"
-    },
-    {
-      "id": "PLAN-0045",
-      "title": "Remove Embedded CLI and Relink Global epost-kit",
-      "type": "implementation",
-      "status": "active",
-      "created": "2026-03-05",
-      "authors": [
-        "epost-architect"
-      ],
-      "tags": [
-        "cli",
-        "cleanup",
-        "migration"
-      ],
-      "file": "../../plans/260305-1024-remove-embedded-cli/plan.md"
-    },
-    {
-      "id": "PLAN-0046",
-      "title": "GitHub Release Process — Implementation",
-      "type": "implementation",
-      "status": "active",
-      "created": "2026-03-05",
-      "authors": [
-        "epost-implementer"
-      ],
-      "tags": [
-        "release",
-        "ci-cd",
-        "github-actions",
-        "versioning"
-      ],
-      "file": "plans/reports/epost-implementer-260305-1126-github-release-process.md"
-    },
-    {
-      "id": "PLAN-0047",
-      "title": "Fix /docs --init: Flag, KB Alignment, Web Bias",
-      "type": "implementation",
-      "status": "active",
-      "created": "2026-03-05",
-      "authors": [
-        "epost-architect"
-      ],
-      "tags": [
-        "docs",
-        "init",
-        "knowledge-base",
-        "fix"
-      ],
-      "file": "260305-1153-docs-init-fixes/plan.md"
-    },
-    {
-      "id": "PLAN-0048",
-      "title": "Unified Package Versioning Strategy",
-      "type": "design",
-      "status": "active",
-      "created": "2026-03-05",
-      "authors": [
-        "epost-architect"
-      ],
-      "tags": [
-        "versioning",
-        "packages",
-        "release",
-        "automation",
-        "cli"
-      ],
-      "file": "260305-1224-unified-package-versioning/plan.md"
-    },
-    {
-      "id": "PLAN-0049",
-      "title": "Align Agent Team Roles with ClaudeKit",
-      "type": "implementation",
-      "status": "active",
-      "created": "2026-03-05",
-      "authors": [
-        "epost-architect"
-      ],
-      "tags": [
-        "agents",
-        "roles",
-        "restructure",
-        "claudekit"
-      ],
-      "file": "260305-1253-align-agents-with-claudekit/plan.md"
-    },
-    {
-      "id": "PLAN-0050",
-      "title": "Agent Ecosystem Redesign: Responsibilities, Skills, Routing & Workflows",
-      "type": "design",
-      "status": "active",
-      "created": "2026-03-05",
-      "authors": [
-        "epost-architect"
-      ],
-      "tags": [
-        "agents",
-        "skills",
-        "routing",
-        "workflows",
-        "ecosystem",
-        "redesign"
-      ],
-      "file": "260305-1322-agent-redesign-audit/plan.md"
-    },
-    {
-      "id": "PLAN-0051",
-      "title": "Muji Agent Skill Redesign: Cross-Platform Design System Team",
-      "type": "design",
-      "status": "active",
-      "created": "2026-03-05",
-      "authors": [
-        "epost-architect"
-      ],
-      "tags": [
-        "muji",
-        "design-system",
-        "skills",
-        "cross-platform",
-        "figma",
-        "audit"
-      ],
-      "file": "260305-1348-muji-skill-redesign/plan.md"
-    },
-    {
-      "id": "PLAN-0052",
-      "title": "Team Workflows: Rules-Based Agent Orchestration",
-      "type": "implementation",
-      "status": "completed",
-      "created": "2026-03-05",
-      "authors": [
-        "epost-project-manager"
-      ],
-      "tags": [
-        "workflows",
-        "orchestration",
-        "agents",
-        "rules",
-        "team-coordination"
-      ],
-      "file": "260305-1601-team-workflows/plan.md"
-    },
-    {
-      "id": "PLAN-0053",
-      "title": "Cleanup Scripts — Keep Only Developer-Facing",
-      "type": "implementation",
-      "status": "active",
-      "created": "2026-03-05",
-      "authors": [
-        "epost-architect"
-      ],
-      "tags": [
-        "scripts",
-        "cleanup",
-        "package-yaml",
-        "developer-facing"
-      ],
-      "file": "260305-1702-cleanup-scripts/plan.md"
-    },
-    {
-      "id": "PLAN-0055",
-      "title": "Agent Report Templates",
-      "type": "implementation",
-      "status": "active",
-      "created": "2026-03-06",
-      "authors": [
-        "epost-fullstack-developer"
-      ],
-      "tags": [
-        "templates",
-        "reports",
-        "agents",
-        "delegation",
-        "standards"
-      ],
-      "file": "260305-2359-agent-report-templates/plan.md"
-    },
-    {
       "id": "PLAN-0056",
       "title": "Klara-Theme Conventions Research",
       "type": "research",
-      "status": "complete",
+      "status": "completed",
       "created": "2026-03-06",
       "authors": [
         "epost-researcher"
@@ -911,14 +259,235 @@
         "ui-lib",
         "conventions",
         "muji",
-        "design-system",
-        "audit-standards"
+        "design-system"
       ],
       "file": "reports/epost-researcher-260306-0625-klara-theme-conventions.md"
     },
     {
+      "id": "PLAN-0062",
+      "title": "Research: A11y vs UI Component Command Parity",
+      "type": "research",
+      "status": "completed",
+      "created": "2026-03-08",
+      "authors": [
+        "epost-researcher"
+      ],
+      "tags": [
+        "audit",
+        "ui",
+        "a11y",
+        "command-parity",
+        "research"
+      ],
+      "file": "reports/epost-researcher-260308-1439-audit-ui-a11y-parity.md"
+    },
+    {
+      "id": "PLAN-0041",
+      "title": "Skill Consolidation: 99 Folders to ~50",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-05",
+      "authors": [
+        "epost-planner"
+      ],
+      "tags": [
+        "skills",
+        "consolidation",
+        "architecture",
+        "cleanup",
+        "flags"
+      ],
+      "file": "plans/260305-0204-skill-consolidation/plan.md"
+    },
+    {
+      "id": "PLAN-0039",
+      "title": "Audit UI-Lib Component Skill",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-04",
+      "authors": [
+        "epost-planner"
+      ],
+      "tags": [
+        "skill",
+        "code-review",
+        "audit",
+        "ui-lib",
+        "muji"
+      ],
+      "file": "plans/260304-1718-audit-ui-lib-component/plan.md"
+    },
+    {
+      "id": "PLAN-0070",
+      "title": "Copilot Target Support",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-01",
+      "authors": [
+        "epost-planner"
+      ],
+      "tags": [
+        "copilot",
+        "targets",
+        "ide-support"
+      ],
+      "file": "plans/260301-1017-copilot-target-support/plan.md"
+    },
+    {
+      "id": "PLAN-0043",
+      "title": "Update kit-skill-development with Anthropic skill-creator",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-05",
+      "authors": [
+        "epost-planner"
+      ],
+      "tags": [
+        "skills",
+        "kit",
+        "skill-creator",
+        "eval",
+        "benchmark"
+      ],
+      "file": "plans/260305-0856-update-skill-creator/plan.md"
+    },
+    {
+      "id": "PLAN-0044",
+      "title": "Plan Skill Process Overhaul",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-05",
+      "authors": [
+        "epost-planner"
+      ],
+      "tags": [
+        "skills",
+        "plan",
+        "process",
+        "planning",
+        "checklist"
+      ],
+      "file": "plans/260305-0911-plan-skill-process-overhaul/plan.md"
+    },
+    {
+      "id": "PLAN-0045",
+      "title": "Remove Embedded CLI and Relink Global epost-kit",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-05",
+      "authors": [
+        "epost-planner"
+      ],
+      "tags": [
+        "cli",
+        "cleanup",
+        "migration"
+      ],
+      "file": "plans/260305-1024-remove-embedded-cli/plan.md"
+    },
+    {
+      "id": "PLAN-0046",
+      "title": "GitHub Release Process",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-05",
+      "authors": [
+        "epost-planner"
+      ],
+      "tags": [
+        "release",
+        "ci-cd",
+        "github-actions",
+        "versioning"
+      ],
+      "file": "plans/260305-1119-github-release-process/plan.md"
+    },
+    {
+      "id": "PLAN-0048",
+      "title": "Unified Package Versioning Strategy",
+      "type": "design",
+      "status": "active",
+      "created": "2026-03-05",
+      "authors": [
+        "epost-planner"
+      ],
+      "tags": [
+        "versioning",
+        "packages",
+        "release",
+        "automation",
+        "cli"
+      ],
+      "file": "plans/260305-1224-unified-package-versioning/plan.md"
+    },
+    {
+      "id": "PLAN-0053",
+      "title": "Cleanup Scripts",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-05",
+      "authors": [
+        "epost-planner"
+      ],
+      "tags": [
+        "scripts",
+        "cleanup",
+        "package-yaml"
+      ],
+      "file": "plans/260305-1702-cleanup-scripts/plan.md"
+    },
+    {
+      "id": "PLAN-0054",
+      "title": "Hook Improvements",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-05",
+      "authors": [
+        "epost-planner"
+      ],
+      "tags": [
+        "hooks",
+        "improvements"
+      ],
+      "file": "plans/260305-1934-hook-improvements/plan.md"
+    },
+    {
+      "id": "PLAN-0054b",
+      "title": "Kit Dev Hooks",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-05",
+      "authors": [
+        "epost-planner"
+      ],
+      "tags": [
+        "hooks",
+        "kit",
+        "development"
+      ],
+      "file": "plans/260305-2045-kit-dev-hooks/plan.md"
+    },
+    {
+      "id": "PLAN-0055",
+      "title": "Agent Report Templates",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-05",
+      "authors": [
+        "epost-planner"
+      ],
+      "tags": [
+        "templates",
+        "reports",
+        "agents",
+        "delegation",
+        "standards"
+      ],
+      "file": "plans/260305-2359-agent-report-templates/plan.md"
+    },
+    {
       "id": "PLAN-0057",
-      "title": "Muji Audit Standards: Enforceable klara-theme Checklist & Scoring",
+      "title": "Muji Audit Standards: klara-theme Checklist & Scoring",
       "type": "implementation",
       "status": "active",
       "created": "2026-03-06",
@@ -931,10 +500,9 @@
         "klara-theme",
         "ui-lib",
         "standards",
-        "checklist",
-        "design-system"
+        "checklist"
       ],
-      "file": "260306-0631-muji-audit-standards/plan.md"
+      "file": "plans/260306-0631-muji-audit-standards/plan.md"
     },
     {
       "id": "PLAN-0058",
@@ -952,7 +520,7 @@
         "port",
         "claudekit"
       ],
-      "file": "260306-1117-agent-teams-port/plan.md"
+      "file": "plans/260306-1117-agent-teams-port/plan.md"
     },
     {
       "id": "PLAN-0059",
@@ -968,14 +536,13 @@
         "klara-theme",
         "consumer",
         "ui-lib",
-        "muji",
-        "design-system"
+        "muji"
       ],
-      "file": "260307-0116-klara-consumer-audit/plan.md"
+      "file": "plans/260307-0116-klara-consumer-audit/plan.md"
     },
     {
       "id": "PLAN-0060",
-      "title": "Update epost-code-reviewer Agent and Related Code",
+      "title": "Update epost-code-reviewer Agent",
       "type": "implementation",
       "status": "active",
       "created": "2026-03-07",
@@ -988,7 +555,7 @@
         "cleanup",
         "kit"
       ],
-      "file": "260307-1159-update-code-reviewer/plan.md"
+      "file": "plans/260307-1159-update-code-reviewer/plan.md"
     },
     {
       "id": "PLAN-0061",
@@ -1004,33 +571,13 @@
         "muji",
         "a11y",
         "delegation",
-        "knowledge-retrieval",
         "routing"
       ],
-      "file": "260307-1230-update-muji-a11y-agents/plan.md"
-    },
-    {
-      "id": "PLAN-0062",
-      "title": "Add Methodology Transparency to Audit & Review Reports",
-      "type": "implementation",
-      "status": "active",
-      "created": "2026-03-07",
-      "authors": [
-        "epost-planner"
-      ],
-      "tags": [
-        "reports",
-        "audit",
-        "review",
-        "methodology",
-        "transparency",
-        "templates"
-      ],
-      "file": "260307-1446-audit-review-methodology-transparency/plan.md"
+      "file": "plans/260307-1230-update-muji-a11y-agents/plan.md"
     },
     {
       "id": "PLAN-0063",
-      "title": "Deepen Audit Flow Delegation",
+      "title": "New Team Onboarding Demo",
       "type": "implementation",
       "status": "active",
       "created": "2026-03-08",
@@ -1038,19 +585,15 @@
         "epost-planner"
       ],
       "tags": [
-        "audit",
-        "delegation",
-        "ui-lib",
-        "muji",
-        "a11y",
-        "code-review",
-        "orchestration"
+        "onboarding",
+        "demo",
+        "team"
       ],
-      "file": "260308-0837-deepen-audit-delegation/plan.md"
+      "file": "plans/260308-1700-new-team-onboarding-demo/plan.md"
     },
     {
       "id": "PLAN-0064",
-      "title": "Fix Audit Routing, Missing Dimensions, and Pre-Audit KB Load",
+      "title": "Hybrid Audit Reliability Standards",
       "type": "implementation",
       "status": "active",
       "created": "2026-03-08",
@@ -1059,63 +602,111 @@
       ],
       "tags": [
         "audit",
-        "routing",
-        "security",
-        "performance",
-        "delegation",
-        "code-reviewer",
-        "muji",
-        "kb-load"
+        "hybrid",
+        "reliability",
+        "standards"
       ],
-      "file": "260308-1339-audit-routing-dimension-gaps/plan.md"
+      "file": "plans/260308-2150-hybrid-audit-reliability-standards/plan.md"
     },
     {
-      "id": "PLAN-0065",
-      "title": "Optimize Audit & Code-Review Flows",
-      "type": "implementation",
-      "status": "active",
-      "created": "2026-03-08",
-      "authors": [
-        "epost-planner"
-      ],
-      "tags": [
-        "audit",
-        "code-review",
-        "report-templates",
-        "dedup",
-        "consumer-standards",
-        "agent-wiring"
-      ],
-      "file": "260308-1426-audit-flow-optimization/plan.md"
-    },
-    {
-      "id": "PLAN-0063",
-      "title": "Research: A11y vs UI Component Command Parity",
-      "type": "research",
-      "status": "completed",
-      "created": "2026-03-08",
-      "authors": [
-        "epost-researcher"
-      ],
-      "tags": [
-        "audit",
-        "ui",
-        "a11y",
-        "command-parity",
-        "research"
-      ],
-      "file": "reports/epost-researcher-260308-1439-audit-ui-a11y-parity.md",
-      "summary": "Full audit of command structure parity between a11y and UI workflows. Identifies 3 missing commands (/fix --ui, /review --ui, /audit --close --ui), data layer gap (no known-findings DB), and 7-10 day implementation plan to achieve parity."
-    },
-    {
-      "id": "PLAN-0064",
-      "title": "Audit session folder pattern — consolidate output paths",
+      "id": "PLAN-0064b",
+      "title": "Audit Session Folder Pattern",
       "type": "implementation",
       "status": "active",
       "created": "2026-03-09",
-      "authors": ["epost-fullstack-developer"],
-      "tags": ["audit", "reports", "session-folder", "index-protocol"],
+      "authors": [
+        "epost-fullstack-developer"
+      ],
+      "tags": [
+        "audit",
+        "reports",
+        "session-folder",
+        "index-protocol"
+      ],
       "file": "plans/260309-0521-audit-session-folder-pattern/plan.md"
+    },
+    {
+      "id": "PLAN-0065",
+      "title": "Audit Rules Standardization",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-09",
+      "authors": [
+        "epost-planner"
+      ],
+      "tags": [
+        "audit",
+        "rules",
+        "standardization"
+      ],
+      "file": "plans/260309-0935-audit-rules-standardization/plan.md"
+    },
+    {
+      "id": "PLAN-0066",
+      "title": "Hybrid Audit Orchestration",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-09",
+      "authors": [
+        "epost-planner"
+      ],
+      "tags": [
+        "audit",
+        "hybrid",
+        "orchestration"
+      ],
+      "file": "plans/260309-1030-hybrid-audit-orchestration/plan.md"
+    },
+    {
+      "id": "PLAN-0067",
+      "title": "CLAUDE.md Natural Routing",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-09",
+      "authors": [
+        "epost-planner"
+      ],
+      "tags": [
+        "routing",
+        "claude-md",
+        "natural-language"
+      ],
+      "file": "plans/260309-1306-claude-md-natural-routing/plan.md"
+    },
+    {
+      "id": "PLAN-0068",
+      "title": "Plans Audit, Archive Cleanup & Product Feature Page",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-10",
+      "authors": [
+        "epost-planner"
+      ],
+      "tags": [
+        "plans",
+        "audit",
+        "archive",
+        "feature-page",
+        "cleanup"
+      ],
+      "file": "plans/260310-0612-plans-audit-feature-page/plan.md"
+    },
+    {
+      "id": "PLAN-0069",
+      "title": "Audit Report Organization: Dated Folders + Known-Findings Store",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-10",
+      "authors": [
+        "epost-planner"
+      ],
+      "tags": [
+        "audit",
+        "reports",
+        "known-findings",
+        "organization"
+      ],
+      "file": "plans/260310-0834-audit-report-organization/plan.md"
     }
   ]
 }

@@ -49,7 +49,7 @@ Sub-agents do NOT create folders. They write to `output_path` provided by the ca
 | Write merged `report.md` | **YES** | no | no | no |
 | Write own sub-report | — | `code-review-findings.md` | `muji-ui-audit.md` | `a11y-audit.md` |
 | Write `session.json` | **YES** | no | no | no |
-| Persist findings to `.epost-data/` | — | `code/` | `ui/` | `a11y/` |
+| Persist findings to `reports/known-findings/` | — | `code.json` | `ui-components.json` | `a11y.json` |
 | Update `reports/index.json` | **YES** | no | no | no |
 
 **Rule**: In hybrid audit, sub-agents write ONLY their own report file + their own known-findings DB. The main context handles session folder, merging, session.json, and index.json.
@@ -61,7 +61,7 @@ Sub-agents do NOT create folders. They write to `output_path` provided by the ca
 | Create session folder (`mkdir -p`) | **YES** |
 | Write `report.md` | **YES** |
 | Write `session.json` | **YES** |
-| Persist findings to `.epost-data/` | **YES** (own domain) |
+| Persist findings to `reports/known-findings/` | **YES** (own domain) |
 | Update `reports/index.json` | **YES** |
 
 ## session.json Schema
@@ -133,17 +133,26 @@ Code-reviewer reads this table, extracts files + issues, fills Template B for ep
 
 ## Known-Findings Persistence
 
-Each agent persists findings to its own domain DB:
+Each agent persists findings to its own topic file inside `reports/known-findings/` (version-controlled, accumulates across audits):
+
+```
+reports/known-findings/
+  a11y.json           ← epost-a11y-specialist
+  ui-components.json  ← epost-muji
+  code.json           ← epost-code-reviewer
+```
 
 | Agent | DB Path | Schema |
 |-------|---------|--------|
-| epost-muji | `.epost-data/ui/known-findings.json` | `audit/references/ui-known-findings-schema.md` |
-| epost-code-reviewer | `.epost-data/code/known-findings.json` | `code-review/references/code-known-findings-schema.md` |
-| epost-a11y-specialist | `.epost-data/a11y/known-findings.json` | `a11y/assets/known-findings-schema.json` |
+| epost-muji | `reports/known-findings/ui-components.json` | `audit/references/ui-known-findings-schema.md` |
+| epost-code-reviewer | `reports/known-findings/code.json` | `code-review/references/code-known-findings-schema.md` |
+| epost-a11y-specialist | `reports/known-findings/a11y.json` | `a11y/assets/known-findings-schema.json` |
 
 **Rule**: Never write to another agent's DB. Muji writes UI findings. Code-reviewer writes SEC/PERF/TS/LOGIC/DEAD/ARCH/STATE. A11Y writes WCAG violations.
 
 Each finding MUST include: `source_agent`, `source_report` (relative path), `first_detected_at` (ISO 8601 datetime).
+
+See `core/references/report-standard.md` for general report anatomy and folder pattern.
 
 ## Standards Files Reference
 

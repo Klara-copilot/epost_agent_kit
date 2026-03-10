@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "updatedAt": "2026-03-08",
+  "updatedAt": "2026-03-10",
   "entries": [
     {
       "id": "fullstack-developer-260307-1635-research-engine",
@@ -92,6 +92,84 @@
       },
       "plan": "plans/260308-1426-audit-flow-optimization/plan.md",
       "created": "2026-03-08 14:26"
+    },
+    {
+      "id": "epost-planner-260309-1621-build-success-gate",
+      "type": "plan",
+      "agent": "epost-planner",
+      "title": "Plan: Build-Success Gate for Git Commit and Audit Workflows",
+      "verdict": "READY",
+      "files": {
+        "agent": "reports/epost-planner-260309-1621-build-success-gate.md",
+        "human": "reports/epost-planner-260309-1621-build-success-gate.md"
+      },
+      "plan": "plans/260309-1621-build-success-gate/plan.md",
+      "created": "2026-03-09 16:21"
+    },
+    {
+      "id": "fullstack-developer-260310-0538-get-started-simulator-launch",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "Validation: get-started Phase 3 simulator/emulator launch — plan complete",
+      "verdict": "complete",
+      "files": {
+        "agent": "reports/epost-fullstack-developer-260310-0538-get-started-simulator-launch.md",
+        "human": "reports/epost-fullstack-developer-260310-0538-get-started-simulator-launch.md"
+      },
+      "plan": "plans/260309-2043-get-started-simulator-launch/plan.md",
+      "created": "2026-03-10 05:38"
+    },
+    {
+      "id": "epost-planner-260310-0612-plans-audit-feature-page",
+      "type": "plan",
+      "agent": "epost-planner",
+      "title": "Plan: Plans Audit, Archive Cleanup & Product Feature Page",
+      "verdict": "READY",
+      "files": {
+        "agent": "reports/epost-planner-260310-0612-plans-audit-feature-page.md",
+        "human": "reports/epost-planner-260310-0612-plans-audit-feature-page.md"
+      },
+      "plan": "plans/260310-0612-plans-audit-feature-page/plan.md",
+      "created": "2026-03-10 06:12"
+    }
+    ,{
+      "id": "epost-fullstack-developer-260310-0621-archive-cleanup-feature-page",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "Plans Audit: archive 37 plans, rewrite README as feature page, rebuild index.json",
+      "verdict": "completed",
+      "files": {
+        "agent": "plans/260310-0612-plans-audit-feature-page/reports/epost-fullstack-developer-260310-0621-archive-cleanup-feature-page.md",
+        "human": "plans/260310-0612-plans-audit-feature-page/reports/epost-fullstack-developer-260310-0621-archive-cleanup-feature-page.md"
+      },
+      "plan": "plans/260310-0612-plans-audit-feature-page/plan.md",
+      "created": "2026-03-10 06:21"
+    },
+    {
+      "id": "epost-planner-260310-0834-audit-report-organization",
+      "type": "plan",
+      "agent": "epost-planner",
+      "title": "Plan: Audit Report Organization — Dated Folders + Known-Findings Store",
+      "verdict": "READY",
+      "files": {
+        "agent": "reports/epost-planner-260310-0834-audit-report-organization.md",
+        "human": "reports/epost-planner-260310-0834-audit-report-organization.md"
+      },
+      "plan": "plans/260310-0834-audit-report-organization/plan.md",
+      "created": "2026-03-10 08:34"
+    },
+    {
+      "id": "epost-fullstack-developer-260310-0910-audit-report-organization",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "Implementation: Audit Report Organization — dated folders, known-findings store, index protocol",
+      "verdict": "completed",
+      "path": "plans/260310-0834-audit-report-organization/reports/",
+      "files": {
+        "report": "plans/260310-0834-audit-report-organization/reports/epost-fullstack-developer-260310-0910-audit-report-organization.md"
+      },
+      "plan": "plans/260310-0834-audit-report-organization/plan.md",
+      "created": "2026-03-10 09:10"
     }
   ]
 }

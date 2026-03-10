@@ -1,3 +1,26 @@
+---
+phase: 2
+title: "Create product feature page"
+effort: 1.5h
+depends: [1]
+---
+
+# Phase 2: Create Product Feature Page
+
+## Overview
+
+Create a friendly, engaging feature page for epost_agent_kit. Target: `plans/README.md` (replaces current board) with a hero section at top, followed by the live plan board.
+
+## Content Design
+
+### Tone
+- Friendly, developer-focused, engaging
+- Show value first, details second
+- Use concrete examples, not abstract descriptions
+
+### Structure for `plans/README.md`
+
+```markdown
 # epost_agent_kit — Features & Roadmap
 
 ## What is epost_agent_kit?
@@ -79,43 +102,15 @@ Supports Claude Code, GitHub Copilot, and Cursor targets.
 
 ## Roadmap (Active Plans)
 
-### Active Development
+[Live plan board below — updated by scripts]
+```
 
-| Plan | Created | Title |
-|------|---------|-------|
-| 260305-0204-skill-consolidation | 2026-03-05 | Skill Consolidation: 99 Folders to ~50 |
-| 260305-0911-plan-skill-process-overhaul | 2026-03-05 | Plan Skill Process Overhaul |
-| 260306-0631-muji-audit-standards | 2026-03-06 | Muji Audit Standards |
-| 260306-1117-agent-teams-port | 2026-03-06 | Port Agent Teams from claudekit |
-| 260307-0116-klara-consumer-audit | 2026-03-07 | Klara-Theme Consumer Code Audit Expansion |
-| 260307-1159-update-code-reviewer | 2026-03-07 | Update epost-code-reviewer Agent |
-| 260307-1230-update-muji-a11y-agents | 2026-03-07 | Update epost-muji and epost-a11y-specialist Agents |
-| 260308-1700-new-team-onboarding-demo | 2026-03-08 | New Team Onboarding Demo |
-| 260308-2150-hybrid-audit-reliability-standards | 2026-03-08 | Hybrid Audit Reliability Standards |
-| 260309-0935-audit-rules-standardization | 2026-03-09 | Audit Rules Standardization |
-| 260309-1030-hybrid-audit-orchestration | 2026-03-09 | Hybrid Audit Orchestration |
-| 260309-1306-claude-md-natural-routing | 2026-03-09 | CLAUDE.md Natural Routing |
+### File to Modify
+- `plans/README.md` — rewrite with feature page at top, plan board at bottom
 
-### In Progress
+## Validation
 
-| Plan | Created | Title |
-|------|---------|-------|
-| 260305-1934-hook-improvements | 2026-03-05 | Hook Improvements |
-| 260305-2045-kit-dev-hooks | 2026-03-05 | Kit Dev Hooks |
-| 260305-2359-agent-report-templates | 2026-03-05 | Agent Report Templates |
-| 260305-1702-cleanup-scripts | 2026-03-05 | Cleanup Scripts |
-
-### Backlog
-
-| Plan | Created | Title |
-|------|---------|-------|
-| 260301-1017-copilot-target-support | 2026-03-01 | Copilot Target Support |
-| 260304-1718-audit-ui-lib-component | 2026-03-04 | Audit UI-Lib Component Skill |
-| 260305-0856-update-skill-creator | 2026-03-05 | Update Skill Creator |
-| 260305-1024-remove-embedded-cli | 2026-03-05 | Remove Embedded CLI |
-| 260305-1119-github-release-process | 2026-03-05 | GitHub Release Process |
-| 260305-1224-unified-package-versioning | 2026-03-05 | Unified Package Versioning |
-
-## Archived
-
-Plans in `plans/archive/` — completed or superseded. Updated by `archive-plan.cjs`.
+- Feature page is readable, friendly, informative
+- All milestones sourced from completed plan dates
+- Active plan board section still functional
+- No broken links

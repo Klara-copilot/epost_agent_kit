@@ -93,7 +93,9 @@ Maintained by: `epost-code-reviewer`, `epost-muji`, `epost-a11y-specialist`, `ep
 }
 ```
 
-**Session folder rule**: `path` points to the session folder directory (trailing `/`). `files.report` is the main Markdown report. `files.session` is the `session.json` metadata file. Both live inside the session folder.
+**Folder rule**: `path` points to the dated folder (trailing `/`) — this is the canonical field. `files.report` is the main Markdown report. `files.session` is the `session.json` metadata file (audit types only). Both live inside the folder.
+
+**Migration note**: Legacy entries with `files.agent`/`files.human` remain valid. New entries must use `path` + `files.report`.
 
 **Update rule**: Append one entry per session (not per sub-agent report). Update `updatedAt`. Create `reports/index.json` if absent.
 
