@@ -3,7 +3,7 @@ name: audit
 description: "(ePost) Audit workflow — auto-detects UI component, a11y, or code audit"
 user-invocable: true
 metadata:
-  argument-hint: "[--ui <ComponentName> [--platform web|ios|android|all] | --a11y [platform] | --code]"
+  argument-hint: "[--ui <ComponentName> [--platform web|ios|android|all] [--poc|--beta|--stable] | --a11y [platform] | --code]"
   keywords: [audit, review, component, a11y, accessibility, code, quality, ui-lib, muji, tokens]
   triggers:
     - "audit"
@@ -50,7 +50,19 @@ Before executing any audit mode, activate `knowledge-retrieval` to load relevant
 
 ## Step 0 — Flag Override + Mode Selection
 
-If `$ARGUMENTS` starts with `--ui`: **dispatch epost-muji** via Agent tool. Pass component name + platform flags + `references/ui.md` workflow.
+If `$ARGUMENTS` contains `--poc`, `--beta`, or `--stable`: extract the maturity tier and pass it through to `references/ui.md` workflow (Step 0.6). These flags combine with `--ui` — they are not standalone modes.
+
+If `$ARGUMENTS` starts with `--ui` and **no maturity tier flag** (`--poc`/`--beta`/`--stable`) is present:
+**Ask the developer to confirm maturity tier before dispatching**:
+> "What's the maturity stage of `{ComponentName}`?
+> - `--poc` — prototype / proof-of-concept (relaxed rules, phased roadmap)
+> - `--beta` — in active development (moderate strictness)
+> - `--stable` — production-ready (full strictness)
+>
+> Reply with the flag or just `poc` / `beta` / `stable`."
+Wait for reply, then set the maturity tier and proceed.
+
+If `$ARGUMENTS` starts with `--ui`: **dispatch epost-muji** via Agent tool. Pass component name + platform flags + maturity tier (if present) + `references/ui.md` workflow.
 If `$ARGUMENTS` starts with `--a11y`: **dispatch epost-a11y-specialist** via Agent tool. Pass `references/a11y.md` + platform hint.
 If `$ARGUMENTS` starts with `--close --ui`: load `references/close-ui.md` and execute inline.
 If `$ARGUMENTS` starts with `--close`: load `references/close-a11y.md` and execute inline.
@@ -124,6 +136,8 @@ For non-hybrid dispatches (`--ui`, `--code`, `--a11y`):
 | Template | Specialist | When |
 |----------|-----------|------|
 | A — UI Component Audit | epost-muji | `--ui` flag or UI component signals |
+| A+ — Feature Module UI Standards | epost-muji | Hybrid mode, multi-file library audit |
+| A++ — POC Organism Audit | epost-muji | `--ui` + organism classification + `--poc`/`--beta` |
 | B — A11y Audit | epost-a11y-specialist | `--a11y` flag or A11y findings from UI audit |
 | C — Code Escalation | epost-code-reviewer | Critical findings needing deeper pass |
 | D — Docs Gap Detection | epost-docs-manager | Post-audit, new feature, or refactor |
@@ -178,6 +192,8 @@ When delegating to epost-muji, detect target platforms:
 
 - `/audit --ui EpostButton` → muji audits EpostButton across all platforms
 - `/audit --ui EpostCard --platform web` → muji audits web-only
+- `/audit --ui SmartLetterComposer --poc` → organism audit with poc maturity tier, phased roadmap verdict
+- `/audit --ui SmartLetterComposer --platform web --beta` → organism audit with beta maturity tier
 - `/audit --a11y` → a11y specialist audits staged changes
 - `/audit --code` → reviewer audits staged code changes
 - `/audit --close --ui 3` → mark UI finding ID 3 as resolved

@@ -35,6 +35,9 @@ const DEFAULT_CONFIG = {
     packagesGuard: {
       enabled: true
     },
+    'build-gate': {
+      enabled: true
+    },
     'session-init': true,
     'subagent-init': true,
     'context-reminder': true,

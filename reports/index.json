@@ -3,6 +3,16 @@
   "updatedAt": "2026-03-10",
   "entries": [
     {
+      "id": "fullstack-developer-260310-1139-audit-organism-poc-mode",
+      "type": "plan",
+      "agent": "epost-fullstack-developer",
+      "title": "Implementation: Audit Organism/POC Mode — Classification, Maturity Tiers, Organism Checklist",
+      "verdict": "COMPLETE",
+      "createdAt": "2026-03-10",
+      "plan": "260309-audit-organism-poc-mode",
+      "path": "plans/260310-0954-build-gate-pretooluse-hook/reports/epost-fullstack-developer-260310-1139-audit-organism-poc-mode.md"
+    },
+    {
       "id": "fullstack-developer-260307-1635-research-engine",
       "type": "plan",
       "agent": "epost-fullstack-developer",
@@ -131,8 +141,8 @@
       },
       "plan": "plans/260310-0612-plans-audit-feature-page/plan.md",
       "created": "2026-03-10 06:12"
-    }
-    ,{
+    },
+    {
       "id": "epost-fullstack-developer-260310-0621-archive-cleanup-feature-page",
       "type": "implementation",
       "agent": "epost-fullstack-developer",
@@ -170,6 +180,45 @@
       },
       "plan": "plans/260310-0834-audit-report-organization/plan.md",
       "created": "2026-03-10 09:10"
+    },
+    {
+      "id": "epost-planner-260310-0954-build-gate-pretooluse-hook",
+      "type": "plan",
+      "agent": "epost-planner",
+      "title": "Plan: PreToolUse Hook — Auto-Run Build-Gate on Git Commit",
+      "verdict": "READY",
+      "files": {
+        "agent": "plans/260310-0954-build-gate-pretooluse-hook/plan.md",
+        "human": "plans/260310-0954-build-gate-pretooluse-hook/plan.md"
+      },
+      "plan": "plans/260310-0954-build-gate-pretooluse-hook/plan.md",
+      "created": "2026-03-10 09:54"
+    },
+    {
+      "id": "epost-fullstack-developer-260310-0956-build-gate-pretooluse-hook",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "Implementation: build-gate PreToolUse hook — auto-intercept git commit commands",
+      "verdict": "completed",
+      "files": {
+        "agent": "plans/260310-0954-build-gate-pretooluse-hook/reports/epost-fullstack-developer-260310-0956-build-gate-pretooluse-hook.md",
+        "human": "plans/260310-0954-build-gate-pretooluse-hook/reports/epost-fullstack-developer-260310-0956-build-gate-pretooluse-hook.md"
+      },
+      "plan": "plans/260310-0954-build-gate-pretooluse-hook/plan.md",
+      "created": "2026-03-10 09:56"
+    },
+    {
+      "id": "epost-planner-260309-audit-organism-poc-mode",
+      "type": "plan",
+      "agent": "epost-planner",
+      "title": "Plan: Audit Organism/POC Mode — Classification, Maturity Tiers, Organism Checklist",
+      "verdict": "READY",
+      "files": {
+        "agent": "plans/260309-audit-organism-poc-mode/plan.md",
+        "human": "plans/260309-audit-organism-poc-mode/plan.md"
+      },
+      "plan": "plans/260309-audit-organism-poc-mode/plan.md",
+      "created": "2026-03-09"
     }
   ]
 }

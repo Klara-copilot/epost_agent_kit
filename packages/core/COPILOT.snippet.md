@@ -34,6 +34,33 @@ When the user describes a task, suggest the right `@epost-{agent}` to invoke.
 - `@epost-debugger Fix this error: [paste error]`
 - `@epost-code-reviewer Review the staged changes before commit.`
 
+---
+
+## UI Component Audit
+
+When the user asks to audit a UI component (e.g. "audit SmartLetterComposer", "review this component"), use `askQuestions` **before** delegating to `@epost-muji`:
+
+```
+askQuestions([
+  {
+    question: "What is the maturity stage of this component?",
+    type: "singleSelect",
+    options: [
+      { value: "poc", label: "POC — Prototype / proof-of-concept (relaxed rules, phased roadmap)" },
+      { value: "beta", label: "Beta — In active development (moderate strictness)" },
+      { value: "stable", label: "Stable — Production-ready (full strictness)" }
+    ]
+  }
+])
+```
+
+Then delegate with the answer included:
+- `@epost-muji Audit [ComponentName] --ui --[poc|beta|stable]`
+
+**Skip `askQuestions` if** the user already specified `--poc`, `--beta`, or `--stable` in their message.
+
+---
+
 ### Context Tips
 
 - Copilot instructions apply to Chat only, not inline autocomplete

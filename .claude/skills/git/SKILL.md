@@ -64,3 +64,19 @@ Based on the user's answer, load and execute the matching workflow:
 - Commit → `references/commit.md`
 - Push → `references/push.md`
 - PR → `references/pr.md`
+
+## Build Gate
+
+Build verification runs at two layers:
+
+| Layer | Mechanism | When |
+|-------|-----------|------|
+| Skill instructions | `references/commit.md` tells agent to run build-gate | Agent follows skill |
+| PreToolUse hook | `build-gate-hook.cjs` intercepts any `git commit` Bash call | Automatic enforcement |
+
+The hook layer is automatic — it intercepts `git commit` regardless of whether the agent followed skill instructions. If the build fails, the commit is blocked with a clear error message.
+
+**Bypasses** (for WIP/draft commits):
+- Pass `--skip-build` flag: `git commit -m "wip" --skip-build`
+- Set env: `EPOST_SKIP_BUILD=1 git commit -m "wip"`
+- Disable via config: `{ "hooks": { "build-gate": { "enabled": false } } }` in `.epost-kit.json`
