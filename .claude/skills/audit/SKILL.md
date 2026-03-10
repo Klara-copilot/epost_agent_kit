@@ -93,9 +93,10 @@ session_folder = reports/{YYMMDD-HHMM}-{slug}-audit/
    - `finding_locations`: Set of file:line flagged by muji
    - `verdict`: muji's overall verdict
    - `a11y_findings`: contents of `## A11Y Findings` section (if present)
-4. **If a11y findings exist**: dispatch epost-a11y-specialist via Agent tool (Template B):
+4. **If a11y findings exist AND maturity tier is NOT `poc`**: dispatch epost-a11y-specialist via Agent tool (Template B):
    - Output path: `{session_folder}/a11y-audit.md`
    - WAIT for completion
+   - **POC exception**: If `--poc`, skip a11y dispatch — A11Y findings are already advisory-only in muji's report (no dedicated a11y pass needed until beta)
 5. **Dispatch epost-code-reviewer** via Agent tool:
    - Pass: file list, `{session_folder}/muji-ui-audit.md` path (for dedup), SEC/PERF/TS/ARCH/STATE/LOGIC scope
    - Output path: `{session_folder}/code-review-findings.md`
@@ -113,7 +114,7 @@ session_folder = reports/{YYMMDD-HHMM}-{slug}-audit/
    Append `## Build Verification` section to `{session_folder}/report.md`:
    - Exit 0: `Build verification: ✓ PASS ({platform}, {duration_ms}ms)`
    - Exit 1: `Build verification: ✗ FAIL — {error excerpt}` (advisory — does not block report)
-   - Exit 2: `Build verification: skipped (no build command detected)`
+   - Exit 0 (no command): `Build verification: skipped (no build command detected)`
 7. **Write session.json** per `references/session-json-schema.md`
 8. **Update reports/index.json** per `core/references/index-protocol.md`
 

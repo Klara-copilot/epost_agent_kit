@@ -112,6 +112,7 @@ Set `maturityTier` in report envelope.
 | STATE-* (state boundary) | blocking | — | blocking | blocking |
 | MOCK-* (mock boundaries) | blocking | — | advisory | N/A |
 | DIALOG-* (future compat) | advisory | — | advisory | advisory |
+| A11Y-* (accessibility) | — | advisory | blocking | blocking |
 
 **Severity modulation instruction:** When applying any rule from the checklist:
 1. Look up rule ID in the table above

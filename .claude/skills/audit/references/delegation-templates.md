@@ -75,7 +75,8 @@ Mode: library
 Platform: {web | ios | android | all}
 Component Class: organism
 Maturity Tier: {poc | beta | stable}
-Audit focus: ORGANISM, STATE, MOCK, A11Y, TEST (DIALOG advisory-only)
+Audit focus: ORGANISM, STATE, MOCK, TEST (DIALOG advisory-only)
+A11Y: collect findings only — all A11Y rules are advisory-only for POC (do NOT escalate; no a11y-specialist dispatch at this tier)
 Out of scope: STRUCT-002, TOKEN-001, BIZ-001/002/003, STRUCT-005, TEST-004 (suppressed per maturity tier)
 
 Expectations:
@@ -90,7 +91,7 @@ Expectations:
 Boundaries:
 - Analyze and report only — do not modify source files
 - Do not run SEC, PERF, or architecture checks — caller handles those
-- If A11Y findings emerge, collect and note for a11y-specialist delegation
+- If A11Y findings emerge: collect as advisory notes only (no escalation — POC tier skips a11y-specialist dispatch)
 
 Report back to: {calling_agent}
 Output path: {session_folder}/muji-ui-audit.md
