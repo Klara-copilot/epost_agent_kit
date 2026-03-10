@@ -66,11 +66,11 @@ Audit KB coverage and health:
 
 ## Step 2b — Has Flat Docs
 
-Read flat docs and suggest migration:
+Read flat docs and prepare for automatic migration (Phase 2 will convert them):
 
 1. **Read each doc file** (first 50 lines) — write 1-2 line summary
 2. **Read project markers** (README, package.json, configs) — extract tech stack, scripts
-3. **Flag**: "Flat docs detected. Run `/docs-init --migrate` to convert to structured KB format (ADR/ARCH/PATTERN/CONV/FEAT/FINDING + index.json)"
+3. **Note** existing files for the researcher report — Phase 2 will migrate them to structured KB (ADR/ARCH/PATTERN/CONV/FEAT/FINDING + index.json) automatically
 4. **Present** → Step 3
 
 ## Step 2c — No Docs
