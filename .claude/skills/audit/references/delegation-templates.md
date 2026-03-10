@@ -23,7 +23,7 @@ Platform: {web | ios | android | all}
 Expectations:
 - Run full audit workflow per audit/references/ui.md
 - Apply audit-standards.md rules for detected mode
-- Produce Markdown report with findings, severity ratings, and verdict
+- Write report per `audit/references/report-template.md`
 
 Boundaries:
 - Analyze and report only — do not modify source files
@@ -49,8 +49,8 @@ Out of scope: Security (SEC), Performance (PERF), TypeScript depth — handled b
 Expectations:
 - Run Library mode steps per audit/references/ui.md
 - Apply audit-standards.md rules for Library mode only
-- Produce `.md` report only (no separate JSON — findings tracked in `known-findings.json`)
-- Include `## Component Catalog` section in report: list of all discovered klara components
+- Write report per `audit/references/report-template.md`
+- Include `## Component Catalog` section: list of all discovered klara components
 - Include `## Docs Gaps` section: any missing/stale docs/index.json entries found
 
 Boundaries:
@@ -83,13 +83,13 @@ Expectations:
 - Apply maturity tier per Step 0.6 — modulate blocking vs advisory
 - Load checklist-web-organism.md (NOT checklist-web.md)
 - Include mock boundary scan: verify MOCK_* naming, API contract mapping, export isolation
-- Produce .md report with phased roadmap verdict (Now / Before Beta / Before Stable)
+- Write report per `audit/references/report-template.md`
+- Use phased roadmap verdict (Now / Before Beta / Before Stable) for POC/beta
 - Include ## Component Catalog and ## Docs Gaps sections
 
 Boundaries:
 - Analyze and report only — do not modify source files
 - Do not run SEC, PERF, or architecture checks — caller handles those
-- DIALOG-* rules are advisory only — include but do not raise as current findings
 - If A11Y findings emerge, collect and note for a11y-specialist delegation
 
 Report back to: {calling_agent}
@@ -111,7 +111,7 @@ Prior findings: {finding_ids if any, else "none"}
 Expectations:
 - Run audit per audit/references/a11y.md + platform mode file
 - Check against known-findings database for regressions
-- Produce Markdown report (WCAG criteria, severity, remediation per finding)
+- Write report per `audit/references/report-template.md` (use WCAG rule IDs instead of ORGANISM/STATE/MOCK IDs)
 
 Boundaries:
 - Fix ONLY accessibility attributes if in fix mode

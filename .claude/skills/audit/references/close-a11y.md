@@ -7,11 +7,11 @@ metadata:
   argument-hint: "<finding-id>"
 ---
 
-Mark finding ID $ARGUMENTS as resolved in `.epost-data/a11y/known-findings.json`.
+Mark finding ID $ARGUMENTS as resolved in `reports/known-findings/a11y.json`.
 
 ## Instructions
 
-1. Load `.epost-data/a11y/known-findings.json`
+1. Load `reports/known-findings/a11y.json`
 2. Find the finding object with `id` matching the argument
 3. If not found, report error with available IDs
 4. If already `resolved: true`, report it's already resolved

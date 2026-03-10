@@ -47,16 +47,9 @@ Default platform: **all** (audit all three, then cross-platform consistency).
 
 ### Step 0 (pre): Track Methodology
 
-Before starting, initialize methodology tracking (populate as you go):
+Before starting, initialize methodology tracking (populate as you go).
 
-Track these fields per `core/references/report-standard.md` Methodology section.
-
-```
-filesScanned      = []          # append each file you read
-knowledgeTiersUsed = []         # append: "L1-docs", "L2-RAG", "L4-grep", etc.
-standardsSource   = []          # append: skill path, checklist name, external standard
-coverageGaps      = []          # append anything unavailable or skipped
-```
+Fields: Files Scanned, Knowledge Tiers (L1–L4), Standards Source, Coverage Gaps — defined in `audit/SKILL.md` § Methodology Tracking.
 
 Add `methodology` to the JSON envelope before writing output.
 
@@ -131,7 +124,7 @@ Set `maturityTier` in report envelope.
 
 ### Step 0: INTEGRITY Gate (Always First)
 
-**Delegation intake:** If this workflow was invoked via an Agent tool delegation (not a direct `/audit --ui` call), read the delegation context block at the start of your task for scope, expectations, output format, and report-back target. Use `scope.file_list` as your file list, `scope.platform` as your platform flag, and send your report to `calling_agent` when done.
+**Delegation intake:** If this workflow was invoked via an Agent tool delegation (not a direct `/audit --ui` call), read the delegation context block at the start of your task for scope, expectations, output format, and report-back target. Use `scope.file_list` as your file list, `scope.platform` as your platform flag, and send your report to `calling_agent` when done. See `audit/references/delegation-templates.md` for context block examples (Template A, A+, A++).
 
 **Delegation block missing or incomplete?** If invoked via Agent tool but `Scope:`, `Mode:`, and `Output path:` fields are absent:
 - Auto-detect mode per Step 1 (Mode Detection) using file path patterns
@@ -163,8 +156,9 @@ Determine audit mode from the file being audited:
 
 Set `auditMode` in the report envelope. Route to the correct step sequence below.
 
-**Library mode** → proceed to Step 1 (Discover + Load KB), then Steps 2–6 (STRUCT, PROPS, TOKEN, BIZ, A11Y, TEST)
-**Consumer mode** → proceed to Step 1 (Discover + Load KB), then Steps 1a–1g below
+Both modes run **Step 1** (Discover + Load Component Catalog) first. Then:
+- **Library mode** → Steps 2–6 (STRUCT, PROPS, TOKEN, BIZ, A11Y, TEST)
+- **Consumer mode** → Steps 1a–1g (PLACE, TW config, DRY, REUSE, A11Y, TEST, SEC/PERF)
 
 ---
 

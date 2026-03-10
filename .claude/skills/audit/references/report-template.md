@@ -1,42 +1,37 @@
 # UI Audit Report Template
 
-**One report per audit session.** Multiple components or scopes → group by scope in one report, not separate files.
+**One report per audit session.** All audit types (muji, a11y, code-reviewer) use this format. Multiple components or scopes → group by scope, not separate files.
 
 ## Session Folder Structure
 
-Every audit — including inline code reviews — writes to a session folder:
-
 ```
-reports/{YYMMDD-HHMM}-{slug}-audit/        # hybrid (code-reviewer orchestrates)
-  session.json      # metadata: scope, agents, verdict, finding counts
-  report.md         # main merged report (code-reviewer owns)
+reports/{YYMMDD-HHMM}-{slug}-audit/        # hybrid
+  session.json
+  report.md         # merged: code-reviewer owns
   muji-ui-audit.md  # muji pass
   a11y-audit.md     # a11y pass
 
-reports/{YYMMDD-HHMM}-{slug}-ui-audit/     # standalone muji (no code-reviewer)
+reports/{YYMMDD-HHMM}-{slug}-ui-audit/     # standalone muji
   session.json
   report.md
 
-reports/{YYMMDD-HHMM}-{slug}-code-review/  # inline code review (no sub-agents)
+reports/{YYMMDD-HHMM}-{slug}-code-review/  # inline code review
   session.json
   report.md
 ```
-
-The main deliverable is always `report.md`. Sub-agent reports (`muji-ui-audit.md`, `a11y-audit.md`) are source material within the same folder.
 
 **Create the folder first:** `mkdir -p reports/{date}-{slug}-{type}/` before writing any file.
 
 ---
 
+## Report Format
+
 ```markdown
-# {Component Name} — UI Audit Report
+# {Component Name} — {Audit Type} Report
 
-**Date:** YYYY-MM-DD | **Auditor:** {agent} | **Mode:** Library|Consumer | **Branch:** {branch}
-**Scope:** `path/to/component/` (all files)
+**Date:** YYYY-MM-DD | **Auditor:** {agent} | **Maturity:** poc|beta|stable | **Scope:** `path/`
 
----
-
-## Executive Summary
+## Summary
 
 | Severity | Count |
 |----------|-------|
@@ -44,72 +39,43 @@ The main deliverable is always `report.md`. Sub-agent reports (`muji-ui-audit.md
 | High | N |
 | Medium | N |
 | Low | N |
-| A11Y (delegated) | N |
 | **Total** | **N** |
 
-**Score:** X/Y applicable rules passing — **Verdict: REDESIGN|FIX-AND-REAUDIT|PASS**
-
-One-sentence rationale (trigger condition + root cause).
-
----
-
-## Findings Index
-
-| ID | Category | Severity | Summary |
-|----|----------|----------|---------|
-| WEB-STRUCT-001 | STRUCT | **Critical** | One-line summary |
-| WEB-TOKEN-001 | TOKEN | **Critical** | One-line summary |
-| WEB-PROPS-001 | PROPS | High | One-line summary |
-| WEB-POC-001 | POC | Medium | One-line summary |
-
-(All findings, ordered by severity desc then ID asc. Bold for Critical/High severity.)
+**Score:** N/Y applicable rules — **Verdict: PASS | FIX-AND-REAUDIT | REDESIGN**
+One-sentence rationale.
 
 ---
 
-## Findings
+## Checklist
 
-### {CATEGORY} — {Category Full Name} ({N} findings)
+| Rule | Description | Status | Finding | Fix |
+|------|-------------|--------|---------|-----|
+| ORGANISM-001 | Props interface exported + JSDoc | ✓ | — | — |
+| ORGANISM-002 | Callback naming + domain-agnostic types | ✗ | `onSubmit` receives `ILetterDraft` (internal type) | Extract to `ISubmitPayload` in public API |
+| STATE-001 | External state via props only | ✗ | `useAppSelector(selectDraft)` called inline | Lift to parent, inject via prop |
+| WCAG-1.4.3 | Contrast ratio ≥ 4.5:1 | ⚠ | Gray text on white (#767676) — ratio 4.48:1 | Use #757575 or darker |
+| MOCK-005 | No mocks in production exports | ✓ | — | — |
 
----
+Legend: ✓ PASS · ✗ FAIL · ⚠ WARN · N/A not applicable
 
-#### {ID} — {One-line descriptive title}  `{Severity}`
-
-**Rule:** {RULE-ID} | **File:** `path/to/file.tsx:line`
-
-Description of what is wrong and why it matters. 2–3 sentences max.
-
-> **Fix:** Concrete action item. Code snippet if it clarifies.
-
----
-
-(repeat per finding within this category, then repeat category block)
+Rules:
+- One row per checklist rule — no finding cards, no separate findings section
+- `Finding`: one-line violation description; `—` if passing
+- `Fix`: one-line action; `—` if passing
+- Omit N/A rows (e.g. MOCK-* for stable, ORGANISM-* for atoms)
+- A11Y specialist: use WCAG criterion IDs (e.g. WCAG-1.4.3) as Rule IDs
 
 ---
 
 ## A11Y Delegation
 
-The following N findings must be delegated to **epost-a11y-specialist**. Do not attempt WCAG remediation inline.
+_(Omit if no a11y findings or a11y already ran)_
 
-**Context:** {Component}, {platform}, {framework}. All findings in `{path}`.
+The following N findings are delegated to **epost-a11y-specialist**.
 
-| ID | Severity | File | Issue |
-|----|----------|------|-------|
-| WEB-A11Y-001 | High | `file.tsx:line` | One-line issue |
-
-(ordered by severity desc)
-
----
-
-## Top 3 Mentoring Points
-
-**1. {Bold lead sentence — the core lesson.}**
-Supporting detail (2–3 sentences). Reference finding IDs.
-
-**2. {Bold lead sentence.}**
-Supporting detail.
-
-**3. {Bold lead sentence.}**
-Supporting detail.
+| Rule | Severity | File | Issue |
+|------|----------|------|-------|
+| WCAG-1.4.3 | High | `file.tsx:42` | Contrast ratio 3.2:1 below threshold |
 
 ---
 
@@ -117,57 +83,48 @@ Supporting detail.
 
 | | |
 |--|--|
-| **Docs Loaded** | `{path/to/docs/index.json}` — FEAT-{N} ({component}), CONV-{N} ({convention}); or "None found" |
-| **KB Layers** | L1 docs/ ({found/not found}), L2 RAG ({available/unavailable}), L3 Skills (audit/ui.md, audit-standards.md), L4 Grep ({used/not needed}) |
-| **Tools Used** | {e.g. Glob (catalog discovery), Grep (pattern scan), Read (source analysis), Task (delegation)} |
-| **Files Scanned** | {N} files directly read; {N}+ covered by grep |
-| **Standards Source** | `audit/references/ui.md`, `ui-lib-dev/references/audit-standards.md` |
-| **Coverage Gaps** | {e.g. "RAG unavailable", "iOS checklist not loaded", or "None"} |
+| **Docs Loaded** | `docs/index.json` — FEAT-N ({component}), CONV-N; or "None found" |
+| **KB Layers** | L1 docs/ ({found/not found}), L2 RAG ({available/unavailable}), L4 Grep ({used/not needed}) |
+| **Files Scanned** | {N} files read; {N}+ covered by grep |
+| **Standards Source** | `audit/references/ui.md`, checklist applied |
+| **Coverage Gaps** | {e.g. "RAG unavailable" or "None"} |
 
 ## Delegation Log
+
+_(Omit if no delegation occurred)_
 
 | Agent | Scope | Template | Verdict | Findings |
 |-------|-------|----------|---------|----------|
 | epost-a11y-specialist | `{path/}` | Template B | block_pr: true/false | {N} |
-| epost-docs-manager | `{component}` | Template D | gap / up-to-date | {N stale fields} |
-| epost-mcp-manager | catalog query | Template E | {N} components returned | — |
-
-_(Omit section if no delegation occurred)_
+| epost-docs-manager | `{component}` | Template D | gap / up-to-date | {N} |
 ```
 
 ---
 
-### POC Verdict — Phased Roadmap (when maturityTier != stable)
+## POC Verdict — Phased Roadmap
 
-Replace the binary verdict line with this phased roadmap when auditing `poc` or `beta` components:
+Replace the binary verdict line when `maturityTier = poc` or `beta`:
 
 ```markdown
+**POC Verdict: {N} blocking / {N} before-beta / {N} before-stable**
+
 ## Phased Roadmap
 
-### Now (POC → Stable POC)
-Blocking findings that must be fixed before POC demo/review.
-
-| ID | Severity | Summary | Fix |
-|----|----------|---------|-----|
-| ... | critical/high | ... | ... |
+### Now (blocking)
+| Rule | Severity | Finding | Fix |
+|------|----------|---------|-----|
+| ORGANISM-003 | critical | ... | ... |
 
 ### Before Beta
-Should-fix findings for production readiness. Currently advisory.
-
-| ID | Severity | Summary | Fix |
-|----|----------|---------|-----|
-| ... | medium | ... | ... |
+| Rule | Severity | Finding | Fix |
+|------|----------|---------|-----|
+| STATE-002 | medium | ... | ... |
 
 ### Before Stable
-Nice-to-fix and advisory items. Address during hardening phase.
-
-| ID | Severity | Summary | Fix |
-|----|----------|---------|-----|
-| ... | low | ... | ... |
+| Rule | Severity | Finding | Fix |
+|------|----------|---------|-----|
+| STATE-003 | low | ... | ... |
 ```
-
-**Verdict line for POC:** `**POC Verdict: {N} blocking / {N} before-beta / {N} before-stable**`
-(replaces PASS / FIX-AND-REAUDIT / REDESIGN for poc/beta tiers)
 
 ---
 
@@ -175,12 +132,9 @@ Nice-to-fix and advisory items. Address during hardening phase.
 
 | Rule | Detail |
 |------|--------|
-| Finding card heading | `#### {ID} — {Title}  \`{Severity}\`` — severity as inline code at end of heading |
-| Fix block | Always `> **Fix:**` blockquote — visually separates fix from issue description |
-| Findings Index | Required — one row per finding before any detail section |
-| Category headers | Include count — `### STRUCT — Component Structure (4 findings)` |
-| Severity in index | **Bold** for Critical and High; plain text for Medium and Low |
-| A11Y table columns | ID \| Severity \| File \| Issue — no Rule column (redundant for delegation) |
-| Code blocks | Inline examples only — never wrap finding descriptions in code fences |
-| Word economy | Issue ≤ 3 sentences; Fix ≤ 2 sentences; Mentoring points ≤ 3 sentences each |
-| Omit Rule field | When finding is module-wide (no specific file), omit `**File:**` |
+| Severity in summary | **Bold** for Critical and High; plain text for Medium and Low |
+| Finding + Fix columns | One line each. `—` when rule passes. Never multi-sentence. |
+| N/A rows | Omit entirely — don't include rows that don't apply |
+| Code blocks | Inline backticks only inside table cells — no fenced blocks |
+| A11Y rule IDs | WCAG-{criterion} format (e.g. WCAG-2.4.3) |
+| Omit empty sections | A11Y Delegation, Delegation Log — omit entirely if unused |

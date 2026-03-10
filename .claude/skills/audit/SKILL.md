@@ -28,7 +28,7 @@ Auto-detect and execute the appropriate audit workflow.
 
 Every audit report MUST include a `methodology` field (JSON) or **Methodology** section (Markdown) documenting:
 - **Files Scanned** — every file actually read
-- **Knowledge Tiers** — which levels (L1–L5) were activated and whether each was available
+- **Knowledge Tiers** — which levels (L1–L4) were activated and whether each was available
 - **Standards Source** — the skill files, checklists, and external standards used as rule authority
 - **Coverage Gaps** — anything unavailable (RAG down, checklist not found, no platform rules loaded)
 
@@ -117,7 +117,7 @@ session_folder = reports/{YYMMDD-HHMM}-{slug}-audit/
 7. **Write session.json** per `references/session-json-schema.md`
 8. **Update reports/index.json** per `core/references/index-protocol.md`
 
-Verdict = `max(muji, a11y, code-reviewer)` where REDESIGN > FIX-AND-RESUBMIT > APPROVE.
+Verdict = `max(muji, a11y, code-reviewer)` where REDESIGN > FIX-AND-REAUDIT > APPROVE.
 
 ## Single-Agent Delegation Protocol
 
@@ -152,7 +152,7 @@ For non-hybrid dispatches (`--ui`, `--code`, `--a11y`):
 | `references/a11y.md` | Audit staged changes for WCAG 2.1 AA violations |
 | `references/close-a11y.md` | Mark an accessibility finding as resolved |
 | `references/close-ui.md` | Close/resolve a UI finding in known-findings DB |
-| `references/ui-known-findings-schema.md` | Schema for `.epost-data/ui/known-findings.json` |
+| `references/ui-known-findings-schema.md` | Schema for `reports/known-findings/ui-components.json` |
 | `references/session-json-schema.md` | Schema for `session.json` — per-session metadata written to every session folder |
 | `references/delegation-templates.md` | Structured handoff templates for specialist delegation |
 

@@ -1,6 +1,6 @@
 ---
 name: audit-close-ui
-description: "(ePost) Mark a UI finding as resolved in .epost-data/ui/known-findings.json"
+description: "(ePost) Mark a UI finding as resolved in reports/known-findings/ui-components.json"
 user-invocable: false
 context: fork
 agent: epost-muji
@@ -14,7 +14,7 @@ Invoked when: `audit --close --ui <finding-id>`
 
 ## Steps
 
-1. Load `.epost-data/ui/known-findings.json`
+1. Load `reports/known-findings/ui-components.json`
    - If file not found: report "no UI findings DB — run `/audit --ui` first" and stop
 2. Find entry with `id == <finding-id>`
    - If not found: list all open finding IDs and prompt user to confirm the correct ID

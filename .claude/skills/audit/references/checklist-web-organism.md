@@ -1,6 +1,6 @@
 # Web Organism/Application Checklist
 
-For use when `componentClass` is `organism` or `application`. Parallel to `checklist-web.md` — covers organism-specific concerns: public API surface, state boundaries, mock data isolation, and dialog compatibility.
+For use when `componentClass` is `organism` or `application`. Parallel to `checklist-web.md` — covers organism-specific concerns only: public API surface, state boundaries, and mock data isolation.
 
 **Maturity tier applies:** Severity is modulated per Step 0.6 of `ui.md`. POC components use phased roadmap verdict, not binary PASS/FAIL.
 
@@ -10,14 +10,11 @@ For use when `componentClass` is `organism` or `application`. Parallel to `check
 
 ## ORGANISM — Public API Surface
 
-Default severity applies unless maturity tier modulates.
-
 - [ ] **ORGANISM-001** `high` — Props interface exported and documented (`I{Name}Props` with JSDoc for every prop)
 - [ ] **ORGANISM-002** `medium` — All callbacks follow `on{Event}` naming, typed with domain-agnostic signatures (no internal domain types in callback params)
 - [ ] **ORGANISM-003** `critical` — No environment coupling: no `process.env` reads, no `window.location` reads, no hardcoded URLs in component body
-- [ ] **ORGANISM-004** `medium` — CSS containment-safe: no `position: fixed`, no viewport-relative units (`100vh`, `100vw`) in root element, no `z-index > 50`
-- [ ] **ORGANISM-005** `high` — Compound entry point: single `index.ts` barrel exports the organism + its public types only
-- [ ] **ORGANISM-006** `medium` — Internal views not individually exported: internal views/subcomponents accessible only through parent organism routing, not via barrel
+- [ ] **ORGANISM-004** `high` — Compound entry point: single `index.ts` barrel exports the organism + its public types only
+- [ ] **ORGANISM-005** `medium` — Internal views not individually exported: internal subcomponents accessible only through parent organism, not via barrel
 
 ---
 
@@ -31,39 +28,27 @@ Default severity applies unless maturity tier modulates.
 
 ---
 
-## MOCK — POC Mock Boundaries
+## MOCK — Mock Data Isolation
 
-Applies when `maturityTier = poc` or `beta`. MOCK-* rules are N/A for `stable` (mocks should not exist in stable components).
+Applies when `maturityTier = poc` or `beta`. MOCK-* rules are N/A for `stable`.
 
 - [ ] **MOCK-001** `medium` — All mock constants use `MOCK_` prefix (SCREAMING_SNAKE_CASE)
-- [ ] **MOCK-002** `high` — Every mock maps to a documented future API contract: JSDoc comment or inline comment referencing expected endpoint/shape
+- [ ] **MOCK-002** `high` — Every mock maps to a documented future API contract: JSDoc comment referencing expected endpoint/shape
 - [ ] **MOCK-003** `high` — Recipients, analytics, and external service data injected via props: not imported from mock files at render time
 - [ ] **MOCK-004** `medium` — Mock data files export typed constants matching the expected API response shape (no `any`, no untyped objects)
 - [ ] **MOCK-005** `critical` — No mock data in production exports: `index.ts` barrel does not re-export mock files or `__mocks__/` contents
 
 ---
 
-## DIALOG — Future Compatibility (advisory-only)
+## Scoring
 
-**DIALOG-* rules exist for future dialog/modal embedding compatibility. Currently advisory-only — do not raise as current findings unless organism is explicitly scoped for dialog embedding.**
-
-- [ ] **DIALOG-001** `low (advisory)` — No `position: fixed` children: organism must work inside modal/dialog containers
-- [ ] **DIALOG-002** `low (advisory)` — Container-relative sizing: uses `%`, `em`, `rem`, flex/grid; no `100vh`/`100vw`
-- [ ] **DIALOG-003** `low (advisory)` — No `document.body` manipulation: no scroll locks, no portal appends, no body class toggles
-- [ ] **DIALOG-004** `low (advisory)` — Focus management delegated to parent: no `autoFocus`, no programmatic focus on mount
-
----
-
-## Severity Defaults per Rule
-
-| Rule | Default Severity |
-|------|-----------------|
+| Rule | Severity |
+|------|----------|
 | ORGANISM-001 | high |
 | ORGANISM-002 | medium |
 | ORGANISM-003 | critical |
-| ORGANISM-004 | medium |
-| ORGANISM-005 | high |
-| ORGANISM-006 | medium |
+| ORGANISM-004 | high |
+| ORGANISM-005 | medium |
 | STATE-001 | critical |
 | STATE-002 | medium |
 | STATE-003 | low |
@@ -74,22 +59,13 @@ Applies when `maturityTier = poc` or `beta`. MOCK-* rules are N/A for `stable` (
 | MOCK-003 | high |
 | MOCK-004 | medium |
 | MOCK-005 | critical |
-| DIALOG-* | low (advisory) |
 
----
-
-## Scoring
-
-- ORGANISM rules: 6
-- STATE rules: 5
-- MOCK rules: 5
-- DIALOG rules: 4 (advisory-only, excluded from score)
-- **Total scored rules: 16**
+**Total scored rules: 15**
 
 ```
 PASS count: ___
 FAIL count: ___
-Score: PASS/16 (percentage)
+Score: PASS/15 (percentage)
 ```
 
 ### Verdict Thresholds (stable/beta)

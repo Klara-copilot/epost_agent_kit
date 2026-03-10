@@ -42,13 +42,13 @@ Machine-readable metadata for an audit session. Written by the orchestrating age
     {
       "name": "epost-muji",
       "report": "muji-ui-audit.md",
-      "verdict": "fix-and-reaudit",
+      "verdict": "FIX-AND-REAUDIT",
       "findings": { "critical": 6, "high": 11, "medium": 10, "low": 6 }
     },
     {
       "name": "epost-code-reviewer",
       "report": "report.md",
-      "verdict": "FIX-AND-RESUBMIT",
+      "verdict": "FIX-AND-REAUDIT",
       "findings": { "critical": 1, "high": 4, "medium": 5, "low": 2 }
     },
     {
@@ -64,7 +64,7 @@ Machine-readable metadata for an audit session. Written by the orchestrating age
     "high": 15,
     "medium": 15,
     "low": 8,
-    "verdict": "FIX-AND-RESUBMIT"
+    "verdict": "FIX-AND-REAUDIT"
   }
 }
 ```
@@ -96,7 +96,7 @@ Machine-readable metadata for an audit session. Written by the orchestrating age
 
 ## Verdict Priority
 
-`REDESIGN` > `FIX-AND-RESUBMIT` > `APPROVE` (use the highest across all agents)
+`REDESIGN` > `FIX-AND-REAUDIT` > `APPROVE` (use the highest across all agents)
 
 ## Who Writes It
 
