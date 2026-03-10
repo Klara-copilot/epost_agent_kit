@@ -108,7 +108,7 @@ Read project markers only (do NOT create files):
 
 Define shared report path before dispatching:
 ```
-RESEARCH_REPORT = reports/get-started-{YYYYMMDD}-research.md
+RESEARCH_REPORT = reports/{YYMMDD-HHMM}-get-started-research.md
 ```
 
 Record the detected docs state from Step 2 as `DOCS_STATE`:

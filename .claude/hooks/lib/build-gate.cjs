@@ -6,9 +6,8 @@
  * Used by git commit/push workflows and audit completion to verify builds don't break.
  *
  * Exit codes:
- *   0 = build passed (or --skip-build)
+ *   0 = build passed, skipped, or no build command detected (informational)
  *   1 = build failed
- *   2 = no build command detected (warns, does not block)
  *
  * Usage:
  *   node .claude/hooks/lib/build-gate.cjs [--platform web|android|ios|backend] [--dry-run] [--skip-build] [--timeout <ms>]
@@ -66,11 +65,18 @@ const timeoutMs = parseInt(getArg('--timeout') || '300000', 10); // 5min default
  * @returns {Platform}
  */
 function detectPlatform() {
-  // Web: package.json with build script
+  // Web: package.json with build script (standard or Nx monorepo)
   if (fs.existsSync('package.json')) {
     try {
       const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
       if (pkg.scripts && pkg.scripts.build) return 'web';
+      // Nx monorepo: no standard 'build' script but has nx run ...:build scripts
+      if (fs.existsSync('nx.json')) {
+        const hasNxBuild = Object.values(pkg.scripts || {}).some(
+          v => typeof v === 'string' && v.includes('nx run') && v.includes(':build')
+        );
+        if (hasNxBuild) return 'web';
+      }
     } catch { /* ignore */ }
   }
 
@@ -105,6 +111,16 @@ function getBuildCommand(platform) {
       // Respect the project's package manager
       const pm = detectPackageManager();
       const runner = pm === 'bun' ? 'bun' : pm === 'pnpm' ? 'pnpm' : pm === 'yarn' ? 'yarn' : 'npm';
+      // Nx monorepo: prefer nx run ...:build script over standard 'build'
+      if (fs.existsSync('nx.json') && fs.existsSync('package.json')) {
+        try {
+          const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+          const nxBuildEntry = Object.entries(pkg.scripts || {}).find(
+            ([, v]) => typeof v === 'string' && v.includes('nx run') && v.includes(':build')
+          );
+          if (nxBuildEntry) return `${runner} run ${nxBuildEntry[0]}`;
+        } catch { /* ignore */ }
+      }
       return `${runner} run build`;
     }
     case 'backend':
@@ -190,12 +206,11 @@ function main() {
   const platform = /** @type {Platform} */ (platformOverride || detectPlatform());
   const command = getBuildCommand(platform);
 
-  // No build command detected
+  // No build command detected — exit 0 (informational, not an error)
   if (!command) {
     const result = { platform, command: null, success: null, warning: 'No build command detected for this project — build gate skipped' };
     process.stdout.write(JSON.stringify(result) + '\n');
-    process.stderr.write(`⚠ build-gate: no build command detected (platform: ${platform})\n`);
-    process.exit(2);
+    process.exit(0);
   }
 
   // Dry run: report what would run without executing
