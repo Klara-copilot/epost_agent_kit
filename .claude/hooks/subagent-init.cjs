@@ -139,7 +139,7 @@ async function main() {
     // Naming templates (computed directly for reliable injection)
     lines.push(``);
     lines.push(`## Naming`);
-    lines.push(`- Report: ${path.join(reportsPath, `${agentType}-${namePattern}.md`)}`);
+    lines.push(`- Report: ${path.join(reportsPath, `${namePattern}-${agentType}.md`)}`);
     lines.push(`- Plan dir: ${path.join(plansPath, namePattern)}/`);
 
     // Trust verification (if enabled)

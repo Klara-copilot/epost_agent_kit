@@ -264,6 +264,16 @@
       },
       "plan": "plans/260310-1628-audit-skills-reorganization/plan.md",
       "created": "2026-03-10"
+    },
+    {
+      "id": "epost-planner-260311-1456-enrich-skill-creator",
+      "type": "plan",
+      "agent": "epost-planner",
+      "title": "Plan: Enrich kit-skill-development with Anthropic patterns + audit all 65 descriptions",
+      "verdict": "READY",
+      "createdAt": "2026-03-11",
+      "plan": "260311-1456-enrich-skill-creator",
+      "path": "plans/260311-1456-enrich-skill-creator/plan.md"
     }
   ]
 }

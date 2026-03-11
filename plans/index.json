@@ -2,10 +2,10 @@
   "version": "1.0.0",
   "updated": "2026-03-10",
   "counts": {
-    "active": 29,
+    "active": 30,
     "completed": 0,
     "archived": 39,
-    "total": 68
+    "total": 69
   },
   "plans": [
     {
@@ -780,6 +780,25 @@
         "muji"
       ],
       "file": "plans/260311-0512-fix-ui-post-audit-flow/plan.md"
+    },
+    {
+      "id": "PLAN-0074",
+      "title": "Enrich kit-skill-development with Anthropic Patterns + Audit Descriptions",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-11",
+      "authors": [
+        "epost-planner"
+      ],
+      "tags": [
+        "skills",
+        "kit",
+        "descriptions",
+        "anthropic",
+        "audit",
+        "orchestration"
+      ],
+      "file": "plans/260311-1456-enrich-skill-creator/plan.md"
     }
   ]
 }

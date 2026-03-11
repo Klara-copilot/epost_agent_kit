@@ -328,7 +328,7 @@ function buildPlanContextSection({ planLine, reportsPath, gitBranch, validationM
 function buildNamingSection({ reportsPath, plansPath, namePattern }) {
   return [
     `## Naming`,
-    `- Report: \`${reportsPath}{type}-${namePattern}.md\``,
+    `- Report: \`${reportsPath}${namePattern}-{type}.md\``,
     `- Plan dir: \`${plansPath}/${namePattern}/\``,
     `- Replace \`{type}\` with: agent name, report type, or context`,
     `- Replace \`{slug}\` in pattern with: descriptive-kebab-slug`
