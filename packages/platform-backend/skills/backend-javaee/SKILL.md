@@ -1,6 +1,6 @@
 ---
 name: backend-javaee
-description: "(ePost) Use when working with Jakarta EE — JAX-RS endpoints, CDI/EJB services, JPA/Hibernate, WildFly deployment"
+description: (ePost) Use when working with Jakarta EE — JAX-RS endpoints, CDI/EJB services, JPA/Hibernate, WildFly deployment
 user-invocable: false
 metadata:
   keywords:

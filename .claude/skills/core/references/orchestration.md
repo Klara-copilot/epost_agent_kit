@@ -72,6 +72,42 @@ Per task:
 
 This gives each task a clean context window and two-stage review.
 
+## Consensus-Voting Pattern (Advanced)
+
+For high-stakes decisions where no clear best practice exists, use consensus voting across independent agents.
+
+**When to use:**
+- Architecture tradeoffs with significant long-term impact
+- Multi-perspective analysis where domain bias matters
+- Design decisions where feasibility, performance, and maintainability conflict
+
+**When NOT to use:**
+- Single-option tasks (only one viable path)
+- Time-sensitive fixes (clear best practice exists)
+- CRUD or routine implementation work
+
+**Flow** (all dispatched from main context — never from within a subagent):
+
+```
+Main context → [Agent tool] → brainstormer   (generates 3 independent options)
+Main context → [Agent tool] → researcher     (evaluates options against criteria)
+Main context → [Agent tool] → planner        (selects winner, writes implementation spec)
+```
+
+**Evaluation criteria template:**
+
+| Dimension | Weight | What to assess |
+|-----------|--------|----------------|
+| Feasibility | High | Can we build it given current constraints? |
+| Maintenance | High | How hard is ongoing upkeep? |
+| Performance | Medium | Does it meet latency/throughput requirements? |
+| Alignment | High | Does it match our architecture patterns? |
+| Risk | Medium | What can go wrong, and how bad is it? |
+
+**Output**: planner produces a spec with the selected option, rationale, and rejected alternatives. The spec becomes the input for the next implementation phase.
+
+**Constraint**: Respects subagent spawn constraint — all three agents are dispatched independently from the main context, not chained.
+
 ## Subagent Spawn Constraint
 
 Subagents (agents spawned via Agent tool) **cannot spawn further subagents**. Neither Agent tool nor Task tool is available in subagent context.

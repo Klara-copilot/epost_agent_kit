@@ -1,6 +1,6 @@
 ---
 name: review
-description: "(ePost) Review workflow — auto-detects code, a11y, or improvements"
+description: (ePost) Use when user says "review", "check my code", "is this good", "look at this before I commit", or "suggest improvements" — detects review type (code quality, a11y, or general improvements) and runs the appropriate review
 user-invocable: true
 context: fork
 agent: epost-code-reviewer

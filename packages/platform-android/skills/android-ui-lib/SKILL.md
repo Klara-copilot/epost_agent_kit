@@ -1,6 +1,6 @@
 ---
 name: android-ui-lib
-description: "(ePost) Use when referencing Android theme Compose components, design tokens, or Material theme integration"
+description: (ePost) Use when referencing Android theme Compose components, design tokens, or Material theme integration
 user-invocable: false
 
 metadata:

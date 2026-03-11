@@ -1,6 +1,6 @@
 ---
 name: scout
-description: "(ePost) Explore codebase — find files, patterns, RAG + grep search across platforms"
+description: (ePost) Use when you need to "find files", "search the codebase", "locate a pattern", "explore the repo", or "what exists for X" — searches across platforms using RAG and grep
 user-invocable: true
 context: fork
 agent: Explore

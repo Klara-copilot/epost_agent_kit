@@ -1,6 +1,6 @@
 ---
 name: convert
-description: "(ePost) Convert prototype/external code to system-consistent code"
+description: (ePost) Use when user says "convert this prototype", "migrate this code", "make this match our design system", or "port from external source" — transforms external or prototype code into production-ready, system-consistent code
 user-invocable: true
 context: fork
 agent: epost-fullstack-developer

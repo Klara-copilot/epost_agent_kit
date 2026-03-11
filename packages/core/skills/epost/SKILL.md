@@ -1,6 +1,6 @@
 ---
 name: epost
-description: "(ePost) Smart hub v2 — context-aware entry point with semantic intent detection, workflow chaining, and contextual discovery"
+description: (ePost) Use when user intent is ambiguous, spans multiple workflows, or is not matched by a specific skill — performs intent detection and routes to the correct specialist (plan, cook, fix, audit, git, docs)
 user-invocable: true
 context: fork
 agent: epost-project-manager

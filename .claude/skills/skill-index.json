@@ -1,12 +1,12 @@
 {
-  "generated": "2026-03-11T08:01:30.325Z",
+  "generated": "2026-03-11T08:36:46.166Z",
   "version": "1.0.0",
   "count": 14,
   "total": 32,
   "skills": [
     {
       "name": "audit",
-      "description": "(ePost) Audit workflow — auto-detects UI component, a11y, or code audit",
+      "description": "(ePost) Use when user says \"audit\", \"run an audit\", \"check quality\", \"review before merge\", \"a11y audit\", or \"code audit\" — detects audit type (UI component, a11y, or code) and dispatches the right specialist",
       "keywords": [
         "audit",
         "review",
@@ -68,7 +68,7 @@
     },
     {
       "name": "bootstrap",
-      "description": "(ePost) Scaffold new projects or modules — auto-detects scope",
+      "description": "(ePost) Use when user says \"bootstrap\", \"scaffold\", \"init a new project\", \"create a new module\", or \"set up from scratch\" — initializes project structure for the detected platform",
       "keywords": [],
       "platforms": [
         "all"
@@ -104,7 +104,7 @@
     },
     {
       "name": "convert",
-      "description": "(ePost) Convert prototype/external code to system-consistent code",
+      "description": "(ePost) Use when user says \"convert this prototype\", \"migrate this code\", \"make this match our design system\", or \"port from external source\" — transforms external or prototype code into production-ready, system-consistent code",
       "keywords": [],
       "platforms": [
         "all"
@@ -115,7 +115,7 @@
     },
     {
       "name": "cook",
-      "description": "(ePost) Implement features — auto-detects platform",
+      "description": "(ePost) Use when user says \"implement\", \"build\", \"add a feature\", \"cook\", \"make this work\", or \"continue the plan\" — dispatches platform-aware feature implementation for web, iOS, Android, or backend",
       "keywords": [],
       "platforms": [
         "all"
@@ -148,7 +148,7 @@
     },
     {
       "name": "debug",
-      "description": "(ePost) Debug issues — auto-detects platform",
+      "description": "(ePost) Use when user says \"debug\", \"trace this\", \"diagnose\", \"it crashes\", \"why is this failing\", or provides a stack trace — investigates root cause using platform-specific debugging tools",
       "keywords": [
         "debug",
         "error",
@@ -207,7 +207,7 @@
     },
     {
       "name": "docs",
-      "description": "(ePost) Documentation workflow — auto-detects init, update, reorganize, migrate, or component",
+      "description": "(ePost) Use when user says \"write docs\", \"update docs\", \"document this\", \"init docs\", \"reorganize documentation\", or \"add component docs\" — detects docs intent (init, update, migrate, component) and runs the right workflow",
       "keywords": [],
       "platforms": [
         "all"
@@ -247,7 +247,7 @@
     },
     {
       "name": "epost",
-      "description": "(ePost) Smart hub v2 — context-aware entry point with semantic intent detection, workflow chaining, and contextual discovery",
+      "description": "(ePost) Use when user intent is ambiguous, spans multiple workflows, or is not matched by a specific skill — performs intent detection and routes to the correct specialist (plan, cook, fix, audit, git, docs)",
       "keywords": [],
       "platforms": [
         "all"
@@ -289,7 +289,7 @@
     },
     {
       "name": "fix",
-      "description": "(ePost) Fix issues — auto-detects error type and platform",
+      "description": "(ePost) Use when user says \"fix\", \"broken\", \"error\", \"failing\", \"this doesn't work\", or pastes an error message — identifies error type and applies platform-appropriate fix",
       "keywords": [],
       "platforms": [
         "all"
@@ -300,7 +300,7 @@
     },
     {
       "name": "get-started",
-      "description": "(ePost) Onboard to a project — detect state, then orchestrate researcher → documenter → implementer pipeline",
+      "description": "(ePost) Use when user says \"get started\", \"I'm new to this project\", \"onboard me\", \"what is this codebase\", or \"help me understand this project\" — discovers project state and delivers a structured onboarding experience",
       "keywords": [
         "onboard",
         "get-started",
@@ -320,7 +320,7 @@
     },
     {
       "name": "git",
-      "description": "(ePost) Git workflow — auto-detects commit, push, or PR",
+      "description": "(ePost) Use when user says \"commit\", \"push\", \"create a PR\", \"ship it\", \"done\", \"merge\", or \"open a pull request\" — runs the appropriate git workflow (commit, push, or PR creation)",
       "keywords": [],
       "platforms": [
         "all"
@@ -438,7 +438,7 @@
     },
     {
       "name": "plan",
-      "description": "(ePost) Create implementation plan — auto-detects complexity",
+      "description": "(ePost) Use when user says \"plan\", \"design this\", \"architect\", \"spec out\", \"how should we build\", or \"create a roadmap\" — produces a phased implementation plan scaled to task complexity",
       "keywords": [
         "plan",
         "planning",
@@ -554,7 +554,7 @@
     },
     {
       "name": "review",
-      "description": "(ePost) Review workflow — auto-detects code, a11y, or improvements",
+      "description": "(ePost) Use when user says \"review\", \"check my code\", \"is this good\", \"look at this before I commit\", or \"suggest improvements\" — detects review type (code quality, a11y, or general improvements) and runs the appropriate review",
       "keywords": [],
       "platforms": [
         "all"
@@ -565,7 +565,7 @@
     },
     {
       "name": "scout",
-      "description": "(ePost) Explore codebase — find files, patterns, RAG + grep search across platforms",
+      "description": "(ePost) Use when you need to \"find files\", \"search the codebase\", \"locate a pattern\", \"explore the repo\", or \"what exists for X\" — searches across platforms using RAG and grep",
       "keywords": [
         "explore",
         "search",
@@ -636,7 +636,7 @@
     },
     {
       "name": "simulator",
-      "description": "(ePost) List, boot, shutdown, and manage iOS simulators using XcodeBuildMCP or xcrun simctl",
+      "description": "(ePost) Use when user says \"list simulators\", \"boot a simulator\", \"launch the app\", \"open simulator\", or \"manage simulators\" — controls iOS simulators via XcodeBuildMCP or xcrun simctl",
       "keywords": [],
       "platforms": [
         "all"
@@ -672,7 +672,7 @@
     },
     {
       "name": "subagent-driven-development",
-      "description": "(ePost) Use when executing implementation plans with multiple independent tasks that benefit from per-task subagent dispatch and two-stage review.",
+      "description": "(ePost) Use when a plan has 3+ independent tasks, phases have non-overlapping file ownership, or user says \"parallel implementation\", \"execute all phases\" — provides per-task subagent dispatch with two-stage review",
       "keywords": [
         "parallel",
         "subagent",
@@ -693,7 +693,7 @@
     },
     {
       "name": "test",
-      "description": "(ePost) Run tests — auto-detects platform",
+      "description": "(ePost) Use when user says \"run tests\", \"add tests\", \"check coverage\", \"write unit tests\", or \"validate this works\" — detects platform and runs the appropriate test suite (Jest, XCTest, JUnit, Espresso)",
       "keywords": [],
       "platforms": [
         "all"

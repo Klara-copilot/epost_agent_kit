@@ -1,6 +1,6 @@
 ---
 name: web-ui-lib
-description: "(ePost) Use when referencing klara-theme component APIs, props, variants, spacing tokens, or theme provider patterns"
+description: (ePost) Use when referencing klara-theme component APIs, props, variants, spacing tokens, or theme provider patterns
 user-invocable: false
 
 metadata:

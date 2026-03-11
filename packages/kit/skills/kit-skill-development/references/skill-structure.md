@@ -46,6 +46,36 @@ Files used in output Claude produces, not loaded into context.
 - **Use cases**: Templates, images, icons, boilerplate code, sample documents
 - **Benefits**: Separates output resources from documentation
 
+## String Substitutions
+
+Claude Code replaces these placeholders before loading the skill into context:
+
+| Substitution | Value | Example Use |
+|---|---|---|
+| `$ARGUMENTS` | User input after skill invocation | Pass user's task description to body instructions |
+| `$0` | Skill invocation command name | Self-referential hints ("you were invoked as `$0`") |
+| `${CLAUDE_SESSION_ID}` | Unique session identifier | Namespaced temp files, session-scoped state |
+| `${CLAUDE_SKILL_DIR}` | Absolute path to skill directory | Reference bundled resources: `${CLAUDE_SKILL_DIR}/references/guide.md` |
+| `!command` | Shell preprocessing — output replaces placeholder before load | Inject dynamic context: `` !date ``, `` !cat .env.example `` |
+
+**Usage examples:**
+
+```yaml
+# $ARGUMENTS — pass user task to body
+description: Use when user needs to process X. Task: $ARGUMENTS
+
+# ${CLAUDE_SKILL_DIR} — reference bundled file
+See ${CLAUDE_SKILL_DIR}/references/patterns.md for examples.
+
+# !command — inject git branch at load time
+Current branch: !git rev-parse --abbrev-ref HEAD
+```
+
+**Notes:**
+- Shell commands (`!command`) run at skill load time in the shell, not inside Claude
+- `$ARGUMENTS` is empty when skill triggers automatically (no explicit invocation)
+- Substitutions occur before SKILL.md body is processed
+
 ## Progressive Disclosure Deep Dive
 
 ### Level 1: Metadata (Always in Context, ~100 tokens)
@@ -58,7 +88,7 @@ The `name` and `description` frontmatter fields. Always loaded. Determines when 
 Core concepts, workflows, quick references, and pointers to Level 3 resources.
 Loaded when Claude determines the skill is relevant to the current task.
 
-**Target: 1,500–2,000 words. Hard max: 5,000 words.**
+**Target: 150–200 lines (~1,500–2,000 words). Hard max: 500 lines. Move everything else to `references/`.**
 
 ### Level 3: Bundled Resources (On Demand, Unlimited)
 

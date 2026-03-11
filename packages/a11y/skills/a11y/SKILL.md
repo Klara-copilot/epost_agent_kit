@@ -1,6 +1,6 @@
 ---
 name: a11y
-description: "(ePost) Use when accessibility, WCAG, POUR, a11y compliance, or accessibility workflow (audit, fix, review, close) is relevant across any platform"
+description: (ePost) Use when "accessibility", "WCAG", "POUR", "a11y", "screen reader", or accessibility workflow ("audit", "fix", "review", "close finding") is mentioned across any platform — loads cross-platform a11y compliance rules
 user-invocable: true
 context: fork
 agent: epost-a11y-specialist

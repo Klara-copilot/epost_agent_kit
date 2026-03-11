@@ -1,6 +1,6 @@
 ---
 name: get-started
-description: "(ePost) Onboard to a project — detect state, then orchestrate researcher → documenter → implementer pipeline"
+description: (ePost) Use when user says "get started", "I'm new to this project", "onboard me", "what is this codebase", or "help me understand this project" — discovers project state and delivers a structured onboarding experience
 user-invocable: true
 context: inline
 metadata:
@@ -64,14 +64,16 @@ Audit KB coverage and health:
 4. **Read project markers** — extract tech stack, scripts
 5. **Present** → Step 3
 
-## Step 2b — Has Flat Docs
+## Step 2b — Has Flat Docs (force migrate)
 
-Read flat docs and prepare for automatic migration (Phase 2 will convert them):
+Read flat docs and build migration manifest for Phase 2:
 
-1. **Read each doc file** (first 50 lines) — write 1-2 line summary
+1. **Read each doc file** (first 50 lines) — write 1-2 line summary + classify target category (ADR/ARCH/PATTERN/CONV/FEAT/FINDING)
 2. **Read project markers** (README, package.json, configs) — extract tech stack, scripts
-3. **Note** existing files for the researcher report — Phase 2 will migrate them to structured KB (ADR/ARCH/PATTERN/CONV/FEAT/FINDING + index.json) automatically
+3. **Build migration manifest** — list every flat doc with: `source path → target category → proposed ID`. Include this in the researcher report so Phase 2 has an explicit migration plan.
 4. **Present** → Step 3
+
+**Note:** Flat docs are always migrated — never left as-is. Phase 2 will convert them to structured KB with `index.json`.
 
 ## Step 2c — No Docs
 
@@ -164,7 +166,7 @@ Agent(
 
   Based on docs state, apply the matching workflow:
   - DOCS_STATE = "none"  → run docs-init workflow: generate full KB structure in docs/ with index.json
-  - DOCS_STATE = "flat"  → run docs-init --migrate workflow: convert flat docs to KB structure
+  - DOCS_STATE = "flat"  → FORCE MIGRATE: convert ALL flat docs to KB structure (ADR/ARCH/PATTERN/CONV/FEAT/FINDING + index.json). Use migration manifest from researcher report. Move files, do not leave originals. Every flat doc must end up categorized in the KB.
   - DOCS_STATE = "kb"    → run docs-update --verify workflow: check all entries, flag STALE/BROKEN/GAP
 
   Apply templates from knowledge-retrieval skill. Keep all files under 800 LOC.

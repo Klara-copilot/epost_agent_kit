@@ -1,6 +1,6 @@
 ---
 name: bootstrap
-description: "(ePost) Scaffold new projects or modules — auto-detects scope"
+description: (ePost) Use when user says "bootstrap", "scaffold", "init a new project", "create a new module", or "set up from scratch" — initializes project structure for the detected platform
 user-invocable: true
 context: fork
 agent: epost-fullstack-developer

@@ -1,6 +1,6 @@
 ---
 name: debug
-description: "(ePost) Debug issues — auto-detects platform"
+description: (ePost) Use when user says "debug", "trace this", "diagnose", "it crashes", "why is this failing", or provides a stack trace — investigates root cause using platform-specific debugging tools
 user-invocable: true
 context: fork
 agent: epost-debugger

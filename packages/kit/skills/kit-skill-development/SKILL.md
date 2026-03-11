@@ -30,7 +30,7 @@ Skills are modular packages that extend Claude's capabilities with specialized k
 | `SKILL.md` body | < 5k tokens | When skill triggers |
 | `references/`, `scripts/`, `assets/` | Unlimited | On demand by Claude |
 
-**Target SKILL.md body: 1,500–2,000 words. Move details to `references/`.**
+**Target SKILL.md body: 150–200 lines (~1,500–2,000 words). Hard max: 500 lines. Move everything else to `references/`.**
 
 ## Skill Creation Process (Summary)
 
@@ -110,6 +110,15 @@ skill-name/
     └── validate.sh
 ```
 
+## Extended Thinking (`ultrathink`)
+
+Anthropic supports the `ultrathink` keyword to trigger extended thinking in Claude models.
+
+- **When to use**: complex multi-step orchestration, deep architecture decisions, root cause analysis with many unknowns
+- **When NOT to use**: simple workflows, lookup tasks, CRUD operations, anything with a clear single answer
+- **How**: include the word `ultrathink` naturally in the skill body where deep reasoning is needed — Claude detects it and activates extended thinking mode
+- Extended thinking increases token usage; use only where depth outweighs speed
+
 ## CSO: Cognitive Skill Optimization
 
 Skills only work if models follow the body, not just the description. CSO prevents the "Description Trap" — where a description that summarizes workflow causes the model to skip the skill body entirely.
@@ -143,4 +152,5 @@ When this skill is active and user intent matches a sub-skill, delegate:
 ## Reference Files
 
 - **`references/skill-authoring-guide.md`** — Step-by-step creation, writing style details, common mistakes, examples from plugin-dev
-- **`references/skill-structure.md`** — Full anatomy, bundled resource types, progressive disclosure deep-dive, validation checklist
+- **`references/skill-structure.md`** — Full anatomy, bundled resource types, string substitutions, progressive disclosure deep-dive, validation checklist
+- **`references/description-validation-checklist.md`** — Checklist for validating skill description quality (form, length, keywords, anti-patterns)

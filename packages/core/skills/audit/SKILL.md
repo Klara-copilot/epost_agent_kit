@@ -1,6 +1,6 @@
 ---
 name: audit
-description: "(ePost) Audit workflow — auto-detects UI component, a11y, or code audit"
+description: (ePost) Use when user says "audit", "run an audit", "check quality", "review before merge", "a11y audit", or "code audit" — detects audit type (UI component, a11y, or code) and dispatches the right specialist
 user-invocable: true
 metadata:
   argument-hint: "[--ui <ComponentName> [--platform web|ios|android|all] [--poc|--beta|--stable] | --a11y [platform] | --code]"

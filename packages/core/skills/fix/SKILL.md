@@ -1,6 +1,6 @@
 ---
 name: fix
-description: "(ePost) Fix issues — auto-detects error type and platform"
+description: (ePost) Use when user says "fix", "broken", "error", "failing", "this doesn't work", or pastes an error message — identifies error type and applies platform-appropriate fix
 user-invocable: true
 metadata:
   argument-hint: "[issue description]"

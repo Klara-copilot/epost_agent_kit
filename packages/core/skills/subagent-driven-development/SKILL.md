@@ -1,6 +1,6 @@
 ---
 name: subagent-driven-development
-description: "(ePost) Use when executing implementation plans with multiple independent tasks that benefit from per-task subagent dispatch and two-stage review."
+description: (ePost) Use when a plan has 3+ independent tasks, phases have non-overlapping file ownership, or user says "parallel implementation", "execute all phases" — provides per-task subagent dispatch with two-stage review
 user-invocable: false
 
 metadata:

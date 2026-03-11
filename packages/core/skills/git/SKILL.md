@@ -1,6 +1,6 @@
 ---
 name: git
-description: "(ePost) Git workflow — auto-detects commit, push, or PR"
+description: (ePost) Use when user says "commit", "push", "create a PR", "ship it", "done", "merge", or "open a pull request" — runs the appropriate git workflow (commit, push, or PR creation)
 user-invocable: true
 context: fork
 agent: epost-git-manager

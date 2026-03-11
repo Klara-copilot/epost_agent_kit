@@ -1,6 +1,6 @@
 ---
 name: simulator
-description: "(ePost) List, boot, shutdown, and manage iOS simulators using XcodeBuildMCP or xcrun simctl"
+description: (ePost) Use when user says "list simulators", "boot a simulator", "launch the app", "open simulator", or "manage simulators" — controls iOS simulators via XcodeBuildMCP or xcrun simctl
 user-invocable: true
 context: fork
 agent: epost-fullstack-developer

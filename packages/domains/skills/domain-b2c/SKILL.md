@@ -1,6 +1,6 @@
 ---
 name: domain-b2c
-description: "(ePost) Use when working on the consumer epost app — B2C mail, documents, notifications on iOS or Android"
+description: (ePost) Use when working on the consumer epost app — B2C mail, documents, notifications on iOS or Android
 user-invocable: false
 ---
 
