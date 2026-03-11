@@ -43,9 +43,12 @@ See `a11y` skill for platform routing. Read the finding's `platform` field to se
 3. If `resolved: true`, skip and report SKIPPED
 4. Use `file_pattern` (glob) to locate the relevant file(s)
 5. Use `code_pattern` (regex) to locate the specific code element
-6. Apply the appropriate fix template from the platform-specific skill
-7. **Update finding status** — if status is FIXED, load `known-findings.json`, set `fix_applied: true` and `fix_applied_date: today` on the finding, save file
-8. Suggest: `Run /audit --close --a11y {id} to mark as resolved after verification`
+6. Show diff preview using the appropriate fix template — do NOT write files yet
+7. **Ask for confirmation**: "Apply this fix? (yes / cancel)"
+   - `yes` → apply the fix template to source file
+   - `cancel` → stop, nothing written
+8. **Update finding status** — if status is FIXED, set `fix_applied: true` and `fix_applied_date: today` in `reports/known-findings/a11y.json`
+9. Suggest: `Run /audit --close --a11y {id} to mark as resolved after verification`
 
 **Output:** single JSON object
 

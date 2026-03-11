@@ -25,14 +25,28 @@ Executes inline in main context — the main context dispatches epost-muji via A
 4. Delegate to epost-muji via Agent tool with:
    - Finding objects from DB
    - Component name + `file_pattern`
-   - Mode: fix (apply surgical changes)
-   - Boundaries: fix ONLY the flagged rule violation — no refactoring
-5. Receive fix result from epost-muji:
-   - Lines changed
-   - Confidence (high|medium|low)
-6. Update `reports/known-findings/ui-components.json`: set `fix_applied: true`, `fix_applied_date: today`
-7. Output confirmation (JSON + prose summary)
-8. Suggest: "Run `/audit --close --ui <id>` to mark as fully resolved after verification"
+   - Mode: **plan** (produce fix plan + diff preview — do NOT write files yet)
+   - Boundaries: plan ONLY the flagged rule violation — no opportunistic improvements
+5. Present fix plan to user. For each finding, show:
+   ```
+   Finding #7 — PROPS-001 (high)
+   File: src/lib/components/smart-letter-composer/smart-letter-composer.tsx
+   Issue: Props interface not exported
+   Fix: Export ISmartLetterComposerProps + add JSDoc on 3 undocumented props
+   Diff preview:
+     - type SmartLetterComposerProps = { ... }
+     + export interface ISmartLetterComposerProps { ... }
+   Confidence: high
+   ```
+6. **Ask for confirmation**: "Apply these N fix(es)? (yes / skip #id / cancel)"
+   - `yes` → proceed to step 7
+   - `skip #id` → exclude that finding, apply the rest
+   - `cancel` → stop, nothing written
+7. Dispatch epost-muji via Agent tool with confirmed findings:
+   - Mode: **apply** (write changes to source files)
+8. Update `reports/known-findings/ui-components.json`: set `fix_applied: true`, `fix_applied_date: today` for each applied finding
+9. Output: files changed, lines changed per finding
+10. Suggest: "Run `/audit --close --ui <id>` to mark as fully resolved after verification"
 
 ## Boundaries
 
