@@ -2,8 +2,6 @@
 name: fix
 description: "(ePost) Fix issues — auto-detects error type and platform"
 user-invocable: true
-context: fork
-agent: epost-debugger
 metadata:
   argument-hint: "[issue description]"
 ---
@@ -16,9 +14,19 @@ Fix issues with automatic error type detection. Absorbs `:fast`, `:test`, `:type
 
 If `$ARGUMENTS` starts with `--ci`: skip auto-detection, load `references/ci-mode.md` and execute. Remaining args are the issue description.
 If `$ARGUMENTS` starts with `--deep`: skip auto-detection, load `references/deep-mode.md` and execute.
-If `$ARGUMENTS` starts with `--ui`: skip auto-detection, load `references/ui-mode.md` and execute.
-If `$ARGUMENTS` starts with `--a11y`: skip auto-detection, load `references/a11y-mode.md` and execute.
+If `$ARGUMENTS` starts with `--ui`: skip auto-detection, load `references/ui-mode.md` and execute **inline** (main context — do NOT fork).
+If `$ARGUMENTS` starts with `--a11y`: skip auto-detection, load `references/a11y-mode.md` and execute **inline** (main context — do NOT fork).
 Otherwise: continue to Error Type Auto-Detection.
+
+## Dispatch Routing
+
+| Flag | Execution | Specialist |
+|------|-----------|-----------|
+| `--ui` | Inline in main context | Main context dispatches epost-muji via Agent tool |
+| `--a11y` | Inline in main context | Main context dispatches epost-a11y-specialist via Agent tool |
+| `--deep` | Dispatch to epost-debugger via Agent tool | epost-debugger runs deep investigation |
+| `--ci` | Dispatch to epost-debugger via Agent tool | epost-debugger handles CI log analysis |
+| _(auto-detect)_ | Dispatch to epost-debugger via Agent tool | epost-debugger handles general debugging |
 
 ## Aspect Files
 
@@ -30,6 +38,8 @@ Otherwise: continue to Error Type Auto-Detection.
 | `references/a11y-mode.md` | Fix accessibility findings from known-findings.json |
 
 ## Error Type Auto-Detection
+
+**Dispatch to epost-debugger via Agent tool** with the full issue context before proceeding. epost-debugger will handle detection, investigation, and fixing. The modes below are instructions for epost-debugger.
 
 Before fixing, detect the error type from context:
 

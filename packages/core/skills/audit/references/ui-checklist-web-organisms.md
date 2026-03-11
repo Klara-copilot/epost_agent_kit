@@ -1,8 +1,8 @@
 # Web Organism/Application Checklist
 
-For use when `componentClass` is `organism` or `application`. Parallel to `checklist-web.md` — covers organism-specific concerns only: public API surface, state boundaries, and mock data isolation.
+For use when `componentClass` is `organism` or `application`. Parallel to `ui-checklist-web-atoms.md` — covers organism-specific concerns only: public API surface, state boundaries, and mock data isolation.
 
-**Maturity tier applies:** Severity is modulated per Step 0.6 of `ui.md`. POC components use phased roadmap verdict, not binary PASS/FAIL.
+**Maturity tier applies:** Severity is modulated per Step 0.6 of `ui-workflow.md`. POC components use phased roadmap verdict, not binary PASS/FAIL.
 
 **Atom/molecule rules NOT applied here:** STRUCT-002, STRUCT-005, TOKEN-001, BIZ-001, BIZ-002, BIZ-003 — see suppression note in `ui.md` Step 3.
 
@@ -34,7 +34,7 @@ Applies when `maturityTier = poc` or `beta`. MOCK-* rules are N/A for `stable`.
 
 - [ ] **MOCK-001** `medium` — All mock constants use `MOCK_` prefix (SCREAMING_SNAKE_CASE)
 - [ ] **MOCK-002** `high` — Every mock maps to a documented future API contract: JSDoc comment referencing expected endpoint/shape
-- [ ] **MOCK-003** `high` — Recipients, analytics, and external service data injected via props: not imported from mock files at render time
+- [ ] **MOCK-003** `high` — External entity data (e.g. contact lists, event payloads, service configs) injected via props: not imported from mock files at render time
 - [ ] **MOCK-004** `medium` — Mock data files export typed constants matching the expected API response shape (no `any`, no untyped objects)
 - [ ] **MOCK-005** `critical` — No mock data in production exports: `index.ts` barrel does not re-export mock files or `__mocks__/` contents
 

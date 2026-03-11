@@ -27,10 +27,10 @@ Cross-platform accessibility foundation (WCAG 2.1 AA) with auto-detection of aud
 
 ## Step 0 — Flag Override
 
-If `$ARGUMENTS` starts with `--audit`: load `/audit --a11y` (references/a11y.md in audit skill). Pass remaining args as platform hint.
+If `$ARGUMENTS` starts with `--audit`: load `/audit --a11y` (references/a11y-workflow.md in audit skill). Pass remaining args as platform hint.
 If `$ARGUMENTS` starts with `--fix`: load `/fix --a11y` (references/a11y-mode.md in fix skill). Pass remaining args as finding ID or count.
 If `$ARGUMENTS` starts with `--review`: load `/review --a11y` (references/a11y.md in review skill). Pass remaining args as focus area.
-If `$ARGUMENTS` starts with `--close`: load `/audit --close` (references/close-a11y.md in audit skill). Pass remaining args as finding ID.
+If `$ARGUMENTS` starts with `--close`: load `/audit --close` (references/a11y-close.md in audit skill). Pass remaining args as finding ID.
 Otherwise: continue to Auto-Detection.
 
 ## Auto-Detection

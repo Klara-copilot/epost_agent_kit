@@ -7,7 +7,7 @@ metadata:
   argument-hint: "[<n> | #<id>]"
 ---
 
-Fix accessibility findings from `.epost-data/a11y/known-findings.json`.
+Fix accessibility findings from `reports/known-findings/a11y.json`.
 
 ## Aspect Files
 
@@ -38,37 +38,31 @@ See `a11y` skill for platform routing. Read the finding's `platform` field to se
 
 ### If argument is `#<id>` (single finding)
 
-1. Load finding with matching `id` from `.epost-data/a11y/known-findings.json`
+1. Load finding with matching `id` from `reports/known-findings/a11y.json`
 2. If not found, report error with available IDs
 3. If `resolved: true`, skip and report SKIPPED
-4. Check `.epost-data/a11y/fixes/patches/` for existing `finding-{id}-*.diff` — reuse if applicable
-5. Use `file_pattern` (glob) to locate the relevant file(s)
-6. Use `code_pattern` (regex) to locate the specific code element
-7. Apply the appropriate fix template from the platform-specific skill
-8. Create minimal patch (unified diff format with 3 lines context)
-9. **Save patch file** — write diff to `.epost-data/a11y/fixes/patches/finding-{id}-YYMMDD.diff` (create directories if missing)
-10. **Update finding status** — if status is FIXED, load `known-findings.json`, set `fix_applied: true` and `fix_applied_date: today` on the finding, save file
-11. Suggest: `Run /audit-close-a11y {id} to mark as resolved after verification`
+4. Use `file_pattern` (glob) to locate the relevant file(s)
+5. Use `code_pattern` (regex) to locate the specific code element
+6. Apply the appropriate fix template from the platform-specific skill
+7. **Update finding status** — if status is FIXED, load `known-findings.json`, set `fix_applied: true` and `fix_applied_date: today` on the finding, save file
+8. Suggest: `Run /audit --close --a11y {id} to mark as resolved after verification`
 
 **Output:** single JSON object
 
 ### If argument is `<n>` or empty (batch)
 
-1. Load `.epost-data/a11y/known-findings.json`
+1. Load `reports/known-findings/a11y.json`
 2. Filter: `resolved !== true` and `priority = 1`
 3. Sort: priority ascending, then ID ascending
 4. Take top N (default N=1 when no argument)
 5. For each finding:
-   - Check `.epost-data/a11y/fixes/patches/` for existing patches — reuse if applicable
    - Read `platform` field to select correct skill
    - Locate file via `file_pattern`, locate code via `code_pattern`
    - Apply `fix_template` per platform-specific skill rules
-   - Generate unified diff
    - Determine status (FIXED / NEEDS_REVIEW / SKIPPED)
 6. Show diffs for review — do NOT apply patches automatically
-7. **Save patch files** — for each finding, write diff to `.epost-data/a11y/fixes/patches/finding-{id}-YYMMDD.diff`
-8. **Update finding status** — for each FIXED finding, load `known-findings.json`, set `fix_applied: true` and `fix_applied_date: today`, save
-9. After verification, suggest `/audit-close-a11y <id>` for each fixed finding
+7. **Update finding status** — for each FIXED finding, load `known-findings.json`, set `fix_applied: true` and `fix_applied_date: today`, save
+8. After verification, suggest `/audit --close --a11y <id>` for each fixed finding
 
 **Output:** JSON array (one object per finding)
 

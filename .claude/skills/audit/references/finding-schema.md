@@ -141,7 +141,7 @@ verdict =
 
 ### Library Mode
 - Score = `{PASS_COUNT}/35`
-- Count only the 35 rules from `checklist-web.md`
+- Count only the 35 rules from `ui-checklist-web-atoms.md`
 - N/A rules do not count toward total (adjust denominator)
 - Example: 32 applicable rules, 28 pass → score = `28/32`
 

@@ -86,7 +86,7 @@ The following N findings are delegated to **epost-a11y-specialist**.
 | **Docs Loaded** | `docs/index.json` — FEAT-N ({component}), CONV-N; or "None found" |
 | **KB Layers** | L1 docs/ ({found/not found}), L2 RAG ({available/unavailable}), L4 Grep ({used/not needed}) |
 | **Files Scanned** | {N} files read; {N}+ covered by grep |
-| **Standards Source** | `audit/references/ui.md`, checklist applied |
+| **Standards Source** | `audit/references/ui-workflow.md`, checklist applied |
 | **Coverage Gaps** | {e.g. "RAG unavailable" or "None"} |
 
 ## Delegation Log

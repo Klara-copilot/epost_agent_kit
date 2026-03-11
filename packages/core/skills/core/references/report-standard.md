@@ -117,7 +117,7 @@ For audit reports that include JSON: the `summary` object provides machine-reada
 | epost-planner | `plan/references/report-template.md` | — |
 | epost-researcher | `research/references/report-template.md` | — |
 | epost-code-reviewer | `code-review/references/report-template.md` | inline JSON findings |
-| epost-muji | `audit/references/audit-report-schema.md` (human section) | `audit/references/audit-report-schema.md` |
+| epost-muji | `audit/references/finding-schema.md` (human section) | `audit/references/finding-schema.md` |
 | epost-a11y-specialist | a11y platform mode schema (human section) | a11y platform mode schema |
 | epost-tester | `test/references/report-template.md` | — |
 

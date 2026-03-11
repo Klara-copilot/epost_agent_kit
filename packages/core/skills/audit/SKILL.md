@@ -50,7 +50,7 @@ Before executing any audit mode, activate `knowledge-retrieval` to load relevant
 
 ## Step 0 — Flag Override + Mode Selection
 
-If `$ARGUMENTS` contains `--poc`, `--beta`, or `--stable`: extract the maturity tier and pass it through to `references/ui.md` workflow (Step 0.6). These flags combine with `--ui` — they are not standalone modes.
+If `$ARGUMENTS` contains `--poc`, `--beta`, or `--stable`: extract the maturity tier and pass it through to `references/ui-workflow.md` workflow (Step 0.6). These flags combine with `--ui` — they are not standalone modes.
 
 If `$ARGUMENTS` starts with `--ui` and **no maturity tier flag** (`--poc`/`--beta`/`--stable`) is present:
 **Ask the developer to confirm maturity tier before dispatching**:
@@ -62,10 +62,10 @@ If `$ARGUMENTS` starts with `--ui` and **no maturity tier flag** (`--poc`/`--bet
 > Reply with the flag or just `poc` / `beta` / `stable`."
 Wait for reply, then set the maturity tier and proceed.
 
-If `$ARGUMENTS` starts with `--ui`: **dispatch epost-muji** via Agent tool. Pass component name + platform flags + maturity tier (if present) + `references/ui.md` workflow.
-If `$ARGUMENTS` starts with `--a11y`: **dispatch epost-a11y-specialist** via Agent tool. Pass `references/a11y.md` + platform hint.
-If `$ARGUMENTS` starts with `--close --ui`: load `references/close-ui.md` and execute inline.
-If `$ARGUMENTS` starts with `--close`: load `references/close-a11y.md` and execute inline.
+If `$ARGUMENTS` starts with `--ui`: **dispatch epost-muji** via Agent tool. Pass component name + platform flags + maturity tier (if present) + `references/ui-workflow.md` workflow.
+If `$ARGUMENTS` starts with `--a11y`: **dispatch epost-a11y-specialist** via Agent tool. Pass `references/a11y-workflow.md` + platform hint.
+If `$ARGUMENTS` starts with `--close --ui`: load `references/ui-close.md` and execute inline.
+If `$ARGUMENTS` starts with `--close`: load `references/a11y-close.md` and execute inline.
 If `$ARGUMENTS` starts with `--code`: **dispatch epost-code-reviewer** via Agent tool.
 If auto-detected as **hybrid** (see Hybrid Detection below): run Hybrid Orchestration.
 Otherwise: continue to Auto-Detection.
@@ -149,11 +149,11 @@ For non-hybrid dispatches (`--ui`, `--code`, `--a11y`):
 | File | Purpose |
 |------|---------|
 | `references/output-contract.md` | **Single source of truth** — all output paths, session folders, file names, agent responsibilities |
-| `references/ui.md` | Audit UI component (Senior Muji Reviewer) |
-| `references/a11y.md` | Audit staged changes for WCAG 2.1 AA violations |
-| `references/close-a11y.md` | Mark an accessibility finding as resolved |
-| `references/close-ui.md` | Close/resolve a UI finding in known-findings DB |
-| `references/ui-known-findings-schema.md` | Schema for `reports/known-findings/ui-components.json` |
+| `references/ui-workflow.md` | Audit UI component (Senior Muji Reviewer) |
+| `references/a11y-workflow.md` | Audit staged changes for WCAG 2.1 AA violations |
+| `references/a11y-close.md` | Mark an accessibility finding as resolved |
+| `references/ui-close.md` | Close/resolve a UI finding in known-findings DB |
+| `references/ui-findings-schema.md` | Schema for `reports/known-findings/ui-components.json` |
 | `references/session-json-schema.md` | Schema for `session.json` — per-session metadata written to every session folder |
 | `references/delegation-templates.md` | Structured handoff templates for specialist delegation |
 
@@ -163,10 +163,10 @@ Analyze `$ARGUMENTS` keywords and context:
 
 | Signal | Dispatch |
 |--------|----------|
-| Component name (`Epost*`, UI keyword), "component", "ui-lib", "design system", "token", "klara", "muji" | `--ui` → `references/ui.md` via **epost-muji** |
-| "a11y", "accessibility", "wcag", "voiceover", "talkback" | `--a11y` → `references/a11y.md` |
-| "close" + "ui" signals | `--close --ui` → `references/close-ui.md` |
-| "close", "resolve", "finding" | `--close` → `references/close-a11y.md` |
+| Component name (`Epost*`, UI keyword), "component", "ui-lib", "design system", "token", "klara", "muji" | `--ui` → `references/ui-workflow.md` via **epost-muji** |
+| "a11y", "accessibility", "wcag", "voiceover", "talkback" | `--a11y` → `references/a11y-workflow.md` |
+| "close" + "ui" signals | `--close --ui` → `references/ui-close.md` |
+| "close", "resolve", "finding" | `--close` → `references/a11y-close.md` |
 | "code", "security", "performance", staged changes without component signal | `--code` → `code-review` |
 | Ambiguous | Ask: UI component audit, a11y audit, or code audit? |
 
@@ -183,10 +183,10 @@ When delegating to epost-muji, detect target platforms:
 
 | Flag | Agent | Reference | Scope |
 |------|-------|-----------|-------|
-| `--ui` | epost-muji | `references/ui.md` | Design system components (web/iOS/Android) |
-| `--a11y` | epost-a11y-specialist | `references/a11y.md` | WCAG 2.1 AA violations |
-| `--close` | epost-a11y-specialist | `references/close-a11y.md` | Mark a11y finding as resolved |
-| `--close --ui <id>` | epost-muji | `references/close-ui.md` | Mark UI finding resolved |
+| `--ui` | epost-muji | `references/ui-workflow.md` | Design system components (web/iOS/Android) |
+| `--a11y` | epost-a11y-specialist | `references/a11y-workflow.md` | WCAG 2.1 AA violations |
+| `--close` | epost-a11y-specialist | `references/a11y-close.md` | Mark a11y finding as resolved |
+| `--close --ui <id>` | epost-muji | `references/ui-close.md` | Mark UI finding resolved |
 | `--code` | epost-code-reviewer | `code-review` | General code quality, security, performance |
 
 ## Examples

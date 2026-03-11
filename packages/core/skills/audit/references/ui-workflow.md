@@ -80,8 +80,8 @@ Set `componentClass` in report envelope.
 
 | Classification | Checklist | Notes |
 |---------------|-----------|-------|
-| atom, molecule | `checklist-web.md` | Current behavior, unchanged |
-| organism, application | `checklist-web-organism.md` | See Phase 2 |
+| atom, molecule | `ui-checklist-web-atoms.md` | Current behavior, unchanged |
+| organism, application | `ui-checklist-web-organisms.md` | See Phase 2 |
 | consumer | Consumer mode steps (existing) | No change |
 
 ---
@@ -298,8 +298,8 @@ Load checklist based on `componentClass` (from Step 0.5):
 
 | componentClass | Checklist |
 |---------------|-----------|
-| atom, molecule | `references/checklist-web.md` (rules from `ui-lib-dev/references/audit-standards.md`) |
-| organism, application | `references/checklist-web-organism.md` |
+| atom, molecule | `references/ui-checklist-web-atoms.md` (rules from `ui-lib-dev/references/audit-standards.md`) |
+| organism, application | `references/ui-checklist-web-organisms.md` |
 
 Also load maturity tier modulation (from Step 0.6) — apply severity overrides before scoring.
 
@@ -345,7 +345,7 @@ Run each check against the loaded checklist. For each violation:
 | **A11Y** | A11Y-001–005 | Same as atom/molecule — always applies |
 | **TEST** | TEST-001–003 | Tests + stories (TEST-004 Figma filtered by maturity tier) |
 
-**Atom/molecule rule suppression for organisms:** The following rules from `checklist-web.md` are NOT applied when `componentClass` is `organism` or `application` (replaced by organism equivalents or N/A):
+**Atom/molecule rule suppression for organisms:** The following rules from `ui-checklist-web-atoms.md` are NOT applied when `componentClass` is `organism` or `application` (replaced by organism equivalents or N/A):
 - STRUCT-002 → replaced by ORGANISM-005 (compound entry point)
 - STRUCT-005 → N/A (organisms are view containers, not leaf components)
 - TOKEN-001 → N/A (organisms delegate styling to child atoms/molecules)
@@ -411,7 +411,7 @@ In hybrid mode, the orchestrator (code-reviewer) writes session.json — muji do
 After writing the Markdown report, persist findings to `.epost-data/ui/known-findings.json`:
 
 1. Check if `.epost-data/ui/known-findings.json` exists
-   - If not: create it with empty `findings: []` array (schema: `audit/references/ui-known-findings-schema.md`)
+   - If not: create it with empty `findings: []` array (schema: `audit/references/ui-findings-schema.md`)
 2. For each finding in this audit with severity critical, high, or medium:
    - Generate next available `id` (max existing id + 1, starting at 1 for empty DB)
    - Map finding fields to schema: `rule_id`, `component`, `file_pattern`, `severity`, `mode`, `platform`, `title`, `code_pattern`, `fix_template`

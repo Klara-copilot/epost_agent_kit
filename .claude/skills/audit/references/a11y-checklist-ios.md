@@ -37,7 +37,7 @@ Produce valid JSON only — no additional text outside JSON:
   "methodology": {
     "filesScanned": ["ProfileViewController.swift", "SettingsView.swift"],
     "knowledgeTiersUsed": ["L1-docs-findings", "L2-RAG", "L3-ios-a11y-skill"],
-    "standardsSource": ["ios-a11y/SKILL.md", "audit/references/ios-audit-mode.md", "WCAG 2.1 AA"],
+    "standardsSource": ["ios-a11y/SKILL.md", "audit/references/a11y-checklist-ios.md", "WCAG 2.1 AA"],
     "coverageGaps": ["RAG unavailable — used Grep fallback" ]
   }
 }

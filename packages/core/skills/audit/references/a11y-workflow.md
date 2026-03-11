@@ -49,8 +49,8 @@ See `a11y` skill for platform routing.
 
 | File | Coverage |
 |------|----------|
-| `references/ios-audit-mode.md` | iOS audit mode: JSON output schema, violation types, block-PR logic, detection rules |
-| `references/android-audit-mode.md` | Android audit mode: Compose + Views/XML violation types, detection rules, framework detection |
+| `references/a11y-checklist-ios.md` | iOS audit mode: JSON output schema, violation types, block-PR logic, detection rules |
+| `references/a11y-checklist-android.md` | Android audit mode: Compose + Views/XML violation types, detection rules, framework detection |
 
 Valid JSON only — no prose:
 

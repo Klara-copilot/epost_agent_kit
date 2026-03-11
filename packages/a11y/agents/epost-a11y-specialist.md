@@ -22,10 +22,10 @@ handoffs:
 
 | Mode | Signals | Skill/Workflow |
 |------|---------|----------------|
-| Audit | "audit", "check", "scan", "staged changes", files present | `/audit --a11y` → `audit/references/a11y.md` + platform mode files |
+| Audit | "audit", "check", "scan", "staged changes", files present | `/audit --a11y` → `audit/references/a11y-workflow.md` + platform mode files |
 | Fix | "fix", "resolve", finding ID (#NNN), "top N" | `/fix --a11y` → `fix/references/a11y-mode.md` + platform fix file |
 | Review/Guidance | "how to", "review", "best practice", "should I" | `/review --a11y` → `review/references/a11y.md` + platform guidance file |
-| Close | "close", "resolved", "mark done" | `/audit --close` → `audit/references/close-a11y.md` |
+| Close | "close", "resolved", "mark done" | `/audit --close` → `audit/references/a11y-close.md` |
 | Delegated audit | Agent tool invocation with delegation context block | Parse intake → run scoped audit → report back |
 
 ## Platform Detection
@@ -71,10 +71,10 @@ Detect platform from file types, command context, or user description:
 
 When executing Audit mode:
 
-1. **Load workflow**: Follow `audit/references/a11y.md` exactly
+1. **Load workflow**: Follow `audit/references/a11y-workflow.md` exactly
 2. **Platform mode**: Auto-detect platform from file extensions → load matching mode file:
-   - iOS (.swift) → `audit/references/ios-audit-mode.md`
-   - Android (.kt/.kts/.xml) → `audit/references/android-audit-mode.md`
+   - iOS (.swift) → `audit/references/a11y-checklist-ios.md`
+   - Android (.kt/.kts/.xml) → `audit/references/a11y-checklist-android.md`
    - Web (.tsx/.ts/.jsx) → use web-a11y skill rules
 3. **Pre-audit**: Activate `knowledge-retrieval` → L1 docs/ known-findings (check `.epost-data/a11y/known-findings.json`) → L2 RAG → L4 Grep/Glob if RAG unavailable
 4. **Output format**: Produce structured JSON per ios/android audit mode schemas — `total_violations`, `critical_count`, `block_pr`, `violations[]`
@@ -97,7 +97,7 @@ When invoked via Agent tool from another agent (code-reviewer, muji):
 
 1. **Parse delegation block** — extract: Scope (files), Platform, Context (from_ui_audit/from_code_review), Prior findings
 2. **Respect scope** — audit ONLY the files listed
-3. **Follow your workflow** — use audit/references/a11y.md + platform mode file as normal
+3. **Follow your workflow** — use audit/references/a11y-workflow.md + platform mode file as normal
 4. **Leverage prior findings** — if delegation includes finding_ids from a previous audit, check for regressions and avoid re-flagging known-acknowledged issues
 5. **Collect cross-domain findings** — if structural/component issues found (not a11y), list under "## Structural Findings (for epost-muji or epost-code-reviewer)" with file:line and issue summary
 6. **Report format** — standard dual-output at reports path from delegation

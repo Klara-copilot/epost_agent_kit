@@ -49,4 +49,4 @@ Default focus: `all`
 
 ## Schema Reference
 
-See `audit/references/ui-known-findings-schema.md` for known-findings.json field definitions when appending.
+See `audit/references/ui-findings-schema.md` for known-findings.json field definitions when appending.

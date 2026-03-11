@@ -144,7 +144,7 @@ reports/known-findings/
 
 | Agent | DB Path | Schema |
 |-------|---------|--------|
-| epost-muji | `reports/known-findings/ui-components.json` | `audit/references/ui-known-findings-schema.md` |
+| epost-muji | `reports/known-findings/ui-components.json` | `audit/references/ui-findings-schema.md` |
 | epost-code-reviewer | `reports/known-findings/code.json` | `code-review/references/code-known-findings-schema.md` |
 | epost-a11y-specialist | `reports/known-findings/a11y.json` | `a11y/assets/known-findings-schema.json` |
 

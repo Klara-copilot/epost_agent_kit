@@ -1,11 +1,11 @@
 {
   "version": "1.0.0",
-  "updated": "2026-03-09",
+  "updated": "2026-03-10",
   "counts": {
-    "active": 27,
+    "active": 29,
     "completed": 0,
     "archived": 39,
-    "total": 66
+    "total": 68
   },
   "plans": [
     {
@@ -744,6 +744,42 @@
         "classification"
       ],
       "file": "plans/260309-audit-organism-poc-mode/plan.md"
+    },
+    {
+      "id": "PLAN-0072",
+      "title": "Audit Skills References Reorganization",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-10",
+      "authors": [
+        "epost-planner"
+      ],
+      "tags": [
+        "audit",
+        "skills",
+        "reorganization",
+        "references"
+      ],
+      "file": "plans/260310-1628-audit-skills-reorganization/plan.md"
+    },
+    {
+      "id": "PLAN-0073",
+      "title": "Fix UI Post-Audit Flow: Resolve Iron Law Violation",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-11",
+      "authors": [
+        "epost-planner"
+      ],
+      "tags": [
+        "fix",
+        "ui",
+        "audit",
+        "iron-law",
+        "dispatch",
+        "muji"
+      ],
+      "file": "plans/260311-0512-fix-ui-post-audit-flow/plan.md"
     }
   ]
 }

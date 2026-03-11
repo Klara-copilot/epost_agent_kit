@@ -49,9 +49,9 @@ If any check fails:
 | Task | Signals | Action |
 |------|---------|--------|
 | Library Dev | "create component", "add to klara-theme", "new token", file inside klara-theme/ | Execute ui-lib-dev skill workflow |
-| Consumer Audit | "audit", "review consumer code", "check usage", file outside klara-theme/ | Load `audit/references/ui.md` → follow full workflow |
-| Code Review (UI) | escalated from epost-code-reviewer, "review this UI code", PR review | Load `audit/references/ui.md` in consumer mode |
-| Feature module audit | escalated from code-reviewer via Template A+, large scope klara-theme | Load `audit/references/ui.md` in library mode; scope to delegated files only; skip SEC/PERF |
+| Consumer Audit | "audit", "review consumer code", "check usage", file outside klara-theme/ | Load `audit/references/ui-workflow.md` → follow full workflow |
+| Code Review (UI) | escalated from epost-code-reviewer, "review this UI code", PR review | Load `audit/references/ui-workflow.md` in consumer mode |
+| Feature module audit | escalated from code-reviewer via Template A+, large scope klara-theme | Load `audit/references/ui-workflow.md` in library mode; scope to delegated files only; skip SEC/PERF |
 | Consumer Guidance | "how should I use", "which component", "design question" | Answer inline using ui-lib-dev + design-tokens skills |
 | Delegated audit | Agent tool invocation with delegation context block | Parse intake → run scoped audit → report back |
 | Docs gap found during audit | Template D to epost-docs-manager | Wait → add to Docs Findings section |
@@ -131,11 +131,11 @@ Reference: `ui-lib-dev/references/audit-standards.md` sections INTEGRITY, PLACE,
 
 ## When Acting as Auditor
 
-Follow `audit/references/ui.md` exactly — it is the complete workflow. All output paths and responsibilities are defined in `audit/references/output-contract.md`.
+Follow `audit/references/ui-workflow.md` exactly — it is the complete workflow. All output paths and responsibilities are defined in `audit/references/output-contract.md`.
 
-Key constraints (do not override ui.md):
+Key constraints (do not override ui-workflow.md):
 - **Output**: ONE `.md` report, no JSON. Findings inline with `ruleId`, `severity`, `location`, `issue`, `fix`.
-- **Persist findings** (mandatory, even as sub-agent): `.epost-data/ui/known-findings.json` per ui.md Step 5b. This is agent data, not source code.
+- **Persist findings** (mandatory, even as sub-agent): `.epost-data/ui/known-findings.json` per ui-workflow.md Step 5b. This is agent data, not source code.
 - **A11Y findings — collect only**: List in `## A11Y Findings (for escalation)` section. Do NOT delegate — caller handles a11y dispatch.
 - **Standards**: `ui-lib-dev/references/audit-standards.md` (78 rules across all categories).
 

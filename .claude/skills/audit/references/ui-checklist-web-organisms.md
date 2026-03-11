@@ -1,8 +1,8 @@
 # Web Organism/Application Checklist
 
-For use when `componentClass` is `organism` or `application`. Parallel to `checklist-web.md` — covers organism-specific concerns only: public API surface, state boundaries, and mock data isolation.
+For use when `componentClass` is `organism` or `application`. Parallel to `ui-checklist-web-atoms.md` — covers organism-specific concerns only: public API surface, state boundaries, and mock data isolation.
 
-**Maturity tier applies:** Severity is modulated per Step 0.6 of `ui.md`. POC components use phased roadmap verdict, not binary PASS/FAIL.
+**Maturity tier applies:** Severity is modulated per Step 0.6 of `ui-workflow.md`. POC components use phased roadmap verdict, not binary PASS/FAIL.
 
 **Atom/molecule rules NOT applied here:** STRUCT-002, STRUCT-005, TOKEN-001, BIZ-001, BIZ-002, BIZ-003 — see suppression note in `ui.md` Step 3.
 

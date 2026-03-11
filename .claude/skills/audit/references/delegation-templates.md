@@ -21,7 +21,7 @@ Mode: {library | consumer}
 Platform: {web | ios | android | all}
 
 Expectations:
-- Run full audit workflow per audit/references/ui.md
+- Run full audit workflow per audit/references/ui-workflow.md
 - Apply audit-standards.md rules for detected mode
 - Write report per `audit/references/report-template.md`
 
@@ -47,7 +47,7 @@ Audit focus: STRUCT, PROPS, TOKEN, BIZ, A11Y, TEST only
 Out of scope: Security (SEC), Performance (PERF), TypeScript depth — handled by caller
 
 Expectations:
-- Run Library mode steps per audit/references/ui.md
+- Run Library mode steps per audit/references/ui-workflow.md
 - Apply audit-standards.md rules for Library mode only
 - Write report per `audit/references/report-template.md`
 - Include `## Component Catalog` section: list of all discovered klara components
@@ -82,7 +82,7 @@ Out of scope: STRUCT-002, TOKEN-001, BIZ-001/002/003, STRUCT-005, TEST-004 (supp
 Expectations:
 - Classify component per Step 0.5 (confirm organism classification)
 - Apply maturity tier per Step 0.6 — modulate blocking vs advisory
-- Load checklist-web-organism.md (NOT checklist-web.md)
+- Load ui-checklist-web-organisms.md (NOT ui-checklist-web-atoms.md)
 - Include mock boundary scan: verify MOCK_* naming, API contract mapping, export isolation
 - Write report per `audit/references/report-template.md`
 - Use phased roadmap verdict (Now / Before Beta / Before Stable) for POC/beta
@@ -110,7 +110,7 @@ Context: {from_ui_audit | from_code_review | direct}
 Prior findings: {finding_ids if any, else "none"}
 
 Expectations:
-- Run audit per audit/references/a11y.md + platform mode file
+- Run audit per audit/references/a11y-workflow.md + platform mode file
 - Check against known-findings database for regressions
 - Write report per `audit/references/report-template.md` (use WCAG rule IDs instead of ORGANISM/STATE/MOCK IDs)
 

@@ -1,5 +1,5 @@
 ---
-name: audit-ui-known-findings-schema
+name: audit-ui-findings-schema
 description: "(ePost) Schema for .epost-data/ui/known-findings.json — UI component findings persistence layer"
 user-invocable: false
 disable-model-invocation: true

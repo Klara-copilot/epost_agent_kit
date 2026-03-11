@@ -45,4 +45,4 @@ Invoked when: `audit --close --ui <finding-id>`
 
 ## Schema Reference
 
-See `audit/references/ui-known-findings-schema.md` for field definitions and resolution state machine.
+See `audit/references/ui-findings-schema.md` for field definitions and resolution state machine.
