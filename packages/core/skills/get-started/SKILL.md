@@ -68,7 +68,7 @@ Audit KB coverage and health:
 
 Read flat docs and build migration manifest for Phase 2:
 
-1. **Read each doc file** (first 50 lines) — write 1-2 line summary + classify target category (ADR/ARCH/PATTERN/CONV/FEAT/FINDING)
+1. **Read each doc file** (first 50 lines) — write 1-2 line summary + classify target category (ADR/ARCH/PATTERN/CONV/FEAT/FINDING/GUIDE)
 2. **Read project markers** (README, package.json, configs) — extract tech stack, scripts
 3. **Build migration manifest** — list every flat doc with: `source path → target category → proposed ID`. Include this in the researcher report so Phase 2 has an explicit migration plan.
 4. **Present** → Step 3
@@ -166,7 +166,7 @@ Agent(
 
   Based on docs state, apply the matching workflow:
   - DOCS_STATE = "none"  → run docs-init workflow: generate full KB structure in docs/ with index.json
-  - DOCS_STATE = "flat"  → FORCE MIGRATE: convert ALL flat docs to KB structure (ADR/ARCH/PATTERN/CONV/FEAT/FINDING + index.json). Use migration manifest from researcher report. Move files, do not leave originals. Every flat doc must end up categorized in the KB.
+  - DOCS_STATE = "flat"  → FORCE MIGRATE: convert ALL flat docs to KB structure (ADR/ARCH/PATTERN/CONV/FEAT/FINDING/GUIDE + index.json). Use migration manifest from researcher report. Move files, do not leave originals. Every flat doc must end up categorized in the KB.
   - DOCS_STATE = "kb"    → run docs-update --verify workflow: check all entries, flag STALE/BROKEN/GAP
 
   Apply templates from knowledge-retrieval skill. Keep all files under 800 LOC.

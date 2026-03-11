@@ -64,7 +64,9 @@ docs/
 ├── patterns/
 ├── conventions/
 ├── features/
-└── findings/
+├── findings/
+│   └── .gitkeep
+└── guides/
     └── .gitkeep
 ```
 
@@ -97,6 +99,12 @@ For each major framework/library detected (e.g., Next.js, Redux, Hibernate):
 #### FINDINGs
 - Create `findings/.gitkeep` only — findings are populated during debugging, not init
 
+#### GUIDEs (from setup/workflow signals)
+- Detect from: Dockerfile, docker-compose, Makefile, CI configs, .env.example, README setup sections
+- `GUIDE-NNNN-{topic}.md` — step-by-step operational how-to (local dev setup, backend integration, deployment, CI/CD)
+- Focus on commands and environment — not architecture (that's ARCH) or rules (that's CONV)
+- Create `guides/.gitkeep` if no setup signals detected
+
 ### 4. Generate index.json
 
 Create `docs/index.json` with all generated entries:
@@ -112,7 +120,8 @@ Create `docs/index.json` with all generated entries:
     "pattern": "Reusable code patterns with examples",
     "convention": "Coding rules and constraints",
     "feature": "Deep-dive guides for specific features",
-    "finding": "Discovered gotchas and debug insights"
+    "finding": "Discovered gotchas and debug insights",
+    "guide": "Operational how-to guides for dev setup, integration, and workflows"
   },
   "entries": [
     {
@@ -147,6 +156,7 @@ Key rules for `agentHint`:
 | FEAT | N | FEAT-0001, ... |
 | PATTERN | N | PATTERN-0001, ... |
 | FINDING | 0 | (populated during debugging) |
+| GUIDE | N | GUIDE-0001, ... |
 
 **Total**: N entries in `docs/index.json`
 **Next**: Run `/docs-update --verify` to validate content accuracy
@@ -168,7 +178,9 @@ Read all files in `docs/*.md` (top-level only, not subdirectories).
 | `system-architecture.md` | `ARCH-0002-system-architecture.md` | architecture |
 | `api-routes.md` | `FEAT-NNNN-api-routes.md` | feature |
 | `data-models.md` | `ARCH-NNNN-data-models.md` | architecture |
-| `deployment-guide.md` | `ARCH-NNNN-deployment.md` | architecture |
+| `deployment-guide.md` | `GUIDE-NNNN-deployment.md` | guide |
+| `setup-guide.md`, `getting-started.md` | `GUIDE-NNNN-local-dev.md` | guide |
+| `integration-guide.md` | `GUIDE-NNNN-integration.md` | guide |
 | `project-overview-pdr.md` | `ARCH-NNNN-project-overview.md` | architecture |
 | Other `.md` files | Classify by content → appropriate category | varies |
 
