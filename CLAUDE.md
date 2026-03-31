@@ -75,6 +75,8 @@ On every user prompt, sense context before acting:
 
 **Less common intents**: scaffold → `/bootstrap`, convert → `/convert`, design/UI → `epost-muji`, architecture debate → `epost-brainstormer`
 
+**Skill authoring**: "create a skill", "improve this skill", "run evals", "test this skill", "measure skill quality", "benchmark skill", "optimize skill description", "refine skill" → use `skill-creator` skill
+
 ### Routing Rules
 
 1. Explicit slash command → execute directly, skip routing

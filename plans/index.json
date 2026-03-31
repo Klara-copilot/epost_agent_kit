@@ -4,8 +4,8 @@
   "counts": {
     "active": 41,
     "completed": 0,
-    "archived": 0,
-    "total": 41
+    "archived": 1,
+    "total": 42
   },
   "plans": [
     {
@@ -437,7 +437,7 @@
     },
     {
       "id": "PLAN-0071",
-      "title": "Audit Organism/POC Mode \u2014 Classification, Maturity Tiers, Organism Checklist",
+      "title": "Audit Organism/POC Mode — Classification, Maturity Tiers, Organism Checklist",
       "type": "implementation",
       "status": "active",
       "created": "2026-03-09",
@@ -570,7 +570,7 @@
     },
     {
       "id": "PLAN-0078",
-      "title": "Agent Navigation Headers \u2014 Summary + Routing Tables",
+      "title": "Agent Navigation Headers — Summary + Routing Tables",
       "type": "implementation",
       "status": "active",
       "created": "2026-03-15",
@@ -588,7 +588,7 @@
     },
     {
       "id": "PLAN-0079",
-      "title": "Skill Discovery Superpower \u2014 Fix Gaps + High-Value Improvements",
+      "title": "Skill Discovery Superpower — Fix Gaps + High-Value Improvements",
       "type": "implementation",
       "status": "active",
       "created": "2026-03-18",
@@ -606,7 +606,7 @@
     },
     {
       "id": "PLAN-0080",
-      "title": "Kit Rationalization \u2014 Lean Into Domain Value, Shed Process Scaffolding",
+      "title": "Kit Rationalization — Lean Into Domain Value, Shed Process Scaffolding",
       "type": "implementation",
       "status": "active",
       "created": "2026-03-19",
@@ -625,7 +625,7 @@
     },
     {
       "id": "PLAN-0081",
-      "title": "Kit Marketplace \u2014 Modular Distribution + Terminal UI",
+      "title": "Kit Marketplace — Modular Distribution + Terminal UI",
       "type": "implementation",
       "status": "active",
       "created": "2026-03-20",
@@ -644,7 +644,7 @@
     },
     {
       "id": "PLAN-0082",
-      "title": "Self-Evolving Skill Loop \u2014 Phase 1: Detect + Propose",
+      "title": "Self-Evolving Skill Loop — Phase 1: Detect + Propose",
       "type": "implementation",
       "status": "active",
       "created": "2026-03-24",
@@ -728,6 +728,25 @@
         "init"
       ],
       "file": "plans/260331-0803-docs-deps-schema-clarity/plan.md"
+    },
+    {
+      "id": "PLAN-0087",
+      "title": "Adopt Anthropic Skill-Creator Methodology",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-31",
+      "authors": [
+        "epost-planner"
+      ],
+      "tags": [
+        "skills",
+        "evals",
+        "quality",
+        "skill-creator",
+        "theory-of-mind",
+        "benchmarks"
+      ],
+      "file": "plans/260331-0924-skill-creator-adoption/plan.md"
     }
   ]
 }

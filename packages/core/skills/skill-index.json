@@ -1,14 +1,14 @@
 {
-  "generated": "2026-03-30T16:17:23.725Z",
+  "generated": "2026-03-31T02:37:34.853Z",
   "version": "2.0.0",
-  "count": 24,
+  "count": 25,
   "categories": {
     "workflow": 12,
     "uncategorized": 1,
-    "quality": 5,
+    "quality": 6,
     "knowledge": 6
   },
-  "connectedSkills": 13,
+  "connectedSkills": 14,
   "skills": [
     {
       "name": "audit",
@@ -220,7 +220,7 @@
         "enhances": [],
         "conflicts": []
       },
-      "size": 37164,
+      "size": 42849,
       "path": "docs/SKILL.md"
     },
     {
@@ -604,10 +604,18 @@
       "platforms": [
         "all"
       ],
-      "triggers": [],
+      "triggers": [
+        "security audit",
+        "check vulnerabilities",
+        "scan for secrets",
+        "OWASP",
+        "STRIDE",
+        "CVE",
+        "pentest",
+        "security review"
+      ],
       "agent-affinity": [
-        "epost-code-reviewer",
-        "epost-tester"
+        "epost-code-reviewer"
       ],
       "connections": {
         "extends": [],
@@ -617,8 +625,31 @@
         ],
         "conflicts": []
       },
-      "size": 11989,
+      "size": 12128,
       "path": "security/SKILL.md"
+    },
+    {
+      "name": "skill-creator",
+      "description": "Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, edit, or optimize an existing skill, run evals to test a skill, benchmark skill performance with variance analysis, or optimize a skill's description for better triggering accuracy.",
+      "category": "quality",
+      "tier": "discoverable",
+      "keywords": [],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [],
+      "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [
+          "cook",
+          "plan"
+        ],
+        "conflicts": []
+      },
+      "size": 45229,
+      "path": "skill-creator/SKILL.md"
     },
     {
       "name": "skill-discovery",
