@@ -10,7 +10,7 @@ const fs = require('fs');
 
 let input = {};
 try {
-  const raw = require('fs').readFileSync('/dev/stdin', 'utf-8');
+  const raw = fs.readFileSync('/dev/stdin', 'utf-8');
   input = JSON.parse(raw);
 } catch {
   process.stdout.write(JSON.stringify({ continue: true }));

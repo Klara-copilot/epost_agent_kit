@@ -107,7 +107,7 @@ function validateConfig(config) {
   if (!config.googleSheetId) missing.push('I18N_GOOGLE_SHEET_ID');
   if (!config.messagesDir) missing.push('I18N_MESSAGES_DIR');
   if (!config.locales.length) missing.push('I18N_LOCALES');
-  if (!config.serviceAccountKeyPath) missing.push('GOOGLE_SERVICE_ACCOUNT_KEY');
+  // GOOGLE_SERVICE_ACCOUNT_KEY only required for --push (write ops); --pull and --validate use public fetch
 
   if (config.sheetMode === 'single') {
     if (!config.sheetTab) missing.push('I18N_SHEET_TAB');

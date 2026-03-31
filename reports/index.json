@@ -3,6 +3,16 @@
   "updatedAt": "2026-03-31",
   "entries": [
     {
+      "id": "epost-code-reviewer-260331-1824-hooks-audit",
+      "type": "code-review",
+      "agent": "epost-code-reviewer",
+      "title": "Hooks Audit — packages/core/hooks/ (19 hooks)",
+      "verdict": "FIX-AND-RESUBMIT",
+      "plan": "plans/260331-1657-skill-gap-updates",
+      "file": "reports/260331-1824-hooks-audit-epost-code-reviewer.md",
+      "date": "2026-03-31"
+    },
+    {
       "id": "epost-fullstack-developer-260331-1709-skill-gap-updates",
       "type": "implementation",
       "agent": "epost-fullstack-developer",
