@@ -3,6 +3,16 @@
   "updatedAt": "2026-03-31",
   "entries": [
     {
+      "id": "epost-fullstack-developer-260331-2044-i18n-validate-docs",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "web-i18n: Rewrite validate.md + update pull.md, SKILL.md, push.md",
+      "verdict": "DONE",
+      "plan": "plans/260331-i18n-validate-docs-update",
+      "file": "reports/260331-2044-i18n-validate-docs-epost-fullstack-developer.md",
+      "date": "2026-03-31"
+    },
+    {
       "id": "epost-code-reviewer-260331-1824-hooks-audit",
       "type": "code-review",
       "agent": "epost-code-reviewer",

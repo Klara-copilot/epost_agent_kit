@@ -2,6 +2,8 @@
 
 Fetch translations from the Google Sheet's Result tab and write locale JSON files.
 
+Read-only operation — `GOOGLE_SERVICE_ACCOUNT_KEY` not required for public sheets.
+
 ## Steps
 
 ### 1. Load config
@@ -9,40 +11,58 @@ Fetch translations from the Google Sheet's Result tab and write locale JSON file
 Run the env-config script to read configuration:
 
 ```javascript
-const { loadConfig, validateConfig } = require('./scripts/env-config.cjs');
+const { loadConfig } = require('./scripts/env-config.cjs');
 const config = loadConfig();
-validateConfig(config);
+// Note: GOOGLE_SERVICE_ACCOUNT_KEY not required for --pull on public sheets.
+// Use validateConfig(config) only if targeting a private sheet.
 ```
 
 Config fields used:
-- `config.serviceAccountKeyPath` — path to service account JSON
 - `config.googleSheetId` — Google Sheet ID
+- `config.serviceAccountKeyPath` — path to service account JSON (private sheets only)
 - `config.resultSheetTab` — tab name with completed translations (default: "Result")
 - `config.localeMap` — map of sheet column header → JSON filename (e.g., `{ en: 'en', de: 'de' }`)
 - `config.keySeparator` — key separator (default: `::`)
 - `config.messagesDir` — output directory for locale JSON files
 
-### 2. Authenticate
+### 2. Authenticate (private sheets only)
+
+For **public sheets**, skip authentication entirely — use `fetchPublicTab` directly:
+
+```javascript
+const { fetchPublicTab } = require('./scripts/sheets-client.cjs');
+const rows = await fetchPublicTab(config.googleSheetId, config.resultSheetTab);
+```
+
+For **private sheets**, use the authenticated path instead:
 
 ```javascript
 const { authenticate, readSheet } = require('./scripts/sheets-client.cjs');
 const auth = authenticate(config.serviceAccountKeyPath);
+const rows = await readSheet(auth, config.googleSheetId, `${config.resultSheetTab}!A1:ZZ`);
 ```
 
 ### 3. Read Result tab
 
-```javascript
-const rows = await readSheet(auth, config.googleSheetId, `${config.resultSheetTab}!A1:ZZ`);
-```
+`fetchPublicTab` returns rows as parsed CSV arrays.
 
-- Row 0 = headers: first column is `key`, remaining columns are locale headers (e.g., `en`, `de`, `fr`, `it`)
+- Row 0 = headers (see Step 4 for column format)
 - Row 1+ = data rows
 
 ### 4. Parse headers
 
+**Result tab column headers are file names, not locale codes:**
+
+```
+Result tab header row: KEY | en.json | de.json | fr.json | it.json
+                                ↑ file names, NOT locale codes
+```
+
+Use `I18N_LOCALE_MAP` (e.g., `en:en,de_CH:de,...`) to map column header → JSON filename:
+
 ```javascript
-const headers = rows[0]; // ['key', 'en', 'de', 'fr', 'it', ...]
-const keyColIdx = headers.indexOf('key');
+const headers = rows[0]; // ['KEY', 'en.json', 'de.json', 'fr.json', ...]
+const keyColIdx = headers.findIndex(h => h.toLowerCase() === 'key');
 // Map each locale column header → { colIdx, filename }
 const localeColumns = Object.entries(config.localeMap).map(([colHeader, filename]) => ({
   colHeader,

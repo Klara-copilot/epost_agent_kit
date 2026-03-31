@@ -35,6 +35,8 @@ See references for detailed step-by-step workflows:
 I18N_GOOGLE_SHEET_ID=<sheet-id>
 I18N_MESSAGES_DIR=<relative-path-to-messages-dir>
 I18N_LOCALES=en,de,fr,it
+
+# Write ops only (--push)
 GOOGLE_SERVICE_ACCOUNT_KEY=<path-to-service-account-json>
 
 # Sheet structure
@@ -58,6 +60,7 @@ I18N_FALLBACK_SHEET_TAB=Common             # tabs mode: fallback tab
 | `sheets-client.cjs` | Google Sheets API auth, read, append, list tabs |
 | `key-converter.cjs` | `Namespace::Key` ↔ `{ Namespace: { Key: value } }` |
 | `tab-resolver.cjs` | Key namespace → sheet tab name (tabs mode) |
+| `validate.cjs` | Detect missing, orphaned, and untranslated keys (read-only, no auth needed) |
 
 ---
 
