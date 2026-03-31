@@ -37,11 +37,12 @@ function findSkillCreatorDir() {
 }
 
 function printUsage() {
-  console.error('Usage: node run-skill-eval.cjs <skill-path> [--model <model-id>]');
+  console.error('Usage: node run-skill-eval.cjs <skill-path> [--model <model-id>] [--eval-set <path>]');
   console.error('');
   console.error('Examples:');
   console.error('  node run-skill-eval.cjs .claude/skills/cook');
   console.error('  node run-skill-eval.cjs .claude/skills/plan --model claude-sonnet-4-6');
+  console.error('  node run-skill-eval.cjs .claude/skills/cook --eval-set path/to/eval-set.json');
   console.error('');
   console.error('Prerequisites: python3, pyyaml (pip install pyyaml), claude CLI');
 }
@@ -56,9 +57,12 @@ if (args.length === 0 || args[0] === '--help' || args[0] === '-h') {
 
 const skillPath = args[0];
 let model = null;
+let evalSetOverride = null;
 for (let i = 1; i < args.length; i++) {
   if (args[i] === '--model' && args[i + 1]) {
     model = args[++i];
+  } else if (args[i] === '--eval-set' && args[i + 1]) {
+    evalSetOverride = args[++i];
   }
 }
 
@@ -84,13 +88,35 @@ if (!fs.existsSync(resolvedSkillPath)) {
   process.exit(1);
 }
 
+// --- eval set resolution -----------------------------------------------------
+
+let evalSetPath = null;
+if (evalSetOverride) {
+  evalSetPath = path.resolve(process.cwd(), evalSetOverride);
+  if (!fs.existsSync(evalSetPath)) {
+    console.error(`Error: eval set not found: ${evalSetPath}`);
+    process.exit(1);
+  }
+} else {
+  const autoDetected = path.join(resolvedSkillPath, 'evals', 'eval-set.json');
+  if (fs.existsSync(autoDetected)) {
+    evalSetPath = autoDetected;
+  } else {
+    console.error(`Error: no eval set found.`);
+    console.error(`Expected: ${autoDetected}`);
+    console.error(`Or pass: --eval-set <path>`);
+    process.exit(1);
+  }
+}
+
 // --- spawn -------------------------------------------------------------------
 
-const pyArgs = ['-m', 'scripts.run_eval', '--skill-path', resolvedSkillPath];
+const pyArgs = ['-m', 'scripts.run_eval', '--skill-path', resolvedSkillPath, '--eval-set', evalSetPath];
 if (model) pyArgs.push('--model', model);
 
 console.log(`Running skill eval: ${path.basename(resolvedSkillPath)}`);
 if (model) console.log(`Model: ${model}`);
+console.log(`Eval set: ${evalSetPath}`);
 console.log('');
 
 const child = spawn(python, pyArgs, {

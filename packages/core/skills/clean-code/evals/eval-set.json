@@ -1,0 +1,11 @@
+[
+  {"query": "clean up this code", "should_trigger": true},
+  {"query": "refactor this function for readability", "should_trigger": true},
+  {"query": "I see code smells in this module", "should_trigger": true},
+  {"query": "improve naming and code quality", "should_trigger": true},
+  {"query": "this function is too long, break it up", "should_trigger": true},
+  {"query": "fix the bug in this function", "should_trigger": false},
+  {"query": "audit for security vulnerabilities", "should_trigger": false},
+  {"query": "add unit tests for this code", "should_trigger": false},
+  {"query": "review for performance issues", "should_trigger": false}
+]

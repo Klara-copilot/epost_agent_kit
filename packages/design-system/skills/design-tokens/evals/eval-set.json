@@ -1,0 +1,11 @@
+[
+  {"query": "use Vien 2.0 design tokens for the button", "should_trigger": true},
+  {"query": "map the Figma semantic color variable to CSS", "should_trigger": true},
+  {"query": "what is the semantic color token for primary action", "should_trigger": true},
+  {"query": "translate the Figma variable to Swift constant", "should_trigger": true},
+  {"query": "convert design tokens to Kotlin theme objects", "should_trigger": true},
+  {"query": "add a color to the Tailwind theme", "should_trigger": false},
+  {"query": "fix the CSS variable for the button", "should_trigger": false},
+  {"query": "update the design system component", "should_trigger": false},
+  {"query": "extract all tokens from Figma", "should_trigger": false}
+]

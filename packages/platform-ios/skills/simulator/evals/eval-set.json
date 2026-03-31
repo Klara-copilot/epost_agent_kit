@@ -1,0 +1,11 @@
+[
+  {"query": "list available iOS simulators", "should_trigger": true},
+  {"query": "boot the iPhone 15 simulator", "should_trigger": true},
+  {"query": "launch the app on the simulator", "should_trigger": true},
+  {"query": "open the iOS simulator", "should_trigger": true},
+  {"query": "manage simulators — show which are running", "should_trigger": true},
+  {"query": "run unit tests on device", "should_trigger": false},
+  {"query": "run XCUITest on physical iPhone", "should_trigger": false},
+  {"query": "deploy to TestFlight", "should_trigger": false},
+  {"query": "run the iOS test suite", "should_trigger": false}
+]

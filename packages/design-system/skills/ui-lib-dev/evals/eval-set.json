@@ -1,0 +1,11 @@
+[
+  {"query": "build a new UI library component for klara-theme", "should_trigger": true},
+  {"query": "audit the Button component in the component library", "should_trigger": true},
+  {"query": "document the design system Card component", "should_trigger": true},
+  {"query": "run the Figma-to-code pipeline for the Modal", "should_trigger": true},
+  {"query": "create a new component following the klara-theme pipeline", "should_trigger": true},
+  {"query": "use the Button component in my page", "should_trigger": false},
+  {"query": "fix a bug in the Button component", "should_trigger": false},
+  {"query": "review the UI for accessibility", "should_trigger": false},
+  {"query": "add a custom component outside the design system", "should_trigger": false}
+]

@@ -1,0 +1,12 @@
+[
+  {"query": "how should we build the authentication system", "should_trigger": true},
+  {"query": "design the architecture for notifications", "should_trigger": true},
+  {"query": "create a roadmap for the payment flow", "should_trigger": true},
+  {"query": "spec out the onboarding experience", "should_trigger": true},
+  {"query": "plan the refactor of the user module", "should_trigger": true},
+  {"query": "architect the multi-tenant data model", "should_trigger": true},
+  {"query": "implement the authentication system", "should_trigger": false},
+  {"query": "fix the failing authentication test", "should_trigger": false},
+  {"query": "commit changes to auth module", "should_trigger": false},
+  {"query": "review the existing plan doc", "should_trigger": false}
+]

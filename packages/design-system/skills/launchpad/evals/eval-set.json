@@ -1,0 +1,11 @@
+[
+  {"query": "build a landing page for the product launch", "should_trigger": true},
+  {"query": "create a marketing page for the new feature", "should_trigger": true},
+  {"query": "build a promotional site for the release", "should_trigger": true},
+  {"query": "design the showcase page for the API", "should_trigger": true},
+  {"query": "create a launch page for the app", "should_trigger": true},
+  {"query": "add a new page to the web app", "should_trigger": false},
+  {"query": "build the app's homepage component", "should_trigger": false},
+  {"query": "implement the dashboard layout", "should_trigger": false},
+  {"query": "add a landing section to the existing page", "should_trigger": false}
+]

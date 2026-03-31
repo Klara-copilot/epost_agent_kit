@@ -1,0 +1,11 @@
+[
+  {"query": "add an API route to handle user creation", "should_trigger": true},
+  {"query": "fix the route.ts handler returning 500", "should_trigger": true},
+  {"query": "create a server endpoint for the notifications", "should_trigger": true},
+  {"query": "call the backend API using FetchBuilder", "should_trigger": true},
+  {"query": "add a new caller for the payments API", "should_trigger": true},
+  {"query": "add a React component for the API response", "should_trigger": false},
+  {"query": "set up NextAuth for authentication", "should_trigger": false},
+  {"query": "create a Next.js page for the dashboard", "should_trigger": false},
+  {"query": "write tests for the API endpoint", "should_trigger": false}
+]

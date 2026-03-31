@@ -1,0 +1,11 @@
+[
+  {"query": "integrate the notification list into the Inbox module", "should_trigger": true},
+  {"query": "add a new screen to the Communities module", "should_trigger": true},
+  {"query": "wire the component to the B2B Smart Send module", "should_trigger": true},
+  {"query": "bind the API to the Monitoring module store", "should_trigger": true},
+  {"query": "set up the route for the Composer module page", "should_trigger": true},
+  {"query": "add a standalone React component", "should_trigger": false},
+  {"query": "implement a generic feature page", "should_trigger": false},
+  {"query": "set up routing in Next.js", "should_trigger": false},
+  {"query": "add B2C consumer feature", "should_trigger": false}
+]

@@ -1,0 +1,11 @@
+[
+  {"query": "add a React component for the user card", "should_trigger": true},
+  {"query": "fix the custom hook returning stale data", "should_trigger": true},
+  {"query": "update the Redux slice for notifications", "should_trigger": true},
+  {"query": "the component doesn't render correctly", "should_trigger": true},
+  {"query": "create a reusable form component with validation", "should_trigger": true},
+  {"query": "add a Next.js App Router page", "should_trigger": false},
+  {"query": "set up an API route handler", "should_trigger": false},
+  {"query": "write a Jest test for the component", "should_trigger": false},
+  {"query": "set up Redux store configuration", "should_trigger": false}
+]

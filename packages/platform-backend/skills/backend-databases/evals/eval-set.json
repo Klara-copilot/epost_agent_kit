@@ -1,0 +1,11 @@
+[
+  {"query": "write a PostgreSQL query for user lookup by email", "should_trigger": true},
+  {"query": "add a MongoDB document schema for notifications", "should_trigger": true},
+  {"query": "fix the Hibernate entity mapping for User", "should_trigger": true},
+  {"query": "the database query is slow — optimize it", "should_trigger": true},
+  {"query": "add a database index for the email column", "should_trigger": true},
+  {"query": "create the JAX-RS API endpoint", "should_trigger": false},
+  {"query": "add a Flyway database migration script", "should_trigger": false},
+  {"query": "fix the database connection pool", "should_trigger": false},
+  {"query": "write tests for the repository layer", "should_trigger": false}
+]

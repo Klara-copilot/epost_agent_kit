@@ -1,0 +1,12 @@
+[
+  {"query": "this crashes on startup with a NullPointerException", "should_trigger": true},
+  {"query": "why does login fail intermittently", "should_trigger": true},
+  {"query": "trace this error in UserService", "should_trigger": true},
+  {"query": "diagnose why the API is slow", "should_trigger": true},
+  {"query": "debug the Redux state mutation", "should_trigger": true},
+  {"query": "stack trace: TypeError at line 42 of auth.ts", "should_trigger": true},
+  {"query": "add error handling to the login form", "should_trigger": false},
+  {"query": "implement retry logic for the API", "should_trigger": false},
+  {"query": "write a test for the crash scenario", "should_trigger": false},
+  {"query": "fix the login button", "should_trigger": false}
+]
