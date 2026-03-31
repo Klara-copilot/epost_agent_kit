@@ -1,6 +1,6 @@
 ---
 name: loop
-description: "(ePost) Use when you want to autonomously improve a single measurable metric (test coverage, bundle size, lint errors, Lighthouse score) over N iterations with automatic keep/discard"
+description: "(ePost) Use when user wants to improve a metric like \"test coverage\", \"bundle size\", \"lint errors\", or \"Lighthouse score\" over multiple iterations — runs autonomous improvement loop until target is met"
 tier: discoverable
 metadata:
   agent-affinity: [epost-tester, epost-fullstack-developer]

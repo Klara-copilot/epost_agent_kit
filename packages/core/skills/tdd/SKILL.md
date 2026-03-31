@@ -1,5 +1,6 @@
 ---
 name: tdd
+user-invocable: true
 description: "(ePost) Use when user says 'TDD', 'test-first', 'red-green-refactor', wants to build features test-first, or asks for behavior-driven testing"
 tier: core
 metadata:

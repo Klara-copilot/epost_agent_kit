@@ -1,8 +1,8 @@
 ---
 name: repomix
-description: Use when you need to pack repository contents into a single file for LLM consumption, share a codebase snapshot with an external AI service, or include a remote repo as context for research
+description: (ePost) Use when user says "pack this repo", "share codebase snapshot", or "include remote repo as context" — bundles repository contents into a single file for LLM consumption or external AI sharing
 tier: core
-user-invocable: false
+user-invocable: true
 metadata:
   keywords:
     - repomix

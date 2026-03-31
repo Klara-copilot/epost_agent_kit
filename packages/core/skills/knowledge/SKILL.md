@@ -1,6 +1,6 @@
 ---
 name: knowledge
-description: "(ePost) Use when you need prior art, past decisions, existing patterns, or external API/library documentation — checks internal sources first, falls back to Context7 and WebSearch. Also use after completing a task to capture learnings to docs/"
+description: "(ePost) Use when you need prior art, past decisions, existing patterns, or external API/library documentation — activates knowledge retrieval from internal docs and external sources. Also use to capture learnings after completing a task."
 user-invocable: false
 
 metadata:
