@@ -21,6 +21,10 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 const { detectPackageManager, detectFramework } = require('./project-detector.cjs');
+const { parseErrors } = require('./error-parser.cjs');
+
+// Max bytes of build output to capture for error parsing (5KB)
+const MAX_OUTPUT_BYTES = 5 * 1024;
 
 // ─── CLI Arg Parsing ───
 
@@ -53,7 +57,8 @@ function hasFlag(key) {
 const platformOverride = getArg('--platform');
 const dryRun = hasFlag('--dry-run');
 const skipBuild = hasFlag('--skip-build');
-const timeoutMs = parseInt(getArg('--timeout') || '300000', 10); // 5min default
+const rawTimeout = parseInt(getArg('--timeout') || '300000', 10);
+const timeoutMs = Number.isNaN(rawTimeout) ? 300000 : rawTimeout; // 5min default
 
 // ─── Platform Detection ───
 
@@ -174,7 +179,7 @@ function detectXcodeScheme() {
 /**
  * Run the build command and return result.
  * @param {string} command
- * @returns {{ success: boolean, duration_ms: number, error?: string }}
+ * @returns {{ success: boolean, duration_ms: number, error?: string, rawOutput?: string }}
  */
 function runBuild(command) {
   const start = Date.now();
@@ -186,10 +191,12 @@ function runBuild(command) {
     });
     return { success: true, duration_ms: Date.now() - start };
   } catch (err) {
-    const stderr = err.stderr ? String(err.stderr).slice(-500) : '';
-    const stdout = err.stdout ? String(err.stdout).slice(-300) : '';
-    const excerpt = (stderr || stdout).trim().split('\n').slice(-10).join('\n');
-    return { success: false, duration_ms: Date.now() - start, error: excerpt };
+    // Capture up to 5KB of output for error parsing
+    const stderr = err.stderr ? String(err.stderr).slice(-MAX_OUTPUT_BYTES) : '';
+    const stdout = err.stdout ? String(err.stdout).slice(-MAX_OUTPUT_BYTES) : '';
+    const rawOutput = (stderr + '\n' + stdout).trim();
+    const excerpt = rawOutput.split('\n').slice(-10).join('\n');
+    return { success: false, duration_ms: Date.now() - start, error: excerpt, rawOutput };
   }
 }
 
@@ -222,11 +229,19 @@ function main() {
 
   // Run the build
   process.stderr.write(`▶ build-gate: running ${platform} build...\n  ${command}\n`);
-  const { success, duration_ms, error } = runBuild(command);
+  const { success, duration_ms, error, rawOutput } = runBuild(command);
 
   /** @type {object} */
   const result = { platform, command, success, duration_ms };
   if (error) result.error = error;
+
+  if (!success && rawOutput) {
+    const parsed = parseErrors(rawOutput);
+    if (parsed.errors.length > 0) {
+      result.errors = parsed.errors;
+      result.suggestion = parsed.suggestion;
+    }
+  }
 
   process.stdout.write(JSON.stringify(result) + '\n');
 
@@ -234,7 +249,23 @@ function main() {
     process.stderr.write(`✓ build-gate: build passed (${duration_ms}ms)\n`);
     process.exit(0);
   } else {
-    process.stderr.write(`✗ build-gate: build FAILED\n${error || ''}\n`);
+    process.stderr.write(`✗ build-gate: build FAILED\n`);
+
+    // Surface top 3 errors in human-readable format
+    if (result.errors && result.errors.length > 0) {
+      const top3 = result.errors.slice(0, 3);
+      process.stderr.write('\nTop errors:\n');
+      for (const e of top3) {
+        const loc = e.file ? `${e.file}${e.line ? `:${e.line}` : ''}` : '(unknown file)';
+        process.stderr.write(`  ${loc} — ${e.message}\n`);
+      }
+      if (result.suggestion) {
+        process.stderr.write(`\n  Suggested: ${result.suggestion}\n`);
+      }
+    } else if (error) {
+      process.stderr.write(`${error}\n`);
+    }
+
     process.exit(1);
   }
 }

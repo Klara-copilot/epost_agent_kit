@@ -3,14 +3,22 @@ name: fix-ui-mode
 description: "(ePost) Fix UI component findings from known-findings DB"
 user-invocable: false
 metadata:
-  argument-hint: "<ComponentName> [--finding-id <id>] [--top <n>]"
+  argument-hint: "<ComponentName> [--finding-id <id>] [--top <n>] [--no-verify]"
 ---
 
 # Fix UI Mode
 
-Invoked when: `fix --ui <ComponentName> [--finding-id <id>] [--top <n>]`
+Invoked when: `fix --ui <ComponentName> [--finding-id <id>] [--top <n>] [--no-verify]`
 
 Executes inline in main context — the main context dispatches epost-muji via Agent tool.
+
+## Flags
+
+| Flag | Behavior |
+|------|----------|
+| `--finding-id <id>` | Apply only the specified finding |
+| `--top <n>` | Apply top N unresolved findings by severity |
+| `--no-verify` | Skip the automatic re-audit after applying fixes (step 7.5) |
 
 ## Steps
 
@@ -44,14 +52,28 @@ Executes inline in main context — the main context dispatches epost-muji via A
    - `cancel` → stop, nothing written
 7. Dispatch epost-muji via Agent tool with confirmed findings:
    - Mode: **apply** (write changes to source files)
-8. Update `reports/known-findings/ui-components.json`: set `fix_applied: true`, `fix_applied_date: today` for each applied finding
+7.5. **Targeted Re-Audit** (unless `--no-verify` flag present):
+   - Collect the list of files modified in step 7
+   - Collect the rule IDs from the applied findings
+   - Dispatch epost-muji via Agent tool with:
+     - Mode: **verify** (check specific rules only — not full audit)
+     - Files: only the files changed in step 7
+     - Rules: only the rule IDs from the applied findings
+   - Parse result: for each finding, set `verified: true` if the rule now passes, `verified: false` if still failing
+   - Output re-audit result: "Re-audit: N/M findings resolved" or "Re-audit: N/M resolved, K still failing (RULE-001, …)"
+8. Update `reports/known-findings/ui-components.json`:
+   - Set `fix_applied: true`, `fix_applied_date: today` for each applied finding
+   - If step 7.5 ran: set `verified: true/false`, `verified_date: today` for each finding
+   - If `--no-verify`: leave `verified: false`, `verified_date: null` (no implicit verification)
 9. Output: files changed, lines changed per finding
-10. Suggest: "Run `/audit --close --ui <id>` to mark as fully resolved after verification"
+10. Conditional suggestion:
+    - If all `verified: true` (or `--no-verify` used): "Run `/audit --close --ui <id>` to mark as fully resolved"
+    - If some `verified: false`: "N finding(s) still failing. Re-fix with `/fix --ui {component} --finding-id <id>` or review manually"
 
 ## Boundaries
 
 - Fix ONE rule violation per finding — no opportunistic improvements
-- Do not run a full re-audit after fixing
+- Re-audit (step 7.5) is scoped to changed files + specific rules only — not a full audit
 - If fix requires structural change (STRUCT category) — report instead of fixing, suggest redesign
 
 ## Schema Reference

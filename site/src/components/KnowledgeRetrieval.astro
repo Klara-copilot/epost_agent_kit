@@ -1,0 +1,218 @@
+---
+const tiers = [
+  {
+    name: 'Procedural',
+    description: 'How to do things — methodology, pipelines, decision frameworks',
+    owner: 'Skills',
+    color: '#34d399',
+    icon: '◈',
+  },
+  {
+    name: 'Codebase',
+    description: 'What exists in the code — components, tokens, patterns, implementations',
+    owner: 'RAG System',
+    color: '#3b82f6',
+    icon: '◉',
+  },
+  {
+    name: 'Project',
+    description: 'What the team decided & learned — ADRs, findings, conventions',
+    owner: 'docs/',
+    color: '#8b5cf6',
+    icon: '◎',
+  },
+];
+
+const levels = [
+  {
+    level: 1,
+    source: 'docs/',
+    description: 'Decisions, conventions, findings, patterns',
+    tool: 'Index query',
+    color: '#8b5cf6',
+  },
+  {
+    level: 2,
+    source: 'RAG',
+    description: 'Components, tokens, implementations',
+    tool: 'Vector search',
+    color: '#3b82f6',
+  },
+  {
+    level: 3,
+    source: 'Skills',
+    description: 'Methodology, procedures, guidelines',
+    tool: 'Skill index',
+    color: '#34d399',
+  },
+  {
+    level: 4,
+    source: 'Codebase',
+    description: 'Exact matches, files RAG missed',
+    tool: 'Grep + Glob',
+    color: '#f59e0b',
+  },
+  {
+    level: 5,
+    source: 'External',
+    description: 'Library APIs, latest external info',
+    tool: 'Context7 + Web',
+    color: '#ef4444',
+  },
+];
+
+const knowledgeCategories = [
+  { prefix: 'ADR', name: 'Decisions', example: 'ADR-0001-nextjs-app-router.md' },
+  { prefix: 'ARCH', name: 'Architecture', example: 'ARCH-0001-system-overview.md' },
+  { prefix: 'PATTERN', name: 'Patterns', example: 'PATTERN-0003-error-boundary.md' },
+  { prefix: 'CONV', name: 'Conventions', example: 'CONV-0001-named-exports.md' },
+  { prefix: 'FEAT', name: 'Features', example: 'FEAT-0002-auth-flow.md' },
+  { prefix: 'FINDING', name: 'Findings', example: 'FINDING-0012-ssr-hydration.md' },
+];
+
+const decisionMatrix = [
+  { question: 'What did we decide about X?', goTo: 'L1 docs/decisions/', skip: 'RAG, External' },
+  { question: 'How is X implemented?', goTo: 'L2 RAG → L4 Codebase', skip: 'Skills' },
+  { question: 'What\'s the process for X?', goTo: 'L3 Skills', skip: 'RAG' },
+  { question: 'How to use library X API?', goTo: 'L5 External', skip: 'docs/' },
+];
+---
+<section class="py-24 px-6 bg-zinc-900/50 border-y border-zinc-800/60">
+  <div class="max-w-5xl mx-auto">
+    <div class="section-label">Knowledge System</div>
+    <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-4">
+      Five levels of retrieval. Zero hallucination.
+    </h2>
+    <p class="text-slate-400 mb-16 max-w-2xl">
+      Agents search internal sources first, cascade outward only when needed, and stop the moment they find sufficient context. Every answer is attributed.
+    </p>
+
+    <!-- Three Knowledge Tiers -->
+    <div class="mb-16">
+      <h3 class="font-mono text-xs text-emerald-400/70 uppercase tracking-wider mb-6">Three Knowledge Tiers</h3>
+      <div class="grid sm:grid-cols-3 gap-5">
+        {tiers.map((tier) => (
+          <div class="card-surface p-5">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="font-mono text-lg" style={`color: ${tier.color};`}>{tier.icon}</span>
+              <h4 class="font-display font-semibold text-white">{tier.name}</h4>
+            </div>
+            <p class="text-slate-400 text-sm mb-3">{tier.description}</p>
+            <div class="font-mono text-xs px-2 py-1 rounded bg-zinc-800 border border-zinc-700 text-slate-500 inline-block">
+              Owner: {tier.owner}
+            </div>
+          </div>
+        ))}
+      </div>
+      <p class="text-slate-600 text-xs font-mono mt-4">
+        Rule: Each piece of knowledge lives in exactly ONE tier. Other systems reference it, never copy it.
+      </p>
+    </div>
+
+    <!-- 5-Level Retrieval Chain -->
+    <div class="mb-16">
+      <h3 class="font-mono text-xs text-emerald-400/70 uppercase tracking-wider mb-6">Retrieval Chain — Search in Order, Stop When Found</h3>
+      <div class="space-y-3">
+        {levels.map((level, i) => (
+          <div class="relative">
+            <div class="card-surface p-4 flex items-center gap-4 group hover:border-zinc-700 transition-colors">
+              <!-- Level badge -->
+              <div
+                class="w-10 h-10 rounded-lg flex items-center justify-center font-mono text-sm font-bold flex-shrink-0"
+                style={`background: ${level.color}15; color: ${level.color};`}
+              >
+                L{level.level}
+              </div>
+              <!-- Source -->
+              <div class="flex-1 min-w-0">
+                <div class="flex items-baseline gap-2">
+                  <span class="font-display font-semibold text-white text-sm">{level.source}</span>
+                  <span class="font-mono text-xs text-slate-600">{level.tool}</span>
+                </div>
+                <p class="text-slate-500 text-xs mt-0.5">{level.description}</p>
+              </div>
+              <!-- Arrow or stop -->
+              {i < levels.length - 1 ? (
+                <div class="hidden sm:flex items-center gap-1.5 text-slate-700 text-xs font-mono flex-shrink-0">
+                  not found →
+                </div>
+              ) : (
+                <div class="hidden sm:flex items-center gap-1.5 text-slate-700 text-xs font-mono flex-shrink-0">
+                  last resort
+                </div>
+              )}
+            </div>
+            <!-- Cascade connector -->
+            {i < levels.length - 1 && (
+              <div class="hidden sm:block absolute left-[29px] top-full w-px h-3 bg-zinc-800"></div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Two-column: Knowledge Base + Decision Matrix -->
+    <div class="grid lg:grid-cols-2 gap-6">
+      <!-- Knowledge Base Structure -->
+      <div class="card-surface overflow-hidden">
+        <div class="px-4 py-2 bg-zinc-800/40 border-b border-zinc-800">
+          <span class="text-xs text-slate-500 font-mono">docs/ — git-tracked knowledge base</span>
+        </div>
+        <div class="p-4 font-mono text-xs space-y-2">
+          <div class="text-slate-600 mb-3">
+            <span class="text-slate-400">docs/</span>
+          </div>
+          {knowledgeCategories.map((cat) => (
+            <div class="flex items-start gap-2 pl-4">
+              <span class="text-emerald-400/60 flex-shrink-0">├─</span>
+              <div class="flex-1 min-w-0">
+                <span class="text-slate-300">{cat.prefix}</span>
+                <span class="text-slate-600 ml-2">{cat.name}</span>
+                <div class="text-slate-700 truncate">{cat.example}</div>
+              </div>
+            </div>
+          ))}
+          <div class="flex items-start gap-2 pl-4 mt-2">
+            <span class="text-emerald-400/60 flex-shrink-0">└─</span>
+            <span class="text-slate-500">index.json</span>
+            <span class="text-slate-700 ml-1">machine-readable registry</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Decision Matrix -->
+      <div class="card-surface overflow-hidden">
+        <div class="px-4 py-2 bg-zinc-800/40 border-b border-zinc-800">
+          <span class="text-xs text-slate-500 font-mono">Smart routing — question type → source</span>
+        </div>
+        <div class="p-4 space-y-4">
+          {decisionMatrix.map((row) => (
+            <div>
+              <p class="text-slate-300 text-sm mb-1.5">"{row.question}"</p>
+              <div class="flex items-center gap-3">
+                <span class="font-mono text-xs text-emerald-400">→ {row.goTo}</span>
+                <span class="font-mono text-xs text-slate-700">skip {row.skip}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div class="px-4 py-3 bg-zinc-800/20 border-t border-zinc-800">
+          <p class="font-mono text-xs text-slate-600">
+            Agents know where to look — no full-scan needed.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cross-Source Bridging callout -->
+    <div class="mt-8 card-surface p-5 flex items-start gap-4">
+      <div class="text-emerald-400 font-mono text-xl flex-shrink-0 mt-0.5">⇄</div>
+      <div>
+        <h4 class="font-display font-semibold text-white text-sm mb-2">Cross-Source Bridging</h4>
+        <p class="text-slate-400 text-sm leading-relaxed">
+          Sources validate each other. An ADR mentions a component path → RAG confirms current state. RAG finds a recurring pattern → docs/ checks for documented convention. Code pattern without docs? Flagged for capture. Decision without code? Flagged as stale. Every answer is grounded.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,170 @@
+---
+import Workflow from '../../layouts/Workflow.astro';
+
+const phases = [
+  {
+    name: 'Ideate',
+    agent: 'epost-brainstormer',
+    description: 'Generate 5–8 solution approaches with trade-offs',
+    details: [
+      'Divergent thinking — no idea rejected in this phase',
+      'Each option gets: summary, pros, cons, effort estimate',
+      'Cross-platform considerations surfaced early',
+      'Prior art checked via knowledge-retrieval',
+    ],
+  },
+  {
+    name: 'Evaluate',
+    agent: 'epost-planner',
+    description: 'Score options on feasibility, effort, impact, risk',
+    details: [
+      'Decision matrix with weighted criteria',
+      'Technical feasibility against current architecture',
+      'Dependency analysis — what needs to exist first',
+      'Top 2 options selected for spike',
+    ],
+  },
+  {
+    name: 'Design',
+    agent: 'epost-muji',
+    description: 'Sketch UI direction for selected approach',
+    details: [
+      'Component breakdown from design system',
+      'Information architecture and user flow',
+      'Existing pattern reuse identified',
+      'Figma-to-code mapping prepared',
+    ],
+  },
+  {
+    name: 'Spike',
+    agent: 'epost-fullstack-developer',
+    description: 'Build a minimal proof-of-concept on a spike branch',
+    details: [
+      'Smallest possible vertical slice',
+      'Working UI connected to stub data',
+      'Validates technical assumptions from Evaluate',
+      'Branch: spike/[feature-name]',
+    ],
+  },
+  {
+    name: 'Validate',
+    agent: 'epost-code-reviewer',
+    description: 'Review spike for viability and flag blockers',
+    details: [
+      'Does it prove the concept?',
+      'Are there architectural red flags?',
+      'Performance characteristics acceptable?',
+      'Recommendation: proceed, pivot, or drop',
+    ],
+  },
+];
+
+const scenarios = [
+  {
+    prompt: '"We need a way for users to collaborate on documents"',
+    options: [
+      'Real-time CRDT editor (Yjs)',
+      'Comment threads with @mentions',
+      'Version history with diff view',
+      'Shared workspace with cursors',
+    ],
+    selected: 'Comment threads — lowest complexity, highest adoption likelihood',
+  },
+  {
+    prompt: '"The mobile app feels slow on the inbox screen"',
+    options: [
+      'Virtualized list with recycling',
+      'Server-side pagination refactor',
+      'Offline-first with sync queue',
+      'Skeleton loading with prefetch',
+    ],
+    selected: 'Virtualized list — addresses root cause, no API changes needed',
+  },
+];
+---
+<Workflow
+  title="Brainstorming Flow"
+  description="From vague idea to validated spike. Agents generate options, evaluate trade-offs, design the UI direction, build a proof-of-concept, and review viability."
+  badge="Ideation → Validation"
+  badgeColor="#a855f7"
+  agents={['epost-brainstormer', 'epost-planner', 'epost-muji', 'epost-fullstack-developer', 'epost-code-reviewer']}
+>
+  <!-- Phases -->
+  <section class="py-16 px-6 border-b border-zinc-800/60">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="font-display text-2xl font-bold text-white mb-8">Five Phases</h2>
+      <div class="space-y-6">
+        {phases.map((phase, i) => (
+          <div class="card-surface p-6">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-lg bg-purple-500/10 flex items-center justify-center font-mono text-sm text-purple-400 flex-shrink-0">
+                {i + 1}
+              </div>
+              <div>
+                <div class="flex items-baseline gap-3 mb-2">
+                  <h3 class="font-display font-semibold text-white text-lg">{phase.name}</h3>
+                  <span class="font-mono text-xs text-slate-600">{phase.agent}</span>
+                </div>
+                <p class="text-slate-300 text-sm mb-3">{phase.description}</p>
+                <ul class="space-y-1.5">
+                  {phase.details.map((d) => (
+                    <li class="text-xs text-slate-500 flex items-start gap-2">
+                      <span class="text-purple-400/50 mt-0.5 flex-shrink-0">·</span>
+                      {d}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Example scenarios -->
+  <section class="py-16 px-6 border-b border-zinc-800/60">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="font-display text-2xl font-bold text-white mb-8">Example Scenarios</h2>
+      <div class="space-y-6">
+        {scenarios.map((s) => (
+          <div class="card-surface overflow-hidden">
+            <div class="px-5 py-3 bg-zinc-800/40 border-b border-zinc-800">
+              <p class="font-mono text-sm text-emerald-400">{s.prompt}</p>
+            </div>
+            <div class="p-5">
+              <div class="text-xs text-slate-600 font-mono mb-3">Brainstormer generates:</div>
+              <div class="grid sm:grid-cols-2 gap-2 mb-4">
+                {s.options.map((opt, i) => (
+                  <div class="flex items-start gap-2 text-sm text-slate-400">
+                    <span class="text-slate-700 font-mono text-xs mt-0.5">{i + 1}.</span>
+                    {opt}
+                  </div>
+                ))}
+              </div>
+              <div class="pt-3 border-t border-zinc-800">
+                <span class="text-xs text-slate-600 font-mono">Planner selects: </span>
+                <span class="text-sm text-emerald-400">{s.selected}</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Key insight -->
+  <section class="py-16 px-6">
+    <div class="max-w-4xl mx-auto">
+      <div class="card-surface p-6 flex items-start gap-4">
+        <div class="text-purple-400 font-mono text-xl flex-shrink-0 mt-0.5">◈</div>
+        <div>
+          <h3 class="font-display font-semibold text-white mb-2">Ideas Are Cheap. Validated Spikes Aren't.</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            The brainstorming flow doesn't stop at ideas — it pushes through to a working proof-of-concept that proves or disproves the approach. By the time a human reviews the result, the question isn't "should we try this?" but "does this spike validate our assumptions?" Faster decisions, less wasted effort.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Workflow>

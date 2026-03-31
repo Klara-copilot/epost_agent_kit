@@ -15,7 +15,7 @@ On every user prompt, sense context before acting:
 ### Prompt Classification
 
 - **Dev task** (action/problem/question about code) → route via intent table below
-- **Kit question** ("which agent", "list skills", "our conventions") → `epost-project-manager`
+- **Kit question** ("which agent", "list skills", "our conventions") → answer directly using CLAUDE.md + skill-index
 - **External tech question** ("how does React...", "what is gRPC") → `epost-researcher`
 - **Conversational** (greetings, opinions, clarifications) → respond directly
 
@@ -26,6 +26,7 @@ On every user prompt, sense context before acting:
 | Build / Create | "add a button", "implement login", "make X work", "continue the plan" | `epost-fullstack-developer` via Agent tool |
 | Fix / Debug | "something is broken", "this crashes", "why does X happen", "it's not working" | `epost-debugger` via Agent tool |
 | Plan / Design | "how should we build X", "let's plan", "what's the approach for" | `epost-planner` via Agent tool |
+| Ideate / Brainstorm | "brainstorm", "should we", "help me think", "which approach", "compare options", "architecture decision" | `epost-brainstormer` via Agent tool |
 | Research | "how does X work", "best practices for", "compare A vs B" | `epost-researcher` via Agent tool |
 | Review / Audit | "check my code", "is this good", "review before merge", "audit this" | `epost-code-reviewer` via Agent tool |
 | Test | "add tests", "is this covered", "validate this works" | `epost-tester` via Agent tool |
@@ -37,10 +38,14 @@ On every user prompt, sense context before acting:
 - Creation verbs (add, make, create, build, set up) → Build
 - Problem verbs (broken, wrong, failing, slow, crash) → Fix/Debug
 - Question verbs (how, why, what, should, compare) → Research or Plan
+- Ideation verbs (brainstorm, debate, explore, weigh, consider, what if) → Ideate/Brainstorm
 - Quality verbs (check, review, improve, clean up, refactor, simplify) → Review
+- Completion verbs (done, ship, finished, ready, merge) → Git
 - Still ambiguous → infer from git context (staged files → Review, active plan → Build, error in prompt → Fix)
 
-**Less common intents**: scaffold → `/bootstrap`, convert → `/convert`, journal → `epost-journal-writer`, MCP → `epost-mcp-manager`, design/UI → `epost-muji`
+**Web-specific examples**: "this component doesn't render" → Fix, "add dark mode" → Build, "page is slow" → Debug, "add a toast notification" → Build, "the CSS is off" → Fix, "update the API endpoint" → Build, "check the bundle size" → Review, "make login faster" → Debug
+
+**Less common intents**: scaffold → `/bootstrap`, convert → `/convert`, design/UI → `epost-muji`, architecture debate → `epost-brainstormer`
 
 ### Routing Rules
 
@@ -51,6 +56,10 @@ On every user prompt, sense context before acting:
 5. Merge conflicts → suggest fix/resolve
 6. Ambiguous after context boost → ask user (max 1 question)
 7. All delegations follow `core/references/orchestration.md`
+8. **Web context boost**: `.tsx`/`.ts`/`.scss`/`.css` files in `git diff` → auto-set platform=web, load web-frontend skill
+9. **Git operations** (commit, push, PR, done, ship) → ALWAYS delegate to `epost-git-manager` via Agent tool. Never handle inline.
+10. **Build, Fix, Plan, Test intents** → ALWAYS dispatch via Agent tool. Never execute inline in main context.
+11. **Compound git intent**: "commit and push" → dispatch `epost-git-manager` with `--push` (single agent call)
 
 ---
 
@@ -58,7 +67,7 @@ On every user prompt, sense context before acting:
 
 **Single intent** → spawn the matched agent directly via Agent tool.
 
-**Multi-intent** ("plan and build X", "research then implement") → spawn `epost-project-manager`, which decomposes and delegates sequentially.
+**Multi-intent** ("plan and build X", "research then implement") → orchestrator decomposes inline and spawns agents in sequence.
 
 **Parallel work** (3+ independent tasks, cross-platform) → use `subagent-driven-development` skill from main context.
 

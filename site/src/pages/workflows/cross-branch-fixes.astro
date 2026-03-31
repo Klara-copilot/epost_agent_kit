@@ -1,0 +1,132 @@
+---
+import Workflow from '../../layouts/Workflow.astro';
+
+const steps = [
+  {
+    phase: 'Detect',
+    description: 'A fix is committed on one branch. The agent extracts the pattern: what changed, why, and what the buggy code looked like.',
+    agent: 'epost-debugger',
+  },
+  {
+    phase: 'Scan',
+    description: 'Search other active branches for the same vulnerable pattern. Grep across branches, match by AST structure — not just text.',
+    agent: 'epost-code-reviewer',
+  },
+  {
+    phase: 'Patch',
+    description: 'For each affected branch, generate a context-aware patch. The fix adapts to local changes — no blind cherry-pick.',
+    agent: 'epost-fullstack-developer',
+  },
+  {
+    phase: 'Verify',
+    description: 'Run tests on each patched branch. If tests pass, open a PR. If they fail, flag for human review with context.',
+    agent: 'epost-tester',
+  },
+  {
+    phase: 'Notify',
+    description: 'Open PRs on affected branches with a cross-reference to the original fix. Branch owners get context, not surprises.',
+    agent: 'epost-git-manager',
+  },
+];
+
+const examples = [
+  {
+    fix: 'Session token refresh race condition',
+    original: 'feat/auth-redesign',
+    affected: ['feat/notifications', 'feat/settings-v2', 'release/3.2'],
+    pattern: 'Concurrent token refresh without mutex',
+  },
+  {
+    fix: 'SQL injection in search query builder',
+    original: 'hotfix/search-injection',
+    affected: ['feat/advanced-search', 'feat/analytics-export'],
+    pattern: 'String interpolation in SQL WHERE clause',
+  },
+  {
+    fix: 'Missing null check on API response',
+    original: 'fix/inbox-crash',
+    affected: ['feat/inbox-redesign', 'feat/smart-send-v2'],
+    pattern: 'response.data.items access without optional chaining',
+  },
+];
+---
+<Workflow
+  title="Cross-Branch Fix Propagation"
+  description="Fix a bug once — agents find the same pattern in other branches and propagate the fix with context-aware patches and automated verification."
+  badge="Maintenance Automation"
+  badgeColor="#ef4444"
+  agents={['epost-debugger', 'epost-code-reviewer', 'epost-fullstack-developer', 'epost-tester', 'epost-git-manager']}
+>
+  <!-- Flow -->
+  <section class="py-16 px-6 border-b border-zinc-800/60">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="font-display text-2xl font-bold text-white mb-8">How It Works</h2>
+      <div class="relative">
+        <div class="absolute left-[19px] top-0 bottom-0 w-px bg-zinc-800 hidden sm:block"></div>
+        <div class="space-y-8">
+          {steps.map((step, i) => (
+            <div class="relative flex items-start gap-5">
+              <div class="w-10 h-10 rounded-full bg-red-500/10 border border-red-500/30 flex items-center justify-center font-mono text-sm text-red-400 flex-shrink-0 z-10 bg-slate-950">
+                {i + 1}
+              </div>
+              <div>
+                <div class="flex items-baseline gap-3 mb-1">
+                  <h3 class="font-display font-semibold text-white">{step.phase}</h3>
+                  <span class="font-mono text-xs text-slate-600">{step.agent}</span>
+                </div>
+                <p class="text-slate-400 text-sm">{step.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Examples -->
+  <section class="py-16 px-6 border-b border-zinc-800/60">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="font-display text-2xl font-bold text-white mb-8">Real-World Examples</h2>
+      <div class="space-y-4">
+        {examples.map((ex) => (
+          <div class="card-surface p-5">
+            <h3 class="font-display font-semibold text-white text-sm mb-3">{ex.fix}</h3>
+            <div class="grid sm:grid-cols-3 gap-4 text-xs">
+              <div>
+                <span class="text-slate-600 font-mono block mb-1">Fixed on</span>
+                <span class="font-mono text-emerald-400">{ex.original}</span>
+              </div>
+              <div>
+                <span class="text-slate-600 font-mono block mb-1">Pattern</span>
+                <span class="text-slate-400">{ex.pattern}</span>
+              </div>
+              <div>
+                <span class="text-slate-600 font-mono block mb-1">Also affected</span>
+                <div class="space-y-1">
+                  {ex.affected.map((b) => (
+                    <span class="font-mono text-red-400/70 block">{b}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Not cherry-pick -->
+  <section class="py-16 px-6">
+    <div class="max-w-4xl mx-auto">
+      <div class="card-surface p-6 flex items-start gap-4">
+        <div class="text-red-400 font-mono text-xl flex-shrink-0 mt-0.5">⇄</div>
+        <div>
+          <h3 class="font-display font-semibold text-white mb-2">Not Cherry-Pick. Smart Propagation.</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Cherry-picking fails when branches have diverged. This workflow understands the <em>intent</em> of the fix — what the bug was and why the new code is correct — then generates a context-aware patch for each branch's current state. Conflicts are resolved by the agent, not by you.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Workflow>

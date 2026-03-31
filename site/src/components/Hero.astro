@@ -1,0 +1,124 @@
+---
+---
+<section class="relative min-h-screen flex flex-col justify-center overflow-hidden bg-slate-950">
+  <!-- Grid background -->
+  <div class="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:48px_48px]"></div>
+
+  <!-- Radial glow -->
+  <div class="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(52,211,153,0.08),transparent)]"></div>
+
+  <!-- Constellation SVG -->
+  <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
+    <svg class="w-full h-full max-w-5xl opacity-30" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+          <feMerge>
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+      <!-- Connection lines -->
+      <g stroke="rgba(52,211,153,0.3)" stroke-width="1" fill="none">
+        <!-- Hub to agents -->
+        <line x1="450" y1="300" x2="200" y2="140" class="constellation-line"/>
+        <line x1="450" y1="300" x2="450" y2="80" class="constellation-line"/>
+        <line x1="450" y1="300" x2="700" y2="140" class="constellation-line"/>
+        <line x1="450" y1="300" x2="780" y2="300" class="constellation-line"/>
+        <line x1="450" y1="300" x2="700" y2="460" class="constellation-line"/>
+        <line x1="450" y1="300" x2="450" y2="520" class="constellation-line"/>
+        <line x1="450" y1="300" x2="200" y2="460" class="constellation-line"/>
+        <line x1="450" y1="300" x2="120" y2="300" class="constellation-line"/>
+        <!-- Cross connections -->
+        <line x1="200" y1="140" x2="450" y2="80" stroke-opacity="0.15"/>
+        <line x1="700" y1="140" x2="780" y2="300" stroke-opacity="0.15"/>
+        <line x1="700" y1="460" x2="450" y2="520" stroke-opacity="0.15"/>
+        <line x1="200" y1="460" x2="120" y2="300" stroke-opacity="0.15"/>
+      </g>
+      <!-- Hub node (main) -->
+      <circle cx="450" cy="300" r="12" fill="rgba(52,211,153,0.2)" stroke="#34d399" stroke-width="1.5" filter="url(#glow)"/>
+      <circle cx="450" cy="300" r="5" fill="#34d399" filter="url(#glow)"/>
+      <!-- Satellite nodes -->
+      <g fill="rgba(52,211,153,0.6)" filter="url(#glow)">
+        <circle cx="200" cy="140" r="4"/>
+        <circle cx="450" cy="80" r="4"/>
+        <circle cx="700" cy="140" r="4"/>
+        <circle cx="780" cy="300" r="4"/>
+        <circle cx="700" cy="460" r="4"/>
+        <circle cx="450" cy="520" r="4"/>
+        <circle cx="200" cy="460" r="4"/>
+        <circle cx="120" cy="300" r="4"/>
+      </g>
+      <!-- Outer ring nodes -->
+      <g fill="rgba(52,211,153,0.3)" filter="url(#glow)">
+        <circle cx="90" cy="150" r="3"/>
+        <circle cx="320" cy="60" r="3"/>
+        <circle cx="600" cy="60" r="3"/>
+        <circle cx="820" cy="160" r="3"/>
+        <circle cx="820" cy="430" r="3"/>
+        <circle cx="600" cy="540" r="3"/>
+        <circle cx="300" cy="540" r="3"/>
+        <circle cx="80" cy="430" r="3"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Content -->
+  <div class="relative z-10 max-w-5xl mx-auto px-6 pt-24 pb-16">
+    <!-- Badge -->
+    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-400/10 border border-emerald-400/20 text-emerald-400 text-xs font-mono mb-8">
+      <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+      v2.0.0 — 15 agents · 65+ skills · 4 platforms
+    </div>
+
+    <!-- Headline -->
+    <h1 class="font-display text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-[1.05] tracking-tight mb-6">
+      Multi-agent<br/>
+      <span class="text-emerald-400">development</span><br/>
+      toolkit.
+    </h1>
+
+    <!-- Subline -->
+    <p class="text-lg sm:text-xl text-slate-400 max-w-2xl mb-10 leading-relaxed">
+      Specialized agents that route intelligently, share conventions, and deliver across 4 platforms — installed with a single CLI command.
+    </p>
+
+    <!-- CTAs -->
+    <div class="flex flex-wrap gap-4">
+      <a
+        href="#getting-started"
+        class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-emerald-400 text-slate-950 font-display font-semibold text-sm hover:bg-emerald-300 transition-colors"
+      >
+        Get Started
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a
+        href="#agents"
+        class="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-zinc-700 text-slate-300 font-display font-semibold text-sm hover:border-emerald-400/50 hover:text-white transition-colors"
+      >
+        See Agents
+      </a>
+    </div>
+
+    <!-- Stats row -->
+    <div class="flex flex-wrap gap-8 mt-16 pt-8 border-t border-zinc-800/60">
+      <div>
+        <div class="font-display text-2xl font-bold text-white">15</div>
+        <div class="text-xs text-slate-500 mt-0.5">Specialized Agents</div>
+      </div>
+      <div>
+        <div class="font-display text-2xl font-bold text-white">65+</div>
+        <div class="text-xs text-slate-500 mt-0.5">Passive Skills</div>
+      </div>
+      <div>
+        <div class="font-display text-2xl font-bold text-white">4</div>
+        <div class="text-xs text-slate-500 mt-0.5">Platforms</div>
+      </div>
+      <div>
+        <div class="font-display text-2xl font-bold text-white">30+</div>
+        <div class="text-xs text-slate-500 mt-0.5">CLI Commands</div>
+      </div>
+    </div>
+  </div>
+</section>

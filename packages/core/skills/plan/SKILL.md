@@ -34,14 +34,11 @@ metadata:
 
 ## Delegation — REQUIRED
 
-This skill MUST run via the `epost-planner` agent, not inline.
-
-**When `/plan` or planning intent is detected:**
-1. Use the **Agent tool** to spawn `epost-planner`
-2. Pass the full user request + active context (branch, plan dir, CWD)
-3. Do NOT execute planning steps inline in the main conversation
-
----
+This skill MUST run via `epost-planner`, not inline.
+When dispatching, include in the Agent tool prompt:
+- **Skill**: `/plan`
+- **Arguments**: `$ARGUMENTS` (full argument string from Skill invocation)
+- If no arguments: state "no arguments — use auto-detection"
 
 Create implementation plans with automatic complexity detection.
 
@@ -85,8 +82,17 @@ effort: Xh
 phases: N
 platforms: [all | ios | android | web | backend]
 breaking: true | false
+blocks: []      # plan IDs this plan blocks (omit if none)
+blockedBy: []   # plan IDs that must complete before this one (omit if none)
 ---
 ```
+
+**Cross-plan dependency detection** (run before writing plan files):
+1. Read `plans/index.json` — scan for active/draft plans
+2. Check their frontmatter `blocks`/`blockedBy` fields for overlap with new plan scope
+3. Scan their phase files for shared file paths
+4. If overlap found → surface to user with plan name + conflicting paths → resolve before proceeding
+5. Populate `blocks`/`blockedBy` in new plan frontmatter when applicable
 
 **phase file frontmatter** (required fields):
 ```yaml
@@ -129,6 +135,17 @@ This stamps `status: active` in `plan.md` and registers the plan in session stat
 1. **Simple** (1 module, clear scope, < 5 files) → load `references/fast-mode.md`
 2. **Moderate** (multiple files, some research needed) → load `references/deep-mode.md`
 3. **Complex** (multi-module, cross-platform, needs dependency mapping) → load `references/parallel-mode.md`
+
+## Auto-Validation
+
+After deep or parallel mode completes plan files (before activation):
+1. Auto-load `references/validate-mode.md`
+2. Generate 3-5 critical questions about the plan
+3. Present to user and document answers in `plan.md` under `## Validation Summary`
+4. Then activate plan
+
+**Fast mode**: skip validation (speed is the priority).
+**User can skip**: "Skip validation and activate" is always an option.
 
 ## Platform Detection
 
@@ -203,7 +220,7 @@ See `references/state-machine-guide.md` for notation, patterns, and validation c
 - Consider testing strategy
 - Estimate conservatively, track actuals
 - Mark file ownership for parallel execution safety (parallel mode)
-- Use `knowledge-retrieval` before planning, `knowledge-capture` after
+- Use `knowledge` before planning, `knowledge --capture` after
 
 ## Mode Reference
 
@@ -213,6 +230,7 @@ See `references/state-machine-guide.md` for notation, patterns, and validation c
 | `--deep` | `references/deep-mode.md` | Thorough multi-phase with research |
 | `--parallel` | `references/parallel-mode.md` | Parallelizable phases with ownership matrix |
 | `--validate` | `references/validate-mode.md` | Validate existing plan |
+| `--predict` | `references/predict-mode.md` | 5-persona expert debate before major changes |
 
 <request>$ARGUMENTS</request>
 <platform>{{detected_platform or "none"}}</platform>

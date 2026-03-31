@@ -135,13 +135,123 @@ When you load a skill, check its frontmatter before executing:
 
 | Frontmatter | How to execute |
 |-------------|---------------|
-| `context: fork` + `agent: {name}` | **MUST** spawn `{name}` via Agent tool. Do NOT execute inline. Do NOT use raw Bash. |
+| `context: fork` + `agent: {name}` | **MUST** spawn `{name}` via Agent tool **with skill arguments**. Do NOT execute inline. Do NOT use raw Bash. |
 | `context: inline` | Execute the skill content directly in the main conversation. |
 | No `context` field | Execute inline (default). |
 
-**Iron Law**: A skill with `context: fork` is a dispatch instruction, not a script to run yourself. Seeing `context: fork` means: stop, spawn the named agent, pass it the task.
+**Iron Law**: A skill with `context: fork` is a dispatch instruction, not a script to run yourself. Seeing `context: fork` means: stop, spawn the named agent, pass it the task **and all arguments**.
+
+### Argument Forwarding
+
+When dispatching a `context: fork` agent, the Agent tool prompt **MUST** include:
+
+```
+Task: Execute /{skill-name} {arguments}
+Skill: {skill-name}
+Arguments: {raw argument string from Skill invocation}
+```
+
+If no arguments were provided, state `Arguments: none — use auto-detection`.
+
+The skill name and arguments are what differentiate `/docs --init` from `/docs --migrate`. Dropping them causes the agent to guess or greet — the **#1 cause of silent skill failures**.
 
 **Common failure mode**: Skipping the Skill tool entirely and running raw Bash/shell commands instead. This bypasses routing, skips build gates, skips all skill-level safety checks. Never do this for git, research, planning, or any workflow that has a dedicated agent.
+
+## Context Budget
+
+**Performance variance breakdown** (quantified evidence — not intuition):
+- Token usage: **80%** of agent performance variance
+- Tool call count: **~10%** of variance
+- Model choice: **~5%** of variance
+
+→ If an agent underperforms, fix token bloat first. Upgrading the model is almost never the answer.
+
+**Thresholds — act on these numbers:**
+
+| Context % | Action |
+|-----------|--------|
+| < 70% | Normal — continue |
+| 70–80% | Plan compaction — identify what to compress |
+| 80–90% | Execute compaction now |
+| > 90% | Immediate action — compact or start new session |
+
+**Usage limits (5-hour rolling window):**
+| Usage % | Action |
+|---------|--------|
+| < 70% | Normal |
+| 70–90% | Reduce parallelization, use Haiku for lighter tasks |
+| > 90% | Essential tasks only — wait for reset |
+
+**Multi-agent cost:** ~15x single-agent token baseline. Justify only for context isolation, not for "role-play" or agent personality. The ~15x cost pays off when work genuinely can't fit in one context window.
+
+**Tool count target:** Keep total tools under 20. Evidence: reducing 17→2 tools yielded 3.5x faster execution, 37% fewer tokens, +20% task success rate. Fewer, well-described tools beat many narrow tools.
+
+**Anchored Iterative compression template** (use when context > 80%):
+
+```markdown
+## Session Intent
+Original goal: [preserved verbatim]
+
+## Files Modified
+- path/to/file.ts: [what changed]
+
+## Decisions Made
+- [decision]: [rationale]
+
+## Current State
+[one paragraph summary of where things stand]
+
+## Next Steps
+1. [next action]
+```
+
+**Artifact trail** — the most commonly missed context discipline: In long sessions, explicitly track every file created, modified, read, and every function/variable name introduced. This is the weakest point in agent context management (scores 2.2–2.5/5.0 in evaluations). If you're in a long task, maintain a running artifact list.
+
+## Subagent Status Protocol
+
+Every subagent **MUST** end its response with a structured status block:
+
+```
+**Status:** DONE | DONE_WITH_CONCERNS | BLOCKED | NEEDS_CONTEXT
+**Summary:** [1–2 sentence summary of what was completed]
+**Concerns/Blockers:** [if applicable — omit if DONE]
+```
+
+### Controller Handling Rules
+
+| Status | Controller Action |
+|--------|------------------|
+| `DONE` | Proceed to next step |
+| `DONE_WITH_CONCERNS (correctness)` | Address concern before continuing |
+| `DONE_WITH_CONCERNS (tech debt)` | Note for future, proceed |
+| `BLOCKED` | Provide context / simplify task / escalate — do NOT retry same approach |
+| `NEEDS_CONTEXT` | Provide missing context → re-dispatch |
+| 3+ failures on same task | Escalate to user — never retry blindly |
+
+### Context Isolation Principle
+
+Every subagent invocation MUST be self-contained. Use this prompt template:
+
+```
+Task: [specific task description]
+Files to modify: [list]
+Files to read for context: [list]
+Acceptance criteria: [list]
+Constraints: [relevant constraints]
+Plan reference: [phase file path if applicable]
+Work context: [project path]
+Reports: [reports path]
+```
+
+**Anti-patterns:**
+
+| ❌ Vague | ✅ Explicit |
+|---------|-----------|
+| "Continue from where we left off" | "Implement X per spec in phase-02.md" |
+| "Fix the issues we discussed" | "Fix null check in auth.ts:45" |
+| "You know what to do" | "Add the missing error handler to login.ts" |
+
+Subagent gets fresh context — never assume it knows prior conversation.
 
 ## Escalation Rules
 

@@ -1,7 +1,7 @@
 ---
 id: 260308-1700-new-team-onboarding-demo
 title: "New team onboarding demo — Java devs → React/Next.js with kit"
-status: active
+status: archived
 effort: 2h
 phases: 4
 audience: 6 Java/JSF devs, VSCode + Copilot only, no Claude Code

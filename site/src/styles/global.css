@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --emerald: #34d399;
+    --emerald-dim: rgba(52, 211, 153, 0.12);
+    --emerald-glow: rgba(52, 211, 153, 0.4);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-slate-950 text-slate-300 font-body antialiased;
+  }
+
+  ::selection {
+    @apply bg-emerald-400/20 text-emerald-400;
+  }
+}
+
+@layer components {
+  .section-label {
+    @apply text-xs font-mono uppercase tracking-widest text-emerald-400/70 mb-4;
+  }
+
+  .glow-emerald {
+    box-shadow: 0 0 20px var(--emerald-glow), 0 0 60px rgba(52, 211, 153, 0.1);
+  }
+
+  .card-surface {
+    @apply bg-zinc-900 border border-zinc-800 rounded-xl;
+  }
+
+  .code-block {
+    @apply font-mono text-sm bg-zinc-900 border border-zinc-800 rounded-lg;
+  }
+
+  .node-dot {
+    @apply w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_2px_rgba(52,211,153,0.5)];
+  }
+}
+
+/* Constellation animation */
+@keyframes constellation-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+.constellation-line {
+  stroke-dasharray: 4 6;
+  animation: constellation-dash 3s linear infinite;
+}
+
+@keyframes constellation-dash {
+  to { stroke-dashoffset: -20; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { @apply bg-slate-950; }
+::-webkit-scrollbar-thumb { @apply bg-zinc-700 rounded-full; }
+::-webkit-scrollbar-thumb:hover { @apply bg-zinc-600; }

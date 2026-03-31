@@ -46,7 +46,6 @@ const CATEGORY_MAP = {
   'figma': 'design-system',
   'design-tokens': 'design-system',
   'ui-lib-dev': 'design-system',
-  'ui-guidance': 'design-system',
   'web-ui-lib': 'design-system',
 
   // accessibility
@@ -84,6 +83,7 @@ const CATEGORY_MAP = {
   'doc-coauthoring': 'analysis-reasoning',
   'knowledge-retrieval': 'analysis-reasoning',
   'knowledge-capture': 'analysis-reasoning',
+  'journal': 'development-tools',
   'repomix': 'analysis-reasoning',
   'skill-discovery': 'analysis-reasoning',
   'data-store': 'analysis-reasoning',
@@ -105,6 +105,9 @@ const CATEGORY_MAP = {
   // business-domains
   'domain-b2b': 'business-domains',
   'domain-b2c': 'business-domains',
+
+  // design-system (design-system package skills)
+  'launchpad': 'design-system',
 };
 
 /**
@@ -279,6 +282,20 @@ function generateSkillIndex() {
       const relativePath = path.relative(OUTPUT_DIR, filePath);
       const name = metadata.name;
       const connections = CONNECTION_MAP[name] || {};
+
+      // Compute size: SKILL.md + all files in references/ subdirectory
+      const skillDir = path.dirname(filePath);
+      const refsDir = path.join(skillDir, 'references');
+      let totalBytes = Buffer.byteLength(content, 'utf-8');
+      if (fs.existsSync(refsDir)) {
+        for (const ref of fs.readdirSync(refsDir)) {
+          try {
+            const refStat = fs.statSync(path.join(refsDir, ref));
+            if (refStat.isFile()) totalBytes += refStat.size;
+          } catch { /* skip unreadable */ }
+        }
+      }
+
       const skill = {
         name,
         description: metadata.description || '',
@@ -294,6 +311,7 @@ function generateSkillIndex() {
           enhances: connections.enhances || [],
           conflicts: connections.conflicts || [],
         },
+        size: totalBytes,
         path: relativePath
       };
 

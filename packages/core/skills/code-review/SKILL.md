@@ -57,18 +57,18 @@ After initial review, the reviewer decides based on findings:
 
 | Finding | Action |
 |---------|--------|
-| Critical severity found | Escalate to `/audit --code` — activate `knowledge-retrieval` for deeper context before reporting |
+| Critical severity found | Escalate to `/audit --code` — activate `knowledge` for deeper context before reporting |
 | Task is UI code review/audit (components, tokens, design system) | Delegate to **epost-muji** — runs `/audit --ui` with klara-theme standards + INTEGRITY gate |
 | Task is about a11y (accessibility, WCAG, VoiceOver, TalkBack, keyboard nav, screen reader) | Delegate to **epost-a11y-specialist** — runs `/audit --a11y` with full WCAG 2.1 AA rules |
 | High severity, UI component finding | Escalate to `/audit --ui` → **epost-muji** for full component audit |
 | High severity, a11y issue | Escalate to `/audit --a11y` — a11y specialist audits with WCAG rules |
 | Medium/Low only | Complete inline, no escalation needed |
 
-**Rule**: Code review is lightweight by default (no `knowledge-retrieval`). Escalate to audit only when findings warrant it. Audit always activates `knowledge-retrieval`.
+**Rule**: Code review is lightweight by default (no `knowledge`). Escalate to audit only when findings warrant it. Audit always activates `knowledge`.
 
 ### Lightweight vs. Escalated Review Scope
 
-| Category | Lightweight (default) | Escalated (knowledge-retrieval active) |
+| Category | Lightweight (default) | Escalated (knowledge active) |
 |----------|-----------------------|---------------------------------------|
 | ARCH | ARCH-001..003 (file org, boundaries, circular deps) | + ARCH-004..005 (layer violations, dependency direction) |
 | LOGIC | LOGIC-001..003 (null handling, edge cases, error paths) | + LOGIC-004..006 (race conditions, off-by-one, comparison) |
@@ -79,7 +79,7 @@ After initial review, the reviewer decides based on findings:
 | Tests | Test file exists, covers changed code | + coverage gap analysis, edge case completeness |
 | Standards source | code-review-standards.md only | + docs/ conventions, RAG patterns |
 
-**Rule**: Lightweight review does NOT load knowledge-retrieval. Only categories in the "Lightweight" column are checked. If a Critical finding is detected, escalate to the full column.
+**Rule**: Lightweight review does NOT load knowledge. Only categories in the "Lightweight" column are checked. If a Critical finding is detected, escalate to the full column.
 
 ### Subagent Constraint
 
@@ -100,7 +100,7 @@ If the caller provides a muji report path (hybrid audit):
 ### Critical Escalation (self-dispatch, no Agent tool needed)
 
 When a Critical finding is detected during review:
-1. Load `knowledge-retrieval` skill (already in agent skills list)
+1. Load `knowledge` skill (already in agent skills list)
 2. Execute: L1 docs/ → L2 RAG → L4 Grep fallback
 3. Document KB layers used in Methodology
 4. Re-examine files with retrieved context; update findings
@@ -163,6 +163,6 @@ Key requirements:
 - Unresolved questions footer always present
 
 ### Related Skills
-- `knowledge-retrieval` — activated on Critical escalation
-- `knowledge-capture` — use after task to persist learnings
+- `knowledge` — activated on Critical escalation
+- `knowledge --capture` — use after task to persist learnings
 - `auto-improvement` — session metrics and improvement trends

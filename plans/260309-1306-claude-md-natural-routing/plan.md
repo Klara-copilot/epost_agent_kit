@@ -1,6 +1,6 @@
 ---
 title: "Improve CLAUDE.md for natural prompt routing and orchestration"
-status: active
+status: archived
 created: 2026-03-09
 updated: 2026-03-09
 effort: 2h

@@ -1,0 +1,76 @@
+---
+const workflows = [
+  {
+    slug: 'automated-code-audit',
+    title: 'Automated Code Audit',
+    desc: 'Every PR audited for security, quality, a11y, and performance',
+    color: '#eab308',
+    icon: '◉',
+  },
+  {
+    slug: 'po-to-prototype',
+    title: 'PO-to-Prototype',
+    desc: 'Feature description → working branch with PR in ~20 min',
+    color: '#3b82f6',
+    icon: '◈',
+  },
+  {
+    slug: 'brainstorming',
+    title: 'Brainstorming',
+    desc: 'Ideas → evaluated options → validated spike branch',
+    color: '#a855f7',
+    icon: '◭',
+  },
+  {
+    slug: 'development-dashboard',
+    title: 'Dev Dashboard',
+    desc: 'Automatic progress tracking from agent outputs — zero reporting',
+    color: '#22c55e',
+    icon: '◬',
+  },
+  {
+    slug: 'cross-branch-fixes',
+    title: 'Cross-Branch Fixes',
+    desc: 'Fix once, propagate to all affected branches automatically',
+    color: '#ef4444',
+    icon: '⇄',
+  },
+  {
+    slug: 'continuous-quality',
+    title: 'Continuous Quality',
+    desc: 'Proactive monitoring and auto-fix for coverage, a11y, bundle size',
+    color: '#06b6d4',
+    icon: '◎',
+  },
+];
+---
+<section class="py-24 px-6 bg-slate-950 border-t border-zinc-800/60">
+  <div class="max-w-5xl mx-auto">
+    <div class="section-label">Automation</div>
+    <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-4">
+      End-to-end workflows.
+    </h2>
+    <p class="text-slate-400 mb-12 max-w-2xl">
+      Chain agents into pipelines that automate entire development processes — from idea to shipped PR.
+    </p>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {workflows.map((wf) => (
+        <a href={`/workflows/${wf.slug}`} class="card-surface p-5 hover:border-zinc-700 transition-all duration-200 group hover:-translate-y-0.5">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="font-mono text-lg" style={`color: ${wf.color};`}>{wf.icon}</span>
+            <h3 class="font-display font-semibold text-white text-sm group-hover:text-emerald-400 transition-colors">{wf.title}</h3>
+          </div>
+          <p class="text-slate-500 text-xs leading-relaxed">{wf.desc}</p>
+        </a>
+      ))}
+    </div>
+
+    <div class="mt-8 text-center">
+      <a href="/workflows" class="inline-flex items-center gap-2 text-sm font-mono text-emerald-400 hover:text-emerald-300 transition-colors">
+        See all workflows
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</section>

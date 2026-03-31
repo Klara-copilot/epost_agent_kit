@@ -6,14 +6,14 @@ disable-model-invocation: true
 metadata:
   argument-hint: "[agent-name] [description]"
   connections:
-    requires: [kit-agent-development]
+    requires: []
 ---
 
 ## Your Mission
 
 Create a new agent definition file following epost_agent_kit conventions.
 
-**IMPORTANT:** Use `kit-agent-development` skill for frontmatter reference and best practices.
+**IMPORTANT:** Read `kit/references/agent-development.md` for frontmatter reference and best practices.
 
 ## Arguments
 
@@ -46,7 +46,7 @@ Create a new agent definition file following epost_agent_kit conventions.
 
 5. **Register**:
    - Update `packages/{package}/package.yaml` agents list
-   - Update `packages/kit/skills/kit-agents/SKILL.md` agent tree
+   - Update `packages/kit/skills/kit/references/agents.md` agent tree
 
 6. **Validate**: Run `epost-kit lint` on new agent — catch broken skill refs
 

@@ -1,12 +1,206 @@
 {
   "schemaVersion": "1.0.0",
-  "updatedAt": "2026-03-11",
+  "updatedAt": "2026-03-31",
   "entries": [
+    {
+      "id": "epost-fullstack-developer-260331-0818-plans-reports-cleanup",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "Plans & Reports Cleanup \u2014 delete archive, orphans, stale index entries",
+      "verdict": "DONE",
+      "plan": "plans/260331-0803-docs-deps-schema-clarity",
+      "path": "Users/than/Projects/epost_agent_kit/plans/260331-0803-docs-deps-schema-clarity/reports/260331-0818-plans-reports-cleanup-epost-fullstack-developer.md",
+      "created": "2026-03-31"
+    },
+    {
+      "id": "epost-fullstack-developer-260331-0807-docs-deps-schema-clarity",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "Fix deps schema confusion in docs init.md \u2014 section 4.5 rewrite",
+      "verdict": "DONE",
+      "plan": "plans/260331-0803-docs-deps-schema-clarity",
+      "path": "Users/than/Projects/epost_agent_kit/plans/260331-0803-docs-deps-schema-clarity/reports/260331-0807-rewrite-deps-section-epost-fullstack-developer.md",
+      "created": "2026-03-31"
+    },
+    {
+      "id": "epost-fullstack-developer-260331-0531-docs-skill-signal-categories",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "Docs Skill: Signal-Based KB Category Selection \u2014 all phases",
+      "verdict": "DONE",
+      "plan": "plans/260330-2325-docs-skill-signal-categories",
+      "path": "Users/than/Projects/epost_agent_kit/plans/260330-2325-docs-skill-signal-categories/reports/260331-0531-docs-skill-signal-categories-epost-fullstack-developer.md",
+      "created": "2026-03-31"
+    },
+    {
+      "id": "epost-planner-260330-2325-docs-skill-signal-categories",
+      "type": "plan",
+      "agent": "epost-planner",
+      "title": "Docs Skill: Signal-Based KB Category Selection",
+      "verdict": "READY",
+      "date": "2026-03-30",
+      "file": "reports/260330-2325-docs-skill-signal-categories-epost-planner.md",
+      "plan": "plans/260330-2325-docs-skill-signal-categories/plan.md"
+    },
+    {
+      "id": "epost-fullstack-developer-260330-2308-epost-brainstormer",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "Add epost-brainstormer agent \u2014 phases 1 & 2",
+      "verdict": "DONE",
+      "plan": "plans/260330-2303-epost-brainstormer",
+      "path": "Users/than/Projects/epost_agent_kit/plans/260330-2303-epost-brainstormer/reports/260330-2308-epost-brainstormer-epost-fullstack-developer.md",
+      "created": "2026-03-30"
+    },
+    {
+      "id": "epost-fullstack-developer-260330-1958-knowledge-consolidation",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "Phases 2 & 3: Unify knowledge skill, update registries",
+      "verdict": "DONE",
+      "plan": "plans/260330-1614-skill-consolidation/",
+      "date": "2026-03-30",
+      "file": "Users/than/Projects/epost_agent_kit/plans/260330-1614-skill-consolidation/reports/260330-1958-knowledge-consolidation-epost-fullstack-developer.md"
+    },
+    {
+      "id": "epost-planner-260330-1614-skill-consolidation",
+      "type": "plan",
+      "agent": "epost-planner",
+      "title": "Core Skills Consolidation: 31 to 24",
+      "verdict": "READY",
+      "plan": "plans/260330-1614-skill-consolidation/",
+      "date": "2026-03-30",
+      "file": "reports/260330-1614-skill-consolidation-epost-planner.md"
+    },
+    {
+      "id": "epost-fullstack-developer-260327-0652-clean-code-skill",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "Clean Code Skill \u2014 Naming, Functions, Formatting, Error Handling",
+      "verdict": "COMPLETED",
+      "date": "2026-03-27",
+      "file": "reports/260327-0652-clean-code-skill-epost-fullstack-developer.md"
+    },
+    {
+      "id": "epost-planner-260324-0607-skill-evolution-phase1",
+      "type": "plan",
+      "agent": "epost-planner",
+      "title": "Self-Evolving Skill Loop \u2014 Phase 1: Detect + Propose",
+      "verdict": "READY",
+      "plan": "plans/260324-0606-skill-evolution-phase1/",
+      "date": "2026-03-24",
+      "file": "reports/260324-0607-skill-evolution-phase1-epost-planner.md"
+    },
+    {
+      "id": "epost-researcher-260323-2353-self-evolving-skill-loop",
+      "type": "research",
+      "agent": "epost-researcher",
+      "title": "Self-Evolving Skill Loop: Design, Risks, and Implementation Strategy",
+      "verdict": "ACTIONABLE",
+      "date": "2026-03-23",
+      "file": "reports/260323-2353-self-evolving-skill-loop-epost-researcher.md"
+    },
+    {
+      "id": "epost-fullstack-developer-260323-2211-marketplace-phase3",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "Phase 3: Marketplace TUI \u2014 epost-kit browse interactive terminal UI",
+      "verdict": "DONE",
+      "plan": "plans/260320-1213-kit-marketplace/",
+      "phase": "phase-3-marketplace-tui",
+      "date": "2026-03-23",
+      "file": "reports/260323-2211-marketplace-phase3-epost-fullstack-developer.md"
+    },
+    {
+      "id": "epost-fullstack-developer-260322-1359-marketplace-phase2",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "Phase 2: Core CLI Commands \u2014 roles, add, remove, list, --profile deprecation",
+      "verdict": "DONE",
+      "plan": "plans/260320-1213-kit-marketplace/",
+      "phase": "phase-2-cli-commands",
+      "date": "2026-03-23",
+      "file": "reports/260322-1359-marketplace-phase2-epost-fullstack-developer.md"
+    },
+    {
+      "id": "epost-fullstack-developer-260321-1211-marketplace-phase1",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "Phase 1: Registry + Bundle Manifest \u2014 bundles.yaml, resolver, .epost.json schema, size field",
+      "verdict": "DONE",
+      "plan": "plans/260320-1213-kit-marketplace/",
+      "phase": "phase-1-registry-bundles",
+      "date": "2026-03-21",
+      "file": "reports/260321-1211-marketplace-phase1-epost-fullstack-developer.md"
+    },
+    {
+      "id": "epost-fullstack-developer-260320-0542-phase3-prune-skills",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "Phase 3: Prune Skills Library \u2014 67 \u2192 46 skills (21 removed/merged)",
+      "verdict": "DONE",
+      "plan": "plans/260319-0538-kit-rationalization/",
+      "phase": "phase-3-prune-skills",
+      "date": "2026-03-20",
+      "file": "reports/260320-0542-phase3-prune-skills-epost-fullstack-developer.md"
+    },
+    {
+      "id": "epost-fullstack-developer-260320-0338-kit-rationalization-phase2",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "Phase 2: Consolidate Agent Responsibilities \u2014 slim 4 agents by 37\u201364%",
+      "verdict": "PARTIAL",
+      "plan": "plans/260319-0538-kit-rationalization/",
+      "phase": "phase-2-consolidate-agents",
+      "date": "2026-03-20",
+      "file": "reports/260320-0338-kit-rationalization-phase2-epost-fullstack-developer.md"
+    },
+    {
+      "id": "epost-fullstack-developer-260319-2053-phase1-delete-redundant-agents",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "Phase 1: Delete Redundant Agents \u2014 Kit Rationalization",
+      "verdict": "DONE",
+      "plan": "plans/260319-0538-kit-rationalization/",
+      "phase": "phase-1-delete-redundant-agents",
+      "date": "2026-03-19",
+      "file": "reports/260319-2053-phase1-delete-redundant-agents-epost-fullstack-developer.md"
+    },
+    {
+      "id": "epost-planner-260319-0538-kit-rationalization",
+      "type": "plan",
+      "agent": "epost-planner",
+      "title": "Kit Rationalization \u2014 Lean Into Domain Value, Shed Process Scaffolding",
+      "verdict": "READY",
+      "createdAt": "2026-03-19",
+      "plan": "260319-0538-kit-rationalization",
+      "path": "reports/260319-0538-kit-rationalization-epost-planner.md"
+    },
+    {
+      "id": "epost-fullstack-developer-260318-1423-skill-discovery-phase1",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "Phase 1: Quick Fixes \u2014 Phantom Refs, Wiring, Validator",
+      "verdict": "COMPLETE",
+      "createdAt": "2026-03-18",
+      "plan": "260318-1353-skill-discovery-superpower",
+      "path": "reports/260318-1423-skill-discovery-phase1-epost-fullstack-developer.md"
+    },
+    {
+      "id": "epost-fullstack-developer-260311-1717-web-platform-to-9",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "Implementation: Web Platform DX 8\u21929 \u2014 all 6 phases (routing, build-gate, findings hook, git routing, visual tests, auto re-audit)",
+      "verdict": "COMPLETE",
+      "createdAt": "2026-03-11",
+      "plan": "260311-1711-web-platform-to-9",
+      "path": "plans/260311-1711-web-platform-to-9/reports/260311-1717-web-platform-to-9-epost-fullstack-developer.md"
+    },
     {
       "id": "epost-fullstack-developer-260311-1228-fix-ui-post-audit-flow",
       "type": "implementation",
       "agent": "epost-fullstack-developer",
-      "title": "Implementation: Fix UI post-audit flow — Iron Law violation resolved",
+      "title": "Implementation: Fix UI post-audit flow \u2014 Iron Law violation resolved",
       "verdict": "COMPLETE",
       "createdAt": "2026-03-11",
       "plan": "260311-0512-fix-ui-post-audit-flow",
@@ -16,7 +210,7 @@
       "id": "epost-planner-260311-0512-fix-ui-post-audit-flow",
       "type": "plan",
       "agent": "epost-planner",
-      "title": "Plan: Fix UI post-audit flow — resolve Iron Law violation + cleanup",
+      "title": "Plan: Fix UI post-audit flow \u2014 resolve Iron Law violation + cleanup",
       "verdict": "READY",
       "createdAt": "2026-03-11",
       "plan": "260311-0512-fix-ui-post-audit-flow",
@@ -26,128 +220,11 @@
       "id": "fullstack-developer-260310-1139-audit-organism-poc-mode",
       "type": "plan",
       "agent": "epost-fullstack-developer",
-      "title": "Implementation: Audit Organism/POC Mode — Classification, Maturity Tiers, Organism Checklist",
+      "title": "Implementation: Audit Organism/POC Mode \u2014 Classification, Maturity Tiers, Organism Checklist",
       "verdict": "COMPLETE",
       "createdAt": "2026-03-10",
       "plan": "260309-audit-organism-poc-mode",
       "path": "plans/260310-0954-build-gate-pretooluse-hook/reports/epost-fullstack-developer-260310-1139-audit-organism-poc-mode.md"
-    },
-    {
-      "id": "fullstack-developer-260307-1635-research-engine",
-      "type": "plan",
-      "agent": "epost-fullstack-developer",
-      "title": "Implementation: Research engine with switchable backend (Gemini / Perplexity)",
-      "verdict": "READY",
-      "files": {
-        "agent": "reports/epost-fullstack-developer-260307-1635-research-engine.md",
-        "human": "reports/epost-fullstack-developer-260307-1635-research-engine.md"
-      },
-      "plan": "plans/260307-1600-research-engine/plan.md",
-      "created": "2026-03-07 16:35"
-    },
-    {
-      "id": "epost-planner-260308-0837-deepen-audit-delegation",
-      "type": "plan",
-      "agent": "epost-planner",
-      "title": "Plan: Deepen Audit Flow Delegation",
-      "verdict": "READY",
-      "files": {
-        "agent": "reports/epost-planner-260308-0837-deepen-audit-delegation.md",
-        "human": "reports/epost-planner-260308-0837-deepen-audit-delegation.md"
-      },
-      "plan": "plans/260308-0837-deepen-audit-delegation/plan.md",
-      "created": "2026-03-08 08:37"
-    },
-    {
-      "id": "epost-fullstack-developer-260308-1007-audit-delegation-phase-1",
-      "type": "implementation",
-      "agent": "epost-fullstack-developer",
-      "title": "Phase 1: Audit delegation templates (Templates A–E, delegation protocol)",
-      "verdict": "completed",
-      "files": {
-        "agent": "reports/epost-fullstack-developer-260308-1007-audit-delegation-phase-1.md",
-        "human": "reports/epost-fullstack-developer-260308-1007-audit-delegation-phase-1.md"
-      },
-      "plan": "plans/260308-0837-deepen-audit-delegation/plan.md",
-      "created": "2026-03-08 10:07"
-    },
-    {
-      "id": "epost-fullstack-developer-260308-1010-phase-2-code-reviewer-escalation",
-      "type": "implementation",
-      "agent": "epost-fullstack-developer",
-      "title": "Phase 2: Code-reviewer escalation protocol (Dispatch Protocol + Post-Delegation Report Merging)",
-      "verdict": "completed",
-      "files": {
-        "agent": "reports/epost-fullstack-developer-260308-1010-phase-2-code-reviewer-escalation.md",
-        "human": "reports/epost-fullstack-developer-260308-1010-phase-2-code-reviewer-escalation.md"
-      },
-      "plan": "plans/260308-0837-deepen-audit-delegation/plan.md",
-      "created": "2026-03-08 10:10"
-    },
-    {
-      "id": "epost-fullstack-developer-260308-1011-phase3-specialist-receiving-protocol",
-      "type": "implementation",
-      "agent": "epost-fullstack-developer",
-      "title": "Phase 3: Specialist receiving protocol — Delegated Audit Intake for muji + a11y-specialist",
-      "verdict": "completed",
-      "files": {
-        "agent": "reports/epost-fullstack-developer-260308-1011-phase3-specialist-receiving-protocol.md",
-        "human": "reports/epost-fullstack-developer-260308-1011-phase3-specialist-receiving-protocol.md"
-      },
-      "plan": "plans/260308-0837-deepen-audit-delegation/plan.md",
-      "created": "2026-03-08 10:11"
-    },
-    {
-      "id": "epost-fullstack-developer-260308-1011-muji-docs-mcp-delegation",
-      "type": "implementation",
-      "agent": "epost-fullstack-developer",
-      "title": "Phase 4: Muji docs & MCP delegation — Templates D/E + Docs & MCP Delegation section",
-      "verdict": "completed",
-      "files": {
-        "agent": "reports/epost-fullstack-developer-260308-1011-muji-docs-mcp-delegation.md",
-        "human": "reports/epost-fullstack-developer-260308-1011-muji-docs-mcp-delegation.md"
-      },
-      "plan": "plans/260308-0837-deepen-audit-delegation/plan.md",
-      "created": "2026-03-08 10:11"
-    },
-    {
-      "id": "epost-planner-260308-1426-audit-flow-optimization",
-      "type": "plan",
-      "agent": "epost-planner",
-      "title": "Plan: Optimize Audit & Code-Review Flows",
-      "verdict": "READY",
-      "files": {
-        "agent": "plans/reports/epost-planner-260308-1426-audit-flow-optimization.md",
-        "human": "plans/reports/epost-planner-260308-1426-audit-flow-optimization.md"
-      },
-      "plan": "plans/260308-1426-audit-flow-optimization/plan.md",
-      "created": "2026-03-08 14:26"
-    },
-    {
-      "id": "epost-planner-260309-1621-build-success-gate",
-      "type": "plan",
-      "agent": "epost-planner",
-      "title": "Plan: Build-Success Gate for Git Commit and Audit Workflows",
-      "verdict": "READY",
-      "files": {
-        "agent": "reports/epost-planner-260309-1621-build-success-gate.md",
-        "human": "reports/epost-planner-260309-1621-build-success-gate.md"
-      },
-      "plan": "plans/260309-1621-build-success-gate/plan.md",
-      "created": "2026-03-09 16:21"
-    },
-    {
-      "id": "fullstack-developer-260310-0538-get-started-simulator-launch",
-      "type": "implementation",
-      "agent": "epost-fullstack-developer",
-      "title": "Validation: get-started Phase 3 simulator/emulator launch — plan complete",
-      "verdict": "complete",
-      "files": {
-        "agent": "reports/epost-fullstack-developer-260310-0538-get-started-simulator-launch.md",
-        "human": "reports/epost-fullstack-developer-260310-0538-get-started-simulator-launch.md"
-      },
-      "plan": "plans/260309-2043-get-started-simulator-launch/plan.md",
-      "created": "2026-03-10 05:38"
     },
     {
       "id": "epost-planner-260310-0612-plans-audit-feature-page",
@@ -179,7 +256,7 @@
       "id": "epost-planner-260310-0834-audit-report-organization",
       "type": "plan",
       "agent": "epost-planner",
-      "title": "Plan: Audit Report Organization — Dated Folders + Known-Findings Store",
+      "title": "Plan: Audit Report Organization \u2014 Dated Folders + Known-Findings Store",
       "verdict": "READY",
       "files": {
         "agent": "reports/epost-planner-260310-0834-audit-report-organization.md",
@@ -192,7 +269,7 @@
       "id": "epost-fullstack-developer-260310-0910-audit-report-organization",
       "type": "implementation",
       "agent": "epost-fullstack-developer",
-      "title": "Implementation: Audit Report Organization — dated folders, known-findings store, index protocol",
+      "title": "Implementation: Audit Report Organization \u2014 dated folders, known-findings store, index protocol",
       "verdict": "completed",
       "path": "plans/260310-0834-audit-report-organization/reports/",
       "files": {
@@ -205,7 +282,7 @@
       "id": "epost-planner-260310-0954-build-gate-pretooluse-hook",
       "type": "plan",
       "agent": "epost-planner",
-      "title": "Plan: PreToolUse Hook — Auto-Run Build-Gate on Git Commit",
+      "title": "Plan: PreToolUse Hook \u2014 Auto-Run Build-Gate on Git Commit",
       "verdict": "READY",
       "files": {
         "agent": "plans/260310-0954-build-gate-pretooluse-hook/plan.md",
@@ -218,7 +295,7 @@
       "id": "epost-fullstack-developer-260310-0956-build-gate-pretooluse-hook",
       "type": "implementation",
       "agent": "epost-fullstack-developer",
-      "title": "Implementation: build-gate PreToolUse hook — auto-intercept git commit commands",
+      "title": "Implementation: build-gate PreToolUse hook \u2014 auto-intercept git commit commands",
       "verdict": "completed",
       "files": {
         "agent": "plans/260310-0954-build-gate-pretooluse-hook/reports/epost-fullstack-developer-260310-0956-build-gate-pretooluse-hook.md",
@@ -231,7 +308,7 @@
       "id": "epost-planner-260309-audit-organism-poc-mode",
       "type": "plan",
       "agent": "epost-planner",
-      "title": "Plan: Audit Organism/POC Mode — Classification, Maturity Tiers, Organism Checklist",
+      "title": "Plan: Audit Organism/POC Mode \u2014 Classification, Maturity Tiers, Organism Checklist",
       "verdict": "READY",
       "files": {
         "agent": "plans/260309-audit-organism-poc-mode/plan.md",
@@ -244,7 +321,7 @@
       "id": "epost-fullstack-developer-260310-1857-audit-skills-reorganization",
       "type": "implementation",
       "agent": "epost-fullstack-developer",
-      "title": "Implementation: Audit Skills References Reorganization — rename 10 files, update all cross-references",
+      "title": "Implementation: Audit Skills References Reorganization \u2014 rename 10 files, update all cross-references",
       "verdict": "completed",
       "files": {
         "agent": "plans/260310-1628-audit-skills-reorganization/reports/epost-fullstack-developer-260310-1857-audit-skills-reorganization.md"
@@ -279,11 +356,219 @@
       "id": "epost-fullstack-developer-260311-1503-enrich-skill-creator",
       "type": "implementation",
       "agent": "epost-fullstack-developer",
-      "title": "Implementation: Enrich kit-skill-development — description checklist, string subs, ultrathink, consensus pattern, audit 64 skill descriptions",
+      "title": "Implementation: Enrich kit-skill-development \u2014 description checklist, string subs, ultrathink, consensus pattern, audit 64 skill descriptions",
       "verdict": "completed",
       "createdAt": "2026-03-11",
       "plan": "260311-1456-enrich-skill-creator",
       "path": "plans/260311-1456-enrich-skill-creator/reports/260311-1503-enrich-skill-creator-epost-fullstack-developer.md"
+    },
+    {
+      "id": "epost-code-reviewer-260311-1735-kit-code-audit",
+      "type": "code-review",
+      "agent": "epost-code-reviewer",
+      "title": "Code Review: Web Platform 8\u21929 changes \u2014 9 files, 9 findings (3H/4M/2L)",
+      "verdict": "FIX-AND-RESUBMIT",
+      "createdAt": "2026-03-11",
+      "path": "reports/260311-1735-kit-code-audit/code-review-findings.md"
+    },
+    {
+      "id": "epost-planner-260311-1711-web-platform-to-9",
+      "type": "plan",
+      "agent": "epost-planner",
+      "title": "Plan: Web Platform DX 8/10 to 9/10 \u2014 routing, build gate, known-findings, visual regression, auto re-audit",
+      "verdict": "READY",
+      "createdAt": "2026-03-11",
+      "plan": "260311-1711-web-platform-to-9",
+      "path": "plans/260311-1711-web-platform-to-9/plan.md"
+    },
+    {
+      "id": "epost-researcher-260311-2018-superpower-planning",
+      "type": "research",
+      "agent": "epost-researcher",
+      "title": "Research: Superpower Planning Skills \u2014 4 core skills analysis (planning-foundation, writing-plans, subagent-driven, executing-plans)",
+      "verdict": "ACTIONABLE",
+      "createdAt": "2026-03-11",
+      "path": "reports/260311-2018-superpower-planning-research-epost-researcher.md"
+    },
+    {
+      "id": "epost-planner-260311-2028-planning-improvements",
+      "type": "plan",
+      "agent": "epost-planner",
+      "title": "Plan: Planning Pipeline Improvements \u2014 5 patterns from superpower-planning research",
+      "verdict": "READY",
+      "createdAt": "2026-03-11",
+      "plan": "260311-2028-planning-improvements",
+      "path": "reports/260311-2028-planning-improvements-epost-planner.md"
+    },
+    {
+      "id": "epost-fullstack-developer-260311-2028-phase1-status-template",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "Implementation: Planning Improvements Phase 1 \u2014 living status.md template + auto-generation wired into all plan/cook/fix/debug skills",
+      "verdict": "COMPLETE",
+      "createdAt": "2026-03-11",
+      "plan": "260311-2028-planning-improvements",
+      "path": "reports/260311-2028-phase1-status-template-epost-fullstack-developer.md"
+    },
+    {
+      "id": "epost-fullstack-developer-260311-2028-phase2-plan-fast-knowledge",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "Implementation: Planning Improvements Phase 2 \u2014 knowledge-retrieval Step 2.5 + Prior Art in fast plan mode",
+      "verdict": "COMPLETE",
+      "createdAt": "2026-03-11",
+      "plan": "260311-2028-planning-improvements",
+      "path": "reports/260311-2028-phase2-plan-fast-knowledge-epost-fullstack-developer.md"
+    },
+    {
+      "id": "epost-planner-260312-0451-kit-landing-page",
+      "type": "plan",
+      "agent": "epost-planner",
+      "title": "Plan: epost_agent_kit Landing Page \u2014 Astro static site with agent gallery, skill map, terminal demos, manager ROI section",
+      "verdict": "READY",
+      "createdAt": "2026-03-12",
+      "plan": "260312-0451-kit-landing-page",
+      "path": "plans/260312-0451-kit-landing-page/plan.md"
+    },
+    {
+      "id": "epost-researcher-260312-1200-multi-agent-automation-workflows",
+      "type": "research",
+      "agent": "epost-researcher",
+      "title": "Research: Multi-Agent AI Automation Workflows \u2014 6 workflows (code audit, PO-to-prototype, dashboard, brainstorming, cross-branch fixes, continuous quality), maturity analysis, implementation roadmap",
+      "verdict": "ACTIONABLE",
+      "createdAt": "2026-03-12",
+      "path": "reports/260312-1200-multi-agent-automation-workflows-epost-researcher.md"
+    },
+    {
+      "id": "epost-planner-260315-1311-agent-navigation-headers",
+      "type": "plan",
+      "agent": "epost-planner",
+      "title": "Plan: Agent Navigation Headers \u2014 summary + routing tables + line references for all 15 agents",
+      "verdict": "READY",
+      "createdAt": "2026-03-15",
+      "plan": "260315-1311-agent-navigation-headers",
+      "path": "reports/260315-1311-agent-navigation-headers-epost-planner.md"
+    },
+    {
+      "id": "epost-researcher-260318-1024-skill-discovery-research",
+      "type": "research",
+      "agent": "epost-researcher",
+      "title": "Research: AI Agent Skill/Tool Discovery & Routing Patterns \u2014 semantic matching, dynamic loading, composition, MCP, progressive disclosure, self-improvement",
+      "verdict": "ACTIONABLE",
+      "createdAt": "2026-03-18",
+      "path": "reports/260318-1024-skill-discovery-research-epost-researcher.md"
+    },
+    {
+      "id": "epost-planner-260318-1353-skill-discovery-superpower",
+      "type": "plan",
+      "agent": "epost-planner",
+      "title": "Plan: Skill Discovery Superpower \u2014 4 phases fixing 10 gaps + 4 improvements (scoring, frontmatter, staleness, usage logging)",
+      "verdict": "READY",
+      "createdAt": "2026-03-18",
+      "plan": "260318-1353-skill-discovery-superpower",
+      "path": "reports/260318-1353-skill-discovery-superpower-epost-planner.md"
+    },
+    {
+      "id": "epost-researcher-260318-1940-native-tools-vs-custom-kit",
+      "type": "research",
+      "agent": "epost-researcher",
+      "title": "Research: Native Tools vs Custom Kit \u2014 architecture audit of epost_agent_kit against Claude Code, Cursor, GitHub Copilot capabilities",
+      "verdict": "ACTIONABLE",
+      "createdAt": "2026-03-18",
+      "path": "reports/260318-1940-native-tools-vs-custom-kit-epost-researcher.md"
+    },
+    {
+      "id": "epost-researcher-260318-1951-cursor-copilot-validation",
+      "type": "research",
+      "agent": "epost-researcher",
+      "title": "Research: Cursor & GitHub Copilot Validation Addendum \u2014 fact-checking 16 prior claims, URL verification, maturity assessment, positioning recommendations",
+      "verdict": "VALIDATED",
+      "createdAt": "2026-03-18",
+      "path": "reports/260318-1951-cursor-copilot-validation-epost-researcher.md"
+    },
+    {
+      "id": "epost-researcher-260319-0653-native-agent-triggering",
+      "type": "research",
+      "agent": "epost-researcher",
+      "title": "Research: Native Agent Triggering Mechanics \u2014 Claude Code (Agent/Task tools, subagent files), Cursor (hooks.json lifecycle), GitHub Copilot (custom agents, handoffs), comparison matrix, hybrid workflow recommendation",
+      "verdict": "ACTIONABLE",
+      "createdAt": "2026-03-19",
+      "path": "reports/260319-0653-native-agent-triggering-epost-researcher.md"
+    },
+    {
+      "id": "epost-planner-260319-1343-kit-rationalization-update",
+      "type": "plan-update",
+      "agent": "epost-planner",
+      "title": "Plan Update: Kit Rationalization \u2014 integrated native delegation patterns from 3 research reports, added Phase 5, resolved all open questions",
+      "verdict": "READY",
+      "createdAt": "2026-03-19",
+      "plan": "260319-0538-kit-rationalization",
+      "path": "reports/260319-1343-kit-rationalization-update-epost-planner.md"
+    },
+    {
+      "id": "epost-researcher-260320-1127-modular-kit-distribution",
+      "type": "research",
+      "agent": "epost-researcher",
+      "title": "Research: Modular Multi-Purpose Distribution System \u2014 skill-level installables, 7 role bundles, CLI UX (interactive init + add/remove), manifest format (YAML bundles + JSON config), lightweight dependency resolver, file-based registry, migration path",
+      "verdict": "ACTIONABLE",
+      "createdAt": "2026-03-20",
+      "path": "reports/260320-1127-modular-kit-distribution-epost-researcher.md"
+    },
+    {
+      "id": "epost-planner-260320-1214-kit-marketplace",
+      "type": "plan",
+      "agent": "epost-planner",
+      "title": "Plan: Kit Marketplace \u2014 Modular Distribution + Terminal UI (4 phases, 20h, @inquirer/prompts TUI, 7 role bundles, GitHub registry)",
+      "verdict": "READY",
+      "createdAt": "2026-03-20",
+      "plan": "260320-1213-kit-marketplace",
+      "path": "reports/260320-1214-kit-marketplace-epost-planner.md"
+    },
+    {
+      "id": "epost-researcher-260323-2336-self-evolving-skill-loop",
+      "type": "research",
+      "agent": "epost-researcher",
+      "title": "Research: Visualizing Self-Evolving AI Agent Skill Loop \u2014 5 visual metaphors (spiral recommended), 3-slide deck structure, naming (Adaptive Skill Loop), non-tech analogies, Mermaid diagrams ready-to-use",
+      "verdict": "ACTIONABLE",
+      "createdAt": "2026-03-23",
+      "path": "reports/260323-2336-self-evolving-skill-loop-epost-researcher.md"
+    },
+    {
+      "id": "epost-researcher-260328-2006-claude-md-best-practices",
+      "type": "research",
+      "agent": "epost-researcher",
+      "title": "Research: CLAUDE.md Best Practices & Multi-Agent Orchestration Patterns \u2014 concise CLAUDE.md guidelines, skill system progressive disclosure, 3 orchestration patterns (subagents, agent teams, synchronous), quality gates, epost_agent_kit alignment assessment",
+      "verdict": "ACTIONABLE",
+      "createdAt": "2026-03-28",
+      "path": "reports/260328-2006-claude-md-best-practices-epost-researcher.md"
+    },
+    {
+      "id": "epost-researcher-260328-2006-deer-flow-orchestration",
+      "type": "research",
+      "agent": "epost-researcher",
+      "title": "Research: ByteDance DeerFlow Multi-Agent Orchestration \u2014 LangGraph StateGraph architecture, supervisor node pattern, tiered memory (working + long-term + archival), sandboxed subagent execution, skill discovery system, comparison vs epost_agent_kit, 5 transferable patterns",
+      "verdict": "ACTIONABLE",
+      "createdAt": "2026-03-28",
+      "path": "reports/260328-2006-deer-flow-orchestration-epost-researcher.md"
+    },
+    {
+      "id": "epost-fullstack-developer-260330-1951-phase1-merge-flag-skills",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "Phase 1: Merge flag-based skills (security-scan, predict, scenario, retro, llms)",
+      "plan": "plans/260330-1614-skill-consolidation",
+      "status": "completed",
+      "createdAt": "2026-03-30",
+      "path": "Users/than/Projects/epost_agent_kit/plans/260330-1614-skill-consolidation/reports/260330-1951-phase1-merge-flag-skills-epost-fullstack-developer.md"
+    },
+    {
+      "id": "epost-researcher-260331-0829-skill-architecture-token-analysis",
+      "type": "research",
+      "agent": "epost-researcher",
+      "title": "Research: Standalone Skills vs Flag-Based Skills \u2014 Token Cost Analysis",
+      "verdict": "ACTIONABLE",
+      "createdAt": "2026-03-31",
+      "path": "reports/260331-0829-skill-architecture-token-analysis-epost-researcher.md"
     }
   ]
 }

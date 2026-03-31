@@ -22,6 +22,14 @@ metadata:
   argument-hint: "[--list | --boot | --shutdown | --install | --launch | --screenshot]"
 ---
 
+## Delegation — REQUIRED
+
+This skill MUST run via `epost-fullstack-developer`, not inline.
+When dispatching, include in the Agent tool prompt:
+- **Skill**: `/simulator`
+- **Arguments**: `$ARGUMENTS` (full argument string from Skill invocation)
+- If no arguments: state "no arguments — use auto-detection"
+
 # iOS Simulator Command
 
 List, boot, shutdown, and manage iOS simulators using XcodeBuildMCP or xcrun simctl.

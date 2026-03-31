@@ -21,6 +21,14 @@ metadata:
     - all
 ---
 
+## Delegation — REQUIRED
+
+This skill MUST run via `epost-a11y-specialist`, not inline.
+When dispatching, include in the Agent tool prompt:
+- **Skill**: `/a11y`
+- **Arguments**: `$ARGUMENTS` (full argument string from Skill invocation)
+- If no arguments: state "no arguments — use auto-detection"
+
 # A11y — Unified Accessibility Command & Foundation
 
 Cross-platform accessibility foundation (WCAG 2.1 AA) with auto-detection of audit, fix, review, or close workflows.

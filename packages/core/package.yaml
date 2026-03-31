@@ -8,7 +8,6 @@ dependencies: []
 
 provides:
   agents:
-    - epost-project-manager
     - epost-planner
     - epost-fullstack-developer
     - epost-code-reviewer
@@ -17,41 +16,31 @@ provides:
     - epost-researcher
     - epost-docs-manager
     - epost-git-manager
-    - epost-brainstormer
-    - epost-journal-writer
-    - epost-mcp-manager
   skills:
     - core
     - code-review
-    - problem-solving
+    - clean-code
     - error-recovery
     - repomix
-    - docs-seeker
-    - sequential-thinking
-    - research
-    - knowledge-retrieval
-    - knowledge-capture
-    - doc-coauthoring
-    - infra-cloud
-    - infra-docker
-    - data-store
+    - knowledge
+    - journal
     - subagent-driven-development
     - skill-discovery
-    - auto-improvement
     - cook
     - fix
     - plan
     - test
     - debug
-    - scout
-    - convert
-    - epost
-    - bootstrap
     - git
     - review
     - docs
     - audit
     - get-started
+    - tdd
+    - thinking
+    - mermaidjs
+    - security
+    - loop
 scripts:
   - get-active-plan.cjs
   - set-active-plan.cjs

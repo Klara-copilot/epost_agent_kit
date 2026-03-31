@@ -1,0 +1,186 @@
+---
+import Workflow from '../../layouts/Workflow.astro';
+
+const metrics = [
+  {
+    name: 'Test Coverage',
+    agent: 'epost-tester',
+    threshold: '≥ 80%',
+    action: 'Generate missing tests for uncovered functions',
+    color: '#22c55e',
+  },
+  {
+    name: 'A11y Score',
+    agent: 'epost-a11y-specialist',
+    threshold: 'WCAG 2.1 AA',
+    action: 'Fix ARIA, contrast, keyboard, focus issues',
+    color: '#3b82f6',
+  },
+  {
+    name: 'Bundle Size',
+    agent: 'epost-code-reviewer',
+    threshold: '< budget per route',
+    action: 'Identify and extract heavy dependencies',
+    color: '#eab308',
+  },
+  {
+    name: 'Lint Health',
+    agent: 'epost-fullstack-developer',
+    threshold: '0 errors',
+    action: 'Auto-fix lint errors, flag unfixable for review',
+    color: '#ef4444',
+  },
+  {
+    name: 'Type Safety',
+    agent: 'epost-fullstack-developer',
+    threshold: '0 type errors',
+    action: 'Fix type mismatches, update interfaces',
+    color: '#8b5cf6',
+  },
+  {
+    name: 'Dependency Health',
+    agent: 'epost-code-reviewer',
+    threshold: '0 known CVEs',
+    action: 'Upgrade vulnerable packages, verify compatibility',
+    color: '#06b6d4',
+  },
+];
+
+const loop = [
+  { step: 'Monitor', desc: 'Scheduled health check runs metrics against thresholds' },
+  { step: 'Detect', desc: 'Identify which metrics have degraded since last check' },
+  { step: 'Diagnose', desc: 'Find the commits that caused the regression' },
+  { step: 'Fix', desc: 'Generate targeted fixes on a quality branch' },
+  { step: 'Verify', desc: 'Run full test suite on the fix branch' },
+  { step: 'Report', desc: 'Open PR with before/after metrics comparison' },
+];
+---
+<Workflow
+  title="Continuous Quality Loop"
+  description="Agents continuously monitor code health metrics — coverage, a11y, bundle size, lint, types, dependencies — and proactively fix regressions before they compound."
+  badge="CI/CD Integration"
+  badgeColor="#06b6d4"
+  agents={['epost-tester', 'epost-a11y-specialist', 'epost-code-reviewer', 'epost-fullstack-developer', 'epost-git-manager']}
+>
+  <!-- Metrics grid -->
+  <section class="py-16 px-6 border-b border-zinc-800/60">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="font-display text-2xl font-bold text-white mb-8">Monitored Metrics</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {metrics.map((m) => (
+          <div class="card-surface p-5">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="font-display font-semibold text-white text-sm">{m.name}</h3>
+              <span class="font-mono text-xs px-2 py-0.5 rounded" style={`background: ${m.color}15; color: ${m.color};`}>
+                {m.threshold}
+              </span>
+            </div>
+            <p class="text-slate-500 text-xs mb-2">{m.action}</p>
+            <div class="font-mono text-[10px] text-slate-600">{m.agent}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- The Loop -->
+  <section class="py-16 px-6 border-b border-zinc-800/60">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="font-display text-2xl font-bold text-white mb-8">The Loop</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {loop.map((l, i) => (
+          <div class="card-surface p-4 flex items-start gap-3">
+            <div class="w-7 h-7 rounded-full border border-cyan-400/30 flex items-center justify-center text-cyan-400 font-mono text-xs flex-shrink-0">
+              {i + 1}
+            </div>
+            <div>
+              <h3 class="font-display font-semibold text-white text-sm mb-1">{l.step}</h3>
+              <p class="text-slate-500 text-xs">{l.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Dashboard mockup -->
+  <section class="py-16 px-6 border-b border-zinc-800/60">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="font-display text-2xl font-bold text-white mb-8">Health Report</h2>
+      <div class="card-surface overflow-hidden">
+        <div class="px-4 py-2 bg-zinc-800/40 border-b border-zinc-800 flex items-center justify-between">
+          <span class="text-xs text-slate-500 font-mono">quality-report — 2026-03-12</span>
+          <span class="text-xs font-mono text-emerald-400">5/6 passing</span>
+        </div>
+        <div class="p-4 font-mono text-xs space-y-2.5">
+          <div class="flex items-center gap-3">
+            <span class="text-emerald-400">✓</span>
+            <span class="text-slate-300 w-32">Coverage</span>
+            <div class="flex-1 bg-zinc-800 rounded-full h-2 overflow-hidden">
+              <div class="bg-emerald-400 h-full rounded-full" style="width: 84%"></div>
+            </div>
+            <span class="text-slate-500 w-12 text-right">84%</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-emerald-400">✓</span>
+            <span class="text-slate-300 w-32">A11y Score</span>
+            <div class="flex-1 bg-zinc-800 rounded-full h-2 overflow-hidden">
+              <div class="bg-blue-400 h-full rounded-full" style="width: 96%"></div>
+            </div>
+            <span class="text-slate-500 w-12 text-right">96%</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-yellow-400">!</span>
+            <span class="text-slate-300 w-32">Bundle Size</span>
+            <div class="flex-1 bg-zinc-800 rounded-full h-2 overflow-hidden">
+              <div class="bg-yellow-400 h-full rounded-full" style="width: 92%"></div>
+            </div>
+            <span class="text-yellow-400 w-12 text-right">+8kb</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-emerald-400">✓</span>
+            <span class="text-slate-300 w-32">Lint</span>
+            <div class="flex-1 bg-zinc-800 rounded-full h-2 overflow-hidden">
+              <div class="bg-emerald-400 h-full rounded-full" style="width: 100%"></div>
+            </div>
+            <span class="text-slate-500 w-12 text-right">0</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-emerald-400">✓</span>
+            <span class="text-slate-300 w-32">Types</span>
+            <div class="flex-1 bg-zinc-800 rounded-full h-2 overflow-hidden">
+              <div class="bg-emerald-400 h-full rounded-full" style="width: 100%"></div>
+            </div>
+            <span class="text-slate-500 w-12 text-right">0</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-emerald-400">✓</span>
+            <span class="text-slate-300 w-32">Dependencies</span>
+            <div class="flex-1 bg-zinc-800 rounded-full h-2 overflow-hidden">
+              <div class="bg-emerald-400 h-full rounded-full" style="width: 100%"></div>
+            </div>
+            <span class="text-slate-500 w-12 text-right">0 CVE</span>
+          </div>
+        </div>
+        <div class="px-4 py-3 bg-zinc-800/20 border-t border-zinc-800 font-mono text-xs text-slate-600">
+          Auto-fix PR opened for bundle regression: fix/quality-bundle-260312
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key insight -->
+  <section class="py-16 px-6">
+    <div class="max-w-4xl mx-auto">
+      <div class="card-surface p-6 flex items-start gap-4">
+        <div class="text-cyan-400 font-mono text-xl flex-shrink-0 mt-0.5">◈</div>
+        <div>
+          <h3 class="font-display font-semibold text-white mb-2">Quality Debt Stops Compounding</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Without continuous monitoring, small regressions accumulate until they become large refactoring projects. This loop catches degradation within hours — when the fix is a one-line change instead of a week-long sprint. Prevention is cheaper than cure.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Workflow>

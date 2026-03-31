@@ -1,0 +1,38 @@
+---
+import { agents } from '../data/agents';
+---
+<section id="agents" class="py-24 px-6 bg-slate-950">
+  <div class="max-w-5xl mx-auto">
+    <div class="section-label">Agent Roster</div>
+    <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-4">
+      15 specialists. One orchestrated system.
+    </h2>
+    <p class="text-slate-400 mb-12 max-w-2xl">
+      Each agent is scope-bounded, skill-loaded, and ready to be dispatched. The main conversation is always the orchestrator.
+    </p>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {agents.map((agent) => (
+        <div class="card-surface p-5 hover:border-zinc-700 transition-all duration-200 group hover:-translate-y-0.5">
+          <div class="flex items-start gap-3">
+            <div
+              class="w-8 h-8 rounded-lg flex items-center justify-center text-sm flex-shrink-0 font-mono"
+              style={`background: ${agent.color}15; color: ${agent.color};`}
+            >
+              {agent.icon}
+            </div>
+            <div class="min-w-0">
+              <div class="font-display font-semibold text-white text-sm mb-1 truncate">
+                {agent.name}
+              </div>
+              <p class="text-slate-500 text-xs leading-relaxed">{agent.role}</p>
+            </div>
+          </div>
+          <div class="mt-3 pt-3 border-t border-zinc-800/60">
+            <code class="text-xs font-mono text-slate-600">{agent.slug}</code>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

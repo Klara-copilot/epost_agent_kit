@@ -34,6 +34,7 @@ You are implementing a single task from a plan. Your ONLY job is this task — d
 6. [ ] No unrelated changes included
 7. [ ] Build passes (run it)
 8. [ ] Tests pass (run them)
+9. [ ] All batch checkpoints passed (if >3 code files changed)
 
 ## Output
 When done, report:

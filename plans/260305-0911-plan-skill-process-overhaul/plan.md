@@ -1,6 +1,6 @@
 ---
 title: Overhaul plan skill to be a followable end-to-end planning process
-status: active
+status: archived
 created: 2026-03-05
 updated: 2026-03-05
 effort: 4h

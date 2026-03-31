@@ -1,0 +1,134 @@
+---
+import Workflow from '../../layouts/Workflow.astro';
+
+const steps = [
+  { agent: 'epost-muji', action: 'Audit UI components against design system — token usage, spacing, component API compliance', output: 'Design system violations with correct token mappings' },
+  { agent: 'epost-code-reviewer', action: 'Scan changed files for security, performance, correctness', output: 'Findings report with severity scores' },
+  { agent: 'epost-a11y-specialist', action: 'Check WCAG 2.1 AA compliance across platforms', output: 'A11y violations with fix suggestions' },
+  { agent: 'epost-debugger', action: 'Trace flagged issues to root cause', output: 'Root cause analysis per finding' },
+  { agent: 'epost-fullstack-developer', action: 'Apply auto-fixable issues on a fix branch', output: 'Fix commits with test coverage' },
+  { agent: 'epost-git-manager', action: 'Open PR with audit report + fixes', output: 'PR ready for human review' },
+];
+
+const triggers = [
+  { name: 'PR Opened', description: 'Automatically audit every pull request before review', icon: '↗' },
+  { name: 'Scheduled', description: 'Nightly or weekly full-codebase health scans', icon: '⏱' },
+  { name: 'On Command', description: '"audit this module" — targeted scans on demand', icon: '▶' },
+  { name: 'Pre-Merge', description: 'Gate merges until audit passes quality thresholds', icon: '⊘' },
+];
+
+const layers = [
+  { name: 'Security', checks: ['SQL injection', 'XSS vectors', 'Auth bypass', 'Secret exposure', 'Dependency CVEs'], color: '#ef4444' },
+  { name: 'Quality', checks: ['Dead code', 'Duplication', 'Complexity', 'Naming', 'Error handling'], color: '#eab308' },
+  { name: 'A11y', checks: ['ARIA roles', 'Keyboard nav', 'Color contrast', 'Screen reader', 'Focus management'], color: '#3b82f6' },
+  { name: 'Design System', checks: ['Token usage', 'Component API', 'Spacing scale', 'Color semantics', 'Typography scale'], color: '#ec4899' },
+  { name: 'Performance', checks: ['Bundle size', 'Re-renders', 'Memory leaks', 'N+1 queries', 'Lazy loading'], color: '#22c55e' },
+];
+---
+<Workflow
+  title="Automated Code Audit"
+  description="Every change audited for security, quality, accessibility, and performance — by specialized agents that understand your codebase conventions."
+  badge="Quality Automation"
+  badgeColor="#eab308"
+  agents={['epost-muji', 'epost-code-reviewer', 'epost-a11y-specialist', 'epost-debugger', 'epost-fullstack-developer', 'epost-git-manager']}
+>
+  <!-- How it works -->
+  <section class="py-16 px-6 border-b border-zinc-800/60">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="font-display text-2xl font-bold text-white mb-8">Agent Chain</h2>
+      <div class="space-y-4">
+        {steps.map((step, i) => (
+          <div class="card-surface p-5 flex items-start gap-4">
+            <div class="w-8 h-8 rounded-full border border-emerald-400/40 flex items-center justify-center text-emerald-400 font-mono text-xs flex-shrink-0 mt-0.5">
+              {i + 1}
+            </div>
+            <div class="flex-1">
+              <div class="flex items-baseline gap-2 mb-1">
+                <span class="font-mono text-xs text-emerald-400">{step.agent}</span>
+              </div>
+              <p class="text-slate-300 text-sm mb-2">{step.action}</p>
+              <p class="text-slate-600 text-xs font-mono">→ {step.output}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Triggers -->
+  <section class="py-16 px-6 border-b border-zinc-800/60">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="font-display text-2xl font-bold text-white mb-8">Triggers</h2>
+      <div class="grid sm:grid-cols-2 gap-4">
+        {triggers.map((t) => (
+          <div class="card-surface p-5">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="text-emerald-400 font-mono text-lg">{t.icon}</span>
+              <h3 class="font-display font-semibold text-white">{t.name}</h3>
+            </div>
+            <p class="text-slate-500 text-sm">{t.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Audit Layers -->
+  <section class="py-16 px-6 border-b border-zinc-800/60">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="font-display text-2xl font-bold text-white mb-8">Five Audit Layers</h2>
+      <div class="grid sm:grid-cols-2 gap-5">
+        {layers.map((layer) => (
+          <div class="card-surface p-5">
+            <h3 class="font-display font-semibold text-white mb-3" style={`color: ${layer.color};`}>{layer.name}</h3>
+            <ul class="space-y-1.5">
+              {layer.checks.map((check) => (
+                <li class="text-sm text-slate-400 flex items-start gap-2">
+                  <span class="text-slate-700 mt-0.5">·</span>
+                  {check}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Terminal mockup -->
+  <section class="py-16 px-6">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="font-display text-2xl font-bold text-white mb-8">In Action</h2>
+      <div class="rounded-xl overflow-hidden border border-zinc-800 bg-zinc-900">
+        <div class="flex items-center gap-1.5 px-4 py-3 bg-zinc-800/60 border-b border-zinc-700/50">
+          <div class="w-3 h-3 rounded-full bg-red-500/60"></div>
+          <div class="w-3 h-3 rounded-full bg-yellow-500/60"></div>
+          <div class="w-3 h-3 rounded-full bg-green-500/60"></div>
+          <span class="ml-2 text-xs text-slate-600 font-mono">terminal</span>
+        </div>
+        <div class="p-5 font-mono text-xs leading-loose">
+          <p class="text-emerald-400 mb-1">&gt; audit the auth module</p>
+          <p class="text-slate-600">Scanning src/modules/auth/ (14 files)...</p>
+          <p class="text-slate-600">Loading: code-review, web-a11y, web-frontend</p>
+          <br/>
+          <p class="text-slate-300">Security (epost-code-reviewer)</p>
+          <p class="text-red-400/70">  CRITICAL  Session token stored in localStorage</p>
+          <p class="text-yellow-400/70">  WARNING   Missing CSRF protection on /api/auth/callback</p>
+          <p class="text-slate-500">  OK        Password hashing uses bcrypt with cost 12</p>
+          <br/>
+          <p class="text-slate-300">A11y (epost-a11y-specialist)</p>
+          <p class="text-yellow-400/70">  WARNING   Login form missing aria-describedby for errors</p>
+          <p class="text-yellow-400/70">  WARNING   Password toggle lacks accessible label</p>
+          <br/>
+          <p class="text-slate-300">Performance</p>
+          <p class="text-slate-500">  OK        Auth bundle 12.3kb gzipped</p>
+          <p class="text-slate-500">  OK        Token refresh uses SWR cache</p>
+          <br/>
+          <p class="text-slate-600">2 critical · 3 warnings · 4 passed</p>
+          <p class="text-slate-600">Auto-fix branch: fix/auth-audit-260312</p>
+          <p class="text-emerald-400/60">&gt; _</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Workflow>

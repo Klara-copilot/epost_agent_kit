@@ -41,6 +41,14 @@ CHECK docs/codebase-summary.md:
 - Fresh: Read and use
 ```
 
+### 2.5. Quick Knowledge Check (max 3 reads)
+
+1. Glob `**/docs/index.json` — if found, filter entries matching task keywords; read up to 2 most relevant
+2. Grep `plans/*/plan.md` for similar titles or tags (max 5 results; grep titles only, not full content)
+3. Inject any matches as **Prior Art** context into Step 4
+
+Skip entirely if: no `docs/` index exists AND no `plans/` directory.
+
 ### 3. Read Context
 Read sequentially (skip if missing):
 - docs/system-architecture.md
@@ -52,6 +60,10 @@ Use Grep/Glob (max 5 searches) to find:
 - Similar implementations
 - Relevant files to modify
 - Patterns and dependencies
+
+**Prior Art** (from Step 2.5, if any):
+- List matched docs/ entries and plan titles here before analysis
+- Use them to avoid duplicating patterns or conflicting with prior decisions
 
 ### 5. Create Plan Directory
 ```
@@ -96,6 +108,15 @@ updated: YYYY-MM-DD
 - [ ] {Testable criterion 1}
 ```
 Max 80 lines excluding frontmatter.
+
+### 6.5. Generate status.md
+
+Create `{plan_dir}/status.md` from `references/status-template.md`:
+- Pre-populate Progress table from plan.md phases (all `Pending`)
+- Not Yet Started: list all phases
+- Key Decisions: empty (one placeholder row)
+- Architecture Reference: "TBD — will be populated during implementation."
+- Known Bugs: "None currently tracked."
 
 ### 7. Generate Phase Files
 For each phase create phase-{XX}-{name}.md:
@@ -184,7 +205,7 @@ Note: FAST plan (no research). For complex tasks use /plan-deep.
 ## Constraints
 - Execution: < 5 minutes
 - No research/external calls
-- Max 10 file reads
+- Max 13 file reads (10 base + 3 knowledge check)
 - Max 5 Grep/Glob searches
 - Plan.md ≤ 80 lines
 - Phase files ≤ 200 lines

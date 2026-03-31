@@ -10,7 +10,7 @@ Defines how agents maintain the three project index files: `docs/index.json`, `p
 
 Maintained by: `epost-docs-manager`, `epost-fullstack-developer`, `epost-debugger`, `epost-planner`
 
-Schema defined in `knowledge-retrieval/references/knowledge-base.md`. Key fields:
+Schema defined in `knowledge/references/knowledge-base.md`. Key fields:
 
 ```json
 {

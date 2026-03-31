@@ -18,143 +18,126 @@ const OUTPUT_FILE = path.join(OUTPUT_DIR, 'skill-index.json');
 
 /**
  * Category taxonomy — maps skill names to categories
+ *
+ * 9 categories, 40 skills (as of 2026-03-27):
+ *   workflow     — user-invocable action commands
+ *   quality      — background discipline / code standards
+ *   knowledge    — retrieval, capture, discovery
+ *   web          — web platform (React, Next.js, APIs, auth, i18n, testing)
+ *   accessibility — WCAG 2.1 AA cross-platform + specializations
+ *   design       — design system pipeline (Figma, tokens, components)
+ *   backend      — Jakarta EE + databases
+ *   domain       — business domain knowledge (B2B, B2C)
+ *   kit          — kit authoring tools
  */
 const CATEGORY_MAP = {
-  // frontend-web
-  'web-frontend': 'frontend-web',
-  'web-nextjs': 'frontend-web',
-  'web-api-routes': 'frontend-web',
-  'web-modules': 'frontend-web',
-  'web-prototype': 'frontend-web',
-  'web-rag': 'frontend-web',
-  'web-auth': 'frontend-web',
-  'web-i18n': 'frontend-web',
-  'web-testing': 'frontend-web',
+  // workflow — user-invocable action skills
+  'cook': 'workflow',
+  'fix': 'workflow',
+  'debug': 'workflow',
+  'plan': 'workflow',
+  'test': 'workflow',
+  'review': 'workflow',
+  'audit': 'workflow',
+  'docs': 'workflow',
+  'git': 'workflow',
+  'get-started': 'workflow',
+  'launchpad': 'workflow',
+  'thinking': 'workflow',
+  'mermaidjs': 'knowledge',
 
-  // mobile-development
-  'ios-development': 'mobile-development',
-  'ios-ui-lib': 'mobile-development',
-  'ios-rag': 'mobile-development',
-  'android-development': 'mobile-development',
-  'android-ui-lib': 'mobile-development',
+  // quality — background discipline, always-on code standards
+  'core': 'quality',
+  'code-review': 'quality',
+  'tdd': 'quality',
+  'error-recovery': 'quality',
+  'security': 'quality',
+  'loop': 'workflow',
 
-  // backend-development
-  'backend-javaee': 'backend-development',
-  'backend-databases': 'backend-development',
+  // knowledge — retrieval, capture, discovery, orchestration
+  'knowledge': 'knowledge',
+  'journal': 'knowledge',
+  'repomix': 'knowledge',
+  'skill-discovery': 'knowledge',
+  'subagent-driven-development': 'knowledge',
 
-  // design-system
-  'figma': 'design-system',
-  'design-tokens': 'design-system',
-  'ui-lib-dev': 'design-system',
-  'ui-guidance': 'design-system',
-  'web-ui-lib': 'design-system',
+  // web — web platform specifics
+  'web-frontend': 'web',
+  'web-nextjs': 'web',
+  'web-api-routes': 'web',
+  'web-auth': 'web',
+  'web-i18n': 'web',
+  'web-modules': 'web',
+  'web-testing': 'web',
+  'web-ui-lib': 'web',
 
-  // accessibility
+  // accessibility — WCAG 2.1 AA
   'a11y': 'accessibility',
   'ios-a11y': 'accessibility',
   'android-a11y': 'accessibility',
   'web-a11y': 'accessibility',
 
-  // development-tools (workflow skills)
-  'cook': 'development-tools',
-  'fix': 'development-tools',
-  'plan': 'development-tools',
-  'test': 'development-tools',
-  'debug': 'development-tools',
-  'scout': 'development-tools',
-  'bootstrap': 'development-tools',
-  'git': 'development-tools',
-  'review': 'development-tools',
-  'audit': 'development-tools',
-  'docs': 'development-tools',
-  'convert': 'development-tools',
-  'simulator': 'development-tools',
-  'epost': 'development-tools',
-  'auto-improvement': 'development-tools',
-  'get-started': 'development-tools',
+  // design — design system pipeline
+  'figma': 'design',
+  'design-tokens': 'design',
+  'ui-lib-dev': 'design',
 
-  // analysis-reasoning
-  'core': 'analysis-reasoning',
-  'code-review': 'analysis-reasoning',
-  'problem-solving': 'analysis-reasoning',
-  'error-recovery': 'analysis-reasoning',
-  'sequential-thinking': 'analysis-reasoning',
-  'research': 'analysis-reasoning',
-  'docs-seeker': 'analysis-reasoning',
-  'doc-coauthoring': 'analysis-reasoning',
-  'knowledge-retrieval': 'analysis-reasoning',
-  'knowledge-capture': 'analysis-reasoning',
-  'repomix': 'analysis-reasoning',
-  'skill-discovery': 'analysis-reasoning',
-  'data-store': 'analysis-reasoning',
-  'subagent-driven-development': 'analysis-reasoning',
+  // backend — Jakarta EE + databases
+  'backend-javaee': 'backend',
+  'backend-databases': 'backend',
 
-  // infrastructure
-  'infra-cloud': 'infrastructure',
-  'infra-docker': 'infrastructure',
+  // domain — business domain knowledge
+  'domain-b2b': 'domain',
+  'domain-b2c': 'domain',
 
-  // kit-authoring
-  'kit': 'kit-authoring',
-  'kit-agents': 'kit-authoring',
-  'kit-agent-development': 'kit-authoring',
-  'kit-skill-development': 'kit-authoring',
-  'kit-hooks': 'kit-authoring',
-  'kit-cli': 'kit-authoring',
-  'kit-verify': 'kit-authoring',
-
-  // business-domains
-  'domain-b2b': 'business-domains',
-  'domain-b2c': 'business-domains',
+  // kit — kit authoring tools
+  'kit': 'kit',
 };
 
 /**
  * Connection graph — defines inter-skill relationships
  * Types: extends (specialization), requires (must co-load),
  *        enhances (optional boost), conflicts (mutually exclusive)
+ *
+ * Cleaned 2026-03-27: removed 13 stale refs to deleted skills
  */
 const CONNECTION_MAP = {
-  // Platform-A11y extends
+  // A11y extends (platform specializes cross-platform base)
   'ios-a11y':     { extends: ['a11y'] },
   'android-a11y': { extends: ['a11y'] },
   'web-a11y':     { extends: ['a11y'] },
 
-  // Platform development enhances
+  // Web platform enhances
   'web-nextjs':     { enhances: ['web-frontend'] },
   'web-api-routes': { enhances: ['web-frontend'] },
   'web-modules':    { enhances: ['web-frontend'] },
-  'ios-ui-lib':     { enhances: ['ios-development'] },
-  'android-ui-lib': { enhances: ['android-development'] },
+
+  // Backend enhances
   'backend-databases': { enhances: ['backend-javaee'] },
 
   // Design system requires
-  'ui-lib-dev':     { requires: ['figma'] },
-  'design-tokens':  { requires: ['figma'] },
+  'ui-lib-dev':    { requires: ['figma'] },
+  'design-tokens': { requires: ['figma'] },
 
-  // Knowledge enhances
-  'problem-solving':     { enhances: ['debug'] },
-  'sequential-thinking': { enhances: ['debug'] },
-  'error-recovery':      { enhances: ['debug'] },
-  'docs-seeker':         { enhances: ['research'] },
-  'knowledge-retrieval': { enhances: ['research', 'plan'] },
-  'knowledge-capture':   { requires: ['knowledge-retrieval'] },
+  // Knowledge graph
+  'repomix':     { enhances: ['docs'] },
+  'knowledge':   { enhances: ['plan', 'debug'] },
 
-  // RAG enhances
-  'web-rag': { enhances: ['web-frontend'] },
-  'ios-rag': { enhances: ['ios-development'] },
-
-  // Cross-cutting enhances
-  'subagent-driven-development':   { enhances: ['plan'] },
-  'auto-improvement':              { enhances: ['skill-discovery'] },
-  'data-store':                    { enhances: ['knowledge-retrieval'] },
-  'repomix':                       { enhances: ['research'] },
-  'doc-coauthoring':               { enhances: ['plan'] },
+  // Quality enhances
+  'tdd':            { enhances: ['test'] },
+  'error-recovery': { enhances: ['debug'] },
+  'security':       { enhances: ['code-review'] },
 
   // Workflow enhances
-  'cook':    { enhances: ['plan'] },
-  'debug':   { enhances: ['fix'] },
-  'test':    { enhances: ['code-review'] },
-  'scout':   { enhances: ['research'] },
-  'audit':   { enhances: ['review'] },
+  'cook':      { enhances: ['plan'] },
+  'debug':     { enhances: ['fix'] },
+  'test':      { enhances: ['code-review'] },
+  'audit':     { enhances: ['review'] },
+  'launchpad': { enhances: ['cook'] },
+  'subagent-driven-development': { enhances: ['plan'] },
+  'thinking':  { enhances: ['debug', 'plan'] },
+  'mermaidjs': { enhances: ['docs', 'plan'] },
+  'loop':      { enhances: ['test'] },
 };
 
 /**
@@ -279,6 +262,20 @@ function generateSkillIndex() {
       const relativePath = path.relative(OUTPUT_DIR, filePath);
       const name = metadata.name;
       const connections = CONNECTION_MAP[name] || {};
+
+      // Compute size: SKILL.md + all files in references/ subdirectory
+      const skillDir = path.dirname(filePath);
+      const refsDir = path.join(skillDir, 'references');
+      let totalBytes = Buffer.byteLength(content, 'utf-8');
+      if (fs.existsSync(refsDir)) {
+        for (const ref of fs.readdirSync(refsDir)) {
+          try {
+            const refStat = fs.statSync(path.join(refsDir, ref));
+            if (refStat.isFile()) totalBytes += refStat.size;
+          } catch { /* skip unreadable */ }
+        }
+      }
+
       const skill = {
         name,
         description: metadata.description || '',
@@ -294,6 +291,7 @@ function generateSkillIndex() {
           enhances: connections.enhances || [],
           conflicts: connections.conflicts || [],
         },
+        size: totalBytes,
         path: relativePath
       };
 

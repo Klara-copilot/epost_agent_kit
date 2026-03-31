@@ -1,0 +1,173 @@
+---
+import Workflow from '../../layouts/Workflow.astro';
+
+const dataSources = [
+  {
+    source: 'plans/',
+    data: 'Phase completion, estimated vs actual, blockers',
+    agent: 'epost-planner',
+  },
+  {
+    source: 'plans/*/status.md',
+    data: 'Key decisions, known bugs, deferred items, progress table',
+    agent: 'epost-planner',
+  },
+  {
+    source: 'reports/',
+    data: 'Audit results, code review findings, test coverage',
+    agent: 'epost-code-reviewer',
+  },
+  {
+    source: 'Git history',
+    data: 'Commit frequency, PR cycle time, merge rate',
+    agent: 'epost-git-manager',
+  },
+  {
+    source: 'Agent logs',
+    data: 'Agent dispatch count, skill usage, error rates',
+    agent: 'epost-project-manager',
+  },
+  {
+    source: 'docs/',
+    data: 'ADR count, knowledge base growth, entry staleness',
+    agent: 'epost-docs-manager',
+  },
+];
+
+const dashboardSections = [
+  {
+    title: 'Sprint Progress',
+    widgets: [
+      { label: 'Active Plans', value: '3', trend: '' },
+      { label: 'Phases Complete', value: '12/18', trend: '↑ 4 this week' },
+      { label: 'Blocked', value: '1', trend: 'auth API dependency' },
+    ],
+  },
+  {
+    title: 'Quality Trends',
+    widgets: [
+      { label: 'Test Coverage', value: '84%', trend: '↑ 2% from last sprint' },
+      { label: 'Open Findings', value: '5', trend: '↓ 3 resolved' },
+      { label: 'A11y Score', value: '96%', trend: '= stable' },
+    ],
+  },
+  {
+    title: 'Team Velocity',
+    widgets: [
+      { label: 'Features Shipped', value: '7', trend: '↑ from 5 last sprint' },
+      { label: 'Avg PR Cycle', value: '4.2h', trend: '↓ from 6.1h' },
+      { label: 'Agent Dispatches', value: '142', trend: 'planner: 34, dev: 58' },
+    ],
+  },
+];
+
+const timelineEntries = [
+  { time: '09:15', agent: 'planner', event: 'Plan created: notification-preferences (3 phases)', type: 'plan' },
+  { time: '09:17', agent: 'developer', event: 'Phase 1 started: API endpoints', type: 'build' },
+  { time: '09:28', agent: 'developer', event: 'Phase 1 complete: 3 files, +127 lines', type: 'build' },
+  { time: '09:30', agent: 'reviewer', event: 'Audit: 1 warning (missing input validation)', type: 'review' },
+  { time: '09:32', agent: 'developer', event: 'Fix applied: added Zod schema validation', type: 'fix' },
+  { time: '09:33', agent: 'tester', event: 'Tests pass: 12/12, coverage 87%', type: 'test' },
+  { time: '09:34', agent: 'git-manager', event: 'PR #312 opened on feat/notification-prefs', type: 'git' },
+  { time: '09:35', agent: 'project-manager', event: 'Status updated: Phase 1 ✓, Phase 2 next', type: 'track' },
+];
+
+const typeColors: Record<string, string> = {
+  plan: '#3b82f6',
+  build: '#22c55e',
+  review: '#eab308',
+  fix: '#ef4444',
+  test: '#a855f7',
+  git: '#06b6d4',
+  track: '#f97316',
+};
+---
+<Workflow
+  title="Development Dashboard"
+  description="Automatic progress tracking from agent outputs. Plan status, velocity metrics, quality trends, and activity timelines — zero manual reporting."
+  badge="Automatic Tracking"
+  badgeColor="#22c55e"
+  agents={['epost-project-manager', 'epost-journal-writer', 'epost-planner']}
+>
+  <!-- Dashboard mockup -->
+  <section class="py-16 px-6 border-b border-zinc-800/60">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="font-display text-2xl font-bold text-white mb-8">Dashboard View</h2>
+      <div class="space-y-6">
+        {dashboardSections.map((section) => (
+          <div>
+            <h3 class="font-mono text-xs text-slate-600 uppercase tracking-wider mb-3">{section.title}</h3>
+            <div class="grid sm:grid-cols-3 gap-4">
+              {section.widgets.map((w) => (
+                <div class="card-surface p-5">
+                  <div class="text-xs text-slate-500 mb-1">{w.label}</div>
+                  <div class="font-display text-2xl font-bold text-white mb-1">{w.value}</div>
+                  <div class="font-mono text-xs text-slate-600">{w.trend}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Activity timeline -->
+  <section class="py-16 px-6 border-b border-zinc-800/60">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="font-display text-2xl font-bold text-white mb-8">Activity Timeline</h2>
+      <div class="card-surface overflow-hidden">
+        <div class="px-4 py-2 bg-zinc-800/40 border-b border-zinc-800 flex items-center justify-between">
+          <span class="text-xs text-slate-500 font-mono">2026-03-12 — morning session</span>
+          <span class="text-xs font-mono text-slate-600">8 events · 20 min</span>
+        </div>
+        <div class="divide-y divide-zinc-800/60">
+          {timelineEntries.map((entry) => (
+            <div class="px-4 py-3 flex items-start gap-3">
+              <span class="font-mono text-xs text-slate-700 w-12 flex-shrink-0 mt-0.5">{entry.time}</span>
+              <div class="w-2 h-2 rounded-full flex-shrink-0 mt-1.5" style={`background: ${typeColors[entry.type]};`}></div>
+              <div class="flex-1 min-w-0">
+                <span class="font-mono text-[10px] text-slate-600">{entry.agent}</span>
+                <p class="text-slate-400 text-sm">{entry.event}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Data sources -->
+  <section class="py-16 px-6 border-b border-zinc-800/60">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="font-display text-2xl font-bold text-white mb-8">Data Sources</h2>
+      <p class="text-slate-400 text-sm mb-6">Every metric is derived from existing agent outputs — no extra instrumentation needed.</p>
+      <div class="card-surface overflow-hidden">
+        <div class="divide-y divide-zinc-800">
+          {dataSources.map((ds) => (
+            <div class="px-5 py-3 flex items-center gap-4">
+              <code class="font-mono text-xs text-emerald-400 w-40 flex-shrink-0">{ds.source}</code>
+              <span class="text-slate-400 text-sm flex-1">{ds.data}</span>
+              <span class="font-mono text-[10px] text-slate-600 hidden sm:block">{ds.agent}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key insight -->
+  <section class="py-16 px-6">
+    <div class="max-w-4xl mx-auto">
+      <div class="card-surface p-6 flex items-start gap-4">
+        <div class="text-green-400 font-mono text-xl flex-shrink-0 mt-0.5">◈</div>
+        <div>
+          <h3 class="font-display font-semibold text-white mb-2">The Report Writes Itself</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Developers hate status reports. Managers need visibility. This dashboard bridges the gap — every plan update, audit result, and commit creates a data point automatically. Sprint retros have real numbers. Standups have real progress. Nobody spent time writing a report.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Workflow>

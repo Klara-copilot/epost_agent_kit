@@ -124,7 +124,7 @@ Authoritative, enforceable rules for general code reviews. Each rule has a uniqu
 
 # Mode Applicability
 
-| Section | Lightweight Review | Escalated Review (knowledge-retrieval active) | Notes |
+| Section | Lightweight Review | Escalated Review (knowledge active) | Notes |
 |---------|--------------------|-----------------------------------------------|-------|
 | SEC | OWASP surface scan (SEC-001–008) | + auth flow trace, input validation chain | Always check; skip for pure utility functions with no I/O |
 | PERF | Obvious N+1, unbounded queries (PERF-001–002) | + bundle impact, caching strategy audit | Full check on 10+ files or any file >300 LOC |

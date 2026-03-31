@@ -134,7 +134,7 @@ Trigger: {critical_finding_summary}
 Original review: {review_report_path}
 
 Expectations:
-- Activate knowledge-retrieval for deeper context (L1 docs/, L4 grep)
+- Activate knowledge for deeper context (L1 docs/, L4 grep)
 - Focus on: {security | performance | architecture} per trigger
 - Cross-reference with docs/ conventions and prior findings
 

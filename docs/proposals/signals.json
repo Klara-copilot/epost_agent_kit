@@ -1,0 +1,386 @@
+{
+  "generated": "2026-03-31T01:47:23.013Z",
+  "summary": {
+    "total": 28,
+    "new": 28,
+    "proposed": 0,
+    "dismissed": 0,
+    "bySkill": {
+      "core": {
+        "total": 4,
+        "high": 0,
+        "medium": 3,
+        "low": 1
+      },
+      "test": {
+        "total": 5,
+        "high": 0,
+        "medium": 5,
+        "low": 0
+      },
+      "skill-discovery": {
+        "total": 3,
+        "high": 0,
+        "medium": 3,
+        "low": 0
+      },
+      "plan": {
+        "total": 2,
+        "high": 0,
+        "medium": 0,
+        "low": 2
+      },
+      "review": {
+        "total": 2,
+        "high": 0,
+        "medium": 2,
+        "low": 0
+      },
+      "kit": {
+        "total": 1,
+        "high": 0,
+        "medium": 0,
+        "low": 1
+      },
+      "docs": {
+        "total": 2,
+        "high": 0,
+        "medium": 0,
+        "low": 2
+      },
+      "unknown": {
+        "total": 7,
+        "high": 4,
+        "medium": 2,
+        "low": 1
+      },
+      "loop": {
+        "total": 1,
+        "high": 0,
+        "medium": 0,
+        "low": 1
+      },
+      "clean-code": {
+        "total": 1,
+        "high": 0,
+        "medium": 0,
+        "low": 1
+      }
+    },
+    "byType": {
+      "journal-flag": 17,
+      "audit-failure": 11,
+      "workaround": 0
+    }
+  },
+  "signals": [
+    {
+      "id": "sig-38125862",
+      "type": "journal-flag",
+      "confidence": "low",
+      "source": "docs/journal/kit-marketplace/260321-marketplace-phase1.md",
+      "excerpt": "- `src/types/epost-config.ts` existed from a prior session — no conflict, but worth checking before assuming files need creation\n- `npm run build` is blocked by the scout-block hook; used `npx tsc --noEmit` instead for type verification",
+      "targetSkill": "core",
+      "suggestedAction": "",
+      "detectedAt": "2026-03-24T00:13:43.325Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-824cd9f4",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/kit-marketplace/260323-marketplace-tui.md",
+      "excerpt": "- Two unused variables (`writeEpostConfig`, `bundles`, `state`) triggered strict TS6133 errors. Prefixed with `_` or removed import.\n- `npm run build` is blocked by scout-block.cjs hook matching \"build\" pattern — ran `npx tsc && npx tsc-alias` directly instead. Same output, no real issue.\n- 6 pre-ex",
+      "targetSkill": "test",
+      "suggestedAction": "",
+      "detectedAt": "2026-03-24T00:13:43.326Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-d4f061b4",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/kit-marketplace/260323-phase2-cli-commands.md",
+      "excerpt": "- `SHARED_AGENTS` was imported but unused in `add.ts` causing a TS6133 error — caught by typecheck before build.\n- Stash check showed 14 pre-existing test failures, not 6 — the stash inadvertently reverted the resolver test files from Phase 1, revealing they fixed some failures. Phase 2 net delta is",
+      "targetSkill": "test",
+      "suggestedAction": "",
+      "detectedAt": "2026-03-24T00:13:43.326Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-bb25c99d",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/kit-rationalization/260319-phase1-agent-deletion.md",
+      "excerpt": "- `plans/260318-1353-skill-discovery-superpower/phase-1-quick-fixes.md` references `epost-kit-designer` as a file to update (add `skills:` field). Pre-check flagged it. Closer reading: it's a file-path-as-target, not an agent dependency. Safe to delete — that task in phase-1 is now moot.",
+      "targetSkill": "skill-discovery",
+      "suggestedAction": "",
+      "detectedAt": "2026-03-24T00:13:43.326Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-227ef314",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/kit-rationalization/260320-prune-skills.md",
+      "excerpt": "- `epost-debugger` agent had `problem-solving` in its `skills:` list — would have caused a broken skill load on every debug session. Caught by grepping agent files for deleted skill names.\n- The `kit/references/add-agent.md`, `add-skill.md`, `add-hook.md`, and `optimize.md` files each had `requires:",
+      "targetSkill": "skill-discovery",
+      "suggestedAction": "",
+      "detectedAt": "2026-03-24T00:13:43.326Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-778f8bba",
+      "type": "audit-failure",
+      "confidence": "low",
+      "source": "reports/260311-2018-superpower-planning-research-epost-researcher.md",
+      "excerpt": "- Immediate execution without planning (create plan first)\n- Repeating failed actions (track attempts and vary approach)\n- Losing subagent findings (aggregate into top-level findings.md)\n\n### Templates & Scripts Available",
+      "targetSkill": "plan",
+      "suggestedAction": "",
+      "detectedAt": "2026-03-24T00:13:43.328Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-e89fe2ce",
+      "type": "audit-failure",
+      "confidence": "medium",
+      "source": "reports/260311-2018-superpower-planning-research-epost-researcher.md",
+      "excerpt": "- Verifies behavior against stated goals\n- Result: PASS or FAIL with specific issues\n\n**Stage 2: Code Quality Review**\n- Ensures technical excellence",
+      "targetSkill": "review",
+      "suggestedAction": "",
+      "detectedAt": "2026-03-24T00:13:43.328Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-9e0e6a66",
+      "type": "audit-failure",
+      "confidence": "medium",
+      "source": "reports/260311-2018-superpower-planning-research-epost-researcher.md",
+      "excerpt": "- Validates test coverage\n- Result: PASS or FAIL with specific issues\n\nBoth must show PASS in Task Status Dashboard—no exceptions.",
+      "targetSkill": "test",
+      "suggestedAction": "",
+      "detectedAt": "2026-03-24T00:13:43.328Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-808113f8",
+      "type": "audit-failure",
+      "confidence": "medium",
+      "source": "reports/260311-2018-superpower-planning-research-epost-researcher.md",
+      "excerpt": "5. **Cross-session findings**: How to migrate `.planning/findings.md` into permanent `docs/findings/` for reuse?\n6. **Spec vs quality trade-off**: Can a task PASS quality review and FAIL spec compliance? (Implies redesign needed)\n7. **Subagent context injection**: How detailed should `.planning/agen",
+      "targetSkill": "review",
+      "suggestedAction": "",
+      "detectedAt": "2026-03-24T00:13:43.328Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-ef1d60a1",
+      "type": "audit-failure",
+      "confidence": "low",
+      "source": "reports/260318-1024-skill-discovery-research-epost-researcher.md",
+      "excerpt": "- Composition via inheritance (extends) is the dominant pattern\n- **Critical warning**: \"performance degrades sharply beyond critical library sizes\" — there are scaling limits to skill libraries. The paper found phase transitions, suggesting 50-65 skills may be near an inflection point.\n\nepost_agent",
+      "targetSkill": "kit",
+      "suggestedAction": "",
+      "detectedAt": "2026-03-24T00:13:43.329Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-bc75a8a1",
+      "type": "audit-failure",
+      "confidence": "low",
+      "source": "reports/260323-2336-self-evolving-skill-loop-epost-researcher.md",
+      "excerpt": "3. **Persistent Learning**: Failed iterations improve the next cycle\n   - Visual: Skill library grows frame-by-frame across iterations\n   - Caption: \"Skills + agents + docs evolve each cycle\"",
+      "targetSkill": "docs",
+      "suggestedAction": "",
+      "detectedAt": "2026-03-24T00:13:43.332Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-82076adf",
+      "type": "audit-failure",
+      "confidence": "high",
+      "source": "reports/260323-2336-self-evolving-skill-loop-epost-researcher.md",
+      "excerpt": ">\n> Our system works the same way. Each task builds skill memory. Failed attempts teach the system what NOT to do. By iteration 100, it's not just executing tasks—it's evolved domain expertise specific to your codebase.\"\n\n**Why This Works:**\n- Everyone has felt skill mastery (sports, music, coding, ",
+      "targetSkill": "unknown",
+      "suggestedAction": "",
+      "detectedAt": "2026-03-24T00:13:43.332Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-4b0ce6fe",
+      "type": "audit-failure",
+      "confidence": "high",
+      "source": "reports/260323-2353-self-evolving-skill-loop-epost-researcher.md",
+      "excerpt": "**Model**: Agent that reflects on failed attempts and stores reflections in memory buffer.\n\n**Self-Improvement Mechanism**:\n- Agent attempts task",
+      "targetSkill": "unknown",
+      "suggestedAction": "",
+      "detectedAt": "2026-03-24T00:13:43.332Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-9073e844",
+      "type": "audit-failure",
+      "confidence": "high",
+      "source": "reports/260323-2353-self-evolving-skill-loop-epost-researcher.md",
+      "excerpt": "a. Create temp skill file with proposed change\n   b. Run last 5 tasks that failed on this skill\n   c. Count pass/fail rates: before vs after\n3. Gate decision:\n   - If pass_rate_after > pass_rate_before: APPROVE (automatic)",
+      "targetSkill": "unknown",
+      "suggestedAction": "",
+      "detectedAt": "2026-03-24T00:13:43.332Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-fd8db09b",
+      "type": "audit-failure",
+      "confidence": "medium",
+      "source": "reports/260323-2353-self-evolving-skill-loop-epost-researcher.md",
+      "excerpt": "2. **Quality Gate** (as described in Part 5)\n   - Test proposed change on past failed tasks\n   - Measure pass_rate improvement\n   - Auto-apply if improvement >= threshold (e.g., +10%)\n   - Reject if regression detected",
+      "targetSkill": "test",
+      "suggestedAction": "",
+      "detectedAt": "2026-03-24T00:13:43.332Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-9c1ba800",
+      "type": "journal-flag",
+      "confidence": "low",
+      "source": "docs/journal/core-skills/260327-clean-code-skill.md",
+      "excerpt": "- The skill-index.json was partially auto-updated (count bumped to 47, development-tools to 12) by an automated process before I could edit it — those values were already correct for a different skill addition. Had to verify the `analysis-reasoning` category count and `connectedSkills` separately.",
+      "targetSkill": "unknown",
+      "suggestedAction": "",
+      "detectedAt": "2026-03-27T01:04:54.735Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-90d247dc",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/kit/260327-tdd-skill.md",
+      "excerpt": "- skill-index.json path for core-local skills uses `tdd/SKILL.md` (relative), not `../../../.claude/skills/tdd/SKILL.md` — the index is generated output at `.claude/` level but source lives in `packages/core/skills/`. Used relative path matching the package structure.",
+      "targetSkill": "core",
+      "suggestedAction": "",
+      "detectedAt": "2026-03-27T01:04:54.741Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-095f15b8",
+      "type": "audit-failure",
+      "confidence": "high",
+      "source": "reports/260328-2006-claude-md-best-practices-epost-researcher.md",
+      "excerpt": "**Anti-pattern**: Kitchen-sink sessions that accumulate irrelevant context. After 2–3 failed corrections on the same issue, `/clear` and start fresh with a better prompt.\n\n#### Task Specification",
+      "targetSkill": "unknown",
+      "suggestedAction": "",
+      "detectedAt": "2026-03-28T13:11:00.966Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-a32b4c20",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/claudekit-adoption/260330-phase2-security-skills.md",
+      "excerpt": "Nothing unexpected. Straightforward knowledge artifact creation — no runtime behavior to verify.",
+      "targetSkill": "unknown",
+      "suggestedAction": "",
+      "detectedAt": "2026-03-30T04:57:49.465Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-b1516d9a",
+      "type": "journal-flag",
+      "confidence": "low",
+      "source": "docs/journal/claudekit-adoption/260330-phase3-ai-tools.md",
+      "excerpt": "- The `loop` skill's resumability depends on `loop-results.tsv` existing and being append-only. If someone deletes it mid-loop, the only fallback is parsing `git log` for `loop[n/N]:` prefixed commits. This is documented in `references/results-logging.md` but not enforced — [loop] should have a guar",
+      "targetSkill": "loop",
+      "suggestedAction": "",
+      "detectedAt": "2026-03-30T04:57:49.466Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-65b542b4",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/claudekit-adoption/260330-phase4-ship-retro-llms.md",
+      "excerpt": "Nothing material. The `.claude/` sync (copy from packages/) is manual — no build tool enforces it post-edit. If someone edits `packages/core/skills/git/SKILL.md` but forgets to copy to `.claude/skills/git/SKILL.md`, the live system lags until next `epost-kit init`. [kit skill should document this ri",
+      "targetSkill": "core",
+      "suggestedAction": "",
+      "detectedAt": "2026-03-30T04:57:49.466Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-8bdc9fc4",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/claudekit-adoption/260330-phase5-agent-upgrades.md",
+      "excerpt": "All changes are additive extensions to existing .md files — no test suite, no build step. The only risk was accidentally breaking existing section structure. Mitigated by reading each file before editing and updating section index line numbers in the navigation comment.",
+      "targetSkill": "test",
+      "suggestedAction": "",
+      "detectedAt": "2026-03-30T04:57:49.467Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-fb684c8b",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/kit/260329-claudekit-adoption-phase1.md",
+      "excerpt": "- `ck-config-utils.cjs` and `hook-logger.cjs` imports in the source hook would have caused immediate runtime failure. The phase spec noted \"adapt from CK source\" but didn't flag the dep difference explicitly. [skill-discovery did not cover: hook dependency mapping between source and target kit]",
+      "targetSkill": "skill-discovery",
+      "suggestedAction": "",
+      "detectedAt": "2026-03-30T04:57:49.468Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-6a7be4f6",
+      "type": "journal-flag",
+      "confidence": "low",
+      "source": "docs/journal/skill-consolidation/260330-knowledge-unify.md",
+      "excerpt": "- Plan.md and phase-4.md contradicted each other on clean-code. The plan intro said \"clean-code stays separate\" but phase-4.1 listed it for removal from package.yaml. [plan skill] cross-references between plan phases created ambiguity that required judgment rather than mechanical execution.\n- `journ",
+      "targetSkill": "clean-code",
+      "suggestedAction": "",
+      "detectedAt": "2026-03-30T13:08:55.511Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-63f8ce0b",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/skill-consolidation/260330-phase1-merge-flag-skills.md",
+      "excerpt": "- `git/SKILL.md` needed two changes: both Step 0 `if` chain AND Aspect Files table. Easy to miss the second location if only scanning for the flag table. [core skill] does not cover \"parent skills may need updates in multiple sections\" — needed manual inspection of each parent's structure.",
+      "targetSkill": "core",
+      "suggestedAction": "",
+      "detectedAt": "2026-03-30T13:08:55.511Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-acd793b0",
+      "type": "journal-flag",
+      "confidence": "low",
+      "source": "docs/journal/kit/260330-epost-brainstormer.md",
+      "excerpt": "No near-misses. Phase 2 routing verification confirmed epost-planner nav header already had the brainstormer routing row at line 24 (no edit needed — plan correctly pre-verified this).",
+      "targetSkill": "plan",
+      "suggestedAction": "",
+      "detectedAt": "2026-03-30T16:13:10.966Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-34959cbb",
+      "type": "journal-flag",
+      "confidence": "low",
+      "source": "docs/journal/docs/260331-signal-based-kb-categories.md",
+      "excerpt": "Step numbering in Smart Init and Generation Mode diverged after insertions — the cross-references \"step 3.5\" and \"step 4\" in Smart Init pointed to the wrong steps in Generation Mode post-renumber. Caught and fixed manually. [docs skill] init.md's cross-references between modes are fragile when steps",
+      "targetSkill": "docs",
+      "suggestedAction": "",
+      "detectedAt": "2026-03-31T01:05:42.682Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-8fc26cda",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/docs-skill/260331-deps-schema-clarity.md",
+      "excerpt": "Nothing significant. Both files were already identical before the edit, confirmed by diff.",
+      "targetSkill": "unknown",
+      "suggestedAction": "",
+      "detectedAt": "2026-03-31T01:22:41.653Z",
+      "status": "new"
+    }
+  ]
+}

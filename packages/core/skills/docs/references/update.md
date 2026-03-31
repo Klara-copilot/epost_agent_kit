@@ -16,8 +16,8 @@ metadata:
   platforms:
     - all
   connections:
-    requires: [knowledge-retrieval]
-    enhances: [knowledge-retrieval]
+    requires: [knowledge]
+    enhances: [knowledge]
 ---
 
 # Docs Update
@@ -172,6 +172,12 @@ Audit KB health using content verification (not git dates):
    - New deps in package.json/pom.xml not covered by ADRs
    - New route files not covered by FEATs
    - New config patterns not covered by CONVs
+3.5. **Check enrichment fields** in `docs/index.json`:
+   - `dependencies` missing → flag as `MISSING-ENRICHMENT`
+   - `dependencies.internal` → for each, verify repo still in pom.xml/package.json
+   - `dependencies.external` → for each, verify service still referenced in config/code
+   - `business` missing → flag as `MISSING-ENRICHMENT`
+   - `business.modules` → verify modules still match current project structure
 4. **Report**:
 
 ```markdown
@@ -182,6 +188,13 @@ Audit KB health using content verification (not git dates):
 | ADR-0001 | Next.js App Router | OK | — |
 | ARCH-0002 | API Layer | STALE | References removed endpoint /api/legacy |
 | FEAT-0003 | Auth Flow | BROKEN | File auth-handler.ts no longer exists |
+
+### Enrichment
+| Field | Status | Issues |
+|-------|--------|--------|
+| dependencies.internal | OK/STALE/MISSING | N entries, M stale |
+| dependencies.external | OK/STALE/MISSING | N entries, M stale |
+| business | OK/STALE/MISSING | — |
 
 ### Gaps
 - **New dep**: `@tanstack/query` added but no ADR exists
@@ -204,11 +217,24 @@ Deep content verification — reads every doc and validates all references:
    - Every function/class/component name → verify via Grep
    - Every code example → verify syntax matches current code
    - Every route/endpoint → verify route file exists
+1.5. **Verify enrichment fields**:
+   - For each `dependencies.internal[]`:
+     - Check `evidence` file still exists
+     - Verify repo reference still present at cited location
+     - Flag `STALE` if evidence no longer holds
+   - For each `dependencies.external[]`:
+     - Check `evidence` file still exists
+     - Verify service reference still present in config/code
+     - Flag `STALE` if evidence no longer holds
+   - For `business`:
+     - Verify `modules` against current directory structure
+     - Check `domain` still matches project scope
 2. **Flag issues**:
    - `STALE` — doc references code that changed significantly (function signature different, moved file)
    - `BROKEN` — doc references code/files that no longer exist
    - `GAP` — significant code area with no doc coverage
    - `OUTDATED` — entry's code area had major changes since doc was written
+   - `MISSING-ENRICHMENT` — index.json lacks `dependencies` or `business` fields; run `/docs --init` to populate
 3. **Report** using same format as Scan Mode but with deeper detail per issue
 
 ## Topic Mode

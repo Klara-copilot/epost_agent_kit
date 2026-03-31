@@ -29,25 +29,43 @@ For each task in the plan:
 
 ## Two-Stage Review
 
-Every task gets TWO independent reviews, in order:
+Every task gets TWO independent reviews, in strict order:
 
 ### Stage 1: Spec Compliance
 - Does the code do what the spec says?
 - Line-by-line comparison against requirements
-- Output: ✅ matches / ❌ deviates with file:line
+- Output: ✅ matches / ❌ deviates / ⚠️ partial with file:line
+- **Verdict**: PASS (all matched, 0 deviations, 0 partial) or FAIL
 
 ### Stage 2: Code Quality
 - Is the code well-written?
 - Security, performance, maintainability
-- Only runs AFTER spec compliance passes
+- **Verdict**: PASS (no CRITICAL/HIGH) or FAIL
+
+**Iron Law**: Quality review (Stage 2) is BLOCKED until spec review (Stage 1) returns PASS. Never run both in parallel. Never skip Stage 1 for "simple" changes.
+
+## Never Do
+
+- Skip spec review for "obvious" implementations
+- Run quality review before spec review passes
+- Merge spec + quality into a single review pass
+- Accept "mostly passes" — spec review is binary PASS/FAIL
+- Proceed to next task with either review in FAIL state
+
+## Context Economics
+
+**~15x token cost** over single-agent baseline — accept this only when work genuinely exceeds one context window or when file ownership isolation is required. Do NOT use for tasks that fit in a single context.
+
+**Each subagent prompt MUST be minimal:** pass only files-to-modify, files-to-read, and acceptance criteria. Never pass full session history. Verbose prompts bloat the subagent's context immediately and reduce its effective working space.
 
 ## Rules
 
 - Never start work on main/master without user consent
-- Never skip either review stage
+- Never skip either review stage — both MUST show PASS before task completion
 - Never dispatch parallel implementation subagents (serial only — one task at a time)
 - Each subagent gets a FRESH context (no stale state)
 - Max 3 fix-review iterations per task; escalate to user after 3
+- Implementer subagent MUST report files created/modified/read at end (artifact trail)
 
 ## Task Dispatch Order
 

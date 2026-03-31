@@ -1,0 +1,64 @@
+---
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  badge: string;
+  badgeColor?: string;
+  agents: string[];
+}
+
+const { title, description, badge, badgeColor = '#34d399', agents } = Astro.props;
+---
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title} — epost_agent_kit</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◈</text></svg>" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  </head>
+  <body class="bg-slate-950 text-slate-300 font-body antialiased overflow-x-hidden">
+    <Nav />
+    <main class="pt-14">
+      <!-- Hero banner -->
+      <section class="py-20 px-6 border-b border-zinc-800/60 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_0%,rgba(52,211,153,0.06),transparent)]"></div>
+        <div class="relative max-w-4xl mx-auto">
+          <a href="/workflows" class="inline-flex items-center gap-1.5 text-xs font-mono text-slate-600 hover:text-slate-400 transition-colors mb-6">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            All Workflows
+          </a>
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs font-mono mb-6" style={`background: ${badgeColor}10; border-color: ${badgeColor}30; color: ${badgeColor};`}>
+            {badge}
+          </div>
+          <h1 class="font-display text-4xl sm:text-5xl font-bold text-white leading-tight mb-6">
+            {title}
+          </h1>
+          <p class="text-lg text-slate-400 max-w-2xl leading-relaxed mb-8">
+            {description}
+          </p>
+          <!-- Agent chain -->
+          <div class="flex flex-wrap gap-2">
+            {agents.map((agent) => (
+              <span class="font-mono text-xs px-2.5 py-1 rounded bg-zinc-900 border border-zinc-800 text-slate-400">
+                {agent}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- Content -->
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

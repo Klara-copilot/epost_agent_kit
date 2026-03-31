@@ -180,6 +180,18 @@ updated: YYYY-MM-DD
 ```
 Max 110 lines (80 + 30 for research section).
 
+### 7.5. Generate status.md
+
+Create `{plan_dir}/status.md` from `references/status-template.md`:
+- Pre-populate Progress table from plan.md phases (all `Pending`)
+- Not Yet Started: list all phases
+- Key Decisions: pre-populate with research-driven decisions from R1/R2 reports
+  ```
+  | {created date} | Chose {approach} over {alternative} | {rationale from research} |
+  ```
+- Architecture Reference: "TBD — will be populated during implementation."
+- Known Bugs: "None currently tracked."
+
 ### 8. Generate Phase Files
 For each phase create phase-{XX}-{name}.md:
 ```
@@ -250,13 +262,24 @@ For each phase create phase-{XX}-{name}.md:
 ```
 Max 200 lines per phase.
 
-### 9. Set Active Plan
+### 9. Validate Plan (auto-triggered)
+
+Before activating, run a quick validation pass:
+1. Load `references/validate-mode.md`
+2. Generate 3-5 critical questions about the plan (assumptions, risks, tradeoffs)
+3. Present to user: "Before I activate this plan, a few quick questions..."
+4. Document answers in `plan.md` under `## Validation Summary`
+
+**User can skip**: If user says "skip" or "just activate" → proceed directly to step 10.
+**Fast mode exempt**: This step only runs for deep and parallel plans.
+
+### 10. Set Active Plan
 ```bash
 node .claude/scripts/set-active-plan.cjs {plan_path}
 ```
 If fails: warn with manual command.
 
-### 10. Report Completion
+### 11. Report Completion
 ```
 ✓ Hard Plan Created: {plan_path}
 

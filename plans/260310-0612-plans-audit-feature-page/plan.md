@@ -1,6 +1,6 @@
 ---
 title: "Plans audit, archive cleanup, and product feature page"
-status: active
+status: archived
 created: 2026-03-10
 updated: 2026-03-09
 effort: 3h

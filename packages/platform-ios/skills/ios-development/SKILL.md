@@ -36,7 +36,7 @@ Reference: `ios/development/references/development.md`
 - Debugging patterns
 
 ### 2. Build & Simulator Management
-Reference: `ios/development/references/build.md`
+Reference: `ios/development/references/build.md` | `ios/development/references/simulator.md`
 
 - Xcode project configuration
 - Build settings and schemes

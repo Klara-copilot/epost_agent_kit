@@ -8,12 +8,20 @@ metadata:
   argument-hint: "[--init | --migrate | --reorganize | --scan | --verify | --batch [category]]"
   connections:
     enhances: []
-    requires: [knowledge-retrieval]
+    requires: [knowledge]
 ---
+
+## Delegation — REQUIRED
+
+This skill MUST run via `epost-docs-manager`, not inline.
+When dispatching, include in the Agent tool prompt:
+- **Skill**: `/docs`
+- **Arguments**: `$ARGUMENTS` (full argument string from Skill invocation)
+- If no arguments: state "no arguments — use auto-detection"
 
 # Docs — Unified Documentation Command
 
-Auto-detect and execute the appropriate documentation workflow following `knowledge-retrieval/references/knowledge-base.md` structure.
+Auto-detect and execute the appropriate documentation workflow following `knowledge/references/knowledge-base.md` structure.
 
 ## Step 0 — Flag Override
 
@@ -23,6 +31,7 @@ If `$ARGUMENTS` starts with `--reorganize`: load `references/update.md`, execute
 If `$ARGUMENTS` starts with `--scan`: load `references/update.md`, execute in scan mode.
 If `$ARGUMENTS` starts with `--verify`: load `references/update.md`, execute in verify mode.
 If `$ARGUMENTS` starts with `--batch`: load `references/component.md`, execute in batch mode. Pass remaining args as category filter.
+If `$ARGUMENTS` starts with `--llms`: load `references/llms.md`, generate llms.txt output.
 Otherwise: continue to Auto-Detection.
 
 ## Aspect Files
@@ -32,6 +41,8 @@ Otherwise: continue to Auto-Detection.
 | `references/init.md` | Scan codebase and generate or migrate KB documentation |
 | `references/update.md` | Update, scan, verify, or reorganize existing documentation |
 | `references/component.md` | Document a klara-theme component (Figma data + prop mapping) |
+| `references/coauthoring.md` | Collaborative doc writing workflow (PRD, RFC, ADR, spec) |
+| `references/llms.md` | Generate llms.txt / llms-full.txt (llmstxt.org spec) |
 
 ## Auto-Detection
 

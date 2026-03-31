@@ -6,11 +6,11 @@ disable-model-invocation: true
 metadata:
   argument-hint: "[skill-name] [prompt]"
   connections:
-    requires: [kit-skill-development]
+    requires: []
 ---
 
 Think harder.
-Use `kit-skill-development` skill.
+Read `kit/references/skill-development.md` for skill structure and CSO principles.
 Use `docs-seeker` skills to search for documentation if needed.
 
 ## Arguments

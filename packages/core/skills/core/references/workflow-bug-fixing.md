@@ -51,7 +51,7 @@ Investigation-first workflow. Scout → Debug → Fix → Test → Review → Ca
 - Record root cause as FINDING in `docs/`
 - Document prevention strategy
 - Cross-reference related patterns
-- Update knowledge base via `knowledge-capture` skill
+- Update knowledge base via `knowledge --capture`
 
 ### 7. Git
 **Agent**: epost-git-manager
