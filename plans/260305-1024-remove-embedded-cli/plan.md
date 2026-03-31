@@ -1,7 +1,7 @@
 ---
 title: "Remove embedded epost-agent-cli and relink global epost-kit"
 description: "Delete epost-agent-cli/ from monorepo, relink epost-kit globally to standalone repo"
-status: active
+status: archived
 priority: P1
 effort: 1h
 tags: [cli, cleanup, migration]

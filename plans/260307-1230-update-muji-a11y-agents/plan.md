@@ -1,7 +1,7 @@
 ---
 title: "Update epost-muji and epost-a11y-specialist agents"
 description: "Add task-type routing, knowledge-retrieval integration, cross-delegation rules to both agents"
-status: active
+status: archived
 priority: P1
 effort: 1.5h
 tags: [agents, delegation, muji, a11y]

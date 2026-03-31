@@ -1,0 +1,14 @@
+{
+  "categories": [
+    { "prefix": "ADR",     "directory": "decisions",     "core": true,  "signals": [] },
+    { "prefix": "ARCH",    "directory": "architecture",  "core": true,  "signals": [] },
+    { "prefix": "CONV",    "directory": "conventions",   "core": true,  "signals": ["eslint", "tsconfig", "prettier", "checkstyle"] },
+    { "prefix": "FEAT",    "directory": "features",      "core": false, "signals": ["route files", "feature directories", "module directories"] },
+    { "prefix": "PATTERN", "directory": "patterns",      "core": false, "signals": ["recurring code pattern >= 3 occurrences", "hooks", "HOCs", "provider wrappers"] },
+    { "prefix": "FINDING", "directory": "findings",      "core": false, "signals": ["existing findings/*.md files only"] },
+    { "prefix": "GUIDE",   "directory": "guides",        "core": false, "signals": ["Dockerfile", ".env.example", "Makefile", "README setup section"] },
+    { "prefix": "API",     "directory": "api",           "core": false, "signals": ["REST route files", "GraphQL schema", "OpenAPI/swagger spec", "JAX-RS @Path annotations"] },
+    { "prefix": "INFRA",   "directory": "infra",         "core": false, "signals": ["docker-compose.yml", "CI config (GitHub Actions/.gitlab-ci)", "Terraform", "Kubernetes manifests"] },
+    { "prefix": "INTEG",   "directory": "integrations",  "core": false, "signals": ["third-party SDK imports", "external API client classes", "Keycloak/S3/SMTP config", "service base URLs in config"] }
+  ]
+}

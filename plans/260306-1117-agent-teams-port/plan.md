@@ -1,6 +1,6 @@
 ---
 title: "Port Agent Teams from claudekit to epost_agent_kit"
-status: active
+status: archived
 created: 2026-03-06
 updated: 2026-03-06
 effort: 4h

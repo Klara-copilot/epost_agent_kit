@@ -1,6 +1,6 @@
 ---
 title: "Klara-theme consumer code audit expansion"
-status: active
+status: archived
 created: 2026-03-07
 updated: 2026-03-07
 effort: 6h

@@ -1,6 +1,6 @@
 ---
 title: "Cleanup scripts - keep only developer-facing ones"
-status: active
+status: archived
 created: 2026-03-05
 updated: 2026-03-05
 effort: 1.5h

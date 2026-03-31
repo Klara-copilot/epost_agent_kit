@@ -1,0 +1,60 @@
+---
+const steps = [
+  {
+    number: '01',
+    title: 'Type naturally',
+    description: 'Say what you mean: "fix the login bug", "plan the notification feature", "commit and push". No flags, no setup, no mode switching.',
+    examples: ['"fix the login page"', '"add dark mode"', '"plan search refactor"'],
+  },
+  {
+    number: '02',
+    title: 'Kit routes',
+    description: 'Intent detection reads your prompt, checks git state, detects platform from file extensions, and routes to the right specialist automatically.',
+    examples: ['.tsx → web', 'git staged → review', 'active plan → build'],
+  },
+  {
+    number: '03',
+    title: 'Agent delivers',
+    description: 'The matched agent loads its platform skills, applies your project conventions, and executes — reporting back to you when done.',
+    examples: ['code + tests', 'audit report', 'PR opened'],
+  },
+];
+---
+<section class="py-24 px-6 bg-zinc-900/50 border-y border-zinc-800/60">
+  <div class="max-w-5xl mx-auto">
+    <div class="section-label">Workflow</div>
+    <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-16">
+      How it works.
+    </h2>
+
+    <div class="relative">
+      <!-- Connecting line -->
+      <div class="hidden sm:block absolute top-8 left-[calc(16.67%+16px)] right-[calc(16.67%+16px)] h-px bg-gradient-to-r from-transparent via-emerald-400/30 to-transparent"></div>
+
+      <div class="grid sm:grid-cols-3 gap-8">
+        {steps.map((step, i) => (
+          <div class="relative">
+            <!-- Step number -->
+            <div class="flex items-center gap-3 mb-5">
+              <div class="w-8 h-8 rounded-full border border-emerald-400/40 flex items-center justify-center text-emerald-400 font-mono text-xs flex-shrink-0">
+                {step.number}
+              </div>
+              {i < 2 && (
+                <div class="sm:hidden flex-1 h-px bg-emerald-400/20"></div>
+              )}
+            </div>
+            <h3 class="font-display text-lg font-semibold text-white mb-2">{step.title}</h3>
+            <p class="text-slate-400 text-sm leading-relaxed mb-4">{step.description}</p>
+            <div class="flex flex-wrap gap-1.5">
+              {step.examples.map((ex) => (
+                <span class="font-mono text-xs px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-slate-400">
+                  {ex}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

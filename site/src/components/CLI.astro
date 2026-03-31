@@ -1,0 +1,83 @@
+---
+const commands = [
+  {
+    group: 'Setup',
+    items: [
+      { cmd: 'epost-kit new', desc: 'Scaffold a new project with agents and skills' },
+      { cmd: 'epost-kit init', desc: 'Install the kit into an existing project' },
+      { cmd: 'epost-kit doctor', desc: 'Validate installation health and fix issues' },
+    ],
+  },
+  {
+    group: 'Packages',
+    items: [
+      { cmd: 'epost-kit profile list', desc: 'Browse available configuration profiles' },
+      { cmd: 'epost-kit package add web', desc: 'Add platform-specific agent packs' },
+      { cmd: 'epost-kit package remove android', desc: 'Remove packages you don\'t need' },
+    ],
+  },
+  {
+    group: 'Maintenance',
+    items: [
+      { cmd: 'epost-kit update', desc: 'Update to the latest kit version' },
+      { cmd: 'epost-kit lint', desc: 'Check skills and agents for issues' },
+      { cmd: 'epost-kit verify', desc: 'Run full pre-release validation' },
+    ],
+  },
+];
+---
+<section id="cli" class="py-24 px-6 bg-slate-950">
+  <div class="max-w-5xl mx-auto">
+    <div class="section-label">CLI</div>
+    <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-4">
+      One CLI to ship the whole system.
+    </h2>
+    <p class="text-slate-400 mb-12 max-w-2xl">
+      <code class="font-mono text-emerald-400 text-sm bg-zinc-800 px-1.5 py-0.5 rounded">epost-kit</code> manages installation, profiles, packages, and updates. Works with any AI coding assistant — configure once, benefit everywhere.
+    </p>
+
+    <div class="grid lg:grid-cols-3 gap-6">
+      {commands.map((group) => (
+        <div class="card-surface p-5">
+          <div class="text-xs font-mono text-emerald-400/70 uppercase tracking-wider mb-4">{group.group}</div>
+          <div class="space-y-4">
+            {group.items.map((item) => (
+              <div>
+                <code class="font-mono text-sm text-slate-200 block mb-1">$ {item.cmd}</code>
+                <p class="text-xs text-slate-500">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Profiles & Packages visual -->
+    <div class="mt-12 grid sm:grid-cols-2 gap-6">
+      <div class="card-surface overflow-hidden">
+        <div class="px-4 py-2 bg-zinc-800/40 border-b border-zinc-800">
+          <span class="text-xs text-slate-500 font-mono">Profiles — preconfigured agent bundles</span>
+        </div>
+        <div class="p-4 font-mono text-xs space-y-2">
+          <div class="flex justify-between"><span class="text-slate-300">full</span><span class="text-slate-600">all platforms + a11y + design</span></div>
+          <div class="flex justify-between"><span class="text-slate-300">web-only</span><span class="text-slate-600">Next.js + React + testing</span></div>
+          <div class="flex justify-between"><span class="text-slate-300">mobile</span><span class="text-slate-600">iOS + Android + a11y</span></div>
+          <div class="flex justify-between"><span class="text-slate-300">minimal</span><span class="text-slate-600">core agents only</span></div>
+        </div>
+      </div>
+      <div class="card-surface overflow-hidden">
+        <div class="px-4 py-2 bg-zinc-800/40 border-b border-zinc-800">
+          <span class="text-xs text-slate-500 font-mono">Packages — composable capability packs</span>
+        </div>
+        <div class="p-4 font-mono text-xs space-y-2">
+          <div class="flex justify-between"><span class="text-emerald-400">core</span><span class="text-slate-600">orchestration + routing</span></div>
+          <div class="flex justify-between"><span class="text-slate-300">platform-web</span><span class="text-slate-600">Next.js, React, testing skills</span></div>
+          <div class="flex justify-between"><span class="text-slate-300">platform-ios</span><span class="text-slate-600">Swift, SwiftUI, Xcode skills</span></div>
+          <div class="flex justify-between"><span class="text-slate-300">platform-android</span><span class="text-slate-600">Kotlin, Compose, Gradle skills</span></div>
+          <div class="flex justify-between"><span class="text-slate-300">a11y</span><span class="text-slate-600">WCAG 2.1 AA across platforms</span></div>
+          <div class="flex justify-between"><span class="text-slate-300">design-system</span><span class="text-slate-600">Figma, tokens, UI library</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

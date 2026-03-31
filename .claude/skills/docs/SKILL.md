@@ -32,6 +32,7 @@ Otherwise: continue to Auto-Detection.
 | `references/init.md` | Scan codebase and generate or migrate KB documentation |
 | `references/update.md` | Update, scan, verify, or reorganize existing documentation |
 | `references/component.md` | Document a klara-theme component (Figma data + prop mapping) |
+| `references/coauthoring.md` | Collaborative doc writing workflow (PRD, RFC, ADR, spec) |
 
 ## Auto-Detection
 

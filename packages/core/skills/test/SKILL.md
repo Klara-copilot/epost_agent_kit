@@ -5,12 +5,33 @@ user-invocable: true
 context: fork
 agent: epost-tester
 metadata:
-  argument-hint: "[--unit | --ui | --coverage | test description]"
+  argument-hint: "[--unit | --ui | --visual | --coverage | test description]"
 ---
+
+## Delegation — REQUIRED
+
+This skill MUST run via `epost-tester`, not inline.
+When dispatching, include in the Agent tool prompt:
+- **Skill**: `/test`
+- **Arguments**: `$ARGUMENTS` (full argument string from Skill invocation)
+- If no arguments: state "no arguments — use auto-detection"
 
 # Test — Unified Test Command
 
 Run tests with automatic platform detection.
+
+## Step 0 — Flag Override
+
+| Flag | Behavior |
+|------|----------|
+| `--visual` | Load `references/visual-mode.md` and run Playwright screenshot comparison tests |
+| `--visual --update` | Load `references/visual-mode.md` and update baseline screenshots |
+| `--unit` | Unit tests only |
+| `--ui` | UI/E2E tests only |
+| `--coverage` | Include coverage report |
+| `--scenario` | Generate edge cases (user types, input extremes, timing, scale) — see `references/scenario-mode.md` |
+
+If `$ARGUMENTS` starts with `--visual`: load `references/visual-mode.md` and follow its steps. Skip platform detection.
 
 ## Platform Detection
 
@@ -20,8 +41,16 @@ Detect platform per `skill-discovery` protocol.
 
 - `--unit` — unit tests only
 - `--ui` — UI/E2E tests only
+- `--visual` — visual regression tests (Playwright screenshot comparison)
 - `--coverage` — include coverage report
 - Test target name — run specific target
+
+## Aspect Files
+
+| File | Purpose |
+|------|---------|
+| `references/visual-mode.md` | Visual regression testing with Playwright screenshot comparison |
+| `references/report-template.md` | Test report output format |
 
 ## Execution
 

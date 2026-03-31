@@ -1,13 +1,13 @@
 ---
 name: audit-ui-findings-schema
-description: "(ePost) Schema for .epost-data/ui/known-findings.json — UI component findings persistence layer"
+description: "(ePost) Schema for reports/known-findings/ui-components.json — UI component findings persistence layer"
 user-invocable: false
 disable-model-invocation: true
 ---
 
 # UI Known-Findings Schema
 
-Schema for `.epost-data/ui/known-findings.json` — the persistence layer for `/fix --ui`, `/review --ui`, and `/audit --close --ui` workflows. Mirrors `.epost-data/a11y/known-findings.json` (v1.3 schema) with UI-specific field substitutions.
+Schema for `reports/known-findings/ui-components.json` — the persistence layer for `/fix --ui`, `/review --ui`, and `/audit --close --ui` workflows. Mirrors `.epost-data/a11y/known-findings.json` (v1.3 schema) with UI-specific field substitutions.
 
 ## Empty Template (bootstrap)
 
@@ -41,7 +41,9 @@ Schema for `.epost-data/ui/known-findings.json` — the persistence layer for `/
   "source": "audit",
   "source_agent": "epost-muji",
   "source_report": "reports/260308-2249-smart-letter-composer-audit/muji-ui-audit.md",
-  "first_detected_at": "2026-03-08T22:49"
+  "first_detected_at": "2026-03-08T22:49",
+  "verified": false,
+  "verified_date": null
 }
 ```
 
@@ -64,6 +66,8 @@ Schema for `.epost-data/ui/known-findings.json` — the persistence layer for `/
 | `resolved_date` | `string \| null` | ISO date when resolved; null if open |
 | `fix_applied` | `boolean` | True when a fix has been applied (but not yet verified/resolved) |
 | `fix_applied_date` | `string \| null` | ISO date when fix was applied; null if not yet fixed |
+| `verified` | `boolean` | True when re-audit confirmed the fix resolved the finding |
+| `verified_date` | `string \| null` | ISO date when verification passed; null if not yet verified |
 | `source` | `string` | See Source Enum below |
 | `source_agent` | `string` | Agent that detected this finding (e.g. `epost-muji`, `epost-code-reviewer`) |
 | `source_report` | `string \| null` | Relative path to the report file that recorded this finding |
@@ -101,13 +105,16 @@ Schema for `.epost-data/ui/known-findings.json` — the persistence layer for `/
 ## Resolution State Machine
 
 ```
-open (resolved: false, fix_applied: false)
-  → fix_applied (resolved: false, fix_applied: true)  [after /fix --ui]
-  → resolved (resolved: true, fix_applied: true)      [after /audit --close --ui]
+open (resolved: false, fix_applied: false, verified: false)
+  → fix_applied (resolved: false, fix_applied: true)       [after /fix --ui]
+  → verified (fix_applied: true, verified: true)           [after auto re-audit in /fix --ui step 7.5]
+  → resolved (resolved: true, fix_applied: true)           [after /audit --close --ui]
 ```
 
-- `open` → `fix_applied`: set `fix_applied: true`, `fix_applied_date: today` (done by `/fix --ui`)
-- `fix_applied` → `resolved`: set `resolved: true`, `resolved_date: today` (done by `/audit --close --ui`)
+- `open` → `fix_applied`: set `fix_applied: true`, `fix_applied_date: today` (done by `/fix --ui` step 7)
+- `fix_applied` → `verified`: set `verified: true`, `verified_date: today` if re-audit passes; set `verified: false`, `verified_date: today` if re-audit fails (done by `/fix --ui` step 7.5 re-audit)
+- `verified` → `resolved`: set `resolved: true`, `resolved_date: today` (done by `/audit --close --ui`). Only transition if `verified: true`; if `verified: false`, prompt re-fix first
+- `fix_applied` with `--no-verify`: `verified` stays `false`, `verified_date` stays `null` — user must run `/audit --close --ui` manually after verifying
 - Cannot skip `fix_applied` → warn user if trying to close without fix applied
 
 ## Deduplication Rule

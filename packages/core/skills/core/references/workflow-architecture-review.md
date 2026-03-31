@@ -29,7 +29,7 @@ Brainstorm → Research → Decide → Document. For evaluating trade-offs and m
 **Agent**: epost-planner
 
 - Synthesize brainstormer output + researcher findings
-- Create ADR (Architecture Decision Record) via `knowledge-capture`
+- Create ADR (Architecture Decision Record) via `knowledge --capture`
 - Define implementation plan if decision is approved
 
 ### 4. Document

@@ -75,6 +75,13 @@ For cases where auto-detection isn't enough, use flags:
 - `/fix --ui` — UI component findings from `.epost-data/ui/known-findings.json` (delegates to epost-muji)
 - `/fix --a11y` — accessibility findings from `.epost-data/a11y/known-findings.json`
 
+## Status Tracking
+
+After fixing a bug, update `{plan_dir}/status.md` if the fix relates to an active plan:
+- Move bug from **Known Bugs** to **Recently Fixed**: `- {what was broken} — {how it was fixed}`
+- If the fix required a design decision, also add to **Key Decisions**
+- If no status.md exists (fix is not plan-related), skip this step
+
 <issue>$ARGUMENTS</issue>
 
 **IMPORTANT:** Analyze the skills catalog and activate needed skills.

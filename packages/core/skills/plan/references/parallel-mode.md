@@ -118,6 +118,24 @@ Phase 02 ──┘
 
 Max plan.md: 150 lines (110 base + 40 for ownership/graph).
 
+### 6.5. Generate status.md
+
+Create `{plan_dir}/status.md` from `references/status-template.md`:
+- Pre-populate Progress table from plan.md phases (all `Pending`)
+- Not Yet Started: list all phases
+- Key Decisions: pre-populate with research-driven decisions from R1/R2 reports
+- Architecture Reference: add file ownership matrix summary:
+  ```
+  **File Ownership Summary**
+  - Phase {N} owns: {files listed in ownership matrix}
+  ...
+
+  Execution batches:
+  - Batch 1 (parallel): {phases}
+  - Batch 2 (parallel, after Batch 1): {phases}
+  ```
+- Known Bugs: "None currently tracked."
+
 ### 7. Generate Phase Files with Parallelization Info
 
 Same as hard.md PLUS Parallelization Info section BEFORE Implementation Steps:
@@ -141,12 +159,22 @@ Same as hard.md PLUS Parallelization Info section BEFORE Implementation Steps:
 
 Max phase file: 240 lines (200 base + 40 for parallelization).
 
-### 8. Set Active Plan
+### 8. Validate Plan (auto-triggered)
+
+Before activating, run a quick validation pass:
+1. Load `references/validate-mode.md`
+2. Generate 3-5 critical questions about the plan (assumptions, risks, tradeoffs, file ownership)
+3. Present to user: "Before I activate this plan, a few quick questions..."
+4. Document answers in `plan.md` under `## Validation Summary`
+
+**User can skip**: If user says "skip" or "just activate" → proceed directly to step 9.
+
+### 9. Set Active Plan
 ```bash
 node .claude/scripts/set-active-plan.cjs {plan_path}
 ```
 
-### 9. Report Completion
+### 10. Report Completion
 ```
 ✓ Parallel Plan Created: {plan_path}
 

@@ -1,6 +1,6 @@
 ---
 title: "Enrich kit-skill-development with Anthropic patterns + audit all descriptions"
-status: active
+status: archived
 created: 2026-03-11
 updated: 2026-03-11
 effort: 4h

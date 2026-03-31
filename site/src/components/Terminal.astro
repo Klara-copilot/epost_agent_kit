@@ -1,0 +1,71 @@
+---
+const sessions = [
+  {
+    prompt: '> fix the login page',
+    steps: [
+      { label: '✓', text: 'Detected: web (.tsx), Fix intent', dim: true },
+      { label: '→', text: 'Dispatching epost-debugger...', dim: true },
+      { label: '✓', text: 'Root cause: session token not refreshed on redirect', dim: false },
+      { label: '✓', text: 'Applied fix + added test case', dim: false },
+      { label: '→', text: 'epost-code-reviewer: LGTM', dim: true },
+    ],
+  },
+  {
+    prompt: '> plan the notification feature',
+    steps: [
+      { label: '✓', text: 'Detected: multi-platform, Plan intent', dim: true },
+      { label: '→', text: 'Dispatching epost-planner...', dim: true },
+      { label: '✓', text: 'Phase 1: Push service + backend endpoints', dim: false },
+      { label: '✓', text: 'Phase 2: iOS + Android foreground handling', dim: false },
+      { label: '✓', text: 'Phase 3: Web notification center UI', dim: false },
+    ],
+  },
+  {
+    prompt: '> commit and push',
+    steps: [
+      { label: '✓', text: 'Dispatching epost-git-manager...', dim: true },
+      { label: '✓', text: 'Staged: 4 files, +127 -23', dim: true },
+      { label: '✓', text: 'Commit: "feat(auth): refresh token on redirect"', dim: false },
+      { label: '✓', text: 'Push: origin/feat/auth-fix-token-refresh', dim: false },
+      { label: '✓', text: 'PR opened: #284', dim: false },
+    ],
+  },
+];
+---
+<section class="py-24 px-6 bg-slate-950">
+  <div class="max-w-5xl mx-auto">
+    <div class="section-label">Developer Experience</div>
+    <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-4">
+      Say it. It ships.
+    </h2>
+    <p class="text-slate-400 mb-12 max-w-2xl">
+      Three real interactions. No slash commands memorized. No mode switching. Just intent.
+    </p>
+
+    <div class="grid lg:grid-cols-3 gap-5">
+      {sessions.map((session) => (
+        <div class="rounded-xl overflow-hidden border border-zinc-800 bg-zinc-900">
+          <!-- Window chrome -->
+          <div class="flex items-center gap-1.5 px-4 py-3 bg-zinc-800/60 border-b border-zinc-700/50">
+            <div class="w-3 h-3 rounded-full bg-red-500/60"></div>
+            <div class="w-3 h-3 rounded-full bg-yellow-500/60"></div>
+            <div class="w-3 h-3 rounded-full bg-green-500/60"></div>
+            <span class="ml-2 text-xs text-slate-600 font-mono">terminal</span>
+          </div>
+          <!-- Terminal content -->
+          <div class="p-4 font-mono text-xs leading-relaxed">
+            <p class="text-emerald-400 mb-3">{session.prompt}</p>
+            <div class="space-y-1.5">
+              {session.steps.map((step) => (
+                <div class={`flex gap-2 ${step.dim ? 'text-slate-600' : 'text-slate-300'}`}>
+                  <span class="text-emerald-400/60 flex-shrink-0">{step.label}</span>
+                  <span>{step.text}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

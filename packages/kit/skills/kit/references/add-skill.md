@@ -6,14 +6,14 @@ disable-model-invocation: true
 metadata:
   argument-hint: "[skill-name] [description]"
   connections:
-    requires: [kit-skill-development]
+    requires: []
 ---
 
 ## Your Mission
 
 Create a new skill definition following epost_agent_kit conventions.
 
-**IMPORTANT:** Use `kit-skill-development` skill for frontmatter reference and best practices.
+**IMPORTANT:** Read `kit/references/skill-development.md` for frontmatter reference and best practices.
 
 ## Arguments
 

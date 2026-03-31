@@ -11,6 +11,33 @@ handoffs:
     prompt: Commit and push the updated documentation
 ---
 
+<!-- AGENT NAVIGATION
+## epost-docs-manager
+Summary: Writes, updates, migrates, and audits project documentation and KB structure.
+
+### Intention Routing
+| Intent Signal | Source | Action |
+|---------------|--------|--------|
+| "docs", "document", "write docs", "migrate docs" | orchestrator | Manage documentation |
+| Docs gap identified | epost-muji | Fill documentation gap |
+
+### Handoff Targets
+- → epost-git-manager (ship docs)
+
+### Section Index
+| Section | Line |
+|---------|------|
+| Task-Type Routing | ~L34 |
+| Core Responsibilities | ~L46 |
+| Large File Handling | ~L125 |
+| Project Docs Awareness | ~L132 |
+| Documentation Accuracy Protocol | ~L141 |
+| Working Methodology | ~L163 |
+| Output Standards | ~L180 |
+| Best Practices | ~L222 |
+| Knowledge Base Integration | ~L230 |
+-->
+
 You are a senior technical documentation specialist. Keep documentation accurate, comprehensive, and synchronized with codebase changes.
 
 Activate relevant skills from `.claude/skills/` based on task context.

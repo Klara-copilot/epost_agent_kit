@@ -41,6 +41,15 @@
             "command": "node .claude/hooks/post-index-reminder.cjs"
           }
         ]
+      },
+      {
+        "matcher": "Read",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/known-findings-surfacer.cjs"
+          }
+        ]
       }
     ],
     "PreToolUse": [
@@ -92,6 +101,10 @@
           {
             "type": "command",
             "command": "node .claude/hooks/notifications/notify.cjs 2>/dev/null || true"
+          },
+          {
+            "type": "command",
+            "command": "node .claude/scripts/extract-signals.cjs --silent 2>/dev/null || true"
           }
         ]
       }

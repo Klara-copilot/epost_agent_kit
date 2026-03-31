@@ -26,6 +26,18 @@ Create/modify files directly (no plan creation).
 - Follow YAGNI, KISS, DRY principles
 - Respect file ownership — don't modify files outside the feature scope
 
+### Batch Checkpoint Protocol
+
+After every 3 file modifications (create or edit):
+1. Run type check on modified files (if type checker available)
+2. Run lint on modified files (if linter available)
+3. If pass: log `Checkpoint {N}: {file1}, {file2}, {file3} — PASS` and continue
+4. If fail: fix immediately before modifying the next file
+
+**Exceptions**: Documentation-only changes (`.md` files) skip checkpoints.
+**Counter**: Resets per phase, not per session. Only code files count.
+**Fallback**: If no type checker or linter configured, verify files are syntactically valid (e.g., `node -c` for JS/CJS).
+
 ## Step 3: Review Gate
 
 After implementation, run all checks before testing:
@@ -43,12 +55,16 @@ Write and run tests for new code.
 - Integration test if touching external boundaries (API, DB, auth)
 - All relevant tests must pass
 
-**Auto-escalation**: If tests fail twice with different fixes attempted → escalate to `epost-debugger` with the failing test output and relevant files. Do not attempt a third guess.
+**Auto-escalation**: Follow `error-recovery` mutation discipline — each retry MUST use a different approach. After 2 different approaches fail → escalate to `epost-debugger` with the attempt log and failing test output. Do not attempt a third guess.
 
 ## Step 5: Finalize
 
-1. **Docs update** — Update relevant docs if public API or behavior changed
-2. **Change summary** — Output a concise summary:
+1. **Status update** — If working from a plan, update `{plan_dir}/status.md`:
+   - Progress table: mark completed phase as `Done`
+   - Key Decisions: add any significant choices made during implementation
+   - Architecture Reference: note any discovered structure
+2. **Docs update** — Update relevant docs if public API or behavior changed
+3. **Change summary** — Output a concise summary:
    ```
    Files changed: N
    Tests added: N

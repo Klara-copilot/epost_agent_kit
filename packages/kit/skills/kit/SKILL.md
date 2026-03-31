@@ -8,8 +8,16 @@ metadata:
   argument-hint: "[--add-agent | --add-skill | --add-hook | --optimize] [name]"
   connections:
     enhances: []
-    requires: [kit-agents, kit-skill-development]
+    requires: []
 ---
+
+## Delegation — REQUIRED
+
+This skill MUST run via `epost-fullstack-developer`, not inline.
+When dispatching, include in the Agent tool prompt:
+- **Skill**: `/kit`
+- **Arguments**: `$ARGUMENTS` (full argument string from Skill invocation)
+- If no arguments: state "no arguments — use auto-detection"
 
 # Kit — Unified Kit Authoring Command
 
@@ -31,6 +39,12 @@ Otherwise: continue to Auto-Detection.
 | `references/add-skill.md` | Create a new skill definition |
 | `references/add-hook.md` | Create a new hook for Claude Code automation |
 | `references/optimize.md` | Optimize an existing agent skill |
+| `references/agent-development.md` | Agent frontmatter, system prompts, ecosystem fields |
+| `references/skill-development.md` | Skill structure, frontmatter, CSO principles |
+| `references/hooks.md` | Hook events, I/O contract, architecture |
+| `references/cli.md` | CLI tech stack, project structure, commands |
+| `references/agents.md` | Ecosystem reference, frontmatter tables, naming |
+| `references/verify.md` | Pre-release audit workflow, CLI commands |
 
 ## Auto-Detection
 

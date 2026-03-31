@@ -129,6 +129,33 @@ const result = await withFallback(
 );
 ```
 
+### 4. Error Mutation Discipline
+
+**When**: Any retry after a failed approach (implementation, test fix, debug)
+
+**Rule**: Each retry MUST differ from the previous attempt. Never repeat the same failing approach.
+
+| Attempt | Requirement |
+|---------|------------|
+| 1st | Try primary approach |
+| 2nd | **MUST change approach** (different algorithm, scope, or tool) |
+| 3rd | Escalate to user with attempt log |
+
+**Mutation dimensions** (change at least one):
+- **Algorithm**: different data structure, pattern, or logic
+- **Scope**: narrower fix (isolate) or broader fix (refactor surrounding code)
+- **Tool**: different library, API, or technique
+- **Strategy**: different error handling (fail-fast vs graceful vs retry)
+
+**Attempt log format** (track in output):
+```
+Attempt 1: {approach description} — FAILED: {error summary}
+Attempt 2: {different approach} — FAILED: {error summary}
+→ Escalating: 2 different approaches failed. See attempt log above.
+```
+
+**Anti-pattern**: Retrying the same approach with minor tweaks (e.g., changing a variable name, adjusting a timeout). This is NOT a mutation — it must be a fundamentally different strategy.
+
 ## Decision Matrix
 
 | Scenario | Strategy | Max Retries | Backoff |
@@ -137,6 +164,7 @@ const result = await withFallback(
 | External API | Retry + Circuit Breaker | 3 | Exponential |
 | File read/write | Retry | 2 | Linear (500ms, 1s) |
 | Agent delegation | Circuit Breaker + Fallback | 1 | None |
+| Implementation retry | Mutation Discipline | 2 | None (change approach) |
 | User input validation | Fail Fast | 0 | None |
 | Missing dependency | Fail Fast | 0 | None |
 
@@ -222,5 +250,5 @@ try {
 
 ### Related Skills
 - `debug` — Systematic debugging methodology
-- `problem-solving` — Root cause analysis techniques
+- `debug` — Root cause analysis techniques (5 Whys, bisection)
 - `knowledge-capture` — Persist error patterns and recovery strategies

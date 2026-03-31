@@ -1,69 +1,113 @@
 ---
 name: repomix
-description: (ePost) Use when you need a full codebase overview, repo summary, or are unfamiliar with a repository structure
-
+description: Use when you need to pack repository contents into a single file for LLM consumption, share a codebase snapshot with an external AI service, or include a remote repo as context for research
+tier: core
+user-invocable: false
 metadata:
-  agent-affinity: [epost-researcher, epost-planner]
-  keywords: [repomix, codebase, summary, analysis, repo, overview]
-  platforms: [all]
-  triggers: ["repomix", "codebase summary", "repo overview"]
+  keywords:
+    - repomix
+    - repo-pack
+    - codebase-snapshot
+    - llm-context
+    - remote-repo
+  agent-affinity:
+    - epost-researcher
+    - epost-fullstack-developer
+  platforms:
+    - all
+  connections:
+    enhances: [research]
 ---
 
-# Repomix Skill
+# Repomix
 
-## Purpose
-Generate comprehensive codebase summaries for analysis and understanding.
+Pack repository content into a single AI-optimized file. Use when you need to feed an entire codebase (or remote repo) to an LLM as context.
 
-## When Active
-User needs codebase overview, unfamiliar with repo structure, preparing for full analysis.
+## When to Use
 
-## Expertise
+| Trigger | Action |
+|---------|--------|
+| Need to analyze a remote repo | `npx repomix --remote <url>` |
+| Need to share local codebase as context | `npx repomix` in project root |
+| Too many files to read individually | Pack, then read the output file |
+| Researching how an external project works | Pack remote → read output |
 
-### Usage
+## Quick Commands
 
-#### Local Project
 ```bash
-repomix
-# Output: repomix-output.xml
+# Pack current repo (outputs repomix-output.xml by default)
+npx repomix
+
+# Pack a remote GitHub repo
+npx repomix --remote https://github.com/owner/repo
+
+# Pack specific directory only
+npx repomix --include "src/**"
+
+# Pack with custom output path
+npx repomix --output context.xml
+
+# Plain text output instead of XML
+npx repomix --style plain
 ```
 
-#### Remote Repository
+## Output Formats
+
+| Format | Flag | Best for |
+|--------|------|----------|
+| XML (default) | `--style xml` | Structured parsing, Claude |
+| Plain text | `--style plain` | Lightweight, copy-paste |
+| Markdown | `--style markdown` | Human-readable review |
+
+## Filtering
+
 ```bash
-repomix --remote https://github.com/owner/repo
+# Exclude test files and build artifacts
+npx repomix --ignore "**/*.test.*,dist/**,node_modules/**"
+
+# Include only source files
+npx repomix --include "src/**/*.ts,src/**/*.tsx"
+
+# Use existing .gitignore patterns
+npx repomix --respect-gitignore  # enabled by default
 ```
 
-#### With Configuration
-Create `.repomixignore` to exclude files (same syntax as .gitignore).
+## Config File (repomix.config.json)
 
-### Common Patterns
-- Generate summary before full codebase review
-- Create `docs/codebase-summary.md` from repomix output
-- Check freshness: if summary >2 days old, regenerate
-- Use for unfamiliar codebases or onboarding
+When a project is packed repeatedly, create a config to avoid re-specifying flags:
 
-### Output Analysis
-- Extract file structure and size metrics
-- Identify key entry points
-- Understand module organization
-- Find documentation files
-- Note configuration files
+```json
+{
+  "output": {
+    "filePath": "repomix-output.xml",
+    "style": "xml",
+    "removeComments": false,
+    "showLineNumbers": true
+  },
+  "ignore": {
+    "useGitignore": true,
+    "useDefaultPatterns": true,
+    "customPatterns": ["*.test.ts", "dist/**"]
+  }
+}
+```
 
-## Patterns
+## Workflow: Research a Remote Repo
 
-### Integration with Other Skills
-- **With Code Review**: Use summary to understand scope
-- **With Debugging**: Use for context before deep dive
-- **With Documentation**: Extract codebase structure for docs
-- **With Planning**: Use to assess complexity
+1. Pack the remote repo: `npx repomix --remote <url> --output /tmp/repo-context.xml`
+2. Read the output file with the Read tool
+3. Analyze patterns, extract relevant code sections
+4. Apply findings to current task
 
-## Best Practices
-- Generate fresh summary at project start
-- Include summary in onboarding docs
-- Update when major restructuring happens
-- Use with .repomixignore for large monorepos
-- Reference summary in documentation
-- Cross-check with actual repo structure
+## Size Limits
 
-### Related Skills
-- `knowledge-retrieval` — Internal-first knowledge search protocol
-- `docs-seeker` — External documentation lookup (Context7, WebSearch)
+Large repos produce large output files. If the packed file is too large to read in one pass:
+- Scope the pack: `--include "src/specific-module/**"`
+- Use `--remove-comments` to reduce size
+- Switch to `--style plain` (smaller than XML)
+- Read the output in chunks with `offset` + `limit` parameters
+
+## References
+
+- `npx repomix --help` — full flag reference
+- Config docs: `repomix.config.json` schema

@@ -10,6 +10,14 @@ metadata:
     enhances: []
 ---
 
+## Delegation — REQUIRED
+
+This skill MUST run via `epost-code-reviewer`, not inline.
+When dispatching, include in the Agent tool prompt:
+- **Skill**: `/review`
+- **Arguments**: `$ARGUMENTS` (full argument string from Skill invocation)
+- If no arguments: state "no arguments — use auto-detection"
+
 # Review — Unified Review Command
 
 Auto-detect and execute the appropriate review workflow.

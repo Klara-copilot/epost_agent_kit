@@ -1,0 +1,51 @@
+version: "1"
+
+# Role bundles for epost-kit marketplace.
+# Shared baseline included in every role (implicit):
+#   skills: core, skill-discovery, knowledge-retrieval
+#   agents: epost-planner, epost-debugger, epost-researcher, epost-docs-manager, epost-git-manager
+#
+# extended roles merge all skills/agents from their parents at install time.
+
+roles:
+  web-frontend:
+    description: "React, Next.js, testing, i18n, auth, a11y"
+    skills: [core, web-frontend, web-nextjs, web-i18n, web-auth, web-testing, web-a11y, error-recovery]
+    agents: [epost-fullstack-developer, epost-code-reviewer, epost-tester]
+    suggested: [design-tokens, web-ui-lib]
+
+  web-backend:
+    description: "REST APIs, Jakarta EE, databases"
+    skills: [core, web-api-routes, backend-javaee, backend-databases, test, error-recovery]
+    agents: [epost-fullstack-developer, epost-debugger]
+
+  web-fullstack:
+    extends: [web-frontend, web-backend]
+    description: "Full web stack + B2B modules"
+    skills: [web-modules, domain-b2b]
+    agents: []
+
+  designer:
+    description: "Design tokens, Figma, UI library, launchpad"
+    skills: [core, design-tokens, figma, ui-lib-dev, launchpad, web-ui-lib, ios-ui-lib, android-ui-lib]
+    agents: [epost-muji, epost-fullstack-developer]
+
+  ios-developer:
+    description: "Swift 6, SwiftUI, iOS a11y, RAG"
+    skills: [core, ios-development, ios-ui-lib, ios-rag, ios-a11y, error-recovery]
+    agents: [epost-fullstack-developer, epost-tester, epost-debugger]
+
+  android-developer:
+    description: "Kotlin, Jetpack Compose, Android a11y"
+    skills: [core, android-development, android-ui-lib, android-a11y, error-recovery, test]
+    agents: [epost-fullstack-developer, epost-tester, epost-debugger]
+
+  a11y-specialist:
+    description: "Cross-platform WCAG 2.1 AA"
+    skills: [core, a11y, ios-a11y, android-a11y, web-a11y, audit]
+    agents: [epost-a11y-specialist, epost-code-reviewer]
+
+  kit-author:
+    description: "Agent & skill development, kit CLI"
+    skills: [core, kit, knowledge-retrieval, knowledge-capture, journal, skill-discovery]
+    agents: [epost-project-manager]

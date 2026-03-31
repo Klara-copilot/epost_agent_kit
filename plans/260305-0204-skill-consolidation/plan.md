@@ -1,7 +1,7 @@
 ---
 updated: 2026-03-05
 title: Consolidate 99 skill folders into ~45 using flag-based routing
-status: active
+status: archived
 created: 2026-03-05
 complexity: complex
 effort: 8h

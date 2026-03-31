@@ -70,5 +70,5 @@ When YOUR code is being reviewed:
 ### 7. Knowledge Capture
 
 After review, if new patterns or conventions identified:
-- Record as CONV entry in `docs/` via `knowledge-capture`
+- Record as CONV entry in `docs/` via `knowledge --capture`
 - Update code standards if convention is project-wide

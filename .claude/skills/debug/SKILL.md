@@ -78,7 +78,7 @@ Detect platform per `skill-discovery` protocol.
 
 ### Root Cause Analysis
 
-See `problem-solving` for root cause analysis techniques (5 Whys, bisection, inversion).
+Root cause analysis techniques: 5 Whys, bisection, inversion. Ask "why did this happen?" 5 times. Bisect to find the commit or line that introduced the issue.
 
 ### Fix Validation
 - Regression testing
@@ -178,6 +178,14 @@ Applies to: React `useState`/`useReducer`, iOS view lifecycle, Android Compose s
 
 See `plan/references/state-machine-guide.md` for notation and common patterns.
 
+## Status Tracking
+
+After diagnosing, update `{plan_dir}/status.md` if diagnosing relates to an active plan:
+- **Bug found**: Add to **Known Bugs**: `- {what is broken} — {root cause}`
+- **Architecture discovery**: Add to **Architecture Reference**
+- **Decision forced by diagnosis**: Add to **Key Decisions**: `| {today} | {decision} | {rationale} |`
+- If no status.md exists (debug is not plan-related), skip this step
+
 ## Verification Checklist
 - [ ] Symptom reproduced consistently
 - [ ] Root cause identified and documented
@@ -213,10 +221,8 @@ See `verification-before-completion` skill for anti-rationalization table, red f
 ### Related Skills
 - `knowledge-retrieval` — Knowledge storage format and `docs/` directory
 - `knowledge-capture` — Post-task capture workflow
-- `problem-solving` — Root cause analysis techniques
 - `error-recovery` — Error handling and recovery patterns
 - `verification-before-completion` — Verify fixes before claiming done
-- `auto-improvement` — Error metrics auto-captured by session-metrics hook on Stop
 
 ## References
 - `references/debugging-flow.dot` — Authoritative debugging process flowchart

@@ -35,7 +35,7 @@ Check request keywords → git diff extensions → CWD path:
 | `.kt/.kts`, "Android", "Kotlin", "Compose" | android | `android-development`, `android-ui-lib` |
 | `.tsx/.ts/.jsx/.scss`, "React", "Next.js", "web" | web | `web-frontend`, `web-nextjs` |
 | `.java` + `pom.xml`, "Java EE", "WildFly", "backend" | backend | `backend-javaee`, `backend-databases` |
-| `epost-agent-kit-cli/` path, `src/domains/`, "CLI", "kit cli" | cli | `kit-cli` |
+| `epost-agent-kit-cli/` path, `src/domains/`, "CLI", "kit cli" | cli | `kit` (load references/cli.md) |
 | `.css/.scss` + design tokens, "Figma", "klara" | design | `figma`, `web-ui-lib` |
 
 Multiple platforms: ask user (max 1 question). If 80%+ files = one platform, use that.
@@ -51,22 +51,31 @@ Scan the user request for these patterns:
 
 | Signal Words | Task Type | Likely Skills |
 |-------------|-----------|---------------|
-| error, stack trace, crash, bug, failing | debug | problem-solving, error-recovery |
+| error, stack trace, crash, bug, failing | debug | debug, error-recovery |
 | docs, library, API reference, how to use | research | docs-seeker, research |
-| ADR, prior art, existing pattern, similar | knowledge | knowledge-retrieval |
-| write docs, spec, proposal, RFC | documentation | doc-coauthoring |
+| ADR, prior art, existing pattern, similar | knowledge | knowledge |
+| write docs, spec, proposal, RFC | documentation | docs (load references/coauthoring.md) |
 | retry, timeout, circuit breaker, fallback | resilience | error-recovery |
-| step by step, complex, analyze, root cause | reasoning | sequential-thinking, problem-solving |
-| repo overview, codebase summary | exploration | repomix |
+| step by step, complex, analyze, root cause | reasoning | debug, knowledge |
 | a11y, accessibility, WCAG, VoiceOver | accessibility | a11y + platform-a11y variant |
 | Figma, design tokens, components, theme | design system | figma, web-ui-lib |
-| Docker, container, GCP, Terraform | infrastructure | infra-docker, infra-cloud |
 | B2B module, inbox, monitoring, composer | domain | domain-b2b |
 | get started, onboard, begin, new to project | onboarding | get-started |
 
 ### 1c. Domain Signals (from git context)
 - Files in module-specific directories → domain skills
 - Infrastructure files (Dockerfile, terraform/) → infra skills
+
+### 1d. Git-State Signals
+Check `git status` and `git diff --name-only` for context:
+
+| Signal | Interpretation | Skills Boost |
+|--------|---------------|--------------|
+| Staged files present | Review or Git intent | code-review, git |
+| Merge conflict markers | Fix intent | fix, error-recovery |
+| Untracked SKILL.md / agent .md | Kit authoring | kit (load references/skill-development.md) |
+| Files in `plans/` changed | Planning context | plan, cook |
+| `package.json` / `pom.xml` changed | Dependency work | platform skill for affected package |
 
 ## Step 2: Query Skill Index
 
@@ -117,7 +126,7 @@ Load order: bases first (extends parents → requires → matched skill).
 **For each selected skill**: Read its SKILL.md. Extract actionable patterns, constraints, conventions. Apply to your task.
 
 **After loading**: Check each loaded skill's `connections.enhances` list. If any enhancers are relevant but not loaded, suggest them:
-> "Also available: problem-solving (enhances debugging)"
+> "Also available: knowledge (enhances debugging)"
 
 Do NOT auto-load enhancers. Only suggest them.
 
@@ -150,8 +159,8 @@ This overrides Steps 1-2 when a clear flow match exists. Falls back to standard 
 | any agent | Android task (.kt) | android-development, android-ui-lib |
 | any agent | Web task (.tsx/.ts) | web-frontend, web-nextjs |
 | any agent | Backend task (.java) | backend-javaee, backend-databases |
-| any agent | CLI task (epost-agent-kit-cli/) | kit-cli |
-| debugger | stuck on bug | sequential-thinking, problem-solving |
+| any agent | CLI task (epost-agent-kit-cli/) | kit (load references/cli.md) |
+| debugger | stuck on bug | debug, error-recovery |
 | fullstack-developer | API timeout | error-recovery |
 | planner | plan with research | research, docs-seeker |
 | any agent | a11y + iOS | a11y, ios-a11y |
@@ -160,6 +169,6 @@ This overrides Steps 1-2 when a clear flow match exists. Falls back to standard 
 | any agent | Figma / design system | figma, web-ui-lib |
 | epost-muji | component dev (Figma pipeline) | figma, design-tokens, ui-lib-dev |
 | epost-muji | consumer asks about usage | {platform}-ui-lib via platform detection |
-| epost-muji | UI audit / review | audit (pre-loaded), ui-guidance |
+| epost-muji | UI audit / review | audit (pre-loaded), web-ui-lib |
 | epost-muji | token translation question | design-tokens (pre-loaded) |
-| any agent | kit authoring | kit-skill-development, kit-agent-development |
+| any agent | kit authoring | kit (load references/skill-development.md or agent-development.md) |

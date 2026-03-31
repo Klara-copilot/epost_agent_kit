@@ -1,6 +1,6 @@
 ---
 title: "Hybrid audit reliability + audit standards overhaul"
-status: active
+status: archived
 created: 2026-03-08
 updated: 2026-03-08
 effort: 3.5h

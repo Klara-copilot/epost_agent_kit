@@ -118,37 +118,44 @@ Record the detected docs state from Step 2 as `DOCS_STATE`:
 - Flat docs found, no `index.json` → `"flat"`
 - No docs → `"none"`
 
-### Phase 1 — Research (epost-researcher)
+### Phase 1 — Research (conditional)
 
-Use the Agent tool to dispatch read-only codebase explorer:
+**Skip condition**: If `DOCS_STATE = "kb"` (index.json exists with entries), the KB already contains project context. Skip the researcher and proceed directly to Phase 2.
+
+**Run condition**: If `DOCS_STATE = "flat"` or `DOCS_STATE = "none"`, dispatch the researcher first — the docs-manager needs codebase context to generate a meaningful KB.
 
 ```
-Agent(
-  subagent_type: "epost-researcher"
-  description: "Research codebase for onboarding"
-  prompt: """
-  Explore the codebase at {CWD}. Read-only — do NOT create or edit files.
+if DOCS_STATE != "kb":
+  Agent(
+    subagent_type: "epost-researcher"
+    description: "Research codebase for onboarding"
+    prompt: """
+    Explore the codebase at {CWD}. Read-only — do NOT create or edit files.
 
-  Goals:
-  1. Read README, package.json/pom.xml/Cargo.toml/Package.swift, Dockerfile, CI configs
-  2. Scan top 3 directory levels (ls)
-  3. Identify: tech stack, language, framework, key entry points, major modules
-  4. Extract build + run commands (install, dev, build, test, start)
-  5. Identify env requirements (.env.example, required secrets/vars)
-  6. Note existing docs structure (docs/index.json, flat docs, or none)
+    Goals:
+    1. Read README, package.json/pom.xml/Cargo.toml/Package.swift, Dockerfile, CI configs
+    2. Scan top 3 directory levels (ls)
+    3. Identify: tech stack, language, framework, key entry points, major modules
+    4. Extract build + run commands (install, dev, build, test, start)
+    5. Identify env requirements (.env.example, required secrets/vars)
+    6. Note existing docs structure (docs/index.json, flat docs, or none)
 
-  Write concise report to: {RESEARCH_REPORT}
+    Write concise report to: {RESEARCH_REPORT}
 
-  ## Tech Stack
-  ## Entry Points
-  ## Build & Run Commands
-  ## Env Requirements
-  ## Docs Status
-  ## Key Findings (anything unusual or important)
-  """
-)
+    ## Tech Stack
+    ## Entry Points
+    ## Build & Run Commands
+    ## Env Requirements
+    ## Docs Status
+    ## Key Findings (anything unusual or important)
+    """
+  )
+  WAIT for Agent to complete, then READ {RESEARCH_REPORT}.
+else:
+  # KB exists — read docs/index.json directly for project context
+  READ docs/index.json → extract tech stack, categories, entry count
+  # No researcher needed — proceed to Phase 2
 ```
-WAIT for Agent to complete, then READ {RESEARCH_REPORT}.
 **Then immediately proceed to Phase 2 — do NOT stop here.**
 
 ### Phase 2 — Documentation (epost-docs-manager)

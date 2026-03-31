@@ -1,0 +1,79 @@
+---
+const props = [
+  {
+    title: 'Velocity',
+    icon: '◈',
+    iconColor: '#34d399',
+    headline: 'Boilerplate handled. Developers unblocked.',
+    points: [
+      'Agents handle routing, staging, commits, and PRs',
+      'Parallel plan execution across 3+ independent tasks',
+      'Platform detection means no context-setting overhead',
+    ],
+    metric: '↑ feature throughput',
+  },
+  {
+    title: 'Quality',
+    icon: '◉',
+    iconColor: '#3b82f6',
+    headline: 'Two-stage review gates on every change.',
+    points: [
+      'Code reviewer: security, performance, correctness',
+      'A11y specialist: WCAG 2.1 AA across all platforms',
+      'Known-findings database prevents regressions',
+    ],
+    metric: '↓ bug escape rate',
+  },
+  {
+    title: 'Consistency',
+    icon: '◎',
+    iconColor: '#8b5cf6',
+    headline: 'Shared conventions across every platform.',
+    points: [
+      '65+ skills encode your team\'s patterns',
+      'Skill-discovery loads the right rules per task',
+      'No "works on my platform" drift',
+    ],
+    metric: '= consistent standards',
+  },
+];
+---
+<section class="py-24 px-6 bg-zinc-900/50 border-y border-zinc-800/60">
+  <div class="max-w-5xl mx-auto">
+    <div class="section-label">Engineering Leadership</div>
+    <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-4">
+      The case for your team.
+    </h2>
+    <p class="text-slate-400 mb-12 max-w-2xl">
+      Not a productivity toy. A systematic approach to raising the floor for every developer on every platform.
+    </p>
+
+    <div class="grid lg:grid-cols-3 gap-6">
+      {props.map((prop) => (
+        <div class="card-surface p-6 flex flex-col">
+          <div class="flex items-center gap-3 mb-4">
+            <div
+              class="w-9 h-9 rounded-lg flex items-center justify-center font-mono text-base"
+              style={`background: ${prop.iconColor}15; color: ${prop.iconColor};`}
+            >
+              {prop.icon}
+            </div>
+            <h3 class="font-display font-semibold text-white">{prop.title}</h3>
+          </div>
+          <p class="text-slate-300 text-sm font-medium mb-4">{prop.headline}</p>
+          <ul class="space-y-2 flex-1">
+            {prop.points.map((point) => (
+              <li class="flex items-start gap-2 text-xs text-slate-500">
+                <span class="text-emerald-400/60 flex-shrink-0 mt-0.5">·</span>
+                {point}
+              </li>
+            ))}
+          </ul>
+          <div class="mt-5 pt-4 border-t border-zinc-800">
+            <span class="font-mono text-xs text-emerald-400">{prop.metric}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

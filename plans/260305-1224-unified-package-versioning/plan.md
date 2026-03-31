@@ -2,7 +2,7 @@
 id: PLAN-0048
 title: "Unified Package Versioning Strategy"
 type: design
-status: active
+status: archived
 created: 2026-03-05
 authors: [epost-architect]
 tags: [versioning, packages, release, automation, cli]

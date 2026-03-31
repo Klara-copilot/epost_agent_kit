@@ -1,0 +1,31 @@
+---
+import { skillCategories } from '../data/skills';
+---
+<section class="py-24 px-6 bg-slate-950">
+  <div class="max-w-5xl mx-auto">
+    <div class="section-label">Skill Catalog</div>
+    <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-4">
+      65+ skills. Lazy-loaded on demand.
+    </h2>
+    <p class="text-slate-400 mb-12 max-w-2xl">
+      Skills are passive knowledge modules. Agents load only what they need — keeping context clean and relevant.
+    </p>
+
+    <div class="space-y-6">
+      {skillCategories.map((cat) => (
+        <div>
+          <div class={`inline-flex items-center gap-1.5 text-xs font-mono px-2.5 py-1 rounded border mb-3 ${cat.color}`}>
+            {cat.label}
+          </div>
+          <div class="flex flex-wrap gap-2">
+            {cat.skills.map((skill) => (
+              <span class="font-mono text-xs px-2.5 py-1 rounded bg-zinc-900 border border-zinc-800 text-slate-400 hover:border-zinc-700 hover:text-slate-300 transition-colors">
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

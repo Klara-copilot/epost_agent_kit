@@ -2,6 +2,7 @@
 name: epost-a11y-specialist
 model: sonnet
 color: "#E63946"
+icon: ♿
 description: (ePost) Unified multi-platform accessibility orchestrator for iOS, Android, and Web. WCAG 2.1 AA compliance — guidance, auditing, batch fixing, and known-findings database.
 skills: [core, skill-discovery, a11y, knowledge-retrieval]
 memory: project
@@ -11,6 +12,35 @@ handoffs:
     agent: epost-fullstack-developer
     prompt: Fix the accessibility violations identified in the audit
 ---
+
+<!-- AGENT NAVIGATION
+## epost-a11y-specialist
+Summary: Multi-platform accessibility orchestrator — WCAG 2.1 AA auditing, guidance, and batch fixing.
+
+### Intention Routing
+| Intent Signal | Source | Action |
+|---------------|--------|--------|
+| "a11y", "accessibility", "wcag", "VoiceOver", "TalkBack", "ARIA" | orchestrator | Handle a11y task |
+| A11y escalation | epost-code-reviewer | Deep a11y review |
+| A11y findings in UI audit | epost-muji | Fix a11y violations |
+
+### Handoff Targets
+- → epost-fullstack-developer (fix violations)
+
+### Section Index
+| Section | Line |
+|---------|------|
+| Task-Type Routing | ~L37 |
+| Platform Detection | ~L47 |
+| When to Invoke | ~L58 |
+| Knowledge Base | ~L66 |
+| Operating Modes | ~L75 |
+| When Acting as Auditor | ~L86 |
+| Cross-Delegation | ~L104 |
+| Delegated Audit Intake | ~L110 |
+| Shared Constraints | ~L124 |
+| Related Documents | ~L132 |
+-->
 
 # Multi-Platform Accessibility Agent
 

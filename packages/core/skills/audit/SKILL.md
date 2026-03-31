@@ -17,7 +17,7 @@ metadata:
   agent-affinity: [epost-muji, epost-code-reviewer, epost-a11y-specialist]
   connections:
     enhances: [code-review, ui-lib-dev]
-    requires: [knowledge-retrieval]
+    requires: [knowledge]
 ---
 
 # Audit — Unified Audit Command
@@ -36,7 +36,7 @@ Track these as you work. Never leave them empty or with placeholder values.
 
 ## Knowledge Retrieval (Pre-Audit)
 
-Before executing any audit mode, activate `knowledge-retrieval` to load relevant context:
+Before executing any audit mode, activate `knowledge` to load relevant context:
 - L1 `docs/` — existing conventions, past findings, ADRs for the files under review
 - L2 RAG — component implementations, token definitions, usage patterns
 - L4 Grep/Glob — fallback if RAG unavailable (search `packages/`, `src/` directly)

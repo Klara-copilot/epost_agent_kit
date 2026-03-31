@@ -1,0 +1,171 @@
+---
+import Workflow from '../../layouts/Workflow.astro';
+
+const pipeline = [
+  {
+    phase: 'Intake',
+    agent: 'orchestrator',
+    input: 'PO describes feature in natural language',
+    output: 'Parsed intent, platform detection, complexity estimate',
+    duration: '~5s',
+  },
+  {
+    phase: 'Plan',
+    agent: 'epost-planner',
+    input: 'Feature description + codebase context',
+    output: 'Phased plan with file ownership, status.md tracking',
+    duration: '~2 min',
+  },
+  {
+    phase: 'Build',
+    agent: 'epost-fullstack-developer',
+    input: 'Plan phases dispatched in parallel',
+    output: 'Working code on feature branch',
+    duration: '~10 min',
+  },
+  {
+    phase: 'Audit',
+    agent: 'epost-code-reviewer',
+    input: 'Changed files from build phase',
+    output: 'Quality report, security scan, spec compliance',
+    duration: '~2 min',
+  },
+  {
+    phase: 'Fix',
+    agent: 'epost-fullstack-developer',
+    input: 'Audit findings with severity ≥ warning',
+    output: 'Fix commits, updated tests',
+    duration: '~5 min',
+  },
+  {
+    phase: 'Ship',
+    agent: 'epost-git-manager',
+    input: 'Clean branch with passing audit',
+    output: 'PR with summary, test plan, demo branch link',
+    duration: '~30s',
+  },
+];
+
+const artifacts = [
+  { name: 'plans/[id]/plan.md', desc: 'Phased implementation plan' },
+  { name: 'plans/[id]/status.md', desc: 'Living progress tracker' },
+  { name: 'Feature branch', desc: 'Working code with tests' },
+  { name: 'Pull Request', desc: 'Summary + audit report + test plan' },
+  { name: 'reports/[id].md', desc: 'Full audit trail' },
+];
+---
+<Workflow
+  title="PO-to-Prototype Pipeline"
+  description="Product Owner describes a feature. Agents plan it, build it, audit it, fix it, and deliver a PR with working code — end to end."
+  badge="End-to-End Automation"
+  badgeColor="#3b82f6"
+  agents={['epost-planner', 'epost-fullstack-developer', 'epost-code-reviewer', 'epost-tester', 'epost-git-manager']}
+>
+  <!-- Pipeline -->
+  <section class="py-16 px-6 border-b border-zinc-800/60">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="font-display text-2xl font-bold text-white mb-8">The Pipeline</h2>
+      <div class="space-y-1">
+        {pipeline.map((step, i) => (
+          <div class="relative">
+            <div class="card-surface p-5">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center font-mono text-sm text-blue-400 flex-shrink-0">
+                  {i + 1}
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-baseline gap-3 mb-1">
+                    <h3 class="font-display font-semibold text-white">{step.phase}</h3>
+                    <span class="font-mono text-xs text-slate-600">{step.agent}</span>
+                    <span class="font-mono text-xs text-slate-700 ml-auto hidden sm:block">{step.duration}</span>
+                  </div>
+                  <div class="grid sm:grid-cols-2 gap-3 mt-2">
+                    <div>
+                      <span class="text-xs text-slate-600 font-mono">input</span>
+                      <p class="text-slate-400 text-sm">{step.input}</p>
+                    </div>
+                    <div>
+                      <span class="text-xs text-emerald-400/60 font-mono">output</span>
+                      <p class="text-slate-300 text-sm">{step.output}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {i < pipeline.length - 1 && (
+              <div class="flex justify-center py-1">
+                <div class="w-px h-4 bg-zinc-800"></div>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- What PO sees vs what happens -->
+  <section class="py-16 px-6 border-b border-zinc-800/60">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="font-display text-2xl font-bold text-white mb-8">What the PO Sees</h2>
+      <div class="grid lg:grid-cols-2 gap-6">
+        <!-- PO input -->
+        <div class="card-surface overflow-hidden">
+          <div class="px-4 py-2 bg-zinc-800/40 border-b border-zinc-800">
+            <span class="text-xs text-slate-500 font-mono">PO types one sentence</span>
+          </div>
+          <div class="p-5 font-mono text-sm">
+            <p class="text-emerald-400">"Add a notification preferences page where users can toggle email and push notifications per category"</p>
+          </div>
+        </div>
+
+        <!-- What gets delivered -->
+        <div class="card-surface overflow-hidden">
+          <div class="px-4 py-2 bg-zinc-800/40 border-b border-zinc-800">
+            <span class="text-xs text-slate-500 font-mono">What gets delivered (~20 min later)</span>
+          </div>
+          <div class="p-5 font-mono text-xs space-y-2">
+            <div class="flex gap-2"><span class="text-emerald-400">✓</span><span class="text-slate-300">3-phase plan with file ownership</span></div>
+            <div class="flex gap-2"><span class="text-emerald-400">✓</span><span class="text-slate-300">API: POST /notifications/preferences</span></div>
+            <div class="flex gap-2"><span class="text-emerald-400">✓</span><span class="text-slate-300">React page with toggle components</span></div>
+            <div class="flex gap-2"><span class="text-emerald-400">✓</span><span class="text-slate-300">Redux slice + API integration</span></div>
+            <div class="flex gap-2"><span class="text-emerald-400">✓</span><span class="text-slate-300">Unit tests + integration test</span></div>
+            <div class="flex gap-2"><span class="text-emerald-400">✓</span><span class="text-slate-300">A11y: keyboard nav, ARIA labels</span></div>
+            <div class="flex gap-2"><span class="text-emerald-400">✓</span><span class="text-slate-300">PR #312 ready for review</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Artifacts -->
+  <section class="py-16 px-6 border-b border-zinc-800/60">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="font-display text-2xl font-bold text-white mb-8">Artifacts Generated</h2>
+      <div class="card-surface overflow-hidden">
+        <div class="divide-y divide-zinc-800">
+          {artifacts.map((a) => (
+            <div class="px-5 py-3 flex items-center gap-4">
+              <code class="font-mono text-xs text-emerald-400 min-w-[180px]">{a.name}</code>
+              <span class="text-slate-500 text-sm">{a.desc}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key insight -->
+  <section class="py-16 px-6">
+    <div class="max-w-4xl mx-auto">
+      <div class="card-surface p-6 flex items-start gap-4">
+        <div class="text-blue-400 font-mono text-xl flex-shrink-0 mt-0.5">◈</div>
+        <div>
+          <h3 class="font-display font-semibold text-white mb-2">The Loop Closes Itself</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            The audit phase feeds findings back to the developer agent. The developer fixes issues and the auditor re-checks. This loop repeats until quality thresholds pass — no human needed for mechanical fixes. Humans review intent, architecture, and UX. Machines handle compliance, patterns, and standards.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Workflow>
