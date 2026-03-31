@@ -96,6 +96,20 @@ Skills only work if models follow the body, not just the description. CSO preven
 
 See `references/cso-principles.md` for the full guide with examples, bad/good descriptions, token budgets, and anti-rationalization table format.
 
+## Description Validation Checklist
+
+Before publishing a skill, verify the `description:` field passes all 7 checks:
+
+- [ ] **Trigger phrasing** — Starts with "Use when..." or equivalent trigger phrasing (third-person)
+- [ ] **Concrete triggers** — Contains at least 2 quoted trigger examples (e.g., `"plan"`, `"debug this"`)
+- [ ] **No workflow summary** — Does NOT describe steps, tools used, or what happens next (Description Trap)
+- [ ] **Character limit** — Under 1024 characters total (agentskills.io limit)
+- [ ] **Quoted user phrases** — At least 2 explicit user-facing phrases in quotes
+- [ ] **Third-person voice** — Uses "Use when user says..." not "I will..." or "This runs..."
+- [ ] **Outcome signal** — Mentions what it dispatches or what domain it covers, not the how
+
+See `references/description-validation-checklist.md` for full examples and fail patterns.
+
 ## agentskills.io Compliance Rules
 
 - `SKILL.md` MUST be in skill root (only `.md` in root)

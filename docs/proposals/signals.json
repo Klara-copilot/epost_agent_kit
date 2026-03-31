@@ -1,8 +1,8 @@
 {
-  "generated": "2026-03-31T02:30:11.747Z",
+  "generated": "2026-03-31T05:09:39.142Z",
   "summary": {
-    "total": 28,
-    "new": 28,
+    "total": 31,
+    "new": 31,
     "proposed": 0,
     "dismissed": 0,
     "bySkill": {
@@ -19,9 +19,9 @@
         "low": 0
       },
       "skill-discovery": {
-        "total": 3,
+        "total": 4,
         "high": 0,
-        "medium": 3,
+        "medium": 4,
         "low": 0
       },
       "plan": {
@@ -65,10 +65,22 @@
         "high": 0,
         "medium": 0,
         "low": 1
+      },
+      "security": {
+        "total": 1,
+        "high": 0,
+        "medium": 0,
+        "low": 1
+      },
+      "audit": {
+        "total": 1,
+        "high": 0,
+        "medium": 0,
+        "low": 1
       }
     },
     "byType": {
-      "journal-flag": 17,
+      "journal-flag": 20,
       "audit-failure": 11,
       "workaround": 0
     }
@@ -380,6 +392,39 @@
       "targetSkill": "unknown",
       "suggestedAction": "",
       "detectedAt": "2026-03-31T01:22:41.653Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-341936fb",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/kit/260331-skill-creator-adoption.md",
+      "excerpt": "- raw.githubusercontent.com returned 503 — `gh api` with base64 decode was the reliable path. `skill-discovery` has no pattern for GitHub raw-fetch failures.",
+      "targetSkill": "skill-discovery",
+      "suggestedAction": "",
+      "detectedAt": "2026-03-31T02:48:36.344Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-9c6747f2",
+      "type": "journal-flag",
+      "confidence": "low",
+      "source": "docs/journal/kit/260331-whitelist-and-compliance.md",
+      "excerpt": "- The phase plan said to add the checklist to skill-development.md after the CSO section, but skill-development.md already referenced `references/description-validation-checklist.md` (line 109). Created both the inline summary section AND the reference file to be consistent with what was already doc",
+      "targetSkill": "security",
+      "suggestedAction": "",
+      "detectedAt": "2026-03-31T04:21:01.425Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-daece139",
+      "type": "journal-flag",
+      "confidence": "low",
+      "source": "docs/journal/skill-rationalization/260331-merge-review-into-audit.md",
+      "excerpt": "- review's `--improvements` mode ran inline (not dispatched to any agent) — easy to miss. Confirmed it was the only truly unique mode by comparing all four flag paths against audit's existing flags before deleting.",
+      "targetSkill": "audit",
+      "suggestedAction": "",
+      "detectedAt": "2026-03-31T05:09:39.003Z",
       "status": "new"
     }
   ]
