@@ -1,13 +1,13 @@
 ---
 name: code-known-findings-schema
-description: "(ePost) Schema for .epost-data/code/known-findings.json — code review findings persistence layer"
+description: "(ePost) Schema for reports/known-findings/code.json — code review findings persistence layer"
 user-invocable: false
 disable-model-invocation: true
 ---
 
 # Code Known-Findings Schema
 
-Schema for `.epost-data/code/known-findings.json` — persistence layer for SEC, PERF, TS, LOGIC, DEAD, ARCH, and STATE findings from code review and hybrid audit passes. Mirrors `.epost-data/ui/known-findings.json` with code-review-specific categories.
+Schema for `reports/known-findings/code.json` — persistence layer for SEC, PERF, TS, LOGIC, DEAD, ARCH, and STATE findings from code review and hybrid audit passes. Mirrors `reports/known-findings/ui-components.json` with code-review-specific categories.
 
 Rule IDs from `code-review-standards.md`: SEC-001..008, PERF-001..006, TS-001..006, LOGIC-001..006, DEAD-001..003, ARCH-001..005, STATE-001..004
 

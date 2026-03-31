@@ -58,4 +58,4 @@ See `a11y` skill for known-findings database documentation. Schema at `.claude/a
 ## Related Documents
 
 - `ios/development/references/tester.md` — iOS testing patterns (includes accessibilityIdentifier examples)
-- `.epost-data/a11y/known-findings.json` — Project-specific known violations (if exists)
+- `reports/known-findings/a11y.json` — Project-specific known violations (if exists)

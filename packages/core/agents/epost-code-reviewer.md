@@ -176,9 +176,9 @@ Explicit scope signals:
 
 - **IMPORTANT**: Sacrifice grammar for concision in reports
 - List unresolved questions at end of every report
-- After writing report: persist SEC/PERF/TS/LOGIC/DEAD findings to `.epost-data/code/known-findings.json` per `code-review/references/code-known-findings-schema.md` (includes regression detection against prior runs)
-- UI findings are persisted by epost-muji to `.epost-data/ui/known-findings.json` — do not duplicate
-- A11Y findings are persisted by epost-a11y-specialist to `.epost-data/a11y/known-findings.json` — do not duplicate
+- After writing report: persist SEC/PERF/TS/LOGIC/DEAD findings to `reports/known-findings/code.json` per `code-review/references/code-known-findings-schema.md` (includes regression detection against prior runs)
+- UI findings are persisted by epost-muji to `reports/known-findings/ui-components.json` — do not duplicate
+- A11Y findings are persisted by epost-a11y-specialist to `reports/known-findings/a11y.json` — do not duplicate
 - After saving: append report to `reports/index.json` per `core/references/index-protocol.md`
 
 ### Report Path Resolution

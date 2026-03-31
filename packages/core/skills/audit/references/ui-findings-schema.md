@@ -7,7 +7,7 @@ disable-model-invocation: true
 
 # UI Known-Findings Schema
 
-Schema for `reports/known-findings/ui-components.json` — the persistence layer for `/fix --ui`, `/review --ui`, and `/audit --close --ui` workflows. Mirrors `.epost-data/a11y/known-findings.json` (v1.3 schema) with UI-specific field substitutions.
+Schema for `reports/known-findings/ui-components.json` — the persistence layer for `/fix --ui`, `/review --ui`, and `/audit --close --ui` workflows. Mirrors `reports/known-findings/a11y.json` (v1.3 schema) with UI-specific field substitutions.
 
 ## Empty Template (bootstrap)
 

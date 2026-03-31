@@ -408,9 +408,9 @@ In hybrid mode, the orchestrator (code-reviewer) writes session.json — muji do
 
 ### Step 5b: Persist Findings (always)
 
-After writing the Markdown report, persist findings to `.epost-data/ui/known-findings.json`:
+After writing the Markdown report, persist findings to `reports/known-findings/ui-components.json`:
 
-1. Check if `.epost-data/ui/known-findings.json` exists
+1. Check if `reports/known-findings/ui-components.json` exists
    - If not: create it with empty `findings: []` array (schema: `audit/references/ui-findings-schema.md`)
 2. For each finding in this audit with severity critical, high, or medium:
    - Generate next available `id` (max existing id + 1, starting at 1 for empty DB)
@@ -419,7 +419,7 @@ After writing the Markdown report, persist findings to `.epost-data/ui/known-fin
    - Deduplication check: skip if entry with same `rule_id` AND `file_pattern` already exists with `resolved: false`
    - Append to `findings` array
 3. Save updated JSON
-4. Report: "Persisted {N} findings to `.epost-data/ui/known-findings.json`"
+4. Report: "Persisted {N} findings to `reports/known-findings/ui-components.json`"
 
 ### Step 5c: A11Y Findings — Collect Only (No Delegation)
 

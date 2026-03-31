@@ -24,6 +24,7 @@ const path = require('path');
 // ─── DB Paths ───
 
 const DB_PATHS = [
+  'reports/known-findings/code.json',
   'reports/known-findings/ui-components.json',
   'reports/known-findings/a11y.json',
 ];
