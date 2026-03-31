@@ -7,7 +7,7 @@ Detect translation keys used in code but missing from the Google Sheet, and appe
 ### 1. Load config
 
 ```javascript
-const { loadConfig, validateConfig } = require('.claude/skills/web-i18n/scripts/env-config.cjs');
+const { loadConfig, validateConfig } = require('./scripts/env-config.cjs');
 const config = loadConfig();
 validateConfig(config);
 ```
@@ -31,7 +31,7 @@ Collect all unique keys into a `Set<string>`.
 ### 3. Authenticate + read existing keys
 
 ```javascript
-const { authenticate, readSheet, getSheetTabs } = require('.claude/skills/web-i18n/scripts/sheets-client.cjs');
+const { authenticate, readSheet, getSheetTabs } = require('./scripts/sheets-client.cjs');
 const auth = authenticate(config.serviceAccountKeyPath);
 ```
 
@@ -56,7 +56,7 @@ If `newKeys.length === 0`: print "No new keys found. Sheet is up to date." and e
 ### 5. Load EN values from local messages
 
 ```javascript
-const { flatten } = require('.claude/skills/web-i18n/scripts/key-converter.cjs');
+const { flatten } = require('./scripts/key-converter.cjs');
 const enPath = path.join(config.messagesDir, 'en.json');
 let enFlat = {};
 if (fs.existsSync(enPath)) {
@@ -69,7 +69,7 @@ For each new key: `enValue = enFlat[key] || ''` (empty if not in local messages)
 ### 6. Resolve target tab per key
 
 ```javascript
-const { resolveTab } = require('.claude/skills/web-i18n/scripts/tab-resolver.cjs');
+const { resolveTab } = require('./scripts/tab-resolver.cjs');
 const availableTabs = await getSheetTabs(auth, config.googleSheetId);
 ```
 
@@ -90,7 +90,7 @@ const headerRow = (await readSheet(auth, config.googleSheetId, `${tab}!1:1`))[0]
 Build each row aligned to tab header columns — locale columns left empty:
 
 ```javascript
-const { appendRows } = require('.claude/skills/web-i18n/scripts/sheets-client.cjs');
+const { appendRows } = require('./scripts/sheets-client.cjs');
 
 function buildRow(headers, key, enVal) {
   return headers.map(col => {

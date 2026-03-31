@@ -9,7 +9,7 @@ Exits with code 1 if any **missing** keys found (CI gate).
 ### 1. Load config
 
 ```javascript
-const { loadConfig, validateConfig } = require('.claude/skills/web-i18n/scripts/env-config.cjs');
+const { loadConfig, validateConfig } = require('./scripts/env-config.cjs');
 const config = loadConfig();
 validateConfig(config);
 ```
