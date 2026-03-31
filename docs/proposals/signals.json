@@ -1,8 +1,8 @@
 {
-  "generated": "2026-03-31T09:59:32.182Z",
+  "generated": "2026-03-31T11:29:13.519Z",
   "summary": {
-    "total": 37,
-    "new": 37,
+    "total": 38,
+    "new": 38,
     "proposed": 0,
     "dismissed": 0,
     "bySkill": {
@@ -49,9 +49,9 @@
         "low": 2
       },
       "unknown": {
-        "total": 8,
+        "total": 9,
         "high": 4,
-        "medium": 3,
+        "medium": 4,
         "low": 1
       },
       "loop": {
@@ -86,7 +86,7 @@
       }
     },
     "byType": {
-      "journal-flag": 26,
+      "journal-flag": 27,
       "audit-failure": 11,
       "workaround": 0
     }
@@ -497,6 +497,17 @@
       "targetSkill": "skill-discovery",
       "suggestedAction": "",
       "detectedAt": "2026-03-31T09:14:38.537Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-2ff76ea4",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/core-skills/260331-skill-gap-updates.md",
+      "excerpt": "Nothing notable — all three were clean additive changes with no conflicts.",
+      "targetSkill": "unknown",
+      "suggestedAction": "",
+      "detectedAt": "2026-03-31T10:12:53.828Z",
       "status": "new"
     }
   ]

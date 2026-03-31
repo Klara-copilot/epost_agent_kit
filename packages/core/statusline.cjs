@@ -12,42 +12,7 @@ const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
-
-// ── ANSI Colors ───────────────────────────────────────────────────────────────
-
-const RESET = '\x1b[0m';
-const DIM   = '\x1b[2m';
-const GREEN   = '\x1b[32m';
-const YELLOW  = '\x1b[33m';
-const MAGENTA = '\x1b[35m';
-const CYAN    = '\x1b[36m';
-
-const useColor = !process.env.NO_COLOR;
-
-function colorize(text, code) {
-  return useColor ? `${code}${text}${RESET}` : String(text);
-}
-const cyan    = t => colorize(t, CYAN);
-const yellow  = t => colorize(t, YELLOW);
-const magenta = t => colorize(t, MAGENTA);
-const dim     = t => colorize(t, DIM);
-
-/** Threshold-based color for context % */
-function ctxColor(pct) {
-  if (pct >= 85) return '\x1b[31m'; // red
-  if (pct >= 70) return YELLOW;
-  return GREEN;
-}
-
-/** Unicode progress bar ▰▱ */
-function progressBar(pct, width = 12) {
-  const clamped = Math.max(0, Math.min(100, pct));
-  const filled  = Math.round((clamped / 100) * width);
-  const empty   = width - filled;
-  if (!useColor) return '▰'.repeat(filled) + '▱'.repeat(empty);
-  const color = ctxColor(pct);
-  return `${color}${'▰'.repeat(filled)}${DIM}${'▱'.repeat(empty)}${RESET}`;
-}
+const { cyan, yellow, magenta, dim, getContextColor: ctxColor, coloredBar: progressBar, RESET } = require('./hooks/lib/colors.cjs');
 
 // ── Git Info ──────────────────────────────────────────────────────────────────
 
@@ -112,7 +77,7 @@ async function main() {
   if (contextSize > 0) {
     const preCalc = data.context_window?.used_percentage;
     if (typeof preCalc === 'number' && preCalc >= 0) {
-      contextPct = Math.round(preCalc);
+      contextPct = Math.min(100, Math.round(preCalc));
     } else {
       const tokens = (usage.input_tokens ?? 0)
         + (usage.cache_creation_input_tokens ?? 0)
@@ -127,7 +92,7 @@ async function main() {
   try {
     const cachePath = process.env.CK_USAGE_CACHE_PATH
       || path.join(os.tmpdir(), 'ck-usage-limits-cache.json');
-    if (fs.existsSync(cachePath)) {
+    {
       const cache = JSON.parse(fs.readFileSync(cachePath, 'utf8'));
       if (cache.status !== 'unavailable') {
         const fiveHour = cache.data?.five_hour;

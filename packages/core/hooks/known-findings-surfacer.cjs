@@ -24,8 +24,9 @@ const path = require('path');
 // ─── DB Paths ───
 
 const DB_PATHS = [
-  'reports/known-findings/ui-components.json',
-  'reports/known-findings/a11y.json',
+  '.epost-data/code/known-findings.json',
+  '.epost-data/ui/known-findings.json',
+  '.epost-data/a11y/known-findings.json',
 ];
 
 // ─── In-memory cache (lives for duration of this hook invocation) ───
@@ -47,17 +48,15 @@ function loadFindings(cwd) {
   let anyLoaded = false;
 
   for (const relPath of DB_PATHS) {
-    const absPath = path.join(cwd, relPath);
-    if (!fs.existsSync(absPath)) continue;
     try {
-      const raw = fs.readFileSync(absPath, 'utf8');
+      const raw = fs.readFileSync(path.join(cwd, relPath), 'utf8');
       const db = JSON.parse(raw);
       if (Array.isArray(db.findings)) {
         all.push(...db.findings);
         anyLoaded = true;
       }
     } catch {
-      // Silently skip malformed DBs
+      // Missing or malformed DB — skip silently
     }
   }
 
@@ -99,24 +98,11 @@ function findingMatchesFile(finding, normalizedFilePath) {
 
 // ─── Main ───
 
-try {
-  // Read hook input from stdin
-  let input = '';
-  process.stdin.setEncoding('utf8');
-  // For PostToolUse hooks, input arrives via stdin as JSON
-  const chunks = [];
-  process.stdin.on('data', chunk => chunks.push(chunk));
-  process.stdin.on('end', () => {
-    input = chunks.join('');
-    run(input);
-  });
-
-  // Handle case where stdin is empty (non-interactive invocation)
-  process.stdin.on('error', () => process.exit(0));
-
-} catch {
-  process.exit(0);
-}
+const chunks = [];
+process.stdin.setEncoding('utf8');
+process.stdin.on('data', chunk => chunks.push(chunk));
+process.stdin.on('end', () => run(chunks.join('')));
+process.stdin.on('error', () => process.exit(0));
 
 /**
  * @param {string} rawInput
