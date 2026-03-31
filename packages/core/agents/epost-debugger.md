@@ -6,6 +6,7 @@ color: red
 icon: 🐛
 skills: [core, skill-discovery, debug, knowledge, error-recovery, journal]
 memory: project
+allowedTools: [Read, Glob, Grep, Write, Edit, Bash]
 handoffs:
   - label: Verify fix
     agent: epost-tester

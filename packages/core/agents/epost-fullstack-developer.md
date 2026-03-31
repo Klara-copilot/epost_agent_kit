@@ -7,6 +7,7 @@ icon: 🔧
 skills: [core, skill-discovery, knowledge, cook, journal]
 memory: project
 permissionMode: acceptEdits
+allowedTools: [Read, Glob, Grep, Write, Edit, Bash]
 handoffs:
   - label: Review code
     agent: epost-code-reviewer

@@ -7,6 +7,7 @@ description: (ePost) Unified multi-platform accessibility orchestrator for iOS, 
 skills: [core, skill-discovery, a11y, knowledge-retrieval]
 memory: project
 permissionMode: default
+allowedTools: [Read, Glob, Grep, Write, Edit, Bash]
 handoffs:
   - label: Fix violations
     agent: epost-fullstack-developer

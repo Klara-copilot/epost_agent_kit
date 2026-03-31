@@ -6,6 +6,7 @@ color: purple
 icon: 🔬
 skills: [core, skill-discovery, knowledge]
 permissionMode: default
+allowedTools: [Read, Glob, Grep, WebSearch, WebFetch, Write]
 handoffs:
   - label: Create plan from findings
     agent: epost-planner

@@ -6,6 +6,7 @@ color: blue
 icon: 📝
 skills: [core, skill-discovery, knowledge, docs]
 memory: project
+allowedTools: [Read, Glob, Grep, Write, Edit, Bash]
 handoffs:
   - label: Ship docs
     agent: epost-git-manager

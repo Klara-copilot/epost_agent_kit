@@ -7,6 +7,7 @@ model: sonnet
 skills: [core, skill-discovery, code-review, security, knowledge]
 memory: project
 permissionMode: default
+allowedTools: [Read, Glob, Grep, Write]
 handoffs:
   - label: Ship changes
     agent: epost-git-manager
