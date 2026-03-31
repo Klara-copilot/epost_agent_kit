@@ -10,16 +10,16 @@ const fs = require('fs');
 
 let input = {};
 try {
-  const raw = fs.readFileSync('/dev/stdin').toString();
+  const raw = require('fs').readFileSync('/dev/stdin', 'utf-8');
   input = JSON.parse(raw);
 } catch {
   process.stdout.write(JSON.stringify({ continue: true }));
   process.exit(0);
 }
 
-// Only fire for epost-planner
-const agentName = input?.agent_name || input?.subagent_name || '';
-if (!agentName.includes('planner')) {
+// Only fire for epost-planner (SubagentStop uses agent_type field)
+const agentType = input?.agent_type || '';
+if (!agentType.toLowerCase().includes('plan')) {
   process.stdout.write(JSON.stringify({ continue: true }));
   process.exit(0);
 }
@@ -33,9 +33,9 @@ const planWritten = toolResults.some(r => {
 
 if (planWritten) {
   const message = 'Plan complete. Run `/cook` or say "implement the plan" to start building.';
-  process.stdout.write(JSON.stringify({ continue: true, stdout: message }));
-} else {
-  process.stdout.write(JSON.stringify({ continue: true }));
+  console.log(message);
 }
+
+process.stdout.write(JSON.stringify({ continue: true }));
 
 process.exit(0);

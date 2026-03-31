@@ -26,7 +26,6 @@ fs.writeFileSync(THROTTLE_FILE, String(counter));
 
 if (counter % THROTTLE_EVERY !== 1) {
   // Not time yet — pass through silently
-  process.stdout.write(JSON.stringify({ continue: true }));
   process.exit(0);
 }
 
@@ -39,5 +38,5 @@ const rules = [
   'Names: kebab-case, self-documenting, no abbreviations.',
 ].join(' ');
 
-process.stdout.write(JSON.stringify({ continue: true, stdout: rules }));
+console.log(rules);
 process.exit(0);
