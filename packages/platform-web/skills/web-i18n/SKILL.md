@@ -52,8 +52,6 @@ I18N_FALLBACK_SHEET_TAB=Common             # tabs mode: fallback tab
 
 ### Scripts
 
-Available at `.claude/skills/web-i18n/scripts/`:
-
 | Script | Purpose |
 |--------|---------|
 | `env-config.cjs` | Read + validate `I18N_*` env vars from `.env.local` |

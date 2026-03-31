@@ -9,7 +9,7 @@ Fetch translations from the Google Sheet's Result tab and write locale JSON file
 Run the env-config script to read configuration:
 
 ```javascript
-const { loadConfig, validateConfig } = require('.claude/skills/web-i18n/scripts/env-config.cjs');
+const { loadConfig, validateConfig } = require('./scripts/env-config.cjs');
 const config = loadConfig();
 validateConfig(config);
 ```
@@ -25,7 +25,7 @@ Config fields used:
 ### 2. Authenticate
 
 ```javascript
-const { authenticate, readSheet } = require('.claude/skills/web-i18n/scripts/sheets-client.cjs');
+const { authenticate, readSheet } = require('./scripts/sheets-client.cjs');
 const auth = authenticate(config.serviceAccountKeyPath);
 ```
 
@@ -72,7 +72,7 @@ for (const row of rows.slice(1)) {
 For each locale:
 
 ```javascript
-const { unflatten } = require('.claude/skills/web-i18n/scripts/key-converter.cjs');
+const { unflatten } = require('./scripts/key-converter.cjs');
 const fs = require('fs');
 const path = require('path');
 
