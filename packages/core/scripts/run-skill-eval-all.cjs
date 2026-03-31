@@ -213,8 +213,11 @@ runBatch().then(() => {
   // Write machine-readable results to reports/
   const reportsDir = path.join(cwd, 'reports');
   if (fs.existsSync(reportsDir)) {
-    const ts = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 16);
-    const reportPath = path.join(reportsDir, `${ts.replace('T', '-').replace(/-/g, '').slice(0, 12)}-skill-eval-all.json`);
+    // Format: YYMMDD-HHMM (e.g. 260331-1430) matching kit naming convention
+    const now = new Date();
+    const pad = n => String(n).padStart(2, '0');
+    const ts = `${String(now.getFullYear()).slice(2)}${pad(now.getMonth()+1)}${pad(now.getDate())}-${pad(now.getHours())}${pad(now.getMinutes())}`;
+    const reportPath = path.join(reportsDir, `${ts}-skill-eval-all.json`);
     fs.writeFileSync(reportPath, JSON.stringify({
       runAt: new Date().toISOString(),
       model: model || 'default',
