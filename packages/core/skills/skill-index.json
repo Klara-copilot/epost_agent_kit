@@ -371,7 +371,7 @@
     },
     {
       "name": "knowledge",
-      "description": "(ePost) Use when you need prior art, past decisions, existing patterns, or external API/library documentation — activates knowledge retrieval from internal docs and external sources. Also use to capture learnings after completing a task.",
+      "description": "(ePost) Use when retrieving prior decisions, internal patterns, or known context — NOT for general how-to questions about external libraries. Also use to capture learnings after completing a non-trivial task.",
       "category": "knowledge",
       "tier": "discoverable",
       "keywords": [
@@ -427,7 +427,7 @@
     },
     {
       "name": "loop",
-      "description": "(ePost) Use when user wants to improve a metric like \\\"test coverage\\\", \\\"bundle size\\\", \\\"lint errors\\\", or \\\"Lighthouse score\\\" over multiple iterations — runs autonomous improvement loop until target is met",
+      "description": "(ePost) Use when user wants to autonomously improve a metric over multiple iterations — test coverage, bundle size, lint errors, Lighthouse score. Key phrases: \\\"keep improving\\\", \\\"fix all X\\\", \\\"improve until target is met\\\". NOT for polling or status checks.",
       "category": "workflow",
       "tier": "discoverable",
       "keywords": [
@@ -463,7 +463,7 @@
     },
     {
       "name": "mermaidjs",
-      "description": "(ePost) Use when user asks to \\\"create a diagram\\\", \\\"draw a flow chart\\\", \\\"visualize this system\\\", or \\\"show the architecture\\\" — generates Mermaid diagrams (flow, sequence, ER, state machine, Gantt)",
+      "description": "(ePost) Use when user wants a Mermaid diagram — flow chart, sequence diagram, state machine, Gantt, or architecture visualization using Mermaid syntax specifically. NOT for generating code-based data models or ER schemas.",
       "category": "knowledge",
       "tier": "discoverable",
       "keywords": [
@@ -757,7 +757,7 @@
     },
     {
       "name": "thinking",
-      "description": "(ePost) Use when stuck after 2+ failed attempts, hitting complexity spirals, or facing complex analysis that requires step-by-step hypothesis testing before acting",
+      "description": "(ePost) Use when user says \\\"think deeply\\\", \\\"use extended thinking\\\", \\\"step-by-step analysis\\\", or when stuck after multiple failed attempts and needs systematic hypothesis testing",
       "category": "workflow",
       "tier": "discoverable",
       "keywords": [

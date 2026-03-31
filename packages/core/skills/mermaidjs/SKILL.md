@@ -1,6 +1,6 @@
 ---
 name: mermaidjs
-description: "(ePost) Use when user asks to \"create a diagram\", \"draw a flow chart\", \"visualize this system\", or \"show the architecture\" — generates Mermaid diagrams (flow, sequence, ER, state machine, Gantt)"
+description: "(ePost) Use when user wants a Mermaid diagram — flow chart, sequence diagram, state machine, Gantt, or architecture visualization using Mermaid syntax specifically. NOT for generating code-based data models or ER schemas."
 user-invocable: true
 category: knowledge
 

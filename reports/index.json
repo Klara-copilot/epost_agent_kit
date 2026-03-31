@@ -3,6 +3,16 @@
   "updatedAt": "2026-03-31",
   "entries": [
     {
+      "id": "epost-fullstack-developer-260331-1531-skill-description-fixes",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "Fix 11 Skill Descriptions That Failed Trigger Evals",
+      "verdict": "DONE",
+      "plan": "plans/260331-1518-skill-description-fixes",
+      "file": "Users/than/Projects/epost_agent_kit/plans/260331-1518-skill-description-fixes/reports/260331-1531-skill-description-fixes-epost-fullstack-developer.md",
+      "date": "2026-03-31"
+    },
+    {
       "id": "epost-fullstack-developer-260331-1442-i18n-commands",
       "type": "implementation",
       "agent": "epost-fullstack-developer",

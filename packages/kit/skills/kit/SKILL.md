@@ -1,6 +1,6 @@
 ---
 name: kit
-description: (ePost) Use when user says "create an agent", "add a skill", "write a hook", "optimize a skill", or "kit authoring" — entry point for epost-kit content creation and optimization workflows
+description: (ePost) Use when creating, editing, or improving kit content — agents, skills, hooks; or when user says "kit authoring", "scaffold a skill", "add an agent", "write a hook"
 user-invocable: true
 context: fork
 agent: epost-fullstack-developer

@@ -1,6 +1,6 @@
 ---
 name: ios-ui-lib
-description: (ePost) Use when referencing iOS theme SwiftUI components, design tokens, or platform-specific token mappings
+description: (ePost) Use when looking up iOS theme SwiftUI component APIs, iOS design tokens, or platform-specific color/typography token mappings
 user-invocable: false
 
 metadata:
