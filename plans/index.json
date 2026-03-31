@@ -5,7 +5,7 @@
     "active": 42,
     "completed": 0,
     "archived": 1,
-    "total": 43
+    "total": 44
   },
   "plans": [
     {
@@ -767,6 +767,26 @@
         "consensus-voting"
       ],
       "file": "plans/260331-1039-whitelist-and-compliance/plan.md"
+    },
+    {
+      "id": "PLAN-0089",
+      "title": "Integrate Skill-Creator Python Scripts into Kit Hooks/Scripts",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-31",
+      "authors": [
+        "epost-planner"
+      ],
+      "tags": [
+        "skill-creator",
+        "hooks",
+        "python",
+        "validation",
+        "eval",
+        "benchmark",
+        "packaging"
+      ],
+      "file": "plans/260331-1232-skill-creator-integration/plan.md"
     }
   ]
 }

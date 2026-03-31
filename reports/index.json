@@ -3,6 +3,36 @@
   "updatedAt": "2026-03-31",
   "entries": [
     {
+      "id": "epost-fullstack-developer-260331-1244-phases2-4-eval-optimize-report-package",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "Skill-Creator Integration Phases 2-4 — Eval, Optimize, Report, Package",
+      "verdict": "DONE",
+      "plan": "plans/260331-1232-skill-creator-integration",
+      "path": "plans/260331-1232-skill-creator-integration/reports/260331-1244-phases2-4-eval-optimize-report-package-epost-fullstack-developer.md",
+      "created": "2026-03-31"
+    },
+    {
+      "id": "epost-fullstack-developer-260331-1238-phase1-validation-gate",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "Skill-Creator Integration Phase 1 — Validation Gate",
+      "verdict": "DONE",
+      "plan": "plans/260331-1232-skill-creator-integration",
+      "path": "plans/260331-1232-skill-creator-integration/reports/260331-1238-phase1-validation-gate-epost-fullstack-developer.md",
+      "created": "2026-03-31"
+    },
+    {
+      "id": "epost-planner-260331-1232-skill-creator-integration",
+      "type": "plan",
+      "agent": "epost-planner",
+      "title": "Skill-Creator Integration — Python bridge into kit hooks/scripts",
+      "verdict": "READY",
+      "plan": "plans/260331-1232-skill-creator-integration",
+      "path": "reports/260331-1232-skill-creator-integration-epost-planner.md",
+      "created": "2026-03-31"
+    },
+    {
       "id": "epost-fullstack-developer-260331-1107-whitelist-and-compliance",
       "type": "implementation",
       "agent": "epost-fullstack-developer",

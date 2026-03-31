@@ -1,15 +1,15 @@
 {
-  "generated": "2026-03-31T05:09:39.142Z",
+  "generated": "2026-03-31T05:58:01.442Z",
   "summary": {
-    "total": 31,
-    "new": 31,
+    "total": 33,
+    "new": 33,
     "proposed": 0,
     "dismissed": 0,
     "bySkill": {
       "core": {
-        "total": 4,
+        "total": 5,
         "high": 0,
-        "medium": 3,
+        "medium": 4,
         "low": 1
       },
       "test": {
@@ -77,10 +77,16 @@
         "high": 0,
         "medium": 0,
         "low": 1
+      },
+      "skill-creator": {
+        "total": 1,
+        "high": 0,
+        "medium": 0,
+        "low": 1
       }
     },
     "byType": {
-      "journal-flag": 20,
+      "journal-flag": 22,
       "audit-failure": 11,
       "workaround": 0
     }
@@ -425,6 +431,28 @@
       "targetSkill": "audit",
       "suggestedAction": "",
       "detectedAt": "2026-03-31T05:09:39.003Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-cf8fc29d",
+      "type": "journal-flag",
+      "confidence": "low",
+      "source": "docs/journal/skill-creator-integration/260331-phase1-validation-gate.md",
+      "excerpt": "- `quick_validate.py` exits with code 1 for all failures — the exit code alone doesn't distinguish \"missing required field\" from \"unexpected key\". Had to parse stdout message text to classify level. [skill-creator SKILL.md] does not document this contract explicitly; it's an implementation detail of",
+      "targetSkill": "skill-creator",
+      "suggestedAction": "",
+      "detectedAt": "2026-03-31T05:58:01.302Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-ce2da0c3",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/skill-creator-integration/260331-phases2-4-eval-optimize-report-package.md",
+      "excerpt": "Python availability check needed to be in each script independently (not imported from skill-validate.cjs) because the bridge scripts live in `scripts/` not `hooks/lib/` — requiring across those directories without a shared module pattern would have created a fragile dependency. Kept `findPython()` ",
+      "targetSkill": "core",
+      "suggestedAction": "",
+      "detectedAt": "2026-03-31T05:58:01.302Z",
       "status": "new"
     }
   ]
