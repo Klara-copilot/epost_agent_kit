@@ -1,0 +1,11 @@
+[
+  {"query": "working in the Inbox module — add filter feature", "should_trigger": true},
+  {"query": "add a B2B Communities feature for organizations", "should_trigger": true},
+  {"query": "implement Smart Send scheduling in the Composer", "should_trigger": true},
+  {"query": "add monitoring dashboard to the Monitoring module", "should_trigger": true},
+  {"query": "Archive module needs a new retention policy screen", "should_trigger": true},
+  {"query": "add a generic web page", "should_trigger": false},
+  {"query": "implement a B2C consumer feature", "should_trigger": false},
+  {"query": "fix a bug in the component", "should_trigger": false},
+  {"query": "add a backend endpoint", "should_trigger": false}
+]

@@ -1,0 +1,11 @@
+[
+  {"query": "what props does the klara-theme Button accept", "should_trigger": true},
+  {"query": "use the klara-theme Card component in my view", "should_trigger": true},
+  {"query": "check the shadcn Dialog component API", "should_trigger": true},
+  {"query": "what variants are available for the Badge component", "should_trigger": true},
+  {"query": "how do I use the theme provider from klara-theme", "should_trigger": true},
+  {"query": "build a custom button component from scratch", "should_trigger": false},
+  {"query": "fix the button style bug", "should_trigger": false},
+  {"query": "audit UI components for accessibility", "should_trigger": false},
+  {"query": "add a new component to the design system", "should_trigger": false}
+]

@@ -1,0 +1,10 @@
+[
+  {"query": "discover relevant skills for this task", "should_trigger": true},
+  {"query": "load skills for working with iOS", "should_trigger": true},
+  {"query": "what skills apply to this backend task", "should_trigger": true},
+  {"query": "detect platform and load matching skills", "should_trigger": true},
+  {"query": "list all available skills", "should_trigger": false},
+  {"query": "what agents are available", "should_trigger": false},
+  {"query": "implement the feature", "should_trigger": false},
+  {"query": "fix the bug", "should_trigger": false}
+]

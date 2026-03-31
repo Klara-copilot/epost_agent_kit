@@ -1,0 +1,11 @@
+[
+  {"query": "create a new agent for iOS development", "should_trigger": true},
+  {"query": "add a skill for backend debugging", "should_trigger": true},
+  {"query": "write a pre-commit hook for lint validation", "should_trigger": true},
+  {"query": "optimize the skill description for better triggering", "should_trigger": true},
+  {"query": "kit authoring — scaffold a new workflow skill", "should_trigger": true},
+  {"query": "implement a feature using the kit", "should_trigger": false},
+  {"query": "create a script to automate deployments", "should_trigger": false},
+  {"query": "write documentation for the project", "should_trigger": false},
+  {"query": "review the agent configuration", "should_trigger": false}
+]

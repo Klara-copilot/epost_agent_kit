@@ -1,0 +1,11 @@
+[
+  {"query": "run all 4 phases in parallel", "should_trigger": true},
+  {"query": "execute all phases simultaneously", "should_trigger": true},
+  {"query": "parallel implementation — 3 independent tasks", "should_trigger": true},
+  {"query": "dispatch all non-overlapping phases at once", "should_trigger": true},
+  {"query": "subagent-driven parallel execution", "should_trigger": true},
+  {"query": "implement the feature", "should_trigger": false},
+  {"query": "plan the work into phases", "should_trigger": false},
+  {"query": "split this into a separate PR", "should_trigger": false},
+  {"query": "review each phase independently", "should_trigger": false}
+]

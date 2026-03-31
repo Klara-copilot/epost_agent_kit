@@ -1,0 +1,11 @@
+[
+  {"query": "add a Jetpack Compose screen for the inbox", "should_trigger": true},
+  {"query": "fix the Android crash in the notification service", "should_trigger": true},
+  {"query": "implement Hilt dependency injection for UserService", "should_trigger": true},
+  {"query": "Kotlin coroutine issue — flow not collecting", "should_trigger": true},
+  {"query": "add a Room database migration", "should_trigger": true},
+  {"query": "add an iOS SwiftUI view", "should_trigger": false},
+  {"query": "fix the web React component", "should_trigger": false},
+  {"query": "write a backend Java endpoint", "should_trigger": false},
+  {"query": "add Android TalkBack label", "should_trigger": false}
+]

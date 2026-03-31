@@ -48,6 +48,7 @@ scripts:
   - archive-plan.cjs
   - generate-skill-index.cjs
   - run-skill-eval.cjs
+  - run-skill-eval-all.cjs
   - run-skill-benchmark.cjs
   - run-skill-optimize.cjs
   - run-skill-improve-desc.cjs

@@ -1,0 +1,11 @@
+[
+  {"query": "what do we know about the auth implementation", "should_trigger": true},
+  {"query": "load deep context on the payment module", "should_trigger": true},
+  {"query": "check for prior art on this pattern", "should_trigger": true},
+  {"query": "look up the previous decision on state management", "should_trigger": true},
+  {"query": "capture learnings from this debug session", "should_trigger": true},
+  {"query": "how does React work", "should_trigger": false},
+  {"query": "implement the feature", "should_trigger": false},
+  {"query": "fix the test", "should_trigger": false},
+  {"query": "write docs for this", "should_trigger": false}
+]
