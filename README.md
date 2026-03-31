@@ -1,115 +1,163 @@
 # epost_agent_kit
 
-A modular multi-agent toolkit for Claude Code. Installs specialized AI agents, skills, and hooks into your project via the `epost-kit` CLI.
+A multi-agent development toolkit for Claude Code — 10 specialized agents, 51 skills, one install command.
 
-## What It Is
+## What It Does
 
-epost_agent_kit provides a layered set of packages — each contributing agents, skills, and hooks — that wire into Claude Code's agent and skill system. You pick a profile (e.g. `web-fullstack`) and the CLI assembles the right packages into your project's `.claude/` directory.
+- **Routes automatically** — every prompt is classified by intent and dispatched to the right agent
+- **Loads skills on demand** — platform skills (web, iOS, Android, backend) load when needed, not all at startup
+- **Covers the full dev cycle** — plan → build → test → review → ship, each step delegated to a specialist
+- **Composable by profile** — install only the packages your stack needs
 
-The main conversation acts as **orchestrator**: it reads context, routes to the right agent via the Agent tool, and merges results. Agents are specialized; they do not spawn further agents.
-
-## Packages
-
-| Package | Layer | What It Provides |
-|---------|-------|-----------------|
-| `core` | 0 | 9 agents (planner, developer, reviewer, debugger, tester, researcher, docs, git, brainstormer) + 25 cross-cutting skills |
-| `kit` | 1 | Kit authoring tools: skill-creator, skill evals, agent/skill/hook development guides |
-| `platform-web` | 1 | 10 skills: web-frontend, web-nextjs, web-i18n, web-auth, web-api-routes, web-testing, web-modules + more |
-| `platform-ios` | 1 | iOS development skills (Swift 6, SwiftUI, UIKit) |
-| `platform-android` | 1 | Android skills (Kotlin, Jetpack Compose, Hilt) |
-| `platform-backend` | 1 | Jakarta EE 8 / WildFly skills (Java 8, JAX-RS, Hibernate) |
-| `a11y` | 1 | WCAG 2.1 AA agent + iOS/Android/Web accessibility skills |
-| `design-system` | 2 | `epost-muji` agent, Figma integration, design tokens, UI library pipeline |
-| `domains` | 2 | B2B and B2C business domain knowledge |
-
-## Installation
-
-Requires the CLI (separate repo, globally linked):
+## Quick Start
 
 ```bash
 npm install -g epost-agent-kit-cli
-```
 
-Then initialize a profile in your project:
-
-```bash
-# Install web-fullstack profile (core + web + backend + a11y + design-system + domains)
+# Web + backend stack
 epost-kit init --profile web-fullstack
 
-# Install full profile (all packages)
+# All platforms
 epost-kit init --profile full
-
-# Reinstall / update
-epost-kit init
 ```
 
-The CLI writes agents, skills, hooks, and settings into `.claude/`. The `packages/` directory is the source of truth — `.claude/` is regenerated on each init.
+After init, `.claude/` is ready. Your first command:
+
+```
+/get-started
+```
 
 ## Agents
 
-| Agent | Intent |
-|-------|--------|
-| `epost-fullstack-developer` | Build / implement features |
-| `epost-debugger` | Fix bugs, diagnose errors |
-| `epost-planner` | Create implementation plans |
-| `epost-code-reviewer` | Code review and audits |
-| `epost-tester` | Write and validate tests |
-| `epost-researcher` | Technology research |
-| `epost-docs-manager` | Write and manage docs |
-| `epost-git-manager` | Commit, push, create PRs |
-| `epost-a11y-specialist` | WCAG 2.1 AA accessibility |
-| `epost-muji` | Design system / UI components |
+| Agent | Role | Triggers |
+|-------|------|---------|
+| `epost-fullstack-developer` | Builds features across web/iOS/Android/backend | "add", "implement", "make X work" |
+| `epost-planner` | Phased plans with dependency tracking | "plan", "how should we build" |
+| `epost-debugger` | Root cause analysis — not just surface fixes | "broken", "crashes", "why does X" |
+| `epost-code-reviewer` | STRIDE threats + OWASP + code quality | "review", "check before merge" |
+| `epost-tester` | Test suites, coverage, edge case decomposition | "add tests", "is this covered" |
+| `epost-researcher` | Multi-source tech research | "how does X work", "compare A vs B" |
+| `epost-docs-manager` | KB structure, lifecycle, orphan detection | "document this", "update the docs" |
+| `epost-git-manager` | Commit + push + PR with security scan | "commit", "ship it", "done" |
+| `epost-muji` | Figma-to-code, design system, UI/UX | "component", "design token", "Figma" |
+| `epost-a11y-specialist` | WCAG 2.1 AA across iOS/Android/Web | "a11y", "accessibility", "screen reader" |
 
-## Skills
+## Key Workflows
 
-Skills are passive knowledge files loaded by agents or invoked by the user with `/skill-name`. Each skill has a `description` field that drives model-invocation routing.
+### Build a feature
+```
+/cook
+```
+Auto-detects platform from file extensions, checks for an active plan, routes to the right agent. Supports `--fast` for quick tasks, `--parallel` for multi-module work.
 
-Key user-invocable skills: `/cook`, `/fix`, `/plan`, `/debug`, `/test`, `/docs`, `/review`, `/git`, `/get-started`, `/web-i18n`, `/kit`
+### Fix a bug
+```
+/fix
+```
+Root cause first — reads error context, traces origin, applies minimal targeted fix. Never patches symptoms.
 
-## Skill Evals
+### Create an implementation plan
+```
+/plan
+```
+Outputs phased plan with dependency graph. Supports `--fast`, `--deep` (ADRs + trade-offs), `--parallel` (independent phases mapped for concurrent execution).
 
-Trigger evals test whether a skill's description causes Claude to invoke it for the right queries:
+### Ship it
+```
+/git --ship
+```
+Full pipeline: test → security scan → commit → push → PR. Single command, no steps skipped.
 
-```bash
-# Run evals for all skills
-node .claude/scripts/run-skill-eval-all.cjs
+### End-of-day summary
+```
+/git --watzup
+```
+Session summary of all changes since last push — what moved, what's still open.
 
-# Run for a specific skill
-node .claude/scripts/run-skill-eval.cjs --skill-path .claude/skills/web-i18n
+### Sprint retrospective
+```
+/git --retro
+```
+Git-metrics retrospective: commit cadence, churn, author contributions since last tag.
 
-# Filter by pattern
-node .claude/scripts/run-skill-eval-all.cjs --filter "web-*"
+### Edge case coverage
+```
+/test --scenario
+```
+12-dimension decomposition: boundary values, concurrency, auth states, network failure, i18n, and more.
+
+### Explain complex code
+```
+/preview
+```
+Diagrams + ASCII art + prose explanation. Add `--html` for a self-contained interactive HTML page.
+
+### Deploy
+```
+/deploy
+```
+Auto-detects target (Vercel, Netlify, Cloudflare, Railway, Fly.io, Docker) → shows plan → confirms → deploys.
+
+### Security scan
+```
+/security
+```
+STRIDE threat model + OWASP Top 10 scan on the current diff or named feature.
+
+## Skills by Package
+
+| Package | Skills |
+|---------|--------|
+| `core` | cook, fix, plan, debug, test, review, docs, git, security, error-recovery, clean-code, tdd, journal, get-started, skill-discovery, subagent-driven-development |
+| `platform-web` | web-frontend, web-nextjs, web-api-routes, web-i18n, web-auth, web-testing, web-modules, web-a11y, web-ui-lib |
+| `platform-ios` | ios-development, ios-ui-lib, ios-a11y, ios-rag, simulator |
+| `platform-android` | android-development, android-ui-lib, android-a11y |
+| `platform-backend` | backend-javaee, backend-databases |
+| `a11y` | a11y (cross-platform WCAG foundation) |
+| `design-system` | figma, design-tokens, ui-lib-dev, launchpad |
+| `domains` | domain-b2b, domain-b2c |
+| `kit` | kit (agent/skill/hook authoring), skill-creator, audit |
+
+## Packages
+
+| Package | What It Adds |
+|---------|-------------|
+| `core` | 9 agents + 25 cross-cutting skills |
+| `kit` | Skill authoring tools, evals, agent/hook development guides |
+| `platform-web` | Next.js 14 / React 18 / Redux skills + web a11y |
+| `platform-ios` | Swift 6, SwiftUI/UIKit, Xcode skills |
+| `platform-android` | Kotlin, Jetpack Compose, Hilt skills |
+| `platform-backend` | Jakarta EE 8, WildFly, Hibernate skills |
+| `a11y` | `epost-a11y-specialist` agent + platform a11y skills |
+| `design-system` | `epost-muji` agent, Figma pipeline, design tokens |
+| `domains` | B2B and B2C domain knowledge |
+
+## How It Works
+
+```
+packages/          ← source of truth (edit here)
+    └── core/
+    └── platform-web/
+    └── ...
+         ↓ epost-kit init
+.claude/           ← generated output (never edit directly)
+    └── agents/
+    └── skills/
+    └── hooks/
 ```
 
-Requires: `python3`, `pyyaml`, `claude` CLI on PATH.
+**Routing**: Every prompt is classified by intent → dispatched to a specialist agent via the Agent tool → result merged back into main context.
 
-## Repository Structure
+**Skill loading**: Agents load platform skills on demand via `skill-discovery`. Only what's needed, when it's needed.
 
-```
-epost_agent_kit/
-├── packages/              # Source of truth — edit here, not .claude/
-│   ├── core/              # Universal agents + skills
-│   ├── kit/               # Kit authoring tools
-│   ├── platform-web/      # Web platform skills
-│   ├── platform-ios/      # iOS platform skills
-│   ├── platform-android/  # Android platform skills
-│   ├── platform-backend/  # Backend platform skills
-│   ├── a11y/              # Accessibility package
-│   ├── design-system/     # Design system package
-│   └── domains/           # Business domain knowledge
-├── .claude/               # Generated output (gitignored locally, not in repo)
-├── plans/                 # Implementation plans
-├── reports/               # Eval and audit reports
-├── docs/                  # Project documentation
-└── bundles.yaml           # Profile definitions
-```
+**Orchestration**: Main conversation = orchestrator only. Agents do not spawn further agents. Parallel work is dispatched as independent branches from main context and merged.
 
 ## Key Rules
 
-- **Never edit `.claude/` directly** — changes are lost on next `epost-kit init`
-- All edits go in `packages/`
-- Subagents cannot spawn further subagents — multi-agent workflows must be orchestrated from the main conversation
-- `packages/` is committed; `.claude/` is local-only
+- **Never edit `.claude/` directly** — regenerated on every `epost-kit init`, changes are lost
+- All edits belong in `packages/`
+- Subagents cannot spawn further subagents — multi-agent workflows are orchestrated from the main conversation
+- `packages/` is committed; `.claude/` is generated locally
 
 ## License
 
