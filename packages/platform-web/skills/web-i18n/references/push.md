@@ -16,15 +16,31 @@ validateConfig(config);
 
 Scan all `.ts`, `.tsx`, `.js`, `.jsx` files (excluding `node_modules`, `.next`, `dist`).
 
-Patterns to match:
-- `t('SomeKey')` / `t("SomeKey")` → key = `SomeKey`
-- `useTranslations('Namespace')` + `t('subkey')` → `Namespace::subkey`
-- `getTranslations('Namespace')` → same as above
+> **Note**: Key extraction logic mirrors `validate.cjs` — reference that implementation as the source of truth.
 
 For each file:
-1. Collect all `useTranslations('X')` / `getTranslations('X')` namespaces
-2. Prefix `t('key')` calls with active namespace
-3. Bare `t('key')` without namespace → use key as-is
+
+1. **Strip comments first** — remove `//` line comments and `/* */` block comments before scanning to avoid false positives from commented-out keys.
+
+2. **Track ALL translation variable names** (not just `t`):
+   - Match `const {anyVar} = useTranslations('NS')` or `getTranslations('NS')`
+   - Build `varMap: Map<varName, namespace>`
+   - e.g. `const btn = useTranslations('Button')` → `varMap.set('btn', 'Button')`
+
+3. **Find calls for each tracked var**: `btn('key')` → namespace `Button`, key `key`
+
+4. **Handle immediately-invoked**: `useTranslations('NS')('key')` → `NS::key`
+
+5. **Normalize dots to `::` separator**: combine namespace + key then replace ALL `.` with `::`:
+   ```javascript
+   function normalizeKey(ns, key, sep) {
+     const combined = ns ? `${ns}.${key}` : key;
+     return combined.split('.').join(sep);
+   }
+   // e.g. ns='Monitoring.Filter', key='State.title' → 'Monitoring::Filter::State::title'
+   ```
+
+6. **Filter malformed keys**: skip keys ending with `::` or that are empty (from template literals or `t('')` calls).
 
 Collect all unique keys into a `Set<string>`.
 

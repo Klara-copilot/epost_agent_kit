@@ -1,7 +1,7 @@
 ---
 title: "web-i18n Skill — Validate Docs Update (Real-World Findings)"
 description: "Update references and SKILL.md with correct implementation details discovered while building /i18n --validate on luz-epost"
-status: active
+status: completed
 created: 2026-03-31
 updated: 2026-03-31
 effort: 80m
@@ -39,10 +39,10 @@ The `/i18n --validate` command was fully implemented and tested against the real
 
 | # | Phase | Files | Effort | Status |
 |---|-------|-------|--------|--------|
-| 1 | Rewrite `references/validate.md` | validate.md | 45m | todo |
-| 2 | Update `references/pull.md` | pull.md | 15m | todo |
-| 3 | Update `SKILL.md` | SKILL.md | 10m | todo |
-| 4 | Update `references/push.md` | push.md | 10m | todo |
+| 1 | Rewrite `references/validate.md` | validate.md | 45m | done |
+| 2 | Update `references/pull.md` | pull.md | 15m | done |
+| 3 | Update `SKILL.md` | SKILL.md | 10m | done |
+| 4 | Update `references/push.md` | push.md | 10m | done |
 
 **Total**: ~80 min
 
