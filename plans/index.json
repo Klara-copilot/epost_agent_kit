@@ -2,10 +2,10 @@
   "version": "1.0.0",
   "updated": "2026-03-31",
   "counts": {
-    "active": 43,
+    "active": 44,
     "completed": 0,
     "archived": 1,
-    "total": 45
+    "total": 46
   },
   "plans": [
     {
@@ -805,6 +805,24 @@
         "quality"
       ],
       "file": "plans/260331-1518-skill-description-fixes/plan.md"
+    },
+    {
+      "id": "PLAN-0091",
+      "title": "Enhance All Skill Descriptions to Anthropic Formula",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-31",
+      "authors": [
+        "epost-planner"
+      ],
+      "tags": [
+        "skills",
+        "descriptions",
+        "anthropic",
+        "capability-summary",
+        "CSO"
+      ],
+      "file": "plans/260331-1551-skill-description-enhancement/plan.md"
     }
   ]
 }

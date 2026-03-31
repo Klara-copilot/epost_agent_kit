@@ -12,7 +12,7 @@
   "skills": [
     {
       "name": "audit",
-      "description": "(ePost) Use when user says \"audit\", \"review\", \"run an audit\", \"check quality\", \"check my code\", \"is this good\", \"look at this before I commit\", \"review before merge\", \"a11y audit\", \"code audit\", or \"suggest improvements\" — detects audit type (UI component, a11y, code, or improvements) and dispatches the right specialist",
+      "description": "(ePost) Dispatches targeted quality audits (UI, a11y, code) to the right specialist. Use when user says \"audit\", \"review\", \"run an audit\", \"check quality\", \"check my code\", \"is this good\", \"look at this before I commit\", \"review before merge\", \"a11y audit\", \"code audit\", or \"suggest improvements\" \u2014 detects audit type (UI component, a11y, code, or improvements) and dispatches the right specialist",
       "category": "workflow",
       "tier": "discoverable",
       "keywords": [
@@ -62,7 +62,7 @@
     },
     {
       "name": "clean-code",
-      "description": "(ePost) Use when writing new code, reviewing PRs, refactoring legacy code, or when code smells are detected — loads Clean Code principles for naming, functions, formatting, and error handling",
+      "description": "(ePost) Enforces Clean Code principles for naming, functions, formatting, and error handling. Use when writing new code, reviewing PRs, refactoring legacy code, or when code smells are detected \u2014 loads Clean Code principles for naming, functions, formatting, and error handling",
       "category": "uncategorized",
       "tier": "core",
       "keywords": [
@@ -92,7 +92,7 @@
     },
     {
       "name": "code-review",
-      "description": "(ePost) Use when user says \"review code\", \"check quality\", \"audit this\", or \"look at changed files\" — checks code quality, style, and correctness before commit",
+      "description": "(ePost) Reviews code for quality, style, and correctness before commit. Use when user says \"review code\", \"check quality\", \"audit this\", or \"look at changed files\" \u2014 checks code quality, style, and correctness before commit",
       "category": "quality",
       "tier": "core",
       "keywords": [
@@ -126,7 +126,7 @@
     },
     {
       "name": "cook",
-      "description": "(ePost) Use when user says \"implement\", \"build\", \"add a feature\", \"cook\", \"make this work\", or \"continue the plan\" — dispatches platform-aware feature implementation for web, iOS, Android, or backend",
+      "description": "(ePost) Orchestrates platform-aware feature implementation across web, iOS, Android, and backend. Use when user says \"implement\", \"add a feature\", \"cook\", \"make this work\", or \"continue the plan\" \u2014 dispatches platform-aware feature implementation for web, iOS, Android, or backend",
       "category": "workflow",
       "tier": "discoverable",
       "keywords": [],
@@ -148,7 +148,7 @@
     },
     {
       "name": "core",
-      "description": "(ePost) Use when any agent modifies files, makes architectural decisions, or needs safety and documentation rules",
+      "description": "(ePost) Defines operational boundaries, safety rules, and documentation standards for all agents. Use when any agent modifies files, makes architectural decisions, or needs safety and documentation rules",
       "category": "quality",
       "tier": "core",
       "keywords": [],
@@ -168,7 +168,7 @@
     },
     {
       "name": "debug",
-      "description": "(ePost) Use when user says \"debug\", \"trace this\", \"diagnose\", \"it crashes\", \"why is this failing\", or provides a stack trace — investigates root cause using platform-specific debugging tools",
+      "description": "(ePost) Investigates root causes using platform-specific debugging tools and structured diagnosis. Use when user says \"debug\", \"trace this\", \"diagnose\", \"it crashes\", \"why is this failing\", or provides a stack trace \u2014 investigates root cause using platform-specific debugging tools",
       "category": "workflow",
       "tier": "core",
       "keywords": [
@@ -210,7 +210,7 @@
     },
     {
       "name": "docs",
-      "description": "(ePost) Use when user says \"write docs\", \"update docs\", \"document this\", \"init docs\", \"reorganize documentation\", or \"add component docs\" — detects docs intent (init, update, migrate, component) and runs the right workflow",
+      "description": "(ePost) Generates and maintains project documentation with structured KB workflows. Use when user says \"write docs\", \"update docs\", \"document this\", \"init docs\", \"reorganize documentation\", or \"add component docs\" \u2014 detects docs intent (init, update, migrate, component) and runs the right workflow",
       "category": "workflow",
       "tier": "discoverable",
       "keywords": [],
@@ -230,7 +230,7 @@
     },
     {
       "name": "error-recovery",
-      "description": "(ePost) Use when operations fail transiently — \"timeout\", \"retry\", \"circuit breaker\", \"network error\", or \"graceful degradation\" — applies resilience patterns to recover or degrade safely",
+      "description": "(ePost) Applies resilience patterns \u2014 retries, circuit breakers, graceful degradation \u2014 to failing operations. Use when operations fail transiently \u2014 \"timeout\", \"retry\", \"circuit breaker\", \"network error\", or \"graceful degradation\" \u2014 applies resilience patterns to recover or degrade safely",
       "category": "quality",
       "tier": "discoverable",
       "keywords": [
@@ -272,7 +272,7 @@
     },
     {
       "name": "fix",
-      "description": "(ePost) Use when user says \"fix\", \"broken\", \"error\", \"failing\", \"this doesn't work\", or pastes an error message — identifies error type and applies platform-appropriate fix",
+      "description": "(ePost) Identifies root causes and applies targeted fixes for bugs, errors, and broken behavior. Use when user says \"fix\", \"broken\", \"error\", \"failing\", or pastes an error message \u2014 identifies error type and applies platform-appropriate fix",
       "category": "workflow",
       "tier": "discoverable",
       "keywords": [],
@@ -292,7 +292,7 @@
     },
     {
       "name": "get-started",
-      "description": "(ePost) Use when user says \"get started\", \"I'm new to this project\", \"onboard me\", \"what is this codebase\", or \"help me understand this project\" — discovers project state and delivers a structured onboarding experience",
+      "description": "(ePost) Discovers project state and delivers a structured onboarding experience for new contributors. Use when user says \"get started\", \"onboard me\", \"what is this codebase\", or \"help me understand this project\" \u2014 discovers project state and delivers a structured onboarding experience",
       "category": "workflow",
       "tier": "discoverable",
       "keywords": [
@@ -321,7 +321,7 @@
     },
     {
       "name": "git",
-      "description": "(ePost) Use when user says \"commit\", \"push\", \"create a PR\", \"ship it\", \"done\", \"merge\", \"open a pull request\", or \"ship this feature\" — runs the appropriate git workflow (commit, push, PR creation, or full ship pipeline)",
+      "description": "(ePost) Runs git workflows \u2014 commit, push, PR creation, and full ship pipeline. Use when user says \"commit\", \"push\", \"create a PR\", \"ship it\", \"done\", \"merge\", \"open a pull request\", or \"ship this feature\" \u2014 runs the appropriate git workflow (commit, push, PR creation, or full ship pipeline)",
       "category": "workflow",
       "tier": "discoverable",
       "keywords": [],
@@ -341,7 +341,7 @@
     },
     {
       "name": "journal",
-      "description": "(ePost) Use after completing a significant feature phase, resolving a non-trivial bug, or making a key architectural decision — writes a structured journal entry to docs/journal/ for future reference",
+      "description": "(ePost) Writes structured implementation journal entries for significant decisions and completions. Use after completing a significant feature phase, resolving a non-trivial bug, or making a key architectural decision \u2014 writes a structured journal entry to docs/journal/ for future reference",
       "category": "knowledge",
       "tier": "discoverable",
       "keywords": [
@@ -371,7 +371,7 @@
     },
     {
       "name": "knowledge",
-      "description": "(ePost) Use when retrieving prior decisions, internal patterns, or known context — NOT for general how-to questions about external libraries. Also use to capture learnings after completing a non-trivial task.",
+      "description": "(ePost) Retrieves prior decisions, internal patterns, and project context from the knowledge base. Use when retrieving prior decisions, internal patterns, or known context \u2014 NOT for general how-to questions about external libraries. Also use to capture learnings after completing a non-trivial task.",
       "category": "knowledge",
       "tier": "discoverable",
       "keywords": [
@@ -427,7 +427,7 @@
     },
     {
       "name": "loop",
-      "description": "(ePost) Use when user wants to autonomously improve a metric over multiple iterations — test coverage, bundle size, lint errors, Lighthouse score. Key phrases: \\\"keep improving\\\", \\\"fix all X\\\", \\\"improve until target is met\\\". NOT for polling or status checks.",
+      "description": "(ePost) Autonomously iterates on a metric \u2014 lint errors, Lighthouse score, test suites \u2014 until a goal is met. Use when user wants to autonomously improve a metric over multiple iterations.",
       "category": "workflow",
       "tier": "discoverable",
       "keywords": [
@@ -463,7 +463,7 @@
     },
     {
       "name": "mermaidjs",
-      "description": "(ePost) Use when user wants a Mermaid diagram — flow chart, sequence diagram, state machine, Gantt, or architecture visualization using Mermaid syntax specifically. NOT for generating code-based data models or ER schemas.",
+      "description": "(ePost) Generates Mermaid diagrams \u2014 flowcharts, sequence diagrams, state machines, and architecture visualizations. Use when user wants a Mermaid diagram \u2014 flow chart, sequence diagram, state machine, Gantt, or architecture visualization using Mermaid syntax specifically. NOT for generating code-based data models or ER schemas.",
       "category": "knowledge",
       "tier": "discoverable",
       "keywords": [
@@ -503,7 +503,7 @@
     },
     {
       "name": "plan",
-      "description": "(ePost) Use when user says \"plan\", \"design this\", \"architect\", \"spec out\", \"how should we build\", or \"create a roadmap\" — produces a phased implementation plan scaled to task complexity",
+      "description": "(ePost) Produces phased implementation plans scaled to task complexity with dependency tracking. Use when user says \"plan\", \"design this\", \"architect\", \"spec out\", \"how should we implement\", or \"create a roadmap\" \u2014 produces a phased implementation plan scaled to task complexity",
       "category": "workflow",
       "tier": "discoverable",
       "keywords": [
@@ -541,7 +541,7 @@
     },
     {
       "name": "repomix",
-      "description": "(ePost) Use when user says \"pack this repo\", \"share codebase snapshot\", or \"include remote repo as context\" — bundles repository contents into a single file for LLM consumption or external AI sharing",
+      "description": "(ePost) Bundles repository contents into a single file for LLM consumption or external sharing. Use when user says \"pack this repo\", \"share codebase snapshot\", or \"include remote repo as context\" \u2014 bundles repository contents into a single file for LLM consumption or external AI sharing",
       "category": "knowledge",
       "tier": "core",
       "keywords": [
@@ -572,7 +572,7 @@
     },
     {
       "name": "security",
-      "description": "(ePost) Use when user says \\\"audit security\\\", \\\"review for vulnerabilities\\\", \\\"check STRIDE threats\\\", or \\\"scan for OWASP Top 10\\\" — runs security analysis on a codebase or feature",
+      "description": "(ePost) Runs security analysis \u2014 STRIDE threats, OWASP Top 10, vulnerability scanning \u2014 on code or features. Use when user says \"audit security\", \"review for vulnerabilities\", \"check STRIDE threats\", or \"scan for OWASP Top 10\" \u2014 runs security analysis on a codebase or feature",
       "category": "quality",
       "tier": "core",
       "keywords": [
@@ -615,7 +615,7 @@
     },
     {
       "name": "skill-creator",
-      "description": "(ePost) Use when user says \"create a skill\", \"edit this skill\", \"optimize a skill's description\", \"run skill evals\", or \"benchmark skill performance\" — creates, modifies, and validates Claude Code skills",
+      "description": "(ePost) Creates, modifies, and validates Claude Code skills with eval-driven quality assurance. Use when user says \"create a skill\", \"edit this skill\", \"optimize a skill description\", \"run skill evals\", or \"benchmark skill performance\" \u2014 creates, modifies, and validates Claude Code skills",
       "category": "quality",
       "tier": "discoverable",
       "keywords": [],
@@ -638,7 +638,7 @@
     },
     {
       "name": "skill-discovery",
-      "description": "(ePost) Use at the START of every task to discover and load relevant skills you don't already have. Detects platform, task type, and domain signals then loads matching skills from the index on demand.",
+      "description": "(ePost) Discovers and loads relevant skills on-demand based on platform, task, and domain signals. Use at the START of every task to discover and load relevant skills you do not already have. Detects platform, task type, and domain signals then loads matching skills from the index on demand.",
       "category": "knowledge",
       "tier": "core",
       "keywords": [
@@ -672,7 +672,7 @@
     },
     {
       "name": "subagent-driven-development",
-      "description": "(ePost) Use when a plan has 3+ independent tasks, phases have non-overlapping file ownership, or user says \"parallel implementation\", \"execute all phases\" — provides per-task subagent dispatch with two-stage review",
+      "description": "(ePost) Orchestrates parallel task execution with per-task subagent dispatch and two-stage review. Use when a plan has 3+ independent tasks, phases have non-overlapping file ownership, or user says \"parallel implementation\", \"execute all phases\" \u2014 provides per-task subagent dispatch with two-stage review",
       "category": "knowledge",
       "tier": "discoverable",
       "keywords": [
@@ -704,7 +704,7 @@
     },
     {
       "name": "tdd",
-      "description": "(ePost) Use when user says 'TDD', 'test-first', 'red-green-refactor', wants to build features test-first, or asks for behavior-driven testing",
+      "description": "(ePost) Guides test-first development using the red-green-refactor cycle. Use when user says TDD, test-first, red-green-refactor, wants to create features test-first, or asks for behavior-driven testing",
       "category": "quality",
       "tier": "core",
       "keywords": [
@@ -735,7 +735,7 @@
     },
     {
       "name": "test",
-      "description": "(ePost) Use when user says \"run tests\", \"add tests\", \"check coverage\", \"write unit tests\", or \"validate this works\" — detects platform and runs the appropriate test suite (Jest, XCTest, JUnit, Espresso)",
+      "description": "(ePost) Detects platform and runs the appropriate test suite with reporting. Use when user says \"run tests\", \"add tests\", \"write unit tests\", or \"validate this works\" \u2014 detects platform and runs the appropriate test suite (Jest, XCTest, JUnit, Espresso)",
       "category": "workflow",
       "tier": "discoverable",
       "keywords": [],
@@ -757,7 +757,7 @@
     },
     {
       "name": "thinking",
-      "description": "(ePost) Use when user says \\\"think deeply\\\", \\\"use extended thinking\\\", \\\"step-by-step analysis\\\", or when stuck after multiple failed attempts and needs systematic hypothesis testing",
+      "description": "(ePost) Activates extended thinking for systematic hypothesis testing and deep analysis. Use when user says \"think deeply\", \"use extended thinking\", \"step-by-step analysis\", or when stuck after multiple failed attempts and needs systematic hypothesis testing",
       "category": "workflow",
       "tier": "discoverable",
       "keywords": [

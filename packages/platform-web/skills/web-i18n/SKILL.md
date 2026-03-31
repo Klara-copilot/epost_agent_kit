@@ -1,6 +1,6 @@
 ---
 name: web-i18n
-description: (ePost) Use when working with translations, locale routing, next-intl configuration, internationalization patterns, or syncing translations with Google Sheets
+description: (ePost) Configures next-intl, manages translations, and handles locale routing. Use when working with translations, locale routing, next-intl configuration, internationalization patterns, or syncing translations with Google Sheets
 user-invocable: true
 
 metadata:

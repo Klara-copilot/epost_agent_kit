@@ -1,6 +1,6 @@
 ---
 name: web-modules
-description: (ePost) Use when integrating a component into a B2B module — adding screens, binding APIs, wiring stores, setting up routes
+description: (ePost) Wires B2B module screens — binds APIs, stores, and routes into the module shell. Use when integrating a component into a B2B module — adding screens, binding APIs, wiring stores, setting up routes
 user-invocable: false
 
 metadata:

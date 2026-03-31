@@ -1,15 +1,15 @@
 {
-  "generated": "2026-03-31T08:22:50.295Z",
+  "generated": "2026-03-31T09:14:38.692Z",
   "summary": {
-    "total": 34,
-    "new": 34,
+    "total": 37,
+    "new": 37,
     "proposed": 0,
     "dismissed": 0,
     "bySkill": {
       "core": {
-        "total": 5,
+        "total": 6,
         "high": 0,
-        "medium": 4,
+        "medium": 5,
         "low": 1
       },
       "test": {
@@ -19,9 +19,9 @@
         "low": 0
       },
       "skill-discovery": {
-        "total": 4,
+        "total": 5,
         "high": 0,
-        "medium": 4,
+        "medium": 5,
         "low": 0
       },
       "plan": {
@@ -49,9 +49,9 @@
         "low": 2
       },
       "unknown": {
-        "total": 7,
+        "total": 8,
         "high": 4,
-        "medium": 2,
+        "medium": 3,
         "low": 1
       },
       "loop": {
@@ -86,7 +86,7 @@
       }
     },
     "byType": {
-      "journal-flag": 23,
+      "journal-flag": 26,
       "audit-failure": 11,
       "workaround": 0
     }
@@ -464,6 +464,39 @@
       "targetSkill": "plan",
       "suggestedAction": "",
       "detectedAt": "2026-03-31T07:50:05.245Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-a9b3c7f1",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/skill-evolution/260331-skill-description-fixes.md",
+      "excerpt": "- The `.claude/skills/*/SKILL.md` mirror files don't exist — only `evals/` subdirs are present per skill. Attempted to mirror SKILL.md changes there before discovering this. Only `skill-index.json` needed updating in `.claude/`.\n- Platform skills (android, ios, kit, simulator) are not registered in ",
+      "targetSkill": "core",
+      "suggestedAction": "",
+      "detectedAt": "2026-03-31T08:37:11.367Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-a37722ab",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/skill-description-enhancement/260331-phase2-platform-domain.md",
+      "excerpt": "Edit tool requires the file to be read in the same conversation batch before editing. With 23 files to update, the read-then-edit constraint meant careful sequencing was needed. No skill covered this constraint explicitly — it's a Claude Code tool behavior, not a domain pattern.",
+      "targetSkill": "unknown",
+      "suggestedAction": "",
+      "detectedAt": "2026-03-31T09:14:38.537Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-b637d9bd",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/skill-evolution/260331-skill-description-enhancement-phase1.md",
+      "excerpt": "- scout-block hook blocked bash one-liners containing \"build\", \"target\", \"coverage\" when writing an inline Node.js update script — worked around by writing a temp Python file and executing it. [scout-block] did not cover this pattern; the hook fires on the command text, not just file paths\n- `packag",
+      "targetSkill": "skill-discovery",
+      "suggestedAction": "",
+      "detectedAt": "2026-03-31T09:14:38.537Z",
       "status": "new"
     }
   ]

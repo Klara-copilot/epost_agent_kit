@@ -1,6 +1,6 @@
 ---
 name: kit
-description: (ePost) Use when creating, editing, or improving kit content — agents, skills, hooks; or when user says "kit authoring", "scaffold a skill", "add an agent", "write a hook"
+description: (ePost) Scaffolds and manages kit content — agents, skills, hooks — with best-practice templates. Use when creating, editing, or improving kit content — agents, skills, hooks; or when user says "kit authoring", "scaffold a skill", "add an agent", "write a hook"
 user-invocable: true
 context: fork
 agent: epost-fullstack-developer

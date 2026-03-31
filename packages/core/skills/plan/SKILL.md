@@ -1,6 +1,6 @@
 ---
 name: plan
-description: (ePost) Use when user says "plan", "design this", "architect", "spec out", "how should we build", or "create a roadmap" — produces a phased implementation plan scaled to task complexity
+description: (ePost) Produces phased implementation plans scaled to task complexity with dependency tracking. Use when user says "plan", "design this", "architect", "spec out", "how should we build", or "create a roadmap" — produces a phased implementation plan scaled to task complexity
 user-invocable: true
 context: fork
 agent: epost-planner

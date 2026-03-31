@@ -1,6 +1,6 @@
 ---
 name: journal
-description: (ePost) Use after completing a significant feature phase, resolving a non-trivial bug, or making a key architectural decision — writes a structured journal entry to docs/journal/ for future reference
+description: (ePost) Writes structured implementation journal entries for significant decisions and completions. Use after completing a significant feature phase, resolving a non-trivial bug, or making a key architectural decision — writes a structured journal entry to docs/journal/ for future reference
 user-invocable: false
 metadata:
   keywords:

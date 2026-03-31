@@ -1,6 +1,6 @@
 ---
 name: get-started
-description: (ePost) Use when user says "get started", "I'm new to this project", "onboard me", "what is this codebase", or "help me understand this project" — discovers project state and delivers a structured onboarding experience
+description: (ePost) Discovers project state and delivers a structured onboarding experience for new contributors. Use when user says "get started", "I'm new to this project", "onboard me", "what is this codebase", or "help me understand this project" — discovers project state and delivers a structured onboarding experience
 user-invocable: true
 context: inline
 metadata:

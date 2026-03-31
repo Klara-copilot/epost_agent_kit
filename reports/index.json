@@ -3,6 +3,25 @@
   "updatedAt": "2026-03-31",
   "entries": [
     {
+      "id": "epost-fullstack-developer-260331-1555-phase1-core-kit-descriptions",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "Phase 1: Core + Kit Skill Descriptions — Anthropic Formula",
+      "verdict": "DONE",
+      "plan": "plans/260331-1551-skill-description-enhancement",
+      "file": "Users/than/Projects/epost_agent_kit/plans/260331-1551-skill-description-enhancement/reports/260331-1555-phase1-core-kit-descriptions-epost-fullstack-developer.md",
+      "date": "2026-03-31"
+    },
+    {
+      "id": "epost-researcher-260331-1547-anthropic-skills-taxonomy",
+      "type": "research",
+      "agent": "epost-researcher",
+      "title": "Research: Anthropic Skills Repository Taxonomy & Structure Analysis \u2014 skill organization, metadata patterns, naming conventions, discovery mechanisms, comparison with epost_agent_kit, actionable improvements",
+      "verdict": "ACTIONABLE",
+      "createdAt": "2026-03-31",
+      "path": "Users/than/Projects/epost_agent_kit/plans/260331-1518-skill-description-fixes/reports/260331-1547-anthropic-skills-taxonomy-analysis-epost-researcher.md"
+    },
+    {
       "id": "epost-fullstack-developer-260331-1531-skill-description-fixes",
       "type": "implementation",
       "agent": "epost-fullstack-developer",
@@ -16,7 +35,7 @@
       "id": "epost-fullstack-developer-260331-1442-i18n-commands",
       "type": "implementation",
       "agent": "epost-fullstack-developer",
-      "title": "i18n Commands — Google Sheet Translation Sync (all phases)",
+      "title": "i18n Commands \u2014 Google Sheet Translation Sync (all phases)",
       "verdict": "DONE",
       "plan": "plans/260328-1345-i18n-commands",
       "path": "Users/than/Projects/epost_agent_kit/plans/260328-1345-i18n-commands/reports/260331-1442-i18n-commands-epost-fullstack-developer.md",
@@ -26,7 +45,7 @@
       "id": "epost-fullstack-developer-260331-1244-phases2-4-eval-optimize-report-package",
       "type": "implementation",
       "agent": "epost-fullstack-developer",
-      "title": "Skill-Creator Integration Phases 2-4 — Eval, Optimize, Report, Package",
+      "title": "Skill-Creator Integration Phases 2-4 \u2014 Eval, Optimize, Report, Package",
       "verdict": "DONE",
       "plan": "plans/260331-1232-skill-creator-integration",
       "path": "plans/260331-1232-skill-creator-integration/reports/260331-1244-phases2-4-eval-optimize-report-package-epost-fullstack-developer.md",
@@ -36,7 +55,7 @@
       "id": "epost-fullstack-developer-260331-1238-phase1-validation-gate",
       "type": "implementation",
       "agent": "epost-fullstack-developer",
-      "title": "Skill-Creator Integration Phase 1 — Validation Gate",
+      "title": "Skill-Creator Integration Phase 1 \u2014 Validation Gate",
       "verdict": "DONE",
       "plan": "plans/260331-1232-skill-creator-integration",
       "path": "plans/260331-1232-skill-creator-integration/reports/260331-1238-phase1-validation-gate-epost-fullstack-developer.md",
@@ -46,7 +65,7 @@
       "id": "epost-planner-260331-1232-skill-creator-integration",
       "type": "plan",
       "agent": "epost-planner",
-      "title": "Skill-Creator Integration — Python bridge into kit hooks/scripts",
+      "title": "Skill-Creator Integration \u2014 Python bridge into kit hooks/scripts",
       "verdict": "READY",
       "plan": "plans/260331-1232-skill-creator-integration",
       "path": "reports/260331-1232-skill-creator-integration-epost-planner.md",
@@ -56,7 +75,7 @@
       "id": "epost-fullstack-developer-260331-1107-whitelist-and-compliance",
       "type": "implementation",
       "agent": "epost-fullstack-developer",
-      "title": "Whitelist Tool Model + Skill Description Compliance — all 4 phases",
+      "title": "Whitelist Tool Model + Skill Description Compliance \u2014 all 4 phases",
       "verdict": "DONE",
       "plan": "plans/260331-1039-whitelist-and-compliance",
       "path": "Users/than/Projects/epost_agent_kit/plans/260331-1039-whitelist-and-compliance/reports/260331-1107-whitelist-and-compliance-epost-fullstack-developer.md",
@@ -634,7 +653,7 @@
       "id": "epost-planner-260331-0924-skill-creator-adoption",
       "type": "plan",
       "agent": "epost-planner",
-      "title": "Plan: Adopt Anthropic Skill-Creator Methodology — eval infrastructure, theory-of-mind, trigger evals",
+      "title": "Plan: Adopt Anthropic Skill-Creator Methodology \u2014 eval infrastructure, theory-of-mind, trigger evals",
       "verdict": "READY",
       "createdAt": "2026-03-31",
       "plan": "plans/260331-0924-skill-creator-adoption",
@@ -644,10 +663,20 @@
       "id": "epost-researcher-260331-1020-agent-skill-architecture",
       "type": "research",
       "agent": "epost-researcher",
-      "title": "Research: Agent Skill Architecture & Adoption Patterns — agentskills.io spec, Anthropic model, superpowers framework, mental models (active vs passive), folder standards, epost assessment, 3 adoption proposals",
+      "title": "Research: Agent Skill Architecture & Adoption Patterns \u2014 agentskills.io spec, Anthropic model, superpowers framework, mental models (active vs passive), folder standards, epost assessment, 3 adoption proposals",
       "verdict": "ACTIONABLE",
       "createdAt": "2026-03-31",
       "path": "reports/260331-1020-agent-skill-architecture-research-epost-researcher.md"
+    },
+    {
+      "id": "epost-fullstack-developer-260331-1610-phase2-platform-domain",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "Implementation: Phase 2 — Platform + Domain + A11y + Design skill descriptions enhanced to Anthropic formula",
+      "verdict": "DONE",
+      "createdAt": "2026-03-31",
+      "plan": "plans/260331-1551-skill-description-enhancement",
+      "path": "Users/than/Projects/epost_agent_kit/plans/260331-1551-skill-description-enhancement/reports/260331-1610-phase2-platform-domain-epost-fullstack-developer.md"
     }
   ]
 }

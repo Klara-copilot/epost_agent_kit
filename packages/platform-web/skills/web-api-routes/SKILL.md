@@ -1,6 +1,6 @@
 ---
 name: web-api-routes
-description: (ePost) Use when working with route.ts files, API endpoints, server actions, or web backend logic in the monorepo
+description: (ePost) Implements API endpoints, server actions, and FetchBuilder HTTP client patterns. Use when working with route.ts files, API endpoints, server actions, or web backend logic in the monorepo
 user-invocable: false
 
 metadata:

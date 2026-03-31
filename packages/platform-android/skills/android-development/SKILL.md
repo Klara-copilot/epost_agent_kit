@@ -1,6 +1,6 @@
 ---
 name: android-development
-description: (ePost) Use when working on Android — Kotlin/Compose screens, Gradle builds, Hilt DI, Room DB, or fixing Android crashes and Kotlin coroutine issues
+description: (ePost) Builds Kotlin/Compose screens, manages Gradle builds, and debugs Android crashes. Use when working on Android — Kotlin/Compose screens, Gradle builds, Hilt DI, Room DB, or fixing Android crashes and Kotlin coroutine issues
 
 metadata:
   agent-affinity: [epost-fullstack-developer, epost-tester, epost-debugger, epost-code-reviewer]

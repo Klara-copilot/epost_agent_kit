@@ -1,6 +1,6 @@
 ---
 name: launchpad
-description: (ePost) Use when building landing pages, promotional sites, or marketing pages — bold craft, not templates. Routes to epost-muji for design direction then epost-fullstack-developer for implementation.
+description: (ePost) Builds bold, craft-first landing pages and promotional sites. Use when building landing pages, promotional sites, or marketing pages — bold craft, not templates. Routes to epost-muji for design direction then epost-fullstack-developer for implementation.
 user-invocable: true
 context: fork
 agent: epost-muji

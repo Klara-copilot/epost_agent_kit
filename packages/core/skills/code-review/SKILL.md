@@ -1,6 +1,6 @@
 ---
 name: code-review
-description: (ePost) Use when user says "review code", "check quality", "audit this", or "look at changed files" — checks code quality, style, and correctness before commit
+description: (ePost) Reviews code for quality, style, and correctness before commit. Use when user says "review code", "check quality", "audit this", or "look at changed files" — checks code quality, style, and correctness before commit
 tier: core
 
 metadata:
