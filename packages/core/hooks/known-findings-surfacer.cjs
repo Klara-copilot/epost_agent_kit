@@ -24,9 +24,8 @@ const path = require('path');
 // ─── DB Paths ───
 
 const DB_PATHS = [
-  '.epost-data/code/known-findings.json',
-  '.epost-data/ui/known-findings.json',
-  '.epost-data/a11y/known-findings.json',
+  'reports/known-findings/ui-components.json',
+  'reports/known-findings/a11y.json',
 ];
 
 // ─── In-memory cache (lives for duration of this hook invocation) ───
