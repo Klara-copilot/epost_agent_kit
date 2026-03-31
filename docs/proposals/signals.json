@@ -1,8 +1,8 @@
 {
-  "generated": "2026-03-31T07:03:55.384Z",
+  "generated": "2026-03-31T07:54:29.736Z",
   "summary": {
-    "total": 33,
-    "new": 33,
+    "total": 34,
+    "new": 34,
     "proposed": 0,
     "dismissed": 0,
     "bySkill": {
@@ -25,9 +25,9 @@
         "low": 0
       },
       "plan": {
-        "total": 2,
+        "total": 3,
         "high": 0,
-        "medium": 0,
+        "medium": 1,
         "low": 2
       },
       "review": {
@@ -86,7 +86,7 @@
       }
     },
     "byType": {
-      "journal-flag": 22,
+      "journal-flag": 23,
       "audit-failure": 11,
       "workaround": 0
     }
@@ -453,6 +453,17 @@
       "targetSkill": "core",
       "suggestedAction": "",
       "detectedAt": "2026-03-31T05:58:01.302Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-9f1a0dab",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/web-i18n/260331-i18n-sheet-sync-commands.md",
+      "excerpt": "- Commands directory (`packages/platform-web/skills/web-i18n/commands/`) didn't exist yet — had to create it alongside scripts. The plan spec listed both paths but the directory was new.\n- The `.claude/commands/` directory also didn't exist — created alongside the mirror. If epost-kit init doesn't h",
+      "targetSkill": "plan",
+      "suggestedAction": "",
+      "detectedAt": "2026-03-31T07:50:05.245Z",
       "status": "new"
     }
   ]

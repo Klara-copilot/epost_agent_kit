@@ -3,6 +3,16 @@
   "updatedAt": "2026-03-31",
   "entries": [
     {
+      "id": "epost-fullstack-developer-260331-1442-i18n-commands",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "i18n Commands — Google Sheet Translation Sync (all phases)",
+      "verdict": "DONE",
+      "plan": "plans/260328-1345-i18n-commands",
+      "path": "Users/than/Projects/epost_agent_kit/plans/260328-1345-i18n-commands/reports/260331-1442-i18n-commands-epost-fullstack-developer.md",
+      "created": "2026-03-31"
+    },
+    {
       "id": "epost-fullstack-developer-260331-1244-phases2-4-eval-optimize-report-package",
       "type": "implementation",
       "agent": "epost-fullstack-developer",
