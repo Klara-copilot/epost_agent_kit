@@ -2,10 +2,10 @@
   "version": "1.0.0",
   "updated": "2026-03-31",
   "counts": {
-    "active": 44,
+    "active": 45,
     "completed": 0,
     "archived": 1,
-    "total": 46
+    "total": 47
   },
   "plans": [
     {
@@ -823,6 +823,25 @@
         "CSO"
       ],
       "file": "plans/260331-1551-skill-description-enhancement/plan.md"
+    },
+    {
+      "id": "PLAN-0092",
+      "title": "Skill Gap Updates: watzup, preview, deploy",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-31",
+      "authors": [
+        "epost-planner"
+      ],
+      "tags": [
+        "skills",
+        "git",
+        "deploy",
+        "mermaidjs",
+        "preview",
+        "watzup"
+      ],
+      "file": "plans/260331-1657-skill-gap-updates/plan.md"
     }
   ]
 }

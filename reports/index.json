@@ -3,6 +3,26 @@
   "updatedAt": "2026-03-31",
   "entries": [
     {
+      "id": "epost-fullstack-developer-260331-1709-skill-gap-updates",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "Skill Gap Updates: git --watzup, mermaid flags, deploy skill",
+      "verdict": "DONE",
+      "plan": "plans/260331-1657-skill-gap-updates",
+      "file": "reports/260331-1709-skill-gap-updates-epost-fullstack-developer.md",
+      "date": "2026-03-31"
+    },
+    {
+      "id": "epost-planner-260331-1657-skill-gap-updates",
+      "type": "plan",
+      "agent": "epost-planner",
+      "title": "Skill Gap Updates: watzup, preview, deploy",
+      "verdict": "READY",
+      "plan": "plans/260331-1657-skill-gap-updates",
+      "file": "reports/260331-1657-skill-gap-updates-epost-planner.md",
+      "date": "2026-03-31"
+    },
+    {
       "id": "epost-fullstack-developer-260331-1555-phase1-core-kit-descriptions",
       "type": "implementation",
       "agent": "epost-fullstack-developer",

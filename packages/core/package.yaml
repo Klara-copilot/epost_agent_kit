@@ -41,6 +41,7 @@ provides:
     - security
     - loop
     - skill-creator
+    - deploy
 scripts:
   - get-active-plan.cjs
   - set-active-plan.cjs
