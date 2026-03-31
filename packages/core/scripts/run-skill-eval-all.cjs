@@ -3,9 +3,8 @@
  * run-skill-eval-all.cjs — Run trigger evals for all skills with eval sets
  *
  * Usage:
- *   node scripts/run-skill-eval-all.cjs [--model <id>] [--concurrency <n>] [--skills-dir <path>]
- *   npm run skill:eval-all
- *   npm run skill:eval-all -- --concurrency 2 --model claude-haiku-4-5-20251001
+ *   node .claude/scripts/run-skill-eval-all.cjs [--model <id>] [--concurrency <n>] [--skills-dir <path>]
+ *   node packages/core/scripts/run-skill-eval-all.cjs --concurrency 2 --model claude-haiku-4-5-20251001
  *
  * Runs skills sequentially by default (concurrency=1) to avoid overloading
  * claude -p subprocess pool. Each skill's run_eval.py already parallelises
