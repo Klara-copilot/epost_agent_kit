@@ -1,6 +1,6 @@
 ---
 name: android-development
-description: (ePost) Use when working with .kt/.kts files, Gradle builds, Jetpack Compose, or Android-specific features
+description: (ePost) Use when working on Android — Kotlin/Compose screens, Gradle builds, Hilt DI, Room DB, or fixing Android crashes and Kotlin coroutine issues
 
 metadata:
   agent-affinity: [epost-fullstack-developer, epost-tester, epost-debugger, epost-code-reviewer]

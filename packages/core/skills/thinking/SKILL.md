@@ -1,6 +1,6 @@
 ---
 name: thinking
-description: "(ePost) Use when stuck after 2+ failed attempts, hitting complexity spirals, or facing complex analysis that requires step-by-step hypothesis testing before acting"
+description: "(ePost) Use when user says \"think deeply\", \"use extended thinking\", \"step-by-step analysis\", or when stuck after multiple failed attempts and needs systematic hypothesis testing"
 user-invocable: false
 category: workflow
 

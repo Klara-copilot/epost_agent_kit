@@ -1,6 +1,6 @@
 ---
 name: knowledge
-description: "(ePost) Use when you need prior art, past decisions, existing patterns, or external API/library documentation — activates knowledge retrieval from internal docs and external sources. Also use to capture learnings after completing a task."
+description: "(ePost) Use when retrieving prior decisions, internal patterns, or known context — NOT for general how-to questions about external libraries. Also use to capture learnings after completing a non-trivial task."
 user-invocable: false
 
 metadata:

@@ -1,6 +1,6 @@
 ---
 name: ios-rag
-description: (ePost) Use when searching iOS codebase for Swift views, UIKit/SwiftUI patterns, or design system tokens via vector search
+description: (ePost) Use when searching or finding existing patterns in the iOS Swift codebase — vector search for views, implementations, or design token usage. NOT for implementing new code.
 user-invocable: false
 
 metadata:
