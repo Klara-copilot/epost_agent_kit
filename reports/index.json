@@ -569,6 +569,16 @@
       "verdict": "ACTIONABLE",
       "createdAt": "2026-03-31",
       "path": "reports/260331-0829-skill-architecture-token-analysis-epost-researcher.md"
+    },
+    {
+      "id": "epost-planner-260331-0924-skill-creator-adoption",
+      "type": "plan",
+      "agent": "epost-planner",
+      "title": "Plan: Adopt Anthropic Skill-Creator Methodology — eval infrastructure, theory-of-mind, trigger evals",
+      "verdict": "READY",
+      "createdAt": "2026-03-31",
+      "plan": "plans/260331-0924-skill-creator-adoption",
+      "path": "plans/260331-0924-skill-creator-adoption/plan.md"
     }
   ]
 }

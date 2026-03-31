@@ -92,6 +92,9 @@ const CATEGORY_MAP = {
 
   // kit — kit authoring tools
   'kit': 'kit',
+
+  // quality — skill authoring and improvement
+  'skill-creator': 'quality',
 };
 
 /**
@@ -137,7 +140,8 @@ const CONNECTION_MAP = {
   'subagent-driven-development': { enhances: ['plan'] },
   'thinking':  { enhances: ['debug', 'plan'] },
   'mermaidjs': { enhances: ['docs', 'plan'] },
-  'loop':      { enhances: ['test'] },
+  'loop':          { enhances: ['test'] },
+  'skill-creator': { enhances: ['cook', 'plan'] },
 };
 
 /**

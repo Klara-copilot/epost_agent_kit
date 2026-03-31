@@ -41,6 +41,7 @@ provides:
     - mermaidjs
     - security
     - loop
+    - skill-creator
 scripts:
   - get-active-plan.cjs
   - set-active-plan.cjs
