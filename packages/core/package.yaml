@@ -47,6 +47,12 @@ scripts:
   - complete-plan.cjs
   - archive-plan.cjs
   - generate-skill-index.cjs
+  - run-skill-eval.cjs
+  - run-skill-benchmark.cjs
+  - run-skill-optimize.cjs
+  - run-skill-improve-desc.cjs
+  - run-skill-report.cjs
+  - run-skill-package.cjs
 
 files:
   agents/: agents/

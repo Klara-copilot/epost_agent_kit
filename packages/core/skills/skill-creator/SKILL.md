@@ -456,6 +456,27 @@ If you're in Cowork, the main things to know are:
 
 ---
 
+## Kit Integration — npm Script Aliases
+
+When running in an epost_agent_kit project, use these npm-style scripts instead of invoking Python directly. Scripts live in `packages/core/scripts/` and are copied to `.claude/scripts/` on `epost-kit init`.
+
+| npm script | Python equivalent | Description |
+|------------|------------------|-------------|
+| `node .claude/scripts/run-skill-eval.cjs <skill-path> [--model <id>]` | `python -m scripts.run_eval` | Run evaluation suite |
+| `node .claude/scripts/run-skill-benchmark.cjs <ws/iter-N> [--skill-name <n>]` | `python -m scripts.aggregate_benchmark` | Aggregate benchmark data |
+| `node .claude/scripts/run-skill-optimize.cjs <skill-path> --eval-set <path> [--model <id>] [--max-iterations 5] [--verbose]` | `python -m scripts.run_loop` | Full optimization loop |
+| `node .claude/scripts/run-skill-improve-desc.cjs <skill-path>` | `python -m scripts.improve_description` | One-shot description improvement |
+| `node .claude/scripts/run-skill-report.cjs <loop-output.json> [--skill-name <n>]` | `python -m scripts.generate_report` | HTML report → `reports/` |
+| `node .claude/scripts/run-skill-package.cjs <skill-path> [output-dir]` | `python -m scripts.package_skill` | Package to `.skill` file |
+
+**Prerequisites** (same as running Python scripts directly): `python3`, `pyyaml` (`pip install pyyaml`), `claude` CLI on PATH.
+
+All bridges degrade gracefully — if `python3` is missing they print an actionable install message and exit 1 without blocking.
+
+The optimize script (`run-skill-optimize.cjs`) writes its JSON output to `<skill-path>/optimization-output.json` for downstream use by `run-skill-report.cjs`.
+
+---
+
 ## Reference files
 
 The agents/ directory contains instructions for specialized subagents. Read them when you need to spawn the relevant subagent.
