@@ -24,12 +24,12 @@ See `a11y` skill for platform routing.
 1. **Detect platform** — from argument or changed file extensions
 2. **Get Git diff** — all changed files matching detected platform
 3. **Scan each file** — for accessibility violations using platform-specific skill rules
-4. **Check known findings** — match against `.epost-data/a11y/known-findings.json` (if exists)
+4. **Check known findings** — match against `reports/known-findings/a11y.json` (if exists)
 5. **Detect regressions** — if a `resolved: true` finding reappears, flag as `regression`
 6. **Classify violations** — type, WCAG criterion, severity, finding ID, regression status
 7. **Determine block** — critical violations, regressions, or 5+ serious = block PR
 8. **Persist new findings** — for each violation NOT matched to an existing finding:
-   a. Load `.epost-data/a11y/known-findings.json` (create with `{"version":"1.3","audit_date":"today","critical_findings":[]}` if missing)
+   a. Load `reports/known-findings/a11y.json` (create with `{"version":"1.3","audit_date":"today","critical_findings":[]}` if missing)
    b. **Dedup**: skip if existing finding matches `wcag` + `file_pattern` + `code_pattern` (all three)
    c. If matched and `resolved: true` → flag as regression (already handled in step 5)
    d. If matched and unresolved → skip, set `finding_id` in output

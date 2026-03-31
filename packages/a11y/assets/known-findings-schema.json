@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "epost Known Accessibility Findings",
-  "description": "Schema for tracking multi-platform accessibility violations. Place as .epost-data/a11y/known-findings.json in project root.",
+  "description": "Schema for tracking multi-platform accessibility violations. Place as reports/known-findings/a11y.json in project root.",
   "type": "object",
   "required": ["version", "audit_date", "critical_findings"],
   "properties": {

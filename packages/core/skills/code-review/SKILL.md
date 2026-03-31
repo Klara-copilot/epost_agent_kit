@@ -133,9 +133,9 @@ Write `{session_folder}/session.json` per `audit/references/session-json-schema.
 
 Ownership per `audit/references/output-contract.md`: code-reviewer → `.epost-data/code/`, muji → `.epost-data/ui/`, a11y → `.epost-data/a11y/`.
 
-Persist SEC/PERF/TS/LOGIC/DEAD/ARCH/STATE findings (critical, high, medium) to `.epost-data/code/known-findings.json`:
+Persist SEC/PERF/TS/LOGIC/DEAD/ARCH/STATE findings (critical, high, medium) to `reports/known-findings/code.json`:
 
-1. Check if `.epost-data/code/known-findings.json` exists
+1. Check if `reports/known-findings/code.json` exists
    - If not: `mkdir -p .epost-data/code/` then create it with `{ "schemaVersion": "1.0.0", "lastUpdated": "{today}", "findings": [] }`
 2. **Pre-scan for regressions**: for each finding in current pass, check if same `rule_id` + `file_pattern` exists with `resolved: true` → flag `regression: true` in report; with `resolved: false` → reference existing `id`, do not duplicate
 3. For each NEW finding (severity critical/high/medium) not already open in DB:
@@ -143,7 +143,7 @@ Persist SEC/PERF/TS/LOGIC/DEAD/ARCH/STATE findings (critical, high, medium) to `
    - Map: `module`, `rule_id`, `category` (SEC/PERF/TS/LOGIC/DEAD/ARCH/STATE), `title`, `file_pattern`, `code_pattern`, `fix_template`, `priority`, `severity`, `source` (`hybrid-audit` or `code-review`), `source_agent: "epost-code-reviewer"`, `source_report: "{report_path}"`, `first_detected_at: "{YYYY-MM-DDTHH:MM}"`
    - Append to `findings[]`
 4. Save updated JSON
-5. Log: "Persisted {N} code findings to `.epost-data/code/known-findings.json`" in Methodology
+5. Log: "Persisted {N} code findings to `reports/known-findings/code.json`" in Methodology
 
 Schema: `code-review/references/code-known-findings-schema.md`
 

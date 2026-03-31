@@ -10,7 +10,7 @@ Activated by: `/fix --a11y [<n> | #<id>]` command.
 
 ## Input
 
-Receives finding objects from `.epost-data/a11y/known-findings.json`:
+Receives finding objects from `reports/known-findings/a11y.json`:
 
 ```json
 {

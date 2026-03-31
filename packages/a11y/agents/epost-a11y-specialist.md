@@ -84,7 +84,7 @@ Detect platform from file types, command context, or user description:
 - **iOS:** `ios-a11y` — 8 WCAG 2.1 AA rule files + 3 mode behavior files (activate on demand)
 - **Android:** `android-a11y` — 5 Compose/TalkBack rule files (activate on demand)
 - **Web:** `web-a11y` — 6 ARIA/keyboard/contrast rule files (activate on demand)
-- **Known Findings:** `.epost-data/a11y/known-findings.json` (if exists in project)
+- **Known Findings:** `reports/known-findings/a11y.json` (if exists in project)
 - **Fix Artifacts:** `.epost-data/a11y/fixes/` — existing patches, reviews, and analysis (if exists)
 
 ## Operating Modes
@@ -92,11 +92,11 @@ Detect platform from file types, command context, or user description:
 | Mode | Activated By | Behavior | Output | Writes Files? |
 |------|-------------|----------|--------|---------------|
 | **Guidance** | `review` command, direct questions | Human-readable code examples | Prose + code | No |
-| **Audit** | `audit` command | Strict JSON only | JSON | Yes (`.epost-data/a11y/known-findings.json` only) |
+| **Audit** | `audit` command | Strict JSON only | JSON | Yes (`reports/known-findings/a11y.json` only) |
 | **Fix** | `fix`, `fix-batch` commands | JSON status + code edits | JSON + patches | Yes |
 | **Close** | `close` command | JSON confirmation | JSON | Yes (findings JSON only) |
 
-**When invoked via audit command: output valid JSON only. Only write operation allowed is appending to `.epost-data/a11y/known-findings.json`. Never edit source files.**
+**When invoked via audit command: output valid JSON only. Only write operation allowed is appending to `reports/known-findings/a11y.json`. Never edit source files.**
 
 ## When Acting as Auditor
 
@@ -107,9 +107,9 @@ When executing Audit mode:
    - iOS (.swift) → `audit/references/a11y-checklist-ios.md`
    - Android (.kt/.kts/.xml) → `audit/references/a11y-checklist-android.md`
    - Web (.tsx/.ts/.jsx) → use web-a11y skill rules
-3. **Pre-audit**: Activate `knowledge-retrieval` → L1 docs/ known-findings (check `.epost-data/a11y/known-findings.json`) → L2 RAG → L4 Grep/Glob if RAG unavailable
+3. **Pre-audit**: Activate `knowledge-retrieval` → L1 docs/ known-findings (check `reports/known-findings/a11y.json`) → L2 RAG → L4 Grep/Glob if RAG unavailable
 4. **Output format**: Produce structured JSON per ios/android audit mode schemas — `total_violations`, `critical_count`, `block_pr`, `violations[]`
-5. **Save findings**: Append new violations to `.epost-data/a11y/known-findings.json` after audit completes (create file if absent). Set `source_agent: "epost-a11y-specialist"`, `source_report: "{report_path}"`, `first_detected_at: "{YYYY-MM-DDTHH:MM}"` on each finding.
+5. **Save findings**: Append new violations to `reports/known-findings/a11y.json` after audit completes (create file if absent). Set `source_agent: "epost-a11y-specialist"`, `source_report: "{report_path}"`, `first_detected_at: "{YYYY-MM-DDTHH:MM}"` on each finding.
 6. **Save reports** per `audit/references/output-contract.md`:
    - Standalone: `mkdir -p reports/{YYMMDD-HHMM}-{slug}-a11y-audit/` → write `report.md` + `session.json`
    - Delegated: write to `output_path` from delegation block (caller created folder)
@@ -150,4 +150,4 @@ The calling agent incorporates your findings. Your block_pr recommendation feeds
 - `ios-a11y` — iOS accessibility (VoiceOver, UIKit, SwiftUI)
 - `android-a11y` — Android accessibility (TalkBack, Compose, Semantics)
 - `web-a11y` — Web accessibility (ARIA, keyboard, screen readers)
-- `.epost-data/a11y/known-findings.json` — Project-specific known violations
+- `reports/known-findings/a11y.json` — Project-specific known violations

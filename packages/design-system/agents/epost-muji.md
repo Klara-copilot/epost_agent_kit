@@ -168,7 +168,7 @@ Follow `audit/references/ui-workflow.md` exactly — it is the complete workflow
 
 Key constraints (do not override ui-workflow.md):
 - **Output**: ONE `.md` report, no JSON. Findings inline with `ruleId`, `severity`, `location`, `issue`, `fix`.
-- **Persist findings** (mandatory, even as sub-agent): `.epost-data/ui/known-findings.json` per ui-workflow.md Step 5b. This is agent data, not source code.
+- **Persist findings** (mandatory, even as sub-agent): `reports/known-findings/ui-components.json` per ui-workflow.md Step 5b. This is agent data, not source code.
 - **A11Y findings — collect only**: List in `## A11Y Findings (for escalation)` section. Do NOT delegate — caller handles a11y dispatch.
 - **Standards**: `ui-lib-dev/references/audit-standards.md` (78 rules across all categories).
 

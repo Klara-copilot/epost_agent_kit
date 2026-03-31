@@ -45,9 +45,9 @@ Report structure follows `code-review/references/report-template.md`: Executive 
 
 After writing `report.md`:
 
-1. **Code findings** (SEC/PERF/TS/LOGIC/DEAD) → `.epost-data/code/known-findings.json` per `code-review/references/code-known-findings-schema.md`
-2. **UI findings** — persisted by epost-muji to `.epost-data/ui/known-findings.json` (do not duplicate)
-3. **A11Y findings** — persisted by epost-a11y-specialist to `.epost-data/a11y/known-findings.json` (do not duplicate)
+1. **Code findings** (SEC/PERF/TS/LOGIC/DEAD) → `reports/known-findings/code.json` per `code-review/references/code-known-findings-schema.md`
+2. **UI findings** — persisted by epost-muji to `reports/known-findings/ui-components.json` (do not duplicate)
+3. **A11Y findings** — persisted by epost-a11y-specialist to `reports/known-findings/a11y.json` (do not duplicate)
 
 Pre-scan for regressions before appending: same `rule_id` + `file_pattern` resolved → flag `regression: true` in report.
 

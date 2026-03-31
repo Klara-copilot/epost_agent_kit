@@ -72,8 +72,8 @@ Same as `/cook` — detect from changed files or `$ARGUMENTS` platform hint.
 For cases where auto-detection isn't enough, use flags:
 - `/fix --deep` — full systematic investigation with documentation
 - `/fix --ci` — CI pipeline debugging (reads CI logs, reproduces locally)
-- `/fix --ui` — UI component findings from `.epost-data/ui/known-findings.json` (delegates to epost-muji)
-- `/fix --a11y` — accessibility findings from `.epost-data/a11y/known-findings.json`
+- `/fix --ui` — UI component findings from `reports/known-findings/ui-components.json` (delegates to epost-muji)
+- `/fix --a11y` — accessibility findings from `reports/known-findings/a11y.json`
 
 ## Status Tracking
 
