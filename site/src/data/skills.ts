@@ -10,13 +10,13 @@ export const skillCategories: SkillCategory[] = [
     name: 'core',
     label: 'Core',
     color: 'text-slate-400 border-slate-700',
-    skills: ['core', 'skill-discovery', 'knowledge-retrieval', 'knowledge-capture', 'data-store', 'sequential-thinking', 'problem-solving', 'error-recovery', 'repomix'],
+    skills: ['cook', 'fix', 'plan', 'debug', 'test', 'review', 'docs', 'git', 'deploy', 'preview', 'security', 'repomix', 'loop', 'thinking', 'clean-code', 'tdd', 'error-recovery', 'skill-discovery', 'subagent-driven-development'],
   },
   {
     name: 'web',
     label: 'Web',
     color: 'text-blue-400 border-blue-800',
-    skills: ['web-frontend', 'web-nextjs', 'web-api-routes', 'web-auth', 'web-i18n', 'web-testing', 'web-modules', 'web-prototype', 'web-rag', 'web-ui-lib', 'web-a11y'],
+    skills: ['web-frontend', 'web-nextjs', 'web-api-routes', 'web-auth', 'web-i18n', 'web-testing', 'web-modules', 'web-ui-lib', 'web-a11y'],
   },
   {
     name: 'ios',
@@ -34,7 +34,7 @@ export const skillCategories: SkillCategory[] = [
     name: 'backend',
     label: 'Backend',
     color: 'text-purple-400 border-purple-800',
-    skills: ['backend-javaee', 'backend-databases', 'infra-docker', 'infra-cloud'],
+    skills: ['backend-javaee', 'backend-databases'],
   },
   {
     name: 'design-system',
@@ -52,6 +52,6 @@ export const skillCategories: SkillCategory[] = [
     name: 'kit',
     label: 'Kit Authoring',
     color: 'text-violet-400 border-violet-800',
-    skills: ['kit', 'kit-agents', 'kit-agent-development', 'kit-skill-development', 'kit-hooks', 'kit-cli', 'kit-verify'],
+    skills: ['kit'],
   },
 ];
