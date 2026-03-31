@@ -7,6 +7,7 @@ model: opus
 skills: [core, skill-discovery, plan, knowledge, subagent-driven-development, journal]
 memory: project
 permissionMode: default
+allowedTools: [Read, Glob, Grep, Write, Edit]
 handoffs:
   - label: Implement plan
     agent: epost-fullstack-developer

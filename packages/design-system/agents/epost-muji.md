@@ -6,6 +6,7 @@ icon: 🎨
 description: "(ePost) Design system specialist + UI/UX designer. Component knowledge, Figma-to-code pipeline, screenshot-to-code conversion, visual asset generation, landing page craft."
 skills: [core, skill-discovery, figma, design-tokens, ui-lib-dev, audit, knowledge-retrieval, launchpad]
 memory: project
+allowedTools: [Read, Glob, Grep, Write, Edit]
 handoffs:
   - label: Implement component
     agent: epost-fullstack-developer

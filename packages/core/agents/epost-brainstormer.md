@@ -6,6 +6,7 @@ model: opus
 skills: [core, skill-discovery, knowledge, thinking]
 memory: project
 permissionMode: default
+allowedTools: [Read, Glob, Grep, Write]
 handoffs:
   - label: Create plan from ideas
     agent: epost-planner

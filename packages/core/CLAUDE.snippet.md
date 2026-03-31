@@ -28,7 +28,7 @@ On every user prompt, sense context before acting:
 | Plan / Design | "how should we build X", "let's plan", "what's the approach for" | `epost-planner` via Agent tool |
 | Ideate / Brainstorm | "brainstorm", "should we", "help me think", "which approach", "compare options", "architecture decision" | `epost-brainstormer` via Agent tool |
 | Research | "how does X work", "best practices for", "compare A vs B" | `epost-researcher` via Agent tool |
-| Review / Audit | "check my code", "is this good", "review before merge", "audit this" | `epost-code-reviewer` via Agent tool |
+| Review / Audit | "review", "check my code", "is this good", "look at this before I commit", "review before merge", "audit this", "suggest improvements" | `epost-code-reviewer` via Agent tool |
 | Test | "add tests", "is this covered", "validate this works" | `epost-tester` via Agent tool |
 | Docs | "document this", "update the docs", "write a spec" | `epost-docs-manager` via Agent tool |
 | Git | "commit", "push", "create a PR", "ship it", "done" | `epost-git-manager` via Agent tool |

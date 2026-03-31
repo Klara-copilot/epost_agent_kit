@@ -6,6 +6,7 @@ color: yellow
 icon: 🧪
 skills: [core, skill-discovery, test]
 memory: project
+allowedTools: [Read, Glob, Grep, Write, Edit, Bash]
 handoffs:
   - label: Ship after tests pass
     agent: epost-git-manager
