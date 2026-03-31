@@ -34,6 +34,24 @@ Always wrap output in ` ```mermaid ` code block. Claude renders these inline.
 
 ---
 
+## Flags
+
+| Flag | Behavior |
+|------|----------|
+| *(none)* | Generate Mermaid diagram (current behavior) |
+| `--explain <topic>` | ASCII art + Mermaid + prose visual explanation |
+| `--ascii <topic>` | Terminal ASCII diagram only (no Mermaid) |
+| `--html <topic>` | Self-contained HTML file with diagram + explanation, opens in browser |
+
+## Dispatch
+
+- No flag → generate Mermaid diagram per diagram type selection below
+- `--explain` → load `references/explain-mode.md`
+- `--ascii` → load `references/ascii-mode.md`
+- `--html` → load `references/html-mode.md`
+
+---
+
 ## Diagram Type Selection
 
 | Type | When to use | Opening line |

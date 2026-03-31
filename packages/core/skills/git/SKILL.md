@@ -5,7 +5,7 @@ user-invocable: true
 context: fork
 agent: epost-git-manager
 metadata:
-  argument-hint: "[--commit | --push | --pr | --ship [official|beta] [--dry-run] [--skip-tests] [--skip-review]]"
+  argument-hint: "[--commit | --push | --pr | --ship [official|beta] [--dry-run] [--skip-tests] [--skip-review] | --watzup]"
   connections:
     enhances: []
 ---
@@ -30,6 +30,7 @@ When dispatching, include in the Agent tool prompt:
 | `references/push.md` | Commit changes and push to remote |
 | `references/pr.md` | Create GitHub pull request from current branch |
 | `references/retro.md` | Data-driven retrospective (commit metrics, churn, completion) |
+| `references/watzup.md` | EOD/handoff session summary — what changed, status, next steps |
 
 ## Step 0 — Flag / Intent Override
 
@@ -38,6 +39,7 @@ If `$ARGUMENTS` contains `--push` or user said "push": execute commit+push workf
 If `$ARGUMENTS` contains `--pr` or user said "pr" / "pull request": execute PR workflow immediately.
 If `$ARGUMENTS` contains `--ship`: execute ship pipeline (see `## Ship Pipeline` below).
 If `$ARGUMENTS` contains `--retro`: load `references/retro.md` and generate retrospective report.
+If `$ARGUMENTS` contains `--watzup`: load `references/watzup.md` and generate EOD summary.
 If `$ARGUMENTS` contains `--skip-build`: pass through to commit/push workflow — skips build verification gate (for WIP/draft commits).
 Otherwise: continue to Step 1.
 
