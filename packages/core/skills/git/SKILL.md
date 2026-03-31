@@ -1,6 +1,6 @@
 ---
 name: git
-description: (ePost) Use when user says "commit", "push", "create a PR", "ship it", "done", "merge", "open a pull request", or "ship this feature" — runs the appropriate git workflow (commit, push, PR creation, or full ship pipeline)
+description: (ePost) Runs git workflows — commit, push, PR creation, and full ship pipeline. Use when user says "commit", "push", "create a PR", "ship it", "done", "merge", "open a pull request", or "ship this feature" — runs the appropriate git workflow (commit, push, PR creation, or full ship pipeline)
 user-invocable: true
 context: fork
 agent: epost-git-manager

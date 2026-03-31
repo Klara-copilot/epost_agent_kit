@@ -1,6 +1,6 @@
 ---
 name: audit
-description: (ePost) Use when user says "audit", "review", "run an audit", "check quality", "check my code", "is this good", "look at this before I commit", "review before merge", "a11y audit", "code audit", or "suggest improvements" — detects audit type (UI component, a11y, code, or improvements) and dispatches the right specialist
+description: (ePost) Dispatches targeted quality audits (UI, a11y, code) to the right specialist. Use when user says "audit", "review", "run an audit", "check quality", "check my code", "is this good", "look at this before I commit", "review before merge", "a11y audit", "code audit", or "suggest improvements" — detects audit type (UI component, a11y, code, or improvements) and dispatches the right specialist
 user-invocable: true
 metadata:
   argument-hint: "[--ui <ComponentName> [--platform web|ios|android|all] [--poc|--beta|--stable] | --a11y [platform] | --code]"

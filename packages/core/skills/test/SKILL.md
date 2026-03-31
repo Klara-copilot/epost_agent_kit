@@ -1,6 +1,6 @@
 ---
 name: test
-description: (ePost) Use when user says "run tests", "add tests", "check coverage", "write unit tests", or "validate this works" — detects platform and runs the appropriate test suite (Jest, XCTest, JUnit, Espresso)
+description: (ePost) Detects platform and runs the appropriate test suite with coverage reporting. Use when user says "run tests", "add tests", "check coverage", "write unit tests", or "validate this works" — detects platform and runs the appropriate test suite (Jest, XCTest, JUnit, Espresso)
 user-invocable: true
 context: fork
 agent: epost-tester

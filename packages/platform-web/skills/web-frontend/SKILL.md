@@ -1,6 +1,6 @@
 ---
 name: web-frontend
-description: (ePost) Use when working with .tsx/.jsx files, React components, hooks, state management, or frontend UI
+description: (ePost) Builds React components, hooks, and Redux Toolkit state management patterns. Use when working with .tsx/.jsx files, React components, hooks, state management, or frontend UI
 user-invocable: false
 
 metadata:

@@ -1,6 +1,6 @@
 ---
 name: domain-b2b
-description: (ePost) Use when working in a B2B module — Inbox, Monitoring, Composer, Smart Send, Communities, Archive, Contacts, Organization
+description: (ePost) Provides B2B module context — Inbox, Monitoring, Composer, Smart Send, and related domains. Use when working in a B2B module — Inbox, Monitoring, Composer, Smart Send, Communities, Archive, Contacts, Organization
 user-invocable: false
 
 metadata:

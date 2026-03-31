@@ -1,6 +1,6 @@
 ---
 name: ui-lib-dev
-description: (ePost) Use when building, auditing, or documenting UI library components through the Figma-to-code pipeline across web, iOS, or Android platforms
+description: (ePost) Manages the Figma-to-code UI library pipeline — plan, implement, audit, fix, document. Use when building, auditing, or documenting UI library components through the Figma-to-code pipeline across web, iOS, or Android platforms
 user-invocable: false
 
 metadata:

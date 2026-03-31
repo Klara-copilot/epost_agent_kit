@@ -1,6 +1,6 @@
 ---
 name: web-auth
-description: (ePost) Use when working with authentication, sessions, OAuth providers, feature flags, or provider nesting
+description: (ePost) Configures NextAuth + Keycloak authentication, session management, and feature flags. Use when working with authentication, sessions, OAuth providers, feature flags, or provider nesting
 user-invocable: false
 
 metadata:

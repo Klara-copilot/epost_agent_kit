@@ -1,7 +1,7 @@
 ---
 name: clean-code
 user-invocable: true
-description: "(ePost) Use when writing new code, reviewing PRs, refactoring legacy code, or when code smells are detected — loads Clean Code principles for naming, functions, formatting, and error handling"
+description: "(ePost) Enforces Clean Code principles for naming, functions, formatting, and error handling. Use when writing new code, reviewing PRs, refactoring legacy code, or when code smells are detected — loads Clean Code principles for naming, functions, formatting, and error handling"
 tier: core
 metadata:
   agent-affinity: [epost-fullstack-developer, epost-code-reviewer]

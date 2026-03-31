@@ -1,6 +1,6 @@
 ---
 name: fix
-description: (ePost) Use when user says "fix", "broken", "error", "failing", "this doesn't work", or pastes an error message — identifies error type and applies platform-appropriate fix
+description: (ePost) Identifies root causes and applies targeted fixes for bugs, errors, and broken behavior. Use when user says "fix", "broken", "error", "failing", "this doesn't work", or pastes an error message — identifies error type and applies platform-appropriate fix
 user-invocable: true
 metadata:
   argument-hint: "[issue description]"

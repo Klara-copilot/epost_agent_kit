@@ -1,6 +1,6 @@
 ---
 name: web-nextjs
-description: (ePost) Use when working with Next.js App Router, Server Components, Server Actions, or page/layout routing
+description: (ePost) Implements Next.js 14 App Router patterns — Server Components, Server Actions, layouts, and middleware. Use when working with Next.js App Router, Server Components, Server Actions, or page/layout routing
 user-invocable: false
 
 metadata:

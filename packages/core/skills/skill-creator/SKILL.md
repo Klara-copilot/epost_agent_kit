@@ -1,6 +1,6 @@
 ---
 name: skill-creator
-description: (ePost) Use when user says "create a skill", "edit this skill", "optimize a skill's description", "run skill evals", or "benchmark skill performance" — creates, modifies, and validates Claude Code skills
+description: (ePost) Creates, modifies, and validates Claude Code skills with eval-driven quality assurance. Use when user says "create a skill", "edit this skill", "optimize a skill's description", "run skill evals", or "benchmark skill performance" — creates, modifies, and validates Claude Code skills
 ---
 
 # Skill Creator

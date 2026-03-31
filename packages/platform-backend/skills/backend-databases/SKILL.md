@@ -1,6 +1,6 @@
 ---
 name: backend-databases
-description: (ePost) Use when working with PostgreSQL queries, MongoDB documents, or database persistence in the epost backend
+description: (ePost) Provides PostgreSQL and MongoDB persistence patterns for the epost backend. Use when working with PostgreSQL queries, MongoDB documents, or database persistence in the epost backend
 user-invocable: false
 metadata:
   keywords:

@@ -1,6 +1,6 @@
 ---
 name: ios-development
-description: (ePost) Use when working on iOS — SwiftUI/UIKit views, Xcode builds, XCTest, or fixing iOS crashes and Swift issues
+description: (ePost) Builds SwiftUI/UIKit views, manages Xcode builds, and debugs iOS crashes. Use when working on iOS — SwiftUI/UIKit views, Xcode builds, XCTest, or fixing iOS crashes and Swift issues
 user-invocable: false
 
 metadata:

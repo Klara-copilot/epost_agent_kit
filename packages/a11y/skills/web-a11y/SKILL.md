@@ -1,6 +1,6 @@
 ---
 name: web-a11y
-description: (ePost) Use when web accessibility issues arise — ARIA roles, keyboard navigation, focus trapping, alt text, contrast, screen readers
+description: (ePost) Diagnoses and fixes web accessibility issues — ARIA, keyboard nav, focus management, screen readers. Use when web accessibility issues arise — ARIA roles, keyboard navigation, focus trapping, alt text, contrast, screen readers
 user-invocable: false
 metadata:
   keywords:

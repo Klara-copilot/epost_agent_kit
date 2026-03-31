@@ -1,6 +1,6 @@
 ---
 name: web-testing
-description: (ePost) Use when writing tests, configuring Jest/Playwright, checking coverage, or working with test patterns
+description: (ePost) Configures and writes Jest + RTL unit tests and Playwright E2E tests. Use when writing tests, configuring Jest/Playwright, checking coverage, or working with test patterns
 user-invocable: false
 
 metadata:

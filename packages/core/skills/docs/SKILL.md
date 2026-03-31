@@ -1,6 +1,6 @@
 ---
 name: docs
-description: (ePost) Use when user says "write docs", "update docs", "document this", "init docs", "reorganize documentation", or "add component docs" — detects docs intent (init, update, migrate, component) and runs the right workflow
+description: (ePost) Generates and maintains project documentation with structured KB workflows. Use when user says "write docs", "update docs", "document this", "init docs", "reorganize documentation", or "add component docs" — detects docs intent (init, update, migrate, component) and runs the right workflow
 user-invocable: true
 context: fork
 agent: epost-docs-manager

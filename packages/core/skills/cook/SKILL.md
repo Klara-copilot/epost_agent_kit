@@ -1,6 +1,6 @@
 ---
 name: cook
-description: (ePost) Use when user says "implement", "build", "add a feature", "cook", "make this work", or "continue the plan" — dispatches platform-aware feature implementation for web, iOS, Android, or backend
+description: (ePost) Orchestrates platform-aware feature implementation across web, iOS, Android, and backend. Use when user says "implement", "build", "add a feature", "cook", "make this work", or "continue the plan" — dispatches platform-aware feature implementation for web, iOS, Android, or backend
 user-invocable: true
 context: fork
 agent: epost-fullstack-developer

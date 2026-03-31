@@ -1,6 +1,6 @@
 ---
 name: ios-a11y
-description: (ePost) Use when iOS accessibility issues arise — VoiceOver, UIKit/SwiftUI labels, traits, focus, Dynamic Type, contrast
+description: (ePost) Diagnoses and fixes iOS accessibility issues across UIKit and SwiftUI. Use when iOS accessibility issues arise — VoiceOver, UIKit/SwiftUI labels, traits, focus, Dynamic Type, contrast
 user-invocable: false
 metadata:
   keywords:
