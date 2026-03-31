@@ -1,0 +1,11 @@
+[
+  {"query": "create a flow diagram for the auth process", "should_trigger": true},
+  {"query": "draw the system architecture with mermaid", "should_trigger": true},
+  {"query": "create a sequence diagram for the API calls", "should_trigger": true},
+  {"query": "visualize the state machine for the order flow", "should_trigger": true},
+  {"query": "draw a Gantt chart for the sprint", "should_trigger": true},
+  {"query": "document the architecture in prose", "should_trigger": false},
+  {"query": "draw the design in Figma", "should_trigger": false},
+  {"query": "create a chart component in React", "should_trigger": false},
+  {"query": "generate an ER diagram in code", "should_trigger": false}
+]

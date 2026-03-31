@@ -37,7 +37,7 @@ provides:
     - get-started
     - tdd
     - thinking
-    - mermaidjs
+    - preview
     - security
     - loop
     - skill-creator
