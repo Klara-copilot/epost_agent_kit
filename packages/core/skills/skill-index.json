@@ -1,9 +1,9 @@
 {
-  "generated": "2026-03-31T02:37:34.853Z",
+  "generated": "2026-03-31T05:08:30.016Z",
   "version": "2.0.0",
-  "count": 25,
+  "count": 24,
   "categories": {
-    "workflow": 12,
+    "workflow": 11,
     "uncategorized": 1,
     "quality": 6,
     "knowledge": 6
@@ -12,7 +12,7 @@
   "skills": [
     {
       "name": "audit",
-      "description": "(ePost) Use when user says \"audit\", \"run an audit\", \"check quality\", \"review before merge\", \"a11y audit\", or \"code audit\" — detects audit type (UI component, a11y, or code) and dispatches the right specialist",
+      "description": "(ePost) Use when user says \"audit\", \"review\", \"run an audit\", \"check quality\", \"check my code\", \"is this good\", \"look at this before I commit\", \"review before merge\", \"a11y audit\", \"code audit\", or \"suggest improvements\" — detects audit type (UI component, a11y, code, or improvements) and dispatches the right specialist",
       "category": "workflow",
       "tier": "discoverable",
       "keywords": [
@@ -32,12 +32,17 @@
       ],
       "triggers": [
         "\"audit\"",
+        "\"review\"",
         "\"audit component\"",
         "\"audit ui\"",
         "\"audit a11y\"",
         "\"audit code\"",
         "\"code audit\"",
-        "\"component audit\""
+        "\"component audit\"",
+        "\"check my code\"",
+        "\"is this good\"",
+        "\"look at this before I commit\"",
+        "\"suggest improvements\""
       ],
       "agent-affinity": [
         "epost-muji",
@@ -48,11 +53,11 @@
         "extends": [],
         "requires": [],
         "enhances": [
-          "review"
+          "code-review"
         ],
         "conflicts": []
       },
-      "size": 85165,
+      "size": 93582,
       "path": "audit/SKILL.md"
     },
     {
@@ -82,12 +87,12 @@
         "enhances": [],
         "conflicts": []
       },
-      "size": 23763,
+      "size": 23784,
       "path": "clean-code/SKILL.md"
     },
     {
       "name": "code-review",
-      "description": "(ePost) Use when reviewing code, checking quality before commit, or auditing changed files for issues",
+      "description": "(ePost) Use when user says \"review code\", \"check quality\", \"audit this\", or \"look at changed files\" — checks code quality, style, and correctness before commit",
       "category": "quality",
       "tier": "core",
       "keywords": [
@@ -116,7 +121,7 @@
         "enhances": [],
         "conflicts": []
       },
-      "size": 39237,
+      "size": 39297,
       "path": "code-review/SKILL.md"
     },
     {
@@ -225,7 +230,7 @@
     },
     {
       "name": "error-recovery",
-      "description": "(ePost) Use when operations fail transiently — timeouts, network errors, retries, circuit breakers, graceful degradation",
+      "description": "(ePost) Use when operations fail transiently — \"timeout\", \"retry\", \"circuit breaker\", \"network error\", or \"graceful degradation\" — applies resilience patterns to recover or degrade safely",
       "category": "quality",
       "tier": "discoverable",
       "keywords": [
@@ -262,7 +267,7 @@
         ],
         "conflicts": []
       },
-      "size": 7365,
+      "size": 7434,
       "path": "error-recovery/SKILL.md"
     },
     {
@@ -366,7 +371,7 @@
     },
     {
       "name": "knowledge",
-      "description": "(ePost) Use when you need prior art, past decisions, existing patterns, or external API/library documentation — checks internal sources first, falls back to Context7 and WebSearch. Also use after completing a task to capture learnings to docs/",
+      "description": "(ePost) Use when you need prior art, past decisions, existing patterns, or external API/library documentation — activates knowledge retrieval from internal docs and external sources. Also use to capture learnings after completing a task.",
       "category": "knowledge",
       "tier": "discoverable",
       "keywords": [
@@ -417,12 +422,12 @@
         ],
         "conflicts": []
       },
-      "size": 44098,
+      "size": 44092,
       "path": "knowledge/SKILL.md"
     },
     {
       "name": "loop",
-      "description": "(ePost) Use when you want to autonomously improve a single measurable metric (test coverage, bundle size, lint errors, Lighthouse score) over N iterations with automatic keep/discard",
+      "description": "(ePost) Use when user wants to improve a metric like \\\"test coverage\\\", \\\"bundle size\\\", \\\"lint errors\\\", or \\\"Lighthouse score\\\" over multiple iterations — runs autonomous improvement loop until target is met",
       "category": "workflow",
       "tier": "discoverable",
       "keywords": [
@@ -453,12 +458,12 @@
         ],
         "conflicts": []
       },
-      "size": 15513,
+      "size": 15542,
       "path": "loop/SKILL.md"
     },
     {
       "name": "mermaidjs",
-      "description": "(ePost) Use when creating architecture diagrams, flow charts, sequence diagrams, entity relationship diagrams, state machines, Gantt charts, or any visual representation of systems or processes",
+      "description": "(ePost) Use when user asks to \\\"create a diagram\\\", \\\"draw a flow chart\\\", \\\"visualize this system\\\", or \\\"show the architecture\\\" — generates Mermaid diagrams (flow, sequence, ER, state machine, Gantt)",
       "category": "knowledge",
       "tier": "discoverable",
       "keywords": [
@@ -493,7 +498,7 @@
         ],
         "conflicts": []
       },
-      "size": 3815,
+      "size": 3825,
       "path": "mermaidjs/SKILL.md"
     },
     {
@@ -536,7 +541,7 @@
     },
     {
       "name": "repomix",
-      "description": "Use when you need to pack repository contents into a single file for LLM consumption, share a codebase snapshot with an external AI service, or include a remote repo as context for research",
+      "description": "(ePost) Use when user says \"pack this repo\", \"share codebase snapshot\", or \"include remote repo as context\" — bundles repository contents into a single file for LLM consumption or external AI sharing",
       "category": "knowledge",
       "tier": "core",
       "keywords": [
@@ -562,32 +567,12 @@
         ],
         "conflicts": []
       },
-      "size": 3007,
+      "size": 3018,
       "path": "repomix/SKILL.md"
     },
     {
-      "name": "review",
-      "description": "(ePost) Use when user says \"review\", \"check my code\", \"is this good\", \"look at this before I commit\", or \"suggest improvements\" — detects review type (code quality, a11y, or general improvements) and runs the appropriate review",
-      "category": "workflow",
-      "tier": "discoverable",
-      "keywords": [],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [],
-      "connections": {
-        "extends": [],
-        "requires": [],
-        "enhances": [],
-        "conflicts": []
-      },
-      "size": 20037,
-      "path": "review/SKILL.md"
-    },
-    {
       "name": "security",
-      "description": "(ePost) Use when asked to audit security, review for vulnerabilities, check STRIDE threats, or scan for OWASP Top 10 issues in a codebase or feature",
+      "description": "(ePost) Use when user says \\\"audit security\\\", \\\"review for vulnerabilities\\\", \\\"check STRIDE threats\\\", or \\\"scan for OWASP Top 10\\\" — runs security analysis on a codebase or feature",
       "category": "quality",
       "tier": "core",
       "keywords": [
@@ -625,12 +610,12 @@
         ],
         "conflicts": []
       },
-      "size": 12128,
+      "size": 12165,
       "path": "security/SKILL.md"
     },
     {
       "name": "skill-creator",
-      "description": "Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, edit, or optimize an existing skill, run evals to test a skill, benchmark skill performance with variance analysis, or optimize a skill's description for better triggering accuracy.",
+      "description": "(ePost) Use when user says \"create a skill\", \"edit this skill\", \"optimize a skill's description\", \"run skill evals\", or \"benchmark skill performance\" — creates, modifies, and validates Claude Code skills",
       "category": "quality",
       "tier": "discoverable",
       "keywords": [],
@@ -648,7 +633,7 @@
         ],
         "conflicts": []
       },
-      "size": 45229,
+      "size": 45115,
       "path": "skill-creator/SKILL.md"
     },
     {
@@ -714,7 +699,7 @@
         ],
         "conflicts": []
       },
-      "size": 8598,
+      "size": 11075,
       "path": "subagent-driven-development/SKILL.md"
     },
     {
@@ -745,7 +730,7 @@
         ],
         "conflicts": []
       },
-      "size": 18940,
+      "size": 18961,
       "path": "tdd/SKILL.md"
     },
     {

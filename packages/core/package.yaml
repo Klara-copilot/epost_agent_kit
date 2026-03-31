@@ -32,7 +32,6 @@ provides:
     - test
     - debug
     - git
-    - review
     - docs
     - audit
     - get-started

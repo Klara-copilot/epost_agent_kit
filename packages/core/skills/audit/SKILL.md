@@ -1,18 +1,23 @@
 ---
 name: audit
-description: (ePost) Use when user says "audit", "run an audit", "check quality", "review before merge", "a11y audit", or "code audit" — detects audit type (UI component, a11y, or code) and dispatches the right specialist
+description: (ePost) Use when user says "audit", "review", "run an audit", "check quality", "check my code", "is this good", "look at this before I commit", "review before merge", "a11y audit", "code audit", or "suggest improvements" — detects audit type (UI component, a11y, code, or improvements) and dispatches the right specialist
 user-invocable: true
 metadata:
   argument-hint: "[--ui <ComponentName> [--platform web|ios|android|all] [--poc|--beta|--stable] | --a11y [platform] | --code]"
   keywords: [audit, review, component, a11y, accessibility, code, quality, ui-lib, muji, tokens]
   triggers:
     - "audit"
+    - "review"
     - "audit component"
     - "audit ui"
     - "audit a11y"
     - "audit code"
     - "code audit"
     - "component audit"
+    - "check my code"
+    - "is this good"
+    - "look at this before I commit"
+    - "suggest improvements"
   platforms: [all]
   agent-affinity: [epost-muji, epost-code-reviewer, epost-a11y-specialist]
   connections:
@@ -67,6 +72,7 @@ If `$ARGUMENTS` starts with `--a11y`: **dispatch epost-a11y-specialist** via Age
 If `$ARGUMENTS` starts with `--close --ui`: load `references/ui-close.md` and execute inline.
 If `$ARGUMENTS` starts with `--close`: load `references/a11y-close.md` and execute inline.
 If `$ARGUMENTS` starts with `--code`: **dispatch epost-code-reviewer** via Agent tool.
+If `$ARGUMENTS` starts with `--improvements`: run improvements inline — load `references/improvements.md` and execute.
 If auto-detected as **hybrid** (see Hybrid Detection below): run Hybrid Orchestration.
 Otherwise: continue to Auto-Detection.
 
@@ -156,6 +162,9 @@ For non-hybrid dispatches (`--ui`, `--code`, `--a11y`):
 | `references/ui-findings-schema.md` | Schema for `reports/known-findings/ui-components.json` |
 | `references/session-json-schema.md` | Schema for `session.json` — per-session metadata written to every session folder |
 | `references/delegation-templates.md` | Structured handoff templates for specialist delegation |
+| `references/improvements.md` | Review auto-improvement metrics from sessions.jsonl, detect patterns |
+| `references/a11y-ios-guidance-mode.md` | iOS a11y real-time guidance — patterns, response style, VoiceOver code examples |
+| `references/a11y-android-guidance-mode.md` | Android a11y real-time guidance — Compose + Views/XML patterns, TalkBack code examples |
 
 ## Auto-Detection
 
@@ -167,8 +176,9 @@ Analyze `$ARGUMENTS` keywords and context:
 | "a11y", "accessibility", "wcag", "voiceover", "talkback" | `--a11y` → `references/a11y-workflow.md` |
 | "close" + "ui" signals | `--close --ui` → `references/ui-close.md` |
 | "close", "resolve", "finding" | `--close` → `references/a11y-close.md` |
-| "code", "security", "performance", staged changes without component signal | `--code` → `code-review` |
-| Ambiguous | Ask: UI component audit, a11y audit, or code audit? |
+| "code", "security", "performance", "check my code", "is this good", staged changes without component signal | `--code` → `code-review` |
+| "improvements", "metrics", "patterns", "sessions" | `--improvements` → `references/improvements.md` inline |
+| Ambiguous | Ask: UI component audit, a11y audit, code audit, or improvements review? |
 
 ## Platform Detection (--ui mode)
 
@@ -188,6 +198,7 @@ When delegating to epost-muji, detect target platforms:
 | `--close` | epost-a11y-specialist | `references/a11y-close.md` | Mark a11y finding as resolved |
 | `--close --ui <id>` | epost-muji | `references/ui-close.md` | Mark UI finding resolved |
 | `--code` | epost-code-reviewer | `code-review` | General code quality, security, performance |
+| `--improvements` | inline | `references/improvements.md` | Session metrics, auto-improvement patterns |
 
 ## Examples
 
@@ -198,4 +209,6 @@ When delegating to epost-muji, detect target platforms:
 - `/audit --a11y` → a11y specialist audits staged changes
 - `/audit --code` → reviewer audits staged code changes
 - `/audit --close --ui 3` → mark UI finding ID 3 as resolved
+- `/audit --improvements` → review session metrics, surface improvement patterns
 - `/audit EpostInput` → auto-detected as UI audit → delegates to muji
+- `/audit check my code` → auto-detected as code audit → delegates to epost-code-reviewer

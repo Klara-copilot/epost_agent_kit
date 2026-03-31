@@ -1,6 +1,6 @@
 ---
 name: security
-description: "(ePost) Use when asked to audit security, review for vulnerabilities, check STRIDE threats, or scan for OWASP Top 10 issues in a codebase or feature"
+description: "(ePost) Use when user says \"audit security\", \"review for vulnerabilities\", \"check STRIDE threats\", or \"scan for OWASP Top 10\" — runs security analysis on a codebase or feature"
 user-invocable: true
 tier: core
 metadata:
