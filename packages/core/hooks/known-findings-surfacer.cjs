@@ -8,7 +8,7 @@
  * Exit codes:
  *   0 = always (never blocks)
  *
- * Output (stdout): JSON with optional warning message
+ * Output (stdout): plain text warning message (PostToolUse context injection)
  *
  * Graceful degradation:
  *   - No DB files → silent exit (no warning)
@@ -180,13 +180,8 @@ function run(rawInput) {
 
     const warning = `[Known Issues] ${path.basename(filePath)}: ${matched.length} unresolved finding${matched.length !== 1 ? 's' : ''} (${severitySummary}) — run ${fixHint} or /audit --close`;
 
-    // Output PostToolUse response: inject warning as additional output
-    const response = {
-      type: 'text',
-      text: warning,
-    };
-
-    process.stdout.write(JSON.stringify(response) + '\n');
+    // Output PostToolUse response: inject warning as plain text (context injection)
+    console.log(warning);
     process.exit(0);
 
   } catch {
