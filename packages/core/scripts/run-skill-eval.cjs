@@ -3,8 +3,8 @@
  * run-skill-eval.cjs — Bridge for skill-creator run_eval.py
  *
  * Usage:
- *   node scripts/run-skill-eval.cjs <skill-path> [--model <id>]
- *   npm run skill:eval -- <skill-path> [--model <id>]
+ *   node .claude/scripts/run-skill-eval.cjs <skill-path> [--model <id>]
+ *   node packages/core/scripts/run-skill-eval.cjs <skill-path> [--model <id>]
  *
  * Requires: python3, pyyaml, claude CLI on PATH
  */
