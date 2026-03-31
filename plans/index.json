@@ -2,10 +2,10 @@
   "version": "1.0.0",
   "updated": "2026-03-31",
   "counts": {
-    "active": 41,
+    "active": 42,
     "completed": 0,
     "archived": 1,
-    "total": 42
+    "total": 43
   },
   "plans": [
     {
@@ -747,6 +747,26 @@
         "benchmarks"
       ],
       "file": "plans/260331-0924-skill-creator-adoption/plan.md"
+    },
+    {
+      "id": "PLAN-0088",
+      "title": "Whitelist Tool Model + Skill Description Compliance",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-03-31",
+      "authors": [
+        "epost-planner"
+      ],
+      "tags": [
+        "agents",
+        "security",
+        "allowedTools",
+        "whitelist",
+        "descriptions",
+        "CSO",
+        "consensus-voting"
+      ],
+      "file": "plans/260331-1039-whitelist-and-compliance/plan.md"
     }
   ]
 }

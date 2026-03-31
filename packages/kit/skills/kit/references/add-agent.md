@@ -37,7 +37,7 @@ Create a new agent definition file following epost_agent_kit conventions.
 3. **Scaffold Agent File**:
    - Create `packages/{package}/agents/{agent-name}.md` with proper frontmatter
    - Include: name, description (with `<example>` blocks), model, color
-   - Add: skills (from step 2), permissionMode, disallowedTools as needed
+   - Add: skills (from step 2), permissionMode, allowedTools (whitelist) per role
    - Write system prompt body with role definition, workflow, and rules
 
 4. **Copy to Package Source**:

@@ -3,6 +3,16 @@
   "updatedAt": "2026-03-31",
   "entries": [
     {
+      "id": "epost-fullstack-developer-260331-1107-whitelist-and-compliance",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "Whitelist Tool Model + Skill Description Compliance — all 4 phases",
+      "verdict": "DONE",
+      "plan": "plans/260331-1039-whitelist-and-compliance",
+      "path": "Users/than/Projects/epost_agent_kit/plans/260331-1039-whitelist-and-compliance/reports/260331-1107-whitelist-and-compliance-epost-fullstack-developer.md",
+      "created": "2026-03-31"
+    },
+    {
       "id": "epost-fullstack-developer-260331-0818-plans-reports-cleanup",
       "type": "implementation",
       "agent": "epost-fullstack-developer",
@@ -579,6 +589,15 @@
       "createdAt": "2026-03-31",
       "plan": "plans/260331-0924-skill-creator-adoption",
       "path": "plans/260331-0924-skill-creator-adoption/plan.md"
+    },
+    {
+      "id": "epost-researcher-260331-1020-agent-skill-architecture",
+      "type": "research",
+      "agent": "epost-researcher",
+      "title": "Research: Agent Skill Architecture & Adoption Patterns — agentskills.io spec, Anthropic model, superpowers framework, mental models (active vs passive), folder standards, epost assessment, 3 adoption proposals",
+      "verdict": "ACTIONABLE",
+      "createdAt": "2026-03-31",
+      "path": "reports/260331-1020-agent-skill-architecture-research-epost-researcher.md"
     }
   ]
 }

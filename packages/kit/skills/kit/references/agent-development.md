@@ -35,8 +35,7 @@ assistant: "[How assistant should respond and use this agent]"
 
 model: inherit
 color: blue
-tools: ["Read", "Write", "Grep"]
-"
+allowedTools: [Read, Write, Grep]
 ---
 
 You are [agent role description]...
@@ -116,15 +115,22 @@ Visual identifier for agent in UI.
 - Red: Critical, security
 - Magenta: Creative, generation
 
-### tools (optional)
+### allowedTools (recommended)
 
-Restrict agent to specific tools.
+Whitelist the tools an agent is allowed to use. **Principle of least privilege** — grant only what the agent's role requires.
 
 **Common tool sets:**
-- Read-only analysis: `["Read", "Grep", "Glob"]`
-- Code generation: `["Read", "Write", "Grep"]`
-- Testing: `["Read", "Bash", "Grep"]`
-- Full access: Omit field
+- Read-only analysis: `allowedTools: [Read, Grep, Glob]`
+- Review + report: `allowedTools: [Read, Glob, Grep, Write]`
+- Planning: `allowedTools: [Read, Glob, Grep, Write, Edit]`
+- Implementation: `allowedTools: [Read, Glob, Grep, Write, Edit, Bash]`
+- Git automation: `allowedTools: [Read, Bash]`
+
+**Note:** `allowedTools` is an ecosystem field (same status as `disallowedTools`) — enforced by ePost Agent Kit conventions.
+
+### tools (deprecated — use allowedTools)
+
+The upstream `tools:` field is now deprecated in favor of `allowedTools:`. Prefer whitelist over blacklist for security and auditability. If you encounter `tools:` in an agent, migrate it to `allowedTools:`.
 
 ## System Prompt Design
 
@@ -146,7 +152,9 @@ The markdown body becomes the agent's system prompt. Write in second person, add
 - `plan` — Read-only exploration, no writes (architects, researchers, reviewers)
 - `bypassPermissions` — Full autonomy (use with caution)
 
-**`disallowedTools`** — Explicitly prevent agent from using specific tools. Useful for read-only agents: `disallowedTools: [Write, Edit]`.
+**`allowedTools`** — *(recommended)* Whitelist the tools the agent is allowed to use. Principle of least privilege. Example: `allowedTools: [Read, Glob, Grep, Write]`.
+
+**`disallowedTools`** — *(deprecated)* Blacklist tools the agent may not use. Prefer `allowedTools` whitelist over `disallowedTools` blacklist — whitelist is safer and more auditable.
 
 ## Declaring a Data Store
 

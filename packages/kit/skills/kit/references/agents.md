@@ -34,13 +34,13 @@ Skills support nested directories. Claude Code auto-discovers `SKILL.md` files a
 | `description` | Yes | Official | string | Triggering conditions with `<example>` blocks |
 | `model` | Yes | Official | string | `inherit`, `sonnet`, `opus`, `haiku` |
 | `color` | Yes | Official | string | `blue`, `cyan`, `green`, `yellow`, `magenta`, `red` |
-| `tools` | No | Official | array | Restrict available tools (default: all) |
+| `tools` | No | Official | array | Upstream field — restrict available tools (default: all) |
 | `skills` | No | Ecosystem | array | Preload skills into agent context at startup |
 | `memory` | No | Ecosystem | string | Persistent learning: `user`, `project`, `local` |
 | `permissionMode` | No | Ecosystem | string | `default`, `acceptEdits`, `dontAsk`, `bypassPermissions`, `plan` |
 | `hooks` | No | Ecosystem | object | Per-agent scoped hooks (same format as settings.json hooks) |
-| `disallowedTools` | No | Ecosystem | string | Comma-separated tools to deny (advisory) |
-| `allowedTools` | No | Ecosystem | string | Comma-separated tools to allow |
+| `allowedTools` | No | Ecosystem | array | **(recommended)** Whitelist tools the agent may use — principle of least privilege |
+| `disallowedTools` | No | Ecosystem | array | **(deprecated)** Blacklist tools — prefer `allowedTools` whitelist instead |
 
 **Source legend:** *Official* = confirmed in upstream `anthropics/claude-code` plugin-dev docs. *Ecosystem* = documented in our reference and observed working but not confirmed upstream.
 
