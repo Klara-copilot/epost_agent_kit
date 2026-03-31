@@ -37,6 +37,7 @@ Scan codebase and generate structured Knowledge Base documentation following the
 | `docs/index.json` exists with entries | Stop — KB already initialized. Run `/docs-update` instead. |
 | Flat docs exist at `docs/*.md` (top-level .md files) | **Smart Init**: migrate flat docs → then gap-fill new docs for uncovered areas |
 | KB subdirs exist but empty (no .md files inside) | **Smart Init**: treat as fresh, scan codebase → generate docs |
+| `docs/` subdirectories contain `.md` files but no `index.json` | **Smart Init**: treat existing docs as migration input — enumerate + classify + index them, then gap-fill with new docs |
 | No `docs/` directory or empty | **Generation Mode**: scan codebase → generate all docs from scratch |
 | `$ARGUMENTS` contains `--migrate` | Same as Smart Init — flag is now optional shorthand |
 
@@ -181,6 +182,15 @@ Build `docs/index.json` with all migrated + newly generated entries. Use the sam
 - Read key files (package.json, pom.xml, tsconfig, configs, Dockerfile, CI configs)
 - Identify: framework, language, database, deployment, major deps, modules
 
+### 1.5. Inventory Existing Files
+
+Before selecting categories or creating KB structure, run: `find docs -type f -name "*.md"`
+
+**Result interpretation:**
+- If `.md` files found (regardless of directory structure) → **switch to Smart Init mode** immediately. This ensures every file on disk gets indexed and prevents orphan errors during validation.
+- If `docs/` exists but no `.md` files (empty subdirs only) → continue to Generation Mode as planned
+- If no `docs/` directory → continue to Generation Mode
+
 ### 2. Select Categories
 
 Read `docs/references/kb-categories.json`. Determine which categories apply to this codebase:
@@ -296,7 +306,7 @@ Create `docs/index.json` with all generated entries. Only include categories tha
     "finding": "Discovered gotchas and debug insights",
     "guide": "Operational how-to guides for dev setup, integration, and workflows",
     "api": "API endpoint documentation",
-    "infra": "Infrastructure and deployment documentation",
+    "infrastructure": "Infrastructure and deployment documentation",
     "integration": "External service integration documentation"
   },
   "dependencies": {
@@ -324,6 +334,8 @@ Create `docs/index.json` with all generated entries. Only include categories tha
   ]
 }
 ```
+
+> **Category field validation**: The `category` field in each entry MUST exactly match a key from the `categories` map above. Common mistakes: `"infra"` (use `"infrastructure"`), `"conventions"` (use `"convention"`), `"decisions"` (use `"decision"`), `"integrations"` (use `"integration"`). The categories map uses `"infrastructure"` as the canonical key, not `"infra"`.
 
 Key rules for `agentHint`:
 - Start with "check before..." — tells agents *when* to read this doc
