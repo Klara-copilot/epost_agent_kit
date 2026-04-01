@@ -50,6 +50,22 @@ Options:
 |------|---------|
 | `--no-gate` | Bypass planning check; implement immediately |
 | `--plan <path>` | Use specified plan file; bypass active-plan lookup |
+| `--auto` | Auto-approve all gates when review finds 0 critical issues |
+
+### Anti-Rationalization
+
+Before bypassing the gate, verify you are NOT rationalizing with any of:
+
+| Thought | Reality |
+|---------|---------|
+| "This is too simple to plan" | Simplicity is judged after design, not before |
+| "I already know the solution" | Unknown unknowns exist — research confirms |
+| "The user wants it fast" | Fast + broken costs more time than planned + correct |
+| "The codebase is familiar" | Familiarity breeds assumption errors |
+| "It's just a small change" | Small changes cause large regressions |
+| "I'll fix it later" | Later never comes — design now |
+
+If you caught yourself with any of the above: stop and run `/plan` first.
 
 ## Step 0b — Active Plan Resolution (when plan found)
 
@@ -84,6 +100,7 @@ When fixed, move to **Recently Fixed**: `- {what was broken} — {how it was fix
 
 If `$ARGUMENTS` starts with `--fast`: skip auto-detection, load `references/fast-mode.md` and execute directly. Remaining args are the task description.
 If `$ARGUMENTS` starts with `--parallel`: skip auto-detection, load `references/parallel-mode.md` and execute directly. Remaining args are the task description.
+If `$ARGUMENTS` contains `--auto`: set auto_approve=true — review gates auto-approve when 0 critical issues found.
 Otherwise: continue to Platform Detection.
 
 ## Aspect Files

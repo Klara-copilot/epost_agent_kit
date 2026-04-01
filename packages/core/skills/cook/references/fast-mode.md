@@ -47,6 +47,15 @@ After implementation, run all checks before testing:
 
 If any check fails → fix immediately before proceeding.
 
+## Step 3.5 — Simplify
+
+Inline simplification pass before testing:
+- Duplication: any block that could be extracted or reused?
+- Over-engineering: simpler data structure or control flow available?
+- File size: any file approaching 200 LOC → split
+
+Skip for documentation-only changes.
+
 ## Step 4: Test
 
 Write and run tests for new code.
@@ -57,21 +66,36 @@ Write and run tests for new code.
 
 **Auto-escalation**: Follow `error-recovery` mutation discipline — each retry MUST use a different approach. After 2 different approaches fail → escalate to `epost-debugger` with the attempt log and failing test output. Do not attempt a third guess.
 
-## Step 5: Finalize
+## Step 5 — Finalize (MANDATORY)
 
-1. **Status update** — If working from a plan, update `{plan_dir}/status.md`:
-   - Progress table: mark completed phase as `Done`
-   - Key Decisions: add any significant choices made during implementation
-   - Architecture Reference: note any discovered structure
-2. **Docs update** — Update relevant docs if public API or behavior changed
-3. **Change summary** — Output a concise summary:
-   ```
-   Files changed: N
-   Tests added: N
-   Behavior change: [yes/no + 1 line description]
-   Follow-up tasks: [any new issues discovered]
-   ```
-3. **Commit offer** — Ask: "Commit? [Y/n]" → use `epost-git-manager` if yes
+Do not skip any sub-step.
+
+### 5a. Plan Sync-Back
+If working from a plan, update `{plan_dir}/status.md`:
+- Progress table: mark completed phase as `Done`
+- Key Decisions: add significant choices made
+- Architecture Reference: note any discovered structure
+
+### 5b. Docs Impact Assessment
+State explicitly:
+```
+Docs impact: none | minor | major
+```
+- `none` — internal logic only, no public API change
+- `minor` — config change, new param — update inline
+- `major` — new feature, behavior change, new API → trigger `epost-docs-manager`
+
+### 5c. Commit Offer
+Ask: "Commit? [Y/n]" → delegate to `epost-git-manager` if yes.
+
+### 5d. Change Summary Output
+```
+Files changed: N
+Tests added: N
+Behavior change: [yes/no + 1 line]
+Docs impact: [none|minor|major]
+Follow-up: [any new issues discovered]
+```
 
 ## Rules
 
