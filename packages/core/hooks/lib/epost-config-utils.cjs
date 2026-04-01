@@ -18,12 +18,7 @@ const CONFIG_PATH = LOCAL_CONFIG_PATH;
 const DEFAULT_CONFIG = {
   privacyBlock: true,  // top-level for privacy-checker backward compat
   statusline: 'full',
-  skills: {
-    research: {
-      engine: 'websearch',
-      gemini: { model: 'gemini-2.5-flash-preview-04-17' }
-    }
-  },
+  skills: {},
   hooks: {
     scout: {
       enabled: true,
@@ -775,22 +770,6 @@ function isHookEnabled(hookName) {
 }
 
 /**
- * Get research engine configuration with validation and defaults
- *
- * @param {Object} config - Loaded epost-kit config
- * @returns {{ engine: string, geminiModel: string }}
- */
-function getResearchConfig(config) {
-  const skills = config?.skills?.research || {};
-  const VALID_ENGINES = ['gemini', 'websearch'];
-  const engine = VALID_ENGINES.includes(skills.engine) ? skills.engine : 'websearch';
-  return {
-    engine,
-    geminiModel: skills.gemini?.model || 'gemini-2.5-flash-preview-04-17'
-  };
-}
-
-/**
  * Get current git branch (safe execution)
  * @param {string|null} cwd - Working directory to run git command from (optional)
  * @returns {string|null} Current branch name or null
@@ -838,6 +817,5 @@ module.exports = {
   resolveNamingPattern,
   getGitBranch,
   getGitRoot,
-  isHookEnabled,
-  getResearchConfig
+  isHookEnabled
 };
