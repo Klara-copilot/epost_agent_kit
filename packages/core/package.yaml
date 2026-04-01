@@ -42,6 +42,7 @@ provides:
     - loop
     - skill-creator
     - deploy
+    - research
 scripts:
   - get-active-plan.cjs
   - set-active-plan.cjs
