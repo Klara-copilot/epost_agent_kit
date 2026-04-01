@@ -99,25 +99,15 @@ Keep single commit if: all files same type/scope, FILES ≤ 3, LINES ≤ 50, all
 
 **A) Single Commit:** Skip to TOOL 3.
 
-**B) Multi Commit:**
-```bash
-gemini -y -p "Analyze these files and create logical commit groups: $(git diff --cached --name-status). Rules: 1) Group by type (feat/fix/docs/chore/deps/ci). 2) Group by scope if same type. 3) Never mix deps with code. 4) Never mix config with features. Output format: GROUP1: type(scope): description | file1,file2,file3 | GROUP2: ... Max 4 groups. <72 chars per message." --model gemini-2.5-flash
-```
-
-**If gemini unavailable:** Group by FILE GROUPS: `config:` → chore, `deps:` → chore, `test:` → test, `code:` → feat|fix, `docs:` → docs.
+**B) Multi Commit:** Group by FILE GROUPS: `config:` → chore, `deps:` → chore, `test:` → test, `code:` → feat|fix, `docs:` → docs.
 
 ### TOOL 3: Generate Commit Message(s)
 
 **A) Single Commit - Simple (LINES ≤ 30 AND FILES ≤ 3):** Create message yourself.
 
-**B) Single Commit - Complex (LINES > 30 OR FILES > 3):**
-```bash
-gemini -y -p "Create conventional commit from this diff: $(git diff --cached | head -300). Format: type(scope): description. Types: feat|fix|docs|chore|refactor|perf|test|build|ci. <72 chars. Focus on WHAT changed. No AI attribution." --model gemini-2.5-flash
-```
+**B) Single Commit - Complex (LINES > 30 OR FILES > 3):** Create message yourself from the diff — read `git diff --cached | head -300` and summarize.
 
 **C) Multi Commit:** Use messages from Tool 2 split groups.
-
-**If gemini unavailable:** Create message yourself.
 
 ### TOOL 4: Commit + Push
 
@@ -165,11 +155,8 @@ git diff origin/$BASE...origin/$HEAD --stat 2>/dev/null || echo "No remote diff 
 ```
 
 ### PR TOOL 2: Generate PR title and body
-```bash
-gemini -y -p "Create PR title and body from these commits: $(git log origin/$BASE...origin/$HEAD --oneline). Title: conventional commit format <72 chars. NO release/version numbers in title. Body: ## Summary with 2-3 bullet points, ## Test plan with checklist. No AI attribution." --model gemini-2.5-flash
-```
 
-**If gemini unavailable:** Create from commit list yourself.
+Create from the commit list: conventional commit format title (<72 chars, no version numbers), body with `## Summary` (2-3 bullets) and `## Test plan` (checklist).
 
 ### PR TOOL 3: Create PR
 ```bash
@@ -278,7 +265,6 @@ fi
 | No changes staged | "❌ No changes to commit" | Exit cleanly |
 | Merge conflicts | "❌ Conflicts in: [files]" | Suggest manual resolution |
 | Push rejected | "⚠ Push rejected (out of sync)" | Suggest `git pull --rebase` |
-| Gemini unavailable | Silent fallback | Create message yourself |
 
 ## Critical Instructions for Haiku
 

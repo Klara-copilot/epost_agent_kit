@@ -139,9 +139,8 @@ docs/{topic}/
 ## Large File Handling
 
 For documentation exceeding reasonable context limits:
-1. **Gemini CLI**: `echo "[question] in [path]" | gemini -y -m gemini-2.5-flash`
-2. **Chunked Read**: Use Read tool with offset/limit parameters
-3. **Grep**: Search specific content with focused patterns
+1. **Chunked Read**: Use Read tool with offset/limit parameters
+2. **Grep**: Search specific content with focused patterns
 
 ## Project Docs Awareness
 
@@ -179,7 +178,7 @@ Before documenting code references:
 ### Documentation Review Process
 1. Read `docs/index.json` to understand existing KB entries
 2. Scan `docs/` directory structure against index entries
-3. Use Glob/Grep tools or Bash → Gemini CLI for large files
+3. Use Glob/Grep tools or Bash for large files
 4. Check each entry for completeness, accuracy, and code reference validity
 5. Verify all links, references, and code examples
 6. Ensure consistent formatting and terminology

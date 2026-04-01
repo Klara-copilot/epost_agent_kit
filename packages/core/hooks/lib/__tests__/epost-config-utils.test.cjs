@@ -22,7 +22,6 @@ const {
   writeSessionState,
   readSessionState,
   getSessionTempPath,
-  getResearchConfig
 } = require('../epost-config-utils.cjs');
 
 let passed = 0;
@@ -769,40 +768,6 @@ test('resolvePlanPath falls back to branch if no session state', () => {
 
   // Should fall through to branch or return null
   assertEquals(result.resolvedBy === 'branch' || result.resolvedBy === null, true);
-});
-
-console.log('\n=== getResearchConfig tests ===\n');
-
-test('default config returns engine=websearch with default gemini model', () => {
-  const result = getResearchConfig({});
-  assertEquals(result.engine, 'websearch');
-  assertEquals(result.geminiModel, 'gemini-2.5-flash-preview-04-17');
-});
-
-test('engine: gemini returns gemini', () => {
-  const result = getResearchConfig({ skills: { research: { engine: 'gemini' } } });
-  assertEquals(result.engine, 'gemini');
-});
-
-test('engine: perplexity (invalid) falls back to websearch', () => {
-  const result = getResearchConfig({ skills: { research: { engine: 'perplexity' } } });
-  assertEquals(result.engine, 'websearch');
-});
-
-test('invalid engine falls back to websearch', () => {
-  const result = getResearchConfig({ skills: { research: { engine: 'invalid-engine' } } });
-  assertEquals(result.engine, 'websearch');
-});
-
-test('custom gemini model is returned', () => {
-  const result = getResearchConfig({ skills: { research: { engine: 'gemini', gemini: { model: 'gemini-3-flash' } } } });
-  assertEquals(result.geminiModel, 'gemini-3-flash');
-});
-
-test('null config returns websearch defaults', () => {
-  const result = getResearchConfig(null);
-  assertEquals(result.engine, 'websearch');
-  assertEquals(result.geminiModel, 'gemini-2.5-flash-preview-04-17');
 });
 
 // Summary
