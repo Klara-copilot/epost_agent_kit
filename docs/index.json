@@ -56,6 +56,17 @@
       "related": ["ARCH-0001", "PATTERN-0001"]
     },
     {
+      "id": "ARCH-0002",
+      "title": "Claude Native Mechanics & Routing Design Principles",
+      "category": "architecture",
+      "status": "current",
+      "audience": ["agent", "human"],
+      "path": "docs/architecture/ARCH-0002-claude-native-mechanics-and-routing-design.md",
+      "tags": ["routing", "agents", "skills", "claude-mechanics", "design-principles"],
+      "agentHint": "check before designing routing logic, adding agents, or restructuring skill loading",
+      "related": ["ARCH-0001", "PATTERN-0001"]
+    },
+    {
       "id": "CONV-0002",
       "title": "Release Process & Distribution (v2.0.0)",
       "category": "convention",
