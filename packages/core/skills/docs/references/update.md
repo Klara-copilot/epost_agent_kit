@@ -177,6 +177,7 @@ Audit KB health using content verification (not git dates):
    - `dependencies.internal` → for each, verify repo still in pom.xml/package.json
    - `dependencies.external` → for each, verify service still referenced in config/code
    - `business` missing → flag as `MISSING-ENRICHMENT`
+   - `business.domain` empty, `null`, or `"..."` → flag as `INVALID-ENRICHMENT`; fix inline using derivation priority list from `init.md` Step 4.5
    - `business.modules` → verify modules still match current project structure
 4. **Report**:
 
@@ -227,6 +228,7 @@ Deep content verification — reads every doc and validates all references:
      - Verify service reference still present in config/code
      - Flag `STALE` if evidence no longer holds
    - For `business`:
+     - Check `domain` is non-empty, not `null` or `"..."` → flag `INVALID-ENRICHMENT` if so; fix inline
      - Verify `modules` against current directory structure
      - Check `domain` still matches project scope
 2. **Flag issues**:
@@ -235,6 +237,7 @@ Deep content verification — reads every doc and validates all references:
    - `GAP` — significant code area with no doc coverage
    - `OUTDATED` — entry's code area had major changes since doc was written
    - `MISSING-ENRICHMENT` — index.json lacks `dependencies` or `business` fields; run `/docs --init` to populate
+   - `INVALID-ENRICHMENT` — required enrichment field has invalid value (empty, `null`, or `"..."`); fix inline without re-running init
 3. **Report** using same format as Scan Mode but with deeper detail per issue
 
 ## Topic Mode

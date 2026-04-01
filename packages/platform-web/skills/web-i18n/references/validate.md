@@ -2,9 +2,19 @@
 
 Validate translation completeness: detect missing keys (code → Sheet), orphaned keys (Sheet → code), and untranslated cells.
 
-Exits with code 1 if any **missing** keys found (CI gate).
+Exits with code 1 if any **missing** keys found (CI gate). Read-only operation — no service account required for public sheets.
 
-Read-only operation — no service account required for public sheets.
+## Configuration
+
+Only 3 required env vars for validate (all read-only):
+
+```bash
+I18N_GOOGLE_SHEET_ID=<sheet-id>
+I18N_MESSAGES_DIR=<relative-path-to-messages-dir>
+I18N_LOCALES=en,de,fr,it
+```
+
+**Important**: `GOOGLE_SERVICE_ACCOUNT_KEY` is **not needed** for validate. Uses public CSV fetch.
 
 ## Steps
 
@@ -13,110 +23,229 @@ Read-only operation — no service account required for public sheets.
 ```javascript
 const { loadConfig } = require('./scripts/env-config.cjs');
 const config = loadConfig();
-// Only validate read-only vars manually (validateConfig() enforces service account — not needed here):
+// Manually validate read-only vars only:
 if (!config.googleSheetId) throw new Error('I18N_GOOGLE_SHEET_ID required');
 if (!config.messagesDir) throw new Error('I18N_MESSAGES_DIR required');
 if (!config.locales || config.locales.length === 0) throw new Error('I18N_LOCALES required');
-// NOTE: GOOGLE_SERVICE_ACCOUNT_KEY not needed for --validate (read-only, public sheets)
+// NOTE: GOOGLE_SERVICE_ACCOUNT_KEY not needed for --validate
 ```
 
 ### 2. Extract keys from codebase
 
 Scan `.ts`, `.tsx`, `.js`, `.jsx` files (exclude `node_modules`, `.next`, `dist`).
 
+**Step 2a: Strip comments first** — prevents false positives from commented-out code
+
 ```javascript
-// 1. Strip comments first (avoid false positives from commented-out code)
-const content = stripComments(raw); // removes // line comments and /* */ block comments
-
-// 2. Track ALL translation variable names (not just 't')
-const assignRe = /const\s+(\w+)\s*=\s*(?:useTranslations|getTranslations)\s*\(\s*(?:['"]([^'"]*)['"])?\s*\)/g;
-const varMap = new Map(); // varName → namespace string
-// e.g. const btn = useTranslations('Button') → varMap.set('btn', 'Button')
-
-// 3. For each tracked var, find calls: btn('key') → 'Button::key'
-// 4. Handle immediately-invoked: useTranslations('NS')('key') → 'NS::key'
-
-// 5. Normalize: combine ns + key, replace ALL dots with :: separator
-function normalizeKey(ns, key, sep) {
-  const combined = ns ? `${ns}.${key}` : key;
-  return combined.split('.').join(sep);
+function stripComments(content) {
+  // Remove // line comments
+  let result = content.replace(/\/\/.*$/gm, '');
+  // Remove /* */ block comments
+  result = result.replace(/\/\*[\s\S]*?\*\//g, '');
+  return result;
 }
-// e.g. ns='Monitoring.Filter', key='State.title' → 'Monitoring::Filter::State::title'
 
-// 6. Filter malformed: skip keys ending with separator or that are empty
-// (caused by template literals or empty t('') calls)
+const stripped = stripComments(fileContent);
 ```
 
-Collect unique keys into `codeKeys: Map<string, { file: string, line: number }>`.
+**Step 2b: Track ALL translation variable names** (not just `t`)
 
-Track source location (file path + line number) for each key to include in the missing-keys report.
+```javascript
+// Pattern matches: const {anyVar} = useTranslations('NS') or getTranslations('NS')
+const assignRe = /const\s+(\w+)\s*=\s*(?:useTranslations|getTranslations)\s*\(\s*(?:['"]([^'"]*)['"])?\s*\)/g;
+const varMap = new Map(); // varName → namespace string
+
+let match;
+while ((match = assignRe.exec(stripped)) !== null) {
+  const varName = match[1];
+  const namespace = match[2] || ''; // namespace may be empty
+  varMap.set(varName, namespace);
+}
+// e.g. const btn = useTranslations('Button') → varMap.set('btn', 'Button')
+// e.g. const t = useTranslations('Monitoring.Filter') → varMap.set('t', 'Monitoring.Filter')
+```
+
+**Step 2c: Find all call sites for each tracked variable**
+
+For each variable in `varMap`, search for `varName('key')` patterns and extract the key:
+
+```javascript
+const codeKeys = new Map(); // key → { file, line }
+
+for (const [varName, namespace] of varMap) {
+  // Match varName('key') or varName("key") call sites
+  const callRe = new RegExp(`${varName}\\s*\\(\\s*['"](.*?)['"]\\s*\\)`, 'g');
+  let match;
+  while ((match = callRe.exec(stripped)) !== null) {
+    const key = match[1];
+    // Combine namespace + key and normalize
+    const fullKey = namespace ? `${namespace}.${key}` : key;
+    const normalized = normalizeKey(fullKey, config.keySeparator);
+
+    // Store with file + line info
+    if (!codeKeys.has(normalized)) {
+      const lineNum = fileContent.substring(0, match.index).split('\n').length;
+      codeKeys.set(normalized, { file: filePath, line: lineNum });
+    }
+  }
+}
+```
+
+**Step 2d: Handle immediately-invoked patterns**
+
+```javascript
+// Match useTranslations('NS')('key') or getTranslations('NS')('key')
+const immediateRe = /(?:useTranslations|getTranslations)\s*\(\s*['"]([^'"]*)['"]?\s*\)\s*\(\s*['"]([^'"]*)['"]?\s*\)/g;
+let match;
+while ((match = immediateRe.exec(stripped)) !== null) {
+  const namespace = match[1] || '';
+  const key = match[2] || '';
+  const fullKey = namespace ? `${namespace}.${key}` : key;
+  const normalized = normalizeKey(fullKey, config.keySeparator);
+  if (!codeKeys.has(normalized)) {
+    const lineNum = fileContent.substring(0, match.index).split('\n').length;
+    codeKeys.set(normalized, { file: filePath, line: lineNum });
+  }
+}
+```
+
+**Step 2e: Normalize keys — replace all dots with separator**
+
+```javascript
+function normalizeKey(fullKey, separator = '::') {
+  // Replace ALL dots with separator
+  return fullKey.split('.').join(separator);
+}
+// e.g. 'Monitoring.Filter.State.title' → 'Monitoring::Filter::State::title'
+// e.g. 'Button.cancel' → 'Button::cancel'
+```
+
+**Step 2f: Filter malformed keys**
+
+Skip keys that:
+- End with the separator (e.g., `Button::` from `t('Button.')`)
+- Are empty or only whitespace
+- Come from template literals that couldn't be parsed
+
+```javascript
+const codeKeysCleaned = new Map();
+for (const [key, loc] of codeKeys) {
+  if (!key.endsWith(config.keySeparator) && key.trim().length > 0) {
+    codeKeysCleaned.set(key, loc);
+  }
+}
+```
+
+**Final result**: `codeKeys: Map<string, { file, line }>`
 
 ### 3. Read keys from Sheet (public fetch, no auth)
 
 ```javascript
 const { fetchPublicTab, getSheetTabs } = require('./scripts/sheets-client.cjs');
 const sep = config.keySeparator || '::';
+```
 
-// Derive which tabs to fetch from the code keys (first segment of each key)
-function deriveTabsFromCode(codeKeys, sep) {
+**Step 3a: Derive tabs to fetch from code keys**
+
+```javascript
+function deriveTabsFromCode(codeKeys, separator) {
   const tabs = new Set();
   for (const key of codeKeys.keys()) {
-    const first = key.split(sep)[0];
-    if (first) tabs.add(first);
+    const firstSegment = key.split(separator)[0];
+    if (firstSegment) tabs.add(firstSegment);
   }
   return tabs;
 }
-
-// Get available sheet tabs (public)
-const availableTabs = await getSheetTabs(config.googleSheetId);
 const neededTabs = deriveTabsFromCode(codeKeys, sep);
-
-// For each needed tab that exists in sheet:
-const rows = await fetchPublicTab(config.googleSheetId, tab); // CSV export, no auth
 ```
 
-**CRITICAL: key format differs by tab type**
+**Step 3b: Get available sheet tabs**
 
 ```javascript
-const isFallback = (tab === config.fallbackSheetTab);
-
-// Feature tab (Monitoring, Smartsend, etc.):
-//   KEY column = sub-key only (e.g. 'Table::sentDate')
-//   Full key = '{tab}::{key}'  ← PREPEND tab name
-const fullKey = isFallback ? key : `${tab}${sep}${key}`;
-
-// Fallback tab (Common / config.fallbackSheetTab):
-//   KEY column = fully-qualified key including namespace (e.g. 'Button::cancel')
-//   Full key = '{key}' as-is  ← DON'T prepend tab name
+const availableTabs = await getSheetTabs(config.googleSheetId);
+// Returns tab names as strings (public endpoint, no auth)
 ```
 
-Build `sheetKeys: Set<string>` of all full keys read from the sheet.
+**Step 3c: Read each needed tab via public CSV fetch**
+
+```javascript
+const sheetKeys = new Set();
+
+for (const tab of neededTabs) {
+  if (!availableTabs.includes(tab)) {
+    console.warn(`Tab "${tab}" not found in sheet`);
+    continue;
+  }
+
+  const rows = await fetchPublicTab(config.googleSheetId, tab); // CSV export, no auth
+  if (!rows || rows.length === 0) continue;
+
+  // Row 0 = headers, find KEY column
+  const headers = rows[0];
+  const keyColIdx = headers.findIndex(h => h.toLowerCase() === 'key');
+  if (keyColIdx === -1) continue;
+
+  // Process data rows (row 1+)
+  for (const row of rows.slice(1)) {
+    const key = row[keyColIdx];
+    if (!key || key.trim() === '') continue;
+
+    // CRITICAL: key format differs by tab type
+    const isFallback = (tab === config.fallbackSheetTab);
+
+    // Feature tab (Monitoring, Smartsend, etc.):
+    //   KEY column contains sub-key only (e.g., 'Table::sentDate')
+    //   Full key = '{tab}::{key}' ← PREPEND tab name
+    const fullKey = isFallback ? key : `${tab}${sep}${key}`;
+
+    // Fallback tab (Common / config.fallbackSheetTab):
+    //   KEY column contains fully-qualified key (e.g., 'Button::cancel')
+    //   Full key = '{key}' as-is ← DON'T prepend tab name
+
+    sheetKeys.add(fullKey);
+  }
+}
+```
 
 ### 4. Read Result tab for translation status
 
-Read `config.resultSheetTab` (default: "Result") via `fetchPublicTab`.
-
-**Column headers are file names, not locale codes:**
-
-```
-Result tab header row: KEY | en.json | de.json | fr.json | it.json
-                                ↑ file names, NOT locale codes
-```
-
-`I18N_LOCALE_MAP=en:en,de_CH:de,...` maps column header → JSON filename.
-Use `localeMap` keys to find column indices for the untranslated check.
-
 ```javascript
-// Map localeMap keys (column headers) to their column indices
-const localeColIndices = Object.keys(config.localeMap).map(colHeader => ({
-  colHeader,
-  colIdx: headers.indexOf(colHeader),
-})).filter(col => col.colIdx !== -1);
+const resultTab = config.resultSheetTab || 'Result';
+const resultRows = await fetchPublicTab(config.googleSheetId, resultTab);
 
-// A key is untranslated if any non-EN locale column is empty
+if (!resultRows || resultRows.length === 0) {
+  console.warn(`Result tab "${resultTab}" not found or empty`);
+} else {
+  const headers = resultRows[0];
+  const keyColIdx = headers.findIndex(h => h.toLowerCase() === 'key');
+
+  // Column headers are file names ('en.json', 'de.json'), not locale codes
+  // Example: ['KEY', 'en.json', 'de.json', 'fr.json', 'it.json', 'TRANS_OK', 'Notes']
+
+  // Build map of column header → column index for each locale
+  const localeColIndices = Object.keys(config.localeMap).map(colHeader => ({
+    colHeader,
+    colIdx: headers.indexOf(colHeader),
+  })).filter(col => col.colIdx !== -1);
+
+  const untranslatedKeys = [];
+
+  for (const row of resultRows.slice(1)) {
+    const key = row[keyColIdx];
+    if (!key || key.trim() === '') continue;
+
+    // Check if any non-EN locale is empty
+    const missingLocales = localeColIndices
+      .filter(col => col.colHeader !== 'en.json') // Skip EN (source language)
+      .filter(col => !row[col.colIdx] || row[col.colIdx].trim() === '')
+      .map(col => col.colHeader);
+
+    if (missingLocales.length > 0) {
+      untranslatedKeys.push({ key, missingLocales });
+    }
+  }
+}
 ```
-
-Build `untranslatedKeys: Array<{ key, missingLocales: string[] }>`.
 
 ### 5. Compute diff
 
@@ -126,7 +255,6 @@ const sep = config.keySeparator || '::';
 // Missing: in code but not in Sheet
 const missingKeys = [...codeKeys.entries()]
   .filter(([key]) => !sheetKeys.has(key))
-  .filter(([key]) => !key.endsWith(sep) && key.trim().length > 0) // filter malformed
   .map(([key, loc]) => ({ key, file: loc.file, line: loc.line }));
 
 // Orphaned: in Sheet but not in code
@@ -135,14 +263,27 @@ const orphanedKeys = [...sheetKeys].filter(k => !codeKeys.has(k));
 
 ### 6. Print report
 
-```
-Validation results:
-  Missing (in code, not in sheet): N keys
-  Orphaned (in sheet, not in code): N keys
-  Untranslated (empty locale columns): N keys
-```
+```javascript
+console.log('Validation results:\n');
+console.log(`  Missing (in code, not in sheet): ${missingKeys.length} keys`);
+if (missingKeys.length > 0) {
+  missingKeys.forEach(({ key, file, line }) => {
+    console.log(`    • ${key} (${file}:${line})`);
+  });
+}
 
-Detailed output per category with file + line for missing keys.
+console.log(`\n  Orphaned (in sheet, not in code): ${orphanedKeys.length} keys`);
+if (orphanedKeys.length > 0 && orphanedKeys.length <= 20) {
+  orphanedKeys.forEach(key => console.log(`    • ${key}`));
+}
+
+console.log(`\n  Untranslated (empty locale columns): ${untranslatedKeys.length} keys`);
+if (untranslatedKeys.length > 0 && untranslatedKeys.length <= 20) {
+  untranslatedKeys.forEach(({ key, missingLocales }) => {
+    console.log(`    • ${key}: missing ${missingLocales.join(', ')}`);
+  });
+}
+```
 
 ### 7. Exit code
 
@@ -153,3 +294,10 @@ if (missingKeys.length > 0) {
 // Orphaned and untranslated are warnings only
 process.exit(0);
 ```
+
+## Notes
+
+- **Missing keys exit 1** — CI gate. Production build blocks until resolved.
+- **Orphaned keys are warnings** — common with dynamic keys from template literals.
+- **Untranslated keys are warnings** — translators have time to complete.
+- **No auth needed** — uses public CSV export, safe for CI environments.

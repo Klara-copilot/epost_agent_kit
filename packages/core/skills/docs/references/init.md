@@ -168,7 +168,7 @@ Build `docs/index.json` with all migrated + newly generated entries. Use the sam
 | Auth flow | FEAT-0001-auth-flow.md (migrated) |
 
 **Total**: N migrated, N gap-filled, N skipped (no duplication)
-**Enrichment**: N internal deps, N external deps, business context {present|absent}
+**Enrichment**: N internal deps, N external deps, business.domain="{value}"
 **Next**: Run `/docs-update --verify` to validate accuracy
 ```
 
@@ -279,14 +279,19 @@ Record each as: `{ "name": "...", "type": "npm-package|maven-artifact|service|sd
 
 #### Business Context
 Infer project business context:
-- `domain` — from module name, package structure, README title
+- `domain` — **REQUIRED**. Derive from these sources (in priority order):
+  1. README title or first heading
+  2. `pom.xml` `<artifactId>` or `<name>`
+  3. `package.json` `name` field
+  4. Bitbucket/Git repo slug
+  5. Primary package/namespace
+  6. Codebase purpose inferred from service names or route handlers
 - `summary` — one-sentence description from README or package description
 - `modules` — from route groups, feature directories, Maven modules
-- `users` — from README, onboarding docs, or infer from domain (B2B → business users, B2C → consumers)
+- `users` — from README, onboarding docs, or infer from domain
 
-Record as: `{ "domain": "...", "summary": "...", "modules": [...], "users": "..." }`
-
-**Rule**: Only record what has code evidence. Skip fields where no signal found.
+**Rule**: `domain` MUST be non-empty. If none of the 6 sources yield a value, use the repo name with `luz_` stripped and underscores converted to hyphens. Never leave as `"..."`, `""`, or `null`.
+**Rule**: For other fields, only record what has code evidence. Skip where no signal found.
 
 ### 5. Generate index.json
 
@@ -314,7 +319,7 @@ Create `docs/index.json` with all generated entries. Only include categories tha
     "external": [{ "name": "...", "type": "api|sdk|service", "evidence": "..." }]
   },
   "business": {
-    "domain": "...",
+    "domain": "...",   // REQUIRED — must be non-empty, never leave as "..."
     "summary": "...",
     "modules": ["..."],
     "users": "..."
@@ -340,6 +345,18 @@ Create `docs/index.json` with all generated entries. Only include categories tha
 Key rules for `agentHint`:
 - Start with "check before..." — tells agents *when* to read this doc
 - Be specific: "check before choosing routing strategy" not "routing docs"
+
+### 5.5. Pre-Write Validation
+
+Before writing `docs/index.json`, verify:
+
+| Field | Check | If fails |
+|-------|-------|----------|
+| `.business.domain` | Non-empty string, not `"..."` | Re-derive from Step 4.5 sources; fallback = repo slug |
+| `.entries` | Non-empty array | At least 1 entry required |
+| `.dependencies` | Object exists | Add empty `{ "internal": [], "external": [] }` |
+
+**Do not write index.json until all checks pass.**
 
 ### 6. Report
 
@@ -375,7 +392,7 @@ Key rules for `agentHint`:
 | INTEG | skipped (no signal) | — |
 
 **Total**: N entries in `docs/index.json`
-**Enrichment**: N internal deps, N external deps, business context {present|absent}
+**Enrichment**: N internal deps, N external deps, business.domain="{value}"
 **Next**: Run `/docs-update --verify` to validate content accuracy
 ```
 

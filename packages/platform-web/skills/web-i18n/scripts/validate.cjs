@@ -4,7 +4,9 @@
  *
  * Read-only — uses public CSV fetch. No service account needed.
  *
- * Usage: node validate.cjs [--cwd /path/to/project]
+ * Usage: node validate.cjs [--cwd /path/to/project] [--tab <TabName>]
+ *
+ * --tab <TabName>  Scope validation to a single sheet tab / namespace (e.g. --tab Monitoring)
  *
  * Exit codes:
  *   0 — all valid (or only orphaned/untranslated warnings)
@@ -20,6 +22,10 @@ const path = require('path');
 // Allow --cwd override
 const cwdIdx = process.argv.indexOf('--cwd');
 const projectRoot = cwdIdx !== -1 ? path.resolve(process.argv[cwdIdx + 1]) : process.cwd();
+
+// Allow --tab filter: scope to a single namespace/tab
+const tabIdx = process.argv.indexOf('--tab');
+const tabFilter = tabIdx !== -1 ? process.argv[tabIdx + 1] : null;
 
 const SCRIPTS_DIR = __dirname;
 const { loadConfig } = require(path.join(SCRIPTS_DIR, 'env-config.cjs'));
@@ -135,9 +141,12 @@ function extractCodeKeys() {
     .filter(fs.existsSync);
 
   const codeKeys = new Map();
+  const sep = config.keySeparator;
   for (const root of scanRoots) {
     for (const file of walkDir(root)) {
-      for (const [key, loc] of extractKeysFromFile(file, config.keySeparator)) {
+      for (const [key, loc] of extractKeysFromFile(file, sep)) {
+        // --tab filter: only keep keys whose namespace prefix matches
+        if (tabFilter && !key.startsWith(`${tabFilter}${sep}`)) continue;
         if (!codeKeys.has(key)) codeKeys.set(key, loc);
       }
     }
@@ -185,12 +194,11 @@ async function readSheetKeys(codeKeys) {
 
   if (config.sheetMode === 'tabs') {
     // Derive tabs from code namespaces — no auth needed to list tabs
-    const tabs = deriveTabsFromCode(codeKeys);
-    if (config.fallbackSheetTab && !tabs.includes(config.fallbackSheetTab)) {
-      tabs.push(config.fallbackSheetTab);
-    }
+    let tabs = tabFilter
+      ? [tabFilter] // --tab: only fetch the specified tab
+      : deriveTabsFromCode(codeKeys);
 
-    // Always include the fallback tab — its keys are fully-qualified (no tab prefix needed)
+    // Always include the fallback tab (Common) — its keys are fully-qualified
     if (config.fallbackSheetTab && !tabs.includes(config.fallbackSheetTab)) {
       tabs.push(config.fallbackSheetTab);
     }
@@ -257,6 +265,8 @@ async function readUntranslated() {
     const row = rows[r];
     const key = String(row[keyIdx] || '').trim();
     if (!key) continue;
+    // --tab filter: only include keys from the specified namespace
+    if (tabFilter && !key.startsWith(`${tabFilter}${config.keySeparator}`)) continue;
 
     const transOk = transOkIdx >= 0 ? String(row[transOkIdx] || '').trim() : '';
     const missingLocales = Object.entries(localeColIndices)
@@ -275,7 +285,9 @@ async function readUntranslated() {
 
 async function main() {
   console.log('\ni18n Validation Report');
-  console.log('======================\n');
+  console.log('======================');
+  if (tabFilter) console.log(`Tab filter: ${tabFilter}\n`);
+  else console.log();
 
   process.stdout.write('Scanning codebase for translation keys... ');
   const codeKeys = extractCodeKeys();

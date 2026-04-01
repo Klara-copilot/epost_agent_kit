@@ -19,7 +19,26 @@ metadata:
 | `--pull` | Fetch translated JSON from Sheet's Result tab → write `messages/*.json` |
 | `--push` | Detect new keys in code not in Sheet → append rows with EN only (other locales empty for translators) |
 | `--validate` | Report missing, orphaned, and untranslated keys (exit 1 on missing) |
+| `--tab <Name>` | Scope `--validate` / `--push` to a single sheet tab/namespace (e.g. `--tab Monitoring`) |
 | *(no flag)* | Show status: untranslated count, key drift, last messages dir mtime |
+
+## Execution
+
+When this skill is invoked with a flag, run the corresponding script. Always pass `--cwd` pointing to the app directory that contains `.env.local` and the source code.
+
+**Detect app dir**: look for the directory under `apps/` that contains `.env.local` with `I18N_GOOGLE_SHEET_ID` set (e.g. `apps/luz-epost`).
+
+| Invocation | Command |
+|------------|---------|
+| `/i18n --validate` | `node .claude/skills/web-i18n/scripts/validate.cjs --cwd <app-dir>` |
+| `/i18n --validate --tab Monitoring` | `node .claude/skills/web-i18n/scripts/validate.cjs --cwd <app-dir> --tab Monitoring` |
+| `/i18n --push` | `node .claude/skills/web-i18n/scripts/push.cjs --cwd <app-dir>` |
+| `/i18n --push --tab Monitoring` | `node .claude/skills/web-i18n/scripts/push.cjs --cwd <app-dir> --tab Monitoring` |
+| `/i18n --pull` | `node .claude/skills/web-i18n/scripts/pull.cjs --cwd <app-dir>` |
+| `/i18n --pull --tab Monitoring` | `node .claude/skills/web-i18n/scripts/pull.cjs --cwd <app-dir> --tab Monitoring` |
+| `/i18n --push --dry-run` | `node .claude/skills/web-i18n/scripts/push.cjs --cwd <app-dir> --dry-run` |
+
+Pass any extra flags (e.g. `--tab`) through verbatim to the script.
 
 ## Sheet Sync Workflows
 
@@ -61,6 +80,8 @@ I18N_FALLBACK_SHEET_TAB=Common             # tabs mode: fallback tab
 | `key-converter.cjs` | `Namespace::Key` ↔ `{ Namespace: { Key: value } }` |
 | `tab-resolver.cjs` | Key namespace → sheet tab name (tabs mode) |
 | `validate.cjs` | Detect missing, orphaned, and untranslated keys (read-only, no auth needed) |
+| `pull.cjs` | Fetch translations from sheet source tabs → write `messages/*.json` (read-only, no auth needed) |
+| `push.cjs` | Detect new code keys not in sheet → append rows with EN pre-filled (requires `GOOGLE_SERVICE_ACCOUNT_KEY`) |
 
 ---
 
