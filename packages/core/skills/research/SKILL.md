@@ -52,6 +52,11 @@ When dispatching, include in the Agent tool prompt:
 | `--codebase` | Internal only — Grep/Glob the project, no web search. For "how is X done in our code". |
 | *(none)* | Auto-detect: simple lookup → fast, evaluation/comparison → deep, "our code" → codebase |
 
+## Search Engine
+
+Read `$EPOST_RESEARCH_ENGINE` — see `references/engines.md` for WebSearch vs Gemini configuration.
+If claudekit is installed and Gemini is preferred, `ck:research` is an alternative with Gemini-first approach.
+
 ## Auto-Detection
 
 - Single library/API name → `--fast`
