@@ -25,22 +25,25 @@ Config fields used:
 - `config.keySeparator` — key separator (default: `::`)
 - `config.messagesDir` — output directory for locale JSON files
 
-### 2. Authenticate (private sheets only)
+### 2. Fetch Result tab (public or private)
 
-For **public sheets**, skip authentication entirely — use `fetchPublicTab` directly:
+**For public sheets** (recommended for most projects), skip authentication — use public CSV fetch:
 
 ```javascript
 const { fetchPublicTab } = require('./scripts/sheets-client.cjs');
 const rows = await fetchPublicTab(config.googleSheetId, config.resultSheetTab);
+// No GOOGLE_SERVICE_ACCOUNT_KEY required
 ```
 
-For **private sheets**, use the authenticated path instead:
+**For private sheets**, authenticate first:
 
 ```javascript
 const { authenticate, readSheet } = require('./scripts/sheets-client.cjs');
 const auth = authenticate(config.serviceAccountKeyPath);
 const rows = await readSheet(auth, config.googleSheetId, `${config.resultSheetTab}!A1:ZZ`);
 ```
+
+**Note**: `GOOGLE_SERVICE_ACCOUNT_KEY` is **not required** for public sheets.
 
 ### 3. Read Result tab
 
@@ -51,22 +54,24 @@ const rows = await readSheet(auth, config.googleSheetId, `${config.resultSheetTa
 
 ### 4. Parse headers
 
-**Result tab column headers are file names, not locale codes:**
+**Critical**: Result tab column headers are **file names**, not locale codes:
 
 ```
 Result tab header row: KEY | en.json | de.json | fr.json | it.json
-                                ↑ file names, NOT locale codes
+                            ↑ actual file names
 ```
 
-Use `I18N_LOCALE_MAP` (e.g., `en:en,de_CH:de,...`) to map column header → JSON filename:
+Example: if `I18N_LOCALE_MAP=en:en,de_CH:de`, the Result tab has columns `en.json` and `de.json`, not `en` and `de_CH`.
 
 ```javascript
-const headers = rows[0]; // ['KEY', 'en.json', 'de.json', 'fr.json', ...]
+const headers = rows[0]; // ['KEY', 'en.json', 'de.json', 'fr.json', 'it.json', ...]
 const keyColIdx = headers.findIndex(h => h.toLowerCase() === 'key');
-// Map each locale column header → { colIdx, filename }
+
+// Map I18N_LOCALE_MAP keys (column headers) to their column indices
+// config.localeMap = { 'en.json': 'en', 'de.json': 'de', ... }
 const localeColumns = Object.entries(config.localeMap).map(([colHeader, filename]) => ({
-  colHeader,
-  filename,
+  colHeader,     // sheet column header ('en.json', 'de.json')
+  filename,      // output file name ('en', 'de')
   colIdx: headers.indexOf(colHeader),
 })).filter(col => col.colIdx !== -1);
 ```

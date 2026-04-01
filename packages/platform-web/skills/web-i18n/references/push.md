@@ -16,33 +16,31 @@ validateConfig(config);
 
 Scan all `.ts`, `.tsx`, `.js`, `.jsx` files (excluding `node_modules`, `.next`, `dist`).
 
-> **Note**: Key extraction logic mirrors `validate.cjs` — reference that implementation as the source of truth.
-
-For each file:
+**Important**: Key extraction logic is identical to `validate.cjs` — see `validate.md` for full implementation details. This section summarizes the approach:
 
 1. **Strip comments first** — remove `//` line comments and `/* */` block comments before scanning to avoid false positives from commented-out keys.
 
 2. **Track ALL translation variable names** (not just `t`):
    - Match `const {anyVar} = useTranslations('NS')` or `getTranslations('NS')`
-   - Build `varMap: Map<varName, namespace>`
-   - e.g. `const btn = useTranslations('Button')` → `varMap.set('btn', 'Button')`
+   - Example: `const btn = useTranslations('Button')` → track that `btn` refers to `Button` namespace
+   - Example: `const t = useTranslations('Monitoring.Filter')` → track that `t` refers to `Monitoring.Filter` namespace
 
-3. **Find calls for each tracked var**: `btn('key')` → namespace `Button`, key `key`
+3. **Find all call sites for each tracked variable**: `btn('key')` patterns
 
-4. **Handle immediately-invoked**: `useTranslations('NS')('key')` → `NS::key`
+4. **Handle immediately-invoked patterns**: `useTranslations('NS')('key')` and `getTranslations('NS')('key')`
 
-5. **Normalize dots to `::` separator**: combine namespace + key then replace ALL `.` with `::`:
+5. **Normalize keys** — replace ALL dots with separator:
    ```javascript
-   function normalizeKey(ns, key, sep) {
-     const combined = ns ? `${ns}.${key}` : key;
-     return combined.split('.').join(sep);
+   function normalizeKey(fullKey, separator = '::') {
+     return fullKey.split('.').join(separator);
    }
-   // e.g. ns='Monitoring.Filter', key='State.title' → 'Monitoring::Filter::State::title'
+   // e.g. 'Monitoring.Filter.State.title' → 'Monitoring::Filter::State::title'
+   // e.g. 'Button.cancel' → 'Button::cancel'
    ```
 
-6. **Filter malformed keys**: skip keys ending with `::` or that are empty (from template literals or `t('')` calls).
+6. **Filter malformed keys**: skip keys ending with separator or that are empty
 
-Collect all unique keys into a `Set<string>`.
+Collect all unique keys into a `Set<string>`. For the complete implementation with line numbers and file tracking, see Step 2 in `validate.md`.
 
 ### 3. Authenticate + read existing keys
 
