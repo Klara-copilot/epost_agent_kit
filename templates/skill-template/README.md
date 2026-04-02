@@ -55,4 +55,4 @@ skill-template/
 ## Related Documents
 
 - `packages/meta-kit-design/skills/agents/claude/skill-development/SKILL.md` - Full skill development guide
-- `packages/core/skills/core/references/documentation-standards.md` - Documentation standards
+- `packages/core/skills/docs/references/documentation-standards.md` - Documentation standards

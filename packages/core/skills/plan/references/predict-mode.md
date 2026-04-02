@@ -1,88 +1,47 @@
 # Predict Mode (`--predict`)
 
-5-persona expert debate protocol. Surfaces risks before implementation via independent adversarial analysis.
+3-persona expert debate protocol. Stress-tests the approach before generating phases.
 
 ## When to Use
 
-- Major architectural decisions
-- Security-critical feature design
-- Contested technical choices (multiple reasonable approaches)
-- Any change where failure cost is high
+- 3+ interacting systems will be changed
+- Existing public API contract is being modified
+- Migration or breaking change is in scope
+- User expresses uncertainty ("should we", "is this the right approach")
 
-## The 5 Personas
+## The 3 Personas
 
-| Persona | Focus |
-|---------|-------|
-| Architect | System design, scalability, long-term maintainability, coupling |
-| Security | Attack surface, auth, data exposure, injection vectors |
-| Performance | Bottlenecks, latency, throughput, memory pressure |
-| UX | User impact, accessibility, workflow disruption, confusion |
-| Devil's Advocate | Challenges assumptions, questions the entire premise, proposes simpler alternatives |
+| # | Persona | Role |
+|---|---------|------|
+| 1 | Optimist | Argues for the approach's strengths and upside |
+| 2 | Skeptic | Challenges assumptions, points out what could go wrong |
+| 3 | Pragmatist | Focuses on implementation cost and timeline reality |
 
-## Workflow
+## Debate Protocol
 
-### Step 1 — Brief Each Persona Independently
+1. State the proposed approach in one sentence.
+2. Each persona gives a 2-3 sentence argument (in order: Optimist → Skeptic → Pragmatist).
+3. Skeptic responds to Optimist's strongest point (one sentence rebuttal).
+4. Synthesis: identify top concern and top strength.
+5. **Decision**: `proceed` | `revise` | `escalate`
 
-For each persona (in order, no cross-influence):
-1. State the persona's lens explicitly
-2. Analyze the proposed change through that lens
-3. Produce: **Analysis** / **Concerns** / **Risks** / **Verdict** (GO / CAUTION / STOP)
-
-### Step 2 — Conflict Resolution
-
-When personas disagree, weight by context:
-- Security concern in auth/payment feature → Security verdict wins
-- Performance concern in batch/reporting feature → Performance verdict wins
-- UX concern in consumer-facing feature → UX verdict wins
-- Architecture concern for long-lived systems → Architect verdict wins
-- Devil's Advocate raises simpler alternative → always explore before dismissing
-
-### Step 3 — Consensus Verdict
-
-Aggregate verdicts:
-- All GO → **GO**
-- Any STOP → **STOP**
-- Mixed GO/CAUTION → **CAUTION**
-- STOP from weighted persona (per context) → **STOP**
-
-### Step 4 — Output
-
-Produce the standard report format below.
+- `revise` → update the approach before generating phases
+- `escalate` → surface unresolved debate to user with a single question
 
 ## Output Format
 
 ```markdown
-## Predict Analysis: [Change Description]
+## Predict Analysis
 
-### Persona Verdicts
-| Persona | Verdict | Top Concern |
-|---------|---------|-------------|
-| Architect | CAUTION | [one sentence] |
-| Security | GO | [one sentence] |
-| Performance | GO | [one sentence] |
-| UX | CAUTION | [one sentence] |
-| Devil's Advocate | CAUTION | [one sentence] |
+**Approach**: [one sentence]
 
-### Conflicts
-[Any disagreements and how resolved — or "None"]
+**Optimist**: ...
+**Skeptic**: ...
+**Pragmatist**: ...
 
-### Consensus: CAUTION
+**Skeptic rebuttal**: ...
 
-### Top Risks
-1. [Most critical risk]
-2. [Second risk]
-3. [Third risk]
-
-### Recommendations
-1. Before proceeding: [action]
-2. During implementation: [constraint]
-3. After completion: [verification]
+**Top concern**: [from synthesis]
+**Top strength**: [from synthesis]
+**Decision**: proceed | revise | escalate
 ```
-
-## Verdict Definitions
-
-| Verdict | Meaning |
-|---------|---------|
-| **GO** | No significant concerns. Proceed. |
-| **CAUTION** | Concerns identified. Mitigate before or during implementation. |
-| **STOP** | Blocking risk. Do not proceed until resolved. |

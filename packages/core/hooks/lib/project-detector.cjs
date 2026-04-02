@@ -254,44 +254,27 @@ function detectFramework(configOverride) {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-// CODING LEVEL
+// OUTPUT MODE
 // ═══════════════════════════════════════════════════════════════════════════
 
 /**
- * Get coding level style name mapping
- * @param {number} level - Coding level (0-5)
- * @returns {string} Style name
- */
-function getCodingLevelStyleName(level) {
-  const styleMap = {
-    0: 'coding-level-0-eli5',
-    1: 'coding-level-1-junior',
-    2: 'coding-level-2-mid',
-    3: 'coding-level-3-senior',
-    4: 'coding-level-4-lead',
-    5: 'coding-level-5-god'
-  };
-  return styleMap[level] || 'coding-level-5-god';
-}
-
-/**
- * Get coding level guidelines by reading from output-styles .md files
- * @param {number} level - Coding level (-1 to 5)
+ * Get output mode guidelines by reading from output-styles .md files
+ * @param {string} mode - Output mode ('report' | 'transparency')
  * @param {string} [configDir] - Config directory path
- * @returns {string|null} Guidelines text or null if disabled
+ * @returns {string|null} Guidelines text or null if mode not found
  */
-function getCodingLevelGuidelines(level, configDir) {
-  if (level === -1 || level === null || level === undefined) return null;
+function getOutputModeGuidelines(mode, configDir) {
+  if (!mode) return null;
 
-  const styleName = getCodingLevelStyleName(level);
+  const validModes = ['report', 'transparency'];
+  if (!validModes.includes(mode)) return null;
+
   const basePath = configDir || path.join(process.cwd(), '.claude');
-  const stylePath = path.join(basePath, 'output-styles', `${styleName}.md`);
+  const stylePath = path.join(basePath, 'output-styles', `output-mode-${mode}.md`);
 
   try {
     if (!fs.existsSync(stylePath)) return null;
-    const content = fs.readFileSync(stylePath, 'utf8');
-    const withoutFrontmatter = content.replace(/^---[\s\S]*?---\n*/, '').trim();
-    return withoutFrontmatter;
+    return fs.readFileSync(stylePath, 'utf8').trim();
   } catch (e) {
     return null;
   }
@@ -418,8 +401,7 @@ module.exports = {
   getGitRoot,
 
   // Coding level
-  getCodingLevelStyleName,
-  getCodingLevelGuidelines,
+  getOutputModeGuidelines,
 
   // Output
   buildContextOutput,

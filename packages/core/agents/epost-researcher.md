@@ -4,7 +4,7 @@ description: (ePost) Expert technology researcher specializing in software devel
 model: haiku
 color: purple
 icon: 🔬
-skills: [core, skill-discovery, knowledge]
+skills: [core, knowledge]
 permissionMode: default
 allowedTools: [Read, Glob, Grep, WebSearch, WebFetch, Write]
 handoffs:
@@ -141,7 +141,7 @@ Required elements: standard header (Date, Agent, Scope, Status), Executive Summa
 
 Use the naming pattern from the `## Naming` section injected by hooks. The pattern includes full path and computed date.
 
-**After writing report**: Append to `reports/index.json` per `core/references/index-protocol.md`.
+**After writing report**: Append to `reports/index.json` per `docs/references/index-protocol.md`.
 
 ```markdown
 ## Research: [Topic]

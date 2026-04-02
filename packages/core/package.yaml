@@ -43,6 +43,7 @@ provides:
     - skill-creator
     - deploy
     - research
+    - retro
 scripts:
   - get-active-plan.cjs
   - set-active-plan.cjs
@@ -59,6 +60,7 @@ scripts:
 
 files:
   agents/: agents/
+  rules/: rules/
   skills/: skills/
   hooks/: hooks/
   scripts/: scripts/

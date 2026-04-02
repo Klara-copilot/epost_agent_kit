@@ -48,7 +48,7 @@ After any mode completes:
 | Index | When to update | What to update |
 |-------|---------------|----------------|
 | `docs/index.json` | Any doc file created, moved, renamed, deleted, or content updated | `entries[]` (add/remove/edit), `updatedAt` |
-| `reports/index.json` | After writing a task report | Append entry per `core/references/index-protocol.md` |
+| `reports/index.json` | After writing a task report | Append entry per `docs/references/index-protocol.md` |
 
 **Never finish a docs task without updating `docs/index.json`.** If you added, moved, renamed, or deleted any doc file — the index must reflect it before you stop.
 

@@ -136,9 +136,25 @@ Create `{plan_dir}/status.md` from `references/status-template.md`:
   ```
 - Known Bugs: "None currently tracked."
 
-### 7. Generate Phase Files with Parallelization Info
+### 7. Generate Phase Files
 
-Same as hard.md PLUS Parallelization Info section BEFORE Implementation Steps:
+Each phase file MUST include all sections below, in order. Section 7 (Parallelization Info) is new — all others match `deep-mode.md`.
+
+| # | Section | Notes |
+|---|---------|-------|
+| 1 | `## Context Links` | Plan + R1 + R2 + code files |
+| 2 | `## Overview` | Priority, Status, Effort, Description |
+| 3 | `## Key Insights` | Findings from research + critical considerations |
+| 4 | `## Requirements` | Functional + Non-Functional |
+| 5 | `## Architecture` | If applicable |
+| 6 | `## Related Code Files` | Modify / Create / Delete |
+| 7 | `## Parallelization Info` | ← unique to parallel mode — see template below |
+| 8 | `## Implementation Steps` | Detailed numbered steps |
+| 9 | `## Todo List` | Checkboxes for tracking |
+| 10 | `## Success Criteria` | Definition of done |
+| 11 | `## Risk Assessment` | Risk / Impact / Mitigation table |
+| 12 | `## Security Considerations` | Auth, data protection, input validation |
+| 13 | `## Next Steps` | Dependencies, follow-up tasks |
 
 ```markdown
 ## Parallelization Info

@@ -32,13 +32,36 @@ When this skill is invoked with a flag, run the corresponding script. Always pas
 |------------|---------|
 | `/i18n --validate` | `node .claude/skills/web-i18n/scripts/validate.cjs --cwd <app-dir>` |
 | `/i18n --validate --tab Monitoring` | `node .claude/skills/web-i18n/scripts/validate.cjs --cwd <app-dir> --tab Monitoring` |
-| `/i18n --push` | `node .claude/skills/web-i18n/scripts/push.cjs --cwd <app-dir>` |
-| `/i18n --push --tab Monitoring` | `node .claude/skills/web-i18n/scripts/push.cjs --cwd <app-dir> --tab Monitoring` |
+| `/i18n --push` | two-step flow — see `--push` orchestration below |
+| `/i18n --push --tab Monitoring` | two-step flow with `--tab Monitoring` |
 | `/i18n --pull` | `node .claude/skills/web-i18n/scripts/pull.cjs --cwd <app-dir>` |
 | `/i18n --pull --tab Monitoring` | `node .claude/skills/web-i18n/scripts/pull.cjs --cwd <app-dir> --tab Monitoring` |
-| `/i18n --push --dry-run` | `node .claude/skills/web-i18n/scripts/push.cjs --cwd <app-dir> --dry-run` |
 
 Pass any extra flags (e.g. `--tab`) through verbatim to the script.
+
+### `--push` Orchestration Flow
+
+Never run `push.cjs` directly. Always use this two-step flow:
+
+**Step 1 — Detect (always first):**
+```
+node .claude/skills/web-i18n/scripts/push.cjs --cwd <app-dir> --dry-run [--tab X]
+```
+
+**Step 2 — Interpret exit code:**
+
+| Exit code | Meaning | Action |
+|-----------|---------|--------|
+| `0` | Missing keys found — dry-run output shows them | Present list to user, ask: "Push these N keys?" |
+| `1` | Nothing to push | Tell user: "Sheet is up to date. Add translation keys in code first, then run `/i18n --push` again." |
+| `2` | Config/auth error | Show error, stop |
+
+**Step 3 — If user confirms:**
+```
+node .claude/skills/web-i18n/scripts/push.cjs --cwd <app-dir> [--tab X]
+```
+
+**Step 3 — If user declines:** Do nothing. Keys stay in code only.
 
 ## Sheet Sync Workflows
 

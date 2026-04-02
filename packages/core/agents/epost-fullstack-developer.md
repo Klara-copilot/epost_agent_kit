@@ -4,7 +4,7 @@ description: (ePost) Execute implementation phases from parallel plans. Handles 
 model: sonnet
 color: green
 icon: 🔧
-skills: [core, skill-discovery, knowledge, cook, journal]
+skills: [core, knowledge, cook, journal]
 memory: project
 permissionMode: acceptEdits
 allowedTools: [Read, Glob, Grep, Write, Edit, Bash]
@@ -47,7 +47,7 @@ Activate relevant skills from `.claude/skills/` based on task context.
 Platform and domain skills are loaded dynamically — do not assume platform.
 
 **IMPORTANT**: Ensure token efficiency while maintaining quality.
-**IMPORTANT**: Follow `core/references/orchestration.md` for file ownership, execution modes, and subagent-driven development.
+**IMPORTANT**: Follow `core/rules/orchestration-protocol.md` for file ownership, execution modes, and subagent-driven development.
 **IMPORTANT**: Follow `./docs/code-standards.md` for coding conventions.
 **IMPORTANT**: Respect YAGNI, KISS, DRY principles.
 
@@ -90,7 +90,7 @@ If any item cannot be checked (e.g., no test suite exists), state why explicitly
 
 Use the naming pattern from the `## Naming` section injected by hooks.
 
-**After writing report**: Append to `reports/index.json` per `core/references/index-protocol.md`.
+**After writing report**: Append to `reports/index.json` per `docs/references/index-protocol.md`.
 
 ## File Ownership Rules (CRITICAL)
 

@@ -1,13 +1,31 @@
 {
   "version": "1.0.0",
-  "updated": "2026-03-31",
+  "updated": "2026-04-02",
   "counts": {
     "active": 45,
-    "completed": 0,
+    "completed": 1,
     "archived": 1,
-    "total": 47
+    "total": 48
   },
   "plans": [
+    {
+      "id": "PLAN-0093",
+      "title": "Kit Routing Redesign — 8 Principles for Claude-Native Simplicity",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-04-02",
+      "authors": [
+        "epost-planner"
+      ],
+      "tags": [
+        "routing",
+        "claude-md",
+        "skill-discovery",
+        "simplification",
+        "design-principles"
+      ],
+      "file": "plans/260402-0949-kit-routing-redesign/plan.md"
+    },
     {
       "id": "PLAN-0041",
       "title": "Skill Consolidation: 99 Folders to ~50",
