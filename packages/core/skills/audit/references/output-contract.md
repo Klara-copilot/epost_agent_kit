@@ -152,7 +152,7 @@ reports/known-findings/
 
 Each finding MUST include: `source_agent`, `source_report` (relative path), `first_detected_at` (ISO 8601 datetime).
 
-See `core/references/report-standard.md` for general report anatomy and folder pattern.
+See `code-review/references/report-standard.md` for general report anatomy and folder pattern.
 
 ## Standards Files Reference
 

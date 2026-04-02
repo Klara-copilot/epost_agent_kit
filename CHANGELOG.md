@@ -6,7 +6,44 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
-(No entries yet)
+## [2.1.0] - 2026-04-02
+
+### Architecture
+
+- **`packages/core/rules/`** — New always-on rules directory, installed to `.claude/rules/` via `package.yaml`. Follows claudekit pattern: rules load every session for every user without agent skill bindings.
+- Migrated all 8 files from `packages/core/skills/core/references/` to permanent homes: 5 behavioral rules → `rules/`, 3 agent-specific refs → owning skills (`code-review/references/`, `docs/references/`)
+- Deleted `packages/core/skills/core/references/` directory entirely
+
+### Rules
+
+- `rules/development-rules.md` — Added YAGNI·KISS·DRY as always-on principles; "update existing files, never create enhanced copies"; compile/lint after code changes; Visual Explanations section (maps `/preview` skill); Documentation Lookup section (maps `knowledge`/`research` skills)
+- `rules/file-organization.md` — Added Code File Size guideline (200 lines for code files); strengthened slug naming rationale for LLM tool readability
+- `rules/orchestration-protocol.md` — Added Agent Dispatch table; Subagent Status Protocol (DONE/DONE_WITH_CONCERNS/BLOCKED/NEEDS_CONTEXT); Context Isolation anti-patterns table
+- `rules/development-rules.md` — New file: commit hygiene, code change boundaries, packages-as-source-of-truth, verification discipline
+
+### Output Styles
+
+- Simplified output modes from 3 → 2: dropped `exec` (redundant with CC Default) and `teach` (redundant with CC Explanatory)
+- Added `report` mode: structured task completion format (Status / Agent / Summary / Findings / Risks)
+- Kept `transparency` mode: full agent trace with routing, skill args, timing, trace ID (no CC equivalent)
+- Removed `output-mode` skill entirely — modes are hook-driven only via `session-init.cjs`
+- Default mode changed: `exec` → `report`
+
+### claudekit Adoption (Phases 1–12)
+
+- Phase 1: cook `--auto` flag, anti-rationalization rules, Finalize step
+- Phase 12: `rules/` architecture migration (see Architecture above)
+- Cross-reference sweep: updated stale `core/references/*` paths across 15+ agent and skill files
+
+### Research
+
+- Added configurable search engine support via `$EPOST_RESEARCH_ENGINE`
+- Removed Gemini CLI integration from research tooling
+
+### Web i18n
+
+- Added `pull.cjs` and `push.cjs` scripts for sheet sync
+- Expanded validate, pull, push references with real-world findings
 
 ## [2.0.0] - 2026-03-05
 

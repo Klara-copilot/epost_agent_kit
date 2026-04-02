@@ -70,7 +70,7 @@ function main() {
       messages.push(
         '[Index] File written in reports/ — update `reports/index.json`:\n' +
         '  • Append entry: { id, type, agent, title, verdict, files: { agent, human }, plan, created }\n' +
-        '  • See `core/references/index-protocol.md` for schema'
+        '  • See `docs/references/index-protocol.md` for schema'
       );
     }
   }
@@ -85,7 +85,7 @@ function main() {
       messages.push(
         '[Index] File written in plans/ — update `plans/index.json`:\n' +
         '  • Add/update entry: { id, title, status, path, created, updated, platforms, effort }\n' +
-        '  • See `core/references/index-protocol.md` for schema'
+        '  • See `docs/references/index-protocol.md` for schema'
       );
     }
   }

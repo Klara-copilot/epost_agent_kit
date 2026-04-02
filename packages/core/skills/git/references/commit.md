@@ -22,6 +22,13 @@ Create professional git commits with build verification.
    - Exit 1 → build **FAILED**: show error excerpt, ask user: "Build failed — fix it first (recommended) or commit anyway?"
    - Exit 2 → no build command detected: warn and proceed
    - `--skip-build` flag → skip this step entirely (for WIP/draft commits)
+**6b. Lint gate** (unless `--skip-build` passed):
+Detect and run linter:
+- Node.js: `npm run lint 2>/dev/null || npx eslint . 2>/dev/null`
+- Java: `mvn checkstyle:check 2>/dev/null`
+- Other: skip with warning
+
+Exit 0 → proceed. Exit 1 → show violations, ask user to fix or override.
 7. Create commit
 8. Run pre-commit hooks if configured
 
@@ -41,6 +48,9 @@ Create professional git commits with build verification.
 - Keep description under 72 chars
 - Include body for significant changes
 - **Build must pass before committing** (unless user explicitly overrides)
+- Never commit files containing secrets — check for: `sk-`, `Bearer `, `password =`, `API_KEY=`
+- No AI attribution in commit messages ("Generated with Claude Code", "Co-authored by Claude")
+- Run lint before committing (step 6b above)
 
 ## Completion
 Report:

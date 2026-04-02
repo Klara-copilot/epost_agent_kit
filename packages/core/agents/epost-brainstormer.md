@@ -3,7 +3,7 @@ name: epost-brainstormer
 description: (ePost) Use when user wants to ideate, brainstorm approaches, debate architecture decisions, or explore technical options before committing to implementation
 color: purple
 model: opus
-skills: [core, skill-discovery, knowledge, thinking]
+skills: [core, knowledge, thinking]
 memory: project
 permissionMode: default
 allowedTools: [Read, Glob, Grep, Write]
@@ -94,11 +94,11 @@ Ask if user wants an implementation plan. If yes, tell user to dispatch `epost-p
 
 ## Report Output
 
-Follow `core/references/report-standard.md`.
+Follow `code-review/references/report-standard.md`.
 
 Naming: `reports/{YYMMDD-HHMM}-{slug}-epost-brainstormer.md`
 
-After writing report: append to `reports/index.json` per `core/references/index-protocol.md`.
+After writing report: append to `reports/index.json` per `docs/references/index-protocol.md`.
 
 ## Critical Constraints
 

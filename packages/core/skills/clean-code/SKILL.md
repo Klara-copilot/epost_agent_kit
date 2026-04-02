@@ -13,6 +13,16 @@ metadata:
 
 # Clean Code Skill
 
+## Confirmation Gate
+
+Code-modifying suggestions require explicit user confirmation before applying.
+
+1. **Propose** — present the proposed changes with rationale
+2. **Wait** — do not apply until user confirms ("yes", "go ahead", "looks good", or equivalent)
+3. **Apply** — only after explicit approval
+
+Never auto-apply refactoring, renaming, or restructuring to working code.
+
 Robert C. Martin's Clean Code principles adapted for our TypeScript/Java stack.
 
 ## Naming

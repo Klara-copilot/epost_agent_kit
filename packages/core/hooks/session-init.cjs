@@ -36,8 +36,7 @@ const {
   getPythonVersion,
   getGitRemoteUrl,
   getGitBranch,
-  getCodingLevelStyleName,
-  getCodingLevelGuidelines,
+  getOutputModeGuidelines,
   buildContextOutput,
   execSafe
 } = require('./lib/project-detector.cjs');
@@ -173,10 +172,9 @@ async function main() {
       writeEnv(envFile, 'EPOST_VALIDATION_MAX_QUESTIONS', validation.maxQuestions || 8);
       writeEnv(envFile, 'EPOST_VALIDATION_FOCUS_AREAS', (validation.focusAreas || ['assumptions', 'risks', 'tradeoffs', 'architecture']).join(','));
 
-      // Coding level config (for output style selection)
-      const codingLevel = config.codingLevel ?? 5;
-      writeEnv(envFile, 'EPOST_CODING_LEVEL', codingLevel);
-      writeEnv(envFile, 'EPOST_CODING_LEVEL_STYLE', getCodingLevelStyleName(codingLevel));
+      // Output mode (report | transparency) — injected for output-mode skill
+      const outputMode = process.env.EPOST_OUTPUT_MODE || config.outputMode || 'report';
+      writeEnv(envFile, 'EPOST_OUTPUT_MODE', outputMode);
 
       // Propagate API keys from .claude/.env to subagent shells
       if (process.env.PERPLEXITY_API_KEY) writeEnv(envFile, 'PERPLEXITY_API_KEY', process.env.PERPLEXITY_API_KEY);
@@ -243,9 +241,12 @@ async function main() {
       console.log(`Use AskUserQuestion to verify: "Context was compacted. Please confirm approval to continue."`);
     }
 
-    // Auto-inject coding level guidelines (if not disabled)
-    const codingLevel = config.codingLevel ?? -1;
-    const guidelines = getCodingLevelGuidelines(codingLevel);
+    // Inject output mode guidelines
+    const outputMode = process.env.EPOST_OUTPUT_MODE || config.outputMode || 'report';
+    const modeLabels = { report: 'Report', transparency: 'Transparency' };
+    const modeLabel = modeLabels[outputMode] || 'Report';
+    console.log(`Output mode: ${outputMode} (${modeLabel}) — apply output structure from output-mode skill`);
+    const guidelines = getOutputModeGuidelines(outputMode);
     if (guidelines) {
       console.log(`\n${guidelines}`);
     }

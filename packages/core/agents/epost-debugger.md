@@ -4,7 +4,7 @@ description: (ePost) Debugging agent that finds root causes and explains issues 
 model: sonnet
 color: red
 icon: 🐛
-skills: [core, skill-discovery, debug, knowledge, error-recovery, journal]
+skills: [core, debug, knowledge, error-recovery, journal]
 memory: project
 allowedTools: [Read, Glob, Grep, Write, Edit, Bash]
 handoffs:
@@ -81,7 +81,7 @@ After finding root cause, trigger `knowledge --capture`:
 
 Use the naming pattern from the `## Naming` section injected by hooks.
 
-**After writing report**: Append to `reports/index.json` per `core/references/index-protocol.md`.
+**After writing report**: Append to `reports/index.json` per `docs/references/index-protocol.md`.
 
 ## Journal Entry (on resolution)
 

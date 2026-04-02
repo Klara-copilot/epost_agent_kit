@@ -48,6 +48,7 @@ If `$ARGUMENTS` starts with `--fast`: skip auto-detection, load `references/fast
 If `$ARGUMENTS` starts with `--deep`: skip auto-detection, load `references/deep-mode.md` and execute.
 If `$ARGUMENTS` starts with `--parallel`: skip auto-detection, load `references/parallel-mode.md` and execute.
 If `$ARGUMENTS` starts with `--validate`: skip auto-detection, load `references/validate-mode.md` and execute.
+If `$ARGUMENTS` starts with `--predict`: load `references/predict-mode.md`, run 3-persona debate, then continue to Complexity Auto-Detection.
 Otherwise: continue to Complexity Auto-Detection.
 
 ## Aspect Files
@@ -222,6 +223,20 @@ See `references/state-machine-guide.md` for notation, patterns, and validation c
 - Mark file ownership for parallel execution safety (parallel mode)
 - Use `knowledge` before planning, `knowledge --capture` after
 
+## --predict Mode
+
+Stress-tests the approach with a structured 3-persona debate before generating phases.
+
+### When to Auto-trigger
+
+Auto-trigger without explicit flag when:
+- 3+ interacting systems will be changed
+- Existing public API contract is being modified
+- Migration or breaking change is in scope
+- User expresses uncertainty ("should we", "is this the right approach")
+
+See `references/predict-mode.md` for the full debate protocol and output format.
+
 ## Mode Reference
 
 | Flag | Reference | When |
@@ -230,7 +245,7 @@ See `references/state-machine-guide.md` for notation, patterns, and validation c
 | `--deep` | `references/deep-mode.md` | Thorough multi-phase with research |
 | `--parallel` | `references/parallel-mode.md` | Parallelizable phases with ownership matrix |
 | `--validate` | `references/validate-mode.md` | Validate existing plan |
-| `--predict` | `references/predict-mode.md` | 5-persona expert debate before major changes |
+| `--predict` | `references/predict-mode.md` | 3-persona expert debate before major changes |
 
 <request>$ARGUMENTS</request>
 <platform>{{detected_platform or "none"}}</platform>

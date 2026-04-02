@@ -140,6 +140,12 @@ Med risk   (write, refactor, multi-file) →  confirm before execute
 High risk  (delete, push, deploy)       →  always isolate + confirm
 ```
 
+### Principle 6: Output contract is invariant
+Skill behavior and output format are identical regardless of execution mode. Whether a skill runs inline in the main context or via an agent spawn, the output structure, report format, and file naming follow the same contract. Execution mode is an implementation detail the user never sees.
+
+### Principle 7: Spawn-time skill injection
+Platform and domain skills are not pre-wired to general-purpose agents. The orchestrator detects platform from surface signals and injects relevant skills into the agent spawn prompt at dispatch time. This keeps agent frontmatter minimal and prevents wiring all platforms to all agents.
+
 ---
 
 ## 5. When Agents Are Still Worth It
@@ -160,11 +166,11 @@ The anti-pattern: spawning an agent for every single task regardless of complexi
 
 | Current | Simpler alternative |
 |---|---|
-| Routing table in CLAUDE.md | Surface-signal detection only |
-| Agent-per-intent (10 agents) | 3–4 agents for isolation, rest inline |
-| Skills wired per-agent | Skill bundles loaded by surface/risk |
+| Routing table in CLAUDE.md | Weight-based execution rule (inline vs. spawn) |
+| Agent-per-intent (10 agents) | Same agents, used by weight not intent label |
+| Skills pre-wired per-agent | Core skills pre-wired; platform skills injected at spawn |
 | Intent classification rules | Trust Claude's natural classification |
-| Compound routing conditions | Two-tier + risk gate |
+| skill-discovery as runtime loader | skill-discovery as passive catalogue reference |
 
 The simplest viable kit:
 1. CLAUDE.md declares capabilities (not rules)

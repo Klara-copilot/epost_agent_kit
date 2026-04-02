@@ -5,7 +5,7 @@ allowedTools: [Read, Bash]
 model: haiku
 color: purple
 icon: 🌿
-skills: [core, skill-discovery, git]
+skills: [core, git]
 ---
 
 <!-- AGENT NAVIGATION
@@ -265,6 +265,17 @@ fi
 | No changes staged | "❌ No changes to commit" | Exit cleanly |
 | Merge conflicts | "❌ Conflicts in: [files]" | Suggest manual resolution |
 | Push rejected | "⚠ Push rejected (out of sync)" | Suggest `git pull --rebase` |
+
+## --ship Flag Handling
+
+When `--ship` is detected in the invocation, execute the ship pipeline as defined in `git/SKILL.md → Ship Pipeline` section.
+
+**Subagent constraint**: `epost-git-manager` cannot spawn sub-agents. For the test gate (step 3) and review gate (step 4):
+- Run inline if platform commands are straightforward (e.g., `npm test`, `mvn test -q`)
+- If a full agent review is needed, report `NEEDS_ORCHESTRATOR` and let the main context dispatch `epost-code-reviewer` then re-invoke `--ship --skip-review` with results attached
+- `--skip-tests` bypasses step 3; `--skip-review` bypasses step 4
+
+**--dry-run**: Print each planned step with `[DRY RUN]` prefix. Execute nothing.
 
 ## Critical Instructions for Haiku
 

@@ -113,7 +113,7 @@ When executing Audit mode:
 6. **Save reports** per `audit/references/output-contract.md`:
    - Standalone: `mkdir -p reports/{YYMMDD-HHMM}-{slug}-a11y-audit/` → write `report.md` + `session.json`
    - Delegated: write to `output_path` from delegation block (caller created folder)
-7. **Index report**: After saving, append entry to `reports/index.json` per `core/references/index-protocol.md`
+7. **Index report**: After saving, append entry to `reports/index.json` per `docs/references/index-protocol.md`
 8. **Regression check**: Cross-reference findings against known-findings database — flag `regression: true` if a resolved finding reappears
 
 ## Cross-Delegation

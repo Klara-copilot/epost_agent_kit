@@ -50,7 +50,47 @@ When dispatching, include in the Agent tool prompt:
 | `--fast` | Single-source lookup — official docs or Context7 only. For quick API/syntax checks. |
 | `--deep` | Full multi-source sweep — docs + GitHub + community + cross-reference. Writes report to `reports/`. |
 | `--codebase` | Internal only — Grep/Glob the project, no web search. For "how is X done in our code". |
+| `--optimize` | Autonomous iterative loop — keep improving until threshold met or N iterations cap. |
 | *(none)* | Auto-detect: simple lookup → fast, evaluation/comparison → deep, "our code" → codebase |
+
+## --optimize Flag
+
+Autonomous iterative research loop. Use when the user wants to keep improving a result until a measurable threshold is met.
+
+### Usage
+```
+/research --optimize [--iterations N] [--goal "description"] <topic>
+```
+
+### Protocol
+
+1. **Baseline**: Run standard research, store result as iteration 0.
+2. **Loop** (up to N iterations, default 5):
+   a. Identify the weakest section based on: missing sources, low confidence claims, unanswered questions.
+   b. Run targeted follow-up research to address the weakest section.
+   c. Merge findings into the result.
+   d. Evaluate: count remaining open questions + low-confidence claims.
+3. **Stop conditions** (any one):
+   - 0 open questions AND 0 low-confidence claims remaining
+   - N iterations reached
+   - Two consecutive iterations with no improvement (stuck detection)
+4. **Output**: Final result + iteration summary (what improved each round, final quality score).
+
+### Quality Score
+
+```
+Score = (sources cited / claims made) × (1 - open_questions / total_questions)
+```
+
+Pass threshold: score ≥ 0.8 OR open_questions = 0.
+
+### --optimize Sub-flags
+
+| Flag | Default | Behavior |
+|------|---------|---------|
+| `--iterations N` | 5 | Max iteration cap |
+| `--goal "text"` | none | Natural language stop condition (agent judges when met) |
+| `--commit` | false | Commit research output to `reports/` after completion |
 
 ## Auto-Detection
 

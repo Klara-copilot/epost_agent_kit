@@ -20,6 +20,16 @@ Comprehensive code quality assessment and verification.
 ## When Active
 User uses /review, asks for code review, or before committing code.
 
+## Confirmation Gate
+
+Code-modifying suggestions require explicit user confirmation before applying.
+
+1. **Propose** — present the proposed changes with rationale
+2. **Wait** — do not apply until user confirms ("yes", "go ahead", "looks good", or equivalent)
+3. **Apply** — only after explicit approval
+
+Never auto-apply refactoring, renaming, or restructuring to working code.
+
 ## Expertise
 
 ### Review Process

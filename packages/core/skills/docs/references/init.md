@@ -50,7 +50,7 @@ After any mode completes:
 | Index | When to update | What to update |
 |-------|---------------|----------------|
 | `docs/index.json` | After generating or migrating any doc file | `entries[]` (all generated/migrated entries), `updatedAt` |
-| `reports/index.json` | After writing the task completion report | Append entry per `core/references/index-protocol.md` |
+| `reports/index.json` | After writing the task completion report | Append entry per `docs/references/index-protocol.md` |
 
 **Never finish without a complete `docs/index.json`.** Every generated or migrated file must have a corresponding entry before you stop.
 

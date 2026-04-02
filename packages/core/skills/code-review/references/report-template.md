@@ -24,7 +24,7 @@
 
 ## Methodology
 
-> Format per `core/references/report-standard.md` Methodology section.
+> Format per `code-review/references/report-standard.md` Methodology section.
 
 | | |
 |--|--|
@@ -37,7 +37,7 @@
 
 ## Delegation Log
 
-> Format per `core/references/report-standard.md` Delegation Log section.
+> Format per `code-review/references/report-standard.md` Delegation Log section.
 
 | Agent | Scope | Template | Verdict | Findings |
 |-------|-------|----------|---------|----------|

@@ -96,7 +96,7 @@ For output paths and file naming: see `output-contract.md`.
 }
 ```
 
-> JSON methodology fields map to `core/references/report-standard.md` Methodology table. Use identical field semantics.
+> JSON methodology fields map to `code-review/references/report-standard.md` Methodology table. Use identical field semantics.
 
 ### Field Definitions
 

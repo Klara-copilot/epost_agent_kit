@@ -122,7 +122,7 @@ session_folder = reports/{YYMMDD-HHMM}-{slug}-audit/
    - Exit 1: `Build verification: ✗ FAIL — {error excerpt}` (advisory — does not block report)
    - Exit 0 (no command): `Build verification: skipped (no build command detected)`
 7. **Write session.json** per `references/session-json-schema.md`
-8. **Update reports/index.json** per `core/references/index-protocol.md`
+8. **Update reports/index.json** per `docs/references/index-protocol.md`
 
 Verdict = `max(muji, a11y, code-reviewer)` where REDESIGN > FIX-AND-REAUDIT > APPROVE.
 

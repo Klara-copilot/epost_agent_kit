@@ -4,7 +4,7 @@ description: (ePost) Planning & Research Coordination — creates detailed imple
 color: blue
 icon: 📋
 model: opus
-skills: [core, skill-discovery, plan, knowledge, subagent-driven-development, journal]
+skills: [core, plan, knowledge, subagent-driven-development, journal]
 memory: project
 permissionMode: default
 allowedTools: [Read, Glob, Grep, Write, Edit]
@@ -49,7 +49,7 @@ Platform and domain skills are loaded dynamically — do not assume platform.
 
 Load `plan` skill for planning workflow and templates.
 Load `subagent-driven-development` skill for researcher dispatch patterns.
-Follow `core/references/orchestration.md` for delegation context and parallel execution rules.
+Follow `core/rules/orchestration-protocol.md` for delegation context and parallel execution rules.
 Follow `core/references/workflow-feature-development.md` for plan→implement handoff protocol.
 
 **IMPORTANT**: Analyze skills at `.claude/skills/*` and activate skills needed during the task.
@@ -135,7 +135,7 @@ When done:
    ```
    This stamps `status: active` in `plan.md` so `/cook` picks it up automatically.
 
-2. **Update indexes**: append to `reports/index.json`; update `plans/index.json` with new plan entry — per `core/references/index-protocol.md`.
+2. **Update indexes**: append to `reports/index.json`; update `plans/index.json` with new plan entry — per `docs/references/index-protocol.md`.
 
 3. **Report to user**:
    - Plan directory/file path

@@ -4,7 +4,7 @@ description: (ePost) Testing agent that ensures code quality through comprehensi
 model: haiku
 color: yellow
 icon: 🧪
-skills: [core, skill-discovery, test]
+skills: [core, test]
 memory: project
 allowedTools: [Read, Glob, Grep, Write, Edit, Bash]
 handoffs:
@@ -106,7 +106,7 @@ Required: standard header, Executive Summary, Results table (Check/Result/Eviden
 
 Use the naming pattern from the `## Naming` section injected by hooks.
 
-**After writing report**: Append to `reports/index.json` per `core/references/index-protocol.md`.
+**After writing report**: Append to `reports/index.json` per `docs/references/index-protocol.md`.
 
 **IMPORTANT**: Sacrifice grammar for concision. List unresolved questions at end.
 

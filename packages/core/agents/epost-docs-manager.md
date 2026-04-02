@@ -4,7 +4,7 @@ description: "(ePost) Use when working with project docs: write, update, migrate
 model: haiku
 color: blue
 icon: 📝
-skills: [core, skill-discovery, knowledge, docs]
+skills: [core, knowledge, docs]
 memory: project
 allowedTools: [Read, Glob, Grep, Write, Edit, Bash]
 handoffs:
@@ -199,7 +199,7 @@ After every task, update ALL relevant indexes before stopping:
 | Index | Trigger | Action |
 |-------|---------|--------|
 | `docs/index.json` | Any doc file created, moved, renamed, or deleted | Update `entries[]` + `updatedAt` |
-| `reports/index.json` | After writing any task report | Append entry per `core/references/index-protocol.md` |
+| `reports/index.json` | After writing any task report | Append entry per `docs/references/index-protocol.md` |
 
 **This is non-negotiable.** A task is not complete until both indexes are up to date.
 

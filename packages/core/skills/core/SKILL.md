@@ -19,26 +19,26 @@ Defines operational boundaries, decision authority, environment safety, and docu
 - Code generation or refactoring
 - Documentation updates
 
-## Aspect Files
+## Behavioral Rules
 
-| File | Purpose |
-|------|---------|
-| `references/decision-boundaries.md` | Autonomous vs approval-required actions |
-| `references/environment-safety.md` | Pre-execution verification rules |
-| `references/external-tools-usage.md` | External tool/MCP boundaries |
-| `references/documentation-standards.md` | Formatting and structure rules |
-| `references/orchestration.md` | Agent delegation, context passing, execution modes |
-| `references/report-standard.md` | Common report format for all agent output |
+Behavioral rules are in `.claude/rules/` (always-on, every user, every session). Agent-specific references are in each owning skill's `references/` directory.
 
-## Team Workflows
+| Rule File | Purpose |
+|-----------|---------|
+| `rules/orchestration-protocol.md` | Agent delegation, context passing, execution modes, agent dispatch table |
+| `rules/file-organization.md` | File and directory structure conventions |
+| `rules/verification.md` | Pre-completion verification steps |
+| `rules/agent-rules.md` | Decision boundaries, environment safety, pre-execution rules |
+| `rules/workflows.md` | Team development workflows |
+| `rules/development-rules.md` | Commit hygiene, code changes, packages/ source of truth |
 
-| Workflow | File | When |
-|----------|------|------|
-| Feature Development | `references/workflow-feature-development.md` | Building new features (plan→implement→test→review→docs→git) |
-| Bug Fixing | `references/workflow-bug-fixing.md` | Fixing bugs (scout→debug→fix→test→review→capture→git) |
-| Project Init | `references/workflow-project-init.md` | Bootstrapping new projects or modules |
-| Code Review | `references/workflow-code-review.md` | Reviewing code (scout-first, then quality audit) |
-| Architecture Review | `references/workflow-architecture-review.md` | Evaluating trade-offs (brainstorm→research→decide→document) |
+## Owning Skill References
+
+| File | Owning Skill |
+|------|-------------|
+| `code-review/references/report-standard.md` | Common report format for all agent output |
+| `docs/references/index-protocol.md` | Reports/plans/docs index update protocol |
+| `docs/references/documentation-standards.md` | Formatting and structure rules |
 
 ## Quick Reference
 
@@ -80,9 +80,15 @@ All documentation files must include:
 2. **Table of Contents** — Anchored links (`#section-name`)
 3. **Related Documents** — Links to related files
 
+### Output Contract
+
+Skill output format is identical whether executed inline or via agent spawn.
+Never vary report structure, status blocks, or file naming based on execution mode.
+Execution mode is an implementation detail invisible to the user.
+
 ### Never Do
 
-- Delete files without approval (see `references/decision-boundaries.md`)
+- Delete files without approval (see `rules/agent-rules.md`)
 - Modify production configs without approval
 - Assume specific runtime environments
 - Merge unrelated concerns into single changes

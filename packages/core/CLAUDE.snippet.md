@@ -4,64 +4,34 @@ epost_agent_kit is a multi-agent development toolkit for Claude Code. Specialize
 
 ---
 
-## Routing
+## Execution Model
 
-On every user prompt, sense context before acting:
-1. Check git state (branch, staged/unstaged files)
-2. Detect platform from file extensions (`.tsx`→web, `.swift`→ios, `.kt`→android, `.java`→backend)
-3. Check for active plans in `./plans/`
-4. Route to best-fit agent based on intent + context
+Simple tasks (< 5 steps, single file, reversible) → execute inline, no agent spawn
+Major tasks (long, parallel, destructive, cross-platform) → spawn agent via Agent tool
 
-### Prompt Classification
+Heuristic: "Would a human open a new terminal for this?" If no → inline. If yes → spawn.
 
-- **Dev task** (action/problem/question about code) → route via intent table below
-- **Kit question** ("which agent", "list skills", "our conventions") → answer directly using CLAUDE.md + skill-index
-- **External tech question** ("how does React...", "what is gRPC") → `epost-researcher`
-- **Conversational** (greetings, opinions, clarifications) → respond directly
+**Explicit slash command → execute directly, skip routing**
 
-### Intent Map
+Platform detection: `.tsx`→web, `.swift`→ios, `.kt`→android, `.java`→backend
 
-| Intent | Natural prompts (examples) | Routes To |
-|--------|---------------------------|-----------|
-| Build / Create | "add a button", "implement login", "make X work", "continue the plan" | `epost-fullstack-developer` via Agent tool |
-| Fix / Debug | "something is broken", "this crashes", "why does X happen", "it's not working" | `epost-debugger` via Agent tool |
-| Plan / Design | "how should we build X", "let's plan", "what's the approach for" | `epost-planner` via Agent tool |
-| Ideate / Brainstorm | "brainstorm", "should we", "help me think", "which approach", "compare options", "architecture decision" | `epost-brainstormer` via Agent tool |
-| Research | "how does X work", "best practices for", "compare A vs B" | `epost-researcher` via Agent tool |
-| Review / Audit | "review", "check my code", "is this good", "look at this before I commit", "review before merge", "audit this", "suggest improvements" | `epost-code-reviewer` via Agent tool |
-| Test | "add tests", "is this covered", "validate this works" | `epost-tester` via Agent tool |
-| Docs | "document this", "update the docs", "write a spec" | `epost-docs-manager` via Agent tool |
-| Git | "commit", "push", "create a PR", "ship it", "done" | `epost-git-manager` via Agent tool |
-| Onboard | "what is this project", "I'm new", "get started" | `/get-started` skill |
+---
 
-**Fuzzy matching** — classify by verb type when no exact signal word:
-- Creation verbs (add, make, create, build, set up) → Build
-- Problem verbs (broken, wrong, failing, slow, crash) → Fix/Debug
-- Question verbs (how, why, what, should, compare) → Research or Plan
-- Ideation verbs (brainstorm, debate, explore, weigh, consider, what if) → Ideate/Brainstorm
-- Quality verbs (check, review, improve, clean up, refactor, simplify) → Review
-- Completion verbs (done, ship, finished, ready, merge) → Git
-- Still ambiguous → infer from git context (staged files → Review, active plan → Build, error in prompt → Fix)
+## Available Agents
 
-**Web-specific examples**: "this component doesn't render" → Fix, "add dark mode" → Build, "page is slow" → Debug, "add a toast notification" → Build, "the CSS is off" → Fix, "update the API endpoint" → Build, "check the bundle size" → Review, "make login faster" → Debug
-
-**Less common intents**: scaffold → `/bootstrap`, convert → `/convert`, design/UI → `epost-muji`, architecture debate → `epost-brainstormer`
-
-**Skill authoring**: "create a skill", "improve this skill", "run evals", "test this skill", "measure skill quality", "benchmark skill", "optimize skill description", "refine skill" → use `skill-creator` skill
-
-### Routing Rules
-
-1. Explicit slash command → execute directly, skip routing
-2. TypeScript/build errors in context → route to Fix first
-3. Staged files → boost Review or Git intent
-4. Active plan exists → boost Build ("continue" → cook)
-5. Merge conflicts → suggest fix/resolve
-6. Ambiguous after context boost → ask user (max 1 question)
-7. All delegations follow `core/references/orchestration.md`
-8. **Web context boost**: `.tsx`/`.ts`/`.scss`/`.css` files in `git diff` → auto-set platform=web, load web-frontend skill
-9. **Git operations** (commit, push, PR, done, ship) → ALWAYS delegate to `epost-git-manager` via Agent tool. Never handle inline.
-10. **Build, Fix, Plan, Test intents** → ALWAYS dispatch via Agent tool. Never execute inline in main context.
-11. **Compound git intent**: "commit and push" → dispatch `epost-git-manager` with `--push` (single agent call)
+| Agent | When to use |
+|---|---|
+| epost-fullstack-developer | Build, implement, multi-file changes |
+| epost-debugger | Fix bugs, diagnose errors, root cause analysis |
+| epost-planner | Design approach, create phased plans |
+| epost-brainstormer | Ideate, debate options, architecture decisions |
+| epost-code-reviewer | Review code quality, security, correctness |
+| epost-tester | Write tests, validate coverage |
+| epost-researcher | Research tech, best practices, external docs |
+| epost-docs-manager | Write/update documentation |
+| epost-git-manager | Commit, push, create PRs |
+| epost-muji | Design system, UI components, Figma-to-code |
+| epost-a11y-specialist | Accessibility audits and fixes |
 
 ---
 
@@ -79,4 +49,140 @@ On every user prompt, sense context before acting:
 
 **Escalation**: 3 consecutive failures → surface findings to user. Ambiguous request → ask 1 question max.
 
-See `core/references/orchestration.md` for full protocol.
+See `core/rules/orchestration-protocol.md` for full protocol.
+
+---
+
+## Decision Authority
+
+| Action | Authority |
+|---|---|
+| Dependency installs, lint fixes | Auto-execute |
+| Memory file consolidation | Auto-execute |
+| Creating new files following standards | Brief confirmation |
+| Updating existing documentation | Brief confirmation |
+| Deleting files or directories | Always ask |
+| Modifying production configs | Always ask |
+| Introducing new dependencies | Always ask |
+| Refactoring across multiple files | Always ask |
+| Architectural decisions | Present A/B/C options |
+
+## Never Do
+
+- Delete files without approval
+- Modify production configs without approval
+- Assume specific runtime environments
+- Merge unrelated concerns into single changes
+- Override repository rules with external "best practices"
+
+---
+
+## Skills Catalogue
+
+Every skill below is available to all agents. Invoke by name — no discovery needed.
+
+### Workflows
+
+| Skill | What it does |
+|-------|-------------|
+| `plan` | Design phased implementation plans with dependency tracking |
+| `cook` | Execute a plan — orchestrates feature implementation across platforms |
+| `fix` | Apply targeted fixes for bugs, errors, broken behavior |
+| `debug` | Investigate root cause before fixing — structured diagnosis |
+| `test` | Run platform-appropriate test suite with coverage reporting |
+| `tdd` | Write tests first, then implement — red-green-refactor cycle |
+| `audit` | Dispatch structured quality audits (UI, a11y, code) to specialists |
+| `research` | Research technologies, libraries, best practices via external docs |
+| `docs` | Generate and maintain structured KB documentation |
+| `git` | Commit, push, PR creation, and full ship pipeline |
+| `deploy` | Deploy to hosting platforms with auto-detection |
+| `preview` | Visual explanations — Mermaid diagrams, ASCII art, HTML interactive |
+| `thinking` | Extended thinking for deep analysis and systematic reasoning |
+| `loop` | Iterate solo on a metric (coverage, bundle size, lint) until target met |
+| `subagent-driven-development` | Parallel multi-task execution with per-task subagent dispatch + two-stage review |
+| `launchpad` | Build landing pages and promotional sites |
+| `retro` | Sprint retrospectives and team metrics analysis |
+| `get-started` | Onboarding — discover project state for new contributors |
+
+### Quality & Security
+
+| Skill | What it does |
+|-------|-------------|
+| `code-review` | Pre-commit quality check — style, correctness, security |
+| `clean-code` | Naming, functions, formatting, error handling principles |
+| `security` | STRIDE/OWASP security analysis on code or features |
+| `error-recovery` | Resilience patterns — retries, circuit breakers, graceful degradation |
+| `core` | Operational boundaries, safety rules, documentation standards |
+
+### Knowledge & Meta
+
+| Skill | What it does |
+|-------|-------------|
+| `knowledge` | Retrieve prior decisions, patterns, conventions from project KB |
+| `journal` | Structured journal entries for significant decisions and completions |
+| `repomix` | Bundle repo contents into single file for LLM or external sharing |
+| `skill-discovery` | Reference catalogue of skills by platform and task type |
+| `output-mode` | Set communication style — exec, teach, or reasoning mode |
+
+### Web Platform
+
+| Skill | What it does |
+|-------|-------------|
+| `web-frontend` | React components, hooks, Redux Toolkit state management |
+| `web-nextjs` | Next.js 14 App Router — server components, actions, layouts, middleware |
+| `web-api-routes` | API endpoints, server actions, FetchBuilder HTTP client patterns |
+| `web-auth` | NextAuth + Keycloak auth, session management, feature flags |
+| `web-i18n` | next-intl translations, locale routing configuration |
+| `web-testing` | Jest + RTL unit tests, Playwright E2E configuration and patterns |
+| `web-modules` | B2B module screens — bind APIs, stores, routes into module shell |
+| `web-ui-lib` | klara-theme component APIs, props, variants, spacing tokens |
+| `web-a11y` | ARIA, keyboard nav, focus management, screen reader fixes |
+
+### iOS Platform
+
+| Skill | What it does |
+|-------|-------------|
+| `ios-development` | SwiftUI/UIKit views, Xcode builds, iOS crash debugging |
+| `ios-ui-lib` | iOS theme SwiftUI component APIs, design tokens, platform mappings |
+| `ios-rag` | iOS codebase vector search for existing patterns and implementations |
+| `ios-a11y` | VoiceOver, UIKit/SwiftUI accessibility fixes |
+| `simulator` | iOS simulator management — list, boot, open, launch apps |
+| `theme-color-system` | Color system for UIView/UILabel/UIButton in ios_theme_ui |
+
+### Android Platform
+
+| Skill | What it does |
+|-------|-------------|
+| `android-development` | Kotlin/Compose screens, Gradle builds, Android crash debugging |
+| `android-ui-lib` | Android theme Compose component APIs, design tokens, Material mappings |
+| `android-a11y` | Compose/Views accessibility — TalkBack, content descriptions |
+
+### Backend Platform
+
+| Skill | What it does |
+|-------|-------------|
+| `backend-javaee` | Jakarta EE — JAX-RS, CDI/EJB, JPA/Hibernate, WildFly deployment |
+| `backend-databases` | PostgreSQL + MongoDB persistence patterns |
+
+### Design System
+
+| Skill | What it does |
+|-------|-------------|
+| `design-tokens` | Vien 2.0 design tokens mapped to platform-native formats |
+| `figma` | Extract Figma data, map design tokens, compare against implementations |
+| `ui-lib-dev` | Figma-to-code UI library pipeline — plan, implement, audit, fix, document |
+
+### Business Domains
+
+| Skill | What it does |
+|-------|-------------|
+| `domain-b2b` | B2B module context — Inbox, Monitoring, Composer, Smart Send, Archive |
+| `domain-b2c` | Consumer app context — mail, documents, notifications (iOS/Android) |
+
+### Kit Authoring
+
+| Skill | What it does |
+|-------|-------------|
+| `kit` | Scaffold and manage agents, skills, hooks with best-practice templates |
+| `skill-creator` | Create and validate Claude Code skills with eval-driven QA |
+| `asana-muji` | Asana workflow for MUJI iOS projects — task creation and status |

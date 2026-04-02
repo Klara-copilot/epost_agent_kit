@@ -1,8 +1,8 @@
 {
-  "generated": "2026-04-01T04:23:53.695Z",
+  "generated": "2026-04-02T06:33:15.396Z",
   "summary": {
-    "total": 39,
-    "new": 39,
+    "total": 41,
+    "new": 41,
     "proposed": 0,
     "dismissed": 0,
     "bySkill": {
@@ -49,9 +49,9 @@
         "low": 2
       },
       "unknown": {
-        "total": 9,
+        "total": 11,
         "high": 4,
-        "medium": 4,
+        "medium": 6,
         "low": 1
       },
       "loop": {
@@ -92,7 +92,7 @@
       }
     },
     "byType": {
-      "journal-flag": 28,
+      "journal-flag": 30,
       "audit-failure": 11,
       "workaround": 0
     }
@@ -525,6 +525,28 @@
       "targetSkill": "web-i18n",
       "suggestedAction": "",
       "detectedAt": "2026-03-31T13:51:26.498Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-0f63a7d4",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/kit-rationalization/260402-skill-discovery-simplification.md",
+      "excerpt": "The platform detection priority list (explicit hint > file extensions > CWD > project markers) was embedded in Step 1 and could have been lost. Verified it's not needed in the catalogue form — that logic belongs in individual agent system prompts, not in a reference file.",
+      "targetSkill": "unknown",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-02T02:58:52.979Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-4fa8396f",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/kit-routing-redesign/260402-claude-md-routing-rewrite.md",
+      "excerpt": "Nothing significant. The phase spec was clear and the file was small enough to rewrite in one pass.",
+      "targetSkill": "unknown",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-02T02:58:52.979Z",
       "status": "new"
     }
   ]

@@ -4,7 +4,7 @@ description: (ePost) Quality Assurance & Security Audits — enforces code stand
 color: yellow
 icon: 🔍
 model: sonnet
-skills: [core, skill-discovery, code-review, security, knowledge]
+skills: [core, code-review, security, knowledge]
 memory: project
 permissionMode: default
 allowedTools: [Read, Glob, Grep, Write]
@@ -179,7 +179,7 @@ Explicit scope signals:
 - After writing report: persist SEC/PERF/TS/LOGIC/DEAD findings to `reports/known-findings/code.json` per `code-review/references/code-known-findings-schema.md` (includes regression detection against prior runs)
 - UI findings are persisted by epost-muji to `reports/known-findings/ui-components.json` — do not duplicate
 - A11Y findings are persisted by epost-a11y-specialist to `reports/known-findings/a11y.json` — do not duplicate
-- After saving: append report to `reports/index.json` per `core/references/index-protocol.md`
+- After saving: append report to `reports/index.json` per `docs/references/index-protocol.md`
 
 ### Report Path Resolution
 
