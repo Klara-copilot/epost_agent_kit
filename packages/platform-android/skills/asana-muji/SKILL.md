@@ -22,8 +22,8 @@ This skill operates on these 3 projects ONLY:
 **MANDATORY SAFETY RULES:**
 
 - NEVER delete any task
-- NEVER update/edit tasks NOT assigned to me (Tan Le Ngoc Minh, GID: `1210221850073445`)
-- Always verify `assignee.gid == 1210221850073445` before any mutation
+- NEVER update/edit tasks NOT assigned to me (Tan Le Ngoc Minh, GID: `1210221850073452`)
+- Always verify `assignee.gid == 1210221850073452` before any mutation
 - Load Asana MCP tools via `ToolSearch` before calling them
 
 ## Project Sections
