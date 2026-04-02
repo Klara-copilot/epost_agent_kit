@@ -20,7 +20,7 @@ Use `AskUserQuestion` (2 rounds):
 mcp__asana__create_tasks:
   name: [task name]
   projects: ["1210248345341985"]
-  assignee: "me"
+  assignee: "1210221850073452"
   due_on: [calculated YYYY-MM-DD]
   notes: [Figma URL or empty]
 ```

@@ -5,7 +5,7 @@
 ```
 mcp__asana__search_tasks:
   projects_any: "1210248345341985"
-  assignee_any: "me"
+  assignee_any: "1210221850073452"
   completed: false
   opt_fields: "name,due_on,memberships.section.name"
   sort_by: "due_date"
