@@ -32,16 +32,15 @@ epost-kit verify --strict   # warnings also block (CI mode)
 
 ## What It Checks
 
-1. **Reference validation** — all agent/skill/command refs point to valid targets
-2. **Connection integrity** — extends/requires/enhances targets exist, no cycles, bidirectional conflicts
-3. **Frontmatter completeness** — skills have description, keywords, platforms
-4. **Package.yaml sync** — skills on disk match provides.skills declarations
-5. **Skill-index staleness** — index count matches actual SKILL.md count
-6. **Orphan detection** — skills not referenced by any agent or connection
-7. **Dependency graph** — auto-generates `docs/skill-dependency-graph.md` (mermaid)
-8. **Layer compliance** *(LLM-assessed)* — read each skill body and assess: is this content org-wide (Layer 0) or repo-specific (Layer 2)? Flag any skill with specific file paths, product names, or repo-scoped conventions. Repo-specific content belongs in `docs/` (CONV, ADR, FEAT, or FINDING).
+Steps 1–6 are automated by `epost-kit verify`. Step 7 requires LLM judgment.
 
-Steps 1–7 are automated by `epost-kit verify`. Step 8 requires LLM judgment — run it by prompting the agent to review skill bodies directly.
+1. **Installed integrity** — checksums of `.claude/` files against `.epost-metadata.json`; flags modified or missing files
+2. **Reference validation** — all agent/skill/command refs point to valid targets
+3. **Connection integrity** — extends/requires/enhances targets exist, no cycles
+4. **Frontmatter completeness** — skills have description, keywords, platforms
+5. **Dependency graph** — auto-generates `docs/skill-dependency-graph.md` (mermaid)
+6. **Health summary** — skill count, connection counts, completeness ratios
+7. **Layer compliance** *(LLM-assessed)* — read each skill body and assess: is content org-wide (Layer 0) or repo-specific (Layer 2)? Flag skills with specific paths, product names, or repo-scoped conventions. Repo-specific content belongs in `docs/` (CONV, ADR, FEAT, or FINDING).
 
 ## Exit Codes
 
