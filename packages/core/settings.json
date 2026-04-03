@@ -115,6 +115,10 @@
         "hooks": [
           {
             "type": "command",
+            "command": "node .claude/hooks/kit-pre-commit-gate.cjs"
+          },
+          {
+            "type": "command",
             "command": "node .claude/hooks/build-gate-hook.cjs"
           }
         ]

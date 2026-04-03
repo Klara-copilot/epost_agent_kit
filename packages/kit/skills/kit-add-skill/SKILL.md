@@ -90,6 +90,13 @@ Create a new skill definition following epost_agent_kit conventions.
    - Add `metadata.connections` if relationships identified in step 3
    - Write concise SKILL.md body — quick reference, NOT documentation
    - Create `references/` directory if the skill needs detailed reference files
+   - Create `evals/eval-set.json` with placeholder trigger queries (required for all user-invocable skills):
+     ```json
+     [
+       {"query": "TODO: add a query that should trigger this skill", "should_trigger": true},
+       {"query": "TODO: add a query that should NOT trigger this skill", "should_trigger": false}
+     ]
+     ```
 
 5. **Progressive Disclosure**:
    - `SKILL.md` — short, concise (< 100 lines), always loaded
@@ -113,6 +120,7 @@ Create a new skill definition following epost_agent_kit conventions.
 - [ ] `metadata.keywords` present (min 3)
 - [ ] `metadata.platforms` set (not defaulting to "all" unless intentional)
 - [ ] `metadata.connections` declared if obvious parent/dependency exists
+- [ ] `evals/eval-set.json` created with ≥2 trigger queries (1 true, 1 false)
 - [ ] Registered in package.yaml `provides.skills`
 - [ ] No lint errors (`epost-kit lint`)
 
