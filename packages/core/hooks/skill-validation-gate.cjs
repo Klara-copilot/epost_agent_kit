@@ -67,13 +67,18 @@ function main() {
     process.stdout.write(JSON.stringify({ additionalContext: context }) + '\n');
   }
 
-  // Layer check — always runs, warn if repo-specific (Layer 2) content detected
+  // Layer check — mechanical hard signals + reminder for agent to assess content layer
   const layer = checkLayer(skillDir);
   if (layer.hasIssues) {
-    const layerContext = `[layer-check WARN] ${path.basename(skillDir)}/SKILL.md: content appears repo-specific (Layer 2), not org-wide (Layer 0).\n` +
-      `  Signals: ${layer.signals.join(', ')}\n` +
-      `  Skills in epost_agent_kit must apply across all repos. Consider moving to docs/ (CONV, ADR, FEAT, or FINDING) instead.`;
-    process.stdout.write(JSON.stringify({ additionalContext: layerContext }) + '\n');
+    // Hard mechanical violation (e.g. hardcoded /Users/... path) — always wrong
+    const hardContext = `[layer-check ERROR] ${path.basename(skillDir)}/SKILL.md: ${layer.signals.join(', ')}. Remove before continuing.`;
+    process.stdout.write(JSON.stringify({ additionalContext: hardContext }) + '\n');
+  } else {
+    // Remind agent to do the content-level layer assessment — regex can't do this reliably
+    const reminder = `[layer-check] Assess layer before closing: is this skill org-wide (Layer 0) or repo-specific (Layer 2)? ` +
+      `Layer 2 content belongs in docs/ (CONV, ADR, FEAT, or FINDING), not in epost_agent_kit skills. ` +
+      `See kit-add-skill step 2 for the full checklist.`;
+    process.stdout.write(JSON.stringify({ additionalContext: reminder }) + '\n');
   }
 
   process.exit(0);
