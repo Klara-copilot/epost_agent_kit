@@ -1,8 +1,8 @@
 {
-  "generated": "2026-04-03T13:19:09.610Z",
+  "generated": "2026-04-03T13:34:00.602Z",
   "summary": {
-    "total": 43,
-    "new": 43,
+    "total": 45,
+    "new": 45,
     "proposed": 0,
     "dismissed": 0,
     "bySkill": {
@@ -13,8 +13,8 @@
         "low": 1
       },
       "test": {
-        "total": 6,
-        "high": 1,
+        "total": 7,
+        "high": 2,
         "medium": 5,
         "low": 0
       },
@@ -37,10 +37,10 @@
         "low": 0
       },
       "kit": {
-        "total": 1,
+        "total": 2,
         "high": 0,
         "medium": 0,
-        "low": 1
+        "low": 2
       },
       "docs": {
         "total": 2,
@@ -98,8 +98,8 @@
       }
     },
     "byType": {
-      "journal-flag": 31,
-      "audit-failure": 12,
+      "journal-flag": 32,
+      "audit-failure": 13,
       "workaround": 0
     }
   },
@@ -575,6 +575,28 @@
       "targetSkill": "error-recovery",
       "suggestedAction": "",
       "detectedAt": "2026-04-03T05:20:58.549Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-e6761732",
+      "type": "journal-flag",
+      "confidence": "low",
+      "source": "docs/journal/kit/260403-kit-ide-snippets.md",
+      "excerpt": "- The Copilot fallback behavior (falls back to `claude_snippet` when `copilot_snippet` not declared) was a non-obvious detail from the CLI source — easy to miss if editing a new package's `package.yaml`. Captured in the pipeline table.",
+      "targetSkill": "kit",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-03T13:23:42.075Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-9f6dbc66",
+      "type": "audit-failure",
+      "confidence": "high",
+      "source": "reports/260403-2021-kit-ide-snippets-epost-fullstack-developer.md",
+      "excerpt": "- Tests: 7 passed, 0 failed — see verify output above\n- Build: 0 errors\n- Acceptance criteria:\n  - [x] SKILL.md with CSO frontmatter description",
+      "targetSkill": "test",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-03T13:23:42.110Z",
       "status": "new"
     }
   ]
