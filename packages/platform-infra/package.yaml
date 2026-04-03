@@ -1,0 +1,19 @@
+name: platform-infra
+version: "1.0.0"
+description: "Infrastructure: Kubernetes, GCP, SOPS secrets, Kustomize"
+layer: 1
+platforms: [all]
+
+dependencies:
+  - core
+
+provides:
+  agents: []
+  skills:
+    - infra-kubernetes
+
+files:
+  skills/: skills/
+
+settings_strategy: merge
+claude_snippet: CLAUDE.snippet.md
