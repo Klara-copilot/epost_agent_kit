@@ -1,3 +1,16 @@
+---
+name: kit-hooks
+description: (ePost) Reference guide for hooks — event types (PreToolUse, PostToolUse, SessionStart, Stop, etc.), I/O contract, configuration in settings.json, hook architecture. Use when creating a hook, debugging hook behavior, or checking which hook event to use.
+user-invocable: false
+metadata:
+  keywords: [hook, PreToolUse, PostToolUse, SessionStart, event, automation, settings]
+  triggers: [hook development, create hook, hook event, hook architecture]
+  platforms: [all]
+  agent-affinity: [epost-fullstack-developer]
+  connections:
+    enhances: [kit]
+---
+
 # Hook Development for epost_agent_kit
 
 ## Overview

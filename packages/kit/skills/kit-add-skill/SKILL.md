@@ -5,6 +5,10 @@ user-invocable: false
 disable-model-invocation: true
 metadata:
   argument-hint: "[skill-name] [description]"
+  keywords: [skill, create, scaffold, add-skill, kit]
+  triggers: [/kit-add-skill, create a skill, scaffold skill, add a skill]
+  platforms: [all]
+  agent-affinity: [epost-fullstack-developer]
   connections:
     requires: []
 ---
@@ -13,7 +17,7 @@ metadata:
 
 Create a new skill definition following epost_agent_kit conventions.
 
-**IMPORTANT:** Read `kit/references/skill-development.md` for frontmatter reference and best practices.
+**IMPORTANT:** Read `.claude/skills/kit-skill-development/SKILL.md` for frontmatter reference and best practices.
 
 ## Arguments
 

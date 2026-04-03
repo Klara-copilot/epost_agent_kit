@@ -1,3 +1,16 @@
+---
+name: kit-agents
+description: (ePost) Ecosystem reference for the Claude Code agent system — component types (agents, skills, commands, hooks, MCP), agent frontmatter table, skill frontmatter table, naming conventions, plugin system. Use when planning changes to the agent ecosystem, creating new components, or auditing existing agents.
+user-invocable: false
+metadata:
+  keywords: [agents, ecosystem, frontmatter, naming, plugin, commands, skills, hooks]
+  triggers: [agent ecosystem, kit ecosystem, frontmatter reference, naming conventions]
+  platforms: [all]
+  agent-affinity: [epost-fullstack-developer, epost-planner, epost-code-reviewer]
+  connections:
+    enhances: [kit]
+---
+
 # Agent Ecosystem Reference
 
 Persistent reference for the epost_agent_kit Claude Code ecosystem. Use this when planning changes, creating new components, or auditing the agent system.

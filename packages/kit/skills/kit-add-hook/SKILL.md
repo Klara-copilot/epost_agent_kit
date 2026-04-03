@@ -5,6 +5,10 @@ user-invocable: false
 disable-model-invocation: true
 metadata:
   argument-hint: "[hook-name] [event-type]"
+  keywords: [hook, create, automation, event, kit]
+  triggers: [/kit-add-hook, create a hook, add a hook, new hook]
+  platforms: [all]
+  agent-affinity: [epost-fullstack-developer]
   connections:
     requires: []
 ---
@@ -13,7 +17,7 @@ metadata:
 
 Create a new hook script and wire it into the settings.json hook configuration.
 
-**IMPORTANT:** Read `kit/references/hooks.md` for hook patterns and best practices.
+**IMPORTANT:** Read `.claude/skills/kit-hooks/SKILL.md` for hook patterns and best practices.
 
 ## Arguments
 

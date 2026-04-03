@@ -5,6 +5,10 @@ user-invocable: false
 disable-model-invocation: true
 metadata:
   argument-hint: "[agent-name] [description]"
+  keywords: [agent, create, scaffold, add-agent, kit]
+  triggers: [/kit-add-agent, create an agent, add an agent, scaffold agent]
+  platforms: [all]
+  agent-affinity: [epost-fullstack-developer]
   connections:
     requires: []
 ---
@@ -13,7 +17,7 @@ metadata:
 
 Create a new agent definition file following epost_agent_kit conventions.
 
-**IMPORTANT:** Read `kit/references/agent-development.md` for frontmatter reference and best practices.
+**IMPORTANT:** Read `.claude/skills/kit-agent-development/SKILL.md` for frontmatter reference and best practices.
 
 ## Arguments
 
@@ -46,7 +50,7 @@ Create a new agent definition file following epost_agent_kit conventions.
 
 5. **Register**:
    - Update `packages/{package}/package.yaml` agents list
-   - Update `packages/kit/skills/kit/references/agents.md` agent tree
+   - Update `packages/kit/skills/kit-agents/SKILL.md` agent tree
 
 6. **Validate**: Run `epost-kit lint` on new agent — catch broken skill refs
 

@@ -1,0 +1,110 @@
+KIT SKILL EXPLORATION — KEY FINDINGS
+=====================================
+
+MAIN KIT SKILL: /packages/kit/skills/kit/SKILL.md (69 lines)
+- Unified dispatcher for agent/skill/hook authoring
+- Delegates to epost-fullstack-developer agent
+- Uses flag routing: --add-agent, --add-skill, --add-hook, --optimize
+- User-invocable: /kit command or keyword triggers
+
+REFERENCE FILES: 11 total, 965 lines
+- Located: packages/kit/skills/kit/references/
+- Provide detailed workflows and teaching documentation
+- Loaded on-demand by kit dispatcher
+
+VIRTUAL SKILLS IN PACKAGE.YAML (7 declared):
+├─ kit (main skill, 69 lines, SKILL.md)
+├─ kit-agents (→ agents.md)
+├─ kit-agent-development (→ agent-development.md)
+├─ kit-skill-development (→ skill-development.md)
+├─ kit-hooks (→ hooks.md)
+├─ kit-cli (→ cli.md)
+└─ kit-verify (→ verify.md)
+
+COVERAGE MAP:
+
+Agent Authoring:
+  ✓ add-agent.md (61 lines) — workflow for creating agents
+  ✓ agent-development.md (179 lines) — complete agent reference
+
+Skill Authoring:
+  ✓ add-skill.md (77 lines) — workflow for creating skills
+  ✓ skill-development.md (124 lines) — complete skill reference
+  ✓ description-validation-checklist.md (69 lines) — description QA
+
+Hook Authoring:
+  ✓ add-hook.md (92 lines) — workflow for creating hooks
+  ✓ hooks.md (143 lines) — complete hook reference
+
+Optimization:
+  ✓ optimize.md (31 lines) — skill optimization workflow
+
+Verification:
+  ✓ verify.md (38 lines) — pre-release audit workflow
+
+Ecosystem Reference:
+  ✓ agents.md (100 lines) — frontmatter specs, naming conventions
+  ✓ cli.md (51 lines) — CLI tech stack and project structure
+
+CANDIDATES FOR INDEPENDENCE (extract to separate skills):
+
+⭐ agent-development.md (179 lines)
+   - Could become standalone agent-development skill
+   - Covers: file structure, frontmatter, system prompts, ecosystem fields
+   - Pedagogical value: HIGH
+   - Coupling: MODERATE — currently supporting add-agent workflow
+
+⭐ skill-development.md (124 lines)
+   - Could become standalone skill-development skill
+   - Covers: structure, frontmatter, CSO principles, progressive disclosure
+   - Pedagogical value: HIGH
+   - Coupling: MODERATE — currently supporting add-skill workflow
+
+⭐ hooks.md (143 lines)
+   - Could become standalone hook-development skill
+   - Covers: event types, I/O contract, configuration, architecture
+   - Pedagogical value: HIGH
+   - Coupling: MODERATE — currently supporting add-hook workflow
+
+SHOULD STAY WITH KIT:
+  ✗ add-agent.md, add-skill.md, add-hook.md — execution workflows (not docs)
+  ✗ agents.md — ecosystem spec (referenced by other specs)
+  ✗ cli.md — too specific to kit CLI implementation
+  ✗ verify.md — narrow single-command reference
+  ✗ optimize.md — narrow skill optimization task
+  ✗ description-validation-checklist.md — specialized QA tool
+
+DESIGN PATTERN:
+The kit skill uses an "aspect-file delegation" model:
+- Single SKILL.md (dispatcher)
+- Multiple reference files (workflows/teaching docs)
+- Aspect table mapping flags/keywords to reference files
+- Delegation to external agent for execution
+
+This is APPROPRIATE and EFFICIENT for unified authoring workflows.
+
+RECOMMENDATIONS:
+
+Immediate: No changes needed. Current structure is solid.
+
+Medium-term: Extract 3 large reference files to independent skills
+- Reduces cognitive load on single skill
+- Enables independent discovery and triggering
+- Maintains kit as execution dispatcher
+- Example: `/skill-development` for comprehensive skill reference
+
+Long-term: Consider autonomous skill-management agent to wrap /kit
+
+TOTAL COVERAGE:
+✓ Agent creation, structure, design
+✓ Skill creation, structure, design, optimization
+✓ Hook creation, configuration, patterns
+✓ Kit verification and quality assurance
+✓ CLI development reference
+✓ Ecosystem documentation
+
+Missing:
+- Agent description validation workflow
+- Skill publishing/distribution workflow
+- Hook testing before integration
+- Skill versioning management

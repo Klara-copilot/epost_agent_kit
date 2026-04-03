@@ -1,3 +1,16 @@
+---
+name: kit-skill-development
+description: (ePost) Reference guide for skill development — SKILL.md structure, frontmatter fields, CSO principles, progressive disclosure, description validation. Use when creating or auditing a skill, writing skill descriptions, or checking valid frontmatter fields.
+user-invocable: false
+metadata:
+  keywords: [skill, frontmatter, cso, progressive-disclosure, description, validation, skill-development]
+  triggers: [skill frontmatter, create skill, skill structure, CSO, description validation]
+  platforms: [all]
+  agent-affinity: [epost-fullstack-developer, epost-code-reviewer]
+  connections:
+    enhances: [kit]
+---
+
 # Skill Development for Claude Code Plugins
 
 Skills are modular packages that extend Claude's capabilities with specialized knowledge, workflows, and tools. Each skill has a required `SKILL.md` and optional bundled resources in `scripts/`, `references/`, and `assets/`.
