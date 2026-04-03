@@ -1,6 +1,6 @@
 ---
 name: skill-discovery
-description: (ePost) Reference catalogue of available skills by platform and task type. Use when you need to identify which skills apply to a given platform or task signal.
+description: (ePost) Reference catalogue of available skills by platform and task type. Use when you need to identify which skills apply to a given platform or task signal, find the right skill for a job, or browse skills by web, iOS, Android, or backend.
 user-invocable: false
 
 metadata:

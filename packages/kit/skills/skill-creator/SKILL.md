@@ -107,7 +107,7 @@ After writing the description, check every item before proceeding:
 
 **How to tell if it's a discipline skill**: the skill exists to enforce a behavior Claude tends to skip under pressure (e.g., verification-before-completion, code-review, security scan). If so, all three discipline checks apply.
 
-See `kit-skill-development` skill → `references/cso-principles.md` for full examples and patterns.
+See `references/epost-skill-authoring-standards.md` for full CSO principles and examples.
 
 ---
 
@@ -530,6 +530,10 @@ The agents/ directory contains instructions for specialized subagents. Read them
 
 The references/ directory has additional documentation:
 - `references/schemas.md` — JSON structures for evals.json, grading.json, etc.
+- `references/epost-skill-authoring-standards.md` — ePost frontmatter spec, invocation modes, CSO, description checklist, Layer check, connections
+- `references/cc-skill-spec.md` — Anthropic's authoritative skill spec (frontmatter, progressive disclosure, description formula)
+- `references/cc-native-mechanics.md` — How CC loads context, agent spawn cost-benefit, two-tier execution model
+- `references/description-validation-checklist.md` — Full description validation examples and fail patterns
 
 ---
 

@@ -150,4 +150,96 @@ function validateSkill(skillDir) {
   }
 }
 
-module.exports = { validateSkill, findPython, findValidateScript };
+// --- CSO checks (ePost layer, applied after quick_validate.py passes) --------
+
+// Trigger phrase patterns — match anywhere in first 250 chars (descriptions may start with "(ePost) ...")
+const TRIGGER_PATTERNS = [
+  /\buse when\b/i,
+  /\btriggers? when\b/i,
+  /\binvoke when\b/i,
+  /\bload when\b/i,
+];
+
+// Workflow summary patterns — only fire when description clearly describes what the skill DOES, not when to use it
+const WORKFLOW_KEYWORDS = [
+  /\bgenerates? a report\b/i,
+  /\bexecutes? the following steps?\b/i,
+  /\bperforms? the following steps?\b/i,
+  /\bautomatically runs? .{5,} and (then|then outputs?)\b/i,
+];
+
+/**
+ * Extract description string from a SKILL.md file.
+ * Returns null if not found.
+ * @param {string} skillMdPath
+ * @returns {string|null}
+ */
+function extractDescription(skillMdPath) {
+  try {
+    const content = require('fs').readFileSync(skillMdPath, 'utf8');
+    const match = content.match(/^---\n([\s\S]*?)\n---/);
+    if (!match) return null;
+    // Match multi-line description: description: "..." or description: >- or description: |-
+    const descMatch = match[1].match(/^description:\s*["']?([\s\S]*?)["']?\s*(?=\n\w|\n---$|$)/m);
+    if (!descMatch) return null;
+    return descMatch[1].trim().replace(/^["']|["']$/g, '');
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Run ePost CSO checks on a skill description.
+ * Returns array of warning strings (empty = pass).
+ * @param {string} description
+ * @returns {string[]}
+ */
+function checkCso(description) {
+  const warnings = [];
+
+  // Check 1: trigger phrasing in first 250 chars
+  const lead = description.slice(0, 250);
+  const hasTriggerPhrase = TRIGGER_PATTERNS.some(p => p.test(lead));
+  if (!hasTriggerPhrase) {
+    warnings.push('Description should start with trigger phrasing ("Use when...") in first 250 chars');
+  }
+
+  // Check 2: concrete trigger phrases — either ≥2 quoted phrases OR "use when" with comma-separated items
+  const quotedPhrases = description.match(/["'][^"']{3,}["']/g) || [];
+  const useWhenIdx = description.search(/use when\b/i);
+  const afterUseWhen = useWhenIdx >= 0 ? description.slice(useWhenIdx) : '';
+  const commaCount = (afterUseWhen.match(/,/g) || []).length;
+  if (quotedPhrases.length < 2 && commaCount < 1) {
+    warnings.push('Description lacks concrete trigger phrases — add ≥2 quoted examples (e.g., "fix bug") or list specific triggers after "Use when"');
+  }
+
+  // Check 3: warn if description is short enough that 250-char truncation cuts the key use case
+  if (description.length > 250) {
+    const truncated = description.slice(0, 250);
+    if (!TRIGGER_PATTERNS.some(p => p.test(truncated))) {
+      warnings.push('Key use case may be buried — descriptions truncate at 250 chars in skill listing; front-load the trigger');
+    }
+  }
+
+  // Check 4: workflow summary detection (heuristic — soft warning)
+  const hasWorkflowSummary = WORKFLOW_KEYWORDS.some(p => p.test(description));
+  if (hasWorkflowSummary) {
+    warnings.push('Description may summarize workflow steps (Description Trap) — keep description as trigger conditions only');
+  }
+
+  return warnings;
+}
+
+/**
+ * Run CSO checks on a skill directory. Returns null if SKILL.md unreadable.
+ * @param {string} skillDir
+ * @returns {{ warnings: string[] }|null}
+ */
+function validateSkillCso(skillDir) {
+  const skillMd = require('path').join(skillDir, 'SKILL.md');
+  const description = extractDescription(skillMd);
+  if (!description) return null;
+  return { warnings: checkCso(description) };
+}
+
+module.exports = { validateSkill, validateSkillCso, findPython, findValidateScript };

@@ -297,8 +297,9 @@ function run() {
     else console.log('\nKit has errors — fix before shipping.');
   }
 
-  if (results.errors.length > 0) process.exit(2);
-  if (results.warnings.length > 0) process.exit(1);
+  // Exit 0 for clean or warnings-only (CC UI shows non-zero as red error)
+  // Exit 1 only for hard errors that block shipping
+  if (results.errors.length > 0) process.exit(1);
   process.exit(0);
 }
 
