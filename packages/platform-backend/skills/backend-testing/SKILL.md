@@ -182,6 +182,48 @@ public class OrderResourceIT {
 
 ---
 
+## Test Naming Convention
+
+Use `methodUnderTest_stateUnderTest_expectedBehaviour` (underscores as separators, camelCase within each segment):
+
+```java
+// ✅ Good
+createOrder_withInvalidItem_shouldThrow400()
+approveInvoice_whenPaymentFails_shouldReturnFalse()
+findUser_withUnknownId_shouldReturnEmpty()
+
+// ❌ Avoid
+testApprove()
+test1()
+shouldWork()
+```
+
+---
+
+## AAA Pattern (Arrange-Act-Assert)
+
+Every test method should have three clear phases — avoid blurring them:
+
+```java
+@Test
+public void approveInvoice_whenPaymentSucceeds_shouldReturnTrue() {
+    // Arrange
+    Invoice invoice = new Invoice("INV-001", 99.99);
+    when(paymentGateway.charge(invoice)).thenReturn(true);
+
+    // Act
+    boolean result = invoiceService.approve(invoice);
+
+    // Assert
+    assertTrue(result);
+    verify(paymentGateway).charge(invoice);
+}
+```
+
+**Rule:** One logical assertion per test (multiple `assert*` calls are OK if they verify the same outcome). If you need two unrelated assertions, write two tests.
+
+---
+
 ## Mockito Patterns
 
 **JUnit 4** uses `@RunWith(MockitoJUnitRunner.class)` (not `@ExtendWith`, which is JUnit 5).
@@ -218,6 +260,61 @@ try (MockedStatic<DateUtil> mocked = Mockito.mockStatic(DateUtil.class)) {
 ```
 
 PowerMock remains available for legacy code that cannot be refactored.
+
+### Mocking Decision Table
+
+| Need | Approach |
+|------|----------|
+| Pure logic, no container | JUnit 4 + `@Mock` / `@InjectMocks` |
+| Verify a method was called | `verify(mock).method(args)` (spy or mock) |
+| Replace one method on a real object | `Mockito.spy(realObject)` + `doReturn` |
+| Replace a static method | `Mockito.mockStatic(Class.class)` (3.4+) |
+| Replace a CDI bean in Weld context | CDI `@Alternative` + `@Priority` or `WeldInitiator.addBeans()` |
+| Replace an EJB in Arquillian | Cannot mock — redesign to inject interface; use a test `@Alternative` |
+| External HTTP call | Mock the JAX-RS `Client` or extract to a gateway interface, then mock |
+
+---
+
+## Auth/AuthZ Testing
+
+Test **401 Unauthenticated** and **403 Forbidden** independently.
+
+```java
+// 401 — no token
+given().baseUri(baseUrl.toString())
+    .when().get("/api/orders")
+    .then().statusCode(401);
+
+// 403 — wrong role
+given().baseUri(baseUrl.toString())
+    .header("Authorization", "Bearer " + userToken)
+    .when().delete("/api/admin/orders/1")
+    .then().statusCode(403);
+
+// 200 — correct role
+given().baseUri(baseUrl.toString())
+    .header("Authorization", "Bearer " + adminToken)
+    .when().delete("/api/admin/orders/1")
+    .then().statusCode(200);
+```
+
+See `references/auth-testing.md` for JWT generation, `@RolesAllowed` testing, and Keycloak test realm setup.
+
+---
+
+## Error Path Checklist
+
+For every JAX-RS endpoint, cover these failure cases before marking done:
+
+| HTTP Status | When to test |
+|------------|--------------|
+| 400 Bad Request | Missing required fields, invalid format, constraint violations |
+| 401 Unauthorized | No `Authorization` header, expired token, malformed JWT |
+| 403 Forbidden | Valid token but insufficient role (`@RolesAllowed`) |
+| 404 Not Found | Resource ID does not exist |
+| 409 Conflict | Duplicate key, state conflict (e.g. re-submitting a closed order) |
+| 422 Unprocessable | Valid JSON but fails business rule (e.g. quantity < 0) |
+| 500 Internal | Simulate downstream failure — verify error response shape, no stack trace leaked |
 
 ---
 
@@ -301,3 +398,4 @@ Exclude DTOs and generated code from coverage — see `references/jacoco-coverag
 |------|---------|
 | `references/arquillian-patterns.md` | Maven BOM, arquillian.xml, ShrinkWrap recipes, transaction rollback |
 | `references/jacoco-coverage.md` | Full plugin config, exclusions, multi-module aggregate, SonarQube wiring |
+| `references/auth-testing.md` | JWT generation, `@RolesAllowed` with Arquillian, Keycloak test realm, RBAC edge cases |

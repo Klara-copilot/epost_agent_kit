@@ -3,6 +3,15 @@
   "updatedAt": "2026-04-03",
   "entries": [
     {
+      "id": "epost-fullstack-developer-260403-2021-kit-ide-snippets",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "Scaffold kit-ide-snippets skill — IDE snippet authoring for Copilot and Cursor targets",
+      "verdict": "DONE",
+      "file": "reports/260403-2021-kit-ide-snippets-epost-fullstack-developer.md",
+      "date": "2026-04-03"
+    },
+    {
       "id": "epost-fullstack-developer-260403-1454-kit-skill-audit-fixes-phase1",
       "type": "implementation",
       "agent": "epost-fullstack-developer",
