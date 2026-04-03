@@ -20,6 +20,7 @@ provides:
     - web-auth
     - web-testing
     - web-ui-lib
+    - web-forms
 files:
   skills/: skills/
 

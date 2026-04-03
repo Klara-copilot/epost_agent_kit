@@ -184,6 +184,7 @@ npx playwright test  # E2E tests
 | `references/render-optimization.md` | React.memo, derived state, transitions, lazy init |
 | `references/prototype.md` | Convert external prototypes/mockups to production code |
 | `references/rag.md` | Vector search for web codebase via MCP tools |
+| `references/typescript-standards.md` | Strict mode, no-any, Result pattern, immutability, null safety |
 
 ## Sub-Skill Routing
 

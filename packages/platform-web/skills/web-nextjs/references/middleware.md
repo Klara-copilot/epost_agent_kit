@@ -89,3 +89,29 @@ const publicPathnameRegex = RegExp(
 );
 export const isPublicUrl = (url: string) => publicPathnameRegex.test(url);
 ```
+
+## Environment Variables
+
+### Server-only (no `NEXT_PUBLIC_` prefix)
+
+Backend base URLs, API keys, secrets. Use ONLY in Server Actions, Route Handlers, and server-side code.
+
+```typescript
+// ✅ Server-only — safe, never exposed to the browser
+const API_BASE = process.env.BACKEND_API_URL;
+const API_KEY = process.env.API_SECRET_KEY;
+```
+
+### Client-exposed (`NEXT_PUBLIC_` prefix)
+
+Only for values that MUST be available in the browser (e.g., public app URL, non-sensitive feature flags).
+
+```typescript
+// ✅ Client-safe — intentionally public
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL;
+```
+
+**Rules**:
+- Never put backend URLs or secrets in `NEXT_PUBLIC_` variables
+- Backend APIs are never called from the client — all calls go via Server Actions, Route Handlers, or server components
+- `NEXT_PUBLIC_` variables are bundled into the client JS — treat them as public information
