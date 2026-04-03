@@ -1,6 +1,6 @@
 ---
 name: kit-agents
-description: (ePost) Ecosystem reference for the Claude Code agent system — component types (agents, skills, commands, hooks, MCP), agent frontmatter table, skill frontmatter table, naming conventions, plugin system. Use when planning changes to the agent ecosystem, creating new components, or auditing existing agents.
+description: "(ePost) Use when planning changes to the agent ecosystem, creating new components, or auditing agent/skill frontmatter. Reference: component types (agents, skills, commands, hooks, MCP), frontmatter tables, naming conventions, plugin system."
 user-invocable: false
 metadata:
   keywords: [agents, ecosystem, frontmatter, naming, plugin, commands, skills, hooks]
@@ -45,15 +45,21 @@ Skills support nested directories. Claude Code auto-discovers `SKILL.md` files a
 |-------|----------|--------|------|-------------|
 | `name` | Yes | Official | string | Identifier (lowercase, hyphens, 3-50 chars) |
 | `description` | Yes | Official | string | Triggering conditions with `<example>` blocks |
-| `model` | Yes | Official | string | `inherit`, `sonnet`, `opus`, `haiku` |
-| `color` | Yes | Official | string | `blue`, `cyan`, `green`, `yellow`, `magenta`, `red` |
+| `model` | No | Official | string | `inherit`, `sonnet`, `opus`, `haiku` |
+| `color` | No | Official | string | `blue`, `cyan`, `green`, `yellow`, `magenta`, `red` |
 | `tools` | No | Official | array | Upstream field — restrict available tools (default: all) |
 | `skills` | No | Ecosystem | array | Preload skills into agent context at startup |
 | `memory` | No | Ecosystem | string | Persistent learning: `user`, `project`, `local` |
 | `permissionMode` | No | Ecosystem | string | `default`, `acceptEdits`, `dontAsk`, `bypassPermissions`, `plan` |
 | `hooks` | No | Ecosystem | object | Per-agent scoped hooks (same format as settings.json hooks) |
 | `allowedTools` | No | Ecosystem | array | **(recommended)** Whitelist tools the agent may use — principle of least privilege |
-| `disallowedTools` | No | Ecosystem | array | **(deprecated)** Blacklist tools — prefer `allowedTools` whitelist instead |
+| `disallowedTools` | No | Official | array | **(deprecated)** Blacklist tools — prefer `allowedTools` whitelist instead |
+| `maxTurns` | No | Official | number | Max agentic turns before agent stops |
+| `mcpServers` | No | Official | array | MCP servers scoped to this agent |
+| `effort` | No | Official | string | `low`, `medium`, `high`, `max` — overrides session effort |
+| `isolation` | No | Official | string | `worktree` = isolated git worktree |
+| `background` | No | Official | boolean | `true` = always run as background task |
+| `initialPrompt` | No | Official | string | Auto-submitted first turn when agent runs as main session |
 
 **Source legend:** *Official* = confirmed in upstream `anthropics/claude-code` plugin-dev docs. *Ecosystem* = documented in our reference and observed working but not confirmed upstream.
 

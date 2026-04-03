@@ -89,6 +89,28 @@ Based on the user interview, fill in these components:
 - **compatibility**: Required tools, dependencies (optional, rarely needed)
 - **the rest of the skill :)**
 
+### CSO Validation — run before moving to test cases
+
+After writing the description, check every item before proceeding:
+
+**Description checks (apply to ALL skills):**
+- [ ] Description = trigger conditions ONLY — no workflow steps, no tool names, no "what happens next"
+- [ ] Key use case is front-loaded — descriptions truncate at 250 chars in the listing
+- [ ] ≥2 quoted user phrases in the description (e.g., `"create a skill"`, `"validate this"`)
+- [ ] Starts with "Use when..." or equivalent trigger phrasing (third person)
+- [ ] Does NOT summarize the body (the "Description Trap" — model skips body if description explains it)
+
+**Body checks for discipline skills** (verification, review, audit, compliance):
+- [ ] Iron Law block present — states the non-negotiable rule in bold at the top
+- [ ] Anti-Rationalization table — lists common excuses + why they fail
+- [ ] Red Flags list — signals that the model is about to skip the discipline
+
+**How to tell if it's a discipline skill**: the skill exists to enforce a behavior Claude tends to skip under pressure (e.g., verification-before-completion, code-review, security scan). If so, all three discipline checks apply.
+
+See `kit-skill-development` skill → `references/cso-principles.md` for full examples and patterns.
+
+---
+
 ### Skill Writing Guide
 
 #### Anatomy of a Skill

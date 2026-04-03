@@ -1,3 +1,17 @@
+---
+name: kit-cli
+description: (ePost) Use when developing the epost-kit CLI, adding new commands, or debugging CLI behavior. Reference: tech stack (Node.js/cac/TypeScript), project structure, key commands, conventions.
+user-invocable: false
+disable-model-invocation: false
+metadata:
+  keywords: [cli, epost-kit, commands, typescript, node, cac]
+  triggers: [cli development, epost-kit cli, add cli command]
+  platforms: [all]
+  agent-affinity: [epost-fullstack-developer]
+  connections:
+    enhances: [kit-add-agent, kit-add-skill]
+---
+
 # CLI Development Patterns
 
 ## Tech Stack
@@ -11,7 +25,7 @@
 ## Project Structure
 
 ```
-epost-agent-kit-cli/   (standalone repo at /Users/than/Projects/epost-agent-kit-cli)
+epost-agent-kit-cli/   (standalone repo, sibling to epost_agent_kit — e.g. /path/to/epost-agent-kit-cli)
 ├── src/
 │   ├── cli.ts              — Entry point, cac setup + fuzzy command suggestions
 │   ├── commands/            — Command implementations (init, onboard, update, doctor, lint, fix-refs, verify)
@@ -48,4 +62,4 @@ epost-agent-kit-cli/   (standalone repo at /Users/than/Projects/epost-agent-kit-
 
 ## Testing
 - Unit tests with vitest
-- Run: `cd /Users/than/Projects/epost-agent-kit-cli && npm test`
+- Run: `cd <path-to-epost-agent-kit-cli> && npm test`

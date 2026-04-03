@@ -1,3 +1,17 @@
+---
+name: kit-verify
+description: (ePost) Use when running a pre-release audit, verifying kit integrity before init, or checking for broken references and stale skill connections.
+user-invocable: false
+disable-model-invocation: false
+metadata:
+  keywords: [verify, audit, integrity, pre-release, references, connections]
+  triggers: [kit verify, pre-release audit, verify kit, check integrity]
+  platforms: [all]
+  agent-affinity: [epost-fullstack-developer]
+  connections:
+    enhances: [kit-add-agent, kit-add-skill, kit-add-hook]
+---
+
 # Kit Verification Workflow
 
 Pre-release/pre-init audit pipeline. Ensures kit integrity before `epost-kit init` or release.

@@ -1,6 +1,6 @@
 ---
 name: kit-agent-development
-description: (ePost) Reference guide for agent development — frontmatter fields, system prompt design, ecosystem fields (skills, permissionMode, allowedTools). Use when creating a new agent, reviewing agent structure, or checking what frontmatter fields an agent supports.
+description: "(ePost) Use when creating a new agent, reviewing agent structure, or checking agent frontmatter fields. Reference: agent file structure, frontmatter spec, system prompt design, ecosystem fields (skills, permissionMode, allowedTools)."
 user-invocable: false
 metadata:
   keywords: [agent, frontmatter, system-prompt, permissionMode, allowedTools, skills, color, model]
@@ -103,7 +103,7 @@ Defines when Claude should trigger this agent. **This is the most critical field
 - Explain reasoning in commentary
 - Be specific about when NOT to use the agent
 
-### model (required)
+### model (optional)
 
 Which model the agent should use.
 
@@ -115,7 +115,7 @@ Which model the agent should use.
 
 **Recommendation:** Use `inherit` unless agent needs specific model capabilities.
 
-### color (required)
+### color (optional)
 
 Visual identifier for agent in UI.
 
@@ -139,11 +139,31 @@ Whitelist the tools an agent is allowed to use. **Principle of least privilege**
 - Implementation: `allowedTools: [Read, Glob, Grep, Write, Edit, Bash]`
 - Git automation: `allowedTools: [Read, Bash]`
 
-**Note:** `allowedTools` is an ecosystem field (same status as `disallowedTools`) — enforced by ePost Agent Kit conventions.
+**Note:** `allowedTools` is an ePost ecosystem convention — not an official CC frontmatter field. It works because Claude Code recognizes it, but `tools` is the upstream spec name.
 
-### tools (deprecated — use allowedTools)
+### tools (official CC field)
 
-The upstream `tools:` field is now deprecated in favor of `allowedTools:`. Prefer whitelist over blacklist for security and auditability. If you encounter `tools:` in an agent, migrate it to `allowedTools:`.
+Restrict which tools the agent can use. This is the official Claude Code field.
+
+**Options:** same tool lists as allowedTools below.
+
+**Note:** ePost agents use `allowedTools` by convention (see below) — both work, but allowedTools is the ePost-preferred name for clarity.
+
+## Additional Official Fields
+
+These fields are part of the official CC sub-agent spec but less commonly used:
+
+**`maxTurns`** — Maximum agentic turns before agent stops.
+
+**`mcpServers`** — MCP servers available to this agent. Each entry is a server name (string reference) or inline definition.
+
+**`effort`** — `low`, `medium`, `high`, `max` (Opus 4.6 only). Overrides session effort level.
+
+**`isolation`** — `worktree` = run in temporary git worktree (isolated copy). Auto-cleaned if no changes.
+
+**`background`** — `true` = always run as background task. Default: `false`.
+
+**`initialPrompt`** — Auto-submitted as first user turn when agent runs as main session agent via `--agent`.
 
 ## System Prompt Design
 
@@ -187,6 +207,3 @@ If your agent produces persistent project-level data (findings, benchmarks, patc
 2. Add the "Data Store" section above to the agent's system prompt
 3. Reference paths in commands with `(if exists)` guards
 
-## References
-
-- `references/agent-creation-guide.md` — Full creation workflow, validation rules, testing, organization

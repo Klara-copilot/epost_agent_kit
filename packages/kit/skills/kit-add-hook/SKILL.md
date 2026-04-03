@@ -1,8 +1,9 @@
 ---
 name: kit-add-hook
-description: "(ePost) Create a new hook for Claude Code automation"
-user-invocable: false
-disable-model-invocation: true
+description: "(ePost) Use when creating a new Claude Code hook, adding event-driven automation, or wiring a new hook into settings.json."
+user-invocable: true
+context: fork
+agent: epost-fullstack-developer
 metadata:
   argument-hint: "[hook-name] [event-type]"
   keywords: [hook, create, automation, event, kit]
@@ -12,6 +13,13 @@ metadata:
   connections:
     requires: []
 ---
+
+## Delegation — REQUIRED
+
+This skill MUST run via `epost-fullstack-developer`, not inline.
+When dispatching, include in the Agent tool prompt:
+- **Skill**: `/kit-add-hook`
+- **Arguments**: $ARGUMENTS
 
 ## Your Mission
 

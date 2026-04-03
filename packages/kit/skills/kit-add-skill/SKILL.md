@@ -1,8 +1,9 @@
 ---
 name: kit-add-skill
-description: "(ePost) Create a new skill definition"
-user-invocable: false
-disable-model-invocation: true
+description: "(ePost) Use when creating a new skill definition, scaffolding a skill directory, or adding a skill to a kit package."
+user-invocable: true
+context: fork
+agent: epost-fullstack-developer
 metadata:
   argument-hint: "[skill-name] [description]"
   keywords: [skill, create, scaffold, add-skill, kit]
@@ -12,6 +13,13 @@ metadata:
   connections:
     requires: []
 ---
+
+## Delegation — REQUIRED
+
+This skill MUST run via `epost-fullstack-developer`, not inline.
+When dispatching, include in the Agent tool prompt:
+- **Skill**: `/kit-add-skill`
+- **Arguments**: $ARGUMENTS
 
 ## Your Mission
 

@@ -1,16 +1,29 @@
 ---
-name: kit-optimize-skill
-description: "(ePost) Optimize an existing agent skill automatically"
-user-invocable: false
-disable-model-invocation: true
+name: kit-optimize
+description: (ePost) Use when optimizing an existing skill for token efficiency, progressive disclosure, or CSO compliance. Use when user says "optimize skill", "improve skill", or "make skill more efficient".
+user-invocable: true
+context: fork
+agent: epost-fullstack-developer
 metadata:
   argument-hint: "[skill-name] [prompt]"
+  keywords: [optimize, skill, CSO, token-efficiency, progressive-disclosure]
+  triggers: [/kit-optimize, optimize skill, improve skill, CSO fix]
+  platforms: [all]
+  agent-affinity: [epost-fullstack-developer]
   connections:
     requires: []
 ---
 
+## Delegation — REQUIRED
+
+This skill MUST run via `epost-fullstack-developer`, not inline.
+When dispatching, include in the Agent tool prompt:
+- **Skill**: `/kit-optimize`
+- **Arguments**: $ARGUMENTS
+- If no arguments: state "no arguments — target all skills"
+
 Think harder.
-Read `kit/references/skill-development.md` for skill structure and CSO principles.
+Read `.claude/skills/kit-skill-development/SKILL.md` for skill structure and CSO principles.
 Use `docs-seeker` skills to search for documentation if needed.
 
 ## Arguments

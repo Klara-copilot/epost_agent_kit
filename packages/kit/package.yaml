@@ -10,14 +10,16 @@ dependencies:
 provides:
   agents: []
   skills:
-    - kit
     - kit-add-agent
     - kit-add-skill
     - kit-add-hook
+    - kit-optimize
     - kit-agent-development
     - kit-skill-development
     - kit-hooks
     - kit-agents
+    - kit-cli
+    - kit-verify
 
 files:
   agents/: agents/
