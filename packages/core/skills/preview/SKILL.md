@@ -26,6 +26,11 @@ metadata:
     - visual
     - chart
     - graph
+  triggers:
+    - /preview
+    - visualize this
+    - draw a diagram
+    - show me a flowchart
 ---
 
 # Mermaid Diagrams

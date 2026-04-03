@@ -6,6 +6,11 @@ metadata:
   agent-affinity: [epost-tester, epost-fullstack-developer]
   keywords: [loop, iterate, optimize, metric, coverage, bundle size, lint, Lighthouse, autonomous, git-memory]
   platforms: [all]
+  triggers:
+    - /loop
+    - keep iterating
+    - run until target met
+    - improve coverage autonomously
   connections:
     enhances: [test]
 ---

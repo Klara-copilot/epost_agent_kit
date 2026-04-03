@@ -45,6 +45,8 @@ provides:
     - research
     - retro
     - find-skill
+    - whatsnew
+    - didyouknow
 scripts:
   - get-active-plan.cjs
   - set-active-plan.cjs

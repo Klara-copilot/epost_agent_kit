@@ -6,6 +6,11 @@ user-invocable: false
 metadata:
   agent-affinity: [epost-muji, epost-fullstack-developer]
   keywords: [ui-lib, components, design-tokens, integration]
+  triggers:
+    - klara component
+    - theme variant
+    - ui-lib usage
+    - klara-theme API
   platforms: [web]
 ---
 

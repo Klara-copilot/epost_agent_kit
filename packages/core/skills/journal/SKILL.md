@@ -1,6 +1,6 @@
 ---
 name: journal
-description: (ePost) Writes structured implementation journal entries for significant decisions and completions. Use after completing a significant feature phase, resolving a non-trivial bug, or making a key architectural decision — writes a structured journal entry to docs/journal/ for future reference
+description: (ePost) Writes structured implementation journal entries to docs/journal/. Use when a significant feature phase completes, a non-trivial bug is resolved, or a key architectural decision is made.
 user-invocable: false
 metadata:
   keywords:
@@ -15,6 +15,11 @@ metadata:
     - epost-planner
   platforms:
     - all
+  triggers:
+    - /journal
+    - log this decision
+    - write journal entry
+    - record implementation notes
   connections:
     enhances: [knowledge]
 ---

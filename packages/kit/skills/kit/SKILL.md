@@ -6,6 +6,12 @@ context: fork
 agent: epost-fullstack-developer
 metadata:
   argument-hint: "[--add-agent | --add-skill | --add-hook | --optimize] [name]"
+  triggers:
+    - /kit
+    - scaffold agent
+    - create skill
+    - manage hooks
+    - add an agent
   connections:
     enhances: []
     requires: []

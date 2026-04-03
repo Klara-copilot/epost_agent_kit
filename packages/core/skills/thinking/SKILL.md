@@ -27,6 +27,11 @@ metadata:
     - problem-solving
     - sequential
     - evidence
+  triggers:
+    - think deeply
+    - extended thinking
+    - step by step analysis
+    - use systematic approach
 ---
 
 # Thinking Frameworks

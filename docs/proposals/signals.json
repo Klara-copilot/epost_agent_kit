@@ -1,8 +1,8 @@
 {
-  "generated": "2026-04-03T03:31:19.966Z",
+  "generated": "2026-04-03T06:14:48.758Z",
   "summary": {
-    "total": 42,
-    "new": 42,
+    "total": 43,
+    "new": 43,
     "proposed": 0,
     "dismissed": 0,
     "bySkill": {
@@ -89,10 +89,16 @@
         "high": 0,
         "medium": 1,
         "low": 0
+      },
+      "error-recovery": {
+        "total": 1,
+        "high": 0,
+        "medium": 0,
+        "low": 1
       }
     },
     "byType": {
-      "journal-flag": 30,
+      "journal-flag": 31,
       "audit-failure": 12,
       "workaround": 0
     }
@@ -558,6 +564,17 @@
       "targetSkill": "test",
       "suggestedAction": "",
       "detectedAt": "2026-04-02T12:15:36.150Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-c7a8c6f3",
+      "type": "journal-flag",
+      "confidence": "low",
+      "source": "docs/journal/skill-evolution/260403-skill-quality-improvements.md",
+      "excerpt": "- Edit tool requires the file to have been read in the same conversation batch. Several edits failed with \"File has not been read yet\" — required re-read before each edit. This caused sequential bottlenecks where parallel edits were intended. [cook skill did not document this constraint explicitly —",
+      "targetSkill": "error-recovery",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-03T05:20:58.549Z",
       "status": "new"
     }
   ]

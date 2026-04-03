@@ -5,6 +5,17 @@ argument-hint: "create|status|my-tasks"
 metadata:
   author: phuong-doan
   version: "1.0.0"
+  keywords:
+    - asana
+    - task-management
+    - muji
+    - workflow
+    - ios-project
+  triggers:
+    - /asana
+    - create asana task
+    - update asana status
+    - move task on board
 ---
 
 # Asana MUJI — iOS Task Workflow

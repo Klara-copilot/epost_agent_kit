@@ -15,6 +15,11 @@ metadata:
     - epost-fullstack-developer
   platforms:
     - web
+  triggers:
+    - aria fix
+    - keyboard navigation
+    - web accessibility
+    - focus management
   connections:
     extends: [a11y]
 ---

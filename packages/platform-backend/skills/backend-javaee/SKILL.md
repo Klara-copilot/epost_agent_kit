@@ -19,6 +19,11 @@ metadata:
     - epost-code-reviewer
   platforms:
     - backend
+  triggers:
+    - jakarta ee
+    - wildfly deploy
+    - jax-rs endpoint
+    - hibernate entity
 ---
 
 # Jakarta EE Backend Patterns

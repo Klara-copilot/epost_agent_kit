@@ -1,0 +1,13 @@
+{
+  "skill": "theme-color-system",
+  "version": "1.0.0",
+  "evals": [
+    {
+      "id": "eval-001",
+      "description": "TODO: Add eval description",
+      "input": "TODO: Add test input",
+      "expected": "TODO: Add expected behavior",
+      "status": "stub"
+    }
+  ]
+}

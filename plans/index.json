@@ -1,13 +1,23 @@
 {
   "version": "1.0.0",
-  "updated": "2026-04-02",
+  "updated": "2026-04-03",
   "counts": {
-    "active": 45,
+    "active": 46,
     "completed": 1,
     "archived": 1,
-    "total": 48
+    "total": 49
   },
   "plans": [
+    {
+      "id": "PLAN-0094",
+      "title": "Skill Quality Improvements: Fix 33 Skills to ≥8/10",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-04-03",
+      "authors": ["epost-planner"],
+      "tags": ["skills", "quality", "metadata", "keywords", "triggers", "evals", "references"],
+      "file": "plans/260403-1142-skill-quality-improvements/plan.md"
+    },
     {
       "id": "PLAN-0093",
       "title": "Kit Routing Redesign — 8 Principles for Claude-Native Simplicity",

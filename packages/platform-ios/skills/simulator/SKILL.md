@@ -20,6 +20,17 @@ allowed-tools:
   - mcp__xcodebuildmcp__doctor
 metadata:
   argument-hint: "[--list | --boot | --shutdown | --install | --launch | --screenshot]"
+  keywords:
+    - simulator
+    - ios-simulator
+    - boot
+    - xcrun
+    - device
+  triggers:
+    - boot simulator
+    - list simulators
+    - open simulator
+    - launch app on simulator
 ---
 
 ## Delegation — REQUIRED

@@ -4,7 +4,13 @@ const path = require('path');
 
 /**
  * Parse YAML frontmatter between --- delimiters.
- * Handles: strings, booleans, inline arrays [a, b], one level of nesting (metadata:).
+ * Handles: strings, booleans, inline arrays [a, b, c], block sequences (- item),
+ * and one level of nesting (e.g. metadata: > keywords: > - item).
+ *
+ * State machine tracks 3 levels:
+ *   L0  top-level key           (0 indent)
+ *   L1  nested key under parent (2-space indent)
+ *   L2  block-sequence item     (4-space indent OR 2-space under top-level array key)
  */
 function parseFrontmatter(content) {
   const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
@@ -12,35 +18,66 @@ function parseFrontmatter(content) {
 
   const lines = match[1].split(/\r?\n/);
   const result = {};
-  let parent = null; // tracks current nested parent key
+
+  // Cursor state
+  let l0key = null;   // current top-level key
+  let l1key = null;   // current nested key (under l0key)
+  let arrayTarget = null; // { obj, key } pointing to the array being built by block-seq items
 
   for (const line of lines) {
     if (!line.trim() || line.trim().startsWith('#')) continue;
 
-    // Nested line (indented with spaces)
-    if (/^  \S/.test(line) && parent) {
-      const colonAt = line.indexOf(':');
-      if (colonAt === -1) continue;
-      const key = line.slice(0, colonAt).trim();
-      const val = line.slice(colonAt + 1).trim();
-      if (!result[parent] || typeof result[parent] !== 'object') result[parent] = {};
-      result[parent][key] = parseYamlValue(val);
+    const indent = line.match(/^(\s*)/)[1].length;
+    const trimmed = line.trim();
+
+    // Block-sequence item: starts with "- "
+    if (trimmed.startsWith('- ') && arrayTarget) {
+      const item = trimmed.slice(2).replace(/^["']|["']$/g, '');
+      if (!Array.isArray(arrayTarget.obj[arrayTarget.key])) {
+        arrayTarget.obj[arrayTarget.key] = [];
+      }
+      arrayTarget.obj[arrayTarget.key].push(item);
       continue;
     }
 
-    // Top-level line
-    const colonAt = line.indexOf(':');
+    // Key: value line
+    const colonAt = trimmed.indexOf(':');
     if (colonAt === -1) continue;
-    const key = line.slice(0, colonAt).trim();
-    const val = line.slice(colonAt + 1).trim();
+    const key = trimmed.slice(0, colonAt).trim();
+    const val = trimmed.slice(colonAt + 1).trim();
 
-    if (val === '') {
-      parent = key;
-      if (!result[key]) result[key] = {};
-    } else {
-      parent = null;
-      result[key] = parseYamlValue(val);
+    if (indent === 0) {
+      // Top-level key
+      l0key = key;
+      l1key = null;
+      arrayTarget = null;
+      if (val === '') {
+        if (!result[key] || typeof result[key] !== 'object' || Array.isArray(result[key])) {
+          result[key] = {};
+        }
+        // Could be a block-seq at L0 — set arrayTarget in case next lines are "- item"
+        arrayTarget = { obj: result, key };
+      } else {
+        result[key] = parseYamlValue(val);
+        arrayTarget = null;
+      }
+    } else if (indent <= 3 && l0key) {
+      // Nested key under l0key (e.g. "  keywords:")
+      l1key = key;
+      arrayTarget = null;
+      const parent = result[l0key];
+      if (!parent || typeof parent !== 'object' || Array.isArray(parent)) {
+        result[l0key] = {};
+      }
+      if (val === '') {
+        // Block-sequence will follow at deeper indent
+        result[l0key][key] = [];
+        arrayTarget = { obj: result[l0key], key };
+      } else {
+        result[l0key][key] = parseYamlValue(val);
+      }
     }
+    // Deeper nesting (indent >= 4) that isn't a block-seq item: ignore (not needed for scoring)
   }
 
   return result;

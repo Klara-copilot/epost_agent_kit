@@ -4,7 +4,7 @@ description: (ePost) Build and implement features across web, iOS, Android, and 
 model: sonnet
 color: green
 icon: 🔧
-skills: [core, knowledge, cook, journal]
+skills: [core, knowledge, cook, journal, skill-creator]
 memory: project
 permissionMode: acceptEdits
 allowedTools: [Read, Glob, Grep, Write, Edit, Bash]

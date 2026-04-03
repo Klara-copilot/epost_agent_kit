@@ -6,6 +6,18 @@ context: fork
 agent: epost-docs-manager
 metadata:
   argument-hint: "[--init | --migrate | --reorganize | --scan | --verify | --batch [category]]"
+  keywords:
+    - docs
+    - documentation
+    - knowledge-base
+    - kb-init
+    - changelog
+  triggers:
+    - /docs
+    - document this
+    - update docs
+    - init knowledge base
+    - write documentation
   connections:
     enhances: []
     requires: [knowledge]

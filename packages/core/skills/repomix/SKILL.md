@@ -15,6 +15,11 @@ metadata:
     - epost-fullstack-developer
   platforms:
     - all
+  triggers:
+    - /repomix
+    - pack this repo
+    - bundle codebase
+    - include remote repo as context
   connections:
     enhances: [research]
 ---

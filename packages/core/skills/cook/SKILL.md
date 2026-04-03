@@ -6,6 +6,18 @@ context: fork
 agent: epost-fullstack-developer
 metadata:
   argument-hint: "[feature description or plan file]"
+  keywords:
+    - cook
+    - implement
+    - build
+    - feature
+    - continue-plan
+  triggers:
+    - /cook
+    - implement this
+    - build the feature
+    - continue the plan
+    - make this work
 ---
 
 ## Delegation — REQUIRED

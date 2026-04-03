@@ -10,7 +10,7 @@ This file provides guidance to Claude Code when working with code in this reposi
 
 **Packages**: core, a11y, platform-web, platform-ios, platform-android, platform-backend, kit, design-system, domains
 
-**Installed by**: epost-kit v2.0.0 on 2026-04-02
+**Installed by**: epost-kit v2.0.0 on 2026-04-03
 
 ---
 
@@ -69,7 +69,7 @@ Platform detection: `.tsx`→web, `.swift`→ios, `.kt`→android, `.java`→bac
 
 **Multi-intent** ("plan and build X", "research then implement") → orchestrator decomposes inline and spawns agents in sequence.
 
-**Parallel work** (3+ independent tasks, cross-platform) → use `subagent-driven-development` skill from main context.
+**Parallel work** (3+ independent tasks, cross-platform) → use `subagents-driven` skill from main context.
 
 **Subagent constraint**: Subagents cannot spawn further subagents. Multi-agent workflows must be orchestrated from the main conversation. Skills that need multi-agent dispatch must NOT use `context: fork`.
 
@@ -105,17 +105,129 @@ See `core/rules/orchestration-protocol.md` for full protocol.
 
 ---
 
+## Skills Catalogue
+
+Every skill below is available to all agents. Invoke by name — no discovery needed.
+
+### Workflows
+
+| Skill | What it does |
+|-------|-------------|
+| `plan` | Design phased implementation plans with dependency tracking |
+| `cook` | Execute a plan — orchestrates feature implementation across platforms |
+| `fix` | Apply targeted fixes for bugs, errors, broken behavior |
+| `debug` | Investigate root cause before fixing — structured diagnosis |
+| `test` | Run platform-appropriate test suite with coverage reporting |
+| `tdd` | Write tests first, then implement — red-green-refactor cycle |
+| `audit` | Dispatch structured quality audits (UI, a11y, code) to specialists |
+| `research` | Research technologies, libraries, best practices via external docs |
+| `docs` | Generate and maintain structured KB documentation |
+| `git` | Commit, push, PR creation, and full ship pipeline |
+| `deploy` | Deploy to hosting platforms with auto-detection |
+| `preview` | Visual explanations — Mermaid diagrams, ASCII art, HTML interactive |
+| `thinking` | Extended thinking for deep analysis and systematic reasoning |
+| `loop` | Iterate solo on a metric (coverage, bundle size, lint) until target met |
+| `subagents-driven` | Parallel multi-task execution with per-task subagent dispatch + two-stage review |
+| `launchpad` | Build landing pages and promotional sites |
+| `retro` | Sprint retrospectives and team metrics analysis |
+| `get-started` | Onboarding — discover project state for new contributors |
+
+### Quality & Security
+
+| Skill | What it does |
+|-------|-------------|
+| `code-review` | Pre-commit quality check — style, correctness, security |
+| `clean-code` | Naming, functions, formatting, error handling principles |
+| `security` | STRIDE/OWASP security analysis on code or features |
+| `error-recovery` | Resilience patterns — retries, circuit breakers, graceful degradation |
+| `core` | Operational boundaries, safety rules, documentation standards |
+
+### Knowledge & Meta
+
+| Skill | What it does |
+|-------|-------------|
+| `knowledge` | Retrieve prior decisions, patterns, conventions from project KB |
+| `journal` | Structured journal entries for significant decisions and completions |
+| `repomix` | Bundle repo contents into single file for LLM or external sharing |
+| `skill-discovery` | Reference catalogue of skills by platform and task type |
+| `output-mode` | Set communication style — exec, teach, or reasoning mode |
+
+### Web Platform
+
+| Skill | What it does |
+|-------|-------------|
+| `web-frontend` | React components, hooks, Redux Toolkit state management |
+| `web-nextjs` | Next.js 14 App Router — server components, actions, layouts, middleware |
+| `web-api-routes` | API endpoints, server actions, FetchBuilder HTTP client patterns |
+| `web-auth` | NextAuth + Keycloak auth, session management, feature flags |
+| `web-i18n` | next-intl translations, locale routing configuration |
+| `web-testing` | Jest + RTL unit tests, Playwright E2E configuration and patterns |
+| `web-modules` | B2B module screens — bind APIs, stores, routes into module shell |
+| `web-ui-lib` | klara-theme component APIs, props, variants, spacing tokens |
+| `web-a11y` | ARIA, keyboard nav, focus management, screen reader fixes |
+
+### iOS Platform
+
+| Skill | What it does |
+|-------|-------------|
+| `ios-development` | SwiftUI/UIKit views, Xcode builds, iOS crash debugging |
+| `ios-ui-lib` | iOS theme SwiftUI component APIs, design tokens, platform mappings |
+| `ios-rag` | iOS codebase vector search for existing patterns and implementations |
+| `ios-a11y` | VoiceOver, UIKit/SwiftUI accessibility fixes |
+| `simulator` | iOS simulator management — list, boot, open, launch apps |
+| `theme-color-system` | Color system for UIView/UILabel/UIButton in ios_theme_ui |
+
+### Android Platform
+
+| Skill | What it does |
+|-------|-------------|
+| `android-development` | Kotlin/Compose screens, Gradle builds, Android crash debugging |
+| `android-ui-lib` | Android theme Compose component APIs, design tokens, Material mappings |
+| `android-a11y` | Compose/Views accessibility — TalkBack, content descriptions |
+
+### Backend Platform
+
+| Skill | What it does |
+|-------|-------------|
+| `backend-javaee` | Jakarta EE — JAX-RS, CDI/EJB, JPA/Hibernate, WildFly deployment |
+| `backend-databases` | PostgreSQL + MongoDB persistence patterns |
+
+### Design System
+
+| Skill | What it does |
+|-------|-------------|
+| `design-tokens` | Vien 2.0 design tokens mapped to platform-native formats |
+| `figma` | Extract Figma data, map design tokens, compare against implementations |
+| `ui-lib-dev` | Figma-to-code UI library pipeline — plan, implement, audit, fix, document |
+
+### Business Domains
+
+| Skill | What it does |
+|-------|-------------|
+| `domain-b2b` | B2B module context — Inbox, Monitoring, Composer, Smart Send, Archive |
+| `domain-b2c` | Consumer app context — mail, documents, notifications (iOS/Android) |
+
+### Kit Authoring
+
+| Skill | What it does |
+|-------|-------------|
+| `kit` | Scaffold and manage agents, skills, hooks with best-practice templates |
+| `skill-creator` | Create and validate Claude Code skills with eval-driven QA |
+| `asana-muji` | Asana workflow for MUJI iOS projects — task creation and status |
+
+---
+
 
 ## Accessibility (WCAG 2.1 AA)
 
 ### Agent
-- `epost-a11y-specialist` — Multi-platform accessibility orchestrator (iOS, Android, Web)
+- `epost-a11y-specialist` — Audit, fix, and guide accessibility on iOS, Android, and Web. Triggers on: "accessibility", "a11y", "wcag", "VoiceOver", "TalkBack", "ARIA", "screen reader".
 
 ### Skills
-- `a11y` — Cross-platform WCAG 2.1 AA foundation (POUR, scoring)
-- `ios-a11y` — iOS (VoiceOver, UIKit-primary, SwiftUI) *(extends a11y)*
-- `android-a11y` — Android (Compose, Views/XML, TalkBack) *(extends a11y)*
-- `web-a11y` — Web (ARIA, keyboard, screen readers) *(extends web/\*)*
+- `a11y` — Cross-platform WCAG 2.1 AA foundation: POUR framework, severity scoring, remediation workflows
+- `ios-a11y` — iOS accessibility: VoiceOver, UIKit/SwiftUI fixes, dynamic type, contrast *(extends a11y)*
+- `android-a11y` — Android accessibility: TalkBack, Compose Semantics, content descriptions *(extends a11y)*
+- `web-a11y` — Web accessibility: ARIA, keyboard nav, focus management, screen readers *(extends a11y)*
 
 ---
 
@@ -139,7 +251,9 @@ See `core/rules/orchestration-protocol.md` for full protocol.
 - `web-i18n` — next-intl configuration, translation patterns, locale routing
 - `web-auth` — NextAuth + Keycloak, session management, feature switches
 - `web-testing` — Jest + RTL unit tests, Playwright E2E, test patterns
-- `web-modules` — B2B module integration
+- `web-modules` — B2B module integration — bind APIs, stores, routes into module shell
+- `web-ui-lib` — klara-theme component APIs, props, variants, spacing tokens, theme patterns
+- `web-a11y` — ARIA, keyboard nav, focus management, screen reader fixes
 
 ---
 
@@ -154,9 +268,12 @@ See `core/rules/orchestration-protocol.md` for full protocol.
 - **Build**: Xcode, XcodeBuildMCP
 
 ### Skills
-- `ios-development` — Swift 6, SwiftUI/UIKit patterns, Xcode builds
-- `ios-ui-lib` — iOS theme SwiftUI components and design tokens
-- `ios-rag` — iOS codebase vector search
+- `ios-development` — Swift 6, SwiftUI/UIKit patterns, Xcode builds, crash debugging
+- `ios-ui-lib` — iOS theme SwiftUI component APIs, design tokens, platform token mappings
+- `ios-rag` — iOS codebase vector search for existing patterns and implementations
+- `ios-a11y` — VoiceOver, UIKit/SwiftUI accessibility fixes (WCAG 2.1 AA)
+- `simulator` — iOS simulator management — list, boot, open, launch apps
+- `theme-color-system` — Color system for UIView/UILabel/UIButton in ios_theme_ui
 
 ---
 
@@ -173,8 +290,9 @@ See `core/rules/orchestration-protocol.md` for full protocol.
 - **Build**: Gradle (Kotlin DSL)
 
 ### Skills
-- `android-development` — Kotlin, Jetpack Compose, Hilt DI patterns
-- `android-ui-lib` — Android theme Compose components and design tokens
+- `android-development` — Kotlin/Compose screens, Gradle builds, Hilt DI, crash debugging
+- `android-ui-lib` — Android theme Compose component APIs, design tokens, Material mappings
+- `android-a11y` — Compose/Views accessibility — TalkBack, content descriptions (WCAG 2.1 AA)
 
 ---
 
@@ -211,11 +329,7 @@ See `core/rules/orchestration-protocol.md` for full protocol.
 ## Kit Authoring Tools
 
 ### Skills
-- `kit-agents` — Agent ecosystem reference and naming conventions
-- `kit-agent-development` — Agent frontmatter, system prompts, triggering patterns
-- `kit-skill-development` — Skill authoring, progressive disclosure, validation
-- `kit-hooks` — Hook event types, I/O contract, creation workflow
-- `kit-cli` — epost-kit CLI development (Commander.js, TypeScript)
+- `kit` — Scaffold and manage agents, skills, hooks with best-practice templates and validation
 
 ---
 
@@ -223,12 +337,13 @@ See `core/rules/orchestration-protocol.md` for full protocol.
 ## Design System
 
 ### Agent
-- `epost-muji` — MUJI UI library agent for design system development, component knowledge, Figma-to-code pipeline
+- `epost-muji` — Design system specialist: component dev, Figma-to-code, klara-theme guidance, landing pages
 
 ### Skills
-- `figma` — Figma MCP tool patterns and design token extraction (all platforms)
-- `design-tokens` — Vien 2.0 design system variable architecture (1,059 variables, 42 collections)
-- `ui-lib-dev` — UI library development pipeline (plan, implement, audit, fix, document); integration guidance via `references/guidance.md`
+- `figma` — Extract Figma data, map design tokens to code, compare implementations against designs
+- `design-tokens` — Vien 2.0 design system (1,059 variables, 42 collections) → web/iOS/Android formats
+- `ui-lib-dev` — Figma-to-code UI library pipeline — plan, implement, audit, fix, document
+- `launchpad` — Build landing pages and promotional sites with craft-first approach
 
 ---
 
@@ -237,9 +352,11 @@ See `core/rules/orchestration-protocol.md` for full protocol.
 
 ### B2B Domain
 B2B modules: Monitoring, Communities, Inbox, Smart Send, Composer, Archive, Contacts, Organization, Smart Letter.
+Use `domain-b2b` skill for module-specific context, API patterns, and domain terminology.
 
 ### B2C Domain
-Consumer mobile application patterns for iOS and Android.
+Consumer mobile application — mail, documents, notifications across iOS and Android.
+Use `domain-b2c` skill for consumer-facing feature context and mobile UX patterns.
 
 ---
 

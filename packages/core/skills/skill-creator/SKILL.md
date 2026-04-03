@@ -1,6 +1,27 @@
 ---
 name: skill-creator
 description: (ePost) Creates, modifies, and validates Claude Code skills with eval-driven quality assurance. Use when user says "create a skill", "edit this skill", "optimize a skill's description", "run skill evals", or "benchmark skill performance" — creates, modifies, and validates Claude Code skills
+metadata:
+  keywords:
+    - skill-creator
+    - eval
+    - benchmark
+    - skill-validation
+    - quality
+    - skill-authoring
+  triggers:
+    - /skill-creator
+    - create a skill
+    - add a skill
+    - make a skill
+    - new skill
+    - scaffold a skill
+    - build a skill
+    - validate skill
+    - write evals
+    - benchmark skill performance
+  agent-affinity:
+    - epost-fullstack-developer
 ---
 
 # Skill Creator
