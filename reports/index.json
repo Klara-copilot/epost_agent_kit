@@ -3,6 +3,15 @@
   "updatedAt": "2026-04-03",
   "entries": [
     {
+      "id": "epost-brainstormer-260403-2315-kit-structural-evolution",
+      "type": "brainstorm",
+      "agent": "epost-brainstormer",
+      "title": "Kit Structural Evolution: Init Pipeline, Nested Discovery, Bundles, Plugins",
+      "verdict": "ACTIONABLE",
+      "file": "reports/260403-2315-kit-structural-evolution-epost-brainstormer.md",
+      "date": "2026-04-03"
+    },
+    {
       "id": "epost-brainstormer-260403-2306-platform-skill-autoload-strategy",
       "type": "brainstorm",
       "agent": "epost-brainstormer",

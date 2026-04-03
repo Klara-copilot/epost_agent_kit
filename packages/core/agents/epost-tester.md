@@ -4,7 +4,7 @@ description: (ePost) Write tests, run test suites, validate coverage, and design
 model: haiku
 color: yellow
 icon: 🧪
-skills: [core, test, tdd, skill-discovery, ios-testing, android-testing, backend-testing, web-testing]
+skills: [core, test, tdd, skill-discovery]
 memory: project
 permissionMode: default
 allowedTools: [Read, Glob, Grep, Write, Edit, Bash]
