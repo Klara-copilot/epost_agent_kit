@@ -25,7 +25,7 @@ When dispatching, include in the Agent tool prompt:
 
 Create a new skill definition following epost_agent_kit conventions.
 
-**IMPORTANT:** Read `.claude/skills/kit-skill-development/SKILL.md` for frontmatter reference and best practices.
+**IMPORTANT:** Read `.claude/skills/skill-creator/references/epost-skill-authoring-standards.md` for frontmatter reference and best practices.
 
 ## Arguments
 
