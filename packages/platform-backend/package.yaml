@@ -12,6 +12,10 @@ provides:
   skills:
     - backend-javaee
     - backend-databases
+    - backend-rest-standards
+    - backend-auth
+    - backend-quarkus
+    - backend-observability
 files:
   skills/: skills/
 
