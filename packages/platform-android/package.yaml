@@ -12,6 +12,7 @@ provides:
   skills:
     - android-development
     - android-ui-lib
+    - android-testing
 files:
   skills/: skills/
 
