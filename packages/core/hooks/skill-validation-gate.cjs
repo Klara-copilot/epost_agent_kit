@@ -66,6 +66,17 @@ function main() {
     process.stdout.write(JSON.stringify({ additionalContext: context }) + '\n');
   }
 
+  // Eval coverage — warn if user-invocable skill has no eval-set.json
+  const skillMdContent = fs.existsSync(path.join(skillDir, 'SKILL.md'))
+    ? fs.readFileSync(path.join(skillDir, 'SKILL.md'), 'utf8') : '';
+  const isUserInvocable = !/^user-invocable:\s*false/m.test(skillMdContent);
+  const evalSetPath = path.join(skillDir, 'evals', 'eval-set.json');
+  if (isUserInvocable && !fs.existsSync(evalSetPath)) {
+    process.stdout.write(JSON.stringify({
+      additionalContext: `[eval-coverage] ${path.basename(skillDir)}/evals/eval-set.json missing — add trigger evals so this skill can be benchmarked`
+    }) + '\n');
+  }
+
   // CSO checks — static description quality checks (ePost layer)
   const cso = validateSkillCso(skillDir);
   if (cso && cso.warnings.length > 0) {

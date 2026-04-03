@@ -244,7 +244,38 @@ function checkAgentRefs() {
   }
 }
 
-/** 6. Index-sync — skill-index.json count matches .claude/skills/ dirs */
+/** 6. Eval-coverage — every user-invocable skill has evals/eval-set.json */
+function checkEvalCoverage() {
+  let missing = 0;
+  let total = 0;
+
+  for (const pkg of fs.readdirSync(PACKAGES_DIR)) {
+    const skillsDir = path.join(PACKAGES_DIR, pkg, 'skills');
+    if (!fs.existsSync(skillsDir)) continue;
+
+    for (const skillName of fs.readdirSync(skillsDir)) {
+      const skillDir = path.join(skillsDir, skillName);
+      if (!fs.statSync(skillDir).isDirectory()) continue;
+      const skillMd = path.join(skillDir, 'SKILL.md');
+      if (!fs.existsSync(skillMd)) continue;
+
+      // Only require eval-set for user-invocable skills (skip user-invocable: false)
+      const content = fs.readFileSync(skillMd, 'utf8');
+      if (/^user-invocable:\s*false/m.test(content)) continue;
+
+      total++;
+      const evalSet = path.join(skillDir, 'evals', 'eval-set.json');
+      if (!fs.existsSync(evalSet)) {
+        warn('eval-coverage', `${pkg}/skills/${skillName} missing evals/eval-set.json`);
+        missing++;
+      }
+    }
+  }
+
+  if (missing === 0) pass('eval-coverage', `All ${total} user-invocable skills have eval-set.json`);
+}
+
+/** 7. Index-sync — skill-index.json count matches .claude/skills/ dirs */
 function checkIndexSync() {
   const index = loadSkillIndex();
   if (!index) { warn('index-sync', 'skill-index.json not found'); return; }
@@ -279,6 +310,7 @@ function run() {
   checkPkgDeclared();
   checkPkgInstalled();
   checkAgentRefs();
+  checkEvalCoverage();
   checkIndexSync();
 
   if (JSON_MODE) {

@@ -1,6 +1,6 @@
 ---
 name: kit-cli
-description: (ePost) Use when developing the epost-kit CLI, adding new commands, or debugging CLI behavior. Reference: tech stack (Node.js/cac/TypeScript), project structure, key commands, conventions.
+description: "(ePost) Use when developing the epost-kit CLI, adding new commands, or debugging CLI behavior. Reference: tech stack (Node.js/cac/TypeScript), project structure, key commands, conventions."
 user-invocable: false
 disable-model-invocation: false
 metadata:
