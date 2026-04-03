@@ -98,6 +98,17 @@
       "tags": ["skills", "cso", "quality-scoring", "metadata", "agent-affinity", "packages", "evals"],
       "agentHint": "check before creating or auditing skills — ePost conventions (CSO, quality scoring, metadata fields, packages/ rule)",
       "related": ["ARCH-0002", "CONV-0001", "PATTERN-0001"]
+    },
+    {
+      "id": "ARCH-0004",
+      "title": "Skill Authoring — Ground Truth",
+      "category": "architecture",
+      "status": "current",
+      "audience": ["agent", "human"],
+      "path": "docs/architecture/ARCH-0004-skill-authoring-ground-truth.md",
+      "tags": ["skills", "authoring", "frontmatter", "progressive-disclosure", "ground-truth", "official-spec"],
+      "agentHint": "canonical reference for skill authoring — official frontmatter fields, kit extensions, description formula, testing framework",
+      "related": ["ARCH-0002", "ARCH-0003", "CONV-0003", "PATTERN-0001"]
     }
   ]
 }
