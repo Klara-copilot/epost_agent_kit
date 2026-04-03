@@ -1,3 +1,16 @@
+---
+name: kit-agent-development
+description: (ePost) Reference guide for agent development — frontmatter fields, system prompt design, ecosystem fields (skills, permissionMode, allowedTools). Use when creating a new agent, reviewing agent structure, or checking what frontmatter fields an agent supports.
+user-invocable: false
+metadata:
+  keywords: [agent, frontmatter, system-prompt, permissionMode, allowedTools, skills, color, model]
+  triggers: [agent frontmatter, create agent, agent development, agent structure]
+  platforms: [all]
+  agent-affinity: [epost-fullstack-developer, epost-planner]
+  connections:
+    enhances: [kit]
+---
+
 # Agent Development for Claude Code Plugins
 
 ## Overview

@@ -14,8 +14,6 @@ provides:
     - web-frontend
     - web-api-routes
     - web-modules
-    - web-prototype
-    - web-rag
     - web-i18n
     - web-auth
     - web-testing

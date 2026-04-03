@@ -6,12 +6,14 @@ context: fork
 agent: epost-fullstack-developer
 metadata:
   argument-hint: "[--add-agent | --add-skill | --add-hook | --optimize] [name]"
+  keywords: [kit, scaffold, agent, skill, hook, authoring, create]
   triggers:
     - /kit
     - scaffold agent
     - create skill
     - manage hooks
     - add an agent
+  platforms: [all]
   connections:
     enhances: []
     requires: []
@@ -31,9 +33,9 @@ Create or optimize agents, skills, hooks, and commands for epost_agent_kit.
 
 ## Step 0 — Flag Override
 
-If `$ARGUMENTS` starts with `--add-agent`: load `references/add-agent.md` and execute. Pass remaining args as agent name.
-If `$ARGUMENTS` starts with `--add-skill`: load `references/add-skill.md` and execute. Pass remaining args as skill name.
-If `$ARGUMENTS` starts with `--add-hook`: load `references/add-hook.md` and execute. Pass remaining args as hook name.
+If `$ARGUMENTS` starts with `--add-agent`: Read `.claude/skills/kit-add-agent/SKILL.md` and execute its workflow. Pass remaining args as agent name.
+If `$ARGUMENTS` starts with `--add-skill`: Read `.claude/skills/kit-add-skill/SKILL.md` and execute its workflow. Pass remaining args as skill name.
+If `$ARGUMENTS` starts with `--add-hook`: Read `.claude/skills/kit-add-hook/SKILL.md` and execute its workflow. Pass remaining args as hook name.
 If `$ARGUMENTS` starts with `--optimize`: load `references/optimize.md` and execute. Pass remaining args as skill name.
 Otherwise: continue to Auto-Detection.
 
@@ -41,29 +43,28 @@ Otherwise: continue to Auto-Detection.
 
 | File | Purpose |
 |------|---------|
-| `references/add-agent.md` | Create a new agent definition |
-| `references/add-skill.md` | Create a new skill definition |
-| `references/add-hook.md` | Create a new hook for Claude Code automation |
-| `references/optimize.md` | Optimize an existing agent skill |
-| `references/agent-development.md` | Agent frontmatter, system prompts, ecosystem fields |
-| `references/skill-development.md` | Skill structure, frontmatter, CSO principles |
-| `references/hooks.md` | Hook events, I/O contract, architecture |
-| `references/cli.md` | CLI tech stack, project structure, commands |
-| `references/agents.md` | Ecosystem reference, frontmatter tables, naming |
+| `.claude/skills/kit-add-agent/SKILL.md` | Create a new agent definition |
+| `.claude/skills/kit-add-skill/SKILL.md` | Create a new skill definition |
+| `.claude/skills/kit-add-hook/SKILL.md` | Create a new hook for Claude Code automation |
+| `references/optimize.md` | Optimize an existing skill |
+| `.claude/skills/kit-agent-development/SKILL.md` | Agent frontmatter, system prompts, ecosystem fields |
+| `.claude/skills/kit-skill-development/SKILL.md` | Skill structure, frontmatter, CSO principles |
+| `.claude/skills/kit-hooks/SKILL.md` | Hook events, I/O contract, architecture |
+| `.claude/skills/kit-agents/SKILL.md` | Ecosystem reference, frontmatter tables, naming |
 | `references/verify.md` | Pre-release audit workflow, CLI commands |
 
 ## Auto-Detection
 
 Analyze `$ARGUMENTS` for type keywords:
 
-| Keyword | Load Reference |
-|---------|---------------|
-| "agent" | `references/add-agent.md` |
-| "skill" | `references/add-skill.md` |
-| "hook" | `references/add-hook.md` |
-| "optim" | `references/optimize.md` |
+| Keyword | Action |
+|---------|--------|
+| "agent" | Read `.claude/skills/kit-add-agent/SKILL.md` and execute |
+| "skill" | Read `.claude/skills/kit-add-skill/SKILL.md` and execute |
+| "hook" | Read `.claude/skills/kit-add-hook/SKILL.md` and execute |
+| "optim" | Load `references/optimize.md` and execute |
 | Empty or ambiguous | Ask user: what type to create? (agent, skill, hook, or optimize existing) |
 
 ## Execution
 
-Load the matching reference file and execute its workflow.
+Read the matching skill file or reference file and execute its workflow.
