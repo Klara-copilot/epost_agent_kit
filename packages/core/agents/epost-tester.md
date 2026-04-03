@@ -46,10 +46,9 @@ Platform and domain skills are loaded dynamically — do not assume platform.
 1. Detect platform from context (file types, project structure, explicit mention)
 2. Load platform skill via `skill-discovery`:
    - Web: `web-testing` — Jest + RTL unit tests, Playwright E2E
-   - iOS: `ios-development` — XCTest, XCUITest
-   - Android: `android-development` — JUnit, Espresso, Compose UI tests
-   - Backend (legacy): `backend-javaee` — JUnit 4, Mockito, Arquillian
-   - Backend (new): `backend-quarkus` — JUnit 5, QuarkusTest, Testcontainers
+   - iOS: `ios-testing` — XCTest, XCUITest, Swift Testing, snapshot testing
+   - Android: `android-testing` — Compose UI Testing, Hilt, Turbine, MockK
+   - Backend: `backend-testing` — Arquillian, Weld-JUnit, RestAssured, JaCoCo
 
 **Detection Rules**:
 - Web: `*.test.ts`, `*.test.tsx`, `*.spec.ts`
