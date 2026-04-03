@@ -14,7 +14,7 @@ try {
 
 const fs = require('fs');
 const path = require('path');
-const { validateSkill } = require('./lib/skill-validate.cjs');
+const { validateSkill, validateSkillCso } = require('./lib/skill-validate.cjs');
 
 function main() {
   let hookData;
@@ -66,10 +66,17 @@ function main() {
     process.stdout.write(JSON.stringify({ additionalContext: context }) + '\n');
   }
 
+  // CSO checks — static description quality checks (ePost layer)
+  const cso = validateSkillCso(skillDir);
+  if (cso && cso.warnings.length > 0) {
+    const csoContext = `[skill-validate CSO] ${path.basename(skillDir)}/SKILL.md:\n` +
+      cso.warnings.map(w => `  • ${w}`).join('\n');
+    process.stdout.write(JSON.stringify({ additionalContext: csoContext }) + '\n');
+  }
+
   // Layer reminder — content layer assessment requires LLM judgment, not regex
   const reminder = `[layer-check] Verify this skill is org-wide (Layer 0), not repo-specific (Layer 2). ` +
-    `Layer 2 content (specific paths, product names, repo deviations) belongs in docs/ instead. ` +
-    `See kit-add-skill step 2 for the checklist.`;
+    `Layer 2 content (specific paths, product names, repo deviations) belongs in docs/ instead.`;
   process.stdout.write(JSON.stringify({ additionalContext: reminder }) + '\n');
 
   process.exit(0);

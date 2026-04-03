@@ -40,7 +40,6 @@ provides:
     - preview
     - security
     - loop
-    - skill-creator
     - deploy
     - research
     - retro

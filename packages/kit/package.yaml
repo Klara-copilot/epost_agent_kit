@@ -10,12 +10,12 @@ dependencies:
 provides:
   agents: []
   skills:
+    - skill-creator
     - kit-add-agent
     - kit-add-skill
     - kit-add-hook
     - kit-optimize
     - kit-agent-development
-    - kit-skill-development
     - kit-hooks
     - kit-agents
     - kit-cli
