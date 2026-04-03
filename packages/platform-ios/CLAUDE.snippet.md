@@ -9,6 +9,7 @@
 
 ### Skills
 - `ios-development` — Swift 6, SwiftUI/UIKit patterns, Xcode builds, crash debugging
+- `ios-testing` — XCTest, XCUITest, Swift Testing (@Test/#expect), snapshot testing, flakiness fixes
 - `ios-ui-lib` — iOS theme SwiftUI component APIs, design tokens, platform token mappings
 - `ios-rag` — iOS codebase vector search for existing patterns and implementations
 - `ios-a11y` — VoiceOver, UIKit/SwiftUI accessibility fixes (WCAG 2.1 AA)
