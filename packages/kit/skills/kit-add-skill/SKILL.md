@@ -110,9 +110,11 @@ Create a new skill definition following epost_agent_kit conventions.
 7. **Register**:
    - Update `packages/{package}/package.yaml` skills list
 
-8. **Validate**: Run `epost-kit lint` on new skill — catch broken refs and connection issues
+8. **Validate**: Run `/kit-verify` — catch broken refs, eval-coverage warnings, frontmatter issues
 
-9. **Report**: Skill name, package, files created, trigger phrases, connections
+9. **Quality** (hand off to `skill-creator`): Once scaffolded, use `skill-creator` to improve description quality, run trigger evals, and optimize. `skill-creator` is Anthropic's eval-driven tool — do not modify it.
+
+10. **Report**: Skill name, package, files created, trigger phrases, connections
 
 ## Post-Creation Checklist
 
