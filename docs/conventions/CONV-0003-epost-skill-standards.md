@@ -4,7 +4,9 @@
 **Audience**: Agent, human
 **Layer**: Layer 0 (epost_agent_kit) — org-wide standard, not per-repo deviation
 
-This document records ePost-specific conventions layered ON TOP of the base CC skill specification (ARCH-0004). Anything here either extends CC spec (our additions) or deviates from it (with rationale). The CC spec is the floor; this doc is the ceiling.
+This document records ePost-specific conventions layered ON TOP of the base CC skill specification. Anything here either extends CC spec (our additions) or deviates from it (with rationale). The CC spec is the floor; this doc is the ceiling.
+
+The authoritative CC skill spec lives at `packages/kit/skills/kit-skill-development/references/cc-skill-spec.md`. The CC sub-agent spec lives at `packages/kit/skills/kit-agent-development/references/cc-agent-spec.md`.
 
 ---
 
@@ -31,7 +33,7 @@ description: Use when auditing skill quality, scoring skills against CSO standar
 - [ ] Contains "Use when" or equivalent trigger language
 - [ ] Mentions concrete user-facing trigger phrases
 - [ ] Does NOT describe the workflow or output format
-- [ ] Under 1024 characters
+- [ ] Front-loaded key use case (descriptions truncated to 250 chars in skill listing)
 
 ---
 
@@ -219,7 +221,7 @@ Before creating a new skill, verify:
 [ ] Folder: kebab-case, under packages/{package}/skills/
 [ ] SKILL.md: exact spelling, case-sensitive
 [ ] name: matches folder name, kebab-case
-[ ] description: WHAT + WHEN trigger conditions (CSO-compliant, <1024 chars)
+[ ] description: trigger conditions only (CSO-compliant, front-load key use case — 250 char truncation)
 [ ] user-invocable: set (true/false)
 [ ] metadata.keywords: non-empty array
 [ ] metadata.triggers: non-empty array (includes slash command if user-invocable)
@@ -234,4 +236,4 @@ Before creating a new skill, verify:
 
 ---
 
-*Related: ARCH-0004 (CC Skill Spec — base standard), ARCH-0005 (CC Sub-Agent Spec), ARCH-0001 (System Architecture)*
+*Related: `packages/kit/skills/kit-skill-development/references/cc-skill-spec.md` (CC Skill Spec), `packages/kit/skills/kit-agent-development/references/cc-agent-spec.md` (CC Sub-Agent Spec), ARCH-0001 (System Architecture)*

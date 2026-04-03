@@ -41,35 +41,71 @@ Create a new skill definition following epost_agent_kit conventions.
    - Whether it's user-invocable (slash command) or background (passive knowledge)
    - Whether it needs `context: fork` (task-oriented) or default (passive)
 
-2. **Suggest Connections** — scan existing skills for likely relationships:
+2. **Layer Check** — verify content belongs in a skill (Layer 0), not repo docs (Layer 2):
+
+   Skills in `epost_agent_kit` are **org-wide standards** (Layer 0). They must apply to any ePost repo, any team, any project.
+
+   Scan the proposed skill content for Layer 2/3 signals:
+   - References to specific repos, projects, or product names (e.g., "ePost web app", "our Keycloak instance")
+   - Specific file paths that only exist in one repo (e.g., `src/modules/inbox/`)
+   - Business logic or domain rules tied to one product
+   - Conventions that deviate from org standard (e.g., "in this repo we use X instead of Y")
+   - Config values, environment details, or deployment specifics for one service
+
+   | Content type | Layer | Where it belongs |
+   |---|---|---|
+   | Org-wide workflow, pattern, or standard | Layer 0 | Skills in `packages/` ✓ |
+   | How THIS repo deviates from the standard | Layer 2 | `docs/conventions/CONV-NNNN-*.md` |
+   | Why a specific decision was made in this repo | Layer 2 | `docs/decisions/ADR-NNNN-*.md` |
+   | Deep-dive on a feature in this repo | Layer 2 | `docs/features/FEAT-NNNN-*.md` |
+   | A gotcha or debug finding in this repo | Layer 2 | `docs/findings/FINDING-NNNN-*.md` |
+
+   **If Layer 2/3 signals detected → STOP. Do not create the skill.**
+
+   Present this to the user:
+   ```
+   ⚠️ Layer Check: This content appears repo-specific (Layer 2), not org-wide (Layer 0).
+
+   Skills in epost_agent_kit are loaded by all agents across all repos — they must
+   apply universally. Repo-specific content belongs in this repo's docs/ instead.
+
+   Suggested doc type: [CONV / ADR / FEAT / GUIDE / FINDING] — [reason]
+   Suggested path: docs/[category]/[PREFIX-NNNN-slug].md
+
+   To proceed anyway (if content is truly org-wide), confirm explicitly.
+   ```
+
+   Only continue to step 3 if content passes the Layer check.
+
+3. **Suggest Connections** — scan existing skills for likely relationships:
    - `extends`: is this a specialization of an existing skill? (e.g., `ios-a11y` extends `a11y`)
    - `requires`: does it depend on another skill to function?
    - `enhances`: does it complement another skill?
    - `conflicts`: is it mutually exclusive with another?
 
-3. **Scaffold Skill Directory**:
+4. **Scaffold Skill Directory**:
    - Create `packages/{package}/skills/{skill-name}/SKILL.md` with proper frontmatter
    - Include: name, description (with trigger phrases)
    - Set: user-invocable, context, agent, allowed-tools as needed
-   - Add `metadata.connections` if relationships identified in step 2
+   - Add `metadata.connections` if relationships identified in step 3
    - Write concise SKILL.md body — quick reference, NOT documentation
    - Create `references/` directory if the skill needs detailed reference files
 
-4. **Progressive Disclosure**:
+5. **Progressive Disclosure**:
    - `SKILL.md` — short, concise (< 100 lines), always loaded
    - `references/*.md` — detailed patterns, loaded on demand via Read tool
    - Token efficiency is critical — keep SKILL.md lean
 
-5. **Copy to Package Source**:
+6. **Copy to Package Source**:
    - Copy skill directory to `packages/{package}/skills/{category}/{skill-name}/`
    - This is the source of truth — `.claude/` is generated output
 
-6. **Register**:
+7. **Register**:
    - Update `packages/{package}/package.yaml` skills list
 
-7. **Validate**: Run `epost-kit lint` on new skill — catch broken refs and connection issues
+8. **Validate**: Run `epost-kit lint` on new skill — catch broken refs and connection issues
 
-8. **Report**: Skill name, package, files created, trigger phrases, connections
+9. **Report**: Skill name, package, files created, trigger phrases, connections
 
 ## Post-Creation Checklist
 
@@ -87,3 +123,4 @@ Create a new skill definition following epost_agent_kit conventions.
 - Use progressive disclosure: SKILL.md is lean, references/ has details
 - `version:` is NOT a valid frontmatter field
 - Background skills use `user-invocable: false`
+- **Layer 0 only**: Skills in this kit must be org-wide applicable — if content is repo-specific, it belongs in that repo's `docs/` (CONV, ADR, FEAT, GUIDE, or FINDING), not here
