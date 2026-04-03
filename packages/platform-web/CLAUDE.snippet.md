@@ -17,4 +17,6 @@
 - `web-i18n` — next-intl configuration, translation patterns, locale routing
 - `web-auth` — NextAuth + Keycloak, session management, feature switches
 - `web-testing` — Jest + RTL unit tests, Playwright E2E, test patterns
-- `web-modules` — B2B module integration
+- `web-modules` — B2B module integration — bind APIs, stores, routes into module shell
+- `web-ui-lib` — klara-theme component APIs, props, variants, spacing tokens, theme patterns
+- `web-a11y` — ARIA, keyboard nav, focus management, screen reader fixes

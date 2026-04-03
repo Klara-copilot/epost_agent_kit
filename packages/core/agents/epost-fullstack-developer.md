@@ -1,6 +1,6 @@
 ---
 name: epost-fullstack-developer
-description: (ePost) Execute implementation phases from parallel plans. Handles backend, frontend, and infrastructure tasks with strict file ownership boundaries.
+description: (ePost) Build and implement features across web, iOS, Android, and backend. Triggers on: "implement", "build", "add", "create", "make", "set up", executing a plan phase, multi-file changes. Handles all platforms with strict file ownership boundaries.
 model: sonnet
 color: green
 icon: 🔧

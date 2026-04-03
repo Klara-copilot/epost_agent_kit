@@ -6,6 +6,7 @@ color: blue
 icon: 📝
 skills: [core, knowledge, docs]
 memory: project
+permissionMode: default
 allowedTools: [Read, Glob, Grep, Write, Edit, Bash]
 handoffs:
   - label: Ship docs

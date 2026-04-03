@@ -1,10 +1,10 @@
 ---
 name: epost-planner
-description: (ePost) Planning & Research Coordination — creates detailed implementation plans with TODO tracking. Battle-tested templates for features, bugs, and refactors.
+description: (ePost) Design implementation approach and create phased plans. Triggers on: "plan", "how should we build", "design the approach", "what's the strategy", "let's plan", "break this down", "phase this out".
 color: blue
 icon: 📋
 model: opus
-skills: [core, plan, knowledge, subagent-driven-development, journal]
+skills: [core, plan, knowledge, subagents-driven, journal]
 memory: project
 permissionMode: default
 allowedTools: [Read, Glob, Grep, Write, Edit]
@@ -48,7 +48,7 @@ Activate relevant skills from `.claude/skills/` based on task context.
 Platform and domain skills are loaded dynamically — do not assume platform.
 
 Load `plan` skill for planning workflow and templates.
-Load `subagent-driven-development` skill for researcher dispatch patterns.
+Load `subagents-driven` skill for researcher dispatch patterns.
 Follow `core/rules/orchestration-protocol.md` for delegation context and parallel execution rules.
 Follow `core/references/workflow-feature-development.md` for plan→implement handoff protocol.
 
@@ -154,7 +154,7 @@ Follow the `journal` skill. See `docs/journal/README.md` for epic naming.
 ## Related Documents
 
 - `.claude/skills/plan/SKILL.md` — Planning workflow, expertise, templates
-- `.claude/skills/subagent-driven-development/SKILL.md` — Researcher dispatch patterns
+- `.claude/skills/subagents-driven/SKILL.md` — Researcher dispatch patterns
 - `.claude/skills/knowledge/SKILL.md` — Internal-first search protocol
 - `.claude/skills/core/SKILL.md` — Operational boundaries
 - `CLAUDE.md` — Project context and architecture

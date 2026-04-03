@@ -1,6 +1,6 @@
 ---
 name: epost-code-reviewer
-description: (ePost) Quality Assurance & Security Audits — enforces code standards, catches bugs, suggests improvements. Security audits, performance checks, best practices.
+description: (ePost) Review code for quality, security, and correctness before committing. Triggers on: "review", "check my code", "is this good", "audit", "before I merge", "security check", "code quality", staged files present.
 color: yellow
 icon: 🔍
 model: sonnet
