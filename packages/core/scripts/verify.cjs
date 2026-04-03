@@ -244,7 +244,107 @@ function checkAgentRefs() {
   }
 }
 
-/** 6. Eval-coverage — every user-invocable skill has evals/eval-set.json */
+// ── Shared helpers for skill-quality checks ────────────────────────────────────
+
+const CSO_TRIGGER_PATTERNS = [/\buse when\b/i, /\btriggers? when\b/i, /\binvoke when\b/i, /\bload when\b/i];
+
+/** Extract raw description string from SKILL.md content */
+function extractDescription(content) {
+  const fm = content.match(/^---\n([\s\S]*?)\n---/);
+  if (!fm) return null;
+  const m = fm[1].match(/^description:\s*([\s\S]*?)(?=\n\w|\n$|$)/m);
+  if (!m) return null;
+  return m[1].trim().replace(/^["']|["']$/g, '');
+}
+
+/** Run static CSO checks on a description. Returns array of warning strings. */
+function csoCheck(desc) {
+  const issues = [];
+  const lead = desc.slice(0, 250);
+  if (!CSO_TRIGGER_PATTERNS.some(p => p.test(lead))) {
+    issues.push('missing trigger phrasing ("Use when...") in first 250 chars');
+  }
+  const quoted = desc.match(/["'][^"']{3,}["']/g) || [];
+  const useWhenIdx = desc.search(/use when\b/i);
+  const commas = useWhenIdx >= 0 ? (desc.slice(useWhenIdx).match(/,/g) || []).length : 0;
+  if (quoted.length < 2 && commas < 1) {
+    issues.push('no concrete trigger phrases (add ≥2 quoted examples or comma-listed triggers after "Use when")');
+  }
+  return issues;
+}
+
+/** Find python3 or python, return null if neither available */
+function findPython() {
+  const { execSync } = require('child_process');
+  for (const bin of ['python3', 'python']) {
+    try { execSync(`${bin} --version`, { stdio: 'pipe', timeout: 3000 }); return bin; } catch { /* next */ }
+  }
+  return null;
+}
+
+/** 6. Skill-quality — CSO description checks + quick_validate.py on all skills */
+function checkSkillQuality() {
+  const { spawnSync } = require('child_process');
+  const python = findPython();
+  const validateScript = path.join(CLAUDE_SKILLS_DIR, 'skill-creator', 'scripts', 'quick_validate.py');
+  const hasValidator = python && fs.existsSync(validateScript);
+
+  // ePost-standard keys that quick_validate.py flags as unexpected — treat as info, not warnings
+  const EPOST_KEYS_RE = /Unexpected key\(s\)/i;
+
+  let csoIssues = 0;
+  let validateIssues = 0;
+  let total = 0;
+
+  for (const pkg of fs.readdirSync(PACKAGES_DIR)) {
+    const skillsDir = path.join(PACKAGES_DIR, pkg, 'skills');
+    if (!fs.existsSync(skillsDir)) continue;
+
+    for (const skillName of fs.readdirSync(skillsDir)) {
+      const skillDir = path.join(skillsDir, skillName);
+      if (!fs.statSync(skillDir).isDirectory()) continue;
+      const skillMd = path.join(skillDir, 'SKILL.md');
+      if (!fs.existsSync(skillMd)) continue;
+
+      const content = fs.readFileSync(skillMd, 'utf-8');
+      const isPassive = /^user-invocable:\s*false/m.test(content);
+      total++;
+
+      // CSO check — skip passive reference skills (they don't need trigger phrasing)
+      if (!isPassive) {
+        const desc = extractDescription(content);
+        if (desc) {
+          for (const issue of csoCheck(desc)) {
+            warn('skill-quality', `${pkg}/skills/${skillName}: ${issue}`);
+            csoIssues++;
+          }
+        }
+      }
+
+      // quick_validate.py — run on all skills
+      if (hasValidator) {
+        const result = spawnSync(python, [validateScript, skillDir], { encoding: 'utf8', timeout: 8000 });
+        if (result.status !== 0) {
+          const msg = (result.stdout || result.stderr || '').trim();
+          if (/Missing '(name|description)'|No YAML frontmatter|Invalid YAML|SKILL\.md not found/i.test(msg)) {
+            error('skill-quality', `${pkg}/skills/${skillName}: ${msg}`);
+            validateIssues++;
+          } else if (!EPOST_KEYS_RE.test(msg)) {
+            warn('skill-quality', `${pkg}/skills/${skillName}: ${msg}`);
+            validateIssues++;
+          }
+          // ePost extension keys → silently skip
+        }
+      }
+    }
+  }
+
+  if (csoIssues === 0 && validateIssues === 0) {
+    pass('skill-quality', `All ${total} skills pass CSO + schema checks`);
+  }
+}
+
+/** 7. Eval-coverage — every user-invocable skill has evals/eval-set.json */
 function checkEvalCoverage() {
   let missing = 0;
   let total = 0;
@@ -310,6 +410,7 @@ function run() {
   checkPkgDeclared();
   checkPkgInstalled();
   checkAgentRefs();
+  checkSkillQuality();
   checkEvalCoverage();
   checkIndexSync();
 
