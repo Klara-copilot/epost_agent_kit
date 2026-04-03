@@ -24,7 +24,7 @@ provides:
     - repomix
     - knowledge
     - journal
-    - subagent-driven-development
+    - subagents-driven
     - skill-discovery
     - cook
     - fix
@@ -44,6 +44,7 @@ provides:
     - deploy
     - research
     - retro
+    - find-skill
 scripts:
   - get-active-plan.cjs
   - set-active-plan.cjs
