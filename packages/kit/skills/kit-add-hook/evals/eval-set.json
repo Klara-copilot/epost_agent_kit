@@ -1,0 +1,13 @@
+[
+  {"query": "create a new hook that fires on session start", "should_trigger": true},
+  {"query": "add a PreToolUse hook to block writes to .env files", "should_trigger": true},
+  {"query": "I need a PostToolUse hook to validate changes", "should_trigger": true},
+  {"query": "scaffold a new hook called build-gate", "should_trigger": true},
+  {"query": "wire a new hook into settings.json", "should_trigger": true},
+  {"query": "add event-driven automation when a file is written", "should_trigger": true},
+  {"query": "add a new skill for accessibility", "should_trigger": false},
+  {"query": "create a new agent for CI/CD", "should_trigger": false},
+  {"query": "optimize the kit-add-skill skill", "should_trigger": false},
+  {"query": "verify the kit health", "should_trigger": false},
+  {"query": "run the tests before committing", "should_trigger": false}
+]
