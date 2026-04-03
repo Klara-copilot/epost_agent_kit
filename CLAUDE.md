@@ -328,29 +328,15 @@ Every skill below is available to all agents. Invoke by name — no discovery ne
 
 ## Kit Contributing
 
-When someone says "add a skill", "improve this skill", "research for a skill", or "add an agent" — route to the kit authoring tools below. All source changes go in `packages/`, never `.claude/` directly.
+All source changes go in `packages/`, never `.claude/` directly — `.claude/` is generated output wiped on `epost-kit init`.
 
-### Intent → Tool
-
-| What the user says | Route to |
-|---|---|
-| "add a new skill", "create a skill", "scaffold a skill" | `/kit-add-skill` |
-| "improve this skill", "update skill description", "optimize skill" | `skill-creator` (Anthropic's eval-driven tool) |
-| "research for a skill", "what's best practice for X", "find patterns for X" | `epost-researcher` |
-| "add to existing skill", "update skill content" | Edit `packages/{pkg}/skills/{name}/SKILL.md` directly |
-| "add an agent", "create an agent" | `/kit-add-agent` |
-| "add a hook", "create a hook" | `/kit-add-hook` |
-| "verify kit health", "check kit", "is kit ok" | `/kit-verify` |
-
-### Workflow: add new skill
-1. `/kit-add-skill` — scaffolds directory, SKILL.md, `evals/eval-set.json`, registers in package.yaml
-2. Fill in `evals/eval-set.json` with real trigger queries
-3. `skill-creator` — improve description quality, run evals, optimize if needed
-4. `/kit-verify` — confirm kit is healthy before committing
-
-### Skill authoring reference
-- `packages/kit/skills/skill-creator/references/epost-skill-authoring-standards.md` — frontmatter, CSO rules, Layer check, connections
-- `packages/kit/skills/skill-creator/references/cc-skill-spec.md` — Anthropic's authoritative spec
+### Kit Authoring Skills
+- `kit-add-skill` — scaffold new skills (directory, SKILL.md, eval-set template, package.yaml registration)
+- `kit-add-agent` — scaffold new agent definitions
+- `kit-add-hook` — scaffold new hooks and wire into settings.json
+- `skill-creator` — improve, eval, and optimize existing skill descriptions (Anthropic's tool — do not modify)
+- `kit-verify` — health check before committing
+- `kit-optimize` — optimize skill token efficiency and progressive disclosure
 
 ---
 

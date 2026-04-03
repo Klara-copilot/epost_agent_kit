@@ -1,6 +1,6 @@
 ---
 name: kit-verify
-description: "(ePost) Runs a structural health check on the kit — validates skill frontmatter, package declarations, agent refs, and .claude/ sync. Use when: kit health check, verify skill index, validate package manifest, audit skill installation, check agent refs."
+description: "(ePost) Use when checking kit health, verifying kit integrity, or confirming everything is in sync before committing. Triggers: 'verify kit', 'check kit', 'kit health', 'is kit ok', 'kit-verify', 'validate package manifest', 'check agent refs'."
 keywords: [kit, verify, health, check, validate, skill-index, package, agent, sync, audit]
 user-invocable: true
 context: inline
