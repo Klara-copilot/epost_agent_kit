@@ -151,6 +151,3 @@ Configuration files:
 3. Add to `packages/{package}/package.yaml` files mapping if needed
 4. Run `epost-kit init --fresh` to regenerate
 
-## Additional Resources
-
-- **`references/hook-patterns.md`** — Common patterns, testing, debugging

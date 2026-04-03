@@ -2,12 +2,22 @@
   "version": "1.0.0",
   "updated": "2026-04-03",
   "counts": {
-    "active": 46,
+    "active": 47,
     "completed": 1,
     "archived": 1,
-    "total": 49
+    "total": 50
   },
   "plans": [
+    {
+      "id": "PLAN-0095",
+      "title": "Fix All Kit Skill Audit Findings",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-04-03",
+      "authors": ["epost-planner"],
+      "tags": ["kit", "skills", "audit", "broken-refs", "CSO", "ARCH-0005", "promotions"],
+      "file": "plans/260403-1433-kit-skill-audit-fixes/plan.md"
+    },
     {
       "id": "PLAN-0094",
       "title": "Skill Quality Improvements: Fix 33 Skills to ≥8/10",

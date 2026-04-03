@@ -1,8 +1,9 @@
 ---
 name: kit-add-agent
-description: "(ePost) Create a new agent definition"
-user-invocable: false
-disable-model-invocation: true
+description: "(ePost) Use when creating a new agent definition, adding an agent to the kit, or scaffolding an agent file from scratch."
+user-invocable: true
+context: fork
+agent: epost-fullstack-developer
 metadata:
   argument-hint: "[agent-name] [description]"
   keywords: [agent, create, scaffold, add-agent, kit]
@@ -12,6 +13,13 @@ metadata:
   connections:
     requires: []
 ---
+
+## Delegation — REQUIRED
+
+This skill MUST run via `epost-fullstack-developer`, not inline.
+When dispatching, include in the Agent tool prompt:
+- **Skill**: `/kit-add-agent`
+- **Arguments**: $ARGUMENTS
 
 ## Your Mission
 
