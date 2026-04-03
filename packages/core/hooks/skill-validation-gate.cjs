@@ -15,6 +15,7 @@ try {
 const fs = require('fs');
 const path = require('path');
 const { validateSkill } = require('./lib/skill-validate.cjs');
+const { checkLayer } = require('./lib/layer-check.cjs');
 
 function main() {
   let hookData;
@@ -54,18 +55,27 @@ function main() {
     process.stdout.write(
       JSON.stringify({ additionalContext: `[skill-validate] ${path.basename(skillDir)}: ${result.message}` }) + '\n'
     );
-    process.exit(0);
+  } else {
+    // Validation issues — format by level
+    const prefix = result.level === 'error' ? '[skill-validate ERROR]' :
+                   result.level === 'warning' ? '[skill-validate WARN]' :
+                   '[skill-validate INFO]';
+
+    const context = `${prefix} ${path.basename(skillDir)}/SKILL.md: ${result.message}` +
+      (result.level === 'info' ? '\n  (epost extra frontmatter fields are expected — not a real error)' : '');
+
+    process.stdout.write(JSON.stringify({ additionalContext: context }) + '\n');
   }
 
-  // Validation issues — format by level
-  const prefix = result.level === 'error' ? '[skill-validate ERROR]' :
-                 result.level === 'warning' ? '[skill-validate WARN]' :
-                 '[skill-validate INFO]';
+  // Layer check — always runs, warn if repo-specific (Layer 2) content detected
+  const layer = checkLayer(skillDir);
+  if (layer.hasIssues) {
+    const layerContext = `[layer-check WARN] ${path.basename(skillDir)}/SKILL.md: content appears repo-specific (Layer 2), not org-wide (Layer 0).\n` +
+      `  Signals: ${layer.signals.join(', ')}\n` +
+      `  Skills in epost_agent_kit must apply across all repos. Consider moving to docs/ (CONV, ADR, FEAT, or FINDING) instead.`;
+    process.stdout.write(JSON.stringify({ additionalContext: layerContext }) + '\n');
+  }
 
-  const context = `${prefix} ${path.basename(skillDir)}/SKILL.md: ${result.message}` +
-    (result.level === 'info' ? '\n  (epost extra frontmatter fields are expected — not a real error)' : '');
-
-  process.stdout.write(JSON.stringify({ additionalContext: context }) + '\n');
   process.exit(0);
 }
 
