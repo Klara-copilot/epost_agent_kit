@@ -7,6 +7,11 @@ metadata:
   agent-affinity: [epost-fullstack-developer, epost-tester]
   keywords: [tdd, test-driven, red-green-refactor, behavior-testing, integration-tests]
   platforms: [all]
+  triggers:
+    - /tdd
+    - test first
+    - red green refactor
+    - build test-first
   connections:
     enhances: [test]
 ---

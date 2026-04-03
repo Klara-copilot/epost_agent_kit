@@ -13,6 +13,11 @@ metadata:
     - epost-fullstack-developer
   platforms:
     - ios
+  triggers:
+    - voiceover fix
+    - ios accessibility
+    - dynamic type
+    - accessibility label missing
   connections:
     extends: [a11y]
 ---

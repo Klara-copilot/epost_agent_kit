@@ -7,6 +7,11 @@ metadata:
   agent-affinity: [epost-project-manager, epost-fullstack-developer, epost-planner]
   keywords: [parallel, subagent, dispatch, implementation-loop, two-stage-review]
   platforms: [all]
+  triggers:
+    - parallel tasks
+    - dispatch subagents
+    - multi-task execution
+    - execute all phases
   connections:
     enhances: [plan]
 ---

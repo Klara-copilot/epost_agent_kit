@@ -6,6 +6,18 @@ context: fork
 agent: epost-tester
 metadata:
   argument-hint: "[--unit | --ui | --visual | --coverage | test description]"
+  keywords:
+    - test
+    - coverage
+    - unit-test
+    - e2e
+    - test-suite
+  triggers:
+    - /test
+    - run tests
+    - add test coverage
+    - write tests for
+    - check coverage
 ---
 
 ## Delegation — REQUIRED

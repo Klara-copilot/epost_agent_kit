@@ -14,6 +14,11 @@ metadata:
     - epost-fullstack-developer
   platforms:
     - ios
+  triggers:
+    - ios component
+    - swiftui token
+    - theme mapping ios
+    - ios design token
   connections:
     enhances: [ios-development]
 ---

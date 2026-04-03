@@ -15,6 +15,11 @@ metadata:
     - git metrics
   platforms:
     - all
+  triggers:
+    - /retro
+    - sprint retrospective
+    - how did we do
+    - team metrics report
 ---
 
 # Retro

@@ -5,6 +5,17 @@ argument-hint: "create|status|my-tasks"
 metadata:
   author: tan-le
   version: "1.0.0"
+  keywords:
+    - asana
+    - task-management
+    - muji
+    - workflow
+    - android-project
+  triggers:
+    - /asana
+    - create asana task
+    - update asana status
+    - move task on board
 ---
 
 # Asana MUJI — Android Task Workflow

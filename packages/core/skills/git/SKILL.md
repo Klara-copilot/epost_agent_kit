@@ -6,6 +6,18 @@ context: fork
 agent: epost-git-manager
 metadata:
   argument-hint: "[--commit | --push | --pr | --ship [official|beta] [--dry-run] [--skip-tests] [--skip-review] | --watzup]"
+  keywords:
+    - git
+    - commit
+    - push
+    - pull-request
+    - ship
+  triggers:
+    - /git
+    - commit this
+    - push
+    - create PR
+    - ship it
   connections:
     enhances: []
 ---

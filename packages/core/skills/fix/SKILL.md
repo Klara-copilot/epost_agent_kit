@@ -4,6 +4,18 @@ description: (ePost) Identifies root causes and applies targeted fixes for bugs,
 user-invocable: true
 metadata:
   argument-hint: "[issue description]"
+  keywords:
+    - fix
+    - bug
+    - patch
+    - hotfix
+    - error-fix
+  triggers:
+    - /fix
+    - fix this bug
+    - apply the fix
+    - patch this
+    - this is broken
 ---
 
 # Fix — Unified Fix Command

@@ -16,6 +16,11 @@ metadata:
     - epost-researcher
   platforms:
     - all
+  triggers:
+    - /get-started
+    - onboard me
+    - I'm new to this project
+    - what is this codebase
   connections:
     enhances: [docs-init, docs-update]
 ---

@@ -1,7 +1,25 @@
 {
   "schemaVersion": "1.0.0",
-  "updatedAt": "2026-03-31",
+  "updatedAt": "2026-04-03",
   "entries": [
+    {
+      "id": "epost-fullstack-developer-260403-1147-skill-quality-improvements",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "Skill Quality Improvements: All 4 Phases — Triggers, Keywords, Refs, Evals",
+      "verdict": "DONE",
+      "file": "plans/260403-1142-skill-quality-improvements/reports/260403-1147-skill-quality-improvements-epost-fullstack-developer.md",
+      "date": "2026-04-03"
+    },
+    {
+      "id": "epost-planner-260403-1142-skill-quality-improvements",
+      "type": "plan",
+      "agent": "epost-planner",
+      "title": "Skill Quality Improvements: Fix 33 Skills to ≥8/10",
+      "verdict": "READY",
+      "file": "reports/260403-1142-skill-quality-improvements-epost-planner.md",
+      "date": "2026-04-03"
+    },
     {
       "id": "epost-researcher-260402-1932-layer0-standards-gap-analysis",
       "type": "research",

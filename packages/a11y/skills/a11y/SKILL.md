@@ -13,6 +13,11 @@ metadata:
     - aria
     - screen-reader
     - pour
+  triggers:
+    - accessibility audit
+    - WCAG check
+    - a11y score
+    - screen reader test
   connections:
     enhances: []
   agent-affinity:

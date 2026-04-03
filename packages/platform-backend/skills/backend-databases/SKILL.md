@@ -16,6 +16,11 @@ metadata:
     - epost-debugger
   platforms:
     - backend
+  triggers:
+    - database query
+    - postgres schema
+    - mongodb collection
+    - sql migration
   connections:
     enhances: [backend-javaee]
 ---

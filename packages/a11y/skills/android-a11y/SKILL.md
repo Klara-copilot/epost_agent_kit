@@ -13,6 +13,11 @@ metadata:
     - epost-fullstack-developer
   platforms:
     - android
+  triggers:
+    - android accessibility
+    - talkback fix
+    - compose semantics
+    - contentDescription missing
   connections:
     extends: [a11y]
 ---

@@ -14,6 +14,11 @@ metadata:
     - epost-fullstack-developer
   platforms:
     - android
+  triggers:
+    - android component
+    - compose token
+    - material mapping
+    - android design token
   connections:
     enhances: [android-development]
 ---

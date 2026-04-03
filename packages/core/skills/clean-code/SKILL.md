@@ -7,6 +7,11 @@ metadata:
   agent-affinity: [epost-fullstack-developer, epost-code-reviewer]
   keywords: [clean-code, naming, functions, formatting, code-smells, refactoring]
   platforms: [all]
+  triggers:
+    - clean up code
+    - naming conventions
+    - refactor for clarity
+    - code smells
   connections:
     enhances: [code-review]
 ---
