@@ -41,7 +41,7 @@ Run tests with automatic platform detection.
 | `--unit` | Unit tests only |
 | `--ui` | UI/E2E tests only |
 | `--coverage` | Include coverage report |
-| `--scenario` | Generate edge cases (user types, input extremes, timing, scale) — see `references/scenario-mode.md` |
+| `--scenario` | Run edge case analysis before tests — delegates to `/scenario` skill. Generates test targets across 12 dimensions. |
 
 If `$ARGUMENTS` starts with `--visual`: load `references/visual-mode.md` and follow its steps. Skip platform detection.
 

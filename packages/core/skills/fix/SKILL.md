@@ -49,6 +49,18 @@ Otherwise: continue to Error Type Auto-Detection.
 | `references/ui-mode.md` | Fix UI component findings from known-findings DB | Loads fix/references/ui-mode.md | epost-muji |
 | `references/a11y-mode.md` | Fix accessibility findings from known-findings.json |
 
+## Complexity Assessment
+
+Classify the issue before routing to epost-debugger:
+
+| Level | Signals | Approach |
+|---|---|---|
+| **Simple** | Single file, clear error message, type/lint | Quick fix: diagnose → fix → verify → prevent |
+| **Moderate** | Multi-file, root cause unclear, failing tests | Standard: scout → diagnose → fix → verify → prevent |
+| **Complex** | Architecture impact, 3+ modules, systemic | Deep: research → diagnose → plan fix → implement → verify → prevent |
+
+Pass the complexity classification to epost-debugger in the dispatch prompt.
+
 ## Error Type Auto-Detection
 
 **Dispatch to epost-debugger via Agent tool** with the full issue context before proceeding. epost-debugger will handle detection, investigation, and fixing. The modes below are instructions for epost-debugger.
@@ -74,6 +86,26 @@ Before fixing, detect the error type from context:
 **Detection:** None of the above matched
 **Action:** Quick diagnosis → minimal correct change → verify (typecheck, tests, build) → add regression test
 **Rules:** Fix root causes, not symptoms. Keep changes minimal.
+
+## Prevention Gate (MANDATORY after every fix)
+
+Before closing the fix:
+
+1. **Add regression test** — write a test that fails WITHOUT the fix and passes WITH it. This is non-negotiable. No "I'll add tests later."
+2. **Verify with fresh output** — run the exact command that was failing. Read the output. Do not claim "done" from memory.
+3. **Check for recurrence** — grep the codebase for the same pattern. Fix all instances, not just the reported one.
+
+If verification fails → loop back to diagnosis (max 3 attempts). After 3 failures, stop and discuss architecture with the user.
+
+## Anti-Rationalization
+
+| Thought | Reality |
+|---|---|
+| "I can see the problem, let me fix it" | Symptoms ≠ root cause. Diagnose first. |
+| "Quick fix for now, investigate later" | "Later" never comes. Fix properly now. |
+| "Just try changing X" | Random fixes create new bugs. Diagnose first. |
+| "One more fix attempt" (after 2+ failures) | 3+ failures = wrong approach. Question architecture. |
+| "The test already covers this" | Add a SPECIFIC regression test for this exact bug. |
 
 ## Platform Detection
 

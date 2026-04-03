@@ -16,6 +16,35 @@ metadata:
 
 Testing patterns for Next.js web applications. Covers Jest + React Testing Library for unit/component tests, Playwright for E2E, and test runner targets.
 
+## Testing Strategy
+
+For Next.js SPAs, use the **Testing Trophy** model:
+
+```
+       E2E (10–20%)        ← critical user journeys only
+    ──────────────────
+      Integration (50%)    ← components + hooks + store wired (RTL)
+    ──────────────────
+       Unit (30%)          ← pure functions, hooks, mappers
+    ──────────────────
+    Static Analysis        ← TypeScript, ESLint (always)
+```
+
+**Coverage targets:** critical paths 100% · core features 80–90% · overall 75–85%
+
+See `references/testing-strategy.md` for full model comparison and priority matrix.
+
+## CI/CD Gate Order
+
+Run fastest gates first — fail early:
+
+```bash
+npm run lint               # Gate 0: static (seconds)
+tsc --noEmit               # Gate 1: type check (seconds)
+npm test                   # Gate 2: unit + integration (minutes)
+TEST_ENV=dev npx playwright test  # Gate 3: E2E (slowest — after unit pass)
+```
+
 ## Test Structure
 
 Tests live in a `tests/` directory and **mirror the app route structure**:
@@ -227,3 +256,9 @@ npx playwright test --ui                       # Interactive UI mode
 - Set `test.setTimeout(120000)` for E2E tests — default is too short
 - Use page helpers for navigation in E2E
 - Use `storageState` for authenticated E2E tests (avoid re-login per test)
+
+## References
+
+- `references/testing-strategy.md` — strategy models (Pyramid/Trophy/Honeycomb), ratios, priority matrix
+- `references/test-flakiness-mitigation.md` — explicit waits, retry strategies, isolation patterns
+- `references/test-data-management.md` — Faker, factory pattern (Fishery), worker-isolated test data
