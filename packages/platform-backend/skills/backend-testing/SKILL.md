@@ -3,6 +3,7 @@ name: backend-testing
 description: "Use when writing backend tests — Arquillian WildFly integration, Weld-JUnit CDI unit tests, JAX-RS endpoint tests with RestAssured, JPA/Hibernate with H2, or JaCoCo coverage configuration. Jakarta EE 8 / JUnit 4 patterns."
 user-invocable: false
 context: inline
+paths: ["**/*Test.java", "**/*Tests.java", "**/*IT.java", "**/*IntegrationTest.java", "**/src/test/**/*.java"]
 metadata:
   keywords: [arquillian, weld, junit, mockito, restassured, jacoco, cdi, ejb, jpa, hibernate]
   platforms: [backend]

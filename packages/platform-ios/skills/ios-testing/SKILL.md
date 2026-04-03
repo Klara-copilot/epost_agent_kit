@@ -3,6 +3,7 @@ name: ios-testing
 description: "Use when writing iOS tests — XCTest unit tests, XCUITest E2E, Swift Testing (@Test/@Suite), snapshot testing, or diagnosing test failures. Covers async/await patterns, Page Object Model, flakiness fixes."
 user-invocable: false
 context: inline
+paths: ["**/*.swift", "**/*Tests.swift", "**/*Test.swift", "**/*Spec.swift"]
 metadata:
   keywords: [xctest, xcuitest, swift-testing, snapshot, unit-test, ui-test, ios]
   platforms: [ios]

@@ -19,9 +19,13 @@ Reference catalogue of skills by platform and task type.
 | Signal | Skills |
 |--------|--------|
 | `.swift`, iOS, Swift, SwiftUI | `ios-development`, `ios-ui-lib` |
+| `.swift` + test writing / test file | `ios-testing` |
 | `.kt/.kts`, Android, Kotlin, Compose | `android-development`, `android-ui-lib` |
+| `.kt/.kts` + test writing / test file | `android-testing` |
 | `.tsx/.ts/.jsx/.scss`, React, Next.js, web | `web-frontend`, `web-nextjs` |
+| `.tsx/.ts` + test writing / test file | `web-testing` |
 | `.java` + `pom.xml`, Java EE, WildFly, backend | `backend-javaee`, `backend-databases` |
+| `.java` + test writing / `*Test.java` / coverage | `backend-testing` |
 | `epost-agent-kit-cli/` path, `src/domains/`, CLI | `kit` (load references/cli.md) |
 | Figma, design tokens, klara, UI library | `figma`, `design-tokens`, `ui-lib-dev` |
 

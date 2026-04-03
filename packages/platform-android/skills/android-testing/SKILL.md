@@ -3,6 +3,7 @@ name: android-testing
 description: "Use when writing Android tests — Compose UI tests, Hilt DI test setup, ViewModel + Flow testing with Turbine, Room in-memory, or MockK mocking. Covers JUnit 4 patterns and flakiness fixes."
 user-invocable: false
 context: inline
+paths: ["**/*.kt", "**/*Test.kt", "**/*Tests.kt", "**/*Spec.kt", "**/*androidTest/**"]
 metadata:
   keywords: [junit, compose-testing, hilt, turbine, mockk, room, viewmodel, flow]
   platforms: [android]
