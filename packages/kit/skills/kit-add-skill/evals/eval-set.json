@@ -1,0 +1,13 @@
+[
+  {"query": "add a new skill for iOS accessibility", "should_trigger": true},
+  {"query": "create a skill called backend-caching", "should_trigger": true},
+  {"query": "scaffold a new skill directory for web-analytics", "should_trigger": true},
+  {"query": "register a new skill in the kit", "should_trigger": true},
+  {"query": "I need a new skill for monitoring", "should_trigger": true},
+  {"query": "set up a skill for Android testing", "should_trigger": true},
+  {"query": "add an agent to the kit", "should_trigger": false},
+  {"query": "create a new hook for PostToolUse", "should_trigger": false},
+  {"query": "optimize the existing web-testing skill", "should_trigger": false},
+  {"query": "verify the kit health", "should_trigger": false},
+  {"query": "write unit tests for the auth service", "should_trigger": false}
+]

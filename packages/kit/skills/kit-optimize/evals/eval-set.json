@@ -1,0 +1,14 @@
+[
+  {"query": "optimize the web-testing skill for token efficiency", "should_trigger": true},
+  {"query": "the backend-javaee skill is too verbose, improve it", "should_trigger": true},
+  {"query": "fix CSO compliance issues in the scenario skill", "should_trigger": true},
+  {"query": "make the fix skill more efficient", "should_trigger": true},
+  {"query": "apply progressive disclosure to the audit skill", "should_trigger": true},
+  {"query": "improve the description of the ios-testing skill", "should_trigger": true},
+  {"query": "the skill is triggering when it shouldn't, fix it", "should_trigger": true},
+  {"query": "add a new skill for caching", "should_trigger": false},
+  {"query": "create a new hook", "should_trigger": false},
+  {"query": "verify the kit", "should_trigger": false},
+  {"query": "write tests for the auth service", "should_trigger": false},
+  {"query": "commit and push", "should_trigger": false}
+]
