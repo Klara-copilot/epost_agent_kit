@@ -21,7 +21,8 @@ const path = require('path');
 const HARD_SIGNALS = [
   {
     label: 'hardcoded absolute user path',
-    pattern: /\/Users\/[a-zA-Z0-9_-]+\/|\/home\/[a-zA-Z0-9_-]+\//,
+    // macOS: /Users/<name>/  Linux: /home/<name>/  Windows: C:\Users\<name>\ or C:/Users/<name>/
+    pattern: /\/Users\/[a-zA-Z0-9_-]+\/|\/home\/[a-zA-Z0-9_-]+\/|[A-Za-z]:[/\\]Users[/\\][a-zA-Z0-9_-]+[/\\]/,
   },
 ];
 
