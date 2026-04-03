@@ -2,12 +2,22 @@
   "version": "1.0.0",
   "updated": "2026-04-03",
   "counts": {
-    "active": 47,
+    "active": 48,
     "completed": 1,
     "archived": 1,
-    "total": 50
+    "total": 51
   },
   "plans": [
+    {
+      "id": "PLAN-0096",
+      "title": "Adopt Understand-Anything Patterns into epost_agent_kit",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-04-03",
+      "authors": ["epost-planner"],
+      "tags": ["understand-anything", "patterns", "onboarding", "fingerprinting", "artifacts", "knowledge-graph"],
+      "file": "plans/260403-2206-understand-anything-adoption/plan.md"
+    },
     {
       "id": "PLAN-0095",
       "title": "Fix All Kit Skill Audit Findings",

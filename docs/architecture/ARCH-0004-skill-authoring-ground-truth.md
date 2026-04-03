@@ -189,7 +189,54 @@ Compare token count and tool calls with vs. without the skill enabled.
 
 ---
 
-## 9. File Size Limits
+## 9. Nested Directory Auto-Discovery (Monorepo Support)
+
+When working with files in a subdirectory, Claude Code also scans for `.claude/skills/` in that subdirectory:
+
+```
+monorepo/
+├── .claude/skills/           ← Always loaded (project root)
+├── packages/frontend/
+│   └── .claude/skills/       ← Loaded when editing files in packages/frontend/
+└── packages/mobile/
+    └── .claude/skills/       ← Loaded when editing files in packages/mobile/
+```
+
+**`--add-dir` exception**: `.claude/skills/` inside additional directories (added via `--add-dir`) are loaded with live change detection. However, other `.claude/` config (agents, commands, output styles) from those directories is NOT loaded.
+
+**epost-kit note**: Our kit doesn't currently use per-package `.claude/skills/`. Skills live at the project root under `.claude/skills/`. The `paths:` field is the preferred approach for platform-scoped auto-loading.
+
+---
+
+## 10. Bundled Skills (Ships with Claude Code)
+
+These skills are built into Claude Code and available in every session without installation:
+
+| Skill | Purpose |
+|-------|---------|
+| `/batch` | Run multiple independent tasks in parallel using subagents |
+| `/claude-api` | Build apps with the Claude API — prompt templates, chat patterns |
+| `/debug` | Systematic debugging — investigate errors, root cause analysis |
+| `/loop` | Iterate on a metric until target is met (coverage, bundle size, lint) |
+| `/simplify` | Reduce code complexity while preserving behavior |
+
+These are prompt-based (no `scripts/`). They can spawn parallel agents and use worktrees. Our kit has its own `debug` and `loop` skills — these extend rather than conflict with the bundled versions.
+
+---
+
+## 11. Skill Priority Hierarchy
+
+When the same skill name exists at multiple scopes:
+
+```
+enterprise policy > personal (~/.claude/skills/) > project (.claude/skills/)
+```
+
+Plugin skills use `plugin-name:skill-name` namespace — no naming conflicts possible.
+
+---
+
+## 12. File Size Limits
 
 | File | Limit | Reason |
 |---|---|---|
