@@ -55,4 +55,4 @@ For all other decisions, use a single expert agent.
 
 ## Integration with SDD
 
-When using subagent-driven-development for parallel phases, consensus voting applies **before** phase execution begins — use it to validate architecture decisions in the plan, not during implementation.
+When using subagents-driven for parallel phases, consensus voting applies **before** phase execution begins — use it to validate architecture decisions in the plan, not during implementation.
