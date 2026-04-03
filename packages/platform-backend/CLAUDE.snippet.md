@@ -22,4 +22,5 @@
 
 ### Skills
 - `backend-javaee` — Jakarta EE patterns, WildFly deployment, Maven builds
+- `backend-testing` — Arquillian, Weld-JUnit, RestAssured, JaCoCo, auth/authz testing
 - `backend-databases` — PostgreSQL + MongoDB persistence
