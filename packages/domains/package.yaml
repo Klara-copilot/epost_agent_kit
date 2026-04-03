@@ -12,6 +12,7 @@ provides:
   skills:
     - domain-b2b
     - domain-b2c
+    - multi-tenancy
 
 files:
   skills/: skills/
