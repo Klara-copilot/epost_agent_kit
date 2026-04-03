@@ -3,6 +3,15 @@
   "updatedAt": "2026-03-31",
   "entries": [
     {
+      "id": "epost-researcher-260402-1932-layer0-standards-gap-analysis",
+      "type": "research",
+      "agent": "epost-researcher",
+      "title": "Layer 0 Technical Standards Gap Analysis — 7 Missing Skills Across 20+ Repos",
+      "verdict": "ACTIONABLE",
+      "file": "reports/260402-1932-layer0-standards-gap-analysis-epost-researcher.md",
+      "date": "2026-04-02"
+    },
+    {
       "id": "epost-planner-260402-0950-kit-routing-redesign",
       "type": "plan",
       "agent": "epost-planner",

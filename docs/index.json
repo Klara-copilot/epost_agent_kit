@@ -67,6 +67,17 @@
       "related": ["ARCH-0001", "PATTERN-0001"]
     },
     {
+      "id": "ARCH-0003",
+      "title": "Three-Layer Knowledge Model",
+      "category": "architecture",
+      "status": "current",
+      "audience": ["agent", "human"],
+      "path": "docs/architecture/ARCH-0003-three-layer-knowledge-model.md",
+      "tags": ["knowledge", "standards", "layers", "epost_knowledge_base", "conventions", "deviations"],
+      "agentHint": "check when deciding where knowledge belongs, reviewing CONV-* scope, or accessing cross-repo context",
+      "related": ["ARCH-0001", "ARCH-0002"]
+    },
+    {
       "id": "CONV-0002",
       "title": "Release Process & Distribution (v2.0.0)",
       "category": "convention",

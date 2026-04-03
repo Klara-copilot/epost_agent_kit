@@ -1,8 +1,8 @@
 {
-  "generated": "2026-04-02T06:33:15.396Z",
+  "generated": "2026-04-03T03:31:19.966Z",
   "summary": {
-    "total": 41,
-    "new": 41,
+    "total": 42,
+    "new": 42,
     "proposed": 0,
     "dismissed": 0,
     "bySkill": {
@@ -13,8 +13,8 @@
         "low": 1
       },
       "test": {
-        "total": 5,
-        "high": 0,
+        "total": 6,
+        "high": 1,
         "medium": 5,
         "low": 0
       },
@@ -93,7 +93,7 @@
     },
     "byType": {
       "journal-flag": 30,
-      "audit-failure": 11,
+      "audit-failure": 12,
       "workaround": 0
     }
   },
@@ -547,6 +547,17 @@
       "targetSkill": "unknown",
       "suggestedAction": "",
       "detectedAt": "2026-04-02T02:58:52.979Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-694dd08b",
+      "type": "audit-failure",
+      "confidence": "high",
+      "source": "reports/260402-1902-skill-gap-analysis-epost-researcher.md",
+      "excerpt": "**What it does:**\nAutonomous skill refinement based on failure pattern analysis. After N failed attempts on a skill:\n1. Detect most-common failure mode\n2. Generate candidate fix (rule addition, description clarification, reference link)\n3. A/B test on past failures: `pass_rate_after > pass_rate_befo",
+      "targetSkill": "test",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-02T12:15:36.150Z",
       "status": "new"
     }
   ]
