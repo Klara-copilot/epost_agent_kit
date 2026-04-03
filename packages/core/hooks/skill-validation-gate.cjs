@@ -15,7 +15,6 @@ try {
 const fs = require('fs');
 const path = require('path');
 const { validateSkill } = require('./lib/skill-validate.cjs');
-const { checkLayer } = require('./lib/layer-check.cjs');
 
 function main() {
   let hookData;
@@ -67,19 +66,11 @@ function main() {
     process.stdout.write(JSON.stringify({ additionalContext: context }) + '\n');
   }
 
-  // Layer check — mechanical hard signals + reminder for agent to assess content layer
-  const layer = checkLayer(skillDir);
-  if (layer.hasIssues) {
-    // Hard mechanical violation (e.g. hardcoded /Users/... path) — always wrong
-    const hardContext = `[layer-check ERROR] ${path.basename(skillDir)}/SKILL.md: ${layer.signals.join(', ')}. Remove before continuing.`;
-    process.stdout.write(JSON.stringify({ additionalContext: hardContext }) + '\n');
-  } else {
-    // Remind agent to do the content-level layer assessment — regex can't do this reliably
-    const reminder = `[layer-check] Assess layer before closing: is this skill org-wide (Layer 0) or repo-specific (Layer 2)? ` +
-      `Layer 2 content belongs in docs/ (CONV, ADR, FEAT, or FINDING), not in epost_agent_kit skills. ` +
-      `See kit-add-skill step 2 for the full checklist.`;
-    process.stdout.write(JSON.stringify({ additionalContext: reminder }) + '\n');
-  }
+  // Layer reminder — content layer assessment requires LLM judgment, not regex
+  const reminder = `[layer-check] Verify this skill is org-wide (Layer 0), not repo-specific (Layer 2). ` +
+    `Layer 2 content (specific paths, product names, repo deviations) belongs in docs/ instead. ` +
+    `See kit-add-skill step 2 for the checklist.`;
+  process.stdout.write(JSON.stringify({ additionalContext: reminder }) + '\n');
 
   process.exit(0);
 }
