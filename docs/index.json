@@ -89,28 +89,6 @@
       "related": ["CONV-0001"]
     },
     {
-      "id": "ARCH-0004",
-      "title": "Claude Code Skill Specification (Official)",
-      "category": "architecture",
-      "status": "current",
-      "audience": ["agent", "human"],
-      "path": "docs/architecture/ARCH-0004-cc-skill-specification.md",
-      "tags": ["skills", "frontmatter", "specification", "progressive-disclosure", "description", "yaml", "anthropic"],
-      "agentHint": "check before creating or auditing skills — authoritative CC spec for frontmatter fields, description rules, file structure, testing",
-      "related": ["ARCH-0005", "CONV-0003", "PATTERN-0001"]
-    },
-    {
-      "id": "ARCH-0005",
-      "title": "Claude Code Sub-Agent Specification (Official)",
-      "category": "architecture",
-      "status": "current",
-      "audience": ["agent", "human"],
-      "path": "docs/architecture/ARCH-0005-cc-sub-agent-specification.md",
-      "tags": ["agents", "frontmatter", "specification", "permission-modes", "memory", "tools", "anthropic"],
-      "agentHint": "check before creating agents or designing orchestration — authoritative CC spec for all frontmatter fields, permission modes, memory scopes, spawning rules",
-      "related": ["ARCH-0004", "CONV-0003", "ARCH-0001"]
-    },
-    {
       "id": "CONV-0003",
       "title": "ePost Skill Authoring Standards",
       "category": "convention",
@@ -118,8 +96,8 @@
       "audience": ["agent", "human"],
       "path": "docs/conventions/CONV-0003-epost-skill-standards.md",
       "tags": ["skills", "cso", "quality-scoring", "metadata", "agent-affinity", "packages", "evals"],
-      "agentHint": "check before creating or auditing skills — ePost conventions (CSO, quality scoring, metadata fields, packages/ rule) layered on top of ARCH-0004",
-      "related": ["ARCH-0004", "ARCH-0005", "CONV-0001"]
+      "agentHint": "check before creating or auditing skills — ePost conventions (CSO, quality scoring, metadata fields, packages/ rule)",
+      "related": ["ARCH-0002", "CONV-0001", "PATTERN-0001"]
     }
   ]
 }

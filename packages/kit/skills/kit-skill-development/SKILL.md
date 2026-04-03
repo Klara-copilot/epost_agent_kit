@@ -169,6 +169,26 @@ Before publishing a skill, verify the `description:` field passes all 7 checks:
 
 See `references/description-validation-checklist.md` for full examples and fail patterns.
 
+## Layer Check — Skills Must Be Org-Wide (Layer 0)
+
+Skills in `epost_agent_kit` are **Layer 0** — org-wide standards loaded across all repos and teams. Before adding or approving a skill, verify its content is universally applicable.
+
+**Layer 2/3 signals (content that belongs in repo `docs/` instead):**
+- References specific repos, projects, or product names
+- Contains file paths that only exist in one codebase
+- Documents how one repo deviates from org standard
+- Captures a decision, gotcha, or finding specific to one project
+
+| If the content is... | It belongs in... |
+|---|---|
+| Org-wide workflow, pattern, or standard | Skills in `packages/` (Layer 0) ✓ |
+| How this repo deviates from standard | `docs/conventions/CONV-NNNN-*.md` |
+| Why a specific decision was made here | `docs/decisions/ADR-NNNN-*.md` |
+| Deep-dive on a feature in this repo | `docs/features/FEAT-NNNN-*.md` |
+| A gotcha or debug finding in this repo | `docs/findings/FINDING-NNNN-*.md` |
+
+**If Layer 2/3 content is detected during skill creation, stop and redirect to `docs/`.** See `kit-add-skill` workflow step 2 for the full check.
+
 ## agentskills.io Compliance Rules
 
 - `SKILL.md` MUST be in skill root (only `.md` in root)
@@ -177,4 +197,6 @@ See `references/description-validation-checklist.md` for full examples and fail 
 
 ## Reference Files
 
+- **`references/cc-skill-spec.md`** — Anthropic's authoritative skill spec: frontmatter, description formula, progressive disclosure, success criteria, troubleshooting
+- **`references/cc-native-mechanics.md`** — How CC loads context, cost-benefit of agents, two-tier execution model, design principles for skill authors
 - **`references/description-validation-checklist.md`** — Checklist for validating skill description quality

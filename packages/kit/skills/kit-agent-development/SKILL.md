@@ -189,6 +189,12 @@ The markdown body becomes the agent's system prompt. Write in second person, add
 
 **`disallowedTools`** — *(deprecated)* Blacklist tools the agent may not use. Prefer `allowedTools` whitelist over `disallowedTools` blacklist — whitelist is safer and more auditable.
 
+## Reference Files
+
+- **`references/cc-agent-spec.md`** — Anthropic's authoritative sub-agent spec: all frontmatter fields, permission modes, scope priority, tool control, skills injection, memory scopes, iron law
+
+---
+
 ## Declaring a Data Store
 
 If your agent produces persistent project-level data (findings, benchmarks, patches), declare a data domain using the `.epost-data/` convention.

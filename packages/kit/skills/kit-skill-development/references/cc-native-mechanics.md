@@ -1,6 +1,6 @@
 # Claude Code Native Mechanics & Routing Design
 
-*Source: ARCH-0002 — ground truth for how CC loads context and when to spawn agents.*
+*Ground truth for how CC loads context and when to spawn agents.*
 
 ---
 
