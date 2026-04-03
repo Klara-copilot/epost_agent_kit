@@ -39,20 +39,14 @@ epost-kit verify --strict   # warnings also block (CI mode)
 5. **Skill-index staleness** — index count matches actual SKILL.md count
 6. **Orphan detection** — skills not referenced by any agent or connection
 7. **Dependency graph** — auto-generates `docs/skill-dependency-graph.md` (mermaid)
+8. **Layer compliance** *(LLM-assessed)* — read each skill body and assess: is this content org-wide (Layer 0) or repo-specific (Layer 2)? Flag any skill with specific file paths, product names, or repo-scoped conventions. Repo-specific content belongs in `docs/` (CONV, ADR, FEAT, or FINDING).
+
+Steps 1–7 are automated by `epost-kit verify`. Step 8 requires LLM judgment — run it by prompting the agent to review skill bodies directly.
 
 ## Exit Codes
 
 - `0` — pass (may have warnings/info)
 - `1` — fail (errors found, or `--strict` with warnings)
-
-## Layer Check (Automatic)
-
-The `skill-validation-gate` hook emits a layer reminder on every `SKILL.md` write. Content layer assessment requires LLM judgment — regex cannot reliably distinguish org-wide patterns from repo-specific ones (both absolute and relative paths can be violations).
-
-The agent is reminded to verify: is this skill org-wide (Layer 0) or repo-specific (Layer 2)? Repo-specific content belongs in `docs/` (CONV, ADR, FEAT, or FINDING).
-
-To **batch-check existing skills** for layer issues, prompt the agent:
-> "Review all skills in `packages/{pkg}/skills/` — identify any with repo-specific content that should be moved to `docs/`."
 
 ## Integration
 
