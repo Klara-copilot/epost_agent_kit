@@ -774,6 +774,15 @@
       "verdict": "ACTIONABLE",
       "createdAt": "2026-04-02",
       "path": "reports/260402-1138-claude-code-agent-skill-mechanics-epost-researcher.md"
+    },
+    {
+      "id": "epost-researcher-260403-1945-agent-routing-comparison",
+      "type": "research",
+      "agent": "epost-researcher",
+      "title": "Research: GitHub Copilot Chat, Cursor IDE, and Claude Code — Agent Routing & Skill Discovery Mechanisms",
+      "verdict": "ACTIONABLE",
+      "createdAt": "2026-04-03",
+      "path": "reports/260403-1945-agent-routing-comparison-epost-researcher.md"
     }
   ]
 }

@@ -16,6 +16,7 @@ provides:
     - backend-auth
     - backend-quarkus
     - backend-observability
+    - backend-testing
 files:
   skills/: skills/
 
