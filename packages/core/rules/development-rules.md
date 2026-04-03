@@ -42,6 +42,23 @@ When explaining complex code, architecture, or flows — use `/preview` instead 
 
 **When to use**: user asks "explain", "how does X work", "visualize", or topic has 3+ interacting components.
 
+## Three-Layer Knowledge Authority
+
+Knowledge lives in one of three layers (see ARCH-0003):
+- **Layer 0** — `epost_agent_kit` skills: org-wide standards, ground truth, never repo-derived
+- **Layer 1** — `epost_knowledge_base`: cross-repo context, dependency graph, domain synthesis
+- **Layer 2** — per-repo `docs/`: implementation-specific, deviations from Layer 0 only
+
+**CONV-* scope rule**: A CONV doc answers "how does this repo differ from the org standard?" — never "what is the org standard?" If CONV content restates a Layer 0 skill → delete it. Only deviations belong in CONV.
+
+**Deviation rule**: If a repo deviates from a Layer 0 standard → document it as BOTH:
+- `CONV-*` — the valid local convention ("this repo uses X because Y")
+- `FINDING-*` — the deviation signal ("deviates from Layer 0 standard Z")
+
+The CONV records the working reality. The FINDING feeds Layer 1 aggregation so deviations across repos can be reviewed, and decisions made: adopt the deviation into Layer 0, or fix Layer 2 repos to align.
+
+**Authority order**: Layer 0 wins over Layer 1 wins over Layer 2. When layers conflict, the higher layer is correct.
+
 ## Documentation Lookup
 
 Before implementing, check existing knowledge:

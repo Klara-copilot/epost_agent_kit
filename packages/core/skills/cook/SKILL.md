@@ -120,7 +120,7 @@ Detect platform per `skill-discovery` protocol.
 - Multi-file, one module → fast (batch checkpoints active for >3 file changes)
 - Multi-module or unknowns → parallel
 - Has existing plan in ./plans/ → follow plan
-- Plan with 3+ independent tasks → consider subagent-driven mode (see `subagent-driven-development` skill)
+- Plan with 3+ independent tasks → consider subagent-driven mode (see `subagents-driven` skill)
 
 ## Execution
 

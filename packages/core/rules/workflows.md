@@ -19,7 +19,7 @@ description: Team development workflows — feature development, bug fixing, cod
 - **Sequential** (default): phases executed in order
 - **Parallel** (auto-detected): when phases have non-overlapping file ownership, spawn one subagent per phase
 - `--parallel` or `--sequential` force override
-- Per-phase implementation follows `subagent-driven-development` skill when 3+ independent tasks exist
+- Per-phase implementation follows `subagents-driven` skill when 3+ independent tasks exist
 
 **3. Test**
 - Unit tests for new logic

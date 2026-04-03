@@ -38,7 +38,7 @@ Execution mode is an implementation detail invisible to the user.
 ### Who Delegates
 - **epost-project-manager** — top-level router, delegates to any agent
 - **epost-planner** — delegates to researchers (parallel fan-out)
-- **epost-fullstack-developer** — delegates to subagents per phase (via `subagent-driven-development`)
+- **epost-fullstack-developer** — delegates to subagents per phase (via `subagents-driven`)
 - **Any agent** — can delegate to Explore subagent for codebase search
 
 ### Delegation Rules
@@ -75,7 +75,7 @@ Analyze task to auto-select mode:
 
 ## Subagent-Driven Development Integration
 
-For plans with 3+ independent tasks, use the `subagent-driven-development` skill:
+For plans with 3+ independent tasks, use the `subagents-driven` skill:
 
 ```
 Per task:

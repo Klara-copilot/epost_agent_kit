@@ -58,7 +58,7 @@ const CATEGORY_MAP = {
   'journal': 'knowledge',
   'repomix': 'knowledge',
   'skill-discovery': 'knowledge',
-  'subagent-driven-development': 'knowledge',
+  'subagents-driven': 'knowledge',
 
   // web — web platform specifics
   'web-frontend': 'web',
@@ -136,7 +136,7 @@ const CONNECTION_MAP = {
   'test':      { enhances: ['code-review'] },
   'audit':     { enhances: ['code-review'] },
   'launchpad': { enhances: ['cook'] },
-  'subagent-driven-development': { enhances: ['plan'] },
+  'subagents-driven': { enhances: ['plan'] },
   'thinking':  { enhances: ['debug', 'plan'] },
   'mermaidjs': { enhances: ['docs', 'plan'] },
   'loop':          { enhances: ['test'] },

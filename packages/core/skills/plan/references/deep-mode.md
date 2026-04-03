@@ -53,8 +53,8 @@ CREATE directory
 
 ### 4. Sequential Research Phase
 
-Follow dispatch patterns from `subagent-driven-development` skill.
-Researcher subagents get fresh context per subagent-driven-development rules.
+Follow dispatch patterns from `subagents-driven` skill.
+Researcher subagents get fresh context per subagents-driven rules.
 
 **Researcher 1: Best Practices**
 ```
