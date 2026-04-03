@@ -41,7 +41,17 @@ Create a new skill definition following epost_agent_kit conventions.
    - Whether it's user-invocable (slash command) or background (passive knowledge)
    - Whether it needs `context: fork` (task-oriented) or default (passive)
 
-2. **Layer Check** — verify content belongs in a skill (Layer 0), not repo docs (Layer 2):
+   **Description checklist** (from official guide — validate before proceeding):
+   - [ ] Includes WHAT the skill does
+   - [ ] Includes WHEN to use it (specific trigger phrases users would say)
+   - [ ] Under 1024 chars
+   - [ ] No XML angle brackets
+   - [ ] File types mentioned if relevant (`.fig`, `.csv`, `.sql`, `.swift`, `.kt`)
+
+2. **Layer Check + Description Formula** — verify content belongs in a skill (Layer 0), not repo docs (Layer 2); and that description follows the official formula:
+
+   Formula: `[When to use it (trigger phrases)] + [What it does] + [Key capabilities]`
+   Reference: `packages/kit/skills/kit-skill-development/references/cso-principles.md`
 
    Skills in `epost_agent_kit` are **org-wide standards** (Layer 0). They must apply to any ePost repo, any team, any project.
 
