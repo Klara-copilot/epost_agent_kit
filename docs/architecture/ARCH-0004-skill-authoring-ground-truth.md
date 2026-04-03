@@ -86,6 +86,7 @@ Inside `metadata:` — consumed only by `epost-kit` CLI tooling (`find-skill`, `
 | `$ARGUMENTS[N]` | Specific argument by 0-based index |
 | `$N` | Shorthand: `$0` = first arg, `$1` = second |
 | `${CLAUDE_SESSION_ID}` | Current session ID |
+| `${CLAUDE_SKILL_DIR}` | Directory containing the skill's `SKILL.md` — use to reference bundled scripts regardless of cwd |
 
 ---
 
@@ -94,13 +95,14 @@ Inside `metadata:` — consumed only by `epost-kit` CLI tooling (`find-skill`, `
 Skills use three levels of context loading to minimize token usage:
 
 ```
-Level 1: YAML frontmatter
-  → Always loaded in Claude's system prompt
+Level 1: YAML frontmatter (description)
+  → Always loaded in Claude's system prompt — regular AND subagent sessions
   → Purpose: just enough to know WHEN to use the skill
-  → Keep lean: description ≤1024 chars
+  → Keep lean: description ≤250 chars shown in listing (truncated), ≤1024 chars total
 
 Level 2: SKILL.md body
-  → Loaded when Claude decides skill is relevant
+  → Loaded when Claude decides skill is relevant (description match)
+  → OR pre-injected at startup if listed in agent's `skills:` frontmatter
   → Full instructions, workflow steps, patterns
   → Keep under 5,000 words
 
@@ -109,6 +111,21 @@ Level 3: references/ files
   → Deep reference material, examples, schemas
   → No size constraint — loaded only when explicitly needed
 ```
+
+### `skills:` in agent frontmatter — use sparingly
+
+When a skill is listed in an agent's `skills:` frontmatter, its **full body** is injected at agent startup — even when not needed for the current task. This is different from description-based loading (body only loads when relevant).
+
+**Rule**: Only put skills in `skills:` that are needed for EVERY task the agent handles:
+- ✅ `core`, `knowledge`, `debug`, `cook` — always needed regardless of platform
+- ✅ `skill-discovery` — routing helper, always useful
+- ❌ `ios-development`, `web-frontend`, etc. — platform-specific; let description matching load them
+
+Description-based loading works in both regular sessions and subagents. Descriptions are always in context. Trust the mechanism.
+
+### Description character budget
+
+Descriptions are budgeted at **1% of context window** (fallback: 8,000 chars total across all skills). Each description is capped at **250 chars in the listing**. All skill names are always included; descriptions get trimmed when over budget. Front-load the trigger phrase.
 
 ---
 
