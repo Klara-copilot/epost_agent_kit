@@ -183,6 +183,41 @@ Every skill below is available to all agents. Invoke by name — no discovery ne
 
 | Skill | What it does |
 |-------|-------------|
-| `kit` | Scaffold and manage agents, skills, hooks with best-practice templates |
-| `skill-creator` | Create and validate Claude Code skills with eval-driven QA |
-| `asana-muji` | Asana workflow for MUJI iOS projects — task creation and status |
+| `skill-creator` | Improve skill descriptions, run evals, optimize skill quality (Anthropic's tool) |
+| `kit-add-skill` | Scaffold a new skill — directory, SKILL.md, evals, package.yaml registration |
+| `kit-verify` | Health check: frontmatter, naming, pkg sync, agent refs, skill quality, eval coverage |
+
+---
+
+## Git Conventions
+
+**DO NOT** use `chore` or `docs` as commit types for changes to files inside the `.claude/` directory. Use `feat:`, `fix:`, or `refactor:` instead — `.claude/` contains generated agent configuration, not documentation or maintenance chores.
+
+---
+
+## Hook Response Protocol
+
+### Privacy Block Hook (`@@PRIVACY_PROMPT@@`)
+
+When a tool call is blocked by the privacy-block hook, the output contains a JSON marker between `@@PRIVACY_PROMPT_START@@` and `@@PRIVACY_PROMPT_END@@`. **You MUST use the `AskUserQuestion` tool** to get proper user approval.
+
+**Required Flow:**
+
+1. Parse the JSON from the hook output
+2. Use `AskUserQuestion` with the question data from the JSON
+3. Based on user's selection:
+   - **"Yes, approve access"** → Use `bash cat "filepath"` to read the file (bash is auto-approved)
+   - **"No, skip this file"** → Continue without accessing the file
+
+**IMPORTANT:** Always ask the user via `AskUserQuestion` first. Never try to work around the privacy block without explicit user approval.
+
+---
+
+## Python Scripts (Skills)
+
+When running Python scripts under `.claude/skills/`, use the venv interpreter so packages installed by `install.sh` are available:
+
+- **Linux/macOS:** `.claude/skills/.venv/bin/python3 scripts/xxx.py`
+- **Windows:** `.claude\skills\.venv\Scripts\python.exe scripts\xxx.py`
+
+When a skill script fails, try to fix it directly — don't stop the workflow.

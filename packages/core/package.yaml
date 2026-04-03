@@ -30,6 +30,7 @@ provides:
     - fix
     - plan
     - test
+    - scenario
     - debug
     - git
     - docs
