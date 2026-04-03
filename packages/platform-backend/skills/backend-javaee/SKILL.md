@@ -2,6 +2,7 @@
 name: backend-javaee
 description: (ePost) Implements Jakarta EE patterns — JAX-RS, CDI/EJB, JPA/Hibernate, WildFly deployment. Use when working with Jakarta EE — JAX-RS endpoints, CDI/EJB services, JPA/Hibernate, WildFly deployment
 user-invocable: false
+paths: ["**/*.java", "**/pom.xml", "**/persistence.xml"]
 metadata:
   keywords:
     - javaee

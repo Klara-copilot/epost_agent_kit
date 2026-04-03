@@ -2,6 +2,7 @@
 name: ios-development
 description: (ePost) Builds SwiftUI/UIKit views, manages Xcode builds, and debugs iOS crashes. Use when working on iOS — SwiftUI/UIKit views, Xcode builds, XCTest, or fixing iOS crashes and Swift issues
 user-invocable: false
+paths: ["**/*.swift", "**/*.xcodeproj/**", "**/*.xcworkspace/**"]
 
 metadata:
   agent-affinity: [epost-fullstack-developer, epost-tester, epost-debugger, epost-code-reviewer]
