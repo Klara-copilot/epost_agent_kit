@@ -2,6 +2,7 @@
 name: web-nextjs
 description: (ePost) Implements Next.js 14 App Router patterns — Server Components, Server Actions, layouts, and middleware. Use when working with Next.js App Router, Server Components, Server Actions, or page/layout routing
 user-invocable: false
+paths: ["**/app/**/*.tsx", "**/pages/**/*.tsx", "**/middleware.ts", "**/next.config.*", "**/layout.tsx", "**/page.tsx"]
 
 metadata:
   agent-affinity: [epost-fullstack-developer]

@@ -2,6 +2,7 @@
 name: web-testing
 description: (ePost) Configures and writes Jest + RTL unit tests and Playwright E2E tests. Use when writing tests, configuring Jest/Playwright, checking coverage, or working with test patterns
 user-invocable: false
+paths: ["**/*.test.tsx", "**/*.test.ts", "**/*.spec.ts", "**/*.spec.tsx", "**/__tests__/**"]
 
 metadata:
   agent-affinity: [epost-tester, epost-fullstack-developer]

@@ -2,6 +2,7 @@
 name: ios-ui-lib
 description: (ePost) Provides iOS theme SwiftUI component APIs, design tokens, and platform token mappings. Use when looking up iOS theme SwiftUI component APIs, iOS design tokens, or platform-specific color/typography token mappings
 user-invocable: false
+paths: ["**/*.swift"]
 
 metadata:
   keywords:

@@ -4,7 +4,7 @@ description: (ePost) Find root causes and fix bugs systematically. Triggers on: 
 model: sonnet
 color: red
 icon: 🐛
-skills: [core, debug, knowledge, error-recovery, journal]
+skills: [core, debug, knowledge, error-recovery, journal, skill-discovery, web-frontend, ios-development, android-development, backend-javaee]
 memory: project
 permissionMode: default
 allowedTools: [Read, Glob, Grep, Write, Edit, Bash]

@@ -3,6 +3,15 @@
   "updatedAt": "2026-04-03",
   "entries": [
     {
+      "id": "epost-brainstormer-260403-2306-platform-skill-autoload-strategy",
+      "type": "brainstorm",
+      "agent": "epost-brainstormer",
+      "title": "Platform Skill Auto-Loading Strategy: paths: + Tiered Agent Skills",
+      "verdict": "ACTIONABLE",
+      "file": "reports/260403-2306-platform-skill-autoload-strategy-epost-brainstormer.md",
+      "date": "2026-04-03"
+    },
+    {
       "id": "epost-fullstack-developer-260403-2237-skill-authoring-ground-truth",
       "type": "implementation",
       "agent": "epost-fullstack-developer",

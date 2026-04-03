@@ -2,6 +2,7 @@
 name: android-ui-lib
 description: (ePost) Provides Android theme Compose component APIs, design tokens, and Material theme mappings. Use when looking up Android theme Compose component APIs, Android design tokens, or Material theme color/typography mappings
 user-invocable: false
+paths: ["**/*.kt", "**/*.kts"]
 
 metadata:
   keywords:
