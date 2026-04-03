@@ -7,9 +7,10 @@
 
 ---
 
-## Source
+## Sources
 
-Anthropic's official guide: "The Complete Guide to Building Skills for Claude" (January 2026)
+- Anthropic's official guide: "The Complete Guide to Building Skills for Claude" (January 2026)
+- Claude Code official docs: `docs.anthropic.com/en/docs/claude-code/slash-commands`
 
 ---
 
@@ -25,19 +26,51 @@ Core properties: Composable (works alongside other skills), Portable (identical 
 
 ---
 
-## 2. Official Frontmatter Fields
+## 2. Frontmatter Fields — Two Spec Layers
 
-These are the ONLY fields defined by the Agent Skills Spec. Any field outside this list is a kit extension.
+### Layer A — Agent Skills Open Standard (portable across AI tools)
 
-### Required
-- `name` — kebab-case, no spaces or capitals, must match folder name
-- `description` — what it does AND when to use it; up to 1024 chars; no XML tags; include specific trigger phrases
+| Field | Required | Notes |
+|---|---|---|
+| `name` | No* | Lowercase, hyphens only, max 64 chars. Defaults to directory name. |
+| `description` | Recommended | What + when. ≤250 chars shown in listing (truncated). **The only signal Claude uses to decide loading.** |
+| `license` | No | MIT, Apache-2.0, etc. |
+| `allowed-tools` | No | Space-separated string OR YAML list. Pre-approved tools. |
+| `compatibility` | No | 1–500 chars. Environment requirements, target product, system deps. |
+| `metadata` | No | Arbitrary key-value bag. Clients read it; Claude ignores it at runtime. |
 
-### Optional (official)
-- `license` — license identifier (MIT, Apache-2.0, etc.)
-- `allowed-tools` — space-separated pre-approved tools: `"Bash(python:*) WebFetch Read"`
-- `compatibility` — 1–500 chars; environment requirements, target product, system dependencies
-- `metadata` — arbitrary key-value bag; suggested keys: `author`, `version`, `mcp-server`
+### Layer B — Claude Code Extensions (official, Claude Code only)
+
+These are **fully official Claude Code fields** — not in the open standard but documented and supported.
+
+> "Claude Code extends the [Agent Skills] standard with additional features like invocation control, subagent execution, and dynamic context injection."
+
+| Field | Default | Purpose |
+|---|---|---|
+| `argument-hint` | — | Autocomplete hint: `[issue-number]` or `[filename] [format]` |
+| `user-invocable` | `true` | `false` = hidden from `/` menu. Skill invoked by Claude only (background knowledge). **Replacement for deprecated `.claude/commands/`.** |
+| `disable-model-invocation` | `false` | `true` = never auto-loads. Manual `/name` trigger only. |
+| `model` | session default | Override model for this skill. |
+| `effort` | session default | `low`, `medium`, `high`, `max` |
+| `context` | inline | `fork` = run in a forked subagent context. |
+| `agent` | — | Subagent type to use when `context: fork`. |
+| `hooks` | — | Lifecycle hooks scoped to this skill. |
+| `paths` | — | Glob patterns. Skill auto-loads **only** when working with matching files. Comma-separated or YAML list. |
+| `shell` | `bash` | `powershell` for Windows. |
+
+**Commands → Skills migration:**
+> "Custom commands have been merged into skills. A file at `.claude/commands/deploy.md` and a skill at `.claude/skills/deploy/SKILL.md` both create `/deploy` and work the same way. Your existing `.claude/commands/` files keep working. Skills add optional features."
+
+### Layer C — Kit-Only Fields (no runtime effect)
+
+Inside `metadata:` — consumed only by `epost-kit` CLI tooling (`find-skill`, `kit-verify`).
+
+| Field | Purpose |
+|---|---|
+| `metadata.keywords` | `find-skill` search index |
+| `metadata.triggers` | Documentation / CLI only |
+| `metadata.platforms` | Documentation / CLI only |
+| `metadata.connections` | Cross-skill relationship graph for CLI |
 
 ### Security restrictions
 - No XML angle brackets (`< >`) anywhere in frontmatter
@@ -45,21 +78,14 @@ These are the ONLY fields defined by the Agent Skills Spec. Any field outside th
 
 ---
 
-## 3. Our Kit Extensions (Non-Standard Fields)
+## 3. String Substitution (Claude Code)
 
-These fields are used by our kit but are NOT in the open Agent Skills Spec. They work in Claude Code via undocumented or kit-specific mechanisms:
-
-| Field | Purpose | Standard? |
-|---|---|---|
-| `user-invocable: false` | Hide from `/` slash menu; Claude-only invocation | Kit extension |
-| `context: fork` | Run skill via agent spawn, not inline | Kit extension |
-| `agent: epost-*` | Which agent to spawn when `context: fork` | Kit extension |
-| `argument-hint` | Autocomplete hint in slash menu | Claude Code–specific (used by claudekit) |
-| `metadata.keywords` | CLI tooling search index | Kit extension (no runtime effect) |
-| `metadata.triggers` | CLI tooling / documentation | Kit extension (no runtime effect) |
-| `metadata.platforms` | CLI tooling / documentation | Kit extension (no runtime effect) |
-
-**Important:** `metadata.keywords`, `metadata.triggers`, and `metadata.platforms` have NO effect on Claude's loading decisions. They are consumed only by `epost-kit` CLI tooling.
+| Variable | Value |
+|---|---|
+| `$ARGUMENTS` | All arguments passed when invoking the skill |
+| `$ARGUMENTS[N]` | Specific argument by 0-based index |
+| `$N` | Shorthand: `$0` = first arg, `$1` = second |
+| `${CLAUDE_SESSION_ID}` | Current session ID |
 
 ---
 
