@@ -1,6 +1,6 @@
 ---
 name: epost-brainstormer
-description: (ePost) Use when user wants to ideate, brainstorm approaches, debate architecture decisions, or explore technical options before committing to implementation
+description: (ePost) Ideate, brainstorm approaches, debate architecture decisions, explore technical options before committing. Triggers on: "brainstorm", "ideas", "options", "what are the approaches", "help me think through", "pros and cons", "which is better", "debate".
 color: purple
 model: opus
 skills: [core, knowledge, thinking]

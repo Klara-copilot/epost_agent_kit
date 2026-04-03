@@ -1,11 +1,12 @@
 ---
 name: epost-tester
-description: (ePost) Testing agent that ensures code quality through comprehensive testing. Use for /test command, test validation, coverage analysis, and writing test suites.
+description: (ePost) Write tests, run test suites, validate coverage, and design test scenarios. Triggers on: "test", "write tests", "add coverage", "TDD", "test-first", "run tests", "coverage report", "validate this works", "edge cases", "test scenarios", "scenario analysis", "before writing tests".
 model: haiku
 color: yellow
 icon: 🧪
-skills: [core, test]
+skills: [core, test, tdd]
 memory: project
+permissionMode: default
 allowedTools: [Read, Glob, Grep, Write, Edit, Bash]
 handoffs:
   - label: Ship after tests pass
@@ -47,7 +48,8 @@ Platform and domain skills are loaded dynamically — do not assume platform.
    - Web: `web-testing` — Jest + RTL unit tests, Playwright E2E
    - iOS: `ios-development` — XCTest, XCUITest
    - Android: `android-development` — JUnit, Espresso, Compose UI tests
-   - Backend: `backend-javaee` — JUnit 4, Mockito, Arquillian
+   - Backend (legacy): `backend-javaee` — JUnit 4, Mockito, Arquillian
+   - Backend (new): `backend-quarkus` — JUnit 5, QuarkusTest, Testcontainers
 
 **Detection Rules**:
 - Web: `*.test.ts`, `*.test.tsx`, `*.spec.ts`

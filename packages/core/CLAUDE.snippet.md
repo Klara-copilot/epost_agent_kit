@@ -41,7 +41,7 @@ Platform detection: `.tsx`→web, `.swift`→ios, `.kt`→android, `.java`→bac
 
 **Multi-intent** ("plan and build X", "research then implement") → orchestrator decomposes inline and spawns agents in sequence.
 
-**Parallel work** (3+ independent tasks, cross-platform) → use `subagent-driven-development` skill from main context.
+**Parallel work** (3+ independent tasks, cross-platform) → use `subagents-driven` skill from main context.
 
 **Subagent constraint**: Subagents cannot spawn further subagents. Multi-agent workflows must be orchestrated from the main conversation. Skills that need multi-agent dispatch must NOT use `context: fork`.
 
@@ -99,7 +99,7 @@ Every skill below is available to all agents. Invoke by name — no discovery ne
 | `preview` | Visual explanations — Mermaid diagrams, ASCII art, HTML interactive |
 | `thinking` | Extended thinking for deep analysis and systematic reasoning |
 | `loop` | Iterate solo on a metric (coverage, bundle size, lint) until target met |
-| `subagent-driven-development` | Parallel multi-task execution with per-task subagent dispatch + two-stage review |
+| `subagents-driven` | Parallel multi-task execution with per-task subagent dispatch + two-stage review |
 | `launchpad` | Build landing pages and promotional sites |
 | `retro` | Sprint retrospectives and team metrics analysis |
 | `get-started` | Onboarding — discover project state for new contributors |

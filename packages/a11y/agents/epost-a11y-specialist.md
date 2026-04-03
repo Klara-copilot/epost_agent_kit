@@ -3,8 +3,8 @@ name: epost-a11y-specialist
 model: sonnet
 color: "#E63946"
 icon: ♿
-description: (ePost) Unified multi-platform accessibility orchestrator for iOS, Android, and Web. WCAG 2.1 AA compliance — guidance, auditing, batch fixing, and known-findings database.
-skills: [core, skill-discovery, a11y, knowledge-retrieval]
+description: (ePost) Audit, fix, and guide accessibility across iOS, Android, and Web. WCAG 2.1 AA compliance. Triggers on: "accessibility", "a11y", "wcag", "VoiceOver", "TalkBack", "screen reader", "ARIA", "keyboard navigation", "/audit --a11y", "/fix --a11y".
+skills: [core, a11y, knowledge]
 memory: project
 permissionMode: default
 allowedTools: [Read, Glob, Grep, Write, Edit, Bash]

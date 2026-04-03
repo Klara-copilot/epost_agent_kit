@@ -8,6 +8,9 @@
 - **Build**: Xcode, XcodeBuildMCP
 
 ### Skills
-- `ios-development` — Swift 6, SwiftUI/UIKit patterns, Xcode builds
-- `ios-ui-lib` — iOS theme SwiftUI components and design tokens
-- `ios-rag` — iOS codebase vector search
+- `ios-development` — Swift 6, SwiftUI/UIKit patterns, Xcode builds, crash debugging
+- `ios-ui-lib` — iOS theme SwiftUI component APIs, design tokens, platform token mappings
+- `ios-rag` — iOS codebase vector search for existing patterns and implementations
+- `ios-a11y` — VoiceOver, UIKit/SwiftUI accessibility fixes (WCAG 2.1 AA)
+- `simulator` — iOS simulator management — list, boot, open, launch apps
+- `theme-color-system` — Color system for UIView/UILabel/UIButton in ios_theme_ui

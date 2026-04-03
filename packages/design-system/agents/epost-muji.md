@@ -3,8 +3,8 @@ name: epost-muji
 model: sonnet
 color: "#FF1493"
 icon: 🎨
-description: "(ePost) Design system specialist + UI/UX designer. Component knowledge, Figma-to-code pipeline, screenshot-to-code conversion, visual asset generation, landing page craft."
-skills: [core, skill-discovery, figma, design-tokens, ui-lib-dev, audit, knowledge-retrieval, launchpad]
+description: "(ePost) Design system specialist and UI/UX designer. Figma-to-code pipeline, component development, klara-theme usage, design tokens, landing pages. Triggers on: \"component\", \"design\", \"figma\", \"klara-theme\", \"UI\", \"design tokens\", \"landing page\", \"screenshot to code\"."
+skills: [core, figma, design-tokens, ui-lib-dev, audit, knowledge, launchpad]
 memory: project
 allowedTools: [Read, Glob, Grep, Write, Edit]
 handoffs:

@@ -1,11 +1,13 @@
 ---
 name: epost-git-manager
-description: (ePost) Git workflow automation agent. Fast execution of staged/commit/push/PR workflows with security scanning and token efficiency.
-allowedTools: [Read, Bash]
+description: (ePost) Run git workflows — commit, push, PR creation, ship pipeline. Triggers on: "commit", "push", "ship", "done", "PR", "pull request", "merge", "create branch", staged files ready to go.
 model: haiku
 color: purple
 icon: 🌿
 skills: [core, git]
+memory: project
+permissionMode: default
+allowedTools: [Read, Bash]
 ---
 
 <!-- AGENT NAVIGATION
