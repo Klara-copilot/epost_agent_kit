@@ -45,6 +45,15 @@ epost-kit verify --strict   # warnings also block (CI mode)
 - `0` — pass (may have warnings/info)
 - `1` — fail (errors found, or `--strict` with warnings)
 
+## Layer Check (Automatic)
+
+The `skill-validation-gate` hook runs a layer check on every `SKILL.md` write:
+- **Hard violation** (e.g. hardcoded absolute user path like `/Users/than/…`, `C:\Users\…`, `/home/user/…`) — flagged immediately as an error
+- **Content assessment** — the agent is reminded to evaluate whether the skill is org-wide (Layer 0) or repo-specific (Layer 2); content classification requires LLM judgment and is not automated
+
+To **batch-check existing skills** for layer issues, prompt the agent:
+> "Review all skills in `packages/{pkg}/skills/` — identify any with repo-specific content that should be moved to `docs/`."
+
 ## Integration
 
 - Wire as pre-commit hook: `epost-kit verify --strict`
