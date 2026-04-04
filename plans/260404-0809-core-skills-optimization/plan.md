@@ -2,7 +2,7 @@
 updated: 2026-04-04
 id: 260404-0809-core-skills-optimization
 title: Core Skills Optimization — Token, Frontmatter, Content
-status: active
+status: completed
 created: 2026-04-04
 phases: 3
 ---
