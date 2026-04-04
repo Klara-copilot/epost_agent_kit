@@ -44,23 +44,20 @@ Create implementation plans with automatic complexity detection.
 
 ## Step 0 — Flag Override
 
-If `$ARGUMENTS` starts with `--fast`: skip auto-detection, load `references/fast-mode.md` and execute. Remaining args are the task description.
+If `$ARGUMENTS` starts with `--fast`: skip auto-detection, load `references/fast-mode.md` and execute.
 If `$ARGUMENTS` starts with `--deep`: skip auto-detection, load `references/deep-mode.md` and execute.
 If `$ARGUMENTS` starts with `--parallel`: skip auto-detection, load `references/parallel-mode.md` and execute.
 If `$ARGUMENTS` starts with `--validate`: skip auto-detection, load `references/validate-mode.md` and execute.
 If `$ARGUMENTS` starts with `--predict`: load `references/predict-mode.md`, run 3-persona debate, then continue to Complexity Auto-Detection.
 Otherwise: continue to Complexity Auto-Detection.
 
-## Aspect Files
+## Complexity Auto-Detection
 
-| File | Purpose |
-|------|---------|
-| `references/fast-mode.md` | Quick plan from codebase analysis only, no research |
-| `references/deep-mode.md` | Deep plan with sequential research and comprehensive analysis |
-| `references/parallel-mode.md` | Dependency-aware plan with file ownership matrix for parallel execution |
-| `references/validate-mode.md` | Validate plan with critical questions interview |
-| `references/state-machine-guide.md` | State machine notation, patterns, and validation checklist |
-| `references/planning-flow.dot` | Planning flow diagram |
+1. **Simple** (1 module, clear scope, < 5 files) → load `references/fast-mode.md`
+2. **Moderate** (multiple files, some research needed) → load `references/deep-mode.md`
+3. **Complex** (multi-module, cross-platform, needs dependency mapping) → load `references/parallel-mode.md`
+
+Heuristics: Single sentence → `:fast` | mentions "research" → `:deep` | multiple platforms/modules → `:parallel` | mentions "dependencies" or "phases" → `:parallel` | unsure → `:fast`, escalate if needed
 
 ## Plan Output Contract
 
@@ -72,45 +69,11 @@ plans/{YYMMDD-HHMM-slug}/
   phase-{N}-{slug}.md        — tasks, files to change, validation per phase
 ```
 
-**plan.md frontmatter** (required fields):
-```yaml
----
-title: "Short description"
-status: draft | active | completed | archived
-created: YYYY-MM-DD
-updated: YYYY-MM-DD
-effort: Xh
-phases: N
-platforms: [all | ios | android | web | backend]
-breaking: true | false
-blocks: []      # plan IDs this plan blocks (omit if none)
-blockedBy: []   # plan IDs that must complete before this one (omit if none)
----
-```
+**plan.md required frontmatter fields**: `title`, `status`, `created`, `updated`, `effort`, `phases`, `platforms`, `breaking`, `blocks`, `blockedBy`
 
-**Cross-plan dependency detection** (run before writing plan files):
-1. Read `plans/index.json` — scan for active/draft plans
-2. Check their frontmatter `blocks`/`blockedBy` fields for overlap with new plan scope
-3. Scan their phase files for shared file paths
-4. If overlap found → surface to user with plan name + conflicting paths → resolve before proceeding
-5. Populate `blocks`/`blockedBy` in new plan frontmatter when applicable
+**phase file required frontmatter fields**: `phase`, `title`, `effort`, `depends`
 
-**phase file frontmatter** (required fields):
-```yaml
----
-phase: N
-title: "Phase title"
-effort: Xh
-depends: []   # phase numbers this phase depends on
----
-```
-
-**Phases table in plan.md must link to phase files:**
-```markdown
-| # | Phase | Effort | Status | File |
-|---|-------|--------|--------|------|
-| 1 | Name | 2h | pending | [phase-1](./phase-1-slug.md) |
-```
+**Phases table** must link to phase files. Each phase must declare file ownership (no overlap across parallel phases).
 
 ## Plan Lifecycle
 
@@ -118,24 +81,11 @@ depends: []   # phase numbers this phase depends on
 draft → active → completed → archived
 ```
 
-| Action | Command |
-|--------|---------|
-| Activate | `node .claude/scripts/set-active-plan.cjs plans/{slug}` |
-| Complete | `node .claude/scripts/complete-plan.cjs plans/{slug}` |
-| Archive | `node .claude/scripts/archive-plan.cjs plans/{slug}` |
-| Board | `plans/README.md` — updated by scripts automatically |
-
 **MANDATORY final step** — after writing all plan files, run:
 ```bash
 node .claude/scripts/set-active-plan.cjs plans/{slug}
 ```
-This stamps `status: active` in `plan.md` and registers the plan in session state so `/cook` picks it up automatically. Do NOT skip this step.
-
-## Complexity Auto-Detection
-
-1. **Simple** (1 module, clear scope, < 5 files) → load `references/fast-mode.md`
-2. **Moderate** (multiple files, some research needed) → load `references/deep-mode.md`
-3. **Complex** (multi-module, cross-platform, needs dependency mapping) → load `references/parallel-mode.md`
+This stamps `status: active` and registers the plan so `/cook` picks it up automatically. Do NOT skip.
 
 ## Auto-Validation
 
@@ -145,97 +95,20 @@ After deep or parallel mode completes plan files (before activation):
 3. Present to user and document answers in `plan.md` under `## Validation Summary`
 4. Then activate plan
 
-**Fast mode**: skip validation (speed is the priority).
-**User can skip**: "Skip validation and activate" is always an option.
-
-## Platform Detection
-
-Detect platform per `skill-discovery` protocol. Pass detected platform as context to the selected variant.
-
-## Heuristics
-
-- Single sentence request → `:fast`
-- Request mentions "research" or "investigate" → `:deep`
-- Request mentions multiple platforms or modules → `:parallel`
-- Request mentions "dependencies" or "phases" → `:parallel`
-- If unsure → default to `:fast`, escalate if needed
-
-## Planning Expertise
-
-| Area | Key Activities |
-|------|---------------|
-| Requirements | Clarify ambiguity, extract functional + non-functional, identify edge cases |
-| Task Breakdown | Decompose, order by dependency, estimate complexity |
-| Dependencies | External packages, internal code, blockers, parallel opportunities |
-| Risk Assessment | Technical/timeline/resource risks, mitigation strategies |
-| Resource Estimation | Time per task, complexity levels, testing overhead |
-| Timeline | Critical path, milestones, buffer allocation |
-
-## Planning Framework
-
-1. **Understand** — Clarify requirements
-2. **Decompose** — Break into smaller tasks
-3. **Sequence** — Order by dependency
-4. **Estimate** — Time/complexity per task
-5. **Identify** — Potential blockers
-6. **Document** — Create structured plan
+Fast mode: skip validation. User can always skip: "Skip validation and activate".
 
 ## State Machine Modeling
 
-When feature involves stateful behavior (UI flows, protocols, async state, workflows), generate ASCII state diagram BEFORE coding:
-
-1. List all states (including error, timeout, edge states)
-2. Map every transition (trigger + guard conditions)
-3. Identify terminal states and dead ends
-4. Mark states where data is mutated
-
-```
-[INITIAL] ──(event)──▸ [STATE_A]
-    │                      │
-    │                  (condition)
-    │                      ▼
-    │               [STATE_B] ──(error)──▸ [ERROR]
-    │                      │
-    │                  (success)
-    │                      ▼
-    └──────────────▸ ◉ [DONE]
-```
+When feature involves stateful behavior (UI flows, protocols, async state), generate ASCII state diagram BEFORE coding. List all states, map every transition, identify terminal states and dead ends.
 
 Use when: auth flows, checkout/payment, form wizards, real-time sync, connection management, retry logic.
 Skip for: simple CRUD, stateless utilities, pure transforms.
-See `references/state-machine-guide.md` for notation, patterns, and validation checklist.
-
-## Mental Models
-
-| Model | Application |
-|-------|-------------|
-| Decomposition | Start with user value, work backward. Tree structure, estimate leaves, sum parents. |
-| 80/20 | 20% of work → 80% of value. Sequence high-value tasks first. |
-| Risk Management | High-risk tasks early, external dependencies first, unknowns before knowns. |
-
-## Best Practices
-
-- Be specific about files to create/modify
-- Include database migrations if needed
-- Note breaking changes
-- Consider testing strategy
-- Estimate conservatively, track actuals
-- Mark file ownership for parallel execution safety (parallel mode)
-- Use `knowledge` before planning, `knowledge --capture` after
 
 ## --predict Mode
 
-Stress-tests the approach with a structured 3-persona debate before generating phases.
+Auto-trigger when: 3+ interacting systems change, public API contract modified, migration/breaking change in scope, or user expresses uncertainty.
 
-### When to Auto-trigger
-
-Auto-trigger without explicit flag when:
-- 3+ interacting systems will be changed
-- Existing public API contract is being modified
-- Migration or breaking change is in scope
-- User expresses uncertainty ("should we", "is this the right approach")
-
-See `references/predict-mode.md` for the full debate protocol and output format.
+See `references/predict-mode.md` for the full 3-persona debate protocol.
 
 ## Mode Reference
 
@@ -246,6 +119,17 @@ See `references/predict-mode.md` for the full debate protocol and output format.
 | `--parallel` | `references/parallel-mode.md` | Parallelizable phases with ownership matrix |
 | `--validate` | `references/validate-mode.md` | Validate existing plan |
 | `--predict` | `references/predict-mode.md` | 3-persona expert debate before major changes |
+
+## References
+
+- `references/plan-templates.md` — example plan.md with full YAML frontmatter, example phase file with all sections filled in, sample success criteria patterns, common constraint patterns, cross-plan dependency detection steps, lifecycle script reference
+- `references/fast-mode.md` — quick plan from codebase analysis only, no research
+- `references/deep-mode.md` — deep plan with sequential research and comprehensive analysis
+- `references/parallel-mode.md` — dependency-aware plan with file ownership matrix for parallel execution
+- `references/validate-mode.md` — validate plan with critical questions interview
+- `references/predict-mode.md` — 3-persona debate protocol and output format
+- `references/state-machine-guide.md` — state machine notation, patterns, and validation checklist
+- `references/planning-flow.dot` — planning flow diagram
 
 <request>$ARGUMENTS</request>
 <platform>{{detected_platform or "none"}}</platform>
