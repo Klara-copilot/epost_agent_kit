@@ -42,16 +42,32 @@ Audit KB coverage and health:
 4. **Read project markers** — extract tech stack, scripts
 5. **Present** → Step 3
 
-## Step 2b — Has Flat Docs (force migrate)
+## Step 2b — Has Flat Docs (ask user)
 
-Read flat docs and build migration manifest for Phase 2:
+Read flat docs and present for user decision:
 
 1. **Read each doc file** (first 50 lines) — write 1-2 line summary + classify target category (ADR/ARCH/PATTERN/CONV/FEAT/FINDING/GUIDE)
 2. **Read project markers** (README, package.json, configs) — extract tech stack, scripts
-3. **Build migration manifest** — list every flat doc with: `source path → target category → proposed ID`. Include this in the researcher report so Phase 2 has an explicit migration plan.
-4. **Present** → Step 3
+3. **Build migration manifest** — list every flat doc with: `source path → target category → proposed ID`
+4. **Present the list to the user**, then ask:
 
-**Note:** Flat docs are always migrated — never left as-is. Phase 2 will convert them to structured KB with `index.json`.
+```
+Found N flat docs not in KB structure:
+
+- docs/foo.md → ARCH — "Overview of auth flow"
+- docs/bar.md → CONV — "Naming conventions"
+(etc.)
+
+Migrate to KB structure, or skip docs and continue with project setup?
+  → migrate  — convert all to docs/{category}/ID-slug.md + create index.json
+  → skip     — leave docs as-is, proceed directly to Phase 3 (env setup)
+```
+
+5. **Wait for user reply.** Record answer as `DOCS_ACTION`:
+   - "migrate" / "yes" / "m" → `DOCS_ACTION = "migrate"` → run Phase 2
+   - "skip" / "no" / "s" → `DOCS_ACTION = "skip"` → skip Phase 2, go to Phase 3
+
+**Note:** Phase 3 (env setup) always runs regardless of the user's docs choice.
 
 ## Step 2c — No Docs
 
@@ -181,28 +197,35 @@ else:
 
 ### Phase 2 — Documentation (epost-docs-manager)
 
+**Gate for flat docs**: If `DOCS_STATE = "flat"` and `DOCS_ACTION = "skip"`, skip this phase entirely and proceed to Phase 3.
+
 Use the Agent tool to dispatch docs agent with mode derived from DOCS_STATE:
 
 ```
-Agent(
-  subagent_type: "epost-docs-manager"
-  description: "Generate/update KB docs"
-  prompt: """
-  Read the researcher report at: {RESEARCH_REPORT}
+if DOCS_STATE = "flat" and DOCS_ACTION = "skip":
+  # User chose to skip migration — go directly to Phase 3
+else:
+  Agent(
+    subagent_type: "epost-docs-manager"
+    description: "Generate/update KB docs"
+    prompt: """
+    Read the researcher report at: {RESEARCH_REPORT}
 
-  Docs state: {DOCS_STATE}
+    Docs state: {DOCS_STATE}
 
-  Based on docs state, apply the matching workflow:
-  - DOCS_STATE = "none"  → run docs-init workflow: generate full KB structure in docs/ with index.json
-  - DOCS_STATE = "flat"  → FORCE MIGRATE: convert ALL flat docs to KB structure (ADR/ARCH/PATTERN/CONV/FEAT/FINDING/GUIDE + index.json). Use migration manifest from researcher report. Move files, do not leave originals. Every flat doc must end up categorized in the KB.
-  - DOCS_STATE = "kb"    → run docs-update --verify workflow: check all entries, flag STALE/BROKEN/GAP
+    Based on docs state, apply the matching workflow:
+    - DOCS_STATE = "none"  → run docs-init workflow: generate full KB structure in docs/ with index.json
+    - DOCS_STATE = "flat"  → migrate: convert ALL flat docs to KB structure (ADR/ARCH/PATTERN/CONV/FEAT/FINDING/GUIDE + index.json).
+                             Use migration manifest from researcher report.
+                             Copy files to new KB paths — do NOT delete originals until index.json is written successfully.
+    - DOCS_STATE = "kb"    → run docs-update --verify workflow: check all entries, flag STALE/BROKEN/GAP
 
-  Apply templates from `knowledge` skill. Keep all files under 800 LOC.
-  Update docs/index.json after all changes.
-  """
-)
+    Apply templates from `knowledge` skill. Keep all files under 800 LOC.
+    Update docs/index.json after all changes.
+    """
+  )
+  WAIT for Agent to complete.
 ```
-WAIT for Agent to complete.
 **Then immediately proceed to Phase 3 — do NOT stop here.**
 
 ### Phase 3 — Environment Setup & Run (epost-fullstack-developer)
