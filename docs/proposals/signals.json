@@ -1,8 +1,8 @@
 {
-  "generated": "2026-04-03T16:37:52.870Z",
+  "generated": "2026-04-04T01:21:04.659Z",
   "summary": {
-    "total": 45,
-    "new": 45,
+    "total": 49,
+    "new": 49,
     "proposed": 0,
     "dismissed": 0,
     "bySkill": {
@@ -43,15 +43,15 @@
         "low": 2
       },
       "docs": {
-        "total": 2,
+        "total": 3,
         "high": 0,
-        "medium": 0,
+        "medium": 1,
         "low": 2
       },
       "unknown": {
-        "total": 11,
+        "total": 13,
         "high": 4,
-        "medium": 6,
+        "medium": 8,
         "low": 1
       },
       "loop": {
@@ -67,9 +67,9 @@
         "low": 1
       },
       "security": {
-        "total": 1,
+        "total": 2,
         "high": 0,
-        "medium": 0,
+        "medium": 1,
         "low": 1
       },
       "audit": {
@@ -98,7 +98,7 @@
       }
     },
     "byType": {
-      "journal-flag": 32,
+      "journal-flag": 36,
       "audit-failure": 13,
       "workaround": 0
     }
@@ -597,6 +597,50 @@
       "targetSkill": "test",
       "suggestedAction": "",
       "detectedAt": "2026-04-03T13:23:42.110Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-4e18035e",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/understand-anything/260404-ua-patterns-reference.md",
+      "excerpt": "- Reference files overran the 1.5KB guideline. The guideline assumes minimal examples, but the phase spec required \"self-contained\" docs with ePost examples. The two goals are in slight tension. Resolved by keeping ePost application snippets concise (pseudocode, not full implementations).",
+      "targetSkill": "docs",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-04T00:43:25.138Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-d470bf48",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/understand-anything/260403-phase1-get-started-two-phase.md",
+      "excerpt": "SKILL.md was 310 lines before the edit — well above the 80-line guideline mentioned in the task spec. The task spec said \"keep SKILL.md under 80 lines\" but the existing file was already 310 lines. Applied YAGNI: added the new section without a full rewrite, since the file structure was clearly inten",
+      "targetSkill": "unknown",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-04T00:50:48.815Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-e076b3e3",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/understand-anything/260404-artifact-persistence-and-fingerprinting.md",
+      "excerpt": "- The `audit/SKILL.md` fingerprint step was initially drafted to apply to all audit modes including security. Added explicit exception to avoid weakening the security posture — `core/rules/verification.md` principle: safety over speed.\n- `cook/SKILL.md` had existing Step 0 → 0b flow. Adding a third ",
+      "targetSkill": "security",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-04T00:50:48.815Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-a178f2b9",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/knowledge-base/260404-frontend-api-discovery-schema.md",
+      "excerpt": "`init.md` line count was estimated at ~520 lines with the full algorithm inline. The phase-2 spec had a fallback rule for this exact case — extracting to a separate file. Followed the fallback without needing to improvise.",
+      "targetSkill": "unknown",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-04T01:10:58.561Z",
       "status": "new"
     }
   ]

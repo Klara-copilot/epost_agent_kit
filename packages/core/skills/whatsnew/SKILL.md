@@ -1,10 +1,10 @@
 ---
 name: whatsnew
 description: (ePost) Shows what changed in the kit recently — new skills, agent updates, rule changes. Use when user asks "what's new", "what changed", "what was added", "recent updates", or after pulling the latest kit
+argument-hint: "[--week | --all]"
 user-invocable: true
 context: inline
 metadata:
-  argument-hint: "[--week | --all]"
   keywords: [whatsnew, changelog, updates, new-skills, recent-changes]
   platforms: [all]
   triggers: ["what's new", "what changed", "recent updates", "what was added", "new in the kit"]

@@ -1,11 +1,11 @@
 ---
 name: cook
 description: (ePost) Orchestrates platform-aware feature implementation across web, iOS, Android, and backend. Use when user says "implement", "build", "add a feature", "cook", "make this work", or "continue the plan" — dispatches platform-aware feature implementation for web, iOS, Android, or backend
+argument-hint: "[feature description or plan file]"
 user-invocable: true
 context: fork
 agent: epost-fullstack-developer
 metadata:
-  argument-hint: "[feature description or plan file]"
   keywords:
     - cook
     - implement
@@ -84,6 +84,19 @@ If you caught yourself with any of the above: stop and run `/plan` first.
 **If active plan exists**, resolve which phase to implement:
 
 1. Read the plan's `status.md` FIRST (if it exists), then `plan.md`. Identify the first phase with `status: pending` and implement it — no need to ask the user what to do.
+
+## Step 0c — Artifact Consumption (Before Each Phase)
+
+Before implementing a phase, check `.epost-cache/artifacts/` for prior outputs from the same plan:
+
+1. List files matching `.epost-cache/artifacts/*-{plan-slug}*.json`
+2. For each match: read the file and check `timestamp` field
+3. If artifact is **< 24 hours old**: read `data` field and incorporate context (avoids re-discovering prior phase outputs)
+4. If artifact is **>= 24 hours old** or missing: proceed without it — re-discovery will happen naturally
+
+Log: "Loaded prior artifact: `.epost-cache/artifacts/{file}` ({age}h old)" or "No prior artifacts found for this plan."
+
+See `core/references/artifact-persistence-protocol.md` for envelope format and reading instructions.
 
 ## Status Tracking
 

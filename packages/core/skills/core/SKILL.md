@@ -2,8 +2,8 @@
 name: core
 description: (ePost) Defines operational boundaries, safety rules, and documentation standards for all agents. Use when any agent modifies files, makes architectural decisions, or needs safety and documentation rules
 user-invocable: false
-tier: core
 metadata:
+  tier: core
   keywords:
     - rules
     - boundaries

@@ -1,11 +1,11 @@
 ---
 name: retro
 description: Use when asked for a retrospective, sprint review, team metrics, or 'how did we do' analysis. Generates data-driven insights from git history.
+argument-hint: "[--since DATE] [--until DATE] [--compare] [--team] [--format report|table|brief]"
 user-invocable: true
 context: fork
 agent: epost-researcher
 metadata:
-  argument-hint: "[--since DATE] [--until DATE] [--compare] [--team] [--format report|table|brief]"
   keywords:
     - retrospective
     - retro

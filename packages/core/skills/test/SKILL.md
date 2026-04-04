@@ -1,11 +1,11 @@
 ---
 name: test
 description: (ePost) Detects platform and runs the appropriate test suite with coverage reporting. Use when user says "run tests", "add tests", "check coverage", "write unit tests", or "validate this works" — detects platform and runs the appropriate test suite (Jest, XCTest, JUnit, Espresso)
+argument-hint: "[--unit | --ui | --visual | --coverage | test description]"
 user-invocable: true
 context: fork
 agent: epost-tester
 metadata:
-  argument-hint: "[--unit | --ui | --visual | --coverage | test description]"
   keywords:
     - test
     - coverage
@@ -44,6 +44,22 @@ Run tests with automatic platform detection.
 | `--scenario` | Run edge case analysis before tests — delegates to `/scenario` skill. Generates test targets across 12 dimensions. |
 
 If `$ARGUMENTS` starts with `--visual`: load `references/visual-mode.md` and follow its steps. Skip platform detection.
+
+## Fingerprint Pre-Check (Skip Unchanged Test Targets)
+
+Before running tests, check `.epost-cache/fingerprints.json`:
+
+1. If file exists: load stored hashes
+2. For each source file in test scope: run `shasum -a 256 <file> | cut -c1-8` and compare to stored hash
+3. Skip test targets whose source files are all unchanged — log `"unchanged: {path}"`
+4. Run tests only for changed files or when `--coverage` flag is present (always full run)
+5. After test run: update `.epost-cache/fingerprints.json` with new hashes
+
+Report: `"{N} test targets run, {M} skipped (source unchanged)"`
+
+See `core/references/file-fingerprinting-protocol.md` for hash format, batch command, and invalidation rules.
+
+**Exception**: `--coverage` flag always triggers full test run regardless of fingerprints.
 
 ## Platform Detection
 

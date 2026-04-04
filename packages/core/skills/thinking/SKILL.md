@@ -2,9 +2,8 @@
 name: thinking
 description: "(ePost) Activates extended thinking for systematic hypothesis testing and deep analysis. Use when user says \"think deeply\", \"use extended thinking\", \"step-by-step analysis\", or when stuck after multiple failed attempts and needs systematic hypothesis testing"
 user-invocable: false
-category: workflow
-
 metadata:
+  category: workflow
   agent-affinity:
     - epost-debugger
     - epost-planner

@@ -1,9 +1,9 @@
 ---
 name: audit
 description: (ePost) Dispatches targeted quality audits (UI, a11y, code) to the right specialist. Use when user says "audit", "review", "run an audit", "check quality", "check my code", "is this good", "look at this before I commit", "review before merge", "a11y audit", "code audit", or "suggest improvements" — detects audit type (UI component, a11y, code, or improvements) and dispatches the right specialist
+argument-hint: "[--ui <ComponentName> [--platform web|ios|android|all] [--poc|--beta|--stable] | --a11y [platform] | --code]"
 user-invocable: true
 metadata:
-  argument-hint: "[--ui <ComponentName> [--platform web|ios|android|all] [--poc|--beta|--stable] | --a11y [platform] | --code]"
   keywords: [audit, review, component, a11y, accessibility, code, quality, ui-lib, muji, tokens]
   triggers:
     - "audit"
@@ -38,6 +38,22 @@ Every audit report MUST include a `methodology` field (JSON) or **Methodology** 
 - **Coverage Gaps** — anything unavailable (RAG down, checklist not found, no platform rules loaded)
 
 Track these as you work. Never leave them empty or with placeholder values.
+
+## Fingerprint Pre-Check (Skip Unchanged Files)
+
+Before running any audit, check `.epost-cache/fingerprints.json`:
+
+1. If file exists: load stored hashes
+2. For each file in audit scope: run `shasum -a 256 <file> | cut -c1-8` and compare to stored hash
+3. Skip files where hash matches — log `"unchanged: {path}"`
+4. Audit only changed or new files
+5. After audit completes: update `.epost-cache/fingerprints.json` with new hashes
+
+Report: `"{N} files audited, {M} skipped (unchanged)"`
+
+See `core/references/file-fingerprinting-protocol.md` for hash format, batch command, and invalidation rules.
+
+**Exception**: Security audits (`--code` with explicit security scope) MUST check all files regardless of fingerprint.
 
 ## Knowledge Retrieval (Pre-Audit)
 

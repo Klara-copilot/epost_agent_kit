@@ -1,11 +1,11 @@
 ---
 name: git
 description: (ePost) Runs git workflows — commit, push, PR creation, and full ship pipeline. Use when user says "commit", "push", "create a PR", "ship it", "done", "merge", "open a pull request", or "ship this feature" — runs the appropriate git workflow (commit, push, PR creation, or full ship pipeline)
+argument-hint: "[--commit | --push | --pr | --ship [official|beta] [--dry-run] [--skip-tests] [--skip-review] | --watzup]"
 user-invocable: true
 context: fork
 agent: epost-git-manager
 metadata:
-  argument-hint: "[--commit | --push | --pr | --ship [official|beta] [--dry-run] [--skip-tests] [--skip-review] | --watzup]"
   keywords:
     - git
     - commit

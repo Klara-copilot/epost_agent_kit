@@ -1,10 +1,10 @@
 ---
 name: get-started
 description: (ePost) Discovers project state and delivers a structured onboarding experience for new contributors. Use when user says "get started", "I'm new to this project", "onboard me", "what is this codebase", or "help me understand this project" — discovers project state and delivers a structured onboarding experience
+argument-hint: "[project path or question]"
 user-invocable: true
 context: inline
 metadata:
-  argument-hint: "[project path or question]"
   keywords:
     - onboard
     - get-started
@@ -88,6 +88,40 @@ Read project markers only (do NOT create files):
 2. **Scan** directory structure (top 2 levels via `ls`)
 3. **Present** → Step 3
 
+## Step 2d — Two-Phase Codebase Extraction
+
+Before presenting insights, run structural scan then semantic annotation. This applies to all Step 2 branches.
+
+**Phase 1a — Structural Scan (deterministic)**
+Run commands, no LLM inference:
+- `git ls-files | head -200` — file inventory
+- Detect framework from marker files (`package.json`, `pom.xml`, `build.gradle`, `Package.swift`, `Cargo.toml`)
+- Locate entry points: `src/app/`, `*App.swift`, `MainActivity.kt`, `main` field in package.json
+- Parse dependency manifests: extract dep names from `package.json` / `pom.xml` / `build.gradle`
+- Build import map: for top 20 files by size, count inbound imports via grep
+
+Output: structured `{framework, entryPoints[], topFiles[], importMap{file: inboundCount}}` — no prose yet.
+
+See `references/structural-scan-protocol.md` for full command list and output schema.
+See `understand-patterns/references/two-phase-extraction.md` for the pattern.
+
+**Phase 1b — Semantic Annotation (LLM)**
+Using Phase 1a output only — do NOT re-read raw source files:
+- Annotate each entry point: purpose, complexity (`simple`/`moderate`/`complex`)
+- Explain key dependency relationships for top 3–5 modules
+- Identify 3–5 "gateway files" — must-reads before exploring features
+
+See `references/semantic-annotation-protocol.md` for annotation format.
+
+**Fan-In Tour**
+Sort modules by `inboundCount` descending → assign tiers → build numbered learning tour:
+- Tier 1 (≥5 inbound): foundations — read first
+- Tier 2 (2–4 inbound): shared utilities
+- Tier 3 (0–1 inbound): features / leaves
+
+See `references/fan-in-tour-construction.md` for tier rules and output format.
+See `understand-patterns/references/fan-in-ordering.md` for topology background.
+
 ## Step 3 — Present Insights
 
 ```markdown
@@ -101,6 +135,9 @@ Read project markers only (do NOT create files):
 
 ### Entry Points
 - {main files}
+
+### Codebase Tour (fan-in order)
+{numbered list from fan-in tour — Tier 1 foundations first}
 
 ### Documentation Status
 {one of:}

@@ -36,9 +36,9 @@ blockedBy: []
 
 | # | Phase | Effort | Status | File |
 |---|-------|--------|--------|------|
-| 0 | UA Patterns Reference Skill | 1h | pending | [phase-0](./phase-0-ua-patterns-reference.md) |
-| 1 | Two-Phase Extraction for get-started | 2h | pending | [phase-1](./phase-1-get-started-two-phase.md) |
-| 2 | Intermediate Artifacts + File Fingerprinting | 3h | pending | [phase-2](./phase-2-artifacts-and-fingerprinting.md) |
+| 0 | UA Patterns Reference Skill | 1h | done | [phase-0](./phase-0-ua-patterns-reference.md) |
+| 1 | Two-Phase Extraction for get-started | 2h | done | [phase-1](./phase-1-get-started-two-phase.md) |
+| 2 | Intermediate Artifacts + File Fingerprinting | 3h | done | [phase-2](./phase-2-artifacts-and-fingerprinting.md) |
 | 3 | Understand Skill (Graph Consumer) | 2h | pending | [phase-3](./phase-3-understand-skill.md) |
 | 4 | Graph-Aware Planning and Debugging | 2h | pending | [phase-4](./phase-4-graph-aware-agents.md) |
 
