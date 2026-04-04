@@ -45,11 +45,11 @@ Full onboarding pipeline — detect project state, then dispatch researcher → 
 | Phase | Agent | Condition |
 |-------|-------|-----------|
 | 1 — Research | `epost-researcher` | Only if docs state is `flat` or `none` |
-| 2 — Documentation | `epost-docs-manager` | Always — init, migrate, or verify KB |
+| 2 — Documentation | `epost-docs-manager` | `none` (init) or `kb` (verify). `flat` → ask user first |
 | 3 — Env Setup | `epost-fullstack-developer` | Always — install, build, launch |
 | 4 — Summary | (inline) | Always — consolidate results |
 
-**CRITICAL**: All 4 phases run automatically in sequence. Do NOT stop between phases to ask the user what to do.
+**CRITICAL**: Phases run automatically in sequence with ONE exception: when `flat` docs are detected, pause after presenting the doc list and ask migrate-or-skip before dispatching Phase 2.
 
 ## Docs State Detection
 
@@ -60,7 +60,7 @@ Detect before Phase 1:
 
 ## Rules
 
-- **MUST run all 4 phases** — do NOT stop, present choices, or ask user between phases
+- **MUST run all phases** — one allowed pause: flat docs gate (ask migrate/skip before Phase 2)
 - **Fast detection** — Steps 1–3 are lightweight scan only, < 15s
 - **Sequential dispatch** — use Agent tool for each phase, wait for completion before next
 - **Shared report** — researcher writes to `reports/`, other agents read from it
