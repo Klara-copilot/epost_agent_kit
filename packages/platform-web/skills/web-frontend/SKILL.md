@@ -21,150 +21,33 @@ React 18 + TypeScript frontend patterns. Covers Redux Toolkit (dual-store), sess
 
 Uses **two Redux stores**:
 
-### Global Store (persisted, app-wide)
+| Store | Location | Scope | Persistence |
+|-------|----------|-------|-------------|
+| Global | `libs/utils/src/redux/store.ts` | App-wide | redux-persist |
+| Feature | `app/[locale]/(auth)/feature-name/_stores/feature-store.tsx` | Feature layout | No |
 
-**Location**: `libs/utils/src/redux/store.ts`
+- Global store: `combineReducers` + `persistReducer` + `PersistGate`, mounted via `ReduxProvider`
+- Feature store: own `configureStore` + `Provider`, scoped to feature layout; includes RTK Query middleware
+- Use `useAppSelector` with narrow selectors — subscribe to booleans/primitives, not objects
 
-```typescript
-import { configureStore } from '@reduxjs/toolkit';
-import { persistReducer, persistStore } from 'redux-persist';
-
-const rootReducer = combineReducers({
-  selectedItemReducer: itemSlice,
-  fileReducer: uploadSlice,
-  userPreferencesReducer: userPreferencesSlice,
-  // Add your app-wide reducers here
-});
-
-export const store = configureStore({
-  reducer: persistReducer(persistConfig, rootReducer),
-  middleware: getDefaultMiddleware =>
-    getDefaultMiddleware({ serializableCheck: false }),
-});
-
-export type RootState = ReturnType<typeof store.getState>;
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
-```
-
-Mounted via `ReduxProvider` (with `PersistGate`) in root locale layout.
-
-### Feature Store (scoped, RTK Query)
-
-**Location**: `app/[locale]/(auth)/feature-name/_stores/feature-store.tsx`
-
-Own `configureStore` + `Provider`, scoped to the feature layout:
-
-```typescript
-export const store = configureStore({
-  reducer: {
-    listReducer, filterReducer, selectionReducer,
-    [featureApi.reducerPath]: featureApi.reducer,
-  },
-  middleware: getDefaultMiddleware =>
-    getDefaultMiddleware({ serializableCheck: false })
-      .concat(featureApi.middleware),
-});
-```
-
-### Slice Template
-
-```typescript
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-const initialState = { selectedItem: { id: '', name: '' } };
-
-export const selectedItem = createSlice({
-  name: 'selectedItem',
-  initialState,
-  reducers: {
-    removeItem: () => initialState,
-    setItem: (state, action: PayloadAction<{ id: string; name: string }>) => ({
-      selectedItem: action.payload,
-    }),
-  },
-});
-
-export const { removeItem, setItem } = selectedItem.actions;
-export default selectedItem.reducer;
-```
-
-### Selector Best Practices
-
-See `references/render-optimization.md` for selector patterns and memoization.
+See `references/react-patterns.md` for full store setup, slice templates, and selector memoization.
 
 ## Provider Nesting Order
 
 See `web-auth` skill for provider nesting order.
 
-## Component Patterns
+## Component Conventions
 
-### forwardRef + displayName
-
-```typescript
-'use client';
-import { forwardRef, Ref, useImperativeHandle } from 'react';
-
-const SearchField = forwardRef((props: ISearchFieldProps, ref: Ref<ICustomSearchFieldRef>) => {
-  useImperativeHandle(ref, () => ({
-    setValue: setSearchValue,
-    focus: () => inputRef.current?.focus(),
-  }));
-  return <TextField {...textFieldProps} />;
-});
-SearchField.displayName = 'SearchField';  // Always set for DevTools
-```
-
-### Compound Components (klara-theme pattern)
-
-See `references/composition.md` for compound component patterns.
-
-### Explicit Variants (not boolean props)
-
-See `references/composition.md` for explicit variant patterns.
+- **`forwardRef` + `displayName`**: Always set `displayName` on forwardRef components for DevTools
+- **Compound components**: See `references/composition.md` for klara-theme pattern
+- **Explicit variants**: Use `cva()` variant props — not boolean props
+- Keep components under 200 lines
 
 ## Hook Patterns
 
-### Utility Hook (no React state)
+Three hook types: utility (no state), effect with cleanup, context hook with guard.
 
-```typescript
-export const useSessionData = () => {
-  const getSessionFields = (session: ExtendedSession | null) => ({
-    isAuthenticated: !!session?.accessToken,
-    organizationId: session?.organizationId ?? '',
-    roles: session?.roles ?? [],
-  });
-  return { getSessionFields };
-};
-```
-
-### Hook with Effect + Cleanup
-
-```typescript
-export const useWebSocketMembers = (socket: WebSocket, channelId: string) => {
-  const [members, setMembers] = useState<Member[]>([]);
-
-  useEffect(() => {
-    const handleMessage = (event: MessageEvent) => { /* update members */ };
-    socket.addEventListener('message', handleMessage);
-    return () => socket.removeEventListener('message', handleMessage);
-  }, [socket, channelId]);
-
-  return { members };
-};
-```
-
-### Context Hook with Guard
-
-```typescript
-const SelectedRoom = createContext<Room | null>(null);
-export const SelectedRoomProvider = SelectedRoom.Provider;
-
-export function useSelectedRoom(): Room {
-  const room = useContext(SelectedRoom);
-  if (!room) throw new Error('Room not found!');
-  return room;
-}
-```
+See `references/react-patterns.md` for hook examples including `useImperativeHandle`, cleanup, and context guard patterns.
 
 ## Build Commands
 
@@ -177,35 +60,21 @@ npm test             # Unit tests (Jest + RTL)
 npx playwright test  # E2E tests
 ```
 
-## Reference Files
-
-| File | Purpose |
-|------|---------|
-| `references/composition.md` | Compound components, state decoupling, children composition |
-| `references/render-optimization.md` | React.memo, derived state, transitions, lazy init |
-| `references/prototype.md` | Convert external prototypes/mockups to production code |
-| `references/rag.md` | Vector search for web codebase via MCP tools |
-| `references/typescript-standards.md` | Strict mode, no-any, Result pattern, immutability, null safety |
-
 ## Sub-Skill Routing
 
-When this skill is active and user intent matches a sub-skill, delegate:
-
-| Intent | Route | When |
-|--------|-------|------|
-| Next.js patterns | `web-nextjs` skill | App Router, Server Components, RSC |
-| API routes | `web-api-routes` skill | API endpoints, server actions |
-| Module integration | `web-modules` skill | B2B module patterns |
-| Prototype conversion | `references/prototype.md` | `/convert`, rapid prototype |
-| RAG search | `references/rag.md` | Vector search web codebase |
-| i18n | `web-i18n` skill | Translations, locale routing |
-| Auth | `web-auth` skill | Session, OAuth, feature flags |
-| Testing | `web-testing` skill | Jest, Playwright, coverage |
+| Intent | Route |
+|--------|-------|
+| Next.js patterns | `web-nextjs` skill |
+| API routes | `web-api-routes` skill |
+| Module integration | `web-modules` skill |
+| i18n | `web-i18n` skill |
+| Auth | `web-auth` skill |
+| Testing | `web-testing` skill |
 
 ## Rules
 
 - Use Redux Toolkit for state — NOT Zustand, NOT React Query
-- Use `useAppSelector` with narrow selectors — subscribe to booleans, not objects
+- Use `useAppSelector` with narrow selectors
 - Always set `displayName` on `forwardRef` components
 - Use explicit variant props (via `cva()`), not boolean props
 - Keep components under 200 lines
@@ -213,11 +82,18 @@ When this skill is active and user intent matches a sub-skill, delegate:
 - WCAG AA accessibility
 - React 18 only — do NOT use React 19 features (`use()`, `<Activity>`, no-forwardRef)
 
+## References
+
+| File | Purpose |
+|------|---------|
+| `references/react-patterns.md` | Store setup, slice templates, hook examples, composition patterns |
+| `references/composition.md` | Compound components, state decoupling, children composition |
+| `references/render-optimization.md` | React.memo, derived state, transitions, lazy init |
+| `references/prototype.md` | Convert external prototypes/mockups to production code |
+| `references/rag.md` | Vector search for web codebase via MCP tools |
+| `references/typescript-standards.md` | Strict mode, no-any, Result pattern, immutability, null safety |
+
 ## Dependencies
 
-- React 18+
-- TypeScript
-- Redux Toolkit + redux-persist
-- React Testing Library
-- Tailwind CSS (styling)
-- klara-theme (UI components)
+- React 18+, TypeScript, Redux Toolkit + redux-persist
+- React Testing Library, Tailwind CSS, klara-theme

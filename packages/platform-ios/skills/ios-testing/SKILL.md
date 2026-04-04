@@ -30,97 +30,20 @@ Keep unit tests fast and isolated. Reserve XCUITest for user-visible flows where
 
 ---
 
-## XCTest Unit Patterns
+## XCTest Critical Rules
 
-### async/await tests
+- `setUp`/`tearDown` must call `super` when async — use `async throws` variants
+- Use `addTeardownBlock` for cleanup registered at point of setup
+- `try XCTUnwrap(optional)` — fail immediately on nil, no force-unwrap
+- `XCTAssertThrowsError` for error path validation
 
-```swift
-func testFetchUser() async throws {
-    let user = try await sut.fetchUser(id: "123")
-    XCTAssertEqual(user.name, "Alice")
-}
-```
+## XCUITest Critical Rules
 
-### setUp / tearDown
+- **ALWAYS use `.accessibilityIdentifier`** — never query by label/text (breaks on localization)
+- **`waitForExistence(timeout:)` is MANDATORY** — never use `.exists` alone
+- Pass `["--uitesting"]` via `app.launchArguments` to disable animations
 
-```swift
-override func setUp() async throws {
-    try await super.setUp()
-    sut = UserService(client: MockAPIClient())
-}
-
-override func tearDown() async throws {
-    sut = nil
-    try await super.tearDown()
-}
-```
-
-Use `addTeardownBlock` for per-test cleanup registered at the point of setup:
-
-```swift
-func testSomething() throws {
-    let resource = try Resource.open()
-    addTeardownBlock { resource.close() }
-    // test continues — resource always closed
-}
-```
-
-### Unwrapping and error assertions
-
-```swift
-// Safe unwrap — test fails immediately on nil
-let item = try XCTUnwrap(response.items.first)
-
-// Assert an error is thrown
-XCTAssertThrowsError(try sut.validate(input: "")) { error in
-    XCTAssertEqual(error as? ValidationError, .empty)
-}
-```
-
----
-
-## XCUITest E2E Patterns
-
-### Critical rules
-
-- **ALWAYS use `.accessibilityIdentifier`** — never query by label or text. Labels break on localization; identifiers are stable.
-- **`waitForExistence(timeout:)` is MANDATORY** — never use `.exists` alone. Elements may not be rendered yet.
-- Use `app.launchArguments` to pass test flags (`["--uitesting"]`) so the app can disable animations and use deterministic data.
-
-```swift
-app.launchArguments = ["--uitesting"]
-app.launch()
-
-let loginButton = app.buttons["login_button"]
-XCTAssertTrue(loginButton.waitForExistence(timeout: 5))
-loginButton.tap()
-```
-
-### Page Object Model
-
-Encapsulate screen interactions in page objects. Actions return the next page to enable chaining.
-
-```swift
-struct LoginPage {
-    let app: XCUIApplication
-
-    var emailField: XCUIElement { app.textFields["login_email"] }
-    var passwordField: XCUIElement { app.secureTextFields["login_password"] }
-    var submitButton: XCUIElement { app.buttons["login_submit"] }
-
-    @discardableResult
-    func login(email: String, password: String) -> DashboardPage {
-        emailField.tap()
-        emailField.typeText(email)
-        passwordField.tap()
-        passwordField.typeText(password)
-        submitButton.tap()
-        return DashboardPage(app: app)
-    }
-}
-```
-
-See `references/xctest-patterns.md` for full Page Object examples and XCUITest flakiness patterns.
+See `references/xctest-patterns.md` for async/await examples, setUp/tearDown, Page Object Model.
 
 ---
 

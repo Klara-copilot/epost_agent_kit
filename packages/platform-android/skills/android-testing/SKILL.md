@@ -72,169 +72,33 @@ composeTestRule.onNodeWithTag("list_item", useUnmergedTree = true)
 
 See `references/compose-ui-testing.md` for full matcher table and flakiness patterns.
 
-## Hilt DI Testing
+## Hilt DI Critical Rules
 
-Use `@HiltAndroidTest` on any test that requires Hilt injection. Call `hiltRule.inject()` in `@Before`.
+- `@HiltAndroidTest` + `HiltAndroidRule` + `hiltRule.inject()` in `@Before`
+- **Prefer `@TestInstallIn`** — one Dagger component compiled once, shared across all tests
+- **Ad-hoc override**: `@BindValue` for single test class
+- **Avoid `@UninstallModules`** — generates a custom component per test class, slows builds
 
-```kotlin
-@HiltAndroidTest
-@RunWith(AndroidJUnit4::class)
-class LoginViewModelTest {
+## ViewModel + Flow Critical Rules
 
-    @get:Rule
-    var hiltRule = HiltAndroidRule(this)
+- Use `runTest` from `kotlinx-coroutines-test`
+- Replace `Dispatchers.Main` with `StandardTestDispatcher` via `MainDispatcherRule()`
+- Use `advanceUntilIdle()` to let coroutines complete
+- Use **Turbine** `.test {}` for Flow assertions: `awaitItem()`, `cancelAndIgnoreRemainingEvents()`
 
-    @Inject
-    lateinit var viewModel: LoginViewModel
+## Room Critical Rules
 
-    @Before
-    fun setUp() {
-        hiltRule.inject()
-    }
-}
-```
+- `Room.inMemoryDatabaseBuilder()` — no persistent state between tests
+- `allowMainThreadQueries()` safe in tests only
+- Use `runTest` for all `suspend` DAO functions
 
-**Preferred: `@TestInstallIn`** — replaces a production module for the entire test source set. One Dagger component compiled once, shared across all tests:
+## MockK Quick Reference
 
-```kotlin
-@Module
-@TestInstallIn(
-    components = [SingletonComponent::class],
-    replaces = [AuthModule::class]
-)
-abstract class FakeAuthModule {
-    @Binds
-    abstract fun bindAuthRepo(fake: FakeAuthRepository): AuthRepository
-}
-```
-
-**Ad-hoc override: `@BindValue`** — replaces a binding for a single test class:
-
-```kotlin
-@HiltAndroidTest
-class SomeTest {
-    @BindValue @JvmField
-    val authRepo: AuthRepository = mockk(relaxed = true)
-}
-```
-
-**Avoid `@UninstallModules`** — it generates a custom Dagger component per test class, significantly slowing build times.
-
-See `references/hilt-testing.md` for full examples and scoping patterns.
-
-## ViewModel + Flow Testing
-
-Use `runTest` from `kotlinx-coroutines-test`. Replace `Dispatchers.Main` with `StandardTestDispatcher`.
-
-```kotlin
-@OptIn(ExperimentalCoroutinesApi::class)
-class LoginViewModelTest {
-
-    @get:Rule
-    val mainDispatcherRule = MainDispatcherRule() // sets Main to TestDispatcher
-
-    private val authRepo = mockk<AuthRepository>()
-    private lateinit var viewModel: LoginViewModel
-
-    @Before
-    fun setUp() {
-        viewModel = LoginViewModel(authRepo)
-    }
-
-    @Test
-    fun `login success emits LoggedIn state`() = runTest {
-        coEvery { authRepo.login(any(), any()) } returns Result.success(fakeUser)
-
-        viewModel.login("user@example.com", "password")
-        advanceUntilIdle()
-
-        assertEquals(LoginUiState.LoggedIn, viewModel.uiState.value)
-    }
-}
-```
-
-**Turbine** for Flow assertions:
-
-```kotlin
-@Test
-fun `user stream emits updates`() = runTest {
-    viewModel.users.test {
-        val first = awaitItem()
-        assertEquals(emptyList<User>(), first)
-
-        viewModel.loadUsers()
-        val loaded = awaitItem()
-        assertEquals(2, loaded.size)
-
-        cancelAndIgnoreRemainingEvents()
-    }
-}
-```
-
-## Room Testing
-
-```kotlin
-private lateinit var db: AppDatabase
-private lateinit var dao: UserDao
-
-@Before
-fun createDb() {
-    db = Room.inMemoryDatabaseBuilder(
-        ApplicationProvider.getApplicationContext(),
-        AppDatabase::class.java
-    )
-        .allowMainThreadQueries()
-        .build()
-    dao = db.userDao()
-}
-
-@After
-fun closeDb() {
-    db.close()
-}
-
-@Test
-fun insertAndReadUser() = runTest {
-    val user = User(id = 1, name = "Alice")
-    dao.insert(user)
-    val result = dao.getById(1)
-    assertEquals(user, result)
-}
-```
-
-`allowMainThreadQueries()` is safe in tests — removes the Room main-thread guard without performance concerns. Use `runTest` for all `suspend` DAO functions.
-
-## MockK Patterns
-
-```kotlin
-// Basic mock
-val repo = mockk<UserRepository>()
-
-// Stub return value
-every { repo.getUser(1) } returns fakeUser
-
-// Stub suspend function
-coEvery { repo.fetchUser(1) } returns Result.success(fakeUser)
-
-// Relaxed mock — auto-stubs all methods with default values
-val repo = mockk<UserRepository>(relaxed = true)
-
-// Verify call happened
-verify { repo.getUser(1) }
-
-// Verify suspend call
-coVerify { repo.fetchUser(1) }
-
-// Capture argument
-val slot = slot<Int>()
-every { repo.getUser(capture(slot)) } returns fakeUser
-repo.getUser(42)
-assertEquals(42, slot.captured)
-```
-
-Use `mockk(relaxed = true)` when only a subset of methods are under test — avoids boilerplate stubs for unrelated calls.
+- `mockk<T>()` — strict mock, must stub all called methods
+- `mockk<T>(relaxed = true)` — auto-stubs with defaults, use when only subset of methods are under test
+- `every { }` / `coEvery { }` for stubbing; `verify { }` / `coVerify { }` for assertion
 
 ## References
 
 - `references/compose-ui-testing.md` — Full matcher table, actions, flakiness patterns, Compose+Views interop
-- `references/hilt-testing.md` — @TestInstallIn, @BindValue, scoped fakes, custom test application
+- `references/hilt-testing.md` — @TestInstallIn, @BindValue, scoped fakes, full examples

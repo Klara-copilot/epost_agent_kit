@@ -1,6 +1,6 @@
 ---
 name: figma
-description: (ePost) Extracts Figma data, maps design tokens to code, and compares implementations against designs. Use when extracting Figma data, mapping design tokens to code, or comparing implementation against Figma designs across any platform (web, iOS, Android)
+description: "(ePost) Use when extracting Figma data, mapping design tokens to code, or comparing implementation against Figma designs (web, iOS, Android). Extracts Figma data and maps tokens to code."
 user-invocable: false
 
 metadata:

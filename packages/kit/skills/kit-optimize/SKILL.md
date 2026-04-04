@@ -1,11 +1,11 @@
 ---
 name: kit-optimize
 description: (ePost) Use when optimizing an existing skill for token efficiency, progressive disclosure, or CSO compliance. Use when user says "optimize skill", "improve skill", or "make skill more efficient".
+argument-hint: "[skill-name] [prompt]"
 user-invocable: true
 context: fork
 agent: epost-fullstack-developer
 metadata:
-  argument-hint: "[skill-name] [prompt]"
   keywords: [optimize, skill, CSO, token-efficiency, progressive-disclosure]
   triggers: [/kit-optimize, optimize skill, improve skill, CSO fix]
   platforms: [all]

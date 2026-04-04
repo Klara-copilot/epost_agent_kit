@@ -1,6 +1,6 @@
 ---
 name: theme-color-system
-description: Use when setting any color (background, text, border, tint, shadow) on UIView/UILabel/UIButton/CALayer in ios_theme_ui. Provides ThemeColorPicker API, semantic key enums, and ThemeColorScheme convenience pickers. Triggers on color assignment, theme styling, picker construction.
+description: "Use when setting colors on UIView/UILabel/UIButton/CALayer in ios_theme_ui — background, text, border, tint, shadow. Provides ThemeColorPicker API, semantic key enums, ThemeColorScheme pickers."
 metadata:
   keywords:
     - color

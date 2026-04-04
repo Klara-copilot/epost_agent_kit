@@ -1,11 +1,11 @@
 ---
 name: kit-add-skill
 description: "(ePost) Use when adding a new skill, creating a skill, scaffolding a skill directory, or registering a skill in a kit package. Triggers: 'add a skill', 'new skill', 'create a skill', 'scaffold a skill'."
+argument-hint: "[skill-name] [description]"
 user-invocable: true
 context: fork
 agent: epost-fullstack-developer
 metadata:
-  argument-hint: "[skill-name] [description]"
   keywords: [skill, create, scaffold, add-skill, kit]
   triggers: [/kit-add-skill, create a skill, scaffold skill, add a skill]
   platforms: [all]

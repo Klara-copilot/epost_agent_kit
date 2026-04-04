@@ -40,167 +40,36 @@ Use when building Android features, UI components, or platform-specific function
 - **[room-entity-dao-template.kt](./assets/room-entity-dao-template.kt)** - Database with migrations
 - **[retrofit-service-template.kt](./assets/retrofit-service-template.kt)** - API service with error handling
 
-## Architecture Patterns
+## Architecture
 
-### MVVM Pattern
-Reference: [mvvm-architecture.md](./references/mvvm-architecture.md)
+MVVM: UI (Composables) → ViewModel (StateFlow) → Domain (use cases) → Data (Room, Retrofit)
 
-Layer responsibilities:
-- **UI Layer**: Composables collect state, emit user actions
-- **ViewModel Layer**: Holds StateFlow, processes actions, calls repositories
-- **Domain Layer**: Business logic, use cases, domain models
-- **Data Layer**: Repository implementations, Room, Retrofit
+Key conventions:
+- `StateFlow` not `LiveData`; `collectAsStateWithLifecycle()` in Composables
+- Sealed `UiState` interface: Loading / Success / Error
+- Hoist state up, pass callbacks down; `remember`/`derivedStateOf` for recomposition
+- `Kotlinx Serialization` over Gson; OkHttp interceptors for auth/logging
 
-```kotlin
-// Example Flow
-User clicks button
-    ↓
-Composable calls ViewModel function
-    ↓
-ViewModel updates StateFlow
-    ↓
-Composable recomposes with new state
-```
+## Tech Stack Summary
 
-### Compose Best Practices
-Reference: [compose-best-practices.md](./references/compose-best-practices.md)
+| Area | Library |
+|------|---------|
+| UI | Jetpack Compose + Material 3 |
+| DI | Hilt |
+| DB | Room + Flow |
+| Network | Retrofit + OkHttp |
+| Async | Coroutines + StateFlow |
+| Testing | JUnit 4, MockK, Turbine, Compose Testing |
 
-Key concepts:
-- **State Hoisting**: Move state up, pass down callbacks
-- **Recomposition**: Use remember, derivedStateOf, keys in lists
-- **Side Effects**: LaunchedEffect, DisposableEffect, rememberCoroutineScope
-- **Modifiers**: Order matters, always accept Modifier parameter
-
-### Error Handling
-Reference: [error-handling.md](./references/error-handling.md)
-
-Patterns:
-- **Result Wrapper**: Sealed class for Success/Error/Loading
-- **Custom Exceptions**: Domain-specific error types
-- **User Messages**: Convert exceptions to friendly text
-- **Retry Logic**: Exponential backoff for network errors
-- **Validation**: Form validation with detailed errors
-
-## Test Examples
-
-### Unit Tests
-- **[viewmodel-test-example.kt](./scripts/viewmodel-test-example.kt)** - Test ViewModels with Turbine
-- **[repository-test-example.kt](./scripts/repository-test-example.kt)** - Test repositories with fakes/mocks
-
-### UI Tests
-- **[compose-ui-test-example.kt](./scripts/compose-ui-test-example.kt)** - Compose testing with semantics
-
-Testing patterns:
-- Use `runTest` for coroutine tests
-- Use `Turbine` for Flow assertions
-- Use `MockK` for mocking
-- Use Fake implementations for complex dependencies
-- Test state transitions, not implementation
-
-## Tech Stack
-
-### Core (Required)
-- **Language**: Kotlin 2.0+
-- **Min SDK**: Android 7.0+ (API 24)
-- **Target SDK**: Android 14+ (API 34)
-- **UI**: Jetpack Compose + Material 3
-- **Architecture**: MVVM with ViewModel + StateFlow
-
-### Jetpack Libraries
-- **Compose**: UI toolkit (BOM for version management)
-- **Navigation**: Type-safe navigation with Compose
-- **ViewModel**: Lifecycle-aware state management
-- **Room**: Local database with Flow
-- **Hilt**: Dependency injection
-
-### Networking & Serialization
-- **Retrofit**: HTTP client
-- **OkHttp**: Networking layer with interceptors
-- **Kotlinx Serialization**: JSON serialization (preferred over Gson)
-
-### Concurrency
-- **Coroutines**: Structured concurrency
-- **Flow**: Reactive streams
-
-### Testing
-- **JUnit**: Unit testing framework
-- **MockK**: Kotlin mocking library
-- **Turbine**: Flow testing assertions
-- **Compose Testing**: UI testing with semantics
-- **Espresso**: Android UI testing (if needed)
-
-## Usage Instructions & Version Compatibility
-
-See `references/usage-and-compatibility.md` for step-by-step setup guides (project, features, database, API, error handling, tests) and version compatibility matrix.
-
-## Best Practices
-
-1. **Keep files under 200 lines** - Split large files into smaller modules
-2. **Use sealed interfaces for state** - Type-safe state representation
-3. **Hoist state appropriately** - Balance reusability and simplicity
-4. **Provide keys in lazy lists** - Optimize recomposition
-5. **Use Flow for reactive data** - Observe database changes efficiently
-6. **Map DTOs to domain models** - Keep layers isolated
-7. **Handle errors gracefully** - Always provide user-friendly messages
-8. **Test each layer independently** - Mock dependencies appropriately
-9. **Use Material 3 design** - Follow system theme and dynamic colors
-10. **Optimize for performance** - Profile with Android Studio Profiler, minimize recomposition
-
-## Common Patterns
-
-### ViewModel with Flow
-```kotlin
-@HiltViewModel
-class MyViewModel @Inject constructor(
-    private val repository: MyRepository
-) : ViewModel() {
-    val uiState: StateFlow<UiState> = repository.observeData()
-        .map { data -> UiState.Success(data) }
-        .catch { emit(UiState.Error(it.message ?: "Error")) }
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000),
-            initialValue = UiState.Loading
-        )
-}
-```
-
-### Compose with State Collection
-```kotlin
-@Composable
-fun MyScreen(viewModel: MyViewModel = hiltViewModel()) {
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-
-    when (val state = uiState) {
-        is UiState.Loading -> LoadingView()
-        is UiState.Success -> SuccessView(state.data)
-        is UiState.Error -> ErrorView(state.message)
-    }
-}
-```
-
-### Repository with Caching
-```kotlin
-class MyRepository @Inject constructor(
-    private val api: ApiService,
-    private val dao: MyDao
-) {
-    fun observeData(): Flow<List<Item>> = dao.observeAll()
-
-    suspend fun refresh() {
-        val items = api.fetchItems()
-        dao.insertAll(items)
-    }
-}
-```
+Min SDK: API 24 (Android 7.0) | Target: API 34+
 
 ## References
 
-- [Android Developer Docs](https://developer.android.com)
-- [Kotlin Coroutines Guide](https://kotlinlang.org/docs/coroutines-guide.html)
-- [Jetpack Compose](https://developer.android.com/jetpack/compose)
-- [Material 3 Design](https://m3.material.io)
-- [Now in Android Sample](https://github.com/android/nowinandroid)
+- `references/android-patterns.md` — ViewModel+StateFlow, Compose state collection, Repository, Hilt module, coroutine patterns
+- `references/mvvm-architecture.md` — Layer responsibilities, data flow diagram
+- `references/compose-best-practices.md` — State hoisting, recomposition, side effects
+- `references/error-handling.md` — Result wrapper, retry logic, validation
+- `references/usage-and-compatibility.md` — Setup guides, version compatibility matrix
 
 ## Build Commands
 

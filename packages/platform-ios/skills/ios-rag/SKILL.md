@@ -1,6 +1,6 @@
 ---
 name: ios-rag
-description: (ePost) Searches the iOS Swift codebase via vector search for existing patterns and implementations. Use when searching or finding existing patterns in the iOS Swift codebase — vector search for views, implementations, or design token usage. NOT for implementing new code.
+description: "(ePost) Use when searching existing patterns in the iOS Swift codebase — views, implementations, design token usage. Vector search over iOS code. NOT for implementing new code."
 user-invocable: false
 
 metadata:
