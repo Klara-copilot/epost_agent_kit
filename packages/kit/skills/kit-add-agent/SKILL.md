@@ -1,11 +1,11 @@
 ---
 name: kit-add-agent
 description: "(ePost) Use when creating a new agent definition, adding an agent to the kit, or scaffolding an agent file from scratch."
+argument-hint: "[agent-name] [description]"
 user-invocable: true
 context: fork
 agent: epost-fullstack-developer
 metadata:
-  argument-hint: "[agent-name] [description]"
   keywords: [agent, create, scaffold, add-agent, kit]
   triggers: [/kit-add-agent, create an agent, add an agent, scaffold agent]
   platforms: [all]

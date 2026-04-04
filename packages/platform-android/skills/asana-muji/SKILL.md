@@ -1,6 +1,6 @@
 ---
 name: asana-muji
-description: "Asana workflow for MUJI Android projects. Create tasks across Android Libraries + MUJI Tasks + MUJI Plan, update task status with auto-sync across boards. Use when user says 'create task', 'new task', 'update status', 'move task', 'asana', 'muji task', 'board update', 'my tasks', or wants to manage Asana tasks for MUJI Android work. Triggers on any Asana task management request in this project."
+description: "Use when: \"create task\", \"update status\", \"move task\", \"asana\", \"muji task\", \"board update\", \"my tasks\". Asana workflow for MUJI Android: create/update tasks across Android Libraries, MUJI Tasks, and MUJI Plan boards."
 argument-hint: "create|status|my-tasks"
 metadata:
   author: tan-le

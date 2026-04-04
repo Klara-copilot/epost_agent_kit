@@ -105,7 +105,7 @@ MDC fields automatically appear in all log statements within the request scope. 
 
 ## Exception Handling Rules
 
-Never swallow exceptions silently. Log stack trace then rethrow or wrap:
+Never swallow exceptions silently. Log then rethrow or wrap:
 
 ```java
 try {
@@ -116,30 +116,24 @@ try {
 }
 ```
 
-Always pass the exception as the last argument to `log.error()` — this captures the full stack trace.
+Always pass the exception as the last argument to `log.error()` — captures the full stack trace.
 
 ## Health Probes
 
-Both readiness and liveness probes are mandatory for Kubernetes deployments.
+Both readiness and liveness probes are mandatory for Kubernetes deployments. Same `HealthCheck` interface for WildFly (MicroProfile Health) and Quarkus (SmallRye Health).
 
 ```java
 @Readiness   // or @Liveness
 @ApplicationScoped
 public class DatabaseReadinessCheck implements HealthCheck {
-
     @Override
     public HealthCheckResponse call() {
-        // check DB connectivity
         return HealthCheckResponse.named("database").up().build();
     }
 }
 ```
 
-Same `HealthCheck` interface for both WildFly (MicroProfile Health) and Quarkus (SmallRye Health).
-
-Default endpoints:
-- WildFly: `/health/ready`, `/health/live`
-- Quarkus: `/q/health/ready`, `/q/health/live`
+Default endpoints: WildFly `/health/ready`, `/health/live` · Quarkus `/q/health/ready`, `/q/health/live`
 
 ## Rules
 

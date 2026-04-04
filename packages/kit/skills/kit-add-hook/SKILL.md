@@ -1,11 +1,11 @@
 ---
 name: kit-add-hook
 description: "(ePost) Use when creating a new Claude Code hook, adding event-driven automation, or wiring a new hook into settings.json."
+argument-hint: "[hook-name] [event-type]"
 user-invocable: true
 context: fork
 agent: epost-fullstack-developer
 metadata:
-  argument-hint: "[hook-name] [event-type]"
   keywords: [hook, create, automation, event, kit]
   triggers: [/kit-add-hook, create a hook, add a hook, new hook]
   platforms: [all]

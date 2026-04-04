@@ -1,11 +1,11 @@
 ---
 name: a11y
-description: (ePost) Enforces cross-platform WCAG 2.1 AA compliance with POUR-based scoring and remediation workflows. Use when "accessibility", "WCAG", "POUR", "a11y", "screen reader", or accessibility workflow ("audit", "fix", "review", "close finding") is mentioned across any platform — loads cross-platform a11y compliance rules
+description: "(ePost) Use when: \"accessibility\", \"WCAG\", \"a11y\", \"screen reader\", \"audit a11y\", \"fix accessibility\", or any accessibility workflow across any platform. Cross-platform WCAG 2.1 AA compliance with POUR scoring."
+argument-hint: "[--audit [platform] | --fix [#id|n] | --review [area] | --close [id]]"
 user-invocable: true
 context: fork
 agent: epost-a11y-specialist
 metadata:
-  argument-hint: "[--audit [platform] | --fix [#id|n] | --review [area] | --close [id]]"
   keywords:
     - a11y
     - accessibility

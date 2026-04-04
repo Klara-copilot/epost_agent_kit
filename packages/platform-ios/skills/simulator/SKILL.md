@@ -1,6 +1,7 @@
 ---
 name: simulator
 description: (ePost) Manages iOS simulators — list, boot, open, and launch apps. Use when user wants to list, boot, open, or manage iOS simulators, or launch the app on a simulator
+argument-hint: "[--list | --boot | --shutdown | --install | --launch | --screenshot]"
 user-invocable: true
 context: fork
 agent: epost-fullstack-developer
@@ -19,7 +20,6 @@ allowed-tools:
   - mcp__xcodebuildmcp__describe_ui
   - mcp__xcodebuildmcp__doctor
 metadata:
-  argument-hint: "[--list | --boot | --shutdown | --install | --launch | --screenshot]"
   keywords:
     - simulator
     - ios-simulator
@@ -57,10 +57,7 @@ List, boot, shutdown, and manage iOS simulators using XcodeBuildMCP or xcrun sim
 
 ## Your Process
 
-1. **Reference Build Skill**
-   - Use `ios-development/references/build.md` for simulator patterns
-
-2. **Parse Action**
+1. **Parse Action**
    - `--list`: List available simulators
    - `--boot <name>`: Boot specific simulator
    - `--shutdown`: Shutdown booted simulator
@@ -68,121 +65,38 @@ List, boot, shutdown, and manage iOS simulators using XcodeBuildMCP or xcrun sim
    - `--launch <bundleId>`: Launch app by bundle ID
    - `--screenshot`: Take screenshot of simulator
 
-3. **Execute Action (MCP preferred)**
+2. **Execute Action (MCP preferred)**
    - Use MCP tools if available
    - Fallback: xcrun simctl commands via Bash
 
-## MCP Tool Usage
+## Quick Reference
 
-### List Simulators
-```swift
-mcp__xcodebuildmcp__list_sims()
-```
+| Action | MCP Tool | Fallback |
+|--------|----------|----------|
+| List | `list_sims()` | `xcrun simctl list devices available` |
+| Boot | `boot_sim({ simulatorId })` + `open_sim` | `xcrun simctl boot "iPhone 16 Pro"` |
+| Shutdown | — | `xcrun simctl shutdown booted` |
+| Install | `install_app_sim({ simulatorId, appPath })` | `xcrun simctl install booted MyApp.app` |
+| Launch | `launch_app_sim({ simulatorId, bundleId })` | `xcrun simctl launch booted com.bundle` |
+| Screenshot | `screenshot({ simulatorId, outputPath })` | `xcrun simctl io booted screenshot out.png` |
 
-### Boot Simulator
-```swift
-mcp__xcodebuildmcp__boot_sim({
-  simulatorId: 'iPhone-16-Pro-UUID'
-})
-mcp__xcodebuildmcp__open_sim({
-  simulatorId: 'iPhone-16-Pro-UUID'
-})
-```
-
-### Install App
-```swift
-mcp__xcodebuildmcp__install_app_sim({
-  simulatorId: 'UUID',
-  appPath: '/path/to/MyApp.app'
-})
-```
-
-### Launch App
-```swift
-mcp__xcodebuildmcp__launch_app_sim({
-  simulatorId: 'UUID',
-  bundleId: 'com.myapp.bundle'
-})
-```
-
-### Stop App
-```swift
-mcp__xcodebuildmcp__stop_app_sim({
-  simulatorId: 'UUID',
-  bundleId: 'com.myapp.bundle'
-})
-```
-
-### Screenshot
-```swift
-mcp__xcodebuildmcp__screenshot({
-  simulatorId: 'UUID',
-  outputPath: '/path/to/screenshot.png'
-})
-```
-
-## Fallback Commands (without MCP)
-
-### List
-```bash
-xcrun simctl list devices available
-```
-
-### Boot
-```bash
-xcrun simctl boot "iPhone 16 Pro"
-open -a Simulator
-```
-
-### Shutdown
-```bash
-xcrun simctl shutdown booted
-```
-
-### Install
-```bash
-xcrun simctl install booted MyApp.app
-```
-
-### Launch
-```bash
-xcrun simctl launch booted com.myapp.bundle
-```
-
-### Screenshot
-```bash
-xcrun simctl io booted screenshot screenshot.png
-```
+Always call `list_sims` first to get current UDIDs before booting.
 
 ## Rules
 - Use MCP tools when available
 - Always use `list_sims` to get device UDIDs before booting
 - Shutdown simulators when done to free resources
 - Use simulator for faster iteration, device for final validation
-- Provide clear feedback on action results
+
+## References
+
+- `references/simulator-commands.md` — Full MCP tool signatures, xcrun fallbacks, troubleshooting
 
 ## Completion Report
 
 ```markdown
 ## Simulator Operation Complete
-
-### Action
-- [Action performed]: Success / Failed
-
-### Simulator Details
-- Device: iPhone 16 Pro
-- UDID: [UUID]
-- Status: Booted / Shutdown
-
-### App Details (if applicable)
-- Bundle ID: com.myapp.bundle
-- App Path: /path/to/MyApp.app
-
-### Output
-- [Any output from the operation]
-
-### Next Steps
-- [ ] Run app
-- [ ] Run tests
-- [ ] Take screenshot
+### Action: [performed] — Success / Failed
+### Device: iPhone 16 Pro | UDID: [UUID] | Status: Booted / Shutdown
+### App (if applicable): Bundle ID / App Path
 ```

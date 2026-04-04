@@ -1,6 +1,6 @@
 ---
 name: kit-hooks
-description: (ePost) Reference guide for hooks — event types (PreToolUse, PostToolUse, SessionStart, Stop, etc.), I/O contract, configuration in settings.json, hook architecture. Use when creating a hook, debugging hook behavior, or checking which hook event to use.
+description: "(ePost) Use when creating a hook, debugging hook behavior, or checking which hook event to use. Reference: event types (PreToolUse, PostToolUse, SessionStart, Stop), I/O contract, settings.json config."
 user-invocable: false
 metadata:
   keywords: [hook, PreToolUse, PostToolUse, SessionStart, event, automation, settings]
@@ -13,37 +13,12 @@ metadata:
 
 # Hook Development for epost_agent_kit
 
-## Overview
-
-Hooks are event-driven automation scripts that execute in response to Claude Code events. Use hooks to validate operations, enforce policies, add context, and integrate external tools.
-
 ## Hook Types
 
-### Command Hooks (Deterministic)
-
-Execute bash/node scripts for fast, deterministic checks:
-
-```json
-{
-  "type": "command",
-  "command": "node .claude/hooks/my-hook.cjs",
-  "timeout": 60
-}
-```
-
-### Prompt Hooks (LLM-Driven)
-
-Use Claude for context-aware validation:
-
-```json
-{
-  "type": "prompt",
-  "prompt": "Validate this tool use is appropriate: $TOOL_INPUT",
-  "timeout": 30
-}
-```
-
-Supported events: Stop, SubagentStop, UserPromptSubmit, PreToolUse
+| Type | When to use |
+|------|-------------|
+| **command** | Deterministic bash/node scripts — fast checks, blocking, validation |
+| **prompt** | LLM-driven — context-aware validation (Stop, SubagentStop, UserPromptSubmit, PreToolUse) |
 
 ## Hook Events
 
@@ -59,95 +34,22 @@ Supported events: Stop, SubagentStop, UserPromptSubmit, PreToolUse
 | `PreCompact` | Before compaction | Preserve critical context |
 | `Notification` | User notified | Reactions |
 
-## Hook Configuration in settings.json
+## I/O Contract Summary
 
-Hooks are configured in `packages/core/settings.json` under the `hooks` key:
-
-```json
-{
-  "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "Bash|Glob|Grep|Read|Edit|Write",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node .claude/hooks/scout-block.cjs",
-            "timeout": 10
-          }
-        ]
-      }
-    ]
-  }
-}
-```
-
-## Matchers
-
-- Exact: `"matcher": "Write"`
-- Multiple: `"matcher": "Read|Write|Edit"`
-- Wildcard: `"matcher": "*"`
-- Regex: `"matcher": "mcp__.*__delete.*"`
-
-## Input/Output Contract
-
-### Input (JSON via stdin)
-
-```json
-{
-  "session_id": "abc123",
-  "cwd": "/project/dir",
-  "hook_event_name": "PreToolUse",
-  "tool_name": "Write",
-  "tool_input": { "file_path": "/path" }
-}
-```
-
-### Output (JSON via stdout)
-
-**PreToolUse decisions:**
-```json
-{
-  "hookSpecificOutput": {
-    "permissionDecision": "allow|deny|ask"
-  },
-  "systemMessage": "Explanation for Claude"
-}
-```
-
-**Exit codes:** 0 = success, 2 = blocking error (stderr → Claude)
-
-## epost_agent_kit Hook Architecture
-
-Hooks live in `packages/core/hooks/` and are generated to `.claude/hooks/`:
-
-```
-packages/core/hooks/
-├── session-init.cjs            # SessionStart: project detection, env vars, plan resolution
-├── subagent-init.cjs           # SubagentStart: compact context injection to Task agents
-├── context-reminder.cjs        # UserPromptSubmit: session context + rules (deduplicated)
-├── scout-block.cjs             # PreToolUse: block node_modules/dist/.git per .epost-ignore
-├── privacy-block.cjs           # PreToolUse: block .env/secrets unless APPROVED: prefix
-├── subagent-stop-reminder.cjs  # SubagentStop: post-agent reminders (planner → /cook)
-├── session-metrics.cjs         # Stop: record session duration/git stats → .epost-data/
-├── lesson-capture.cjs          # Stop: evaluate significance, prompt knowledge capture
-└── notifications/
-    └── notify.cjs              # Stop: Discord/Telegram notification
-
-packages/kit/hooks/
-├── kit-session-check.cjs       # SessionStart: check skill-index.json staleness
-├── kit-write-guard.cjs         # PreToolUse: block writes to .claude/ in kit-repo context
-└── kit-post-edit-reminder.cjs  # PostToolUse: skill index + re-init + stale ref scan
-```
-
-Configuration files:
-- `.epost-kit.json` — Hook config (plan naming, project type, hook toggles, validation rules)
-- `.epost-ignore` — Scout-block patterns (gitignore-spec format)
+- **Input**: JSON via stdin — `session_id`, `cwd`, `hook_event_name`, `tool_name`, `tool_input`
+- **Output**: JSON via stdout — `hookSpecificOutput.permissionDecision` (allow/deny/ask) + `systemMessage`
+- **Exit codes**: 0 = success, 2 = blocking error (stderr → Claude)
 
 ## Creating a New Hook
 
-1. Create hook script in `packages/{package}/hooks/{hook-name}.cjs`
+1. Create `packages/{package}/hooks/{hook-name}.cjs` (CommonJS `.cjs`)
 2. Wire into `packages/core/settings.json` under appropriate event
 3. Add to `packages/{package}/package.yaml` files mapping if needed
-4. Run `epost-kit init --fresh` to regenerate
+4. Test: `echo '{"tool_name":"X"}' | node packages/{package}/hooks/{hook-name}.cjs`
+5. Run `epost-kit init --fresh` to regenerate
 
+**Source of truth**: `packages/` — never edit `.claude/` directly.
+
+## References
+
+- `references/hook-implementation-examples.md` — Full script template, settings.json config examples, matcher patterns, I/O contract details, epost_agent_kit hook architecture map

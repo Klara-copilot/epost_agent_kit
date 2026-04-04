@@ -1,6 +1,6 @@
 ---
 name: kit-ide-snippets
-description: "(ePost) Use when authoring or updating IDE snippets for Copilot or Cursor targets, converting Claude skills to IDE-specific format, or generating copilot-instructions.md or .cursor/rules/. Triggers: 'update copilot snippet', 'cursor rules', 'ide snippet', 'copilot instructions', 'convert skill to cursor', 'cursor agents', 'cursor skills'."
+description: "(ePost) Use when: \"cursor rules\", \"copilot instructions\", \"ide snippet\", \"convert skill to cursor\". Generates copilot-instructions.md, .cursor/rules/, or converts Claude skills to IDE-specific formats."
 user-invocable: false
 metadata:
   keywords: [copilot, cursor, ide, snippets, copilot-instructions, cursor-rules, mdc, snippet-authoring, cursor-agents, cursor-skills]
