@@ -1,6 +1,6 @@
 ---
 name: subagents-driven
-description: (ePost) Orchestrates parallel task execution with per-task subagent dispatch and two-stage review. Use when a plan has 3+ independent tasks, phases have non-overlapping file ownership, or user says "parallel implementation", "execute all phases" — provides per-task subagent dispatch with two-stage review
+description: "(ePost) Use when a plan has 3+ independent tasks or non-overlapping phases, or user says \"parallel implementation\", \"execute all phases\". Dispatches per-task subagents with two-stage review."
 user-invocable: false
 
 metadata:

@@ -1,6 +1,6 @@
 ---
 name: repomix
-description: (ePost) Bundles repository contents into a single file for LLM consumption or external sharing. Use when user says "pack this repo", "share codebase snapshot", or "include remote repo as context" — bundles repository contents into a single file for LLM consumption or external AI sharing
+description: "(ePost) Use when: \"pack this repo\", \"share codebase snapshot\", \"include remote repo as context\". Bundles repository contents into a single file for LLM consumption or external AI sharing."
 user-invocable: true
 metadata:
   tier: core

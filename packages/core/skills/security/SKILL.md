@@ -1,6 +1,6 @@
 ---
 name: security
-description: "(ePost) Runs security analysis — STRIDE threats, OWASP Top 10, vulnerability scanning — on code or features. Use when user says \"audit security\", \"review for vulnerabilities\", \"check STRIDE threats\", or \"scan for OWASP Top 10\" — runs security analysis on a codebase or feature"
+description: "(ePost) Use when: \"audit security\", \"review for vulnerabilities\", \"OWASP\", \"threat model\", \"check for injection\". Runs STRIDE threat analysis, OWASP Top 10 scan, and vulnerability review."
 user-invocable: true
 metadata:
   tier: core
