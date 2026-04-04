@@ -1,6 +1,6 @@
 ---
 name: debug
-description: (ePost) Investigates root causes using platform-specific debugging tools and structured diagnosis. Use when user says "debug", "trace this", "diagnose", "it crashes", "why is this failing", or provides a stack trace — investigates root cause using platform-specific debugging tools
+description: "(ePost) Use when: \"debug\", \"trace this\", \"diagnose\", \"it crashes\", \"why is this failing\", or user provides a stack trace. Investigates root cause using platform-specific debugging tools."
 argument-hint: "[issue description or error log]"
 user-invocable: true
 context: fork

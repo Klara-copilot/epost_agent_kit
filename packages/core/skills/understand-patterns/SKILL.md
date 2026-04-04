@@ -1,6 +1,6 @@
 ---
 name: understand-patterns
-description: (ePost) Reference catalogue of Understand-Anything architectural patterns — two-phase extraction, artifact persistence, fan-in ordering, and file fingerprinting. Use when designing multi-agent codebase analysis, building incremental workflows, or implementing cross-agent artifact sharing.
+description: "(ePost) Use when designing multi-agent codebase analysis, incremental workflows, or cross-agent artifact sharing. Reference for Understand-Anything patterns: two-phase extraction, fan-in, artifact persistence."
 user-invocable: false
 disable-model-invocation: true
 metadata:

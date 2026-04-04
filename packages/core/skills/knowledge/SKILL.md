@@ -1,6 +1,6 @@
 ---
 name: knowledge
-description: "(ePost) Retrieves prior decisions, internal patterns, and project context from the knowledge base. Use when retrieving prior decisions, internal patterns, or known context — NOT for general how-to questions about external libraries. Also use to capture learnings after completing a non-trivial task."
+description: "(ePost) Use when retrieving prior decisions, internal patterns, or project context. NOT for external library how-tos. Also use to capture learnings after completing a non-trivial task."
 user-invocable: false
 
 metadata:

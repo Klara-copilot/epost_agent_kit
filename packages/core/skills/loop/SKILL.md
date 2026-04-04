@@ -1,6 +1,6 @@
 ---
 name: loop
-description: "(ePost) Autonomously iterates on a metric — coverage, bundle size, lint errors — until a target is met. Use when user wants to autonomously improve a metric over multiple iterations — test coverage, bundle size, lint errors, Lighthouse score. Key phrases: \"keep improving\", \"fix all X\", \"improve until target is met\". NOT for polling or status checks."
+description: "(ePost) Use when: \"keep improving until target met\", \"fix all lint errors\", \"improve coverage autonomously\". Iterates on a metric — coverage, bundle size, lint, Lighthouse — until target is reached. NOT for polling."
 metadata:
   tier: discoverable
   agent-affinity: [epost-tester, epost-fullstack-developer]

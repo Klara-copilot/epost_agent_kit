@@ -1,6 +1,6 @@
 ---
 name: get-started
-description: (ePost) Discovers project state and delivers a structured onboarding experience for new contributors. Use when user says "get started", "I'm new to this project", "onboard me", "what is this codebase", or "help me understand this project" — discovers project state and delivers a structured onboarding experience
+description: "(ePost) Use when: \"get started\", \"I'm new to this project\", \"onboard me\", \"what is this codebase\", \"help me understand this project\". Discovers project state and delivers structured onboarding."
 argument-hint: "[project path or question]"
 user-invocable: true
 context: inline
