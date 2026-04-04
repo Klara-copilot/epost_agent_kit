@@ -1,11 +1,11 @@
 ---
 name: plan
 description: (ePost) Produces phased implementation plans scaled to task complexity with dependency tracking. Use when user says "plan", "design this", "architect", "spec out", "how should we build", or "create a roadmap" — produces a phased implementation plan scaled to task complexity
+argument-hint: "[feature or task description]"
 user-invocable: true
 context: fork
 agent: epost-planner
 metadata:
-  argument-hint: "[feature or task description]"
   agent-affinity:
     - epost-planner
     - epost-project-manager

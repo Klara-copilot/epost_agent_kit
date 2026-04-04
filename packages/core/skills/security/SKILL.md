@@ -2,8 +2,8 @@
 name: security
 description: "(ePost) Runs security analysis — STRIDE threats, OWASP Top 10, vulnerability scanning — on code or features. Use when user says \"audit security\", \"review for vulnerabilities\", \"check STRIDE threats\", or \"scan for OWASP Top 10\" — runs security analysis on a codebase or feature"
 user-invocable: true
-tier: core
 metadata:
+  tier: core
   agent-affinity: [epost-code-reviewer]
   triggers: ["security audit", "check vulnerabilities", "scan for secrets", "OWASP", "STRIDE", "CVE", "pentest", "security review"]
   keywords: [security, STRIDE, OWASP, vulnerabilities, secrets, injection, audit, CVE, dependencies]

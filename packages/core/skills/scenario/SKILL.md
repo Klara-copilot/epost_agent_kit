@@ -1,11 +1,11 @@
 ---
 name: scenario
 description: "(ePost) Use when analyzing edge cases before implementing a feature, generating test targets, or stress-testing a feature design. Use before writing tests or during planning — generates scenarios across 12 dimensions (auth, timing, scale, data integrity, etc.)"
+argument-hint: "<file path or feature description>"
 user-invocable: true
 context: fork
 agent: epost-tester
 metadata:
-  argument-hint: "<file path or feature description>"
   keywords: [scenario, edge-case, test-planning, risk, dimensions, pre-implementation]
   triggers: [/scenario, edge cases, test scenarios, scenario analysis, before writing tests]
   platforms: [all]

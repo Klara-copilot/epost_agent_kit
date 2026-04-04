@@ -1,10 +1,10 @@
 ---
 name: didyouknow
 description: (ePost) Surfaces non-obvious kit capabilities, hidden flags, and skill combinations. Use when user says "did you know", "tips", "what can I do with the kit", "underused features", or asks about a specific topic like "testing tips" or "backend tips"
+argument-hint: "[<topic>] [--all]"
 user-invocable: true
 context: inline
 metadata:
-  argument-hint: "[<topic>] [--all]"
   keywords: [tips, didyouknow, discovery, hidden-features, skill-combinations]
   platforms: [all]
   triggers: ["did you know", "tips", "kit tips", "underused", "what else can", "hidden features"]

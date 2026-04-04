@@ -2,9 +2,8 @@
 name: deploy
 description: "Deploys projects to hosting platforms with auto-detection. Use when user says 'deploy', 'publish', 'go live', 'push to production', or mentions Vercel, Netlify, Cloudflare, Railway, Fly.io, or Docker."
 user-invocable: true
-category: devops
-
 metadata:
+  category: devops
   agent-affinity: [epost-fullstack-developer]
   keywords: [deploy, publish, vercel, netlify, cloudflare, railway, flyio, docker, production, hosting]
   triggers: ["deploy", "publish", "go live", "push to production", "ship to prod", "host this"]

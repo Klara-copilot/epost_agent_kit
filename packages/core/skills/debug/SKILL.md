@@ -1,12 +1,12 @@
 ---
 name: debug
 description: (ePost) Investigates root causes using platform-specific debugging tools and structured diagnosis. Use when user says "debug", "trace this", "diagnose", "it crashes", "why is this failing", or provides a stack trace — investigates root cause using platform-specific debugging tools
+argument-hint: "[issue description or error log]"
 user-invocable: true
 context: fork
 agent: epost-debugger
-tier: core
 metadata:
-  argument-hint: "[issue description or error log]"
+  tier: core
   agent-affinity:
     - epost-debugger
     - epost-fullstack-developer
@@ -185,6 +185,35 @@ MISSING:  timeout → ERROR transition
 Applies to: React `useState`/`useReducer`, iOS view lifecycle, Android Compose state, async/Promise chains, WebSocket connections.
 
 See `plan/references/state-machine-guide.md` for notation and common patterns.
+
+## Trace Artifact Output
+
+After root cause is identified, write a trace to `.epost-cache/traces/`:
+
+```
+File: .epost-cache/traces/{YYMMDD-HHMM}-{slug}.json
+```
+
+```json
+{
+  "schema": "1.0",
+  "agent": "epost-debugger",
+  "timestamp": "<ISO 8601>",
+  "type": "debug-trace",
+  "data": {
+    "rootCause": "<one-sentence description>",
+    "filesInvestigated": ["path/to/file.ts", "..."],
+    "callChain": ["entryPoint", "calledFn", "crashSite"],
+    "fix": "<recommended fix or 'see report'>"
+  }
+}
+```
+
+`{slug}` = kebab-case summary of the issue (e.g., `null-pointer-auth-middleware`).
+
+Report: "Trace written to `.epost-cache/traces/{file}`"
+
+See `core/references/artifact-persistence-protocol.md` for envelope format and cleanup rules.
 
 ## Status Tracking
 

@@ -1,11 +1,11 @@
 ---
 name: research
 description: (ePost) Researches technologies, libraries, best practices, and documentation. Use when user says "research", "how does X work", "best practices for", "compare A vs B", "look up", "find docs for", or "what's the best way to" — dispatches to epost-researcher for multi-source synthesis
+argument-hint: "[topic | --fast | --deep | --codebase]"
 user-invocable: true
 context: fork
 agent: epost-researcher
 metadata:
-  argument-hint: "[topic | --fast | --deep | --codebase]"
   agent-affinity:
     - epost-researcher
     - epost-planner

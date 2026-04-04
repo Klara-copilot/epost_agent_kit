@@ -238,9 +238,14 @@ The `docs/index.json` file provides fast lookups:
     "finding": "Discovered gotchas and debug insights"
   },
   "dependencies": {
-    "internal": [
-      { "repo": "luz_common", "type": "library", "evidence": "pom.xml dependency" }
-    ],
+    "internal": {
+      "libraries": [
+        { "repo": "luz_common", "type": "library", "evidence": "pom.xml dependency", "confidence": "declared", "discoveryMethod": "pom-xml" }
+      ],
+      "apiServices": [
+        { "repo": "luz_epc", "type": "api", "evidence": "pom.xml REST client", "confidence": "declared", "discoveryMethod": "pom-xml" }
+      ]
+    },
     "external": [
       { "name": "Keycloak", "type": "service", "evidence": "keycloak.json config" }
     ]
@@ -265,16 +270,45 @@ The `docs/index.json` file provides fast lookups:
 }
 ```
 
+**Backward compatibility**: If `internal` is a flat array (old format), treat it as `internal.libraries[]`. The object form is required for new entries.
+
+**Frontend example** (Next.js / `luz_next` style repo):
+
+```json
+{
+  "dependencies": {
+    "internal": {
+      "libraries": [
+        { "repo": "luz_common_ui", "type": "library", "evidence": "package.json:@luz/common-ui", "confidence": "declared", "discoveryMethod": "package-json" }
+      ],
+      "apiServices": [
+        { "repo": "luz_epc", "type": "api", "evidence": ".env.example:NEXT_PUBLIC_EPC_API_URL", "confidence": "declared", "discoveryMethod": "env-var" },
+        { "repo": "luz_eletter", "type": "api", "evidence": "ApiRestConstants.ts:/api/luz-eletter/", "confidence": "declared", "discoveryMethod": "api-constants" }
+      ]
+    },
+    "external": [
+      { "name": "next@14.1.0", "type": "npm-package", "evidence": "package.json" }
+    ]
+  }
+}
+```
+
 ### Key Fields
 
 - **`agentHint`** — Single sentence: when should an agent check this entry. Matched against current task keywords.
 - **`audience`** — `["agent", "human"]` or `["agent"]` for agent-only entries.
 - **`path`** — Relative to project root (e.g., `docs/decisions/ADR-0001.md`).
-- **`dependencies.internal[].repo`** — Internal repository name (`luz_*` naming convention).
-- **`dependencies.internal[].type`** — `api` | `library` | `shared-db`.
-- **`dependencies.internal[].evidence`** — Where this was detected (e.g., `pom.xml`, `package.json`, REST client import).
+- **`dependencies.internal.libraries[].repo`** — Internal repository name for Nx workspace packages / shared libraries (`luz_*` naming).
+- **`dependencies.internal.libraries[].type`** — `library` | `shared-db`.
+- **`dependencies.internal.libraries[].evidence`** — Where this was detected (e.g., `package.json:@luz/common-ui`, `pom.xml dependency`).
+- **`dependencies.internal.apiServices[].repo`** — Internal repository name for backend services called via HTTP (`luz_*` naming).
+- **`dependencies.internal.apiServices[].type`** — Always `api` for HTTP service dependencies.
+- **`dependencies.internal.apiServices[].evidence`** — Source of detection (e.g., `.env.example:NEXT_PUBLIC_EPC_API_URL`, `ApiRestConstants.ts:/api/luz-epc/`).
+- **`dependencies.internal[*].confidence`** — `"declared"` (explicit in source file) | `"inferred"` (derived from naming heuristic) | `"confirmed"` (inferred + cross-referenced). Default: `"declared"`.
+- **`dependencies.internal[*].discoveryMethod`** — How the dependency was found: `"pom-xml"` | `"package-json"` | `"env-var"` | `"api-constants"` | `"proxy-rewrite"` | `"caller-pattern"` | `"docker-compose"` | `"manual"`.
+- **`dependencies.internal[*].via`** — Optional. `"api-gateway"` | `"bff"` | `null`. Records whether the frontend calls the backend directly or through a gateway/BFF layer.
 - **`dependencies.external[].name`** — Third-party service or library name.
-- **`dependencies.external[].type`** — `api` | `sdk` | `service`.
+- **`dependencies.external[].type`** — `api` | `sdk` | `service` | `npm-package` | `maven-artifact`.
 - **`dependencies.external[].evidence`** — Config file or code reference where dependency was found.
 - **`business.domain`** — Business domain label (e.g., "B2B Inbox", "B2C Notifications").
 - **`business.summary`** — One-sentence project description.

@@ -2,8 +2,8 @@
 name: tdd
 user-invocable: true
 description: "(ePost) Guides test-first development using the red-green-refactor cycle. Use when user says 'TDD', 'test-first', 'red-green-refactor', wants to build features test-first, or asks for behavior-driven testing"
-tier: core
 metadata:
+  tier: core
   agent-affinity: [epost-fullstack-developer, epost-tester]
   keywords: [tdd, test-driven, red-green-refactor, behavior-testing, integration-tests]
   platforms: [all]

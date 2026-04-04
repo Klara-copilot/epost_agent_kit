@@ -2,9 +2,8 @@
 name: preview
 description: "(ePost) Generates visual explanations — Mermaid diagrams, ASCII art, and HTML interactive pages. Use when user wants a diagram, visual explanation, ASCII art, or HTML preview of a concept, flow, or architecture."
 user-invocable: true
-category: knowledge
-
 metadata:
+  category: knowledge
   agent-affinity:
     - epost-planner
     - epost-docs-manager

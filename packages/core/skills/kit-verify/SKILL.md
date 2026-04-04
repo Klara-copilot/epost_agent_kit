@@ -1,11 +1,12 @@
 ---
 name: kit-verify
 description: "(ePost) Use when checking kit health, verifying kit integrity, or confirming everything is in sync before committing. Triggers: 'verify kit', 'check kit', 'kit health', 'is kit ok', 'kit-verify', 'validate package manifest', 'check agent refs'."
-keywords: [kit, verify, health, check, validate, skill-index, package, agent, sync, audit]
 user-invocable: true
 context: inline
-platforms: [all]
-tier: discoverable
+metadata:
+  keywords: [kit, verify, health, check, validate, skill-index, package, agent, sync, audit]
+  platforms: [all]
+  tier: discoverable
 ---
 
 # Kit Verify

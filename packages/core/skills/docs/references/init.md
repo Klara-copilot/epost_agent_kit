@@ -245,14 +245,29 @@ Check existing KB subdirs first — if any `.md` files already exist, note what 
 
 Populate index.json enrichment fields by scanning code artifacts. Schema: `knowledge/references/knowledge-base.md`.
 
+#### Platform Detection
+
+Before scanning, detect platform to select discovery passes:
+
+| Signal | Platform |
+|--------|----------|
+| `pom.xml` at repo root | `java` |
+| `package.json` with `next`, `react`, or `vite` in `dependencies`/`devDependencies` | `web` |
+| Both present | Run both Java and web discovery |
+| Neither | Generic scanning only (REST client URLs, import patterns) |
+
 #### Dependencies (internal) — other `luz_*` repositories ONLY
 
-Scan for cross-repo dependencies within the luz ecosystem:
-- `pom.xml` → `<dependency>` with `luz_*` groupId or artifactId
-- `package.json` → `@luz/*` or `luz_*` package names
-- REST client base URLs → service-to-service calls pointing to other luz services
+Output format uses `internal.libraries[]` for shared packages and `internal.apiServices[]` for HTTP service dependencies. See `knowledge/references/knowledge-base.md` for full schema.
 
-Record each as: `{ "repo": "luz_*_slug", "type": "api|library|shared-db", "evidence": "..." }`
+**Java platform** — scan `pom.xml`:
+- `<dependency>` with `luz_*` groupId or artifactId → `internal.libraries[]`
+- REST client base URLs pointing to other luz services → `internal.apiServices[]`
+- Add `"confidence": "declared"`, `"discoveryMethod": "pom-xml"` to each entry
+
+**Web platform** — run 2-pass algorithm: `references/frontend-discovery.md`
+
+For web platform repos, follow `references/frontend-discovery.md` for Pass 1 (declared signals) and Pass 2 (inferred signals).
 
 > `.repo` MUST be a luz repository slug (e.g. `luz_mail_service`). Never an npm package or maven artifact.
 
@@ -270,8 +285,9 @@ Record each as: `{ "name": "...", "type": "npm-package|maven-artifact|service|sd
 
 | Field | Correct | Incorrect |
 |-------|---------|-----------|
-| `internal[].repo` | `"luz_mail_service"` | `"@nestjs/common"` |
-| `internal[].type` | `"api"`, `"library"`, `"shared-db"` | `"framework"`, `"npm-package"` |
+| `internal.libraries[].repo` | `"luz_common_ui"` | `"@nestjs/common"` |
+| `internal.apiServices[].repo` | `"luz_epc"` | `"@luz/common-ui"` |
+| `internal[*].type` | `"api"`, `"library"`, `"shared-db"` | `"framework"`, `"npm-package"` |
 | `external[].name` | `"@nestjs/common@10.1.3"` | (should never appear in internal) |
 | `external[].type` | `"npm-package"`, `"maven-artifact"`, `"service"`, `"sdk"` | `"api"` (use only for internal) |
 
@@ -315,8 +331,11 @@ Create `docs/index.json` with all generated entries. Only include categories tha
     "integration": "External service integration documentation"
   },
   "dependencies": {
-    "internal": [{ "repo": "...", "type": "api|library|shared-db", "evidence": "..." }],
-    "external": [{ "name": "...", "type": "api|sdk|service", "evidence": "..." }]
+    "internal": {
+      "libraries": [{ "repo": "...", "type": "library|shared-db", "evidence": "...", "confidence": "declared", "discoveryMethod": "pom-xml|package-json" }],
+      "apiServices": [{ "repo": "...", "type": "api", "evidence": "...", "confidence": "declared|inferred", "discoveryMethod": "env-var|api-constants|proxy-rewrite|caller-pattern" }]
+    },
+    "external": [{ "name": "...", "type": "npm-package|maven-artifact|service|sdk", "evidence": "..." }]
   },
   "business": {
     "domain": "...",   // REQUIRED — must be non-empty, never leave as "..."

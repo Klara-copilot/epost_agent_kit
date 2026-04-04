@@ -1,11 +1,11 @@
 ---
 name: docs
 description: (ePost) Generates and maintains project documentation with structured KB workflows. Use when user says "write docs", "update docs", "document this", "init docs", "reorganize documentation", or "add component docs" — detects docs intent (init, update, migrate, component) and runs the right workflow
+argument-hint: "[--init | --migrate | --reorganize | --scan | --verify | --batch [category]]"
 user-invocable: true
 context: fork
 agent: epost-docs-manager
 metadata:
-  argument-hint: "[--init | --migrate | --reorganize | --scan | --verify | --batch [category]]"
   keywords:
     - docs
     - documentation
@@ -55,6 +55,50 @@ Otherwise: continue to Auto-Detection.
 | `references/component.md` | Document a klara-theme component (Figma data + prop mapping) |
 | `references/coauthoring.md` | Collaborative doc writing workflow (PRD, RFC, ADR, spec) |
 | `references/llms.md` | Generate llms.txt / llms-full.txt (llmstxt.org spec) |
+
+## Fingerprint Gate (--scan / --update)
+
+Before scanning source files, check `.epost-cache/fingerprints.json`:
+
+1. If file exists: load stored hashes
+2. For each source file in scan scope: run `shasum -a 256 <file> | cut -c1-8` and compare
+3. Skip files where hash matches — log `"unchanged: {path}"`
+4. Scan only changed files; merge results with prior cached analysis
+5. After scan: update `.epost-cache/fingerprints.json` with new hashes
+
+If a matching `docs-discovery-{slug}.json` artifact exists in `.epost-cache/artifacts/` and is < 24h old AND all source files are unchanged (all hashes match): skip the scan entirely and serve from cache.
+
+See `core/references/file-fingerprinting-protocol.md` for hash format and skip logic.
+
+## Discovery Artifact Write (--init / --scan)
+
+After completing `--init` or `--scan`, persist discovery output:
+
+```
+File: .epost-cache/artifacts/docs-discovery-{slug}.json
+```
+
+```json
+{
+  "schema": "1.0",
+  "agent": "epost-docs-manager",
+  "timestamp": "<ISO 8601>",
+  "type": "docs-discovery",
+  "data": {
+    "apiServices": ["AuthService", "UserService", "..."],
+    "libraries": ["next-intl", "redux-toolkit", "..."],
+    "docsIndex": { }
+  }
+}
+```
+
+`{slug}` = project name or plan slug (kebab-case). `docsIndex` mirrors the generated `docs/index.json` structure.
+
+Report: "Discovery written to `.epost-cache/artifacts/docs-discovery-{slug}.json`"
+
+Downstream consumers: `epost-planner` (knows what APIs exist), `epost-researcher` (knows KB coverage).
+
+See `core/references/artifact-persistence-protocol.md` for envelope format and cleanup rules.
 
 ## Auto-Detection
 
