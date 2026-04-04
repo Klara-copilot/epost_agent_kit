@@ -49,142 +49,26 @@ Debug platform-specific issues with automatic platform detection.
 
 Detect platform per `skill-discovery` protocol.
 
-## Execution
+## 5-Step Diagnosis Protocol
 
-1. Detect platform
-2. Route to platform-specific agent (read-only investigation tools preferred)
-3. Analyze error context, gather logs, identify root cause
-4. Explain root cause and suggest fix (do NOT auto-apply fix — that's `/fix`)
+1. **Understand** — What is the symptom? What is the expected vs actual behavior?
+2. **Reproduce** — Can it be reproduced? Minimal reproduction case?
+3. **Isolate** — Narrow to the smallest failing unit (file, function, line)
+4. **Analyze** — Read stack trace top-down, identify root cause frame; use 5 Whys or bisection
+5. **Hypothesize & Verify** — Propose fix, apply, confirm it resolves without regressions
 
-## Expertise
+> **IRON LAW: NO FIXES WITHOUT ROOT CAUSE FIRST.**
+> Applying a fix before identifying root cause is not debugging — it is guessing. Guesses compound into technical debt.
 
-### Systematic Debugging
-1. **Understand**: What's the symptom?
-2. **Reproduce**: Can you reproduce it?
-3. **Isolate**: What's the minimal case?
-4. **Analyze**: What's actually happening?
-5. **Hypothesize**: What could cause this?
-6. **Verify**: Does the fix work?
+## Escalation Rules
 
-### Log Analysis
-- Parse error messages
-- Follow stack traces
-- Identify log patterns
-- Contextual logging
+| Situation | Action |
+|-----------|--------|
+| Root cause unclear after 3 hypotheses | Escalate to user with evidence |
+| Fix applied but symptom persists | Re-diagnose from Step 1 |
+| State machine bug suspected | Use state diagram overlay (see platform-debug-patterns.md) |
 
-### Stack Trace Interpretation
-- Read top-down
-- Identify root cause frame
-- Distinguish cause from symptom
-- Async stack traces
-
-### Reproduction Strategies
-- Minimal reproduction
-- Environment matching
-- Data setup
-- Step reproduction
-
-### Root Cause Analysis
-
-Root cause analysis techniques: 5 Whys, bisection, inversion. Ask "why did this happen?" 5 times. Bisect to find the commit or line that introduced the issue.
-
-### Fix Validation
-- Regression testing
-- Edge case testing
-- Performance impact
-- Side effect analysis
-
-## Patterns
-
-### Debug Logging
-```typescript
-console.log('[Feature]', { variable, state });
-console.debug('[Debug]', value);
-console.error('[Error]', error);
-```
-
-### Error Boundaries
-```typescript
-class ErrorBoundary extends Component {
-  componentDidCatch(error, errorInfo) {
-    console.error('Error caught:', error, errorInfo);
-  }
-}
-```
-
-### Debug Mode
-```typescript
-const DEBUG = process.env.DEBUG === 'true';
-if (DEBUG) console.debug('Debug info');
-```
-
-### Structured Logging
-```typescript
-logger.info('User action', {
-  action: 'login',
-  userId: user.id,
-  timestamp: Date.now()
-});
-```
-
-## Common Issues
-
-### TypeScript
-- Type mismatches
-- Missing type imports
-- Any type issues
-- Generic constraints
-
-### React
-- Stale closures
-- Missing dependencies
-- Re-render loops
-- State timing
-
-### Async
-- Race conditions
-- Promise rejection
-- Missing await
-- Callback hell
-
-## Defense-in-Depth Patterns
-
-### Validation Layers
-1. Input validation (reject invalid early)
-2. Business logic validation (enforce invariants)
-3. Output validation (verify results before return)
-
-### Error Handling Strategy
-- **Catch**: Only where you can handle meaningfully
-- **Transform**: Convert to domain-specific errors
-- **Log**: Include context (not just message)
-- **Propagate**: Let upstream handle if you can't
-
-### Assertion vs Exception
-- Assertions: Programmer errors (should never happen)
-- Exceptions: Runtime problems (can happen legitimately)
-
-### State Diagram Tracing
-
-When debugging **state-related bugs** (unexpected transitions, stuck states, race conditions):
-
-1. **Draw the ACTUAL state machine** from code — read every `if/switch/state=` and extract what ACTUALLY happens
-2. **Draw the EXPECTED state machine** from requirements or docs
-3. **Overlay and diff** — mismatches reveal the bug:
-   - Missing transitions (no path from state A to B)
-   - Unguarded transitions (state changes without preconditions)
-   - Dead states (reachable but no exit — component gets "stuck")
-   - Race conditions (two transitions competing for same state)
-
-```
-ACTUAL:   [LOADING] ──(timeout)──▸ [LOADING]     ← stuck! no error path
-EXPECTED: [LOADING] ──(timeout)──▸ [ERROR] ──(retry)──▸ [LOADING]
-MISSING:  timeout → ERROR transition
-```
-
-Applies to: React `useState`/`useReducer`, iOS view lifecycle, Android Compose state, async/Promise chains, WebSocket connections.
-
-See `plan/references/state-machine-guide.md` for notation and common patterns.
+See `verification-before-completion` skill for anti-rationalization table, red flags, and verification gate.
 
 ## Trace Artifact Output
 
@@ -209,10 +93,6 @@ File: .epost-cache/traces/{YYMMDD-HHMM}-{slug}.json
 }
 ```
 
-`{slug}` = kebab-case summary of the issue (e.g., `null-pointer-auth-middleware`).
-
-Report: "Trace written to `.epost-cache/traces/{file}`"
-
 See `core/references/artifact-persistence-protocol.md` for envelope format and cleanup rules.
 
 ## Status Tracking
@@ -223,29 +103,6 @@ After diagnosing, update `{plan_dir}/status.md` if diagnosing relates to an acti
 - **Decision forced by diagnosis**: Add to **Key Decisions**: `| {today} | {decision} | {rationale} |`
 - If no status.md exists (debug is not plan-related), skip this step
 
-## Verification Checklist
-- [ ] Symptom reproduced consistently
-- [ ] Root cause identified and documented
-- [ ] Fix applied and tested
-- [ ] No new issues introduced
-- [ ] Edge cases considered
-- [ ] Similar issues checked elsewhere in codebase
-
-## Tools
-- Browser DevTools (breakpoints, profiling)
-- Node debugger (--inspect)
-- Console logging (structured)
-- Source maps (correct line numbers)
-- Test suite (regression testing)
-
-## Debugging Discipline
-
-> **IRON LAW: NO FIXES WITHOUT ROOT CAUSE FIRST.**
->
-> Applying a fix before identifying root cause is not debugging — it is guessing. Guesses compound into technical debt.
-
-See `verification-before-completion` skill for anti-rationalization table, red flags, and the full verification gate protocol.
-
 ## Sub-Skill Routing
 
 | Intent | Sub-Skill | When |
@@ -255,14 +112,16 @@ See `verification-before-completion` skill for anti-rationalization table, red f
 | Fix CI pipeline | `fix-ci` | `/fix-ci`, CI/CD failures, build pipeline |
 | Fix UI issues | `fix-ui` | `/fix-ui`, visual bugs, layout broken |
 
+## References
+
+- `references/platform-debug-patterns.md` — platform-specific tools and log locations: Web/TS/React, iOS/Swift, Android/Kotlin, Backend/Java; state machine tracing; defense-in-depth patterns; root cause analysis techniques
+- `references/debugging-flow.dot` — authoritative debugging process flowchart
+- `references/condition-based-waiting.md` — patterns for replacing `sleep()` with condition polling
+
 ### Related Skills
 - `knowledge` — Knowledge storage, retrieval, and post-task capture (`knowledge --capture`)
 - `error-recovery` — Error handling and recovery patterns
 - `verification-before-completion` — Verify fixes before claiming done
-
-## References
-- `references/debugging-flow.dot` — Authoritative debugging process flowchart
-- `references/condition-based-waiting.md` — Patterns for replacing `sleep()` with condition polling
 
 <issue>$ARGUMENTS</issue>
 

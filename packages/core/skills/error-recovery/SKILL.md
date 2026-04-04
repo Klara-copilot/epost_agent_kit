@@ -14,10 +14,6 @@ metadata:
 
 Standardized patterns for robust error handling in agent execution.
 
-## Overview
-
-This skill provides battle-tested strategies for handling failures gracefully: retry with exponential backoff, circuit breaker patterns, and fallback strategies. Use when operations may fail transiently (network, timeouts) or when you need graceful degradation.
-
 ## When to Use
 
 - Network requests that may timeout or fail
@@ -26,137 +22,7 @@ This skill provides battle-tested strategies for handling failures gracefully: r
 - Multi-step workflows where individual steps can fail
 - Agent delegation with potential cascade failures
 
-## Core Patterns
-
-### 1. Retry with Exponential Backoff
-
-**When**: Transient errors (network timeout, rate limiting, temporary unavailability)
-
-**Pattern**:
-```javascript
-async function retryWithBackoff(operation, maxRetries = 3) {
-  for (let attempt = 0; attempt < maxRetries; attempt++) {
-    try {
-      return await operation();
-    } catch (error) {
-      if (!isRetriable(error) || attempt === maxRetries - 1) {
-        throw error;
-      }
-      const delay = Math.pow(2, attempt) * 1000; // 1s, 2s, 4s
-      await sleep(delay);
-    }
-  }
-}
-
-function isRetriable(error) {
-  const retriableCodes = ['ETIMEDOUT', 'ECONNRESET', 'ENOTFOUND'];
-  return retriableCodes.includes(error.code) ||
-         (error.status >= 500 && error.status < 600);
-}
-```
-
-### 2. Circuit Breaker
-
-**When**: Cascading failures (agent A fails → agent B fails → agent C fails)
-
-**Pattern**:
-```javascript
-class CircuitBreaker {
-  constructor(threshold = 3, timeout = 60000) {
-    this.failureCount = 0;
-    this.threshold = threshold;
-    this.timeout = timeout;
-    this.state = 'CLOSED'; // CLOSED, OPEN, HALF_OPEN
-    this.nextAttempt = Date.now();
-  }
-
-  async execute(operation) {
-    if (this.state === 'OPEN') {
-      if (Date.now() < this.nextAttempt) {
-        throw new Error('Circuit breaker OPEN');
-      }
-      this.state = 'HALF_OPEN';
-    }
-
-    try {
-      const result = await operation();
-      this.onSuccess();
-      return result;
-    } catch (error) {
-      this.onFailure();
-      throw error;
-    }
-  }
-
-  onSuccess() {
-    this.failureCount = 0;
-    this.state = 'CLOSED';
-  }
-
-  onFailure() {
-    this.failureCount++;
-    if (this.failureCount >= this.threshold) {
-      this.state = 'OPEN';
-      this.nextAttempt = Date.now() + this.timeout;
-    }
-  }
-}
-```
-
-### 3. Fallback Strategy
-
-**When**: Primary approach fails, acceptable alternative exists
-
-**Pattern**:
-```javascript
-async function withFallback(primary, fallback, condition) {
-  try {
-    return await primary();
-  } catch (error) {
-    if (condition(error)) {
-      console.warn('Primary failed, using fallback:', error.message);
-      return await fallback();
-    }
-    throw error;
-  }
-}
-
-// Example usage
-const result = await withFallback(
-  () => complexAIAnalysis(code),
-  () => simplePatternMatching(code),
-  (err) => err.code === 'TIMEOUT' || err.code === 'RATE_LIMIT'
-);
-```
-
-### 4. Error Mutation Discipline
-
-**When**: Any retry after a failed approach (implementation, test fix, debug)
-
-**Rule**: Each retry MUST differ from the previous attempt. Never repeat the same failing approach.
-
-| Attempt | Requirement |
-|---------|------------|
-| 1st | Try primary approach |
-| 2nd | **MUST change approach** (different algorithm, scope, or tool) |
-| 3rd | Escalate to user with attempt log |
-
-**Mutation dimensions** (change at least one):
-- **Algorithm**: different data structure, pattern, or logic
-- **Scope**: narrower fix (isolate) or broader fix (refactor surrounding code)
-- **Tool**: different library, API, or technique
-- **Strategy**: different error handling (fail-fast vs graceful vs retry)
-
-**Attempt log format** (track in output):
-```
-Attempt 1: {approach description} — FAILED: {error summary}
-Attempt 2: {different approach} — FAILED: {error summary}
-→ Escalating: 2 different approaches failed. See attempt log above.
-```
-
-**Anti-pattern**: Retrying the same approach with minor tweaks (e.g., changing a variable name, adjusting a timeout). This is NOT a mutation — it must be a fundamentally different strategy.
-
-## Decision Matrix
+## Pattern Decision Table
 
 | Scenario | Strategy | Max Retries | Backoff |
 |----------|----------|-------------|---------|
@@ -168,87 +34,33 @@ Attempt 2: {different approach} — FAILED: {error summary}
 | User input validation | Fail Fast | 0 | None |
 | Missing dependency | Fail Fast | 0 | None |
 
+## Core Patterns (summary)
+
+**Retry with Exponential Backoff** — loop with `Math.pow(2, attempt) * 1000ms` delay; check `isRetriable(error)` before each retry.
+
+**Circuit Breaker** — CLOSED → OPEN after N failures → HALF_OPEN after timeout → CLOSED on success. Prevents cascade failures.
+
+**Fallback** — wrap primary in try/catch; call fallback only when `condition(error)` is true. Log fallback activation.
+
+**Fail Fast** — validate input/deps before any operation; throw immediately, never retry non-retriable errors.
+
+**Graceful Degradation** — catch and return safe default (empty list, cached value, disabled feature) for non-critical paths.
+
+**Error Mutation Discipline** — each retry MUST change approach (algorithm, scope, tool, or strategy). Same approach repeated = not a retry, it's a loop. Escalate after 2 failed mutations.
+
 ## When to Fail Fast
 
-**Do NOT retry for**:
+Do NOT retry:
 - Invalid input (schema validation failures)
 - Missing required dependencies
 - Authentication/authorization errors
 - Logical errors in code
 - Data corruption
 
-**Pattern**:
-```javascript
-if (!isValid(input)) {
-  throw new Error('Invalid input - fix and retry');
-}
-
-if (!fs.existsSync(requiredFile)) {
-  throw new Error('Missing required file');
-}
-```
-
-## Agent-Specific Guidelines
-
-### For Implementer Agents
-
-- Retry file operations (transient disk issues)
-- Fail fast on syntax errors
-- Fallback: simpler implementation if complex approach fails
-
-### For Tester Agents
-
-- Retry flaky tests (once only)
-- Fail fast on compilation errors
-- Fallback: skip optional tests if infrastructure unavailable
-
-### For Git Manager
-
-- Retry push (network issues)
-- Fail fast on merge conflicts
-- Fallback: none (git operations must succeed)
-
-### For Researcher Agents
-
-- Retry API calls (rate limiting, timeouts)
-- Circuit breaker for unreliable sources
-- Fallback: use cached results if available
-
-## Best Practices
-
-1. **Log retries clearly**: Help debugging
-2. **Set reasonable limits**: Avoid infinite loops
-3. **Preserve original error**: Include in final throw
-4. **Document why retrying**: Comment the reasoning
-5. **Monitor failure rates**: Track circuit breaker trips
-
-## Example Integration
-
-```javascript
-// In subagent execution
-const circuitBreaker = new CircuitBreaker(3, 60000);
-
-try {
-  const result = await circuitBreaker.execute(async () => {
-    return await retryWithBackoff(
-      () => implementFeature(spec),
-      3
-    );
-  });
-  return result;
-} catch (error) {
-  // Fallback to simpler implementation
-  console.warn('Complex implementation failed, using simpler approach');
-  return await simpleImplementation(spec);
-}
-```
-
 ## References
 
-- [AWS Architecture Blog: Exponential Backoff](https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/)
-- [Martin Fowler: Circuit Breaker](https://martinfowler.com/bliki/CircuitBreaker.html)
+- `references/resilience-patterns.md` — full code examples: retry/backoff (JS + Java), circuit breaker with state diagram, fallback, fail fast, graceful degradation, combined pattern; agent-specific guidelines; best practices
 
 ### Related Skills
-- `debug` — Systematic debugging methodology
-- `debug` — Root cause analysis techniques (5 Whys, bisection)
+- `debug` — Systematic debugging methodology and root cause analysis
 - `knowledge` — Persist error patterns and recovery strategies (`knowledge --capture`)
