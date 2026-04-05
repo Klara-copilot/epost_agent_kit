@@ -1,0 +1,12 @@
+[
+  {"query": "audit my code before merge", "should_trigger": true},
+  {"query": "review this component", "should_trigger": true},
+  {"query": "check code quality of the auth module", "should_trigger": true},
+  {"query": "is this implementation good enough", "should_trigger": true},
+  {"query": "look at this before I commit", "should_trigger": true},
+  {"query": "suggest improvements for this function", "should_trigger": true},
+  {"query": "fix the security issue found in review", "should_trigger": false},
+  {"query": "implement the review feedback", "should_trigger": false},
+  {"query": "run the test suite", "should_trigger": false},
+  {"query": "write documentation for this code", "should_trigger": false}
+]

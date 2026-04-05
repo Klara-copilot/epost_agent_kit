@@ -1,0 +1,12 @@
+[
+  {"query": "document the UserService API", "should_trigger": true},
+  {"query": "update the README for the auth module", "should_trigger": true},
+  {"query": "write a spec for the notification system", "should_trigger": true},
+  {"query": "init docs for the new project", "should_trigger": true},
+  {"query": "add component documentation for Button", "should_trigger": true},
+  {"query": "reorganize the documentation structure", "should_trigger": true},
+  {"query": "add inline comments to the function", "should_trigger": false},
+  {"query": "create a plan document for the feature", "should_trigger": false},
+  {"query": "update the changelog entry", "should_trigger": false},
+  {"query": "write tests to document behavior", "should_trigger": false}
+]

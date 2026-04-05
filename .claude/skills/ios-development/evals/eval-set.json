@@ -1,0 +1,11 @@
+[
+  {"query": "add a SwiftUI view for the user profile", "should_trigger": true},
+  {"query": "fix the iOS crash in the notification handler", "should_trigger": true},
+  {"query": "implement the iOS settings screen", "should_trigger": true},
+  {"query": "XCTest is failing for the login flow", "should_trigger": true},
+  {"query": "add UIKit table view for the inbox", "should_trigger": true},
+  {"query": "add an Android Compose screen", "should_trigger": false},
+  {"query": "fix the web React component", "should_trigger": false},
+  {"query": "write a backend Java endpoint", "should_trigger": false},
+  {"query": "add an iOS accessibility label", "should_trigger": false}
+]

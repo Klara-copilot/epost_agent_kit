@@ -1,0 +1,11 @@
+[
+  {"query": "fix VoiceOver label on the iOS login button", "should_trigger": true},
+  {"query": "add accessibility traits to the SwiftUI view", "should_trigger": true},
+  {"query": "fix Dynamic Type support in UIKit table view", "should_trigger": true},
+  {"query": "VoiceOver focus order is wrong on the profile screen", "should_trigger": true},
+  {"query": "check contrast ratio for iOS dark mode", "should_trigger": true},
+  {"query": "fix Android TalkBack label", "should_trigger": false},
+  {"query": "fix ARIA role on the web component", "should_trigger": false},
+  {"query": "review iOS UI for design issues", "should_trigger": false},
+  {"query": "implement the iOS accessibility screen", "should_trigger": false}
+]

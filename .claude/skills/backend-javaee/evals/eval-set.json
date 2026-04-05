@@ -1,0 +1,11 @@
+[
+  {"query": "add a JAX-RS REST endpoint for user creation", "should_trigger": true},
+  {"query": "fix the WildFly deployment failure", "should_trigger": true},
+  {"query": "create an EJB service for notifications", "should_trigger": true},
+  {"query": "write a Hibernate query for the user table", "should_trigger": true},
+  {"query": "add CDI injection for the payment service", "should_trigger": true},
+  {"query": "add a web Next.js API route", "should_trigger": false},
+  {"query": "deploy to Kubernetes", "should_trigger": false},
+  {"query": "write a JUnit test for the service", "should_trigger": false},
+  {"query": "add a PostgreSQL migration", "should_trigger": false}
+]

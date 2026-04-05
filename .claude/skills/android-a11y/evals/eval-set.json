@@ -1,0 +1,11 @@
+[
+  {"query": "fix TalkBack contentDescription for the Android button", "should_trigger": true},
+  {"query": "touch target is too small on Android — fix it", "should_trigger": true},
+  {"query": "fix focus order in the Compose screen", "should_trigger": true},
+  {"query": "add contentDescription to Compose image", "should_trigger": true},
+  {"query": "check contrast in the Android XML layout", "should_trigger": true},
+  {"query": "fix iOS VoiceOver label", "should_trigger": false},
+  {"query": "fix ARIA role on the web component", "should_trigger": false},
+  {"query": "review Android UI for design consistency", "should_trigger": false},
+  {"query": "implement the Android feature", "should_trigger": false}
+]

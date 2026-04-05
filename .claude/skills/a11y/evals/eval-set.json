@@ -1,0 +1,11 @@
+[
+  {"query": "check accessibility compliance for the login page", "should_trigger": true},
+  {"query": "audit WCAG 2.1 AA compliance", "should_trigger": true},
+  {"query": "fix screen reader issues on the dashboard", "should_trigger": true},
+  {"query": "run an a11y audit on the iOS app", "should_trigger": true},
+  {"query": "check POUR criteria for the form", "should_trigger": true},
+  {"query": "fix the button style to match the design", "should_trigger": false},
+  {"query": "review the UI for design consistency", "should_trigger": false},
+  {"query": "check color contrast in the CSS file", "should_trigger": false},
+  {"query": "add ARIA labels to the component", "should_trigger": false}
+]

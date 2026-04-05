@@ -1,0 +1,11 @@
+[
+  {"query": "use TDD for this new feature", "should_trigger": true},
+  {"query": "let's go test-first for the payment service", "should_trigger": true},
+  {"query": "red-green-refactor the user registration flow", "should_trigger": true},
+  {"query": "build the feature test-driven", "should_trigger": true},
+  {"query": "I want behavior-driven tests before implementation", "should_trigger": true},
+  {"query": "add unit tests after implementation", "should_trigger": false},
+  {"query": "fix the failing test", "should_trigger": false},
+  {"query": "check test coverage percentage", "should_trigger": false},
+  {"query": "implement the feature, then write tests", "should_trigger": false}
+]

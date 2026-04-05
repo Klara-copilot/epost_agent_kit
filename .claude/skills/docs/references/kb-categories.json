@@ -1,0 +1,14 @@
+{
+  "categories": [
+    { "prefix": "ADR",     "category": "decision",      "description": "Architectural choices and reasoning (ADRs)",          "directory": "decisions",     "core": true,  "signals": [] },
+    { "prefix": "ARCH",    "category": "architecture",  "description": "System structure, components, tech stack, data flow", "directory": "architecture",  "core": true,  "signals": [] },
+    { "prefix": "CONV",    "category": "convention",    "description": "Coding rules, naming patterns, error handling",        "directory": "conventions",   "core": true,  "signals": ["eslint", "tsconfig", "prettier", "checkstyle"] },
+    { "prefix": "FEAT",    "category": "feature",       "description": "Deep-dive guides for specific features",              "directory": "features",      "core": false, "signals": ["route files", "feature directories", "module directories"] },
+    { "prefix": "PATTERN", "category": "pattern",       "description": "Reusable code patterns with examples",               "directory": "patterns",      "core": false, "signals": ["recurring code pattern >= 3 occurrences", "hooks", "HOCs", "provider wrappers"] },
+    { "prefix": "FINDING", "category": "finding",       "description": "Debug insights, discovered gotchas, non-obvious behaviors", "directory": "findings", "core": false, "signals": ["existing findings/*.md files only"] },
+    { "prefix": "GUIDE",   "category": "guide",         "description": "Operational how-to guides (dev setup, onboarding, workflows)", "directory": "guides", "core": false, "signals": ["Dockerfile", ".env.example", "Makefile", "README setup section"] },
+    { "prefix": "API",     "category": "api",           "description": "REST/GraphQL endpoint documentation",                "directory": "api",           "core": false, "signals": ["REST route files", "GraphQL schema", "OpenAPI/swagger spec", "JAX-RS @Path annotations"] },
+    { "prefix": "INFRA",   "category": "infrastructure","description": "Infrastructure, deployment, CI/CD pipeline",         "directory": "infra",         "core": false, "signals": ["docker-compose.yml", "CI config (GitHub Actions/.gitlab-ci)", "Terraform", "Kubernetes manifests"] },
+    { "prefix": "INTEG",   "category": "integration",   "description": "External service integrations (APIs, SDKs, third-party systems)", "directory": "integrations", "core": false, "signals": ["third-party SDK imports", "external API client classes", "Keycloak/S3/SMTP config", "service base URLs in config"] }
+  ]
+}

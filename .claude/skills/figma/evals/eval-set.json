@@ -1,0 +1,11 @@
+[
+  {"query": "extract design tokens from the Figma file", "should_trigger": true},
+  {"query": "compare the Button implementation against Figma", "should_trigger": true},
+  {"query": "use the Figma MCP tool to get component data", "should_trigger": true},
+  {"query": "import color variables from Figma", "should_trigger": true},
+  {"query": "map Figma design to iOS Swift code", "should_trigger": true},
+  {"query": "build the component from the screenshot", "should_trigger": false},
+  {"query": "fix the design system CSS variables", "should_trigger": false},
+  {"query": "update the Tailwind styles", "should_trigger": false},
+  {"query": "add tokens to the Android theme", "should_trigger": false}
+]

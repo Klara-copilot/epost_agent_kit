@@ -1,0 +1,14 @@
+[
+  {"query": "verify the kit", "should_trigger": true},
+  {"query": "check kit health", "should_trigger": true},
+  {"query": "is the kit ok before I commit", "should_trigger": true},
+  {"query": "validate package manifests", "should_trigger": true},
+  {"query": "check agent refs are all valid", "should_trigger": true},
+  {"query": "run kit-verify", "should_trigger": true},
+  {"query": "is skill-index in sync", "should_trigger": true},
+  {"query": "add a new skill to the kit", "should_trigger": false},
+  {"query": "optimize the web-testing skill", "should_trigger": false},
+  {"query": "commit and push", "should_trigger": false},
+  {"query": "run the tests", "should_trigger": false},
+  {"query": "deploy the kit", "should_trigger": false}
+]

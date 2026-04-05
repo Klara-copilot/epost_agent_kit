@@ -1,0 +1,11 @@
+[
+  {"query": "fix ARIA roles on the navigation menu", "should_trigger": true},
+  {"query": "keyboard navigation is broken on the modal", "should_trigger": true},
+  {"query": "focus is not trapped in the dialog", "should_trigger": true},
+  {"query": "add alt text to images on the page", "should_trigger": true},
+  {"query": "screen reader announces the wrong label on the button", "should_trigger": true},
+  {"query": "fix TalkBack label on Android", "should_trigger": false},
+  {"query": "fix VoiceOver focus on iOS", "should_trigger": false},
+  {"query": "review the web UI for design issues", "should_trigger": false},
+  {"query": "add the button component to the page", "should_trigger": false}
+]

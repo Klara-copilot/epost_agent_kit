@@ -1,0 +1,12 @@
+[
+  {"query": "commit my changes", "should_trigger": true},
+  {"query": "push to remote", "should_trigger": true},
+  {"query": "create a PR for this feature", "should_trigger": true},
+  {"query": "ship it", "should_trigger": true},
+  {"query": "done — open a pull request", "should_trigger": true},
+  {"query": "merge the feature branch", "should_trigger": true},
+  {"query": "review changes before committing", "should_trigger": false},
+  {"query": "fix the merge conflict in auth.ts", "should_trigger": false},
+  {"query": "check git status", "should_trigger": false},
+  {"query": "stash my changes temporarily", "should_trigger": false}
+]

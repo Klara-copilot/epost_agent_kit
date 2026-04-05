@@ -1,0 +1,14 @@
+[
+  {"query": "analyze edge cases before implementing the checkout flow", "should_trigger": true},
+  {"query": "generate test scenarios for the user authentication feature", "should_trigger": true},
+  {"query": "what edge cases should I consider for the payment retry logic", "should_trigger": true},
+  {"query": "stress-test the design for concurrent order submissions", "should_trigger": true},
+  {"query": "before writing tests, what scenarios should I cover for the notification service", "should_trigger": true},
+  {"query": "run scenario analysis on the file upload feature", "should_trigger": true},
+  {"query": "what are the timing edge cases for the session expiry logic", "should_trigger": true},
+  {"query": "write unit tests for the order service", "should_trigger": false},
+  {"query": "implement the checkout feature", "should_trigger": false},
+  {"query": "fix the login bug", "should_trigger": false},
+  {"query": "deploy the application", "should_trigger": false},
+  {"query": "review my code before merging", "should_trigger": false}
+]

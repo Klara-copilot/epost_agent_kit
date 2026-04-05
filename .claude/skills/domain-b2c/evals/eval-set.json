@@ -1,0 +1,11 @@
+[
+  {"query": "add a B2C mail screen for the consumer app", "should_trigger": true},
+  {"query": "implement consumer epost notification on iOS", "should_trigger": true},
+  {"query": "build the document viewer for the B2C app", "should_trigger": true},
+  {"query": "add push notification handling to the consumer Android app", "should_trigger": true},
+  {"query": "consumer epost iOS — fix the mail list screen", "should_trigger": true},
+  {"query": "add a B2B Inbox feature", "should_trigger": false},
+  {"query": "add a generic Android screen", "should_trigger": false},
+  {"query": "fix a consumer bug", "should_trigger": false},
+  {"query": "implement a feature for the web app", "should_trigger": false}
+]

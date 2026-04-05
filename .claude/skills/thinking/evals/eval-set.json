@@ -1,0 +1,10 @@
+[
+  {"query": "think deeply about this architectural trade-off", "should_trigger": true},
+  {"query": "use extended thinking to analyze the root cause", "should_trigger": true},
+  {"query": "I've tried 3 approaches and it's still broken — think it through", "should_trigger": true},
+  {"query": "step-by-step hypothesis testing before acting", "should_trigger": true},
+  {"query": "implement the feature", "should_trigger": false},
+  {"query": "fix the bug quickly", "should_trigger": false},
+  {"query": "what is this architecture", "should_trigger": false},
+  {"query": "run the tests", "should_trigger": false}
+]

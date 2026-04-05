@@ -1,0 +1,12 @@
+[
+  {"query": "implement the login feature", "should_trigger": true},
+  {"query": "add a button component to the header", "should_trigger": true},
+  {"query": "build the user profile page", "should_trigger": true},
+  {"query": "make the search bar work", "should_trigger": true},
+  {"query": "continue the plan", "should_trigger": true},
+  {"query": "cook the notification feature", "should_trigger": true},
+  {"query": "why is login failing for some users", "should_trigger": false},
+  {"query": "review my code before I commit", "should_trigger": false},
+  {"query": "how should we architect the auth system", "should_trigger": false},
+  {"query": "commit my changes and push", "should_trigger": false}
+]

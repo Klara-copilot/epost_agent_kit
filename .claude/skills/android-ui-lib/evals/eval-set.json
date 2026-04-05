@@ -1,0 +1,11 @@
+[
+  {"query": "what Compose components are in the Android theme", "should_trigger": true},
+  {"query": "use the Android theme Button in Compose", "should_trigger": true},
+  {"query": "what design tokens are available for Android", "should_trigger": true},
+  {"query": "check the Material theme color mapping for Android", "should_trigger": true},
+  {"query": "how do I use Android typography tokens", "should_trigger": true},
+  {"query": "build a custom Compose button from scratch", "should_trigger": false},
+  {"query": "fix the Android layout issue", "should_trigger": false},
+  {"query": "add a web klara-theme component", "should_trigger": false},
+  {"query": "implement the Android screen", "should_trigger": false}
+]

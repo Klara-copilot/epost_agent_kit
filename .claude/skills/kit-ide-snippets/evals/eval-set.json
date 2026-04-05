@@ -1,0 +1,6 @@
+[
+  {"query": "update the copilot snippet", "should_trigger": true},
+  {"query": "how does cursor rules injection work", "should_trigger": true},
+  {"query": "convert this skill for cursor", "should_trigger": true},
+  {"query": "add a new react component", "should_trigger": false}
+]

@@ -1,0 +1,11 @@
+[
+  {"query": "add an App Router page for the dashboard", "should_trigger": true},
+  {"query": "set up Next.js middleware for auth", "should_trigger": true},
+  {"query": "create a server action to submit the form", "should_trigger": true},
+  {"query": "Next.js routing issue — page not found", "should_trigger": true},
+  {"query": "add a layout.tsx for the settings section", "should_trigger": true},
+  {"query": "add a React component for the button", "should_trigger": false},
+  {"query": "set up Redux store", "should_trigger": false},
+  {"query": "write a Playwright test for the page", "should_trigger": false},
+  {"query": "configure next-intl for i18n", "should_trigger": false}
+]

@@ -1,0 +1,11 @@
+[
+  {"query": "pack this repo for LLM consumption", "should_trigger": true},
+  {"query": "create a codebase snapshot to share with AI", "should_trigger": true},
+  {"query": "include this remote repo as context", "should_trigger": true},
+  {"query": "repomix the project", "should_trigger": true},
+  {"query": "bundle the codebase into a single file", "should_trigger": true},
+  {"query": "document the codebase", "should_trigger": false},
+  {"query": "analyze the repo for issues", "should_trigger": false},
+  {"query": "create a changelog for the project", "should_trigger": false},
+  {"query": "search the codebase for a pattern", "should_trigger": false}
+]
