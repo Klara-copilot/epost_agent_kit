@@ -1,54 +1,64 @@
-# Workflow: Create Task
+# Workflow: Create Task (MUJI)
+
+Creates a task in iOS Libraries and multi-homes it to MUJI Tasks + MUJI Plan.
 
 ## Step 1 — Gather info
 
 Use `AskUserQuestion` (2 rounds):
 
-**Round 1** (2 questions):
-- Q1 header "Task Name": free text (user types via Other)
-  - Options: placeholder only, e.g. "[Vien-Comp] Component Name", "[ThemeUI] Feature Name"
-- Q2 header "Module": `theme-ui (Recommended)`, `theme-ui-showcase`, `theme-ui >< ePost`, `MUJI >< ePost`, `theme-ui >< ePost Mock app`
+**Round 1**:
+- Q1 header "Task Name": free text (e.g. "[Vien-Comp] Component Name", "[ThemeUI] Feature Name")
+- Q2 header "Module": `ios_theme_ui (Recommended)`, `ios_theme_showcase`, `ePost <> Bottom Menu Bar`
 
-**Round 2** (2 questions):
+**Round 2**:
 - Q3 header "Due Date": `+3 days`, `+7 days`, `+14 days`, Other (user types number)
   - Calculate: today + N days → `YYYY-MM-DD`
 - Q4 header "Figma": `No Figma link`, Other (user pastes URL)
 
-## Step 2 — Create in Android Libraries
+## Step 2 — Create in iOS Libraries
 
 ```
-mcp__asana__create_tasks:
+mcp__claude_ai_Asana__create_task_confirm:
   name: [task name]
-  projects: ["1210248345341985"]
-  assignee: "1210221850073452"
+  projects: ["$ASANA_IOS_LIBRARIES_GID"]
+  assignee: "$ASANA_USER_GID"
   due_on: [calculated YYYY-MM-DD]
-  notes: [Figma URL or empty]
+  notes: [Figma URL or ""]
 ```
 
 Capture returned task `gid`.
 
-## Step 3 — Move to module section in Android Libraries
+## Step 3 — Move to module section in iOS Libraries
 
-Move task to chosen section (theme-ui default: `1210434600893748`).
+Move task to chosen section:
+- `ios_theme_ui` → `$ASANA_SECTION_IOS_THEME_UI_GID`
+- `ios_theme_showcase` → `$ASANA_SECTION_IOS_THEME_SHOWCASE_GID`
+- `ePost <> Bottom Menu Bar` → `$ASANA_SECTION_EPOST_BOTTOM_MENU_GID`
+
+```
+mcp__claude_ai_Asana__update_tasks:
+  task_id: [gid]
+  memberships: [{ project: "$ASANA_IOS_LIBRARIES_GID", section: "[chosen section gid]" }]
+```
 
 ## Step 4 — Multi-home to MUJI Tasks + MUJI Plan
 
 ```
-mcp__asana__update_tasks:
+mcp__claude_ai_Asana__update_tasks:
   task_id: [gid]
-  addProjects: ["1176686389740521", "1184227957274218"]
+  addProjects: ["$ASANA_MUJI_TASKS_GID", "$ASANA_MUJI_PLAN_GID"]
 ```
 
-Then move to initial sections:
-- MUJI Tasks → TO DO (`1176686389740524`)
-- MUJI Plan → New Requests (`1184227957274234`)
+Move to initial sections:
+- MUJI Tasks → TO DO (`$ASANA_SECTION_TODO_GID`)
+- MUJI Plan → New Requests (`$ASANA_SECTION_NEW_REQUESTS_GID`)
 
 ## Step 5 — Confirm
 
 ```
 Task created: [name]
 Due: [date]
-Android Libraries: [section]
+iOS Libraries: [section name]
 MUJI Tasks: TO DO
 MUJI Plan: New Requests
 Figma: [URL or none]
