@@ -1,0 +1,11 @@
+[
+  {"query": "I'm new to this project, help me get started", "should_trigger": true},
+  {"query": "what is this codebase", "should_trigger": true},
+  {"query": "onboard me to the project", "should_trigger": true},
+  {"query": "help me understand this project structure", "should_trigger": true},
+  {"query": "give me an overview of the architecture", "should_trigger": true},
+  {"query": "start implementing the feature", "should_trigger": false},
+  {"query": "set up the project dependencies", "should_trigger": false},
+  {"query": "install the required packages", "should_trigger": false},
+  {"query": "what is React", "should_trigger": false}
+]

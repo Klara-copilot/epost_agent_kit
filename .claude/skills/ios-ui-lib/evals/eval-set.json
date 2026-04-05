@@ -1,0 +1,11 @@
+[
+  {"query": "what props does the iOS theme Button accept", "should_trigger": true},
+  {"query": "use the iOS theme Card component in SwiftUI", "should_trigger": true},
+  {"query": "what design tokens are available for iOS", "should_trigger": true},
+  {"query": "check the iOS theme color token for primary", "should_trigger": true},
+  {"query": "how do I use the iOS typography tokens", "should_trigger": true},
+  {"query": "build a custom SwiftUI button from scratch", "should_trigger": false},
+  {"query": "fix the iOS button layout", "should_trigger": false},
+  {"query": "add a web klara-theme component", "should_trigger": false},
+  {"query": "implement the iOS screen", "should_trigger": false}
+]

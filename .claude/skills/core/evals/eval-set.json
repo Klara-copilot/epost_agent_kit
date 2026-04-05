@@ -1,0 +1,8 @@
+[
+  {"query": "apply core safety rules before modifying files", "should_trigger": true},
+  {"query": "check decision authority before deleting", "should_trigger": true},
+  {"query": "what are the documentation standards", "should_trigger": false},
+  {"query": "implement the feature", "should_trigger": false},
+  {"query": "fix the bug", "should_trigger": false},
+  {"query": "run the tests", "should_trigger": false}
+]

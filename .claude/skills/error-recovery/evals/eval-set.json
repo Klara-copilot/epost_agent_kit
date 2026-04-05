@@ -1,0 +1,12 @@
+[
+  {"query": "add retry logic with exponential backoff", "should_trigger": true},
+  {"query": "implement circuit breaker for the payment API", "should_trigger": true},
+  {"query": "handle transient network timeouts gracefully", "should_trigger": true},
+  {"query": "add graceful degradation when the service is down", "should_trigger": true},
+  {"query": "the API times out occasionally — add fallback", "should_trigger": true},
+  {"query": "implement resilience patterns for the upload service", "should_trigger": true},
+  {"query": "fix the timeout error", "should_trigger": false},
+  {"query": "add error handling UI for failed requests", "should_trigger": false},
+  {"query": "debug why the request is timing out", "should_trigger": false},
+  {"query": "implement error logging", "should_trigger": false}
+]

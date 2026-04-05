@@ -1,0 +1,11 @@
+[
+  {"query": "write a Jest test for the login component", "should_trigger": true},
+  {"query": "add React Testing Library tests for the form", "should_trigger": true},
+  {"query": "write Playwright E2E test for checkout", "should_trigger": true},
+  {"query": "test the login page end-to-end", "should_trigger": true},
+  {"query": "set up Jest configuration for the project", "should_trigger": true},
+  {"query": "fix the failing Jest test", "should_trigger": false},
+  {"query": "check overall test coverage", "should_trigger": false},
+  {"query": "debug why the Playwright test times out", "should_trigger": false},
+  {"query": "add XCTest for the iOS login screen", "should_trigger": false}
+]

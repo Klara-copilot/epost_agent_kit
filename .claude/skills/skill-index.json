@@ -1,0 +1,2904 @@
+{
+  "generated": "2026-04-05T02:48:36.005Z",
+  "version": "2.0.0",
+  "count": 79,
+  "categories": {
+    "accessibility": 4,
+    "uncategorized": 37,
+    "workflow": 12,
+    "backend": 2,
+    "quality": 6,
+    "design": 3,
+    "domain": 2,
+    "knowledge": 5,
+    "web": 8
+  },
+  "connectedSkills": 23,
+  "skills": [
+    {
+      "name": "a11y",
+      "description": "(ePost) Use when: \\\"accessibility\\\", \\\"WCAG\\\", \\\"a11y\\\", \\\"screen reader\\\", \\\"audit a11y\\\", \\\"fix accessibility\\\", or any accessibility workflow across any platform. Cross-platform WCAG 2.1 AA compliance with POUR scoring.",
+      "category": "accessibility",
+      "tier": "discoverable",
+      "keywords": [
+        "a11y",
+        "accessibility",
+        "wcag",
+        "aria",
+        "screen-reader",
+        "pour"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "accessibility audit",
+        "WCAG check",
+        "a11y score",
+        "screen reader test"
+      ],
+      "agent-affinity": [
+        "epost-a11y-specialist"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 5263,
+      "path": "a11y/SKILL.md"
+    },
+    {
+      "name": "android-a11y",
+      "description": "(ePost) Diagnoses and fixes Android accessibility issues across Compose and Views/XML. Use when Android accessibility issues arise — TalkBack, contentDescription, touch targets, focus order, contrast in Compose or Views/XML",
+      "category": "accessibility",
+      "tier": "discoverable",
+      "keywords": [
+        "talkback",
+        "android-accessibility",
+        "content-description",
+        "touch-target"
+      ],
+      "platforms": [
+        "android"
+      ],
+      "triggers": [
+        "android accessibility",
+        "talkback fix",
+        "compose semantics",
+        "contentDescription missing"
+      ],
+      "agent-affinity": [
+        "epost-a11y-specialist",
+        "epost-fullstack-developer"
+      ],
+      "connections": {
+        "extends": [
+          "a11y"
+        ],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 66358,
+      "path": "android-a11y/SKILL.md"
+    },
+    {
+      "name": "android-development",
+      "description": "(ePost) Builds Kotlin/Compose screens, manages Gradle builds, and debugs Android crashes. Use when working on Android — Kotlin/Compose screens, Gradle builds, Hilt DI, Room DB, or fixing Android crashes and Kotlin coroutine issues",
+      "category": "uncategorized",
+      "tier": "discoverable",
+      "keywords": [
+        "android",
+        "kotlin",
+        "jetpack-compose",
+        "mvvm",
+        "hilt",
+        "room",
+        "retrofit"
+      ],
+      "platforms": [
+        "android"
+      ],
+      "triggers": [
+        ".kt",
+        ".kts",
+        "build.gradle",
+        "AndroidManifest.xml",
+        "android"
+      ],
+      "agent-affinity": [
+        "epost-fullstack-developer",
+        "epost-tester",
+        "epost-debugger",
+        "epost-code-reviewer"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 36021,
+      "path": "android-development/SKILL.md"
+    },
+    {
+      "name": "android-testing",
+      "description": "Use when writing Android tests — Compose UI tests, Hilt DI test setup, ViewModel + Flow testing with Turbine, Room in-memory, or MockK mocking. Covers JUnit 4 patterns and flakiness fixes.",
+      "category": "uncategorized",
+      "tier": "discoverable",
+      "keywords": [
+        "junit",
+        "compose-testing",
+        "hilt",
+        "turbine",
+        "mockk",
+        "room",
+        "viewmodel",
+        "flow"
+      ],
+      "platforms": [
+        "android"
+      ],
+      "triggers": [],
+      "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 19182,
+      "path": "android-testing/SKILL.md"
+    },
+    {
+      "name": "android-ui-lib",
+      "description": "(ePost) Provides Android theme Compose component APIs, design tokens, and Material theme mappings. Use when looking up Android theme Compose component APIs, Android design tokens, or Material theme color/typography mappings",
+      "category": "uncategorized",
+      "tier": "discoverable",
+      "keywords": [
+        "android-ui",
+        "compose-components",
+        "design-tokens",
+        "theme"
+      ],
+      "platforms": [
+        "android"
+      ],
+      "triggers": [
+        "android component",
+        "compose token",
+        "material mapping",
+        "android design token"
+      ],
+      "agent-affinity": [
+        "epost-muji",
+        "epost-fullstack-developer"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 3530,
+      "path": "android-ui-lib/SKILL.md"
+    },
+    {
+      "name": "asana-muji",
+      "description": "Use when: \\\"create task\\\", \\\"update status\\\", \\\"move task\\\", \\\"asana\\\", \\\"muji task\\\", \\\"board update\\\", \\\"my tasks\\\". Asana workflow for MUJI Android: create/update tasks across Android Libraries, MUJI Tasks, and MUJI Plan boards.",
+      "category": "uncategorized",
+      "tier": "discoverable",
+      "keywords": [
+        "asana",
+        "task-management",
+        "muji",
+        "workflow",
+        "android-project"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "/asana",
+        "create asana task",
+        "update asana status",
+        "move task on board"
+      ],
+      "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 3075,
+      "path": "asana-muji/SKILL.md"
+    },
+    {
+      "name": "audit",
+      "description": "(ePost) Use when: \\\"audit\\\", \\\"review\\\", \\\"check quality\\\", \\\"is this good\\\", \\\"review before merge\\\", \\\"a11y audit\\\", \\\"code audit\\\", \\\"suggest improvements\\\". Dispatches UI, a11y, and code quality audits to the right specialist.",
+      "category": "workflow",
+      "tier": "discoverable",
+      "keywords": [
+        "audit",
+        "review",
+        "component",
+        "a11y",
+        "accessibility",
+        "code",
+        "quality",
+        "ui-lib",
+        "muji",
+        "tokens"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "\"audit\"",
+        "\"review\"",
+        "\"audit component\"",
+        "\"audit ui\"",
+        "\"audit a11y\"",
+        "\"audit code\"",
+        "\"code audit\"",
+        "\"component audit\"",
+        "\"check my code\"",
+        "\"is this good\"",
+        "\"look at this before I commit\"",
+        "\"suggest improvements\""
+      ],
+      "agent-affinity": [
+        "epost-muji",
+        "epost-code-reviewer",
+        "epost-a11y-specialist"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [
+          "code-review"
+        ],
+        "conflicts": []
+      },
+      "size": 94233,
+      "path": "audit/SKILL.md"
+    },
+    {
+      "name": "backend-auth",
+      "description": "(ePost) Provides internal JWT token architecture for Java backends. Use when working with jwt, token, auth, permission, AccessibleWithoutTenant, PermissionAllowed, tenant context, or Keycloak integration.",
+      "category": "uncategorized",
+      "tier": "discoverable",
+      "keywords": [
+        "jwt",
+        "token",
+        "auth",
+        "tenant",
+        "permission",
+        "keycloak",
+        "user-token",
+        "tenant-token"
+      ],
+      "platforms": [
+        "backend"
+      ],
+      "triggers": [
+        "jwt",
+        "token",
+        "auth",
+        "permission",
+        "AccessibleWithoutTenant",
+        "PermissionAllowed",
+        "tenant token"
+      ],
+      "agent-affinity": [
+        "epost-fullstack-developer",
+        "epost-code-reviewer",
+        "epost-debugger"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 7488,
+      "path": "backend-auth/SKILL.md"
+    },
+    {
+      "name": "backend-databases",
+      "description": "(ePost) Provides PostgreSQL and MongoDB persistence patterns for the epost backend. Use when working with PostgreSQL queries, MongoDB documents, or database persistence in the epost backend",
+      "category": "backend",
+      "tier": "discoverable",
+      "keywords": [
+        "postgresql",
+        "mongodb",
+        "database",
+        "sql",
+        "query",
+        "migration",
+        "connection-pool"
+      ],
+      "platforms": [
+        "backend"
+      ],
+      "triggers": [
+        "database query",
+        "postgres schema",
+        "mongodb collection",
+        "sql migration"
+      ],
+      "agent-affinity": [
+        "epost-fullstack-developer",
+        "epost-debugger"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [
+          "backend-javaee"
+        ],
+        "conflicts": []
+      },
+      "size": 984,
+      "path": "backend-databases/SKILL.md"
+    },
+    {
+      "name": "backend-javaee",
+      "description": "(ePost) Implements Jakarta EE patterns — JAX-RS, CDI/EJB, JPA/Hibernate, WildFly deployment. Use when working with Jakarta EE — JAX-RS endpoints, CDI/EJB services, JPA/Hibernate, WildFly deployment",
+      "category": "backend",
+      "tier": "discoverable",
+      "keywords": [
+        "javaee",
+        "jakarta",
+        "jax-rs",
+        "hibernate",
+        "ejb",
+        "cdi",
+        "wildfly",
+        "jpa"
+      ],
+      "platforms": [
+        "backend"
+      ],
+      "triggers": [
+        "jakarta ee",
+        "wildfly deploy",
+        "jax-rs endpoint",
+        "hibernate entity"
+      ],
+      "agent-affinity": [
+        "epost-fullstack-developer",
+        "epost-tester",
+        "epost-debugger",
+        "epost-code-reviewer"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 10639,
+      "path": "backend-javaee/SKILL.md"
+    },
+    {
+      "name": "backend-observability",
+      "description": "(ePost) Enforces structured logging and observability standards for Java backends. Use when working with logging, log levels, slf4j, MDC, health checks, metrics, or tracing — applies to both WildFly/Jakarta EE and Quarkus services.",
+      "category": "uncategorized",
+      "tier": "discoverable",
+      "keywords": [
+        "logging",
+        "observability",
+        "slf4j",
+        "mdc",
+        "tracing",
+        "metrics",
+        "structured-logging"
+      ],
+      "platforms": [
+        "backend"
+      ],
+      "triggers": [
+        "logging",
+        "log",
+        "observability",
+        "slf4j",
+        "mdc",
+        "health check",
+        "metrics"
+      ],
+      "agent-affinity": [
+        "epost-fullstack-developer",
+        "epost-debugger",
+        "epost-code-reviewer"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 4616,
+      "path": "backend-observability/SKILL.md"
+    },
+    {
+      "name": "backend-quarkus",
+      "description": "(ePost) Implements Quarkus microservice patterns — Java 21, Cloud Run, AlloyDB, Pub/Sub, Flyway. Use when building new backend services with Quarkus, Java 21+, or Cloud Run deployment",
+      "category": "uncategorized",
+      "tier": "discoverable",
+      "keywords": [
+        "quarkus",
+        "java21",
+        "cloud-run",
+        "microservice",
+        "alloydb",
+        "flyway",
+        "pubsub",
+        "opentelemetry"
+      ],
+      "platforms": [
+        "backend"
+      ],
+      "triggers": [
+        "quarkus",
+        "java 21",
+        "cloud run",
+        "new service",
+        "alloydb",
+        "flyway"
+      ],
+      "agent-affinity": [
+        "epost-fullstack-developer",
+        "epost-tester",
+        "epost-debugger",
+        "epost-code-reviewer"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 15727,
+      "path": "backend-quarkus/SKILL.md"
+    },
+    {
+      "name": "backend-rest-standards",
+      "description": "(ePost) Enforces org-wide REST API contract standards for Java backends. Use when designing REST endpoints, error responses, pagination, status codes, or API contracts — applies to both WildFly/Jakarta EE and Quarkus services.",
+      "category": "uncategorized",
+      "tier": "discoverable",
+      "keywords": [
+        "rest",
+        "api",
+        "error",
+        "pagination",
+        "status-code",
+        "response",
+        "dto",
+        "jax-rs"
+      ],
+      "platforms": [
+        "backend"
+      ],
+      "triggers": [
+        "REST API",
+        "error response",
+        "pagination",
+        "status code",
+        "API contract"
+      ],
+      "agent-affinity": [
+        "epost-fullstack-developer",
+        "epost-code-reviewer"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 3900,
+      "path": "backend-rest-standards/SKILL.md"
+    },
+    {
+      "name": "backend-testing",
+      "description": "Use when writing backend tests — Arquillian WildFly integration, Weld-JUnit CDI unit tests, JAX-RS endpoint tests with RestAssured, JPA/Hibernate with H2, or JaCoCo coverage configuration. Jakarta EE 8 / JUnit 4 patterns.",
+      "category": "uncategorized",
+      "tier": "discoverable",
+      "keywords": [
+        "arquillian",
+        "weld",
+        "junit",
+        "mockito",
+        "restassured",
+        "jacoco",
+        "cdi",
+        "ejb",
+        "jpa",
+        "hibernate"
+      ],
+      "platforms": [
+        "backend"
+      ],
+      "triggers": [],
+      "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 26916,
+      "path": "backend-testing/SKILL.md"
+    },
+    {
+      "name": "clean-code",
+      "description": "(ePost) Use when writing code, reviewing PRs, refactoring, or when code smells detected. Enforces Clean Code principles for naming, functions, formatting, and error handling.",
+      "category": "uncategorized",
+      "tier": "core",
+      "keywords": [
+        "clean-code",
+        "naming",
+        "functions",
+        "formatting",
+        "code-smells",
+        "refactoring"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "clean up code",
+        "naming conventions",
+        "refactor for clarity",
+        "code smells"
+      ],
+      "agent-affinity": [
+        "epost-fullstack-developer",
+        "epost-code-reviewer"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 24254,
+      "path": "clean-code/SKILL.md"
+    },
+    {
+      "name": "code-review",
+      "description": "(ePost) Reviews code for quality, style, and correctness before commit. Use when user says \"review code\", \"check quality\", \"audit this\", or \"look at changed files\" — checks code quality, style, and correctness before commit",
+      "category": "quality",
+      "tier": "core",
+      "keywords": [
+        "review",
+        "code-quality",
+        "security",
+        "performance",
+        "testing",
+        "verification"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "/review",
+        "code review",
+        "review code"
+      ],
+      "agent-affinity": [
+        "epost-code-reviewer",
+        "epost-fullstack-developer"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 45043,
+      "path": "code-review/SKILL.md"
+    },
+    {
+      "name": "cook",
+      "description": "(ePost) Use when: \\\"implement\\\", \\\"build\\\", \\\"add a feature\\\", \\\"cook\\\", \\\"make this work\\\", \\\"continue the plan\\\". Dispatches platform-aware feature implementation across web, iOS, Android, and backend.",
+      "category": "workflow",
+      "tier": "discoverable",
+      "keywords": [
+        "cook",
+        "implement",
+        "build",
+        "feature",
+        "continue-plan"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "/cook",
+        "implement this",
+        "build the feature",
+        "continue the plan",
+        "make this work"
+      ],
+      "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [
+          "plan"
+        ],
+        "conflicts": []
+      },
+      "size": 11901,
+      "path": "cook/SKILL.md"
+    },
+    {
+      "name": "core",
+      "description": "(ePost) Defines operational boundaries, safety rules, and documentation standards for all agents. Use when any agent modifies files, makes architectural decisions, or needs safety and documentation rules",
+      "category": "quality",
+      "tier": "core",
+      "keywords": [
+        "rules",
+        "boundaries",
+        "safety",
+        "documentation-standards"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "check rules",
+        "what are the boundaries",
+        "core rules",
+        "safety guidelines"
+      ],
+      "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 8865,
+      "path": "core/SKILL.md"
+    },
+    {
+      "name": "debug",
+      "description": "(ePost) Use when: \\\"debug\\\", \\\"trace this\\\", \\\"diagnose\\\", \\\"it crashes\\\", \\\"why is this failing\\\", or user provides a stack trace. Investigates root cause using platform-specific debugging tools.",
+      "category": "workflow",
+      "tier": "core",
+      "keywords": [
+        "debug",
+        "error",
+        "bug",
+        "troubleshoot",
+        "root-cause",
+        "stack-trace",
+        "logging",
+        "crash",
+        "exception",
+        "fix"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "/debug",
+        "error",
+        "bug",
+        "crash",
+        "exception"
+      ],
+      "agent-affinity": [
+        "epost-debugger",
+        "epost-fullstack-developer"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [
+          "fix"
+        ],
+        "conflicts": []
+      },
+      "size": 14726,
+      "path": "debug/SKILL.md"
+    },
+    {
+      "name": "deploy",
+      "description": "Deploys projects to hosting platforms with auto-detection. Use when user says 'deploy', 'publish', 'go live', 'push to production', or mentions Vercel, Netlify, Cloudflare, Railway, Fly.io, or Docker.",
+      "category": "uncategorized",
+      "tier": "discoverable",
+      "keywords": [
+        "deploy",
+        "publish",
+        "vercel",
+        "netlify",
+        "cloudflare",
+        "railway",
+        "flyio",
+        "docker",
+        "production",
+        "hosting"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "deploy",
+        "publish",
+        "go live",
+        "push to production",
+        "ship to prod",
+        "host this"
+      ],
+      "agent-affinity": [
+        "epost-fullstack-developer"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 4792,
+      "path": "deploy/SKILL.md"
+    },
+    {
+      "name": "design-tokens",
+      "description": "(ePost) Use when working with Vien 2.0 design tokens, Figma variables, semantic colors, or multi-brand theming. Maps tokens to platform-native formats: CSS variables, Swift constants, Kotlin theme objects.",
+      "category": "design",
+      "tier": "discoverable",
+      "keywords": [
+        "figma",
+        "variables",
+        "tokens",
+        "design-system",
+        "semantic"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [],
+      "agent-affinity": [
+        "epost-muji"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [
+          "figma"
+        ],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 42510,
+      "path": "design-tokens/SKILL.md"
+    },
+    {
+      "name": "didyouknow",
+      "description": "(ePost) Surfaces non-obvious kit capabilities, hidden flags, and skill combinations. Use when user says \"did you know\", \"tips\", \"what can I do with the kit\", \"underused features\", or asks about a specific topic like \"testing tips\" or \"backend tips",
+      "category": "uncategorized",
+      "tier": "discoverable",
+      "keywords": [
+        "tips",
+        "didyouknow",
+        "discovery",
+        "hidden-features",
+        "skill-combinations"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "did you know",
+        "tips",
+        "kit tips",
+        "underused",
+        "what else can",
+        "hidden features"
+      ],
+      "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 2749,
+      "path": "didyouknow/SKILL.md"
+    },
+    {
+      "name": "docs",
+      "description": "(ePost) Use when: \\\"write docs\\\", \\\"update docs\\\", \\\"document this\\\", \\\"init docs\\\", \\\"reorganize documentation\\\", \\\"add component docs\\\". Detects docs intent (init, update, migrate, component) and runs the right workflow.",
+      "category": "workflow",
+      "tier": "discoverable",
+      "keywords": [
+        "docs",
+        "documentation",
+        "knowledge-base",
+        "kb-init",
+        "changelog"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "/docs",
+        "document this",
+        "update docs",
+        "init knowledge base",
+        "write documentation"
+      ],
+      "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 61832,
+      "path": "docs/SKILL.md"
+    },
+    {
+      "name": "domain-b2b",
+      "description": "(ePost) Provides B2B module context — Inbox, Monitoring, Composer, Smart Send, and related domains. Use when working in a B2B module — Inbox, Monitoring, Composer, Smart Send, Communities, Archive, Contacts, Organization",
+      "category": "domain",
+      "tier": "discoverable",
+      "keywords": [
+        "module",
+        "inbox",
+        "monitoring",
+        "composer",
+        "smart-send",
+        "smart send",
+        "communities",
+        "archive",
+        "contacts",
+        "organization",
+        "smart-letter"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "triggers": [
+        "which module",
+        "module structure",
+        "explore module",
+        "understand module"
+      ],
+      "agent-affinity": [
+        "epost-fullstack-developer",
+        "epost-project-manager"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 17035,
+      "path": "domain-b2b/SKILL.md"
+    },
+    {
+      "name": "domain-b2c",
+      "description": "(ePost) Provides consumer app context — B2C mail, documents, notifications on iOS and Android. Use when working on the consumer epost app — B2C mail, documents, notifications on iOS or Android",
+      "category": "domain",
+      "tier": "discoverable",
+      "keywords": [
+        "b2c",
+        "consumer",
+        "mobile-app",
+        "mail",
+        "notifications"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "consumer app",
+        "b2c feature",
+        "mobile mail",
+        "epost consumer"
+      ],
+      "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 2429,
+      "path": "domain-b2c/SKILL.md"
+    },
+    {
+      "name": "error-recovery",
+      "description": "(ePost) Use when operations fail transiently — \\\"timeout\\\", \\\"retry\\\", \\\"circuit breaker\\\", \\\"network error\\\", \\\"graceful degradation\\\". Applies resilience patterns: retries, backoff, circuit breakers, graceful degradation.",
+      "category": "quality",
+      "tier": "discoverable",
+      "keywords": [
+        "error",
+        "retry",
+        "fallback",
+        "circuit-breaker",
+        "backoff",
+        "resilience",
+        "failure",
+        "exponential",
+        "degradation"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "error",
+        "exception",
+        "timeout",
+        "retry",
+        "fallback"
+      ],
+      "agent-affinity": [
+        "epost-fullstack-developer",
+        "epost-debugger",
+        "epost-tester"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [
+          "debug"
+        ],
+        "conflicts": []
+      },
+      "size": 3068,
+      "path": "error-recovery/SKILL.md"
+    },
+    {
+      "name": "figma",
+      "description": "(ePost) Use when extracting Figma data, mapping design tokens to code, or comparing implementation against Figma designs (web, iOS, Android). Extracts Figma data and maps tokens to code.",
+      "category": "design",
+      "tier": "discoverable",
+      "keywords": [
+        "figma",
+        "design",
+        "tokens",
+        "mcp",
+        "figma-to-code"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [],
+      "agent-affinity": [
+        "epost-muji",
+        "epost-fullstack-developer"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 7205,
+      "path": "figma/SKILL.md"
+    },
+    {
+      "name": "find-skill",
+      "description": "(ePost) Discovers and installs external skills from agent-kernel (Bitbucket) or skills.sh community registry. Use when user wants to find, browse, or install skills not bundled in epost_agent_kit.",
+      "category": "uncategorized",
+      "tier": "discoverable",
+      "keywords": [
+        "find",
+        "discover",
+        "skill",
+        "agent-kernel",
+        "community",
+        "install",
+        "external",
+        "skills.sh"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "/find-skill",
+        "find skill",
+        "search skill",
+        "browse skills",
+        "install skill",
+        "agent-kernel"
+      ],
+      "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 2346,
+      "path": "find-skill/SKILL.md"
+    },
+    {
+      "name": "fix",
+      "description": "(ePost) Identifies root causes and applies targeted fixes for bugs, errors, and broken behavior. Use when user says \"fix\", \"broken\", \"error\", \"failing\", \"this doesn't work\", or pastes an error message — identifies error type and applies platform-appropriate fix",
+      "category": "workflow",
+      "tier": "discoverable",
+      "keywords": [
+        "fix",
+        "bug",
+        "patch",
+        "hotfix",
+        "error-fix"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "/fix",
+        "fix this bug",
+        "apply the fix",
+        "patch this",
+        "this is broken"
+      ],
+      "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 21027,
+      "path": "fix/SKILL.md"
+    },
+    {
+      "name": "get-started",
+      "description": "(ePost) Use when: \\\"get started\\\", \\\"I'm new to this project\\\", \\\"onboard me\\\", \\\"what is this codebase\\\", \\\"help me understand this project\\\". Discovers project state and delivers structured onboarding.",
+      "category": "workflow",
+      "tier": "discoverable",
+      "keywords": [
+        "onboard",
+        "get-started",
+        "begin",
+        "new-project",
+        "what-is-this",
+        "existing-project"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "/get-started",
+        "onboard me",
+        "I'm new to this project",
+        "what is this codebase"
+      ],
+      "agent-affinity": [
+        "epost-researcher"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 25262,
+      "path": "get-started/SKILL.md"
+    },
+    {
+      "name": "git",
+      "description": "(ePost) Use when: \\\"commit\\\", \\\"push\\\", \\\"create a PR\\\", \\\"ship it\\\", \\\"done\\\", \\\"merge\\\", \\\"ship this feature\\\". Runs the appropriate git workflow: commit, push, PR creation, or full ship pipeline.",
+      "category": "workflow",
+      "tier": "discoverable",
+      "keywords": [
+        "git",
+        "commit",
+        "push",
+        "pull-request",
+        "ship"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "/git",
+        "commit this",
+        "push",
+        "create PR",
+        "ship it"
+      ],
+      "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 14474,
+      "path": "git/SKILL.md"
+    },
+    {
+      "name": "ios-a11y",
+      "description": "(ePost) Diagnoses and fixes iOS accessibility issues across UIKit and SwiftUI. Use when iOS accessibility issues arise — VoiceOver, UIKit/SwiftUI labels, traits, focus, Dynamic Type, contrast",
+      "category": "accessibility",
+      "tier": "discoverable",
+      "keywords": [
+        "voiceover",
+        "ios-accessibility",
+        "accessibility-label",
+        "dynamic-type"
+      ],
+      "platforms": [
+        "ios"
+      ],
+      "triggers": [
+        "voiceover fix",
+        "ios accessibility",
+        "dynamic type",
+        "accessibility label missing"
+      ],
+      "agent-affinity": [
+        "epost-a11y-specialist",
+        "epost-fullstack-developer"
+      ],
+      "connections": {
+        "extends": [
+          "a11y"
+        ],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 74092,
+      "path": "ios-a11y/SKILL.md"
+    },
+    {
+      "name": "ios-development",
+      "description": "(ePost) Builds SwiftUI/UIKit views, manages Xcode builds, and debugs iOS crashes. Use when working on iOS — SwiftUI/UIKit views, Xcode builds, XCTest, or fixing iOS crashes and Swift issues",
+      "category": "uncategorized",
+      "tier": "discoverable",
+      "keywords": [
+        "ios",
+        "swift",
+        "swiftui",
+        "uikit",
+        "xcode",
+        "iphone",
+        "ipad",
+        "mobile"
+      ],
+      "platforms": [
+        "ios"
+      ],
+      "triggers": [
+        ".swift",
+        ".xcodeproj",
+        ".xcworkspace",
+        "ios",
+        "iphone",
+        "ipad"
+      ],
+      "agent-affinity": [
+        "epost-fullstack-developer",
+        "epost-tester",
+        "epost-debugger",
+        "epost-code-reviewer"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 37159,
+      "path": "ios-development/SKILL.md"
+    },
+    {
+      "name": "ios-rag",
+      "description": "(ePost) Use when searching existing patterns in the iOS Swift codebase — views, implementations, design token usage. Vector search over iOS code. NOT for implementing new code.",
+      "category": "uncategorized",
+      "tier": "discoverable",
+      "keywords": [
+        "rag",
+        "vector-search",
+        "ios",
+        "swift",
+        "swiftui",
+        "uikit",
+        "design-system"
+      ],
+      "platforms": [
+        "ios"
+      ],
+      "triggers": [
+        "search swift",
+        "find view",
+        "ios pattern",
+        "theme token"
+      ],
+      "agent-affinity": [
+        "epost-a11y-specialist",
+        "epost-muji",
+        "epost-fullstack-developer"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 13118,
+      "path": "ios-rag/SKILL.md"
+    },
+    {
+      "name": "ios-testing",
+      "description": "Use when writing iOS tests — XCTest unit tests, XCUITest E2E, Swift Testing (@Test/@Suite), snapshot testing, or diagnosing test failures. Covers async/await patterns, Page Object Model, flakiness fixes.",
+      "category": "uncategorized",
+      "tier": "discoverable",
+      "keywords": [
+        "xctest",
+        "xcuitest",
+        "swift-testing",
+        "snapshot",
+        "unit-test",
+        "ui-test",
+        "ios"
+      ],
+      "platforms": [
+        "ios"
+      ],
+      "triggers": [],
+      "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 19285,
+      "path": "ios-testing/SKILL.md"
+    },
+    {
+      "name": "ios-ui-lib",
+      "description": "(ePost) Provides iOS theme SwiftUI component APIs, design tokens, and platform token mappings. Use when looking up iOS theme SwiftUI component APIs, iOS design tokens, or platform-specific color/typography token mappings",
+      "category": "uncategorized",
+      "tier": "discoverable",
+      "keywords": [
+        "ios-ui",
+        "swiftui-components",
+        "design-tokens",
+        "theme"
+      ],
+      "platforms": [
+        "ios"
+      ],
+      "triggers": [
+        "ios component",
+        "swiftui token",
+        "theme mapping ios",
+        "ios design token"
+      ],
+      "agent-affinity": [
+        "epost-muji",
+        "epost-fullstack-developer"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 3603,
+      "path": "ios-ui-lib/SKILL.md"
+    },
+    {
+      "name": "journal",
+      "description": "(ePost) Writes structured implementation journal entries to docs/journal/. Use when a significant feature phase completes, a non-trivial bug is resolved, or a key architectural decision is made.",
+      "category": "knowledge",
+      "tier": "discoverable",
+      "keywords": [
+        "journal",
+        "decision-log",
+        "post-mortem",
+        "implementation-history",
+        "lessons-learned"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "/journal",
+        "log this decision",
+        "write journal entry",
+        "record implementation notes"
+      ],
+      "agent-affinity": [
+        "epost-fullstack-developer",
+        "epost-debugger",
+        "epost-planner"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 3731,
+      "path": "journal/SKILL.md"
+    },
+    {
+      "name": "kit-add-agent",
+      "description": "(ePost) Use when creating a new agent definition, adding an agent to the kit, or scaffolding an agent file from scratch.",
+      "category": "uncategorized",
+      "tier": "discoverable",
+      "keywords": [
+        "agent",
+        "create",
+        "scaffold",
+        "add-agent",
+        "kit"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "/kit-add-agent",
+        "create an agent",
+        "add an agent",
+        "scaffold agent"
+      ],
+      "agent-affinity": [
+        "epost-fullstack-developer"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 2965,
+      "path": "kit-add-agent/SKILL.md"
+    },
+    {
+      "name": "kit-add-hook",
+      "description": "(ePost) Use when creating a new Claude Code hook, adding event-driven automation, or wiring a new hook into settings.json.",
+      "category": "uncategorized",
+      "tier": "discoverable",
+      "keywords": [
+        "hook",
+        "create",
+        "automation",
+        "event",
+        "kit"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "/kit-add-hook",
+        "create a hook",
+        "add a hook",
+        "new hook"
+      ],
+      "agent-affinity": [
+        "epost-fullstack-developer"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 3294,
+      "path": "kit-add-hook/SKILL.md"
+    },
+    {
+      "name": "kit-add-skill",
+      "description": "(ePost) Use when adding a new skill, creating a skill, scaffolding a skill directory, or registering a skill in a kit package. Triggers: 'add a skill', 'new skill', 'create a skill', 'scaffold a skill'.",
+      "category": "uncategorized",
+      "tier": "discoverable",
+      "keywords": [
+        "skill",
+        "create",
+        "scaffold",
+        "add-skill",
+        "kit"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "/kit-add-skill",
+        "create a skill",
+        "scaffold skill",
+        "add a skill"
+      ],
+      "agent-affinity": [
+        "epost-fullstack-developer"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 7061,
+      "path": "kit-add-skill/SKILL.md"
+    },
+    {
+      "name": "kit-agent-development",
+      "description": "(ePost) Use when creating a new agent, reviewing agent structure, or checking agent frontmatter fields. Reference: agent file structure, frontmatter spec, system prompt design, ecosystem fields (skills, permissionMode, allowedTools).",
+      "category": "uncategorized",
+      "tier": "discoverable",
+      "keywords": [
+        "agent",
+        "frontmatter",
+        "system-prompt",
+        "permissionMode",
+        "allowedTools",
+        "skills",
+        "color",
+        "model"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "agent frontmatter",
+        "create agent",
+        "agent development",
+        "agent structure"
+      ],
+      "agent-affinity": [
+        "epost-fullstack-developer",
+        "epost-planner"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 13988,
+      "path": "kit-agent-development/SKILL.md"
+    },
+    {
+      "name": "kit-agents",
+      "description": "(ePost) Use when planning changes to the agent ecosystem, creating new components, or auditing agent/skill frontmatter. Reference: component types (agents, skills, commands, hooks, MCP), frontmatter tables, naming conventions, plugin system.",
+      "category": "uncategorized",
+      "tier": "discoverable",
+      "keywords": [
+        "agents",
+        "ecosystem",
+        "frontmatter",
+        "naming",
+        "plugin",
+        "commands",
+        "skills",
+        "hooks"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "agent ecosystem",
+        "kit ecosystem",
+        "frontmatter reference",
+        "naming conventions"
+      ],
+      "agent-affinity": [
+        "epost-fullstack-developer",
+        "epost-planner",
+        "epost-code-reviewer"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 6277,
+      "path": "kit-agents/SKILL.md"
+    },
+    {
+      "name": "kit-cli",
+      "description": "(ePost) Use when developing the epost-kit CLI, adding new commands, or debugging CLI behavior. Reference: tech stack (Node.js/cac/TypeScript), project structure, key commands, conventions.",
+      "category": "uncategorized",
+      "tier": "discoverable",
+      "keywords": [
+        "cli",
+        "epost-kit",
+        "commands",
+        "typescript",
+        "node",
+        "cac"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "cli development",
+        "epost-kit cli",
+        "add cli command"
+      ],
+      "agent-affinity": [
+        "epost-fullstack-developer"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 3077,
+      "path": "kit-cli/SKILL.md"
+    },
+    {
+      "name": "kit-hooks",
+      "description": "(ePost) Use when creating a hook, debugging hook behavior, or checking which hook event to use. Reference: event types (PreToolUse, PostToolUse, SessionStart, Stop), I/O contract, settings.json config.",
+      "category": "uncategorized",
+      "tier": "discoverable",
+      "keywords": [
+        "hook",
+        "PreToolUse",
+        "PostToolUse",
+        "SessionStart",
+        "event",
+        "automation",
+        "settings"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "hook development",
+        "create hook",
+        "hook event",
+        "hook architecture"
+      ],
+      "agent-affinity": [
+        "epost-fullstack-developer"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 5734,
+      "path": "kit-hooks/SKILL.md"
+    },
+    {
+      "name": "kit-ide-snippets",
+      "description": "(ePost) Use when: \\\"cursor rules\\\", \\\"copilot instructions\\\", \\\"ide snippet\\\", \\\"convert skill to cursor\\\". Generates copilot-instructions.md, .cursor/rules/, or converts Claude skills to IDE-specific formats.",
+      "category": "uncategorized",
+      "tier": "discoverable",
+      "keywords": [
+        "copilot",
+        "cursor",
+        "ide",
+        "snippets",
+        "copilot-instructions",
+        "cursor-rules",
+        "mdc",
+        "snippet-authoring",
+        "cursor-agents",
+        "cursor-skills"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "update copilot snippet",
+        "cursor rules",
+        "ide snippet",
+        "copilot instructions",
+        "convert skill to cursor",
+        "COPILOT.snippet.md",
+        "CURSOR.snippet.md",
+        "cursor agents",
+        "cursor skills"
+      ],
+      "agent-affinity": [
+        "epost-fullstack-developer",
+        "epost-docs-manager"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 8066,
+      "path": "kit-ide-snippets/SKILL.md"
+    },
+    {
+      "name": "kit-optimize",
+      "description": "(ePost) Use when optimizing an existing skill for token efficiency, progressive disclosure, or CSO compliance. Use when user says \"optimize skill\", \"improve skill\", or \"make skill more efficient\".",
+      "category": "uncategorized",
+      "tier": "discoverable",
+      "keywords": [
+        "optimize",
+        "skill",
+        "CSO",
+        "token-efficiency",
+        "progressive-disclosure"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "/kit-optimize",
+        "optimize skill",
+        "improve skill",
+        "CSO fix"
+      ],
+      "agent-affinity": [
+        "epost-fullstack-developer"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 1871,
+      "path": "kit-optimize/SKILL.md"
+    },
+    {
+      "name": "kit-verify",
+      "description": "(ePost) Use when running a pre-release audit, verifying kit integrity before init, or checking for broken references and stale skill connections.",
+      "category": "uncategorized",
+      "tier": "discoverable",
+      "keywords": [
+        "verify",
+        "audit",
+        "integrity",
+        "pre-release",
+        "references",
+        "connections"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "kit verify",
+        "pre-release audit",
+        "verify kit",
+        "check integrity"
+      ],
+      "agent-affinity": [
+        "epost-fullstack-developer"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 2502,
+      "path": "kit-verify/SKILL.md"
+    },
+    {
+      "name": "knowledge",
+      "description": "(ePost) Use when retrieving prior decisions, internal patterns, or project context. NOT for external library how-tos. Also use to capture learnings after completing a non-trivial task.",
+      "category": "knowledge",
+      "tier": "discoverable",
+      "keywords": [
+        "retrieve",
+        "search",
+        "knowledge",
+        "context",
+        "rag",
+        "lookup",
+        "prior-art",
+        "capture",
+        "learn",
+        "persist",
+        "record",
+        "context7",
+        "api-reference",
+        "library",
+        "documentation"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "what do we know about",
+        "check knowledge",
+        "prior art",
+        "previous decision",
+        "capture learnings",
+        "save pattern",
+        "record finding",
+        "api reference",
+        "library docs",
+        "how to use"
+      ],
+      "agent-affinity": [
+        "epost-planner",
+        "epost-fullstack-developer",
+        "epost-debugger",
+        "epost-researcher",
+        "epost-code-reviewer"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [
+          "plan",
+          "debug"
+        ],
+        "conflicts": []
+      },
+      "size": 46306,
+      "path": "knowledge/SKILL.md"
+    },
+    {
+      "name": "launchpad",
+      "description": "(ePost) Use when building landing pages, promotional sites, or marketing pages. Craft-first, not templates. Routes to epost-muji for design then epost-fullstack-developer for implementation.",
+      "category": "workflow",
+      "tier": "discoverable",
+      "keywords": [
+        "landing-page",
+        "launchpad",
+        "marketing",
+        "promotional",
+        "showcase",
+        "launch",
+        "website",
+        "homepage"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "triggers": [
+        "landing page",
+        "launch page",
+        "marketing page",
+        "promotional site",
+        "showcase site"
+      ],
+      "agent-affinity": [
+        "epost-muji",
+        "epost-fullstack-developer"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [
+          "cook"
+        ],
+        "conflicts": []
+      },
+      "size": 11775,
+      "path": "launchpad/SKILL.md"
+    },
+    {
+      "name": "loop",
+      "description": "(ePost) Use when: \\\"keep improving until target met\\\", \\\"fix all lint errors\\\", \\\"improve coverage autonomously\\\". Iterates on a metric — coverage, bundle size, lint, Lighthouse — until target is reached. NOT for polling.",
+      "category": "workflow",
+      "tier": "discoverable",
+      "keywords": [
+        "loop",
+        "iterate",
+        "optimize",
+        "metric",
+        "coverage",
+        "bundle size",
+        "lint",
+        "Lighthouse",
+        "autonomous",
+        "git-memory"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "/loop",
+        "keep iterating",
+        "run until target met",
+        "improve coverage autonomously"
+      ],
+      "agent-affinity": [
+        "epost-tester",
+        "epost-fullstack-developer"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [
+          "test"
+        ],
+        "conflicts": []
+      },
+      "size": 15666,
+      "path": "loop/SKILL.md"
+    },
+    {
+      "name": "multi-tenancy",
+      "description": "(ePost) Defines the ePost tenant model — COMPANY, PERSON, INDIVIDUAL types, role hierarchy, schema isolation, and context propagation. Use when working with tenant context, company/user roles, schema isolation, or multi-tenant data access",
+      "category": "uncategorized",
+      "tier": "discoverable",
+      "keywords": [
+        "tenant",
+        "multi-tenancy",
+        "company",
+        "individual",
+        "schema-isolation",
+        "luz_multi_tenancy",
+        "tenant-token"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "tenant",
+        "multi-tenancy",
+        "company tenant",
+        "schema isolation",
+        "luz_multi_tenancy",
+        "tenant context"
+      ],
+      "agent-affinity": [
+        "epost-fullstack-developer",
+        "epost-code-reviewer",
+        "epost-debugger"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 8738,
+      "path": "multi-tenancy/SKILL.md"
+    },
+    {
+      "name": "plan",
+      "description": "(ePost) Produces phased implementation plans scaled to task complexity with dependency tracking. Use when user says \"plan\", \"design this\", \"architect\", \"spec out\", \"how should we build\", or \"create a roadmap\" — produces a phased implementation plan scaled to task complexity",
+      "category": "workflow",
+      "tier": "discoverable",
+      "keywords": [
+        "plan",
+        "planning",
+        "requirements",
+        "tasks",
+        "estimation",
+        "roadmap",
+        "design",
+        "spec",
+        "architecture",
+        "blueprint"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "/plan",
+        "create plan",
+        "implementation plan"
+      ],
+      "agent-affinity": [
+        "epost-planner",
+        "epost-project-manager"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 52871,
+      "path": "plan/SKILL.md"
+    },
+    {
+      "name": "preview",
+      "description": "(ePost) Generates visual explanations — Mermaid diagrams, ASCII art, and HTML interactive pages. Use when user wants a diagram, visual explanation, ASCII art, or HTML preview of a concept, flow, or architecture.",
+      "category": "uncategorized",
+      "tier": "discoverable",
+      "keywords": [
+        "diagram",
+        "architecture",
+        "flowchart",
+        "sequence",
+        "mermaid",
+        "ER",
+        "ERD",
+        "state machine",
+        "Gantt",
+        "visual",
+        "chart",
+        "graph"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "/preview",
+        "visualize this",
+        "draw a diagram",
+        "show me a flowchart"
+      ],
+      "agent-affinity": [
+        "epost-planner",
+        "epost-docs-manager",
+        "epost-researcher"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 6721,
+      "path": "preview/SKILL.md"
+    },
+    {
+      "name": "repomix",
+      "description": "(ePost) Use when: \\\"pack this repo\\\", \\\"share codebase snapshot\\\", \\\"include remote repo as context\\\". Bundles repository contents into a single file for LLM consumption or external AI sharing.",
+      "category": "knowledge",
+      "tier": "core",
+      "keywords": [
+        "repomix",
+        "repo-pack",
+        "codebase-snapshot",
+        "llm-context",
+        "remote-repo"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "/repomix",
+        "pack this repo",
+        "bundle codebase",
+        "include remote repo as context"
+      ],
+      "agent-affinity": [
+        "epost-researcher",
+        "epost-fullstack-developer"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [
+          "docs"
+        ],
+        "conflicts": []
+      },
+      "size": 3263,
+      "path": "repomix/SKILL.md"
+    },
+    {
+      "name": "research",
+      "description": "(ePost) Use when: \\\"research\\\", \\\"how does X work\\\", \\\"best practices for\\\", \\\"compare A vs B\\\", \\\"look up\\\", \\\"find docs for\\\". Dispatches to epost-researcher for multi-source synthesis.",
+      "category": "uncategorized",
+      "tier": "discoverable",
+      "keywords": [
+        "research",
+        "investigate",
+        "look up",
+        "best practices",
+        "compare",
+        "documentation",
+        "how does",
+        "evaluate",
+        "library",
+        "framework"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "/research",
+        "research",
+        "how does",
+        "best practices for",
+        "compare",
+        "look up docs"
+      ],
+      "agent-affinity": [
+        "epost-researcher",
+        "epost-planner"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 4134,
+      "path": "research/SKILL.md"
+    },
+    {
+      "name": "retro",
+      "description": "Use when asked for a retrospective, sprint review, team metrics, or 'how did we do' analysis. Generates data-driven insights from git history.",
+      "category": "uncategorized",
+      "tier": "discoverable",
+      "keywords": [
+        "retrospective",
+        "retro",
+        "sprint review",
+        "team metrics",
+        "how did we do",
+        "git metrics"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "/retro",
+        "sprint retrospective",
+        "how did we do",
+        "team metrics report"
+      ],
+      "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 3142,
+      "path": "retro/SKILL.md"
+    },
+    {
+      "name": "scenario",
+      "description": "(ePost) Use when analyzing edge cases before implementing a feature, generating test targets, or stress-testing a feature design. Use before writing tests or during planning — generates scenarios across 12 dimensions (auth, timing, scale, data integrity, etc.)",
+      "category": "uncategorized",
+      "tier": "discoverable",
+      "keywords": [
+        "scenario",
+        "edge-case",
+        "test-planning",
+        "risk",
+        "dimensions",
+        "pre-implementation"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "/scenario",
+        "edge cases",
+        "test scenarios",
+        "scenario analysis",
+        "before writing tests"
+      ],
+      "agent-affinity": [
+        "epost-tester",
+        "epost-planner",
+        "epost-fullstack-developer"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 4463,
+      "path": "scenario/SKILL.md"
+    },
+    {
+      "name": "security",
+      "description": "(ePost) Use when: \\\"audit security\\\", \\\"review for vulnerabilities\\\", \\\"OWASP\\\", \\\"threat model\\\", \\\"check for injection\\\". Runs STRIDE threat analysis, OWASP Top 10 scan, and vulnerability review.",
+      "category": "quality",
+      "tier": "core",
+      "keywords": [
+        "security",
+        "STRIDE",
+        "OWASP",
+        "vulnerabilities",
+        "secrets",
+        "injection",
+        "audit",
+        "CVE",
+        "dependencies"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "security audit",
+        "check vulnerabilities",
+        "scan for secrets",
+        "OWASP",
+        "STRIDE",
+        "CVE",
+        "pentest",
+        "security review"
+      ],
+      "agent-affinity": [
+        "epost-code-reviewer"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [
+          "code-review"
+        ],
+        "conflicts": []
+      },
+      "size": 12179,
+      "path": "security/SKILL.md"
+    },
+    {
+      "name": "simulator",
+      "description": "(ePost) Manages iOS simulators — list, boot, open, and launch apps. Use when user wants to list, boot, open, or manage iOS simulators, or launch the app on a simulator",
+      "category": "uncategorized",
+      "tier": "discoverable",
+      "keywords": [
+        "simulator",
+        "ios-simulator",
+        "boot",
+        "xcrun",
+        "device"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "boot simulator",
+        "list simulators",
+        "open simulator",
+        "launch app on simulator"
+      ],
+      "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 5073,
+      "path": "simulator/SKILL.md"
+    },
+    {
+      "name": "skill-creator",
+      "description": "(ePost) Use when improving a skill's description, running skill evals, optimizing skill quality, or benchmarking skill performance. Triggers: 'edit this skill', 'optimize skill description', 'run skill evals', 'benchmark skill', 'improve this skill'.",
+      "category": "quality",
+      "tier": "discoverable",
+      "keywords": [
+        "skill-creator",
+        "eval",
+        "benchmark",
+        "skill-validation",
+        "quality",
+        "skill-authoring"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "/skill-creator",
+        "create a skill",
+        "add a skill",
+        "make a skill",
+        "new skill",
+        "scaffold a skill",
+        "build a skill",
+        "validate skill",
+        "write evals",
+        "benchmark skill performance"
+      ],
+      "agent-affinity": [
+        "epost-fullstack-developer"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [
+          "cook",
+          "plan"
+        ],
+        "conflicts": []
+      },
+      "size": 46690,
+      "path": "skill-creator/SKILL.md"
+    },
+    {
+      "name": "skill-discovery",
+      "description": "(ePost) Reference catalogue of available skills by platform and task type. Use when you need to identify which skills apply to a given platform or task signal, find the right skill for a job, or browse skills by web, iOS, Android, or backend.",
+      "category": "knowledge",
+      "tier": "discoverable",
+      "keywords": [
+        "platform",
+        "discovery",
+        "skills",
+        "catalogue"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [],
+      "agent-affinity": [
+        "epost-planner",
+        "epost-fullstack-developer",
+        "epost-debugger",
+        "epost-tester",
+        "epost-code-reviewer",
+        "epost-project-manager"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 2376,
+      "path": "skill-discovery/SKILL.md"
+    },
+    {
+      "name": "subagents-driven",
+      "description": "(ePost) Use when a plan has 3+ independent tasks or non-overlapping phases, or user says \\\"parallel implementation\\\", \\\"execute all phases\\\". Dispatches per-task subagents with two-stage review.",
+      "category": "knowledge",
+      "tier": "discoverable",
+      "keywords": [
+        "parallel",
+        "subagent",
+        "dispatch",
+        "implementation-loop",
+        "two-stage-review"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "parallel tasks",
+        "dispatch subagents",
+        "multi-task execution",
+        "execute all phases"
+      ],
+      "agent-affinity": [
+        "epost-project-manager",
+        "epost-fullstack-developer",
+        "epost-planner"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [
+          "plan"
+        ],
+        "conflicts": []
+      },
+      "size": 11143,
+      "path": "subagents-driven/SKILL.md"
+    },
+    {
+      "name": "tdd",
+      "description": "(ePost) Guides test-first development using the red-green-refactor cycle. Use when user says 'TDD', 'test-first', 'red-green-refactor', wants to build features test-first, or asks for behavior-driven testing",
+      "category": "quality",
+      "tier": "core",
+      "keywords": [
+        "tdd",
+        "test-driven",
+        "red-green-refactor",
+        "behavior-testing",
+        "integration-tests"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "/tdd",
+        "test first",
+        "red green refactor",
+        "build test-first"
+      ],
+      "agent-affinity": [
+        "epost-fullstack-developer",
+        "epost-tester"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [
+          "test"
+        ],
+        "conflicts": []
+      },
+      "size": 19117,
+      "path": "tdd/SKILL.md"
+    },
+    {
+      "name": "test",
+      "description": "(ePost) Detects platform and runs the appropriate test suite with coverage reporting. Use when user says \"run tests\", \"add tests\", \"check coverage\", \"write unit tests\", or \"validate this works\" — detects platform and runs the appropriate test suite (Jest, XCTest, JUnit, Espresso)",
+      "category": "workflow",
+      "tier": "discoverable",
+      "keywords": [
+        "test",
+        "coverage",
+        "unit-test",
+        "e2e",
+        "test-suite"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "/test",
+        "run tests",
+        "add test coverage",
+        "write tests for",
+        "check coverage"
+      ],
+      "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [
+          "code-review"
+        ],
+        "conflicts": []
+      },
+      "size": 10083,
+      "path": "test/SKILL.md"
+    },
+    {
+      "name": "theme-color-system",
+      "description": "Use when setting colors on UIView/UILabel/UIButton/CALayer in ios_theme_ui — background, text, border, tint, shadow. Provides ThemeColorPicker API, semantic key enums, ThemeColorScheme pickers.",
+      "category": "uncategorized",
+      "tier": "discoverable",
+      "keywords": [
+        "color",
+        "theme",
+        "uiview",
+        "uilabel",
+        "uibutton",
+        "ios-theme"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "set background color",
+        "UIView color",
+        "apply theme color",
+        "ThemeColorPicker"
+      ],
+      "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 9972,
+      "path": "theme-color-system/SKILL.md"
+    },
+    {
+      "name": "thinking",
+      "description": "(ePost) Activates extended thinking for systematic hypothesis testing and deep analysis. Use when user says \\\"think deeply\\\", \\\"use extended thinking\\\", \\\"step-by-step analysis\\\", or when stuck after multiple failed attempts and needs systematic hypothesis testing",
+      "category": "workflow",
+      "tier": "discoverable",
+      "keywords": [
+        "stuck",
+        "spiral",
+        "complexity",
+        "assumption",
+        "hypothesis",
+        "analysis",
+        "framework",
+        "retry",
+        "failing",
+        "problem-solving",
+        "sequential",
+        "evidence"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "think deeply",
+        "extended thinking",
+        "step by step analysis",
+        "use systematic approach"
+      ],
+      "agent-affinity": [
+        "epost-debugger",
+        "epost-planner",
+        "epost-researcher"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [
+          "debug",
+          "plan"
+        ],
+        "conflicts": []
+      },
+      "size": 3916,
+      "path": "thinking/SKILL.md"
+    },
+    {
+      "name": "ui-lib-dev",
+      "description": "(ePost) Manages the Figma-to-code UI library pipeline — plan, implement, audit, fix, document. Use when building, auditing, or documenting UI library components through the Figma-to-code pipeline across web, iOS, or Android platforms",
+      "category": "design",
+      "tier": "discoverable",
+      "keywords": [
+        "klara-theme",
+        "component",
+        "components",
+        "pipeline",
+        "audit",
+        "storybook"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [],
+      "agent-affinity": [
+        "epost-muji",
+        "epost-fullstack-developer"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [
+          "figma"
+        ],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 47688,
+      "path": "ui-lib-dev/SKILL.md"
+    },
+    {
+      "name": "understand-patterns",
+      "description": "(ePost) Use when designing multi-agent codebase analysis, incremental workflows, or cross-agent artifact sharing. Reference for Understand-Anything patterns: two-phase extraction, fan-in, artifact persistence.",
+      "category": "uncategorized",
+      "tier": "discoverable",
+      "keywords": [
+        "understand-anything",
+        "two-phase",
+        "artifact",
+        "fingerprint",
+        "fan-in",
+        "codebase-analysis",
+        "incremental"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [],
+      "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 13307,
+      "path": "understand-patterns/SKILL.md"
+    },
+    {
+      "name": "web-a11y",
+      "description": "(ePost) Diagnoses and fixes web accessibility issues — ARIA, keyboard nav, focus management, screen readers. Use when web accessibility issues arise — ARIA roles, keyboard navigation, focus trapping, alt text, contrast, screen readers",
+      "category": "accessibility",
+      "tier": "discoverable",
+      "keywords": [
+        "keyboard",
+        "aria",
+        "focus",
+        "screen-reader",
+        "web-accessibility",
+        "semantic-html"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "triggers": [
+        "aria fix",
+        "keyboard navigation",
+        "web accessibility",
+        "focus management"
+      ],
+      "agent-affinity": [
+        "epost-a11y-specialist",
+        "epost-fullstack-developer"
+      ],
+      "connections": {
+        "extends": [
+          "a11y"
+        ],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 58676,
+      "path": "web-a11y/SKILL.md"
+    },
+    {
+      "name": "web-api-routes",
+      "description": "(ePost) Implements API endpoints, server actions, and FetchBuilder HTTP client patterns. Use when working with route.ts files, API endpoints, server actions, or web backend logic in the monorepo",
+      "category": "web",
+      "tier": "discoverable",
+      "keywords": [
+        "api",
+        "rest",
+        "fetchbuilder",
+        "caller",
+        "server-action",
+        "route",
+        "endpoint"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "triggers": [
+        "route.ts",
+        "api/",
+        "server action",
+        "endpoint",
+        "caller",
+        "fetchbuilder"
+      ],
+      "agent-affinity": [
+        "epost-fullstack-developer"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [
+          "web-frontend"
+        ],
+        "conflicts": []
+      },
+      "size": 11293,
+      "path": "web-api-routes/SKILL.md"
+    },
+    {
+      "name": "web-auth",
+      "description": "(ePost) Configures NextAuth + Keycloak authentication, session management, and feature flags. Use when working with authentication, sessions, OAuth providers, feature flags, or provider nesting",
+      "category": "web",
+      "tier": "discoverable",
+      "keywords": [
+        "auth",
+        "session",
+        "oauth",
+        "nextauth",
+        "feature-flag",
+        "jwt"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "triggers": [
+        "session",
+        "auth",
+        "oauth",
+        "login",
+        "feature flag",
+        "provider"
+      ],
+      "agent-affinity": [
+        "epost-fullstack-developer"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 5612,
+      "path": "web-auth/SKILL.md"
+    },
+    {
+      "name": "web-forms",
+      "description": "(ePost) Implements form validation with React Hook Form + Zod schemas, API error mapping, and accessible error states. Use when building forms, handling form validation, mapping API errors to fields, or implementing Zod schemas",
+      "category": "uncategorized",
+      "tier": "discoverable",
+      "keywords": [
+        "form",
+        "validation",
+        "zod",
+        "react-hook-form",
+        "rhf",
+        "error-mapping",
+        "aria",
+        "schema"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "triggers": [
+        "form",
+        "validation",
+        "zod",
+        "react hook form",
+        "rhf",
+        "useForm",
+        "setError",
+        "field error"
+      ],
+      "agent-affinity": [
+        "epost-fullstack-developer",
+        "epost-tester"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 3074,
+      "path": "web-forms/SKILL.md"
+    },
+    {
+      "name": "web-frontend",
+      "description": "(ePost) Builds React components, hooks, and Redux Toolkit state management patterns. Use when working with .tsx/.jsx files, React components, hooks, state management, or frontend UI",
+      "category": "web",
+      "tier": "discoverable",
+      "keywords": [
+        "react",
+        "frontend",
+        "ui",
+        "hooks",
+        "components",
+        "state",
+        "typescript",
+        "redux"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "triggers": [
+        ".tsx",
+        ".jsx",
+        "react",
+        "frontend",
+        "ui component",
+        "redux",
+        "hook"
+      ],
+      "agent-affinity": [
+        "epost-fullstack-developer",
+        "epost-tester",
+        "epost-debugger",
+        "epost-code-reviewer"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 20223,
+      "path": "web-frontend/SKILL.md"
+    },
+    {
+      "name": "web-i18n",
+      "description": "(ePost) Configures next-intl, manages translations, and handles locale routing. Use when working with translations, locale routing, next-intl configuration, internationalization patterns, or syncing translations with Google Sheets",
+      "category": "web",
+      "tier": "discoverable",
+      "keywords": [
+        "i18n",
+        "translation",
+        "locale",
+        "next-intl",
+        "internationalization",
+        "google-sheets",
+        "sync",
+        "pull",
+        "push",
+        "validate"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "triggers": [
+        "translation",
+        "locale",
+        "i18n",
+        "useTranslations",
+        "getTranslations",
+        "next-intl",
+        "sync translations",
+        "pull translations",
+        "push translations",
+        "missing keys"
+      ],
+      "agent-affinity": [
+        "epost-fullstack-developer"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 23893,
+      "path": "web-i18n/SKILL.md"
+    },
+    {
+      "name": "web-modules",
+      "description": "(ePost) Wires B2B module screens — binds APIs, stores, and routes into the module shell. Use when integrating a component into a B2B module — adding screens, binding APIs, wiring stores, setting up routes",
+      "category": "web",
+      "tier": "discoverable",
+      "keywords": [
+        "integrate",
+        "module",
+        "screen",
+        "page",
+        "api",
+        "store",
+        "hook",
+        "bind"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "triggers": [
+        "add to module",
+        "integrate into",
+        "create screen",
+        "add page",
+        "bind api"
+      ],
+      "agent-affinity": [
+        "epost-fullstack-developer"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [
+          "web-frontend"
+        ],
+        "conflicts": []
+      },
+      "size": 14026,
+      "path": "web-modules/SKILL.md"
+    },
+    {
+      "name": "web-nextjs",
+      "description": "(ePost) Implements Next.js 14 App Router patterns — Server Components, Server Actions, layouts, and middleware. Use when working with Next.js App Router, Server Components, Server Actions, or page/layout routing",
+      "category": "web",
+      "tier": "discoverable",
+      "keywords": [
+        "nextjs",
+        "next",
+        "app-router",
+        "server-components",
+        "server-actions",
+        "routing",
+        "middleware"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "triggers": [
+        "next.js",
+        "nextjs",
+        "app router",
+        "server component",
+        "middleware",
+        "layout.tsx",
+        "page.tsx"
+      ],
+      "agent-affinity": [
+        "epost-fullstack-developer"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [
+          "web-frontend"
+        ],
+        "conflicts": []
+      },
+      "size": 14429,
+      "path": "web-nextjs/SKILL.md"
+    },
+    {
+      "name": "web-testing",
+      "description": "(ePost) Configures and writes Jest + RTL unit tests and Playwright E2E tests. Use when writing tests, configuring Jest/Playwright, checking coverage, or working with test patterns",
+      "category": "web",
+      "tier": "discoverable",
+      "keywords": [
+        "test",
+        "jest",
+        "playwright",
+        "coverage",
+        "e2e",
+        "unit-test",
+        "rtl",
+        "testing-library"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "triggers": [
+        "test",
+        "jest",
+        "playwright",
+        "coverage",
+        "e2e",
+        "unit test",
+        "spec"
+      ],
+      "agent-affinity": [
+        "epost-tester",
+        "epost-fullstack-developer"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 18524,
+      "path": "web-testing/SKILL.md"
+    },
+    {
+      "name": "web-ui-lib",
+      "description": "(ePost) Provides klara-theme component APIs, props, variants, spacing tokens, and theme patterns. Use when referencing klara-theme component APIs, props, variants, spacing tokens, or theme provider patterns",
+      "category": "web",
+      "tier": "discoverable",
+      "keywords": [
+        "ui-lib",
+        "components",
+        "design-tokens",
+        "integration"
+      ],
+      "platforms": [
+        "web"
+      ],
+      "triggers": [
+        "klara component",
+        "theme variant",
+        "ui-lib usage",
+        "klara-theme API"
+      ],
+      "agent-affinity": [
+        "epost-muji",
+        "epost-fullstack-developer"
+      ],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 8864,
+      "path": "web-ui-lib/SKILL.md"
+    },
+    {
+      "name": "whatsnew",
+      "description": "(ePost) Shows what changed in the kit recently — new skills, agent updates, rule changes. Use when user asks \"what's new\", \"what changed\", \"what was added\", \"recent updates\", or after pulling the latest kit",
+      "category": "uncategorized",
+      "tier": "discoverable",
+      "keywords": [
+        "whatsnew",
+        "changelog",
+        "updates",
+        "new-skills",
+        "recent-changes"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [
+        "what's new",
+        "what changed",
+        "recent updates",
+        "what was added",
+        "new in the kit"
+      ],
+      "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 2660,
+      "path": "whatsnew/SKILL.md"
+    }
+  ]
+}

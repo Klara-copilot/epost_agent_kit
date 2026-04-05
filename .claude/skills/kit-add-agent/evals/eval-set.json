@@ -1,0 +1,13 @@
+[
+  {"query": "create a new agent for database migrations", "should_trigger": true},
+  {"query": "add an agent called epost-data-engineer", "should_trigger": true},
+  {"query": "scaffold a new agent definition", "should_trigger": true},
+  {"query": "I need an agent for handling deployments", "should_trigger": true},
+  {"query": "add an agent to the kit", "should_trigger": true},
+  {"query": "create an agent file from scratch", "should_trigger": true},
+  {"query": "add a new skill to the kit", "should_trigger": false},
+  {"query": "create a hook for session start", "should_trigger": false},
+  {"query": "verify the kit", "should_trigger": false},
+  {"query": "optimize the scenario skill", "should_trigger": false},
+  {"query": "commit my changes", "should_trigger": false}
+]

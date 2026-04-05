@@ -1,0 +1,11 @@
+[
+  {"query": "improve test coverage to 80% autonomously", "should_trigger": true},
+  {"query": "reduce bundle size to under 200kb iteratively", "should_trigger": true},
+  {"query": "fix all lint errors in a loop", "should_trigger": true},
+  {"query": "improve Lighthouse score to 90 over multiple iterations", "should_trigger": true},
+  {"query": "keep improving until all tests pass", "should_trigger": true},
+  {"query": "implement polling for the status endpoint", "should_trigger": false},
+  {"query": "add a cron job for cleanup", "should_trigger": false},
+  {"query": "check deploy status every 5 minutes via shell", "should_trigger": false},
+  {"query": "add retry logic to the request", "should_trigger": false}
+]

@@ -1,0 +1,12 @@
+[
+  {"query": "audit for security vulnerabilities", "should_trigger": true},
+  {"query": "check OWASP Top 10 compliance", "should_trigger": true},
+  {"query": "scan for secrets in the codebase", "should_trigger": true},
+  {"query": "run a STRIDE threat analysis", "should_trigger": true},
+  {"query": "check for SQL injection vulnerabilities", "should_trigger": true},
+  {"query": "security review before release", "should_trigger": true},
+  {"query": "review my code quality", "should_trigger": false},
+  {"query": "fix the SQL query performance", "should_trigger": false},
+  {"query": "add authentication to the endpoint", "should_trigger": false},
+  {"query": "audit accessibility compliance", "should_trigger": false}
+]

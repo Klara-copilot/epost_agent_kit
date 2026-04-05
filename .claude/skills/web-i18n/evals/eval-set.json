@@ -1,0 +1,11 @@
+[
+  {"query": "add translation keys for the error messages", "should_trigger": true},
+  {"query": "set up next-intl for the project", "should_trigger": true},
+  {"query": "add French locale support", "should_trigger": true},
+  {"query": "the translation key is missing for the button", "should_trigger": true},
+  {"query": "fix locale routing for Norwegian", "should_trigger": true},
+  {"query": "add a new page to the app", "should_trigger": false},
+  {"query": "fix the component rendering issue", "should_trigger": false},
+  {"query": "update the button copy", "should_trigger": false},
+  {"query": "set up Next.js middleware", "should_trigger": false}
+]

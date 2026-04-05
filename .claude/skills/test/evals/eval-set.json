@@ -1,0 +1,12 @@
+[
+  {"query": "add unit tests for UserService", "should_trigger": true},
+  {"query": "write tests for the login flow", "should_trigger": true},
+  {"query": "check test coverage for the auth module", "should_trigger": true},
+  {"query": "is the payment service tested", "should_trigger": true},
+  {"query": "validate that the form submission works correctly", "should_trigger": true},
+  {"query": "run tests for the notification module", "should_trigger": true},
+  {"query": "fix the failing test in UserService", "should_trigger": false},
+  {"query": "implement TDD for the new feature", "should_trigger": false},
+  {"query": "debug why the Jest test hangs", "should_trigger": false},
+  {"query": "add test data to the database", "should_trigger": false}
+]

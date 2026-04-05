@@ -1,0 +1,271 @@
+# Hilt Testing Reference
+
+## Overview
+
+Hilt provides three mechanisms for replacing production dependencies in tests:
+
+| Mechanism | Scope | Build cost | When to use |
+|-----------|-------|------------|-------------|
+| `@TestInstallIn` | Entire test source set | Low — one Dagger component | Default choice for persistent fakes |
+| `@BindValue` | Single test class | Minimal | Ad-hoc overrides, per-test mocks |
+| `@UninstallModules` | Single test class | High — custom component per test | Avoid |
+
+---
+
+## @TestInstallIn — Preferred Pattern
+
+Replaces a production module for **all tests** in the source set. Hilt compiles one test Dagger component — no per-test overhead.
+
+**Step 1: Create a fake implementation**
+
+```kotlin
+class FakeAuthRepository @Inject constructor() : AuthRepository {
+    var shouldSucceed = true
+
+    override suspend fun login(email: String, password: String): Result<User> {
+        return if (shouldSucceed) Result.success(User(id = 1, email = email))
+        else Result.failure(Exception("Invalid credentials"))
+    }
+}
+```
+
+**Step 2: Create the test module**
+
+```kotlin
+@Module
+@TestInstallIn(
+    components = [SingletonComponent::class],
+    replaces = [AuthModule::class]        // the production module being replaced
+)
+abstract class FakeAuthModule {
+
+    @Binds
+    @Singleton
+    abstract fun bindAuthRepository(
+        fake: FakeAuthRepository
+    ): AuthRepository
+}
+```
+
+**Step 3: Inject and use in tests**
+
+```kotlin
+@HiltAndroidTest
+@RunWith(AndroidJUnit4::class)
+class LoginScreenTest {
+
+    @get:Rule(order = 0)
+    val hiltRule = HiltAndroidRule(this)
+
+    @get:Rule(order = 1)
+    val composeTestRule = createAndroidComposeRule<MainActivity>()
+
+    @Inject
+    lateinit var fakeAuthRepo: FakeAuthRepository
+
+    @Before
+    fun setUp() {
+        hiltRule.inject()
+    }
+
+    @Test
+    fun loginFailure_showsErrorMessage() {
+        fakeAuthRepo.shouldSucceed = false
+
+        composeTestRule.onNodeWithTag("login_button").performClick()
+        composeTestRule.onNodeWithText("Invalid credentials").assertIsDisplayed()
+    }
+}
+```
+
+**Why preferred:** Single Dagger component generation. All tests in the source set share the same component — compile once, run many.
+
+---
+
+## @BindValue — Ad-Hoc Per-Test Override
+
+Overrides a binding for a single test class without replacing the entire module. Use when you need a `mockk` instance with per-test behavior configuration.
+
+```kotlin
+@HiltAndroidTest
+@RunWith(AndroidJUnit4::class)
+class UserProfileTest {
+
+    @get:Rule
+    val hiltRule = HiltAndroidRule(this)
+
+    // Hilt injects this instance wherever UserRepository is required
+    @BindValue
+    @JvmField
+    val userRepo: UserRepository = mockk(relaxed = true)
+
+    @Before
+    fun setUp() {
+        hiltRule.inject()
+    }
+
+    @Test
+    fun profileLoads_withUserData() {
+        every { userRepo.getUser(any()) } returns fakeUser
+
+        // ... test assertions
+    }
+}
+```
+
+`@JvmField` is required — Hilt reads the field via reflection and needs a JVM field (not a Kotlin property).
+
+**Combining with `@TestInstallIn`:** `@BindValue` overrides the `@TestInstallIn` binding for that specific test class. Use when most tests share a fake but one test needs different behavior.
+
+---
+
+## @UninstallModules — Avoid
+
+Removes a module for a specific test class and forces Hilt to generate a **custom Dagger component** for that test. Each annotated test class adds significant build time.
+
+```kotlin
+// AVOID — generates a new Dagger component for this test class
+@HiltAndroidTest
+@UninstallModules(AuthModule::class)
+class SlowTest { ... }
+```
+
+**When it's unavoidable:** Testing behavior that requires the module itself to be absent (e.g., verifying no binding exists). In practice, this is rare — prefer `@TestInstallIn` with a configurable fake.
+
+---
+
+## Custom Test Application
+
+Required when your `Application` class has initialization logic that must run in tests (e.g., custom DI setup, SDK initialization).
+
+```kotlin
+// Define the custom test application
+class MyTestApp : Application(), HiltTestApplication_Application {
+    override fun onCreate() {
+        super.onCreate()
+        // test-specific initialization
+    }
+}
+
+// Annotate a class in the test source set
+@CustomTestApplication(MyTestApp::class)
+interface HiltTestApplication
+```
+
+Hilt generates `HiltTestApplication_Application` — the name is derived from the interface name. Register the generated class in `AndroidManifest.xml` for the `androidTest` source set via `testInstrumentationRunnerArguments`:
+
+```groovy
+// build.gradle.kts
+android {
+    defaultConfig {
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunnerArguments["clearPackageData"] = "true"
+    }
+}
+```
+
+For most projects, the default `HiltTestApplication` generated by Hilt is sufficient — only add a custom one if you have custom `Application` initialization.
+
+---
+
+## ViewModel Injection in Tests
+
+**Option A: Direct construction (unit tests)** — inject fakes manually, no Hilt required:
+
+```kotlin
+class LoginViewModelTest {
+    private val authRepo = mockk<AuthRepository>()
+    private lateinit var viewModel: LoginViewModel
+
+    @Before
+    fun setUp() {
+        viewModel = LoginViewModel(authRepo)  // direct constructor injection
+    }
+}
+```
+
+**Option B: Hilt injection (integration tests)** — let Hilt provide the ViewModel with test fakes:
+
+```kotlin
+@HiltAndroidTest
+@RunWith(AndroidJUnit4::class)
+class LoginScreenTest {
+
+    @get:Rule(order = 0)
+    val hiltRule = HiltAndroidRule(this)
+
+    @get:Rule(order = 1)
+    val composeTestRule = createAndroidComposeRule<HiltComponentActivity>()
+
+    @Before
+    fun setUp() {
+        hiltRule.inject()
+    }
+
+    @Test
+    fun screen_displaysViewModel_state() {
+        // ViewModel created by Hilt inside the composable — fakes from @TestInstallIn apply
+        composeTestRule.setContent {
+            LoginScreen()
+        }
+        // assertions...
+    }
+}
+```
+
+Use `HiltComponentActivity` (from `androidx.hilt:hilt-navigation-compose:*`) when the composable uses `hiltViewModel()` — it provides the correct component for ViewModel injection.
+
+---
+
+## Scoped Fakes
+
+**`@Singleton` fake** — shared state across all injection points in a test. Good for fakes that accumulate calls or maintain lists:
+
+```kotlin
+@Module
+@TestInstallIn(components = [SingletonComponent::class], replaces = [RepoModule::class])
+abstract class FakeRepoModule {
+
+    @Binds
+    @Singleton  // one instance per test run
+    abstract fun bindRepo(fake: FakeUserRepository): UserRepository
+}
+```
+
+**`@ActivityScoped` fake** — separate instance per Activity. Use when testing multi-screen flows where each screen should see an independent state:
+
+```kotlin
+@Module
+@TestInstallIn(components = [ActivityComponent::class], replaces = [ScreenModule::class])
+abstract class FakeScreenModule {
+
+    @Binds
+    @ActivityScoped
+    abstract fun bindScreenRepo(fake: FakeScreenRepository): ScreenRepository
+}
+```
+
+**Rule:** Use `@Singleton` by default. Narrow the scope only when test isolation requires independent instances per Activity/Fragment.
+
+---
+
+## Rule Order
+
+When combining `HiltAndroidRule` with other rules, use `order` to ensure Hilt initializes before other rules run:
+
+```kotlin
+@get:Rule(order = 0)   // Hilt first
+val hiltRule = HiltAndroidRule(this)
+
+@get:Rule(order = 1)   // Compose/Activity rule second
+val composeTestRule = createAndroidComposeRule<HiltComponentActivity>()
+```
+
+`hiltRule.inject()` must still be called in `@Before` — rule `order` only controls JUnit's rule lifecycle hooks, not `inject()`.
+
+---
+
+## Related
+
+- `SKILL.md` — Hilt test setup summary and @BindValue quick reference
+- `compose-ui-testing.md` — Compose test rules and activity setup

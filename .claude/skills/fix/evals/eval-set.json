@@ -1,0 +1,12 @@
+[
+  {"query": "fix the broken button in the header", "should_trigger": true},
+  {"query": "the test is failing with TypeError", "should_trigger": true},
+  {"query": "this doesn't work — TypeError: Cannot read property of undefined", "should_trigger": true},
+  {"query": "the build is broken", "should_trigger": true},
+  {"query": "Error: Module not found: 'react-router'", "should_trigger": true},
+  {"query": "the login redirect is broken", "should_trigger": true},
+  {"query": "add input validation to the form", "should_trigger": false},
+  {"query": "implement error boundary component", "should_trigger": false},
+  {"query": "debug why the session expires early", "should_trigger": false},
+  {"query": "write tests for the error cases", "should_trigger": false}
+]

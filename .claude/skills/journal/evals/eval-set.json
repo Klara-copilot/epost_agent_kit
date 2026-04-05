@@ -1,0 +1,11 @@
+[
+  {"query": "journal this session", "should_trigger": true},
+  {"query": "write a dev journal entry for what we built today", "should_trigger": true},
+  {"query": "log the architectural decision we made", "should_trigger": true},
+  {"query": "record this implementation history", "should_trigger": true},
+  {"query": "write a post-mortem for this bug fix", "should_trigger": true},
+  {"query": "write documentation for the feature", "should_trigger": false},
+  {"query": "update the changelog", "should_trigger": false},
+  {"query": "create a report for the work done", "should_trigger": false},
+  {"query": "add a commit message", "should_trigger": false}
+]
