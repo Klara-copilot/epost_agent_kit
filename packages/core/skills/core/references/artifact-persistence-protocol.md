@@ -86,5 +86,4 @@ If downstream agent starts and expected artifact is missing:
 
 ## Cross-References
 
-- `understand-patterns/references/artifact-persistence.md` — pattern rationale and recovery behavior
 - `core/references/file-fingerprinting-protocol.md` — fingerprint format and skip logic

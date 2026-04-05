@@ -94,7 +94,6 @@ Run commands, no LLM inference:
 Output: structured `{framework, entryPoints[], topFiles[], importMap{file: inboundCount}}` — no prose yet.
 
 See `references/structural-scan-protocol.md` for full command list and output schema.
-See `understand-patterns/references/two-phase-extraction.md` for the pattern.
 
 **Phase 1b — Semantic Annotation (LLM)**
 Using Phase 1a output only — do NOT re-read raw source files:
@@ -111,7 +110,6 @@ Sort modules by `inboundCount` descending → assign tiers → build numbered le
 - Tier 3 (0–1 inbound): features / leaves
 
 See `references/fan-in-tour-construction.md` for tier rules and output format.
-See `understand-patterns/references/fan-in-ordering.md` for topology background.
 
 ---
 

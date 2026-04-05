@@ -48,7 +48,6 @@ provides:
     - whatsnew
     - didyouknow
     - kit-verify
-    - understand-patterns
 scripts:
   - verify.cjs
   - get-active-plan.cjs

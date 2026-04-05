@@ -71,4 +71,4 @@ Identify 3–5 files a new developer must understand first:
 
 ## Cross-Reference
 
-See `understand-patterns/references/two-phase-extraction.md` — key constraint: Phase 2 reads Phase 1 output, never raw files.
+Key constraint: Phase 2 reads Phase 1 output only, never raw files. See `references/structural-scan-protocol.md` for Phase 1 output schema.

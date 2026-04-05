@@ -82,4 +82,4 @@ This captures 80% of the benefit. Prefer full import map when available.
 
 ## Cross-Reference
 
-See `understand-patterns/references/fan-in-ordering.md` for the underlying topology pattern and BFS traversal approach this implements.
+See `references/structural-scan-protocol.md` for the `importMap` input this consumes.
