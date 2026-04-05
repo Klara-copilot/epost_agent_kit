@@ -80,5 +80,4 @@ Always `.epost-cache/fingerprints.json` at project root. Never per-skill or per-
 
 ## Cross-References
 
-- `understand-patterns/references/file-fingerprinting.md` — pattern rationale and Node.js implementation snippet
 - `core/references/artifact-persistence-protocol.md` — artifact envelope and cleanup rules

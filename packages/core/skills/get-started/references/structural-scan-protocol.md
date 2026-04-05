@@ -96,4 +96,4 @@ Produce a structured summary before semantic annotation:
 
 ## Cross-Reference
 
-See `understand-patterns/references/two-phase-extraction.md` for the pattern this implements.
+See `references/semantic-annotation-protocol.md` for Phase 1b which consumes this output.
