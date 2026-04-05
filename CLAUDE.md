@@ -10,7 +10,7 @@ This file provides guidance to Claude Code when working with code in this reposi
 
 **Packages**: core, a11y, platform-web, platform-ios, platform-android, platform-backend, kit, design-system, domains
 
-**Installed by**: epost-kit v2.0.0 on 2026-04-03
+**Installed by**: epost-kit v2.0.0 on 2026-04-05
 
 ---
 
@@ -304,6 +304,7 @@ When a skill script fails, try to fix it directly — don't stop the workflow.
 
 ### Skills
 - `ios-development` — Swift 6, SwiftUI/UIKit patterns, Xcode builds, crash debugging
+- `ios-testing` — XCTest, XCUITest, Swift Testing (@Test/#expect), snapshot testing, flakiness fixes
 - `ios-ui-lib` — iOS theme SwiftUI component APIs, design tokens, platform token mappings
 - `ios-rag` — iOS codebase vector search for existing patterns and implementations
 - `ios-a11y` — VoiceOver, UIKit/SwiftUI accessibility fixes (WCAG 2.1 AA)
@@ -326,6 +327,7 @@ When a skill script fails, try to fix it directly — don't stop the workflow.
 
 ### Skills
 - `android-development` — Kotlin/Compose screens, Gradle builds, Hilt DI, crash debugging
+- `android-testing` — Compose UI Testing, Hilt @TestInstallIn, Turbine Flow testing, MockK, Room in-memory
 - `android-ui-lib` — Android theme Compose component APIs, design tokens, Material mappings
 - `android-a11y` — Compose/Views accessibility — TalkBack, content descriptions (WCAG 2.1 AA)
 
@@ -356,6 +358,7 @@ When a skill script fails, try to fix it directly — don't stop the workflow.
 
 ### Skills
 - `backend-javaee` — Jakarta EE patterns, WildFly deployment, Maven builds
+- `backend-testing` — Arquillian, Weld-JUnit, RestAssured, JaCoCo, auth/authz testing
 - `backend-databases` — PostgreSQL + MongoDB persistence
 
 ---
