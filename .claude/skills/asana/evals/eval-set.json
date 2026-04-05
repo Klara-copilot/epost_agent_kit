@@ -1,0 +1,54 @@
+{
+  "skill": "asana",
+  "version": "1.0.0",
+  "evals": [
+    {
+      "id": "asana-trigger-create",
+      "input": "create an asana task for the login bug fix",
+      "expected": "trigger",
+      "notes": "Direct create intent"
+    },
+    {
+      "id": "asana-trigger-search",
+      "input": "search asana for overdue tasks",
+      "expected": "trigger",
+      "notes": "Search intent"
+    },
+    {
+      "id": "asana-trigger-my-tasks",
+      "input": "show me my asana tasks",
+      "expected": "trigger",
+      "notes": "My tasks intent"
+    },
+    {
+      "id": "asana-trigger-update",
+      "input": "update the status of my asana task",
+      "expected": "trigger",
+      "notes": "Update intent"
+    },
+    {
+      "id": "asana-trigger-move",
+      "input": "move the task to done on the asana board",
+      "expected": "trigger",
+      "notes": "Board move intent"
+    },
+    {
+      "id": "asana-trigger-board",
+      "input": "what's on my asana board",
+      "expected": "trigger",
+      "notes": "List/view intent"
+    },
+    {
+      "id": "asana-negative-jira",
+      "input": "create a jira ticket for this bug",
+      "expected": "no-trigger",
+      "notes": "Different task tool"
+    },
+    {
+      "id": "asana-negative-slack",
+      "input": "send a slack message to #dev",
+      "expected": "no-trigger",
+      "notes": "Slack, not Asana"
+    }
+  ]
+}

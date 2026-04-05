@@ -1,10 +1,10 @@
 {
-  "generated": "2026-04-05T05:06:22.020Z",
+  "generated": "2026-04-05T23:29:54.490Z",
   "version": "2.0.0",
-  "count": 79,
+  "count": 81,
   "categories": {
     "accessibility": 4,
-    "uncategorized": 37,
+    "uncategorized": 39,
     "workflow": 12,
     "backend": 2,
     "quality": 6,
@@ -186,26 +186,19 @@
       "path": "android-ui-lib/SKILL.md"
     },
     {
-      "name": "asana-muji",
-      "description": "Use when: \\\"create task\\\", \\\"update status\\\", \\\"move task\\\", \\\"asana\\\", \\\"muji task\\\", \\\"board update\\\", \\\"my tasks\\\". Asana workflow for MUJI Android: create/update tasks across Android Libraries, MUJI Tasks, and MUJI Plan boards.",
+      "name": "asana",
+      "description": "Use when: user says 'asana', 'create task', 'update task status', 'search asana', 'my asana tasks', 'move task', 'asana board'. Manages Asana tasks generically via MCP.",
       "category": "uncategorized",
       "tier": "discoverable",
       "keywords": [
         "asana",
         "task-management",
-        "muji",
-        "workflow",
-        "android-project"
+        "project-management"
       ],
       "platforms": [
         "all"
       ],
-      "triggers": [
-        "/asana",
-        "create asana task",
-        "update asana status",
-        "move task on board"
-      ],
+      "triggers": [],
       "agent-affinity": [],
       "connections": {
         "extends": [],
@@ -213,7 +206,32 @@
         "enhances": [],
         "conflicts": []
       },
-      "size": 3075,
+      "size": 6963,
+      "path": "asana/SKILL.md"
+    },
+    {
+      "name": "asana-muji",
+      "description": "Use when: 'create task', 'update status', 'move task', 'asana', 'muji task', 'board update', 'my tasks'. MUJI-specific Asana workflow across iOS Libraries, MUJI Tasks, and MUJI Plan boards.",
+      "category": "uncategorized",
+      "tier": "discoverable",
+      "keywords": [
+        "asana",
+        "task-management",
+        "muji",
+        "workflow"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [],
+      "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 4924,
       "path": "asana-muji/SKILL.md"
     },
     {
@@ -2232,6 +2250,31 @@
       },
       "size": 2376,
       "path": "skill-discovery/SKILL.md"
+    },
+    {
+      "name": "slack",
+      "description": "Use when: user says 'slack', 'send message', 'post to channel', 'read slack', 'search slack', 'slack thread', 'DM someone on slack'. Manages Slack messaging via MCP.",
+      "category": "uncategorized",
+      "tier": "discoverable",
+      "keywords": [
+        "slack",
+        "messaging",
+        "channels",
+        "collaboration"
+      ],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [],
+      "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 5457,
+      "path": "slack/SKILL.md"
     },
     {
       "name": "subagents-driven",
