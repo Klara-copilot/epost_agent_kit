@@ -25,34 +25,34 @@ Instead of thin wrappers, the right model is:
 
 No wrapper pattern needed. Generic connector (`asana`) + project skill (`asana-muji`) + env vars = full coverage for any dev.
 
-## Env Var Contract
+## epost-config.json (replaces all env var GIDs)
 
-```bash
-# Who I am
-ASANA_USER_GID=1207699335267611        # my Asana user GID
-
-# Which projects (MUJI-specific)
-ASANA_IOS_LIBRARIES_GID=...            # iOS Libraries project
-ASANA_MUJI_TASKS_GID=...              # MUJI Tasks project
-ASANA_MUJI_PLAN_GID=...               # MUJI Plan project
-
-# Section GIDs (MUJI Tasks kanban)
-ASANA_SECTION_TODO_GID=...
-ASANA_SECTION_INPROGRESS_GID=...
-ASANA_SECTION_DONE_GID=...
-
-# Section GIDs (MUJI Plan 5-step)
-ASANA_SECTION_NEW_REQUESTS_GID=...
-ASANA_SECTION_IN_PROGRESS_GID=...
-ASANA_SECTION_INTEGRATION_GID=...
-ASANA_SECTION_TEST_GID=...
-ASANA_SECTION_PLAN_DONE_GID=...
-
-# iOS Libraries module sections
-ASANA_SECTION_IOS_THEME_SHOWCASE_GID=...
-ASANA_SECTION_IOS_THEME_UI_GID=...
-ASANA_SECTION_EPOST_BOTTOM_MENU_GID=...
+```json
+{
+  "connectors": {
+    "asana": {
+      "workspace_gid": "...",
+      "projects": {
+        "iOS Libraries": "1207773169815446",
+        "MUJI Tasks":    "1176686389740521",
+        "MUJI Plan":     "1184227957274218"
+      },
+      "create_task": {
+        "target":  "iOS Libraries",
+        "link_to": ["MUJI Tasks", "MUJI Plan"]
+      },
+      "templates": {
+        "component": { "name_prefix": "[Vien-Comp]", "fields": ["module", "due_date", "figma_url"] },
+        "bug":       { "name_prefix": "[Bug]",        "fields": ["module", "due_date", "severity"] }
+      }
+    }
+  }
+}
 ```
+
+**No user GID** — OAuth `assignee: "me"` handles identity.
+**No section GIDs** — fetched live from Asana MCP per project.
+**No `.env.connectors`** — OAuth credentials stored in system keychain via `claude mcp add`.
 
 ## Files to Create
 
@@ -62,7 +62,7 @@ ASANA_SECTION_EPOST_BOTTOM_MENU_GID=...
 | `packages/connectors/skills/asana-muji/workflows/create-task.md` | Merged from iOS/Android |
 | `packages/connectors/skills/asana-muji/workflows/update-status.md` | Merged |
 | `packages/connectors/skills/asana-muji/workflows/my-tasks.md` | Merged |
-| `packages/connectors/skills/asana-muji/references/env-vars.md` | Env var contract + setup instructions |
+| `packages/connectors/skills/asana-muji/references/epost-config-example.md` | epost-config.json schema + example with real MUJI GIDs |
 | `packages/connectors/skills/asana-muji/evals/eval-set.json` | Basic trigger evals |
 
 ## Files to Delete
@@ -74,11 +74,11 @@ ASANA_SECTION_EPOST_BOTTOM_MENU_GID=...
 
 ## Tasks
 
-- [ ] Write merged `SKILL.md` — same flags (create/status/my-tasks), all GIDs via `$ENV_VAR_NAME` references
-- [ ] Write merged `workflows/create-task.md` — same 5-step flow, env var substitution for GIDs
-- [ ] Write merged `workflows/update-status.md` — same section transitions, env var substitution
-- [ ] Write merged `workflows/my-tasks.md` — same fetch + display, env var for project filter
-- [ ] Write `references/env-vars.md` — full var list, how to find GIDs in Asana UI, example `.env.connectors`
+- [ ] Write merged `SKILL.md` — same flags (create/status/my-tasks), reads `epost-config.json`
+- [ ] Write merged `workflows/create-task.md` — reads config for projects/templates; sections fetched live; `assignee: "me"`
+- [ ] Write merged `workflows/update-status.md` — fetches sections live from MCP, no GIDs in workflow
+- [ ] Write merged `workflows/my-tasks.md` — `assignee: "me"`, filters by configured projects
+- [ ] Write `references/epost-config-example.md` — full config schema with MUJI GIDs filled in as example, instructions for finding GIDs in Asana URL
 - [ ] Delete `packages/platform-ios/skills/asana-muji/` (confirm with user first)
 - [ ] Delete `packages/platform-android/skills/asana-muji/` (confirm with user first)
 - [ ] Register `asana-muji` in `packages/connectors/package.yaml`
@@ -86,7 +86,9 @@ ASANA_SECTION_EPOST_BOTTOM_MENU_GID=...
 ## Acceptance Criteria
 
 - [ ] One `asana-muji` skill in `connectors/`, zero duplicates
-- [ ] Zero hardcoded GIDs anywhere in the skill or workflows
-- [ ] `references/env-vars.md` documents every required env var
+- [ ] Zero hardcoded GIDs — all from `epost-config.json`
+- [ ] No user GID anywhere — `assignee: "me"` throughout
+- [ ] Sections fetched live — none stored in config or skill files
+- [ ] `references/epost-config-example.md` documents schema + how to find GIDs
 - [ ] Old platform-specific skills deleted (after user confirmation)
 - [ ] Still works with flags: `create`, `status`, `my-tasks`
