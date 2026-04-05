@@ -53,38 +53,40 @@ For the selected skill:
 
 ## Step 4 — Format Output
 
-Write the tip as a short punchy message, not a doc block. Tone: a sharp colleague dropping a useful shortcut, not a manual.
+Tone: sharp colleague dropping a useful shortcut. Output must render cleanly in plain text and Slack — no markdown bold (`**`), no triple backticks.
 
 ```
-💡 **Did you know?** — `/<skill-name>`
+💡 Did You Know? — <Skill Name>
 
 <Hook sentence — what problem this solves or what most people miss. 1 line.>
 
 <2–3 lines of the actual insight. Specific. Actionable. No filler.>
 
-```<concrete invocation or pattern — copy-pasteable>```
+Example:
+  <concrete invocation or pattern — indented 2 spaces, not fenced>
 
-→ Go deeper: `<references/filename.md>` or combine with `/<related-skill>`
+Go deeper: <references/filename.md> or combine with /<related-skill>
+
+---
+/didyouknow <topic>  ·  /didyouknow --all
 ```
 
-**For `--all` mode:**
+**For `--all` mode**, plain grouped list:
 
 ```
-## Kit Skills at a Glance
+Kit Skills at a Glance
 
-**<Category>**
-- `/<skill>` — <one-liner: what it does, not what it is>
-...
+[Category]
+  /<skill> — <one-liner: what it does, not what it is>
+  ...
 ```
 
 ## Rules
 
 - Hook first — lead with the payoff, not the setup
-- Concrete over abstract — if you can show a command, show it
+- Plain text only — no `**bold**`, no triple backtick fences, no `→` arrows
+- Examples: indent 2 spaces under "Example:" label, never fenced code block
 - One insight per tip — don't stack multiple tricks
 - Non-obvious only — skip primary purpose, surface flags/combos/constraints most users miss
-- Max 4 lines of prose before the code block
 - Never invent capabilities — only surface what exists in the actual SKILL.md
 - Topic match: partial word is fine (`form` matches `web-forms`, `forms`)
-- Footer hint: always end rotating/topic tips with the one-liner footer:
-  `💬 /didyouknow <topic> · /didyouknow --all`
