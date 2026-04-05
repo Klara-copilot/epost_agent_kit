@@ -53,23 +53,38 @@ For the selected skill:
 
 ## Step 4 — Format Output
 
+Write the tip as a short punchy message, not a doc block. Tone: a sharp colleague dropping a useful shortcut, not a manual.
+
 ```
-💡 Did You Know? — <Skill Name>
+💡 **Did you know?** — `/<skill-name>`
 
-<Non-obvious insight — 3-5 lines max>
+<Hook sentence — what problem this solves or what most people miss. 1 line.>
 
-Example:
-  <concrete usage, command, or pattern>
+<2–3 lines of the actual insight. Specific. Actionable. No filler.>
 
-Go deeper: <references/filename.md or related skill>
+```<concrete invocation or pattern — copy-pasteable>```
 
----
-/didyouknow <topic>  to search by topic  |  /didyouknow --all  to browse all skills
+→ Go deeper: `<references/filename.md>` or combine with `/<related-skill>`
+```
+
+**For `--all` mode:**
+
+```
+## Kit Skills at a Glance
+
+**<Category>**
+- `/<skill>` — <one-liner: what it does, not what it is>
+...
 ```
 
 ## Rules
 
-- Max 5 lines in tip body — point to the skill for details, don't expand here
+- Hook first — lead with the payoff, not the setup
+- Concrete over abstract — if you can show a command, show it
+- One insight per tip — don't stack multiple tricks
+- Non-obvious only — skip primary purpose, surface flags/combos/constraints most users miss
+- Max 4 lines of prose before the code block
 - Never invent capabilities — only surface what exists in the actual SKILL.md
-- Non-obvious only: skip the skill's primary purpose (user already knows that), surface what they'd miss
 - Topic match: partial word is fine (`form` matches `web-forms`, `forms`)
+- Footer hint: always end rotating/topic tips with the one-liner footer:
+  `💬 /didyouknow <topic> · /didyouknow --all`
