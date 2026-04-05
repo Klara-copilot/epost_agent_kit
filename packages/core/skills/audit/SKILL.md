@@ -1,22 +1,19 @@
 ---
 name: audit
-description: "(ePost) Use when: \"audit\", \"review\", \"check quality\", \"is this good\", \"review before merge\", \"a11y audit\", \"code audit\", \"suggest improvements\". Dispatches UI, a11y, and code quality audits to the right specialist."
+description: "(ePost) Use when: \"audit\", \"check quality\", \"is this good\", \"a11y audit\", \"code audit\", \"suggest improvements\". Dispatches UI, a11y, and code quality audits to the right specialist."
 argument-hint: "[--ui <ComponentName> [--platform web|ios|android|all] [--poc|--beta|--stable] | --a11y [platform] | --code]"
 user-invocable: true
 metadata:
   keywords: [audit, review, component, a11y, accessibility, code, quality, ui-lib, muji, tokens]
   triggers:
     - "audit"
-    - "review"
     - "audit component"
     - "audit ui"
     - "audit a11y"
     - "audit code"
     - "code audit"
     - "component audit"
-    - "check my code"
     - "is this good"
-    - "look at this before I commit"
     - "suggest improvements"
   platforms: [all]
   agent-affinity: [epost-muji, epost-code-reviewer, epost-a11y-specialist]
@@ -28,6 +25,14 @@ metadata:
 # Audit — Unified Audit Command
 
 Auto-detect and execute the appropriate audit workflow.
+
+## When to Use Which
+
+| Need | Command | What happens |
+|------|---------|-------------|
+| Quick code quality check before commit | `/review [files]` | Lightweight code-review, no specialist dispatch |
+| Full component audit (UI + code + a11y) | `/audit --ui ComponentName` | Dispatches muji + optional code-reviewer + a11y |
+| Auto-detect what needs checking | `/audit` | Reads git diff, dispatches appropriate specialists |
 
 ## Methodology Tracking
 
@@ -87,7 +92,9 @@ If `$ARGUMENTS` starts with `--ui`: **dispatch epost-muji** via Agent tool. Pass
 If `$ARGUMENTS` starts with `--a11y`: **dispatch epost-a11y-specialist** via Agent tool. Pass `references/a11y-workflow.md` + platform hint.
 If `$ARGUMENTS` starts with `--close --ui`: load `references/ui-close.md` and execute inline.
 If `$ARGUMENTS` starts with `--close`: load `references/a11y-close.md` and execute inline.
-If `$ARGUMENTS` starts with `--code`: **dispatch epost-code-reviewer** via Agent tool.
+If `$ARGUMENTS` starts with `--code`: **dispatch epost-code-reviewer** via Agent tool with platform context:
+1. Detect platforms from files in scope (`.tsx`/`.ts`→web, `.java`→backend, `.swift`→ios, `.kt`/`.kts`→android)
+2. Include in dispatch prompt: `Platform: {detected}. Platform rules: {platform-skill}/references/code-review-rules.md`
 If `$ARGUMENTS` starts with `--improvements`: run improvements inline — load `references/improvements.md` and execute.
 If auto-detected as **hybrid** (see Hybrid Detection below): run Hybrid Orchestration.
 Otherwise: continue to Auto-Detection.
@@ -120,7 +127,9 @@ session_folder = reports/{YYMMDD-HHMM}-{slug}-audit/
    - WAIT for completion
    - **POC exception**: If `--poc`, skip a11y dispatch — A11Y findings are already advisory-only in muji's report (no dedicated a11y pass needed until beta)
 5. **Dispatch epost-code-reviewer** via Agent tool:
+   - Detect platforms from files in scope (`.tsx`/`.ts`→web, `.java`→backend, `.swift`→ios, `.kt`/`.kts`→android)
    - Pass: file list, `{session_folder}/muji-ui-audit.md` path (for dedup), SEC/PERF/TS/ARCH/STATE/LOGIC scope
+   - Include in prompt: `Platform: {detected}. Platform rules: {platform-skill}/references/code-review-rules.md`
    - Output path: `{session_folder}/code-review-findings.md`
    - WAIT for completion
 6. **Merge reports** into `{session_folder}/report.md`:

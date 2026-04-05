@@ -154,6 +154,32 @@ Each finding MUST include: `source_agent`, `source_report` (relative path), `fir
 
 See `code-review/references/report-standard.md` for general report anatomy and folder pattern.
 
+## Cross-DB Deduplication
+
+Before persisting ANY finding (code, UI, or a11y agent):
+1. Check `reports/known-findings/code.json` for same `rule_id` + `file_pattern`
+2. Check `reports/known-findings/ui-components.json` for same `rule_id` + `file_pattern`
+3. Check `reports/known-findings/a11y.json` for same `rule_id` + `file_pattern`
+4. Match with `resolved: false` → reference existing ID, skip duplicate
+5. Match with `resolved: true` → flag as regression in report
+6. No match → create new finding with auto-incremented ID
+
+## Platform Context (Code Review Dispatch)
+
+When dispatching epost-code-reviewer (standalone via `--code` or via hybrid audit):
+- Detect platforms from file extensions in scope:
+  - `.tsx`/`.ts`/`.jsx` → `web`
+  - `.java` → `backend`
+  - `.swift` → `ios`
+  - `.kt`/`.kts` → `android`
+  - Multiple platforms detected → `multi`
+- Include in Agent tool prompt:
+  ```
+  Platform: {web|backend|ios|android|multi}
+  Platform rules: {platform-skill}/references/code-review-rules.md
+  ```
+- Multi-platform: pass comma-separated platforms + all applicable rule paths
+
 ## Standards Files Reference
 
 | Standards File | Used By | Scope |

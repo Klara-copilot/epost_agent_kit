@@ -20,6 +20,32 @@ Comprehensive code quality assessment and verification.
 ## When Active
 User uses /review, asks for code review, or before committing code.
 
+## Platform Detection
+
+When invoked, detect platform from files in scope:
+1. If caller passed explicit `Platform:` context → use it
+2. Otherwise, scan file extensions in scope:
+   - `.tsx`, `.ts`, `.scss`, `.css` → web
+   - `.java` → backend
+   - `.swift` → ios
+   - `.kt`, `.kts` → android
+3. Load platform rule file(s):
+   - web: `web-frontend/references/code-review-rules.md`
+   - backend: `backend-javaee/references/code-review-rules.md`
+   - ios: `ios-development/references/code-review-rules.md`
+   - android: `android-development/references/code-review-rules.md`
+4. Always load: `code-review/references/code-review-standards.md` (cross-cutting)
+5. If no platform detected: cross-cutting rules only
+6. Multi-platform: if files span platforms, load all matching rule files
+
+## Caller Protocol
+
+When dispatching epost-code-reviewer, include in prompt:
+```
+Platform: {detected platform(s)}
+Platform rules: {path to platform code-review-rules.md}
+```
+
 ## Confirmation Gate
 
 Code-modifying suggestions require explicit user confirmation before applying.
@@ -43,17 +69,31 @@ Never auto-apply refactoring, renaming, or restructuring to working code.
 
 ### Systematic Review
 
-All code review rules are defined in `references/code-review-standards.md` with numbered IDs, severity, and pass/fail criteria.
+Cross-cutting rules are in `references/code-review-standards.md`. Platform rules are loaded per Platform Detection above.
+
+**Cross-cutting (always loaded):**
 
 | Category | Human Name | Rules | Scope |
 |----------|-----------|-------|-------|
 | SEC | Security | SEC-001..008 | OWASP Top 10, credentials, injection, auth |
-| PERF | Performance | PERF-001..006 | N+1, renders, caching, bundle |
-| TS | Type Safety | TS-001..006 | Unsafe any, casts, guards, generics |
 | LOGIC | Logic & Correctness | LOGIC-001..006 | Null handling, edge cases, race conditions |
 | DEAD | Dead Code | DEAD-001..003 | Unreachable, unused, orphaned |
 | ARCH | Architecture | ARCH-001..005 | File org, boundaries, circular deps, layers |
-| STATE | State Management | STATE-001..004 | Completeness, exits, guards, concurrency |
+
+**Platform-specific (loaded on demand):**
+
+| Platform | Category | Rules | Scope |
+|----------|----------|-------|-------|
+| Web | PERF | PERF-001..006 | N+1, renders, caching, bundle |
+| Web | TS | TS-001..006 | Unsafe any, casts, guards, generics |
+| Web | STATE | STATE-001..004 | Completeness, exits, guards, concurrency |
+| Web (klara) | KLARA | — | klara-theme component standards |
+| Backend | JPA | future | JPA/Hibernate query patterns |
+| Backend | CDI | future | CDI/EJB injection, scope patterns |
+| iOS | SWIFT | future | Swift 6 concurrency, patterns |
+| iOS | UIKIT | future | UIKit/SwiftUI lifecycle |
+| Android | COMPOSE | future | Jetpack Compose recomposition |
+| Android | HILT | future | Hilt DI correctness |
 
 ### Severity Classification
 - **Critical**: Security vulnerabilities, data loss, breaking changes
@@ -76,18 +116,17 @@ After initial review, the reviewer decides based on findings:
 
 **Rule**: Code review is lightweight by default (no `knowledge`). Escalate to audit only when findings warrant it. Audit always activates `knowledge`.
 
-### Lightweight vs. Escalated Review Scope
+### Lightweight vs. Escalated Review Scope (Cross-cutting)
 
 | Category | Lightweight (default) | Escalated (knowledge active) |
 |----------|-----------------------|---------------------------------------|
 | ARCH | ARCH-001..003 (file org, boundaries, circular deps) | + ARCH-004..005 (layer violations, dependency direction) |
 | LOGIC | LOGIC-001..003 (null handling, edge cases, error paths) | + LOGIC-004..006 (race conditions, off-by-one, comparison) |
-| STATE | STATE-001..002 (completeness, exit states) | + STATE-003..004 (transition guards, concurrent mutations) |
-| TS | TS-001..003 (unsafe any, unvalidated cast, missing guard) | + TS-004..006 (generic constraints, non-null assertions, strict null) |
-| PERF | PERF-001..003 (N+1, re-renders, loops) | + PERF-004..006 (caching, bundle, lazy loading) |
 | SEC | SEC-001..004 (injection, XSS, secrets, auth) | + SEC-005..008 (input validation, SSRF, deserialization, data logging) |
 | Tests | Test file exists, covers changed code | + coverage gap analysis, edge case completeness |
 | Standards source | code-review-standards.md only | + docs/ conventions, RAG patterns |
+
+**Note**: Platform-specific rules (PERF, TS, STATE, JPA, etc.) follow the same lightweight (first 50%) / escalated (all) pattern defined in their respective platform rule files.
 
 **Rule**: Lightweight review does NOT load knowledge. Only categories in the "Lightweight" column are checked. If a Critical finding is detected, escalate to the full column.
 
@@ -98,40 +137,21 @@ Code-reviewer runs as a **subagent** (spawned via Agent tool). Subagents **canno
 - Hybrid orchestration (muji + code-reviewer) is handled by the **main context** via `audit/SKILL.md`
 - Code-reviewer is a pure reviewer: reads files, applies rules, writes report
 
-### When Invoked with Muji Report
+### When Invoked with Muji Report (hybrid audit)
 
-If the caller provides a muji report path (hybrid audit):
-1. Read muji report at the provided path
-2. Extract `finding_locations`: Set of file:line already flagged by muji
-3. Run SEC/PERF/TS/ARCH/STATE/LOGIC/DEAD rules on the same files
-4. **Dedup**: skip any file:line already in muji's finding set
-5. Write report to the provided `output_path`
+1. Read muji report → extract `finding_locations` (file:line already flagged)
+2. Run cross-cutting + platform rules on the same files
+3. **Dedup**: skip any file:line in muji's finding set
+4. Write report to `output_path`; add delegation section (agent, verdict, count)
+5. If specialist found Critical → your verdict cannot be APPROVE
 
-### Critical Escalation (self-dispatch, no Agent tool needed)
+### Critical Escalation (no Agent tool needed)
 
-When a Critical finding is detected during review:
-1. Load `knowledge` skill (already in agent skills list)
-2. Execute: L1 docs/ → L2 RAG → L4 Grep fallback
-3. Document KB layers used in Methodology
-4. Re-examine files with retrieved context; update findings
+When Critical found: load `knowledge` → L1 docs/ → L2 RAG → L4 Grep fallback → re-examine files → update findings. Document KB layers in Methodology.
 
-### RAG Lookup (when reviewing)
+### RAG Lookup
 
-1. `ToolSearch("web-rag")` → discover `mcp__web-rag-system__*` tools
-2. Call `status` → confirm available
-3. Call `query` with module + "prior findings security architecture"
-4. If unavailable: fallback to Grep on `reports/` for prior audit files
-5. Append "L2-RAG" or "L2-RAG-unavailable" to methodology
-
-### Post-Delegation Report Merging
-
-After specialist reports arrive:
-1. Read the specialist's Markdown report
-2. Add a delegation section to your report: agent name, report path, verdict, finding count
-3. Adjust your overall verdict: if specialist found Critical → your verdict cannot be APPROVE
-4. List specialist report paths in the report's Related Documents section
-
-**Report consolidation**: After all specialist reports are merged into your report, the final deliverable is YOUR single report file. Sub-agent reports are source material — do not surface them as separate deliverables to the user unless explicitly requested.
+`ToolSearch("web-rag")` → call `status` → call `query` (module + "prior findings security"). If unavailable: Grep `reports/` for prior audits. Append "L2-RAG" or "L2-RAG-unavailable" to methodology.
 
 ## Write session.json (always — after writing report.md)
 
