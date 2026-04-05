@@ -53,8 +53,9 @@ For the selected skill:
 
 ## Step 4 — Format Output
 
-Tone: sharp colleague dropping a useful shortcut. Output must render cleanly in plain text and Slack — no markdown bold (`**`), no triple backticks.
+Wrap the ENTIRE output in a triple-backtick code fence. This makes it render as a monospace block in Slack and other chat tools — no markdown interpretation, clean visual separation.
 
+````
 ```
 💡 Did You Know? — <Skill Name>
 
@@ -63,16 +64,18 @@ Tone: sharp colleague dropping a useful shortcut. Output must render cleanly in 
 <2–3 lines of the actual insight. Specific. Actionable. No filler.>
 
 Example:
-  <concrete invocation or pattern — indented 2 spaces, not fenced>
+  <concrete invocation or pattern — indented 2 spaces>
 
 Go deeper: <references/filename.md> or combine with /<related-skill>
 
 ---
-/didyouknow <topic>  ·  /didyouknow --all
+/didyouknow <topic>  to search by topic  |  /didyouknow --all  to browse all skills
 ```
+````
 
-**For `--all` mode**, plain grouped list:
+**For `--all` mode**, same wrapper:
 
+````
 ```
 Kit Skills at a Glance
 
@@ -80,12 +83,12 @@ Kit Skills at a Glance
   /<skill> — <one-liner: what it does, not what it is>
   ...
 ```
+````
 
 ## Rules
 
+- Always wrap full output in triple-backtick fence — never output raw markdown
 - Hook first — lead with the payoff, not the setup
-- Plain text only — no `**bold**`, no triple backtick fences, no `→` arrows
-- Examples: indent 2 spaces under "Example:" label, never fenced code block
 - One insight per tip — don't stack multiple tricks
 - Non-obvious only — skip primary purpose, surface flags/combos/constraints most users miss
 - Never invent capabilities — only surface what exists in the actual SKILL.md
