@@ -4,6 +4,7 @@ description: (ePost) Surfaces non-obvious kit capabilities, hidden flags, and sk
 argument-hint: "[<topic>] [--all]"
 user-invocable: true
 context: inline
+model: haiku
 metadata:
   keywords: [tips, didyouknow, discovery, hidden-features, skill-combinations]
   platforms: [all]
@@ -12,53 +13,63 @@ metadata:
 
 # Did You Know?
 
-Surfaces non-obvious kit capabilities. Rotates daily or matches a topic.
+Surfaces non-obvious kit capabilities dynamically from the live skill index. Always current — no static tip list to maintain.
 
 ## Step 0 — Determine Mode
 
 | Argument | Behaviour |
 |----------|-----------|
-| *(none)* | Return today's rotating tip — use `dayOfYear % tipCount` to pick deterministically |
-| `<topic>` | Keyword-match topic against tip tags → return best 1–3 matches |
-| `--all` | Print all tips grouped by category |
+| *(none)* | Today's rotating tip — read skill-index, pick by `dayOfYear % skillCount` |
+| `<topic>` | Keyword-match topic against skill keywords → surface tip from best-matched skill |
+| `--all` | List all skills grouped by category with one-line hook each |
 
-For topic matching: read `references/tips.md`, scan each tip's `tags:` line for matches against `$ARGUMENTS` words. Return the tip(s) with the most tag overlap. If no match → return today's tip + "No tips matched '<topic>' — showing today's tip instead."
+## Step 1 — Load Source
 
-## Step 2 — Format Single Tip
+Read `.claude/skill-index.json` — this is the live index of all installed skills.
+
+## Step 2 — Pick Skill
+
+**Rotating (no args)**:
+- Calculate `dayOfYear` (Jan 1 = 1)
+- `index = dayOfYear % totalSkills`
+- Pick skill at that index from the index array
+
+**Topic match**:
+- Match `$ARGUMENTS` words against each skill's `keywords` and `description`
+- Pick the 1–3 skills with most overlap
+- If no match → fall back to rotating tip + note "No match for '<topic>' — showing today's tip"
+
+**--all**:
+- Group skills by their package/category
+- Show `name` + first sentence of `description` per skill
+- No full body expansion
+
+## Step 3 — Surface the Tip
+
+For the selected skill:
+1. Read its `SKILL.md` from `.claude/skills/{name}/SKILL.md`
+2. Identify the most non-obvious thing: a hidden flag, a reference file, a combination with another skill, or a constraint most users miss
+3. If the skill has a `references/` directory — mention one reference file by name as a "go deeper" pointer
+
+## Step 4 — Format Output
 
 ```
-💡 Did You Know? — <Tip Title>
+💡 Did You Know? — <Skill Name>
 
-<Tip body — 3-6 lines max>
+<Non-obvious insight — 3-5 lines max>
 
 Example:
-  <concrete usage example>
+  <concrete usage, command, or pattern>
 
-Related: <skill or flag to explore next>
+Go deeper: <references/filename.md or related skill>
 
 ---
-/didyouknow <topic>  to search by topic  |  /didyouknow --all  to browse all tips
-```
-
-## Step 3 — Format --all
-
-Group tips by category. Show title + one-line summary per tip. Don't expand full body.
-
-```
-## Kit Tips — All Categories
-
-### Hidden Flags
-- TIP-001: `test --scenario` — 12-dimension edge case generator before writing tests
-- TIP-002: `test --visual` — Playwright screenshot regression testing
-...
-
-### Skill Combinations
-- TIP-010: scenario → test → git — the full TDD flow
-...
+/didyouknow <topic>  to search by topic  |  /didyouknow --all  to browse all skills
 ```
 
 ## Rules
 
-- Single tip mode: body max 6 lines — if more is needed, point to the skill
-- Never invent tips — only surface what is actually in `references/tips.md`
-- Topic match: partial word match is fine (`form` matches `forms`, `web-forms`)
+- Max 5 lines in tip body — point to the skill for details, don't expand here
+- Never invent capabilities — only surface what exists in the actual SKILL.md
+- Non-obvious only: skip the skill's primary purpose (user already knows that), surface what they'd miss
+- Topic match: partial word is fine (`form` matches `web-forms`, `forms`)
