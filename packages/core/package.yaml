@@ -47,7 +47,6 @@ provides:
     - find-skill
     - whatsnew
     - didyouknow
-    - kit-verify
 scripts:
   - verify.cjs
   - get-active-plan.cjs

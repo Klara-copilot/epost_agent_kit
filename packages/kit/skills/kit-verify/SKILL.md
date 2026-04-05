@@ -1,61 +1,61 @@
 ---
 name: kit-verify
-description: (ePost) Use when running a pre-release audit, verifying kit integrity before init, or checking for broken references and stale skill connections.
-user-invocable: false
-disable-model-invocation: false
+description: "(ePost) Use when checking kit health, verifying kit integrity, or confirming everything is in sync before committing. Triggers: 'verify kit', 'check kit', 'kit health', 'is kit ok', 'kit-verify', 'validate package manifest', 'check agent refs'."
+user-invocable: true
+context: inline
 metadata:
-  keywords: [verify, audit, integrity, pre-release, references, connections]
-  triggers: [kit verify, pre-release audit, verify kit, check integrity]
+  keywords: [kit, verify, health, check, validate, skill-index, package, agent, sync, audit]
   platforms: [all]
-  agent-affinity: [epost-fullstack-developer]
-  connections:
-    enhances: [kit-add-agent, kit-add-skill, kit-add-hook]
+  tier: discoverable
 ---
 
-# Kit Verification Workflow
+# Kit Verify
 
-Pre-release/pre-init audit pipeline. `epost-kit verify` and the agent layer check are independent — run both.
+Runs all structural health checks against the kit. Single entrypoint for validating that agents, skills, and package manifests are in sync.
 
-## When to Use
+## Usage
 
-- Before running `epost-kit init` on a project
-- Before creating a release/tag
-- After batch-editing skills, agents, or connections
-
-## Step 1 — Run the CLI (automated)
-
-```bash
-epost-kit verify            # errors block, warnings advisory
-epost-kit verify --strict   # warnings also block (CI mode)
+```
+/kit-verify
+/kit-verify --json
 ```
 
-The CLI checks automatically:
-- **Installed integrity** — checksums of `.claude/` files vs `.epost-metadata.json`
-- **Reference validation** — all agent/skill/command refs point to valid targets
-- **Connection integrity** — extends/requires/enhances targets exist, no cycles
-- **Frontmatter completeness** — skills have description, keywords, platforms
-- **Dependency graph** — writes `docs/skill-dependency-graph.md` (mermaid)
-- **Health summary** — skill count, connection counts, completeness ratios
+## What It Checks
 
-Exit codes: `0` = pass, `1` = errors (or warnings under `--strict`), `2` = warnings only.
+| Check | What it validates |
+|-------|-----------------|
+| `frontmatter` | All `SKILL.md` in `packages/` have `name` + `description` |
+| `naming` | All skill dirs in `packages/` are kebab-case |
+| `pkg-declared` | Every skill in `package.yaml` `provides.skills` has a real directory |
+| `pkg-installed` | Every `.claude/skills/` dir traces back to a `packages/` source |
+| `agent-refs` | Every skill in agent `skills:` frontmatter exists in skill-index |
+| `skill-quality` | All skills pass CSO description checks + `quick_validate.py` schema |
+| `eval-coverage` | Every user-invocable skill has `evals/eval-set.json` |
+| `index-sync` | `skill-index.json` count matches `.claude/skills/` dirs |
 
-Fix all errors before proceeding. Warnings are advisory unless in strict mode.
+## Execution
 
-## Step 2 — Layer compliance (you assess)
+```bash
+node .claude/scripts/verify.cjs
+```
 
-The CLI cannot assess content — this is your job.
+Output: `✓` pass · `⚠` warning · `✗` error
 
-For each skill in `packages/`:
-1. Read the SKILL.md body
-2. Ask: is this content **org-wide** (applies to any ePost repo/team) or **repo-specific** (tied to one project, product, or codebase)?
-3. Repo-specific signals to look for: specific file paths, product or repo names, "in this repo" conventions, business logic scoped to one team
+Exit codes: `0` all pass or warnings only · `1` one or more errors
 
-If repo-specific content found:
-- Flag it to the user
-- Suggest the appropriate `docs/` type: `CONV` (deviation), `ADR` (decision), `FEAT` (feature), `FINDING` (gotcha)
-- Do NOT move it automatically — present the finding and wait for confirmation
+## After Running
 
-## Integration
+| Result | Action |
+|--------|--------|
+| `index-sync` warning | Run `node .claude/scripts/generate-skill-index.cjs` |
+| `pkg-declared` error | Fix `package.yaml` or add the missing skill directory |
+| `pkg-installed` warning | Run `epost-kit init` to re-sync `.claude/` from `packages/` |
+| `agent-refs` error | Fix agent frontmatter `skills:` list or add the skill to skill-index |
+| `skill-quality` warning/error | Fix CSO description (add "Use when..." + trigger phrases) or fix YAML |
+| `eval-coverage` warning | Add `evals/eval-set.json` with ≥1 true + ≥1 false trigger query |
+| `frontmatter` error | Add missing `name`/`description` to the `SKILL.md` |
 
-- Wire as pre-commit hook: `epost-kit verify --strict`
-- Wire in CI: `npx epost-kit verify --strict --dir .`
+## Source
+
+Script: `packages/core/scripts/verify.cjs`
+Engine only — no LLM calls, runs headlessly in CI.
