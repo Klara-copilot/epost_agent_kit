@@ -124,6 +124,18 @@ Scan code for areas NOT yet covered by migrated docs, referencing **selected cat
 
 Same as Generation Mode step 4.5 — populate `dependencies` + `business` in index.json.
 
+### 5.5. Pre-Write Validation
+
+Before writing `docs/index.json`, verify:
+
+| Field | Check | If fails |
+|-------|-------|----------|
+| `.business.domain` | Non-empty string, not `"..."` or `null` | Re-derive from Step 5 sources; fallback = repo slug |
+| `.entries` | Non-empty array | At least 1 entry required |
+| `.dependencies` | Object exists | Add `{ "internal": { "libraries": [], "apiServices": [] }, "external": [] }` |
+
+**Do not write index.json until all checks pass.**
+
 ### 6. Generate index.json
 
 Build `docs/index.json` with all migrated + newly generated entries. Use the same template as Generation Mode step 5.
@@ -306,7 +318,7 @@ Infer project business context:
 - `modules` — from route groups, feature directories, Maven modules
 - `users` — from README, onboarding docs, or infer from domain
 
-**Rule**: `domain` MUST be non-empty. If none of the 6 sources yield a value, use the repo name with `luz_` stripped and underscores converted to hyphens. Never leave as `"..."`, `""`, or `null`.
+**Rule**: `domain` MUST be non-empty. If none of the 6 sources yield a value, use the repo slug converted to kebab-case. Never leave as `"..."`, `""`, or `null`.
 **Rule**: For other fields, only record what has code evidence. Skip where no signal found.
 
 ### 5. Generate index.json
@@ -448,8 +460,24 @@ After migrating existing content, scan codebase for gaps:
 - No patterns documented → detect and generate
 - No conventions → detect from config
 
+### 4.5. Extract Dependencies & Business Context
+
+Same as Generation Mode step 4.5 — populate `dependencies` + `business` in index.json.
+
 ### 5. Create index.json
 Build `docs/index.json` with all migrated + newly generated entries.
+
+### 5.5. Pre-Write Validation
+
+Before writing `docs/index.json`, verify:
+
+| Field | Check | If fails |
+|-------|-------|----------|
+| `.business.domain` | Non-empty string, not `"..."` or `null` | Re-derive from Step 4.5 sources; fallback = repo slug |
+| `.entries` | Non-empty array | At least 1 entry required |
+| `.dependencies` | Object exists | Add `{ "internal": { "libraries": [], "apiServices": [] }, "external": [] }` |
+
+**Do not write index.json until all checks pass.**
 
 ### 6. Clean Up
 - Delete original flat files (they've been migrated)

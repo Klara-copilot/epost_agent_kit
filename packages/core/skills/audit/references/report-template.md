@@ -128,6 +128,18 @@ Replace the binary verdict line when `maturityTier = poc` or `beta`:
 
 ---
 
+## Verdict Formula
+
+| Condition | Verdict |
+|-----------|---------|
+| 2+ critical findings | REDESIGN |
+| 1 critical finding | FIX-AND-RESUBMIT |
+| 1+ high findings, 0 critical | FIX-AND-RESUBMIT |
+| Medium/low only | APPROVE |
+
+All specialists (muji, epost-code-reviewer, epost-a11y-specialist) use this scale.
+Overall verdict = max(all specialist verdicts): `REDESIGN` > `FIX-AND-RESUBMIT` > `APPROVE`.
+
 ## Formatting Rules
 
 | Rule | Detail |

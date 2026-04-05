@@ -97,6 +97,10 @@ For audit reports that include JSON: the `summary` object provides machine-reada
 
 ---
 
+## Verdict Thresholds
+
+See `audit/references/report-template.md § Verdict Formula` for severity thresholds (critical/high/medium/low → REDESIGN/FIX-AND-RESUBMIT/APPROVE).
+
 ## Verdict Word — Per Agent Type
 
 | Agent | Valid verdicts |

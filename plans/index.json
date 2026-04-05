@@ -1,13 +1,33 @@
 {
   "version": "1.0.0",
-  "updated": "2026-04-03",
+  "updated": "2026-04-05",
   "counts": {
-    "active": 48,
+    "active": 50,
     "completed": 1,
     "archived": 1,
-    "total": 51
+    "total": 53
   },
   "plans": [
+    {
+      "id": "PLAN-0098",
+      "title": "Audit/Code-Review Phase 1: Platform-Aware Code Review",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-04-05",
+      "authors": ["epost-planner"],
+      "tags": ["audit", "code-review", "platform-aware", "orchestrator", "cross-cutting", "flag-injection"],
+      "file": "plans/260405-1934-audit-review-phase1-consolidation/plan.md"
+    },
+    {
+      "id": "PLAN-0097",
+      "title": "Connectors Package — Generic Asana + Slack Skills",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-04-05",
+      "authors": ["epost-planner"],
+      "tags": ["connectors", "asana", "slack", "mcp", "config-driven", "migration"],
+      "file": "plans/260405-1748-connectors-package/plan.md"
+    },
     {
       "id": "PLAN-0096",
       "title": "Adopt Understand-Anything Patterns into epost_agent_kit",
