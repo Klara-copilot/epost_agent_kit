@@ -29,8 +29,8 @@ Register the connectors package, update CLAUDE.md snippet, regenerate skill inde
 - [ ] Verify `package.yaml` lists both skills: `[asana, slack]`
 - [ ] Finalize `CLAUDE.snippet.md`:
   - Connectors section with skill table
-  - Env vars summary table
-  - Link to setup references
+  - epost-config.json setup instructions (where to place file, minimal schema)
+  - Link to `references/setup.md` for OAuth registration steps
 - [ ] Run `epost-kit init` (or manual install) to generate `.claude/skills/` from packages
 - [ ] Run `node .claude/scripts/generate-skill-index.cjs` to regenerate skill index
 - [ ] Verify `skill-index.json`:

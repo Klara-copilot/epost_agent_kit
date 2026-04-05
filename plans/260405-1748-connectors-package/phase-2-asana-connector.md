@@ -12,7 +12,10 @@ depends: [1]
 - Plan: [plan.md](./plan.md)
 - Existing iOS skill: `packages/platform-ios/skills/asana-muji/SKILL.md`
 - Existing Android skill: `packages/platform-android/skills/asana-muji/SKILL.md`
-- MCP tools: `mcp__claude_ai_Asana__*` prefix (verified)
+- **V2 endpoint**: `https://mcp.asana.com/v2/mcp` (HTTP transport, OAuth 2.0)
+- **V1 deprecated**: May 11, 2026 — build against V2 only
+- **MCP tool prefix**: V1 was `mcp__claude_ai_Asana__*` — V2 prefix must be verified with ToolSearch after registration
+- **OAuth identity**: `assignee: "me"` resolves to authenticated user — no user GID needed
 
 ## Overview
 
@@ -35,34 +38,37 @@ Create the generic, config-driven Asana skill. Extracts reusable patterns from e
 
 - [ ] Write `SKILL.md`:
   - Frontmatter: name `asana`, description (trigger-only CSO), argument-hint, allowed-tools list
-  - Flags: `--create`, `--update`, `--search`, `--list`, `--my-tasks`
-  - Env var table: `ASANA_USER_GID`, `ASANA_WORKSPACE_GID`, `ASANA_DEFAULT_PROJECT_GID` (all optional, with fallback to `get_me`)
+  - Flags: `--create`, `--update`, `--search`, `--my-tasks`
+  - Config source: reads `epost-config.json` connectors.asana block
   - Safety rules (reference `connector-base.md`)
   - Workflow dispatch table (flag → workflow file)
   - No hardcoded GIDs anywhere
 - [ ] Write `references/setup.md`:
-  - Claude Desktop MCP server config for Asana
-  - Required env vars with descriptions
-  - Verification steps (call `get_me` to confirm auth)
+  - V2 MCP registration: `claude mcp add --transport http --client-id ... --client-secret ... --callback-port 8080 asana https://mcp.asana.com/v2/mcp`
+  - OAuth flow: browser opens, user signs in, token stored in `~/.mcp-auth/`
+  - Security: unique credentials per developer, never commit client secret
+  - Verification steps: call get_me to confirm auth
+  - epost-config.json schema with examples
 - [ ] Write `references/operations.md`:
-  - All `mcp__claude_ai_Asana__*` tools with parameter docs
-  - Group by: read operations, write operations, search operations
-  - Note which require auth, which are read-only
+  - **First**: verify V2 tool prefix via ToolSearch after registering V2 server
+  - Document all available V2 tools with parameters
+  - Group by: read, write, search operations
 - [ ] Write `workflows/create-task.md`:
-  - Generic version of iOS `create-task.md`
-  - Uses env vars for project/assignee
-  - Interactive gathering via AskUserQuestion
-  - Multi-home support (optional, user-configured)
+  - Read `epost-config.json` → `create_task.target` and `create_task.link_to`
+  - Read `templates` from config → ask "which template?"
+  - Template drives: name prefix, which fields to collect
+  - Fetch sections for target project live via MCP (not from config)
+  - `assignee: "me"` (OAuth, no GID needed)
+  - Multi-home to `link_to` projects, set initial sections (fetched live)
 - [ ] Write `workflows/update-task.md`:
-  - Generic version of iOS `update-status.md`
-  - Section transitions driven by project config, not hardcoded
-  - Fetch sections dynamically from project
+  - Fetch sections dynamically from project via MCP
+  - Present live section list to user
+  - No section GIDs in config
 - [ ] Write `workflows/search-tasks.md`:
-  - Search by name, assignee, project, completion status
-  - Tabular output
+  - Search by name/project/status, tabular output
 - [ ] Write `workflows/my-tasks.md`:
-  - Generic version — uses env var or `get_me` for user GID
-  - Sortable output table
+  - `assignee: "me"` — no GID needed
+  - Filter by configured projects, sortable table
 - [ ] Write `evals/eval-set.json`:
   - 5+ trigger evals: "create asana task", "search asana", "my asana tasks", "update task status", "asana board"
   - 2+ negative evals: "create jira ticket", "send slack message"
