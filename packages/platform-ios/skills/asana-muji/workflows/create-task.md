@@ -11,7 +11,8 @@ Use `AskUserQuestion` (2 rounds):
 
 **Round 2** (2 questions):
 - Q3 header "Due Date": `+3 days`, `+7 days`, `+14 days`, Other (user types number)
-  - Calculate: today + N days → `YYYY-MM-DD`
+  - Calculate due_on: today + N days → `YYYY-MM-DD`
+  - start_on is always set to today (task creation date) automatically — no need to ask
 - Q4 header "Figma": `No Figma link`, Other (user pastes URL)
 
 ## Step 2 — Create in iOS Libraries
@@ -21,7 +22,8 @@ mcp__asana__create_tasks:
   name: [task name]
   projects: ["1207773169815446"]
   assignee: "1207699335267611"
-  due_on: [calculated YYYY-MM-DD]
+  start_on: [today YYYY-MM-DD]
+  due_on: [today + N days YYYY-MM-DD]
   notes: [Figma URL or empty]
 ```
 
@@ -47,7 +49,8 @@ Then move to initial sections:
 
 ```
 Task created: [name]
-Due: [date]
+Start: [today]
+Due: [today + N days]
 iOS Libraries: [section]
 MUJI Tasks: TO DO
 MUJI Plan: New Requests
