@@ -42,13 +42,13 @@ Machine-readable metadata for an audit session. Written by the orchestrating age
     {
       "name": "epost-muji",
       "report": "muji-ui-audit.md",
-      "verdict": "FIX-AND-REAUDIT",
+      "verdict": "FIX-AND-RESUBMIT",
       "findings": { "critical": 6, "high": 11, "medium": 10, "low": 6 }
     },
     {
       "name": "epost-code-reviewer",
       "report": "report.md",
-      "verdict": "FIX-AND-REAUDIT",
+      "verdict": "FIX-AND-RESUBMIT",
       "findings": { "critical": 1, "high": 4, "medium": 5, "low": 2 }
     },
     {
@@ -64,7 +64,7 @@ Machine-readable metadata for an audit session. Written by the orchestrating age
     "high": 15,
     "medium": 15,
     "low": 8,
-    "verdict": "FIX-AND-REAUDIT"
+    "verdict": "FIX-AND-RESUBMIT"
   }
 }
 ```
@@ -96,13 +96,13 @@ Machine-readable metadata for an audit session. Written by the orchestrating age
 
 ## Verdict Priority
 
-`REDESIGN` > `FIX-AND-REAUDIT` > `APPROVE` (use the highest across all agents)
+`REDESIGN` > `FIX-AND-RESUBMIT` > `APPROVE` (use the highest across all agents)
 
 ## Who Writes It
 
 | Audit type | Written by |
 |------------|-----------|
-| `hybrid-audit` | `epost-code-reviewer` (after merging all sub-agent reports) |
+| `hybrid-audit` | main context (via `audit/SKILL.md`) — after all sub-agent reports complete |
 | `ui-audit` | `epost-muji` (standalone, no code-reviewer) |
 | `a11y-audit` | `epost-a11y-specialist` (standalone) |
 | `code-review` | `epost-code-reviewer` (inline, no sub-agents) |

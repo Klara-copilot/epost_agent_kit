@@ -9,7 +9,7 @@ disable-model-invocation: true
 
 Schema for `reports/known-findings/code.json` — persistence layer for SEC, PERF, TS, LOGIC, DEAD, ARCH, and STATE findings from code review and hybrid audit passes. Mirrors `reports/known-findings/ui-components.json` with code-review-specific categories.
 
-Rule IDs from `code-review-standards.md`: SEC-001..008, PERF-001..006, TS-001..006, LOGIC-001..006, DEAD-001..003, ARCH-001..005, STATE-001..004
+Cross-cutting rule IDs: SEC-001..008, PERF-001..007, TS-001..006, LOGIC-001..006, DEAD-001..003, ARCH-001..005, STATE-001..004, QUALITY-001..007, TEST-001. ePost web-specific: HOOKS-001..008, FETCH-001..006, AUTH-001..006, MOD-001..005, I18N-001..005, REDUX-001..006
 
 ## Empty Template (bootstrap)
 
@@ -73,12 +73,20 @@ Rule IDs from `code-review-standards.md`: SEC-001..008, PERF-001..006, TS-001..0
 
 ### category
 - `"SEC"` — security vulnerability (OWASP Top 10, credential exposure, injection, XSS)
-- `"PERF"` — performance issue (N+1, unnecessary renders, unguarded expensive ops)
+- `"PERF"` — performance issue (N+1, unnecessary renders, unguarded expensive ops, async serialization)
 - `"TS"` — TypeScript safety (unsafe `any`, unvalidated casts, missing type guards)
 - `"LOGIC"` — logic correctness (wrong algorithm, silent failure, incorrect comparison)
 - `"DEAD"` — dead code (unreachable code, unused exports, orphaned utilities)
 - `"ARCH"` — architecture violation (module boundaries, circular deps, layer violations)
 - `"STATE"` — state management issue (incomplete state machines, missing exit states, concurrent mutations)
+- `"QUALITY"` — code quality (DRY, single responsibility, magic values, OOP, complexity)
+- `"HOOKS"` — React hooks violations (deps arrays, Rules of Hooks, cleanup, hook cascade)
+- `"FETCH"` — FetchBuilder usage violations (ePost web — FETCH-001..006)
+- `"AUTH"` — authentication/session violations (ePost web — AUTH-001..006)
+- `"MOD"` — B2B module structure violations (ePost web — MOD-001..005)
+- `"I18N"` — internationalization violations (ePost web — I18N-001..005)
+- `"REDUX"` — Redux Toolkit dual-store violations (ePost web — REDUX-001..006)
+- `"TEST"` — test coverage violations (changed logic without corresponding test changes)
 
 ### severity
 - `"critical"` — security risk, data loss, or breaking behaviour

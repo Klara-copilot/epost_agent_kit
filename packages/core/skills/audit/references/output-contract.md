@@ -8,7 +8,7 @@ Every audit — hybrid, standalone, or inline — writes to a session folder. **
 
 | Audit Type | Folder Pattern | Orchestrator |
 |------------|----------------|-------------|
-| Hybrid (code-reviewer + muji) | `reports/{YYMMDD-HHMM}-{slug}-audit/` | epost-code-reviewer |
+| Hybrid (code-reviewer + muji) | `reports/{YYMMDD-HHMM}-{slug}-audit/` | main context (audit/SKILL.md) |
 | Standalone UI audit | `reports/{YYMMDD-HHMM}-{slug}-ui-audit/` | epost-muji |
 | Standalone a11y audit | `reports/{YYMMDD-HHMM}-{slug}-a11y-audit/` | epost-a11y-specialist |
 | Inline code review | `reports/{YYMMDD-HHMM}-{slug}-code-review/` | epost-code-reviewer |
@@ -82,14 +82,14 @@ Written by the orchestrator as the LAST step (after all reports are merged).
     "fileCount": 93
   },
   "agents": [
-    { "name": "epost-muji", "report": "muji-ui-audit.md", "verdict": "FIX-AND-REAUDIT", "findings": { "critical": 6, "high": 11, "medium": 10, "low": 6 } },
-    { "name": "epost-code-reviewer", "report": "report.md", "verdict": "FIX-AND-REAUDIT", "findings": { "critical": 1, "high": 4, "medium": 5, "low": 2 } }
+    { "name": "epost-muji", "report": "muji-ui-audit.md", "verdict": "FIX-AND-RESUBMIT", "findings": { "critical": 6, "high": 11, "medium": 10, "low": 6 } },
+    { "name": "epost-code-reviewer", "report": "report.md", "verdict": "FIX-AND-RESUBMIT", "findings": { "critical": 1, "high": 4, "medium": 5, "low": 2 } }
   ],
-  "summary": { "total": 45, "critical": 7, "high": 15, "medium": 15, "low": 8, "verdict": "FIX-AND-REAUDIT" }
+  "summary": { "total": 45, "critical": 7, "high": 15, "medium": 15, "low": 8, "verdict": "FIX-AND-RESUBMIT" }
 }
 ```
 
-Verdict priority: `REDESIGN` > `FIX-AND-REAUDIT` > `APPROVE` (use highest across all agents).
+Verdict priority: `REDESIGN` > `FIX-AND-RESUBMIT` > `APPROVE` (use highest across all agents).
 
 ## reports/index.json Entry
 
@@ -101,7 +101,7 @@ One entry per session (not per sub-agent):
   "type": "hybrid-audit",
   "agent": "epost-code-reviewer",
   "title": "SmartLetterComposer Full Audit",
-  "verdict": "FIX-AND-REAUDIT",
+  "verdict": "FIX-AND-RESUBMIT",
   "path": "reports/260309-0521-smart-letter-composer-audit/",
   "files": {
     "report": "reports/260309-0521-smart-letter-composer-audit/report.md",

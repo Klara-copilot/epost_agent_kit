@@ -108,7 +108,7 @@ See `audit/references/report-template.md § Verdict Formula` for severity thresh
 | epost-planner | `READY` `NEEDS-RESEARCH` `BLOCKED` |
 | epost-researcher | `ACTIONABLE` `INCONCLUSIVE` `NEEDS-MORE` |
 | epost-code-reviewer | `APPROVE` `FIX-AND-RESUBMIT` `REDESIGN` |
-| epost-muji | `APPROVE` `FIX-AND-RESUBMIT` `BLOCKED` |
+| epost-muji | `APPROVE` `FIX-AND-RESUBMIT` `REDESIGN` |
 | epost-a11y-specialist | `PASS` `FAIL` `FIX-AND-RESUBMIT` |
 | epost-tester | `PASS` `FAIL` `PARTIAL` |
 
