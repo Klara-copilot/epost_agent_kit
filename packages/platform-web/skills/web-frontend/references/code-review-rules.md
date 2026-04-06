@@ -27,6 +27,7 @@ For klara-theme UI component rules (STRUCT/PROPS/TOKEN/BIZ), see `ui-lib-dev/ref
 | PERF-004 | Expensive operations behind appropriate caching layer | medium | RTK Query cache, React.cache(), or useMemo applied to expensive deterministic operations | `computeExpensiveReport(userId)` called on every render with no cache |
 | PERF-005 | Large library imports use named/path imports, not full barrel — flag imports adding >20KB to initial bundle | medium | `import debounce from 'lodash/debounce'`; `import { format } from 'date-fns/format'` | `import _ from 'lodash'` (70KB); `import * as datefns from 'date-fns'` (35KB); `import moment from 'moment'` (67KB when date-fns suffices) |
 | PERF-006 | Modules >30KB loaded lazily when not needed on initial render — React.lazy + Suspense or dynamic import() | low | `const Chart = React.lazy(() => import('recharts'))` for chart widget only shown on dashboard tab | Top-level `import { LineChart } from 'recharts'` (45KB) on a page where chart is behind a tab; `import 'highlight.js'` (180KB) for optional code preview |
+| PERF-007 | Sequential `await` in loops replaced with `Promise.all` — don't serialize N independent async ops | medium | `await Promise.all(items.map(item => fetchDetail(item.id)))` | `for (const item of items) { item.detail = await fetchDetail(item.id) }` — N serial round trips; applies to API calls, file reads, any async op not DB-queried (DB covered by PERF-001) |
 
 <!-- Bundle size delta check (PERF-007) deferred.
      Threshold for implementing: when CI pipeline reports bundle size per-PR,
@@ -101,7 +102,7 @@ For klara-theme UI component rules (STRUCT/PROPS/TOKEN/BIZ), see `ui-lib-dev/ref
 | Rule IDs | Lightweight (default) | Escalated only |
 |----------|-----------------------|----------------|
 | PERF-001–002 | Yes | — |
-| PERF-003–006 | — | Yes |
+| PERF-003–007 | — | Yes |
 | TS-001–003 | Yes | — |
 | TS-004–006 | — | Yes |
 | STATE-001–002 | Yes | — |

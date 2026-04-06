@@ -45,7 +45,7 @@ blockedBy: []
 | 1 | Package scaffold | 0.5h | pending | [phase-1](./phase-1-package-scaffold.md) |
 | 2 | Asana connector | 2h | pending | [phase-2](./phase-2-asana-connector.md) |
 | 3 | Slack connector | 1.5h | pending | [phase-3](./phase-3-slack-connector.md) |
-| 4 | Consolidate asana-muji — env vars + merge iOS/Android into one | 0.5h | pending | [phase-4](./phase-4-migration.md) |
+| 4 | Remove asana-muji duplicates — replace with config | 0.5h | pending | [phase-4](./phase-4-migration.md) |
 | 5 | Registration + index | 1h | pending | [phase-5](./phase-5-registration-index.md) |
 
 ## .epost-kit.json Schema (final)
@@ -94,7 +94,7 @@ blockedBy: []
 - [ ] `packages/connectors/package.yaml` registered and installable
 - [ ] Generic `asana` skill targets V2 endpoint, uses OAuth identity
 - [ ] Generic `slack` skill works with any workspace
-- [ ] `asana-muji` merged into one skill (connectors/) — no iOS/Android duplicates
+- [ ] `asana-muji` platform skills deleted — replaced by `asana` skill + `.epost-kit.json` config
 - [ ] Zero hardcoded GIDs — config-driven via `.epost-kit.json`
 - [ ] Teams can define custom templates in `.epost-kit.json`
 - [ ] `skill-index.json` regenerated, count correct

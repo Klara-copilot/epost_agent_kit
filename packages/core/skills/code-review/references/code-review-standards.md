@@ -68,7 +68,7 @@ Cross-cutting code review rules applicable to all platforms and languages. Platf
 | SEC | SEC-001–005 (surface scan) | + auth flow trace, SEC-006–008 | Always check |
 | LOGIC | LOGIC-001–003 | + race condition trace, LOGIC-004–006 | Always check |
 | DEAD | DEAD-001 | + unused exports, DEAD-002–003 | Escalated pass only for full check |
-| ARCH | ARCH-003 | + layer scan, ARCH-001–002, ARCH-004–005 | Multi-file or new module changes |
+| ARCH | ARCH-001–003 | + ARCH-004–005 | Multi-file or new module changes |
 
 **Rule**: Escalate to full audit when any Critical finding detected.
 
