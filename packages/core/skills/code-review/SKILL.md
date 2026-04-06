@@ -65,6 +65,21 @@ Code-modifying suggestions require explicit user confirmation before applying.
 
 Never auto-apply refactoring, renaming, or restructuring to working code.
 
+## Rule Authority
+
+**House rules beat country rules.** Project conventions in `docs/conventions/` always take precedence over org-level rule files.
+
+Before applying any rule (cross-cutting, platform, or ePost-specific):
+1. Check `docs/conventions/` in the reviewed repo for a `CONV-*` doc covering the same pattern
+2. **Match found** → apply the project convention, not the org rule
+3. **Match found AND conflicts with org rule** → apply project convention, then add a finding:
+   - Severity: low
+   - Type: `CONV-DEVIATION`
+   - Note: `"Project overrides org rule {RULE-ID}. Intentional deviation or unresolved tech debt?"`
+4. **No match** → apply org rule as written
+
+This applies to ALL platforms — web, backend, iOS, Android, cross-cutting.
+
 ## Expertise
 
 ### Review Process
@@ -72,9 +87,10 @@ Never auto-apply refactoring, renaming, or restructuring to working code.
    - If user provided file paths, component name, or `--files` list → **explicit scope**: use those directly, skip git diff
    - Otherwise → **implicit scope**: identify changed files via `git diff` or `git log`
 2. Read the plan file if one exists — understand requirements before reviewing
-3. Systematic review: structure, logic, types, performance, security
-4. Categorize findings: Critical > High > Medium > Low
-5. Update plan TODO status if plan exists
+3. Check `docs/conventions/` for project-level rule overrides (see Rule Authority above)
+4. Systematic review: structure, logic, types, performance, security
+5. Categorize findings: Critical > High > Medium > Low
+6. Update plan TODO status if plan exists
 
 ### Systematic Review
 
