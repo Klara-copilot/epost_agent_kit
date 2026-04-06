@@ -1,0 +1,19 @@
+name: connectors
+version: "1.0.0"
+description: "Config-driven external service connectors (Asana, Slack)"
+layer: 1
+platforms: [all]
+
+dependencies: [core]
+
+provides:
+  skills:
+    - asana
+    - slack
+    - asana-muji
+
+files:
+  skills/: skills/
+
+settings_strategy: merge
+claude_snippet: CLAUDE.snippet.md

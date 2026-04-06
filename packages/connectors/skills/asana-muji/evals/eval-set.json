@@ -1,0 +1,48 @@
+{
+  "skill": "asana-muji",
+  "version": "2.0.0",
+  "evals": [
+    {
+      "id": "asana-muji-trigger-create",
+      "input": "create a muji task for the new button component",
+      "expected": "trigger",
+      "notes": "MUJI create intent"
+    },
+    {
+      "id": "asana-muji-trigger-status",
+      "input": "update the asana status of my task",
+      "expected": "trigger",
+      "notes": "Status update intent"
+    },
+    {
+      "id": "asana-muji-trigger-my-tasks",
+      "input": "show my muji tasks",
+      "expected": "trigger",
+      "notes": "My tasks intent"
+    },
+    {
+      "id": "asana-muji-trigger-move",
+      "input": "move my task to in progress on the board",
+      "expected": "trigger",
+      "notes": "Board move intent"
+    },
+    {
+      "id": "asana-muji-trigger-board",
+      "input": "board update for the ios libraries task",
+      "expected": "trigger",
+      "notes": "Board update intent"
+    },
+    {
+      "id": "asana-muji-negative-jira",
+      "input": "create a jira ticket",
+      "expected": "no-trigger",
+      "notes": "Different tool"
+    },
+    {
+      "id": "asana-muji-negative-slack",
+      "input": "send a message on slack",
+      "expected": "no-trigger",
+      "notes": "Different service"
+    }
+  ]
+}
