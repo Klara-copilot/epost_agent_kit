@@ -25,11 +25,11 @@ blockedBy: []
 ## Architecture (pre-decided)
 
 - One skill per service (flat, not layered)
-- Config via `epost-config.json` (committed) — project GIDs, templates, workflow config
+- Config via `.epost-kit.json` (committed) — project GIDs, templates, workflow config
 - Personal secrets (OAuth credentials) stay in system keychain via `claude mcp add`
 - No user GID in config — OAuth `assignee: "me"` resolves identity automatically
 - Sections fetched live from Asana MCP (not stored in config)
-- Teams define their own task templates in `epost-config.json`
+- Teams define their own task templates in `.epost-kit.json`
 - `connector-base.md` = shared reference file, NOT standalone skill
 - Asana + Slack only (YAGNI)
 - No webhooks — interactive commands only
@@ -48,7 +48,7 @@ blockedBy: []
 | 4 | Consolidate asana-muji — env vars + merge iOS/Android into one | 0.5h | pending | [phase-4](./phase-4-migration.md) |
 | 5 | Registration + index | 1h | pending | [phase-5](./phase-5-registration-index.md) |
 
-## epost-config.json Schema (final)
+## .epost-kit.json Schema (final)
 
 ```json
 {
@@ -87,7 +87,7 @@ blockedBy: []
 - ALL edits in `packages/` — never `.claude/` directly
 - MCP tool names: V2 prefix TBD (verify with ToolSearch after V2 registration)
 - V1 `mcp__claude_ai_Asana__*` prefix may change in V2 — check before writing operations.md
-- No wrapper skills — epost-config.json + OAuth is sufficient for every developer
+- No wrapper skills — .epost-kit.json + OAuth is sufficient for every developer
 
 ## Success Criteria
 
@@ -95,6 +95,6 @@ blockedBy: []
 - [ ] Generic `asana` skill targets V2 endpoint, uses OAuth identity
 - [ ] Generic `slack` skill works with any workspace
 - [ ] `asana-muji` merged into one skill (connectors/) — no iOS/Android duplicates
-- [ ] Zero hardcoded GIDs — config-driven via `epost-config.json`
-- [ ] Teams can define custom templates in `epost-config.json`
+- [ ] Zero hardcoded GIDs — config-driven via `.epost-kit.json`
+- [ ] Teams can define custom templates in `.epost-kit.json`
 - [ ] `skill-index.json` regenerated, count correct

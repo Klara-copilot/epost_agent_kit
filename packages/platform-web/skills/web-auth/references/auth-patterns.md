@@ -31,6 +31,8 @@ JWT callback handles refresh with two triggers:
 - **30-minute interval** refresh regardless of expiry
 
 ```typescript
+// TECH-DEBT: moment.js (2.30.1) used here — project standard. 
+// Consider migrating to date-fns or native Date when refactoring auth.
 function shouldRefreshToken(decodedToken, lastRefreshed): boolean {
   const isTokenExpiring = decodedToken?.exp &&
     moment().isAfter(moment.unix(decodedToken.exp).subtract(5, 'minutes'));

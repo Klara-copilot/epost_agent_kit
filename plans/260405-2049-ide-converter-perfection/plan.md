@@ -34,7 +34,7 @@ The CLI at `epost-agent-kit-cli/` already has:
 
 | Area | Copilot (vscode) | Cursor | JetBrains |
 |------|------------------|--------|-----------|
-| Tool names | WRONG: uses `execute/read/edit/search/web` — should be `runInTerminal/readFile/editFiles/textSearch/fetch` | N/A (no tool arrays) | N/A |
+| Tool names | CORRECT: `read/edit/execute/search/web` — confirmed by VS Code "Configure Tools" UI. Verbose sub-tool names (`readFile`, `editFiles`) are internal to toolsets, not valid `tools:` values | N/A (no tool arrays) | N/A |
 | Model mapping | Correct | Pass-through (OK — Cursor uses model IDs) | N/A |
 | Agent transform | Works but wrong tools | Works, 5 fields only | Not built |
 | Skill transform | `invocable→invokable` only | Pass-through (OK — Cursor uses SKILL.md) | N/A |
@@ -70,12 +70,16 @@ The CLI at `epost-agent-kit-cli/` already has:
 | **permissionMode: plan** | Omit write/execute tools | `readonly: true` | N/A |
 | **disallowedTools: Write** | Omit `editFiles` | N/A (not supported) | N/A |
 | **user-invocable** | `user-invokable` | N/A (all invocable) | N/A |
-| **Tool: Read** | `readFile` | N/A | N/A |
-| **Tool: Write/Edit** | `editFiles` | N/A | N/A |
-| **Tool: Bash** | `runInTerminal` | N/A | N/A |
-| **Tool: Grep** | `textSearch` | N/A | N/A |
-| **Tool: Glob** | `listDirectory` | N/A | N/A |
-| **Tool: WebFetch** | `fetch` | N/A | N/A |
+| **Tool: Read** | `read` | N/A | N/A |
+| **Tool: Write/Edit** | `edit` | N/A | N/A |
+| **Tool: Bash** | `execute` | N/A | N/A |
+| **Tool: Grep** | `search` | N/A | N/A |
+| **Tool: Glob** | `search` | N/A | N/A |
+| **Tool: WebFetch** | `web` | N/A | N/A |
+| **Tool: Agent** | `agent` | N/A | N/A |
+| _(none)_ | `browser` | N/A | N/A |
+| _(none)_ | `todo` | N/A | N/A |
+| _(none)_ | `vscode` | N/A | N/A |
 
 ## Risk Register
 
@@ -89,7 +93,7 @@ The CLI at `epost-agent-kit-cli/` already has:
 
 ## Success Criteria
 
-1. `epost-kit init --target vscode` produces `.github/agents/*.agent.md` with correct tool names (`readFile`, `editFiles`, `runInTerminal`, `textSearch`, `listDirectory`, `fetch`)
+1. `epost-kit init --target vscode` produces `.github/agents/*.agent.md` with correct tool names (`read`, `edit`, `execute`, `search`, `web`) — short-form names confirmed by VS Code "Configure Tools" UI
 2. `epost-kit init --target cursor` produces split `.cursor/rules/epost-kit-{platform}.mdc` files with correct globs
 3. `epost-kit init --target jetbrains` produces `AGENTS.md` with agent descriptions and routing table
 4. `epost-kit convert` tool mappings match the `init` adapter mappings exactly

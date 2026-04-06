@@ -41,15 +41,15 @@ let config;
 let messagesAbsDir; // resolved absolute path to messages dir
 
 try {
-  const raw = loadConfig(path.join(projectRoot, '.env.local'));
+  const raw = loadConfig(projectRoot);
   const missing = [];
-  if (!raw.googleSheetId) missing.push('I18N_GOOGLE_SHEET_ID');
-  if (!raw.messagesDir) missing.push('I18N_MESSAGES_DIR');
-  if (!raw.locales.length) missing.push('I18N_LOCALES');
-  if (!dryRun && !raw.serviceAccountKeyPath) missing.push('GOOGLE_SERVICE_ACCOUNT_KEY');
+  if (!raw.googleSheetId) missing.push('i18n.googleSheetId');
+  if (!raw.messagesDir) missing.push('i18n.messagesDir');
+  if (!raw.locales.length) missing.push('i18n.locales');
+  if (!dryRun && !raw.serviceAccountKeyPath) missing.push('GOOGLE_SERVICE_ACCOUNT_KEY (in .env.local)');
   if (missing.length) {
     throw new Error(
-      `Missing required i18n config vars:\n${missing.map((v) => `  - ${v}`).join('\n')}\n\nSet these in .env.local or as environment variables.`
+      `Missing required i18n config:\n${missing.map((v) => `  - ${v}`).join('\n')}\n\nSet i18n.* fields in .epost-kit.json. Set GOOGLE_SERVICE_ACCOUNT_KEY in .env.local.`
     );
   }
   config = raw;

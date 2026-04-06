@@ -1,0 +1,12 @@
+{
+  "i18n": {
+    "googleSheetId": "1MYcD7ktAy1tx6bERwgWyp8OR-RIj8YSUNcXPwwiR_QQ",
+    "messagesDir": "apps/luz-epost/messages",
+    "locales": ["en", "de", "fr", "it"],
+    "localeMap": "en:en,de_CH:de,fr_CH:fr,it_CH:it",
+    "sheetMode": "tabs",
+    "resultSheetTab": "Result",
+    "keySeparator": "::",
+    "fallbackSheetTab": "Common"
+  }
+}

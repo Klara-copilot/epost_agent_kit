@@ -24,9 +24,15 @@ For klara-theme UI component rules (STRUCT/PROPS/TOKEN/BIZ), see `ui-lib-dev/ref
 | PERF-001 | No N+1 queries — related data loaded in batch or joined, not per-item | high | Single query with JOIN or batch fetch (`WHERE id IN (...)`) | Loop calling `findById(item.id)` for each item in a collection |
 | PERF-002 | No unbounded queries — all list/search queries have limit/pagination | high | `LIMIT`, `take`, `pageSize` applied; cursor or offset pagination | `findAll()` with no limit on potentially large datasets |
 | PERF-003 | Inefficient O(n²) or worse loops replaced with set/map lookups | medium | O(n) lookup structures for deduplication, membership tests | Nested loops for deduplication: `arr.forEach(x => result.filter(y => y.id === x.id))` |
-| PERF-004 | Expensive operations behind appropriate caching layer | medium | React Query cache, SWR, or memoization applied to expensive deterministic operations | `computeExpensiveReport(userId)` called on every render with no cache |
-| PERF-005 | Large library imports use named or path imports, not full barrel imports | medium | `import { specific } from 'lodash/specific'` | `import _ from 'lodash'` when only one utility is used |
-| PERF-006 | Heavy modules loaded lazily where applicable | low | `React.lazy()` + `Suspense` or dynamic `import()` for large optional features | Synchronous top-level import of large library only needed in one route |
+| PERF-004 | Expensive operations behind appropriate caching layer | medium | RTK Query cache, React.cache(), or useMemo applied to expensive deterministic operations | `computeExpensiveReport(userId)` called on every render with no cache |
+| PERF-005 | Large library imports use named/path imports, not full barrel — flag imports adding >20KB to initial bundle | medium | `import debounce from 'lodash/debounce'`; `import { format } from 'date-fns/format'` | `import _ from 'lodash'` (70KB); `import * as datefns from 'date-fns'` (35KB); `import moment from 'moment'` (67KB when date-fns suffices) |
+| PERF-006 | Modules >30KB loaded lazily when not needed on initial render — React.lazy + Suspense or dynamic import() | low | `const Chart = React.lazy(() => import('recharts'))` for chart widget only shown on dashboard tab | Top-level `import { LineChart } from 'recharts'` (45KB) on a page where chart is behind a tab; `import 'highlight.js'` (180KB) for optional code preview |
+
+<!-- Bundle size delta check (PERF-007) deferred.
+     Threshold for implementing: when CI pipeline reports bundle size per-PR,
+     or when a PR demonstrably adds >50KB to initial bundle despite PERF-005/006.
+     Current coverage: PERF-005 (import patterns) + PERF-006 (lazy loading) catch
+     the most common regressions without external tooling. -->
 
 ---
 
@@ -47,7 +53,7 @@ For klara-theme UI component rules (STRUCT/PROPS/TOKEN/BIZ), see `ui-lib-dev/ref
 
 ## STATE: State Management
 
-**Scope**: Redux slices, Zustand stores, React context, XState machines in web apps.
+**Scope**: RTK slices, React context, XState machines in web apps.
 
 | Rule ID | Rule | Severity | Pass | Fail |
 |---------|------|----------|------|------|

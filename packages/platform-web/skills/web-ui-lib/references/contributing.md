@@ -7,7 +7,7 @@ description: "How to propose new components back to the MUJI team"
 
 ## Proposing New Components
 
-1. **Check existing components** — Search knowledge/klara-theme/components.md first
+1. **Check existing components** — Read `libs/klara-theme/docs/index.json` and check the component catalog first.
 2. **Create a proposal** — Open a GitHub issue with the `component-proposal` template
 3. **Include**: Use case, API sketch, Figma link (if available), priority justification
 4. **MUJI team reviews** — Weekly component review meeting (Tuesdays)
