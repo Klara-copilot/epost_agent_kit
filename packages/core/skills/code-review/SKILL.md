@@ -85,9 +85,9 @@ This applies to ALL platforms — web, backend, iOS, Android, cross-cutting.
 ### Review Process
 1. Scope resolution (before git diff):
    - If user provided file paths, component name, or `--files` list → **explicit scope**: use those directly, skip git diff
-   - Otherwise → **implicit scope**: identify changed files via `git diff` or `git log`
+   - Otherwise → **implicit scope**: run `git diff --name-only HEAD` (unstaged) or `git diff --staged --name-only` (staged). Review ONLY those files — do NOT read the full workspace or unrelated modules.
 2. Read the plan file if one exists — understand requirements before reviewing
-3. Check `docs/conventions/` for project-level rule overrides (see Rule Authority above)
+3. Check `docs/conventions/` for project-level rule overrides (see Rule Authority above) — do this BEFORE loading rule files in Platform Detection
 4. Systematic review: structure, logic, types, performance, security
 5. Categorize findings: Critical > High > Medium > Low
 6. Update plan TODO status if plan exists
@@ -104,6 +104,7 @@ Cross-cutting rules are in `references/code-review-standards.md`. Platform rules
 | LOGIC | Logic & Correctness | LOGIC-001..006 | Null handling, edge cases, race conditions |
 | DEAD | Dead Code | DEAD-001..003 | Unreachable, unused, orphaned |
 | ARCH | Architecture | ARCH-001..005 | File org, boundaries, circular deps, layers |
+| QUALITY | Code Quality & OOP | QUALITY-001..006 | DRY, single responsibility, no magic values, composition |
 
 **Platform-specific (loaded on demand):**
 
@@ -113,6 +114,7 @@ Cross-cutting rules are in `references/code-review-standards.md`. Platform rules
 | Web | TS | TS-001..006 | Unsafe any, casts, guards, generics |
 | Web | STATE | STATE-001..004 | Completeness, exits, guards, concurrency |
 | Web | REDUX | REDUX-001..006 | Dual-store, slices, selectors (in web-frontend rules) |
+| Web | HOOKS | HOOKS-001..008 | Deps arrays, Rules of Hooks, cleanup, hook cascade |
 | Web (ePost) | FETCH | FETCH-001..006 | FetchBuilder, caller pattern, API constants |
 | Web (ePost) | AUTH | AUTH-001..006 | NextAuth, session, feature flags, route protection |
 | Web (ePost) | MOD | MOD-001..005 | B2B module structure, layering, store scoping |
@@ -153,6 +155,7 @@ After initial review, the reviewer decides based on findings:
 | ARCH | ARCH-001..003 (file org, boundaries, circular deps) | + ARCH-004..005 (layer violations, dependency direction) |
 | LOGIC | LOGIC-001..003 (null handling, edge cases, error paths) | + LOGIC-004..006 (race conditions, off-by-one, comparison) |
 | SEC | SEC-001..004 (injection, XSS, secrets, auth) | + SEC-005..008 (input validation, SSRF, deserialization, data logging) |
+| QUALITY | QUALITY-001, QUALITY-003 (DRY, magic values) | + QUALITY-002, QUALITY-004..006 (function size, OOP, composition, guards) |
 | Tests | Test file exists, covers changed code | + coverage gap analysis, edge case completeness |
 | Standards source | code-review-standards.md only | + docs/ conventions, RAG patterns |
 
@@ -193,14 +196,14 @@ Write `{session_folder}/session.json` per `audit/references/session-json-schema.
 
 Ownership per `audit/references/output-contract.md`: code-reviewer → `.epost-data/code/`, muji → `.epost-data/ui/`, a11y → `.epost-data/a11y/`.
 
-Persist SEC/PERF/TS/LOGIC/DEAD/ARCH/STATE findings (critical, high, medium) to `reports/known-findings/code.json`:
+Persist SEC/PERF/TS/LOGIC/DEAD/ARCH/STATE/QUALITY/HOOKS/FETCH/AUTH/MOD/I18N/REDUX findings (critical, high, medium) to `reports/known-findings/code.json`:
 
 1. Check if `reports/known-findings/code.json` exists
    - If not: `mkdir -p .epost-data/code/` then create it with `{ "schemaVersion": "1.0.0", "lastUpdated": "{today}", "findings": [] }`
 2. **Pre-scan for regressions**: for each finding in current pass, check if same `rule_id` + `file_pattern` exists with `resolved: true` → flag `regression: true` in report; with `resolved: false` → reference existing `id`, do not duplicate
 3. For each NEW finding (severity critical/high/medium) not already open in DB:
    - Auto-increment `id` from `max(existing_ids) + 1` (start at 1 for empty)
-   - Map: `module`, `rule_id`, `category` (SEC/PERF/TS/LOGIC/DEAD/ARCH/STATE), `title`, `file_pattern`, `code_pattern`, `fix_template`, `priority`, `severity`, `source` (`hybrid-audit` or `code-review`), `source_agent: "epost-code-reviewer"`, `source_report: "{report_path}"`, `first_detected_at: "{YYYY-MM-DDTHH:MM}"`
+   - Map: `module`, `rule_id`, `category` (SEC/PERF/TS/LOGIC/DEAD/ARCH/STATE/QUALITY/HOOKS/FETCH/AUTH/MOD/I18N/REDUX), `title`, `file_pattern`, `code_pattern`, `fix_template`, `priority`, `severity`, `source` (`hybrid-audit` or `code-review`), `source_agent: "epost-code-reviewer"`, `source_report: "{report_path}"`, `first_detected_at: "{YYYY-MM-DDTHH:MM}"`
    - Append to `findings[]`
 4. Save updated JSON
 5. Log: "Persisted {N} code findings to `reports/known-findings/code.json`" in Methodology
@@ -220,6 +223,8 @@ Key requirements:
 - **Delegation Log** section (required if delegation occurred): agent, scope, template, verdict, finding count
 - Findings table with ID, Severity, File:Line, Issue, Fix
 - Verdict: `APPROVE` | `FIX-AND-RESUBMIT` | `REDESIGN`
+
+  > `FIX-AND-RESUBMIT` = fix issues and re-request review. Never use `FIX-AND-REAUDIT` in code-review reports.
 - Unresolved questions footer always present
 
 ### Related Skills

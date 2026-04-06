@@ -72,6 +72,25 @@ Cross-cutting code review rules applicable to all platforms and languages. Platf
 
 **Rule**: Escalate to full audit when any Critical finding detected.
 
+## QUALITY: Code Quality, Reuse & OOP
+
+**Activation gate**: Apply when reviewing any implementation file — not config or boilerplate.
+
+| Rule ID | Rule | Severity | Pass | Fail |
+|---------|------|----------|------|------|
+| QUALITY-001 | No duplicate logic — identical or near-identical blocks extracted into a shared function | medium | Shared `formatDate(date)` utility used in 3+ places | Same 5-line date formatting block copy-pasted across 3 files |
+| QUALITY-002 | Functions do one thing — no function longer than 30 lines that mixes multiple concerns | medium | `validateUser(data)` only validates; caller handles saving | `saveAndValidateAndNotifyUser()` does all three in sequence |
+| QUALITY-003 | No magic numbers or magic strings — constants named and co-located | medium | `const MAX_RETRY = 3` defined once, imported where used | `if (retries > 3)` or `status === 'PENDING_REVIEW'` inline without named constant |
+| QUALITY-004 | Classes/objects expose behavior, not raw data — no anemic models | medium | `order.calculateTotal()` on the domain object | `order.items` accessed everywhere, total calculated inline in every caller |
+| QUALITY-005 | Prefer composition over inheritance — inheritance only for genuine "is-a" relationships | medium | `EmailNotifier` composes `Mailer` | `AdminUser extends User` when only behavior differs |
+| QUALITY-006 | Early return / guard clause pattern — happy path last, not nested | low | Guard returns at top, happy path flows naturally at the bottom | 4-level `if/else` nesting where early returns would flatten the logic |
+
+## Mode Applicability (QUALITY)
+
+| Section | Lightweight | Escalated |
+|---------|-------------|-----------|
+| QUALITY | QUALITY-001, QUALITY-003 | + QUALITY-002, QUALITY-004–006 |
+
 ## Anti-Patterns
 
 | Anti-Pattern | Rule |

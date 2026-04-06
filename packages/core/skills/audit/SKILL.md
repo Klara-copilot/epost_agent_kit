@@ -94,7 +94,12 @@ If `$ARGUMENTS` starts with `--close --ui`: load `references/ui-close.md` and ex
 If `$ARGUMENTS` starts with `--close`: load `references/a11y-close.md` and execute inline.
 If `$ARGUMENTS` starts with `--code`: **dispatch epost-code-reviewer** via Agent tool with platform context:
 1. Detect platforms from files in scope (`.tsx`/`.ts`→web, `.java`→backend, `.swift`→ios, `.kt`/`.kts`→android)
-2. Include in dispatch prompt: `Platform: {detected}. Platform rules: {platform-skill}/references/code-review-rules.md`
+2. For web files, detect ePost-specific patterns:
+   - `caller/`, `_services/`, FetchBuilder import → `web-api-routes/references/code-review-rules.md`
+   - `auth/`, `session/`, feature-flag logic → `web-auth/references/code-review-rules.md`
+   - `_ui-models/`, `_services/`, `_hooks/`, `_actions/` → `web-modules/references/code-review-rules.md`
+   - `useTranslations`, `messages/` → `web-i18n/references/code-review-rules.md`
+3. Include in dispatch prompt: `Platform: {detected}. Platform rules: {platform-skill}/references/code-review-rules.md. ePost rules: {comma-separated ePost rule paths, or "none"}.`
 If `$ARGUMENTS` starts with `--improvements`: run improvements inline — load `references/improvements.md` and execute.
 If auto-detected as **hybrid** (see Hybrid Detection below): run Hybrid Orchestration.
 Otherwise: continue to Auto-Detection.
