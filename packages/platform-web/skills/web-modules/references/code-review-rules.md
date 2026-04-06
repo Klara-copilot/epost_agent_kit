@@ -15,6 +15,8 @@ disable-model-invocation: true
 
 **Scope**: ePost B2B module screens — Inbox, Monitoring, Composer, Smart Send, Archive, Contacts, Organization, Smart Letter.
 
+**Activation gate**: Skip MOD-001 (scaffold order) and MOD-003 (layering) for files in `_ui-models/` — those rules apply to components, hooks, and actions; data model files only need MOD-002 (directory placement).
+
 | Rule ID | Rule | Severity | Pass | Fail |
 |---------|------|----------|------|------|
 | MOD-001 | Module built in scaffold order: types → service → actions → hooks → store → components → page | medium | PR introduces layers in order; page wired last | Component created before its hook; store added before actions exist |

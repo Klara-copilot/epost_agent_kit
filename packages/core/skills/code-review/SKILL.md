@@ -25,7 +25,8 @@ User uses /review, asks for code review, or before committing code.
 When invoked, detect platform from files in scope:
 1. If caller passed explicit `Platform:` context → use it
 2. Otherwise, scan file extensions in scope:
-   - `.tsx`, `.ts`, `.scss`, `.css` → web
+   - `.tsx`, `.ts` → web
+   - `.scss`, `.css` → web (stylesheet — skip SEC/LOGIC/ARCH/QUALITY; apply PERF-005 import patterns only)
    - `.java` → backend
    - `.swift` → ios
    - `.kt`, `.kts` → android
@@ -42,6 +43,9 @@ When invoked, detect platform from files in scope:
    | Files in `_ui-models/`, `_services/`, `_hooks/`, `_actions/` (module shell) | `web-modules/references/code-review-rules.md` |
    | Files using `useTranslations`, `getTranslations`, or in `messages/` | `web-i18n/references/code-review-rules.md` |
    | Files in `_stores/`, slice files, or using Redux patterns | REDUX rules already in `web-frontend/references/code-review-rules.md` |
+   | Files matching klara-theme path (`libs/klara-theme/`, `libs/common/`) | Note in Unresolved Questions: "Component audit recommended: `/audit --ui {component}` (epost-muji) — KLARA/STRUCT/TOKEN rules not covered by code-review" |
+
+   A file may match multiple signals simultaneously — load ALL matching rule files and apply all detected rules.
 4. Always load: `code-review/references/code-review-standards.md` (cross-cutting)
 5. If no platform detected: cross-cutting rules only
 6. Multi-platform: if files span platforms, load all matching rule files
@@ -117,8 +121,8 @@ Cross-cutting rules are in `references/code-review-standards.md`. Platform rules
 
 | Platform | Category | Rules | Scope |
 |----------|----------|-------|-------|
-| Web | PERF | PERF-001..007 | N+1, renders, caching, bundle, async serialization |
-| Web | TS | TS-001..006 | Unsafe any, casts, guards, generics |
+| Web | PERF | PERF-001..008 | N+1, renders, caching, bundle, async serialization, image optimization |
+| Web | TS | TS-001..008 | Unsafe any, casts, guards, generics, use-client directive, token compliance |
 | Web | STATE | STATE-001..004 | Completeness, exits, guards, concurrency |
 | Web | REDUX | REDUX-001..006 | Dual-store, slices, selectors (in web-frontend rules) |
 | Web | HOOKS | HOOKS-001..008 | Deps arrays, Rules of Hooks, cleanup, hook cascade |
