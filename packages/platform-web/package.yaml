@@ -19,6 +19,7 @@ provides:
     - web-testing
     - web-ui-lib
     - web-forms
+    - web-prototype-convert
 files:
   skills/: skills/
 
