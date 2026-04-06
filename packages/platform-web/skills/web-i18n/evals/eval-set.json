@@ -4,8 +4,12 @@
   {"query": "add French locale support", "should_trigger": true},
   {"query": "the translation key is missing for the button", "should_trigger": true},
   {"query": "fix locale routing for Norwegian", "should_trigger": true},
+  {"query": "run the i18n push with dry-run to preview changes before syncing to Google Sheets", "should_trigger": true},
+  {"query": "validate that all message keys are used and no translations are missing", "should_trigger": true},
   {"query": "add a new page to the app", "should_trigger": false},
   {"query": "fix the component rendering issue", "should_trigger": false},
   {"query": "update the button copy", "should_trigger": false},
-  {"query": "set up Next.js middleware", "should_trigger": false}
+  {"query": "set up Next.js middleware", "should_trigger": false},
+  {"query": "add a new form field with validation schema", "should_trigger": false},
+  {"query": "configure the NextAuth session callback", "should_trigger": false}
 ]

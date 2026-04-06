@@ -1,11 +1,12 @@
 [
-  {"query": "what props does the klara-theme Button accept", "should_trigger": true},
-  {"query": "use the klara-theme Card component in my view", "should_trigger": true},
-  {"query": "check the shadcn Dialog component API", "should_trigger": true},
-  {"query": "what variants are available for the Badge component", "should_trigger": true},
-  {"query": "how do I use the theme provider from klara-theme", "should_trigger": true},
-  {"query": "build a custom button component from scratch", "should_trigger": false},
-  {"query": "fix the button style bug", "should_trigger": false},
-  {"query": "audit UI components for accessibility", "should_trigger": false},
-  {"query": "add a new component to the design system", "should_trigger": false}
+  {"query": "which klara-theme component should I use for a dismissible notification?", "should_trigger": true},
+  {"query": "how do I compose a klara-theme Card with a custom header slot?", "should_trigger": true},
+  {"query": "apply the correct design token for primary button background color", "should_trigger": true},
+  {"query": "use the klara-theme FormField with React Hook Form Controller", "should_trigger": true},
+  {"query": "check if my component violates any klara-theme contribution rules", "should_trigger": true},
+  {"query": "add Zod validation to the registration form", "should_trigger": false},
+  {"query": "set up the Redux feature store for the inbox module", "should_trigger": false},
+  {"query": "fix the keyboard focus order on this page", "should_trigger": false},
+  {"query": "create a new API endpoint for document upload", "should_trigger": false},
+  {"query": "add a loading skeleton to the server component", "should_trigger": false}
 ]

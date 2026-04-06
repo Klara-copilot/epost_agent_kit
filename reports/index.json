@@ -3,14 +3,30 @@
   "updatedAt": "2026-04-06",
   "entries": [
     {
+      "id": "260406-2307-web-skills-minor-fixes-epost-fullstack-developer",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "Web Platform Skills Minor Fixes \u2014 Token efficiency, typo fix, metadata improvements across 9 SKILL.md files",
+      "verdict": "DONE",
+      "date": "2026-04-06",
+      "plan": "plans/260406-2304-web-skills-minor-fixes",
+      "path": "Users/than/Projects/epost_agent_kit/plans/260406-2304-web-skills-minor-fixes/reports/260406-2307-web-skills-minor-fixes-epost-fullstack-developer.md"
+    },
+    {
       "id": "260406-2255-web-skills-self-eval-epost-code-reviewer",
       "type": "skill-quality-audit",
       "agent": "epost-code-reviewer",
-      "title": "Web Platform Skills Self-Evaluation — 11 Skills Scored Across 5 Quality Dimensions",
+      "title": "Web Platform Skills Self-Evaluation \u2014 11 Skills Scored Across 5 Quality Dimensions",
       "verdict": "DONE",
       "path": "reports/260406-2255-web-skills-self-eval-epost-code-reviewer.md",
       "date": "2026-04-06",
-      "tags": ["web", "skills", "self-eval", "token-efficiency", "quality"]
+      "tags": [
+        "web",
+        "skills",
+        "self-eval",
+        "token-efficiency",
+        "quality"
+      ]
     },
     {
       "id": "260406-1727-web-skills-audit-epost-code-reviewer",
