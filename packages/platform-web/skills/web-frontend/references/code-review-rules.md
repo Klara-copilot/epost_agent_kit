@@ -28,6 +28,7 @@ For klara-theme UI component rules (STRUCT/PROPS/TOKEN/BIZ), see `ui-lib-dev/ref
 | PERF-005 | Large library imports use named/path imports, not full barrel — flag imports adding >20KB to initial bundle | medium | `import debounce from 'lodash/debounce'`; `import { format } from 'date-fns/format'` | `import _ from 'lodash'` (70KB); `import * as datefns from 'date-fns'` (35KB); `import moment from 'moment'` (67KB when date-fns suffices) |
 | PERF-006 | Modules >30KB loaded lazily when not needed on initial render — React.lazy + Suspense or dynamic import() | low | `const Chart = React.lazy(() => import('recharts'))` for chart widget only shown on dashboard tab | Top-level `import { LineChart } from 'recharts'` (45KB) on a page where chart is behind a tab; `import 'highlight.js'` (180KB) for optional code preview |
 | PERF-007 | Sequential `await` in loops replaced with `Promise.all` — don't serialize N independent async ops | medium | `await Promise.all(items.map(item => fetchDetail(item.id)))` | `for (const item of items) { item.detail = await fetchDetail(item.id) }` — N serial round trips; applies to API calls, file reads, any async op not DB-queried (DB covered by PERF-001) |
+| PERF-008 | Use `<Image>` from `next/image` instead of raw `<img>` — enables lazy loading, LCP optimization, automatic format conversion | medium | `import Image from 'next/image'; <Image src={url} alt="..." width={N} height={N} />` | `<img src={url} alt="..." />` in a Next.js component — skips image optimization pipeline, hurts LCP |
 
 <!-- Bundle size delta check (PERF-007) deferred.
      Threshold for implementing: when CI pipeline reports bundle size per-PR,
@@ -49,6 +50,8 @@ For klara-theme UI component rules (STRUCT/PROPS/TOKEN/BIZ), see `ui-lib-dev/ref
 | TS-004 | Generic constraints are as tight as the usage requires | medium | `<T extends Record<string, string>>` where only string-keyed objects make sense | `<T>` (unconstrained) used when caller intent clearly requires a narrower shape |
 | TS-005 | Non-null assertions (`!`) only when null is logically impossible and documented | high | `element!` annotated with comment explaining why null is impossible here | `userId!` used without comment on value that could plausibly be null/undefined |
 | TS-006 | No `strict: false` or `noImplicitAny: false` suppressions added to tsconfig | critical | `tsconfig.json` maintains strict mode settings; no per-file `// @ts-nocheck` except documented legacy files | New file adds `// @ts-nocheck` or tsconfig has strict checks disabled for a new path |
+| TS-007 | Components using hooks or browser APIs have `'use client'` directive — App Router runs files server-side by default | critical | `'use client'` at top of any file using `useState`, `useEffect`, `useRouter`, or DOM APIs | `useEffect` or `useRef` in a file without `'use client'` — crashes at runtime; App Router treats it as Server Component |
+| TS-008 | No hardcoded hex/rgb colors in `className` — use klara-theme token classes | medium | `className="bg-base-background text-base-foreground"` | `className="bg-[#1a2b3c]"` or `style={{ color: '#ff0000' }}` — bypasses design token system, breaks theming |
 
 ---
 
@@ -104,9 +107,9 @@ For klara-theme UI component rules (STRUCT/PROPS/TOKEN/BIZ), see `ui-lib-dev/ref
 | Rule IDs | Lightweight (default) | Escalated only |
 |----------|-----------------------|----------------|
 | PERF-001–002 | Yes | — |
-| PERF-003–007 | — | Yes |
-| TS-001–003 | Yes | — |
-| TS-004–006 | — | Yes |
+| PERF-003–008 | — | Yes |
+| TS-001–003, TS-007 | Yes | — |
+| TS-004–006, TS-008 | — | Yes |
 | STATE-001–002 | Yes | — |
 | STATE-003–004 | — | Yes |
 | REDUX-001–003 | Yes | — |
