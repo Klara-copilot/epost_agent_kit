@@ -13,7 +13,6 @@ provides:
   skills:
     - ios-development
     - ios-ui-lib
-    - ios-rag
     - simulator
     - ios-testing
 files:
@@ -21,3 +20,5 @@ files:
 
 settings_strategy: merge
 claude_snippet: CLAUDE.snippet.md
+copilot_snippet: COPILOT.snippet.md
+cursor_snippet: CURSOR.snippet.md

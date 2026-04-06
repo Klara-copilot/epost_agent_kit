@@ -89,7 +89,6 @@ npx playwright test  # E2E tests
 | `references/react-patterns.md` | Store setup, slice templates, hook examples, composition patterns |
 | `references/composition.md` | Compound components, state decoupling, children composition |
 | `references/render-optimization.md` | React.memo, derived state, transitions, lazy init |
-| `references/rag.md` | Vector search for web codebase via MCP tools |
 | `references/typescript-standards.md` | Strict mode, no-any, Result pattern, immutability, null safety |
 
 ## Dependencies
