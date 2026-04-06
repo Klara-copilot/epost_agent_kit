@@ -20,3 +20,5 @@
 {"ts":"2026-04-06T05:36:04.432Z","hook":"scout-block","status":"crash","error":"path must not be empty"}
 {"ts":"2026-04-06T05:36:04.626Z","hook":"scout-block","status":"crash","error":"path must not be empty"}
 {"ts":"2026-04-06T05:36:12.883Z","hook":"scout-block","status":"crash","error":"path must not be empty"}
+{"ts":"2026-04-06T13:17:30.268Z","hook":"scout-block","status":"crash","error":"path must not be empty"}
+{"ts":"2026-04-06T13:26:36.341Z","hook":"scout-block","status":"crash","error":"path must not be empty"}
