@@ -73,6 +73,23 @@ For klara-theme UI component rules (STRUCT/PROPS/TOKEN/BIZ), see `ui-lib-dev/ref
 
 ---
 
+## HOOKS: React Hooks
+
+**Scope**: All React components and custom hooks in `.tsx`/`.ts` files.
+
+| Rule ID | Rule | Severity | Pass | Fail |
+|---------|------|----------|------|------|
+| HOOKS-001 | `useEffect` deps array is complete — all referenced variables listed | critical | `useEffect(() => { fetch(userId) }, [userId])` | `useEffect(() => { fetch(userId) }, [])` — `userId` missing, stale closure |
+| HOOKS-002 | Hooks called unconditionally at top level — never inside conditions, loops, or callbacks | critical | All `use*` calls at top of component/hook body | `if (isAdmin) { useAdminData() }` — violates Rules of Hooks, crashes on toggle |
+| HOOKS-003 | No derived state via `useState` + `useEffect` chain — use `useMemo` or compute inline | high | `const sorted = useMemo(() => list.sort(), [list])` | `useEffect(() => { setSorted(list.sort()) }, [list])` — extra render pass, hook cascade |
+| HOOKS-004 | `useEffect` with subscriptions/timers has cleanup return | high | `useEffect(() => { const id = setInterval(fn, 1s); return () => clearInterval(id) }, [])` | `useEffect(() => { setInterval(fn, 1000) }, [])` — timer leaks on unmount |
+| HOOKS-005 | `useCallback`/`useMemo` deps array is complete — same rule as HOOKS-001 | high | `useCallback((x) => fn(x, userId), [userId])` | `useCallback((x) => fn(x, userId), [])` — stale `userId` in memoized callback |
+| HOOKS-006 | No inline object/array literals in deps arrays — extract to ref or memo first | medium | `const opts = useMemo(() => ({ id }), [id]); useEffect(() => f(opts), [opts])` | `useEffect(() => f({ id }), [{ id }])` — `{}` !== `{}` causes infinite loop |
+| HOOKS-007 | Custom hook has single responsibility — one concern per hook | medium | `useInboxMessages()` fetches and returns messages only | `useInboxPage()` fetches, filters, sorts, tracks selection, and manages pagination |
+| HOOKS-008 | No `// eslint-disable-next-line react-hooks/exhaustive-deps` suppressions | critical | Deps array fixed; if suppression seems needed → restructure the effect | `// eslint-disable-next-line react-hooks/exhaustive-deps` above `useEffect` |
+
+---
+
 ## Lightweight vs Escalated
 
 | Rule IDs | Lightweight (default) | Escalated only |
@@ -85,5 +102,7 @@ For klara-theme UI component rules (STRUCT/PROPS/TOKEN/BIZ), see `ui-lib-dev/ref
 | STATE-003–004 | — | Yes |
 | REDUX-001–003 | Yes | — |
 | REDUX-004–006 | — | Yes |
+| HOOKS-001–002, HOOKS-008 | Yes | — |
+| HOOKS-003–007 | — | Yes |
 
 **Lightweight**: Run on all web file reviews. **Escalated**: Activate on critical findings, large PRs (10+ files), or explicit `--deep` flag.
