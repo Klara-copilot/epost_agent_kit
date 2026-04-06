@@ -34,6 +34,14 @@ When invoked, detect platform from files in scope:
    - backend: `backend-javaee/references/code-review-rules.md`
    - ios: `ios-development/references/code-review-rules.md`
    - android: `android-development/references/code-review-rules.md`
+3b. For web platform, detect ePost-specific patterns and load additional rule files:
+   | Signal (file path or import pattern) | Additional rules file |
+   |--------------------------------------|-----------------------|
+   | Files in `caller/`, `_services/`, or importing `FetchBuilder` | `web-api-routes/references/code-review-rules.md` |
+   | Files in `auth`, `session`, or using feature-flag logic | `web-auth/references/code-review-rules.md` |
+   | Files in `_ui-models/`, `_services/`, `_hooks/`, `_actions/` (module shell) | `web-modules/references/code-review-rules.md` |
+   | Files using `useTranslations`, `getTranslations`, or in `messages/` | `web-i18n/references/code-review-rules.md` |
+   | Files in `_stores/`, slice files, or using Redux patterns | REDUX rules already in `web-frontend/references/code-review-rules.md` |
 4. Always load: `code-review/references/code-review-standards.md` (cross-cutting)
 5. If no platform detected: cross-cutting rules only
 6. Multi-platform: if files span platforms, load all matching rule files
@@ -44,6 +52,7 @@ When dispatching epost-code-reviewer, include in prompt:
 ```
 Platform: {detected platform(s)}
 Platform rules: {path to platform code-review-rules.md}
+ePost rules: {comma-separated paths to ePost-specific rule files detected in step 3b, or "none"}
 ```
 
 ## Confirmation Gate
@@ -87,13 +96,18 @@ Cross-cutting rules are in `references/code-review-standards.md`. Platform rules
 | Web | PERF | PERF-001..006 | N+1, renders, caching, bundle |
 | Web | TS | TS-001..006 | Unsafe any, casts, guards, generics |
 | Web | STATE | STATE-001..004 | Completeness, exits, guards, concurrency |
+| Web | REDUX | REDUX-001..006 | Dual-store, slices, selectors (in web-frontend rules) |
+| Web (ePost) | FETCH | FETCH-001..006 | FetchBuilder, caller pattern, API constants |
+| Web (ePost) | AUTH | AUTH-001..006 | NextAuth, session, feature flags, route protection |
+| Web (ePost) | MOD | MOD-001..005 | B2B module structure, layering, store scoping |
+| Web (ePost) | I18N | I18N-001..005 | next-intl, locale completeness, navigation |
 | Web (klara) | KLARA | — | klara-theme component standards |
-| Backend | JPA | future | JPA/Hibernate query patterns |
-| Backend | CDI | future | CDI/EJB injection, scope patterns |
-| iOS | SWIFT | future | Swift 6 concurrency, patterns |
-| iOS | UIKIT | future | UIKit/SwiftUI lifecycle |
-| Android | COMPOSE | future | Jetpack Compose recomposition |
-| Android | HILT | future | Hilt DI correctness |
+| Backend | JPA | JPA-001..004 | JPA/Hibernate query patterns |
+| Backend | CDI | CDI-001..004 | CDI/EJB injection, scope patterns |
+| iOS | SWIFT | SWIFT-001..003 | Swift 6 concurrency, patterns |
+| iOS | UIKIT | UIKIT-001..003 | UIKit/SwiftUI lifecycle |
+| Android | COMPOSE | COMPOSE-001..003 | Jetpack Compose recomposition |
+| Android | HILT | HILT-001..003 | Hilt DI correctness |
 
 ### Severity Classification
 - **Critical**: Security vulnerabilities, data loss, breaking changes
@@ -126,7 +140,7 @@ After initial review, the reviewer decides based on findings:
 | Tests | Test file exists, covers changed code | + coverage gap analysis, edge case completeness |
 | Standards source | code-review-standards.md only | + docs/ conventions, RAG patterns |
 
-**Note**: Platform-specific rules (PERF, TS, STATE, JPA, etc.) follow the same lightweight (first 50%) / escalated (all) pattern defined in their respective platform rule files.
+**Note**: Platform-specific rules (PERF, TS, STATE, JPA, etc.) and ePost-specific rules (FETCH, AUTH, MOD, I18N, REDUX) all follow the same lightweight (first 50%) / escalated (all) pattern defined in their respective rule files.
 
 **Rule**: Lightweight review does NOT load knowledge. Only categories in the "Lightweight" column are checked. If a Critical finding is detected, escalate to the full column.
 
