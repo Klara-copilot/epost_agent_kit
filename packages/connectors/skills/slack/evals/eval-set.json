@@ -1,0 +1,54 @@
+{
+  "skill": "slack",
+  "version": "1.0.0",
+  "evals": [
+    {
+      "id": "slack-trigger-send",
+      "input": "send a slack message to #general",
+      "expected": "trigger",
+      "notes": "Direct send intent"
+    },
+    {
+      "id": "slack-trigger-post",
+      "input": "post this update to the dev channel on slack",
+      "expected": "trigger",
+      "notes": "Post intent"
+    },
+    {
+      "id": "slack-trigger-read",
+      "input": "read the last 10 messages in #general",
+      "expected": "trigger",
+      "notes": "Read intent"
+    },
+    {
+      "id": "slack-trigger-search",
+      "input": "search slack for the deploy notification from yesterday",
+      "expected": "trigger",
+      "notes": "Search intent"
+    },
+    {
+      "id": "slack-trigger-thread",
+      "input": "reply to the slack thread about the release",
+      "expected": "trigger",
+      "notes": "Thread reply intent"
+    },
+    {
+      "id": "slack-trigger-dm",
+      "input": "send John a slack DM about the meeting",
+      "expected": "trigger",
+      "notes": "DM intent"
+    },
+    {
+      "id": "slack-negative-asana",
+      "input": "create an asana task for this bug",
+      "expected": "no-trigger",
+      "notes": "Asana, not Slack"
+    },
+    {
+      "id": "slack-negative-email",
+      "input": "send an email to the team about the release",
+      "expected": "no-trigger",
+      "notes": "Email, not Slack"
+    }
+  ]
+}

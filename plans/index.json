@@ -2,12 +2,22 @@
   "version": "1.0.0",
   "updated": "2026-04-05",
   "counts": {
-    "active": 50,
+    "active": 51,
     "completed": 1,
     "archived": 1,
-    "total": 53
+    "total": 54
   },
   "plans": [
+    {
+      "id": "PLAN-0099",
+      "title": "IDE Converter Perfection — Copilot, Cursor, JetBrains Full Parity",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-04-05",
+      "authors": ["epost-planner"],
+      "tags": ["ide", "converter", "copilot", "cursor", "jetbrains", "target-adapter", "cli"],
+      "file": "plans/260405-2049-ide-converter-perfection/plan.md"
+    },
     {
       "id": "PLAN-0098",
       "title": "Audit/Code-Review Phase 1: Platform-Aware Code Review",

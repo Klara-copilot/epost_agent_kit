@@ -1,8 +1,8 @@
 {
-  "generated": "2026-04-05T23:19:26.191Z",
+  "generated": "2026-04-05T23:34:46.718Z",
   "summary": {
-    "total": 50,
-    "new": 50,
+    "total": 51,
+    "new": 51,
     "proposed": 0,
     "dismissed": 0,
     "bySkill": {
@@ -49,9 +49,9 @@
         "low": 2
       },
       "unknown": {
-        "total": 14,
+        "total": 15,
         "high": 5,
-        "medium": 8,
+        "medium": 9,
         "low": 1
       },
       "loop": {
@@ -98,7 +98,7 @@
       }
     },
     "byType": {
-      "journal-flag": 36,
+      "journal-flag": 37,
       "audit-failure": 14,
       "workaround": 0
     }
@@ -652,6 +652,17 @@
       "targetSkill": "unknown",
       "suggestedAction": "",
       "detectedAt": "2026-04-05T11:10:35.731Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-4c61e228",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/skill-consolidation/260406-audit-review-phase5-entry-points.md",
+      "excerpt": "- The task spec specified `.epost-data/` paths for the dedup check, but the existing output-contract already established `reports/known-findings/` as the canonical location. Using `.epost-data/` would have created a contradiction. Always read the existing file before implementing additions to it.",
+      "targetSkill": "unknown",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-05T23:30:52.675Z",
       "status": "new"
     }
   ]
