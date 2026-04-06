@@ -4,7 +4,11 @@
       "WebSearch",
       "WebFetch(domain:cursor.com)",
       "WebFetch(domain:code.visualstudio.com)",
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:antigravity.google)",
+      "WebFetch(domain:antigravity.codes)",
+      "WebFetch(domain:developers.googleblog.com)",
+      "WebFetch(domain:codelabs.developers.google.com)"
     ]
   }
 }
