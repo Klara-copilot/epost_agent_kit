@@ -41,7 +41,7 @@ reports/{YYMMDD-HHMM}-{slug}-code-review/  # inline code review
 | Low | N |
 | **Total** | **N** |
 
-**Score:** N/Y applicable rules — **Verdict: PASS | FIX-AND-REAUDIT | REDESIGN**
+**Score:** N/Y applicable rules — **Verdict: APPROVE | FIX-AND-RESUBMIT | REDESIGN**
 One-sentence rationale.
 
 ---
