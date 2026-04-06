@@ -140,20 +140,18 @@ Cross-cutting rules are in `references/code-review-standards.md`. Platform rules
 - **Medium**: Code smells, maintainability issues, documentation gaps
 - **Low**: Style inconsistencies, minor optimizations
 
-### Escalation Gate (Reviewer Decision)
+### Escalation Signals (Reviewer Reporting)
 
-After initial review, the reviewer decides based on findings:
+Code-reviewer runs as a **subagent** — it cannot dispatch other agents. Signal escalation in the report; the main context (via `audit/SKILL.md`) reads the report and handles dispatch.
 
-| Finding | Action |
-|---------|--------|
-| Critical severity found | Escalate to `/audit --code` — activate `knowledge` for deeper context before reporting |
-| Task is UI code review/audit (components, tokens, design system) | Delegate to **epost-muji** — runs `/audit --ui` with klara-theme standards + INTEGRITY gate |
-| Task is about a11y (accessibility, WCAG, VoiceOver, TalkBack, keyboard nav, screen reader) | Delegate to **epost-a11y-specialist** — runs `/audit --a11y` with full WCAG 2.1 AA rules |
-| High severity, UI component finding | Escalate to `/audit --ui` → **epost-muji** for full component audit |
-| High severity, a11y issue | Escalate to `/audit --a11y` — a11y specialist audits with WCAG rules |
-| Medium/Low only | Complete inline, no escalation needed |
+| Finding | Signal in report |
+|---------|-----------------|
+| Critical severity found | Load `knowledge` inline (L1 docs/ → L4 Grep fallback) → re-examine files → update findings; add "Escalation recommended: `/audit --code`" to Unresolved Questions |
+| UI code (components, tokens, design system) | Add "UI audit recommended: `/audit --ui` (epost-muji)" to Unresolved Questions |
+| A11y issue found | Add "A11y audit recommended: `/audit --a11y`" to Unresolved Questions |
+| Medium/Low only | Complete inline, no escalation signal needed |
 
-**Rule**: Code review is lightweight by default (no `knowledge`). Escalate to audit only when findings warrant it. Audit always activates `knowledge`.
+**Rule**: Code review is lightweight by default (no `knowledge`). On Critical: load `knowledge` inline, deepen analysis, then surface in report. The **main context** escalates to full audit.
 
 ### Lightweight vs. Escalated Review Scope (Cross-cutting)
 
@@ -204,7 +202,7 @@ Write `{session_folder}/session.json` per `audit/references/session-json-schema.
 
 Ownership per `audit/references/output-contract.md`: code-reviewer → `.epost-data/code/`, muji → `.epost-data/ui/`, a11y → `.epost-data/a11y/`.
 
-Persist SEC/PERF/TS/LOGIC/DEAD/ARCH/STATE/QUALITY/HOOKS/FETCH/AUTH/MOD/I18N/REDUX findings (critical, high, medium) to `reports/known-findings/code.json`:
+Persist SEC/PERF/TS/LOGIC/DEAD/ARCH/STATE/QUALITY/HOOKS/FETCH/AUTH/MOD/I18N/REDUX/TEST findings (critical, high, medium) to `reports/known-findings/code.json`:
 
 1. Check if `reports/known-findings/code.json` exists
    - If not: `mkdir -p .epost-data/code/` then create it with `{ "schemaVersion": "1.0.0", "lastUpdated": "{today}", "findings": [] }`
@@ -212,7 +210,7 @@ Persist SEC/PERF/TS/LOGIC/DEAD/ARCH/STATE/QUALITY/HOOKS/FETCH/AUTH/MOD/I18N/REDU
 2b. **Surface recurring rules**: after pre-scan, if any `rule_id` has 3+ open entries in DB (escalated) or 5+ (lightweight), include in report's Regression Trends section with count and file patterns.
 3. For each NEW finding (severity critical/high/medium) not already open in DB:
    - Auto-increment `id` from `max(existing_ids) + 1` (start at 1 for empty)
-   - Map: `module`, `rule_id`, `category` (SEC/PERF/TS/LOGIC/DEAD/ARCH/STATE/QUALITY/HOOKS/FETCH/AUTH/MOD/I18N/REDUX), `title`, `file_pattern`, `code_pattern`, `fix_template`, `priority`, `severity`, `source` (`hybrid-audit` or `code-review`), `source_agent: "epost-code-reviewer"`, `source_report: "{report_path}"`, `first_detected_at: "{YYYY-MM-DDTHH:MM}"`
+   - Map: `module`, `rule_id`, `category` (SEC/PERF/TS/LOGIC/DEAD/ARCH/STATE/QUALITY/HOOKS/FETCH/AUTH/MOD/I18N/REDUX/TEST), `title`, `file_pattern`, `code_pattern`, `fix_template`, `priority`, `severity`, `source` (`hybrid-audit` or `code-review`), `source_agent: "epost-code-reviewer"`, `source_report: "{report_path}"`, `first_detected_at: "{YYYY-MM-DDTHH:MM}"`
    - Append to `findings[]`
 4. Save updated JSON
 5. Log: "Persisted {N} code findings to `reports/known-findings/code.json`" in Methodology
