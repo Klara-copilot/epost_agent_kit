@@ -117,7 +117,7 @@ Cross-cutting rules are in `references/code-review-standards.md`. Platform rules
 
 | Platform | Category | Rules | Scope |
 |----------|----------|-------|-------|
-| Web | PERF | PERF-001..006 | N+1, renders, caching, bundle |
+| Web | PERF | PERF-001..007 | N+1, renders, caching, bundle, async serialization |
 | Web | TS | TS-001..006 | Unsafe any, casts, guards, generics |
 | Web | STATE | STATE-001..004 | Completeness, exits, guards, concurrency |
 | Web | REDUX | REDUX-001..006 | Dual-store, slices, selectors (in web-frontend rules) |
@@ -160,8 +160,9 @@ After initial review, the reviewer decides based on findings:
 | Category | Lightweight (default) | Escalated (knowledge active) |
 |----------|-----------------------|---------------------------------------|
 | ARCH | ARCH-001..003 (file org, boundaries, circular deps) | + ARCH-004..005 (layer violations, dependency direction) |
+| DEAD | DEAD-001 (unreachable code) | + DEAD-002..003 (unused exports, orphaned files) |
 | LOGIC | LOGIC-001..003 (null handling, edge cases, error paths) | + LOGIC-004..006 (race conditions, off-by-one, comparison) |
-| SEC | SEC-001..004 (injection, XSS, secrets, auth) | + SEC-005..008 (input validation, SSRF, deserialization, data logging) |
+| SEC | SEC-001..005 (injection, XSS, secrets, auth, route guards) | + SEC-006..008 (input validation, SSRF, data logging) |
 | QUALITY | QUALITY-001, QUALITY-003 (DRY, magic values) | + QUALITY-002, QUALITY-004..007 (function size, OOP, composition, guards, complexity) |
 | TEST | TEST-001 (changed logic must have test changes) | + edge case coverage, boundary condition completeness |
 | Standards source | code-review-standards.md only | + docs/ conventions, RAG patterns |
