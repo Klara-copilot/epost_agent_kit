@@ -58,6 +58,21 @@ For klara-theme UI component rules (STRUCT/PROPS/TOKEN/BIZ), see `ui-lib-dev/ref
 
 ---
 
+## REDUX: Redux Toolkit Dual-Store
+
+**Scope**: ePost dual-store pattern — Global (persisted app state) + Feature (scoped per layout). Redux Toolkit slices, selectors, RTK Query.
+
+| Rule ID | Rule | Severity | Pass | Fail |
+|---------|------|----------|------|------|
+| REDUX-001 | App-wide state in Global store, feature state in Feature store — no cross-contamination | high | User profile in Global; feature list in Feature store scoped to layout | Feature-specific data persisted in Global store |
+| REDUX-002 | Feature store has own `configureStore` + `Provider` scoped to feature layout — not Global | high | Feature store wrapped in feature layout with own Provider | Feature slices registered in Global store's `combineReducers` |
+| REDUX-003 | `useAppSelector` with narrow selectors — subscribe to primitives, not objects | high | `useAppSelector(s => s.user.name)` | `useAppSelector(s => s.user)` causing re-renders on unrelated user field changes |
+| REDUX-004 | Reducers are pure — side effects only in thunks/middleware | critical | Async logic in `createAsyncThunk`; reducer returns new state only | `fetch()` or `console.log` inside reducer body |
+| REDUX-005 | No direct store import in components — use hooks (`useAppSelector`, `useAppDispatch`) | medium | Component uses `useAppDispatch()` | Component imports `store` and calls `store.dispatch()` directly |
+| REDUX-006 | RTK Query middleware registered only in Feature store — not Global persisted store | medium | `api.middleware` in feature store's middleware chain | RTK Query middleware registered in Global store alongside persist config |
+
+---
+
 ## Lightweight vs Escalated
 
 | Rule IDs | Lightweight (default) | Escalated only |
@@ -68,5 +83,7 @@ For klara-theme UI component rules (STRUCT/PROPS/TOKEN/BIZ), see `ui-lib-dev/ref
 | TS-004–006 | — | Yes |
 | STATE-001–002 | Yes | — |
 | STATE-003–004 | — | Yes |
+| REDUX-001–003 | Yes | — |
+| REDUX-004–006 | — | Yes |
 
 **Lightweight**: Run on all web file reviews. **Escalated**: Activate on critical findings, large PRs (10+ files), or explicit `--deep` flag.
