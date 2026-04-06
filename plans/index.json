@@ -2,12 +2,22 @@
   "version": "1.0.0",
   "updated": "2026-04-06",
   "counts": {
-    "active": 54,
+    "active": 55,
     "completed": 1,
     "archived": 1,
-    "total": 57
+    "total": 58
   },
   "plans": [
+    {
+      "id": "PLAN-0103",
+      "title": "Fix Web Platform Skill Audit Issues (excl. web-prototype-convert)",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-04-06",
+      "authors": ["epost-planner"],
+      "tags": ["web", "skills", "token-efficiency", "bug-fixes", "metadata", "audit-followup"],
+      "file": "plans/260406-2304-web-skills-minor-fixes/plan.md"
+    },
     {
       "id": "PLAN-0102",
       "title": "Code Review Quality Gaps: Test Coverage, Complexity, Bundle Size, Regression Trends",

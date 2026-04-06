@@ -56,6 +56,8 @@ For klara-theme UI component rules (STRUCT/PROPS/TOKEN/BIZ), see `ui-lib-dev/ref
 
 **Scope**: RTK slices, React context, XState machines in web apps.
 
+**Activation gate**: Apply only when reviewing XState machine files or complex multi-step async flows with explicit states. Skip for standard RTK slice files — REDUX rules cover those.
+
 | Rule ID | Rule | Severity | Pass | Fail |
 |---------|------|----------|------|------|
 | STATE-001 | State machine completeness — every state has at least one defined exit transition | high | All states listed in transitions map; no terminal state without explicit `done`/`error` exit | Loading state has no transition to error or success — machine can get stuck |

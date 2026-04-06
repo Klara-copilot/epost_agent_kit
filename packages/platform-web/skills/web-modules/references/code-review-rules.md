@@ -7,8 +7,6 @@ disable-model-invocation: true
 
 # Web Modules Code Review Rules
 
-ePost-specific B2B module structure rules. Loaded by code-review skill when reviewing files inside a B2B module directory.
-
 **Scope**: Module scaffold order, directory conventions, layering, store scoping in ePost B2B modules.
 
 ---
@@ -35,7 +33,3 @@ ePost-specific B2B module structure rules. Loaded by code-review skill when revi
 | MOD-001–002, MOD-005 | — | Yes |
 
 **Lightweight**: Run on all module-directory files. **Escalated**: Activate on new module creation or full module integration PRs.
-
-## Extending
-
-Add rules following the ID pattern: `MOD-{NNN}`. Keep severity scale consistent with cross-cutting rules.

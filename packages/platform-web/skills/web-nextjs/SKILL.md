@@ -21,31 +21,8 @@ Next.js 14 App Router patterns for web applications. Covers routing structure, m
 
 ## Route Structure
 
-Uses locale-scoped route groups with auth separation:
-
-```
-app/
-├── [locale]/                      # Dynamic locale segment
-│   ├── layout.tsx                 # Root: ReduxProvider > AuthProvider > NextIntlClientProvider
-│   ├── global_error.tsx           # Must include <html><body> — wraps root layout
-│   ├── (auth)/                    # Requires authentication session
-│   │   ├── layout.tsx             # Sidebar menu, session check
-│   │   ├── error.tsx              # Auth-level error boundary
-│   │   ├── [...rest]/page.tsx     # Catch-all → notFound()
-│   │   ├── feature-a/
-│   │   │   └── [id]/detail/[detailId]/
-│   │   ├── feature-b/
-│   │   │   └── [category]/
-│   │   ├── feature-c/
-│   │   └── feature-d/
-│   └── (public)/                  # No auth required
-│       ├── onboarding/
-│       └── error-pages/
-├── api/
-│   ├── auth/[...nextauth]/        # NextAuth route handler
-│   ├── internal/log/              # Client→server log forwarding
-│   └── proxy/                     # Proxy endpoints
-```
+Route structure follows `app/(locale)/(auth|public)/` pattern.
+See `references/routing.md` for full tree.
 
 ### Conventions
 

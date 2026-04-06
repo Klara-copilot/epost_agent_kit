@@ -157,3 +157,21 @@ messages/
 | `validate.cjs` | Detect missing, orphaned, untranslated keys (read-only) |
 | `pull.cjs` | Fetch from sheet → write `messages/*.json` (read-only) |
 | `push.cjs` | Detect new code keys → append rows with EN pre-filled |
+
+---
+
+## Quick Reference
+
+### Translation Usage
+
+| Context | API |
+|---------|-----|
+| Server Components | `getTranslations('FeatureName')` (async) |
+| Client Components | `useTranslations('FeatureName.Dashboard')` |
+| Root Layout | `NextIntlClientProvider messages={await getMessages()}` |
+
+### Key Rules
+
+- Import navigation helpers from `navigation.ts` — never `next/link` or `next/navigation`
+- Always add translations to ALL locale files
+- Use dot notation for nested namespaces: `useTranslations('Feature.Sub')`
