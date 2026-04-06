@@ -57,7 +57,7 @@ export function useLetters() {
 
 ```typescript
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getLetters } from '../_callers/letter-caller';
+import { getLetters } from '../_services/letter-caller';
 import { Letter } from '../_ui-models/letter';
 
 export const fetchLetters = createAsyncThunk<Letter[]>(
@@ -77,27 +77,37 @@ export const fetchLetters = createAsyncThunk<Letter[]>(
 ## Layer 4: Caller (FetchBuilder)
 
 ```typescript
-// _callers/letter-caller.ts
+// _services/letter-caller.ts
 'use server';
-import { fetchBuilder } from '@/service/fetch-builder';
+import { FetchBuilder } from '@/service/fetch-builder';
+import { getSession } from 'next-auth/react';
 import { LETTER_API } from '@/constants/api-urls';
 import { Letter } from '../_ui-models/letter';
 
 export async function getLetters(): Promise<Letter[]> {
-  return fetchBuilder(LETTER_API.LIST)
-    .fetch<Letter[]>();
+  const session = await getSession();
+  return new FetchBuilder<Letter[]>()
+    .withUrl(LETTER_API.LIST)
+    .withBearerToken(session.accessToken)
+    .execute();
 }
 
 export async function getLetterById(id: string): Promise<Letter> {
-  return fetchBuilder(LETTER_API.DETAIL(id))
-    .fetch<Letter>();
+  const session = await getSession();
+  return new FetchBuilder<Letter>()
+    .withUrl(LETTER_API.DETAIL.replace(':id', id))
+    .withBearerToken(session.accessToken)
+    .execute();
 }
 
 export async function createLetter(data: Partial<Letter>): Promise<Letter> {
-  return fetchBuilder(LETTER_API.LIST)
+  const session = await getSession();
+  return new FetchBuilder<Letter>()
+    .withUrl(LETTER_API.LIST)
+    .withBearerToken(session.accessToken)
     .withMethod('POST')
     .withBody(data)
-    .fetch<Letter>();
+    .execute();
 }
 ```
 

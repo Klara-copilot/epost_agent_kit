@@ -10,13 +10,10 @@ source: dynamic
 
 > Do NOT maintain a component list here. Use RAG for current data.
 
-### Primary: Delegate to `epost-mcp-manager`
+### Primary: Codebase Search
 
-Ask epost-mcp-manager to run a RAG search:
-- query = `"[component name or category]"`, scope = web, topic = ui, file_type = tsx
-- query = `"component list"`, scope = web, topic = ui, top_k = 20
+Read `libs/klara-theme/docs/index.json` to discover available components.
 
-### Fallback: Codebase Search
 ```
 Glob: libs/klara-theme/src/lib/components/**/index.ts
 ```
@@ -35,7 +32,7 @@ Layout | Navigation | Forms | Data Display | Feedback | Actions
 ## Usage Pattern (stable)
 
 ```tsx
-import { ComponentName } from '@org/design-system';
+import { ComponentName } from '@luz-next/klara-theme';
 ```
 
 - All components support `className` prop

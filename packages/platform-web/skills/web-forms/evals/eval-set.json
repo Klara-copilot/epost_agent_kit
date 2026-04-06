@@ -1,13 +1,10 @@
-{
-  "skill": "web-forms",
-  "version": "1.0.0",
-  "evals": [
-    {
-      "id": "eval-001",
-      "description": "TODO: Add eval description",
-      "input": "TODO: Add test input",
-      "expected": "TODO: Add expected behavior",
-      "status": "stub"
-    }
-  ]
-}
+[
+  {"query": "add form validation with Zod schema", "should_trigger": true},
+  {"query": "map API errors to form fields", "should_trigger": true},
+  {"query": "make form errors accessible with ARIA", "should_trigger": true},
+  {"query": "build a multi-step form with step validation", "should_trigger": true},
+  {"query": "add a file upload field with size validation", "should_trigger": true},
+  {"query": "write a Jest unit test", "should_trigger": false},
+  {"query": "add a Next.js App Router page", "should_trigger": false},
+  {"query": "set up the Redux store", "should_trigger": false}
+]

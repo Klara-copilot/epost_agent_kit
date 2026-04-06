@@ -25,7 +25,7 @@ Instead of thin wrappers, the right model is:
 
 No wrapper pattern needed. Generic connector (`asana`) + project skill (`asana-muji`) + env vars = full coverage for any dev.
 
-## epost-config.json (replaces all env var GIDs)
+## .epost-kit.json (replaces all env var GIDs)
 
 ```json
 {
@@ -62,7 +62,7 @@ No wrapper pattern needed. Generic connector (`asana`) + project skill (`asana-m
 | `packages/connectors/skills/asana-muji/workflows/create-task.md` | Merged from iOS/Android |
 | `packages/connectors/skills/asana-muji/workflows/update-status.md` | Merged |
 | `packages/connectors/skills/asana-muji/workflows/my-tasks.md` | Merged |
-| `packages/connectors/skills/asana-muji/references/epost-config-example.md` | epost-config.json schema + example with real MUJI GIDs |
+| `packages/connectors/skills/asana-muji/references/epost-kit-config-example.md` | .epost-kit.json schema + example with real MUJI GIDs |
 | `packages/connectors/skills/asana-muji/evals/eval-set.json` | Basic trigger evals |
 
 ## Files to Delete
@@ -74,11 +74,11 @@ No wrapper pattern needed. Generic connector (`asana`) + project skill (`asana-m
 
 ## Tasks
 
-- [ ] Write merged `SKILL.md` — same flags (create/status/my-tasks), reads `epost-config.json`
+- [ ] Write merged `SKILL.md` — same flags (create/status/my-tasks), reads `.epost-kit.json`
 - [ ] Write merged `workflows/create-task.md` — reads config for projects/templates; sections fetched live; `assignee: "me"`
 - [ ] Write merged `workflows/update-status.md` — fetches sections live from MCP, no GIDs in workflow
 - [ ] Write merged `workflows/my-tasks.md` — `assignee: "me"`, filters by configured projects
-- [ ] Write `references/epost-config-example.md` — full config schema with MUJI GIDs filled in as example, instructions for finding GIDs in Asana URL
+- [ ] Write `references/epost-kit-config-example.md` — full config schema with MUJI GIDs filled in as example, instructions for finding GIDs in Asana URL
 - [ ] Delete `packages/platform-ios/skills/asana-muji/` (confirm with user first)
 - [ ] Delete `packages/platform-android/skills/asana-muji/` (confirm with user first)
 - [ ] Register `asana-muji` in `packages/connectors/package.yaml`
@@ -86,9 +86,9 @@ No wrapper pattern needed. Generic connector (`asana`) + project skill (`asana-m
 ## Acceptance Criteria
 
 - [ ] One `asana-muji` skill in `connectors/`, zero duplicates
-- [ ] Zero hardcoded GIDs — all from `epost-config.json`
+- [ ] Zero hardcoded GIDs — all from `.epost-kit.json`
 - [ ] No user GID anywhere — `assignee: "me"` throughout
 - [ ] Sections fetched live — none stored in config or skill files
-- [ ] `references/epost-config-example.md` documents schema + how to find GIDs
+- [ ] `references/epost-kit-config-example.md` documents schema + how to find GIDs
 - [ ] Old platform-specific skills deleted (after user confirmation)
 - [ ] Still works with flags: `create`, `status`, `my-tasks`

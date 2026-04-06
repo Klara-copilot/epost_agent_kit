@@ -84,12 +84,29 @@ Cross-cutting code review rules applicable to all platforms and languages. Platf
 | QUALITY-004 | Classes/objects expose behavior, not raw data — no anemic models | medium | `order.calculateTotal()` on the domain object | `order.items` accessed everywhere, total calculated inline in every caller |
 | QUALITY-005 | Prefer composition over inheritance — inheritance only for genuine "is-a" relationships | medium | `EmailNotifier` composes `Mailer` | `AdminUser extends User` when only behavior differs |
 | QUALITY-006 | Early return / guard clause pattern — happy path last, not nested | low | Guard returns at top, happy path flows naturally at the bottom | 4-level `if/else` nesting where early returns would flatten the logic |
+| QUALITY-007 | No function exceeds cognitive complexity ~15 — count +1 per: nesting level, `if`/`else`/`switch`, `&&`/`||` chain, recursion, `catch` | medium | Functions are flat with early returns; complex logic extracted to helpers | 4-level nested `if` inside a `for` inside a `try/catch` with inline `&&` chains |
 
 ## Mode Applicability (QUALITY)
 
 | Section | Lightweight | Escalated |
 |---------|-------------|-----------|
-| QUALITY | QUALITY-001, QUALITY-003 | + QUALITY-002, QUALITY-004–006 |
+| QUALITY | QUALITY-001, QUALITY-003 | + QUALITY-002, QUALITY-004–007 |
+
+## TEST: Test Coverage
+
+**Activation gate**: Apply when reviewing any PR that modifies logic files (not config, docs, or type-only changes).
+
+**Scope logic**: "Logic file" = any `.ts`, `.tsx`, `.java`, `.swift`, `.kt` file that is NOT a type definition (`*.d.ts`, `types.ts`), a config file, a translation file, or a pure re-export barrel (`index.ts` with only `export * from`). If ALL changed files are non-logic → skip TEST-001.
+
+| Rule ID | Rule | Severity | Pass | Fail |
+|---------|------|----------|------|------|
+| TEST-001 | Changed logic files have corresponding test changes — new functions need new tests, modified functions need updated tests | high | PR adds `calculateTotal()` in `order.ts` and adds `calculateTotal.test.ts` or updates existing test file | PR adds 3 new service methods with zero test file changes in the diff |
+
+## Mode Applicability (TEST)
+
+| Section | Lightweight | Escalated |
+|---------|-------------|-----------|
+| TEST | TEST-001 | — (same rule; escalated adds edge case coverage check) |
 
 ## Anti-Patterns
 

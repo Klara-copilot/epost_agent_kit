@@ -35,14 +35,14 @@ const { fetchPublicTab } = require(path.join(SCRIPTS_DIR, 'sheets-client.cjs'));
 
 let config;
 try {
-  const raw = loadConfig(path.join(projectRoot, '.env.local'));
+  const raw = loadConfig(projectRoot);
   // Validate only the fields needed for read-only validation
   const missing = [];
-  if (!raw.googleSheetId) missing.push('I18N_GOOGLE_SHEET_ID');
-  if (!raw.messagesDir) missing.push('I18N_MESSAGES_DIR');
-  if (!raw.locales.length) missing.push('I18N_LOCALES');
+  if (!raw.googleSheetId) missing.push('i18n.googleSheetId');
+  if (!raw.messagesDir) missing.push('i18n.messagesDir');
+  if (!raw.locales.length) missing.push('i18n.locales');
   if (missing.length) {
-    throw new Error(`Missing required i18n config vars:\n${missing.map((v) => `  - ${v}`).join('\n')}\n\nSet these in .env.local or as environment variables.`);
+    throw new Error(`Missing required i18n config in .epost-kit.json:\n${missing.map((v) => `  - ${v}`).join('\n')}\n\nHint: "messagesDir" is repo-specific — e.g. "apps/my-app/messages".`);
   }
   config = raw;
 } catch (err) {

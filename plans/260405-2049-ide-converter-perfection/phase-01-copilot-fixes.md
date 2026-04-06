@@ -14,76 +14,87 @@ depends: []
 
 ## Overview
 
-The CopilotAdapter uses WRONG Copilot tool names. Current: `execute, read, edit, search, web`. Correct (verified Nov 2025 VS Code docs): `runInTerminal, readFile, editFiles, textSearch, fetch`. Also `listDirectory` (Glob) and Copilot-only tools like `githubRepo`, `usages`, `codebase`, `findTestFiles`.
+**CORRECTION (2026-04-06)**: Screenshots from VS Code confirm the actual Copilot built-in tool names are the short forms: `read`, `edit`, `execute`, `search`, `web`, `agent`, `browser`, `todo`, `vscode`. The existing adapter was CORRECT. The verbose names (`readFile`, `editFiles`, `runInTerminal`) are sub-tools within toolsets shown only in the edit panel — NOT the values to use in `tools:` arrays.
 
-Additionally, scoped `.instructions.md` files (with `applyTo` globs) are not generated yet.
+Full built-in tool list (from VS Code "Configure Tools" panel):
+- `read` — Read files in your workspace
+- `edit` — Edit files in your workspace (toolset: createDirectory, createFile, editFiles, rename...)
+- `execute` — Execute code and applications on your machine
+- `search` — Search files in your workspace
+- `web` — Fetch information from the web
+- `agent` — Delegate tasks to other agents
+- `browser` — Open and interact with integrated browser pages
+- `todo` — Manage and track todo items for task planning
+- `vscode` — Use VS Code features
+
+Phase 1 scope (revised): **no tool name fix needed**. Focus on:
+1. Confirm existing tool map is correct (audit copilot-adapter.ts)
+2. Expose `browser`, `todo`, `vscode` as optional Copilot-only tools in DEFAULT_TOOLS
+3. Add scoped `.instructions.md` generation
+4. Add auto-handoff generation
 
 ## Requirements
 
-### 1a. Fix TOOL_MAP in copilot-adapter.ts
+### 1a. Audit + verify TOOL_MAP in copilot-adapter.ts
 
 **File**: `src/domains/installation/copilot-adapter.ts`
 
-Replace the mapping tables:
+Confirm the mapping matches actual VS Code tool names:
 
 ```typescript
 const TOOL_MAP: Record<string, string> = {
-  Read: "readFile",
-  Write: "editFiles",
-  Edit: "editFiles",
-  Bash: "runInTerminal",
-  Grep: "textSearch",
-  Glob: "listDirectory",
-  WebFetch: "fetch",
-  WebSearch: "fetch",    // no direct equivalent; fetch is closest
-  Browser: "fetch",
-  Agent: "agent",        // handoffs frontmatter, not a tool — but keep for inference
+  Read: "read",
+  Write: "edit",
+  Edit: "edit",
+  Bash: "execute",
+  Grep: "search",
+  Glob: "search",       // search covers both text and file patterns
+  WebFetch: "web",
+  WebSearch: "web",
+  Browser: "browser",
+  Agent: "agent",       // for handoffs frontmatter inference
+  TodoWrite: "todo",
 };
 
-const DEFAULT_TOOLS = [
-  "readFile", "editFiles", "runInTerminal", "textSearch",
-  "listDirectory", "fetch", "githubRepo", "codebase"
-];
+const DEFAULT_TOOLS = ["read", "edit", "execute", "search", "web"];
+const READONLY_TOOLS = ["read", "search", "web"];
 
-const READONLY_TOOLS = [
-  "readFile", "textSearch", "listDirectory", "fetch",
-  "githubRepo", "codebase"
-];
+// Copilot-only tools — included when agent has broad scope
+const COPILOT_EXTRA_TOOLS = ["agent", "browser", "todo", "vscode"];
 ```
 
-### 1b. Fix TOOL_ALIASES in conversion/tool-mappers.ts
+### 1b. Verify TOOL_ALIASES in conversion/tool-mappers.ts
 
 **File**: `src/domains/conversion/tool-mappers.ts`
 
-Align the standalone `convert` command's mappings to match the adapter:
+Align the standalone `convert` command's mappings to match the adapter (same short names):
 
 ```typescript
 export const TOOL_ALIASES: Record<string, string> = {
-  Bash: "runInTerminal",
-  shell: "runInTerminal",
-  terminal: "runInTerminal",
-  Read: "readFile",
-  NotebookRead: "readFile",
-  Edit: "editFiles",
-  MultiEdit: "editFiles",
-  Write: "editFiles",
-  NotebookEdit: "editFiles",
-  Grep: "textSearch",
-  Glob: "listDirectory",
-  WebSearch: "fetch",
-  WebFetch: "fetch",
+  Bash: "execute",
+  shell: "execute",
+  terminal: "execute",
+  Read: "read",
+  NotebookRead: "read",
+  Edit: "edit",
+  MultiEdit: "edit",
+  Write: "edit",
+  NotebookEdit: "edit",
+  Grep: "search",
+  Glob: "search",
+  WebSearch: "web",
+  WebFetch: "web",
   TodoWrite: "todo",
   Task: "agent",
   "custom-agent": "agent",
-  github: "githubRepo",
 };
 
 export const DEFAULT_TOOLS_BY_TYPE: Record<string, string[]> = {
-  implementer: ["readFile", "editFiles", "textSearch", "runInTerminal"],
-  reviewer: ["readFile", "textSearch"],
-  planner: ["readFile", "textSearch", "editFiles"],
-  tester: ["readFile", "editFiles", "textSearch", "runInTerminal"],
-  debugger: ["readFile", "editFiles", "textSearch", "runInTerminal"],
+  implementer: ["read", "edit", "execute", "search"],
+  reviewer: ["read", "search"],
+  planner: ["read", "search", "edit"],
+  tester: ["read", "edit", "execute", "search"],
+  debugger: ["read", "edit", "execute", "search"],
 };
 ```
 
@@ -144,10 +155,11 @@ Apply handoffs only when the agent frontmatter does NOT already contain `handoff
 
 ## TODO
 
-- [ ] Update TOOL_MAP to correct Copilot tool names
-- [ ] Update DEFAULT_TOOLS and READONLY_TOOLS arrays
-- [ ] Update TOOL_ALIASES in conversion/tool-mappers.ts
-- [ ] Update DEFAULT_TOOLS_BY_TYPE in tool-mappers.ts
+- [ ] Read copilot-adapter.ts — audit existing TOOL_MAP against confirmed short names
+- [ ] Confirm/fix DEFAULT_TOOLS uses `["read", "edit", "execute", "search", "web"]`
+- [ ] Confirm/fix READONLY_TOOLS uses `["read", "search", "web"]`
+- [ ] Read tool-mappers.ts — align TOOL_ALIASES to short names
+- [ ] Align DEFAULT_TOOLS_BY_TYPE in tool-mappers.ts
 - [ ] Add `generateScopedInstructions` to TargetAdapter interface
 - [ ] Implement scoped instructions in CopilotAdapter
 - [ ] Wire scoped instructions generation into init.ts
@@ -156,7 +168,7 @@ Apply handoffs only when the agent frontmatter does NOT already contain `handoff
 
 ## Success Criteria
 
-- Agent `.agent.md` files contain `tools: [readFile, editFiles, runInTerminal, textSearch, listDirectory, fetch]` (not old names)
-- `grep -r 'execute\|"read"\|"edit"\|"search"\|"web"' .github/agents/` returns 0 matches for old tool aliases
+- Agent `.agent.md` files contain `tools: [read, edit, execute, search, web]` (short form confirmed by VS Code UI)
 - `.github/instructions/web.instructions.md` exists with `applyTo: "**/*.{ts,tsx,scss,css}"`
 - Agents with known workflow successors have `handoffs:` in frontmatter
+- `grep -r 'readFile\|editFiles\|runInTerminal\|textSearch\|listDirectory' .github/agents/` returns 0 (no verbose sub-tool names in tools arrays)

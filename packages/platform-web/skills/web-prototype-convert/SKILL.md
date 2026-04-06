@@ -2,7 +2,7 @@
 name: web-prototype-convert
 description: "(ePost) Use when: \"convert prototype\", \"migrate mockup\", \"turn this into production code\", \"prototype to code\", \"migrate from codepen\", \"convert design to module\". Converts external prototypes, mockups, or PoC codebases into production-ready ePost code."
 argument-hint: "[prototype-path or description]"
-user-invocable: true
+user-invocable: false
 metadata:
   keywords: [prototype, convert, migrate, mockup, production, klara-theme, tokens]
   triggers:
@@ -18,6 +18,8 @@ metadata:
 ---
 
 # Web Prototype Convert
+
+> **Note**: References not yet written. This skill is disabled until reference files are created.
 
 Convert external prototypes, mockups, or PoC codebases into production-ready ePost code using klara-theme components, semantic design tokens, and proper module architecture.
 
