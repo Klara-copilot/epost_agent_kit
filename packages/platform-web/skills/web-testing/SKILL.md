@@ -48,7 +48,7 @@ tests/[locale]/feature-a/utils/mapping.test.ts
 
 - Uses `next/jest` + `ts-jest`, `testEnvironment: 'jsdom'`
 - `pathsToModuleNameMapper` from `tsconfig.base.json`
-- `@testing-library/jest-dom` via `setupFilesAfterSetup`
+- `@testing-library/jest-dom` via `setupFilesAfterFramework`
 - Global mocks: `IntersectionObserver`, `TextEncoder`, `TextDecoder`, `fetch`
 - Coverage: `lcov` + `jest-junit` + `jest-sonar-reporter` (no enforced thresholds)
 
@@ -87,16 +87,6 @@ See `references/jest-rtl-patterns.md` for detailed RTL query patterns, async tes
 - `test.setTimeout(120000)` — default is too short for E2E
 
 See `references/playwright-patterns.md` for full config, PageHelper, environment setup, and API call helpers.
-
-## Test Commands
-
-```bash
-npm test                                       # All unit tests
-npm test -- --testFile=path/to/test            # Single file
-npm test -- --coverage                         # With coverage
-TEST_ENV=dev npx playwright test               # E2E against dev
-npx playwright test --ui                       # Interactive UI mode
-```
 
 ## References
 

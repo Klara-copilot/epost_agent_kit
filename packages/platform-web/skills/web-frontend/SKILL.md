@@ -49,17 +49,6 @@ Three hook types: utility (no state), effect with cleanup, context hook with gua
 
 See `references/react-patterns.md` for hook examples including `useImperativeHandle`, cleanup, and context guard patterns.
 
-## Build Commands
-
-```bash
-npm run dev          # Development server
-npm run build        # Production build
-npm run lint         # ESLint
-npx tsc --noEmit     # Type check
-npm test             # Unit tests (Jest + RTL)
-npx playwright test  # E2E tests
-```
-
 ## Sub-Skill Routing
 
 | Intent | Route |

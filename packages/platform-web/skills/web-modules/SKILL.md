@@ -7,9 +7,10 @@ metadata:
   agent-affinity: [epost-fullstack-developer]
   keywords: [integrate, module, screen, page, api, store, hook, bind]
   platforms: [web]
-  triggers: ["add to module", "integrate into", "create screen", "add page", "bind api"]
+  triggers: ["B2B module", "module screen", "add to module", "integrate into", "create screen", "add page", "bind api"]
   connections:
     enhances: [web-frontend]
+    uses: [domain-b2b]
 ---
 
 # Module Integration Skill

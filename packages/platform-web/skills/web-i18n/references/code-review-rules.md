@@ -7,8 +7,6 @@ disable-model-invocation: true
 
 # Web i18n Code Review Rules
 
-ePost-specific internationalization rules. Loaded by code-review skill when reviewing components or pages with user-facing strings.
-
 **Scope**: next-intl usage, locale completeness, navigation imports, namespace conventions in ePost web app.
 
 ---
@@ -35,7 +33,3 @@ ePost-specific internationalization rules. Loaded by code-review skill when revi
 | I18N-004–005 | — | Yes |
 
 **Lightweight**: Run on all component and page files. **Escalated**: Activate on i18n config changes or new locale additions.
-
-## Extending
-
-Add rules following the ID pattern: `I18N-{NNN}`. Keep severity scale consistent with cross-cutting rules.

@@ -384,3 +384,20 @@ When using CSS `order`, `flex-direction: row-reverse`, or `grid-template-areas` 
 - [ ] Escape key dismisses modals, drawers, and menus
 - [ ] Focus order matches visual reading order
 - [ ] SPA route changes move focus to new page heading or main
+
+## Quick Reference
+
+```css
+/* Never suppress focus without replacement */
+:focus-visible {
+  outline: 2px solid #005fcc;
+  outline-offset: 2px;
+}
+```
+
+```js
+// tabIndex rules
+tabIndex={0}   // Natural keyboard order
+tabIndex={-1}  // Programmatic focus only, not in tab order
+// Never use positive tabIndex values
+```

@@ -2,6 +2,7 @@
 name: web-auth
 description: (ePost) Configures NextAuth + Keycloak authentication, session management, and feature flags. Use when working with authentication, sessions, OAuth providers, feature flags, or provider nesting
 user-invocable: false
+paths: ["**/auth-options.ts", "**/[...nextauth]/**", "**/session*.ts", "**/middleware.ts"]
 
 metadata:
   agent-affinity: [epost-fullstack-developer]

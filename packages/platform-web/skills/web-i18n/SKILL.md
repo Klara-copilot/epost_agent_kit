@@ -87,23 +87,7 @@ GOOGLE_SERVICE_ACCOUNT_KEY=.secrets/google-sa.json
 
 See `references/i18n-patterns.md` for full field reference and next-intl configuration.
 
-## next-intl Quick Reference
-
-### Translation Usage
-
-| Context | API |
-|---------|-----|
-| Server Components | `getTranslations('FeatureName')` (async) |
-| Client Components | `useTranslations('FeatureName.Dashboard')` |
-| Root Layout | `NextIntlClientProvider messages={await getMessages()}` |
-
-### Key Rules
-
-- Import navigation helpers from `navigation.ts` — never `next/link` or `next/navigation`
-- Always add translations to ALL locale files
-- Use dot notation for nested namespaces: `useTranslations('Feature.Sub')`
-
-See `references/i18n-patterns.md` for full configuration, `i18n.ts`, `navigation.ts`, and namespace structure.
+See `references/i18n-patterns.md` for next-intl API patterns, full configuration, `i18n.ts`, `navigation.ts`, and namespace structure.
 
 ## References
 

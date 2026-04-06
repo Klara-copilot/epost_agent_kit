@@ -7,8 +7,6 @@ disable-model-invocation: true
 
 # Web API Routes Code Review Rules
 
-ePost-specific HTTP client rules. Loaded by code-review skill when reviewing files in `caller/`, `_services/`, or `api/` directories.
-
 **Scope**: FetchBuilder usage, API URL constants, caller conventions in ePost web apps.
 
 ---
@@ -36,7 +34,3 @@ ePost-specific HTTP client rules. Loaded by code-review skill when reviewing fil
 | FETCH-003–004, FETCH-006 | — | Yes |
 
 **Lightweight**: Run on all files touching HTTP calls. **Escalated**: Activate on large service layers or explicit `--deep` flag.
-
-## Extending
-
-Add rules following the ID pattern: `FETCH-{NNN}`. Keep severity scale consistent with cross-cutting rules.

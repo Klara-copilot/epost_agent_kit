@@ -28,6 +28,8 @@ Parse `entries[]`. Each entry has an `agentHint` field that tells you exactly wh
 
 **Step 2 — Load docs by task type:**
 
+> **Staleness warning**: Entry IDs are hardcoded. Verify against `libs/klara-theme/docs/index.json` before referencing — IDs may have changed.
+
 | Task | Load these entries |
 |------|--------------------|
 | Component lookup / REUSE check | **FEAT-0001** — 76-component catalog |
