@@ -1,8 +1,8 @@
 {
-  "generated": "2026-04-06T16:25:21.323Z",
+  "generated": "2026-04-07T08:40:19.113Z",
   "summary": {
-    "total": 56,
-    "new": 56,
+    "total": 58,
+    "new": 58,
     "proposed": 0,
     "dismissed": 0,
     "bySkill": {
@@ -113,12 +113,18 @@
         "high": 0,
         "medium": 0,
         "low": 1
+      },
+      "cook": {
+        "total": 2,
+        "high": 0,
+        "medium": 0,
+        "low": 2
       }
     },
     "byType": {
-      "journal-flag": 42,
+      "journal-flag": 43,
       "audit-failure": 14,
-      "workaround": 0
+      "workaround": 1
     }
   },
   "signals": [
@@ -736,6 +742,28 @@
       "targetSkill": "kit-add-skill",
       "suggestedAction": "",
       "detectedAt": "2026-04-06T16:14:15.087Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-0cf2a63f",
+      "type": "journal-flag",
+      "confidence": "low",
+      "source": "docs/journal/docs-skill/260407-docs-init-validation-hardening.md",
+      "excerpt": "- [docs] The `epost-kit init` interactive prompt would have blocked sync. Plan said \"run epost-kit init\" but the CLI exits on non-interactive stdin. Direct file copy was the right workaround — but [docs/cook] skill should mention this edge case for single-file syncs.",
+      "targetSkill": "cook",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-07T08:31:05.739Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-ba653e3b",
+      "type": "workaround",
+      "confidence": "low",
+      "source": "docs/journal/docs-skill/260407-docs-init-validation-hardening.md",
+      "excerpt": "irect file copy was the right workaround — but [docs/cook] skill should mention this edge case for single-file syncs.",
+      "targetSkill": "cook",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-07T08:31:05.739Z",
       "status": "new"
     }
   ]
