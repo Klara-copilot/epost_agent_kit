@@ -32,7 +32,7 @@ Add to `claude_desktop_config.json`:
 After setup, confirm auth:
 
 ```
-ToolSearch: "select:mcp__claude_ai_Asana__get_me"
+ToolSearch: "select:mcp__asana__get_me"
 → call get_me
 → expect: { gid: "...", name: "Your Name", email: "..." }
 ```

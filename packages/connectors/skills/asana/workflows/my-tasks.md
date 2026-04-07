@@ -4,14 +4,14 @@
 
 Use `$ASANA_USER_GID` if set. Otherwise:
 ```
-mcp__claude_ai_Asana__get_me: {}
+mcp__asana__get_me: {}
 ```
 Capture `gid` from response.
 
 ## Step 2 — Fetch incomplete tasks
 
 ```
-mcp__claude_ai_Asana__get_my_tasks:
+mcp__asana__get_my_tasks:
   workspace_id: "$ASANA_WORKSPACE_GID"
   completed: false
   opt_fields: "name,due_on,memberships.section.name,memberships.project.name"
@@ -19,7 +19,7 @@ mcp__claude_ai_Asana__get_my_tasks:
 
 If `ASANA_DEFAULT_PROJECT_GID` set → also filter by project:
 ```
-mcp__claude_ai_Asana__search_tasks_preview:
+mcp__asana__search_tasks:
   projects_any: "$ASANA_DEFAULT_PROJECT_GID"
   assignee: "$ASANA_USER_GID"
   completed: false

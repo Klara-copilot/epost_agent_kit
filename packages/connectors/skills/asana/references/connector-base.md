@@ -7,7 +7,7 @@ Shared reference for all connector skills. Load before executing any connector w
 Load MCP tools via ToolSearch before any operation. Use `select:` for known tools:
 
 ```
-ToolSearch: "select:mcp__claude_ai_Asana__get_me"              # Asana auth check
+ToolSearch: "select:mcp__asana__get_me"                        # Asana auth check
 ToolSearch: "select:mcp__claude_ai_Slack__slack_read_channel"  # Slack auth check
 ToolSearch: "+asana create"                                     # Discovery pattern
 ```

@@ -1,6 +1,6 @@
 # Asana MCP Operations Reference
 
-All tools use the `mcp__claude_ai_Asana__` prefix. Load via ToolSearch before calling.
+All tools use the `mcp__asana__` prefix. Load via ToolSearch before calling.
 
 ## Read Operations
 
@@ -12,24 +12,22 @@ All tools use the `mcp__claude_ai_Asana__` prefix. Load via ToolSearch before ca
 | `get_my_tasks` | `workspace_id`, `completed`, `opt_fields` | Authenticated user's tasks |
 | `get_project` | `project_id` | Project details + sections |
 | `get_projects` | `workspace_id` | All projects in workspace |
+| `get_teams` | `organization_id` | All teams in workspace |
 
 ## Write Operations
 
 | Tool | Key Parameters | Notes |
 |------|---------------|-------|
-| `create_task_preview` | `name`, `projects`, `assignee`, `due_on`, `notes` | Preview before creating |
-| `create_task_confirm` | `name`, `projects`, `assignee`, `due_on`, `notes` | Actually creates the task |
-| `create_task_confirm_populate` | same + `custom_fields` | Create + populate fields |
-| `update_tasks` | `task_id`, `name`, `due_on`, `completed`, `addProjects` | Update task fields, move to project |
+| `create_tasks` | `name`, `projects`, `assignee`, `due_on`, `notes` | Creates the task |
+| `update_tasks` | `task_id`, `name`, `due_on`, `completed`, `memberships` | Update task fields, move to section |
 | `add_comment` | `task_id`, `text` | Add comment to task |
 
 ## Search Operations
 
 | Tool | Key Parameters | Notes |
 |------|---------------|-------|
-| `search_tasks_preview` | `workspace_id`, `text`, `assignee`, `projects_any`, `completed` | Search with filters |
+| `search_tasks` | `workspace_id`, `text`, `assignee`, `projects_any`, `completed` | Search with filters |
 | `search_objects` | `workspace_id`, `query`, `resource_type` | Generic search |
-| `search_objects_internal` | same | Internal search (use sparingly) |
 
 ## Sections & Membership
 

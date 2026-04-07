@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "gid": "1234567890123456",
+  "name": "Jane Doe",
+  "email": "jane@example.com",
+  "workspace_gid": "9876543210987654",
+  "team_gid": "1122334455667788",
+  "team_name": "MUJI",
+  "projects": [
+    { "gid": "1176686389740521", "name": "MUJI Tasks" },
+    { "gid": "1184227957274218", "name": "MUJI Plan" }
+  ],
+  "default_project_gid": "1176686389740521"
+}
