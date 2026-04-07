@@ -124,6 +124,21 @@ Scan code for areas NOT yet covered by migrated docs, referencing **selected cat
 
 Same as Generation Mode step 4.5 — populate `dependencies` + `business` in index.json.
 
+### 5.5. Pre-Write Validation
+
+**STOP — DO NOT WRITE index.json until every row below passes.** If any row fails, fix the data in memory first, re-run the checklist, then write. Never write a partially-valid index.
+
+| Field | Check | If fails |
+|-------|-------|----------|
+| `.business.domain` | Non-empty string; not `"..."`, `""`, `null` | Re-derive from Step 5 sources; fallback = repo slug |
+| `.dependencies.internal.libraries` | Array exists (may be empty) | Add `[]` |
+| `.dependencies.internal.apiServices` | Array exists (may be empty) | Add `[]` |
+| `.dependencies.external` | Array exists (may be empty) | Add `[]` |
+| `.entries` | Non-empty array | At least 1 entry required |
+| `.entries[].id` | Matches `PREFIX-NNNN` format (see §4.9) | Regenerate id as `{PREFIX}-{NNNN}` zero-padded |
+| `.entries[].path` | Non-empty string starting with `docs/` | Reconstruct from category dir + filename (see §4.9) |
+| `.entries[].category` | Matches a key in `categories` map | Use canonical key (`architecture` not `arch`, etc.) |
+
 ### 6. Generate index.json
 
 Build `docs/index.json` with all migrated + newly generated entries. Use the same template as Generation Mode step 5.
@@ -306,8 +321,39 @@ Infer project business context:
 - `modules` — from route groups, feature directories, Maven modules
 - `users` — from README, onboarding docs, or infer from domain
 
-**Rule**: `domain` MUST be non-empty. If none of the 6 sources yield a value, use the repo name with `luz_` stripped and underscores converted to hyphens. Never leave as `"..."`, `""`, or `null`.
+**Rule**: `domain` MUST be non-empty. If none of the 6 sources yield a value, use the repo slug converted to kebab-case. Never leave as `"..."`, `""`, or `null`.
 **Rule**: For other fields, only record what has code evidence. Skip where no signal found.
+
+### 4.9. Entry Schema & ID Format
+
+Every entry in `docs/index.json` MUST follow this derivation rule:
+
+Given a file `docs/{category-dir}/{PREFIX}-{NNNN}-{slug}.md`:
+- `id` = `"{PREFIX}-{NNNN}"` — the prefix + 4-digit zero-padded number, nothing else
+- `path` = `"docs/{category-dir}/{PREFIX}-{NNNN}-{slug}.md"` — full relative path from repo root
+
+**Correct**:
+```json
+{ "id": "ADR-0001", "path": "docs/decisions/ADR-0001-nextjs-app-router.md" }
+{ "id": "FEAT-0012", "path": "docs/features/FEAT-0012-inbox-search.md" }
+```
+
+**Incorrect — do not emit these**:
+
+| Bad id | Why |
+|--------|-----|
+| `"auth-token-refresh"` | Missing PREFIX and NNNN — use `"ADR-0001"` or `"FEAT-0001"` |
+| `"ADR-1"` | NNNN must be zero-padded to 4 digits |
+| `"adr-0001"` | PREFIX is uppercase |
+| `"ADR-0001-auth-token"` | id is PREFIX-NNNN only; slug goes in `path` not `id` |
+
+**Incorrect — missing path**:
+
+| Bad entry | Fix |
+|-----------|-----|
+| `{ "id": "ADR-0001", "title": "..." }` (no path) | Add `"path"` — it is REQUIRED, never omit |
+
+Numbering: IDs within a category are sequential starting at `0001`. Gaps are allowed but not recommended.
 
 ### 5. Generate index.json
 
@@ -345,12 +391,12 @@ Create `docs/index.json` with all generated entries. Only include categories tha
   },
   "entries": [
     {
-      "id": "ADR-0001",
+      "id": "ADR-0001",            // REQUIRED — format: PREFIX-NNNN (4-digit zero-padded); see §4.9
       "title": "...",
       "category": "decision",
       "status": "accepted",
       "audience": ["agent", "human"],
-      "path": "docs/decisions/ADR-0001-title.md",
+      "path": "docs/decisions/ADR-0001-title.md",  // REQUIRED — full relative path from repo root; see §4.9
       "tags": [],
       "agentHint": "check before ...",
       "related": []
@@ -367,15 +413,18 @@ Key rules for `agentHint`:
 
 ### 5.5. Pre-Write Validation
 
-Before writing `docs/index.json`, verify:
+**STOP — DO NOT WRITE index.json until every row below passes.** If any row fails, fix the data in memory first, re-run the checklist, then write. Never write a partially-valid index.
 
 | Field | Check | If fails |
 |-------|-------|----------|
-| `.business.domain` | Non-empty string, not `"..."` | Re-derive from Step 4.5 sources; fallback = repo slug |
+| `.business.domain` | Non-empty string; not `"..."`, `""`, `null` | Re-derive from Step 4.5 sources; fallback = repo slug |
+| `.dependencies.internal.libraries` | Array exists (may be empty) | Add `[]` |
+| `.dependencies.internal.apiServices` | Array exists (may be empty) | Add `[]` |
+| `.dependencies.external` | Array exists (may be empty) | Add `[]` |
 | `.entries` | Non-empty array | At least 1 entry required |
-| `.dependencies` | Object exists | Add empty `{ "internal": [], "external": [] }` |
-
-**Do not write index.json until all checks pass.**
+| `.entries[].id` | Matches `PREFIX-NNNN` format (see §4.9) | Regenerate id as `{PREFIX}-{NNNN}` zero-padded |
+| `.entries[].path` | Non-empty string starting with `docs/` | Reconstruct from category dir + filename (see §4.9) |
+| `.entries[].category` | Matches a key in `categories` map | Use canonical key (`architecture` not `arch`, etc.) |
 
 ### 6. Report
 
@@ -448,8 +497,16 @@ After migrating existing content, scan codebase for gaps:
 - No patterns documented → detect and generate
 - No conventions → detect from config
 
+### 4.5. Extract Dependencies & Business Context
+
+Same as Generation Mode step 4.5 — populate `dependencies` + `business` in index.json.
+
 ### 5. Create index.json
 Build `docs/index.json` with all migrated + newly generated entries.
+
+### 5.5. Pre-Write Validation
+
+Run the §5.5 Pre-Write Validation checklist from Generation Mode before writing `docs/index.json`.
 
 ### 6. Clean Up
 - Delete original flat files (they've been migrated)

@@ -1,7 +1,29 @@
 {
   "schemaVersion": "1.0.0",
-  "updatedAt": "2026-04-06",
+  "updatedAt": "2026-04-07",
   "entries": [
+    {
+      "id": "260407-0914-docs-init-fixes-phases-1-2-epost-fullstack-developer",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "docs-init-fixes phases 1+2 — Strengthen Pre-Write Validation + ID/path guidance in init.md",
+      "verdict": "DONE",
+      "date": "2026-04-07",
+      "plan": "plans/260407-0857-docs-init-fixes",
+      "path": "reports/260407-0914-docs-init-fixes-phases-1-2-epost-fullstack-developer.md"
+    },
+    {
+      "id": "260407-0857-docs-init-fixes-epost-planner",
+      "type": "plan",
+      "agent": "epost-planner",
+      "title": "Fix /docs --init index.json field population blockers",
+      "verdict": "READY",
+      "path": "reports/260407-0857-docs-init-fixes-epost-planner.md",
+      "files": {
+        "report": "reports/260407-0857-docs-init-fixes-epost-planner.md"
+      },
+      "created": "2026-04-07 08:57"
+    },
     {
       "id": "260406-2307-web-skills-minor-fixes-epost-fullstack-developer",
       "type": "implementation",
