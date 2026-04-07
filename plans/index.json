@@ -1,13 +1,33 @@
 {
   "version": "1.0.0",
-  "updated": "2026-04-06",
+  "updated": "2026-04-07",
   "counts": {
-    "active": 55,
+    "active": 57,
     "completed": 1,
     "archived": 1,
-    "total": 58
+    "total": 60
   },
   "plans": [
+    {
+      "id": "PLAN-0105",
+      "title": "Fix /docs --init index.json field population blockers",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-04-07",
+      "authors": ["epost-planner"],
+      "tags": ["docs", "skills", "kit", "index-json", "bug-fixes"],
+      "file": "plans/260407-0857-docs-init-fixes/plan.md"
+    },
+    {
+      "id": "PLAN-0104",
+      "title": "iOS & Android Code Review Rule Expansion",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-04-06",
+      "authors": ["epost-planner"],
+      "tags": ["code-review", "ios", "android", "realm", "alamofire", "coroutine", "flow", "room", "swift", "compose", "hilt"],
+      "file": "plans/260406-2347-ios-android-code-review-expansion/plan.md"
+    },
     {
       "id": "PLAN-0103",
       "title": "Fix Web Platform Skill Audit Issues (excl. web-prototype-convert)",
