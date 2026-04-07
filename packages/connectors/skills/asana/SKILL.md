@@ -1,21 +1,21 @@
 ---
 name: asana
-description: "Use when: user says 'asana', 'create task', 'update task status', 'search asana', 'my asana tasks', 'move task', 'asana board'. Manages Asana tasks generically via MCP."
-argument-hint: "create|update|search|list|my-tasks"
+description: "Use when: user says 'asana', 'create task', 'update task status', 'search asana', 'my asana tasks', 'move task', 'asana board', 'onboard asana'. Manages Asana tasks generically via MCP."
+argument-hint: "create|update|search|list|my-tasks|--onboard"
 allowed-tools:
-  - mcp__claude_ai_Asana__create_task_preview
-  - mcp__claude_ai_Asana__create_task_confirm
-  - mcp__claude_ai_Asana__update_tasks
-  - mcp__claude_ai_Asana__get_task
-  - mcp__claude_ai_Asana__get_tasks
-  - mcp__claude_ai_Asana__get_my_tasks
-  - mcp__claude_ai_Asana__search_tasks_preview
-  - mcp__claude_ai_Asana__get_me
-  - mcp__claude_ai_Asana__get_projects
-  - mcp__claude_ai_Asana__get_project
-  - mcp__claude_ai_Asana__search_objects
+  - mcp__asana__create_tasks
+  - mcp__asana__update_tasks
+  - mcp__asana__get_task
+  - mcp__asana__get_tasks
+  - mcp__asana__get_my_tasks
+  - mcp__asana__search_tasks
+  - mcp__asana__get_me
+  - mcp__asana__get_projects
+  - mcp__asana__get_project
+  - mcp__asana__get_teams
+  - mcp__asana__search_objects
 metadata:
-  version: "1.0.0"
+  version: "2.0.0"
   keywords: [asana, task-management, project-management]
 ---
 
@@ -35,6 +35,7 @@ Generic Asana task management via MCP. Works with any project/workspace via env 
 
 | Flag | Action | Workflow |
 |------|--------|---------|
+| `--onboard` | First-time guided setup | `workflows/onboard.md` |
 | `--create` | Create a new task | `workflows/create-task.md` |
 | `--update` | Update an existing task | `workflows/update-task.md` |
 | `--search` | Search tasks | `workflows/search-tasks.md` |
@@ -42,13 +43,22 @@ Generic Asana task management via MCP. Works with any project/workspace via env 
 | `--my-tasks` | List my incomplete tasks | `workflows/my-tasks.md` |
 | (none) | Ask via AskUserQuestion | — |
 
-No flag → present options: Create Task / Update Task / Search / My Tasks.
+No flag → present options: Create Task / Update Task / Search / My Tasks / Onboard.
 
 ## Pre-Flight
 
-1. Load Asana MCP tools via ToolSearch: `"+asana get_me"`
-2. Verify auth: call `mcp__claude_ai_Asana__get_me`
-3. If auth fails → report error, link to `references/setup.md`
+1. If `--onboard` flag → skip pre-flight, go directly to `workflows/onboard.md`
+2. Check for cached profile (first match wins):
+   - `{project_root}/.claude/skills/asana/asana-profile.json`
+   - `~/.claude/skills/asana/asana-profile.json`
+3. Load Asana MCP tools via ToolSearch: `"+asana get_me"`
+4. Verify auth: call `mcp__asana__get_me`
+5. If auth fails OR profile missing → offer onboard:
+   ```
+   Asana profile not found. Run /asana --onboard to configure your account.
+   Or visit: https://developers.asana.com/docs/connecting-mcp-clients-to-asanas-v2-server#claude-code
+   ```
+6. If profile exists, use cached `gid`, `workspace_gid`, `default_project_gid`, `projects[]` — skip API lookups for those values
 
 ## Safety
 
@@ -59,5 +69,6 @@ No flag → present options: Create Task / Update Task / Search / My Tasks.
 ## Error Handling
 
 See `references/connector-base.md` error format.
-- MCP unavailable → report, suggest checking setup
+- MCP unavailable → report, link to https://developers.asana.com/docs/connecting-mcp-clients-to-asanas-v2-server#claude-code
 - Missing project GID → prompt user or use `get_projects` to list options
+- Profile missing → offer `--onboard` prompt before failing
