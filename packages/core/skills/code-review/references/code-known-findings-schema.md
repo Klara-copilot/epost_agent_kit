@@ -9,7 +9,7 @@ disable-model-invocation: true
 
 Schema for `reports/known-findings/code.json` — persistence layer for SEC, PERF, TS, LOGIC, DEAD, ARCH, and STATE findings from code review and hybrid audit passes. Mirrors `reports/known-findings/ui-components.json` with code-review-specific categories.
 
-Cross-cutting rule IDs: SEC-001..008, PERF-001..007, TS-001..006, LOGIC-001..006, DEAD-001..003, ARCH-001..005, STATE-001..004, QUALITY-001..007, TEST-001. ePost web-specific: HOOKS-001..008, FETCH-001..006, AUTH-001..006, MOD-001..005, I18N-001..005, REDUX-001..006
+Cross-cutting rule IDs: SEC-001..008, PERF-001..008, TS-001..008, LOGIC-001..006, DEAD-001..003, ARCH-001..005, STATE-001..004, QUALITY-001..007, TEST-001. ePost web-specific: HOOKS-001..008, FETCH-001..006, AUTH-001..006, MOD-001..005, I18N-001..005, REDUX-001..006, FORM-001..005, NEXTJS-001..003
 
 ## Empty Template (bootstrap)
 
@@ -86,6 +86,8 @@ Cross-cutting rule IDs: SEC-001..008, PERF-001..007, TS-001..006, LOGIC-001..006
 - `"MOD"` — B2B module structure violations (ePost web — MOD-001..005)
 - `"I18N"` — internationalization violations (ePost web — I18N-001..005)
 - `"REDUX"` — Redux Toolkit dual-store violations (ePost web — REDUX-001..006)
+- `"FORM"` — React Hook Form + Zod form validation violations (ePost web — FORM-001..005)
+- `"NEXTJS"` — Next.js App Router pattern violations and migration warnings (ePost web — NEXTJS-001..003)
 - `"TEST"` — test coverage violations (changed logic without corresponding test changes)
 
 ### severity
