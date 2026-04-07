@@ -1,0 +1,15 @@
+[
+  {"query": "convert this Vite React prototype to a luz_next module", "should_trigger": true},
+  {"query": "migrate this mockup into the ePost design system", "should_trigger": true},
+  {"query": "turn this proof of concept into production code using klara-theme", "should_trigger": true},
+  {"query": "take this plain HTML mock and rebuild it using klara components", "should_trigger": true},
+  {"query": "convert this Next.js prototype into a luz module", "should_trigger": true},
+  {"query": "adopt this React app's layout into our codebase", "should_trigger": true},
+  {"query": "I have a mock frontend built by a designer, convert it to luz_next", "should_trigger": true},
+  {"query": "turn this HTML mockup into a production component", "should_trigger": true},
+  {"query": "write a new component from scratch", "should_trigger": false},
+  {"query": "review this component for code quality", "should_trigger": false},
+  {"query": "fix a bug in this existing module", "should_trigger": false},
+  {"query": "update the klara-theme Button component", "should_trigger": false},
+  {"query": "add a new page to the app router", "should_trigger": false}
+]
