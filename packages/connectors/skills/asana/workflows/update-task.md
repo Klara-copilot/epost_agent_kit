@@ -6,7 +6,7 @@ If task name/GID provided in argument → use directly.
 
 Otherwise search:
 ```
-mcp__claude_ai_Asana__search_tasks_preview:
+mcp__asana__search_tasks:
   workspace_id: "$ASANA_WORKSPACE_GID"
   assignee: "me"
   completed: false
@@ -37,7 +37,7 @@ AskUserQuestion — what to update:
 
 For "Move to section":
 ```
-mcp__claude_ai_Asana__get_project: { project_id: "[project_gid]" }
+mcp__asana__get_project: { project_id: "[project_gid]" }
 ```
 Fetch sections dynamically, present list, user picks target.
 
@@ -48,7 +48,7 @@ For "Mark complete": confirm once — "Mark [task name] as complete? Yes / Cance
 ## Step 5 — Execute
 
 ```
-mcp__claude_ai_Asana__update_tasks:
+mcp__asana__update_tasks:
   task_id: [gid]
   [updated fields]
   memberships: [{ project: "[gid]", section: "[section_gid]" }]  # if moving

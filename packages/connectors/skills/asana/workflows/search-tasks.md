@@ -14,7 +14,7 @@ For "Project": use `get_projects` to list, user picks.
 ## Step 2 — Search
 
 ```
-mcp__claude_ai_Asana__search_tasks_preview:
+mcp__asana__search_tasks:
   workspace_id: "$ASANA_WORKSPACE_GID"
   text: [keyword]              # if searching by name
   assignee: [gid or "me"]     # if filtering by assignee

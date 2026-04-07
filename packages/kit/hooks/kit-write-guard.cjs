@@ -48,8 +48,14 @@ function main() {
   const absFilePath = path.resolve(process.cwd(), filePath);
   const claudeDir = path.resolve(process.cwd(), '.claude') + path.sep;
 
-  // Block if file is under .claude/
+  // Block if file is under .claude/ — unless it's a user-generated data file
   if (absFilePath.startsWith(claudeDir) || absFilePath === path.resolve(process.cwd(), '.claude')) {
+    // Allowlist: user profile/cache files stored in .claude/skills/ subdirectories
+    // These are runtime data (not kit-generated code) and safe to write directly.
+    const relPath = absFilePath.slice(claudeDir.length); // path relative to .claude/
+    const isUserData = /^skills[\\/].+[\\/][^/\\]+-profile\.json$/.test(relPath);
+    if (isUserData) process.exit(0);
+
     const response = {
       decision: 'block',
       reason: [
