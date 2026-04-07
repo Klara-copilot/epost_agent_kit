@@ -19,6 +19,7 @@ Comprehensive code quality assessment and verification.
 
 ## When Active
 User uses /review, asks for code review, or before committing code.
+Use `/review --close <id>` to mark a finding resolved. See `references/close-code-finding.md`.
 
 ## Platform Detection
 
@@ -43,6 +44,8 @@ When invoked, detect platform from files in scope:
    | Files in `_ui-models/`, `_services/`, `_hooks/`, `_actions/` (module shell) | `web-modules/references/code-review-rules.md` |
    | Files using `useTranslations`, `getTranslations`, or in `messages/` | `web-i18n/references/code-review-rules.md` |
    | Files in `_stores/`, slice files, or using Redux patterns | REDUX rules already in `web-frontend/references/code-review-rules.md` |
+   | Files using `useForm`, `zodResolver`, or containing form submit handlers | `web-forms/references/code-review-rules.md` |
+   | Files in `app/` directory, `middleware.ts`, or `next.config.*` | `web-nextjs/references/code-review-rules.md` |
    | Files matching klara-theme path (`libs/klara-theme/`, `libs/common/`) | Note in Unresolved Questions: "Component audit recommended: `/audit --ui {component}` (epost-muji) — KLARA/STRUCT/TOKEN rules not covered by code-review" |
 
    A file may match multiple signals simultaneously — load ALL matching rule files and apply all detected rules.
@@ -130,6 +133,8 @@ Cross-cutting rules are in `references/code-review-standards.md`. Platform rules
 | Web (ePost) | AUTH | AUTH-001..006 | NextAuth, session, feature flags, route protection |
 | Web (ePost) | MOD | MOD-001..005 | B2B module structure, layering, store scoping |
 | Web (ePost) | I18N | I18N-001..005 | next-intl, locale completeness, navigation |
+| Web (ePost) | FORM | FORM-001..005 | React Hook Form + Zod, validation setup, accessible errors |
+| Web (Next.js) | NEXTJS | NEXTJS-001..003 | App Router cache, server/client boundary, migration warnings |
 | Web (klara) | KLARA | — | klara-theme component standards |
 | Backend | JPA | JPA-001..004 | JPA/Hibernate query patterns |
 | Backend | CDI | CDI-001..004 | CDI/EJB injection, scope patterns |
@@ -196,6 +201,12 @@ When Critical found: load `knowledge` → L1 docs/ → L2 RAG → L4 Grep fallba
 
 `ToolSearch("web-rag")` → call `status` → call `query` (module + "prior findings security"). If unavailable: Grep `reports/` for prior audits. Append "L2-RAG" or "L2-RAG-unavailable" to methodology.
 
+## Close Workflow (`--close <id>`)
+
+When invoked with `--close <id>` or "close finding \<id\>":
+- Skip the review flow entirely
+- Execute the close protocol in `references/close-code-finding.md`
+
 ## Write session.json (always — after writing report.md)
 
 Write `{session_folder}/session.json` per `audit/references/session-json-schema.md`:
@@ -206,7 +217,7 @@ Write `{session_folder}/session.json` per `audit/references/session-json-schema.
 
 Ownership per `audit/references/output-contract.md`: code-reviewer → `.epost-data/code/`, muji → `.epost-data/ui/`, a11y → `.epost-data/a11y/`.
 
-Persist SEC/PERF/TS/LOGIC/DEAD/ARCH/STATE/QUALITY/HOOKS/FETCH/AUTH/MOD/I18N/REDUX/TEST findings (critical, high, medium) to `reports/known-findings/code.json`:
+Persist SEC/PERF/TS/LOGIC/DEAD/ARCH/STATE/QUALITY/HOOKS/FETCH/AUTH/MOD/I18N/REDUX/TEST/FORM/NEXTJS findings (critical, high, medium) to `reports/known-findings/code.json`:
 
 1. Check if `reports/known-findings/code.json` exists
    - If not: `mkdir -p .epost-data/code/` then create it with `{ "schemaVersion": "1.0.0", "lastUpdated": "{today}", "findings": [] }`
@@ -214,7 +225,7 @@ Persist SEC/PERF/TS/LOGIC/DEAD/ARCH/STATE/QUALITY/HOOKS/FETCH/AUTH/MOD/I18N/REDU
 2b. **Surface recurring rules**: after pre-scan, if any `rule_id` has 3+ open entries in DB (escalated) or 5+ (lightweight), include in report's Regression Trends section with count and file patterns.
 3. For each NEW finding (severity critical/high/medium) not already open in DB:
    - Auto-increment `id` from `max(existing_ids) + 1` (start at 1 for empty)
-   - Map: `module`, `rule_id`, `category` (SEC/PERF/TS/LOGIC/DEAD/ARCH/STATE/QUALITY/HOOKS/FETCH/AUTH/MOD/I18N/REDUX/TEST), `title`, `file_pattern`, `code_pattern`, `fix_template`, `priority`, `severity`, `source` (`hybrid-audit` or `code-review`), `source_agent: "epost-code-reviewer"`, `source_report: "{report_path}"`, `first_detected_at: "{YYYY-MM-DDTHH:MM}"`
+   - Map: `module`, `rule_id`, `category` (SEC/PERF/TS/LOGIC/DEAD/ARCH/STATE/QUALITY/HOOKS/FETCH/AUTH/MOD/I18N/REDUX/TEST/FORM/NEXTJS), `title`, `file_pattern`, `code_pattern`, `fix_template`, `priority`, `severity`, `source` (`hybrid-audit` or `code-review`), `source_agent: "epost-code-reviewer"`, `source_report: "{report_path}"`, `first_detected_at: "{YYYY-MM-DDTHH:MM}"`
    - Append to `findings[]`
 4. Save updated JSON
 5. Log: "Persisted {N} code findings to `reports/known-findings/code.json`" in Methodology
