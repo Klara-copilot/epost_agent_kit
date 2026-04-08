@@ -49,6 +49,17 @@ When invoked, detect platform from files in scope:
    | Files matching klara-theme path (`libs/klara-theme/`, `libs/common/`) | Note in Unresolved Questions: "Component audit recommended: `/audit --ui {component}` (epost-muji) — KLARA/STRUCT/TOKEN rules not covered by code-review" |
 
    A file may match multiple signals simultaneously — load ALL matching rule files and apply all detected rules.
+3c. For iOS ePost files, detect library-specific imports and load additional rule files:
+   | Signal (import pattern in `.swift` files) | Additional rules file |
+   |-------------------------------------------|-----------------------|
+   | `import RealmSwift` detected | `ios-development/references/code-review-rules-realm.md` |
+   | `import Alamofire` or `AF.request` detected | `ios-development/references/code-review-rules-alamofire.md` |
+3d. For Android ePost files, detect library-specific imports and load additional rule files:
+   | Signal (import pattern in `.kt`/`.kts` files) | Additional rules file |
+   |------------------------------------------------|-----------------------|
+   | `import kotlinx.coroutines` detected | `android-development/references/code-review-rules-coroutine.md` |
+   | `import kotlinx.coroutines.flow` detected | `android-development/references/code-review-rules-flow.md` |
+   | `import androidx.room` detected | `android-development/references/code-review-rules-room.md` |
 4. Always load: `code-review/references/code-review-standards.md` (cross-cutting)
 5. If no platform detected: cross-cutting rules only
 6. Multi-platform: if files span platforms, load all matching rule files
@@ -59,8 +70,9 @@ When dispatching epost-code-reviewer, include in prompt:
 ```
 Platform: {detected platform(s)}
 Platform rules: {path to platform code-review-rules.md}
-ePost rules: {comma-separated paths to ePost-specific rule files detected in step 3b, or "none"}
 ```
+
+Companion rule file detection (steps 3b/3c/3d) runs inside the code-reviewer based on actual file imports — callers do NOT detect or pass companion paths. This SKILL.md is the single source of detection logic.
 
 ## Confirmation Gate
 
@@ -138,10 +150,15 @@ Cross-cutting rules are in `references/code-review-standards.md`. Platform rules
 | Web (klara) | KLARA | — | klara-theme component standards |
 | Backend | JPA | JPA-001..004 | JPA/Hibernate query patterns |
 | Backend | CDI | CDI-001..004 | CDI/EJB injection, scope patterns |
-| iOS | SWIFT | SWIFT-001..003 | Swift 6 concurrency, patterns |
-| iOS | UIKIT | UIKIT-001..003 | UIKit/SwiftUI lifecycle |
-| Android | COMPOSE | COMPOSE-001..003 | Jetpack Compose recomposition |
-| Android | HILT | HILT-001..003 | Hilt DI correctness |
+| iOS | SWIFT | SWIFT-001..008 | Swift optionals, closures, concurrency, Codable |
+| iOS | UIKIT | UIKIT-001..006 | UIKit/SwiftUI lifecycle, a11y, design tokens |
+| iOS (ePost) | REALM | REALM-001..003 | RealmSwift thread safety, write transactions, live objects |
+| iOS (ePost) | ALAMOFIRE | ALAMOFIRE-001..003 | Alamofire response validation, retry policy, cancellation |
+| Android | COMPOSE | COMPOSE-001..008 | Jetpack Compose recomposition, state hoisting, side effects |
+| Android | HILT | HILT-001..005 | Hilt DI correctness, scopes, ViewModel annotation |
+| Android (ePost) | COROUTINE | COROUTINE-001..004 | Coroutine scope, dispatchers, cancellation handling |
+| Android (ePost) | FLOW | FLOW-001..004 | StateFlow collection, lifecycle, MutableStateFlow exposure |
+| Android (ePost) | ROOM | ROOM-001..004 | Room N+1, transactions, reactive queries, SQL injection |
 
 ### Severity Classification
 - **Critical**: Security vulnerabilities, data loss, breaking changes
@@ -217,7 +234,7 @@ Write `{session_folder}/session.json` per `audit/references/session-json-schema.
 
 Ownership per `audit/references/output-contract.md`: code-reviewer → `.epost-data/code/`, muji → `.epost-data/ui/`, a11y → `.epost-data/a11y/`.
 
-Persist SEC/PERF/TS/LOGIC/DEAD/ARCH/STATE/QUALITY/HOOKS/FETCH/AUTH/MOD/I18N/REDUX/TEST/FORM/NEXTJS findings (critical, high, medium) to `reports/known-findings/code.json`:
+Persist SEC/PERF/TS/LOGIC/DEAD/ARCH/STATE/QUALITY/HOOKS/FETCH/AUTH/MOD/I18N/REDUX/TEST/FORM/NEXTJS/SWIFT/UIKIT/REALM/ALAMOFIRE/COMPOSE/HILT/COROUTINE/FLOW/ROOM findings (critical, high, medium) to `reports/known-findings/code.json`:
 
 1. Check if `reports/known-findings/code.json` exists
    - If not: `mkdir -p .epost-data/code/` then create it with `{ "schemaVersion": "1.0.0", "lastUpdated": "{today}", "findings": [] }`
@@ -225,7 +242,7 @@ Persist SEC/PERF/TS/LOGIC/DEAD/ARCH/STATE/QUALITY/HOOKS/FETCH/AUTH/MOD/I18N/REDU
 2b. **Surface recurring rules**: after pre-scan, if any `rule_id` has 3+ open entries in DB (escalated) or 5+ (lightweight), include in report's Regression Trends section with count and file patterns.
 3. For each NEW finding (severity critical/high/medium) not already open in DB:
    - Auto-increment `id` from `max(existing_ids) + 1` (start at 1 for empty)
-   - Map: `module`, `rule_id`, `category` (SEC/PERF/TS/LOGIC/DEAD/ARCH/STATE/QUALITY/HOOKS/FETCH/AUTH/MOD/I18N/REDUX/TEST/FORM/NEXTJS), `title`, `file_pattern`, `code_pattern`, `fix_template`, `priority`, `severity`, `source` (`hybrid-audit` or `code-review`), `source_agent: "epost-code-reviewer"`, `source_report: "{report_path}"`, `first_detected_at: "{YYYY-MM-DDTHH:MM}"`
+   - Map: `module`, `rule_id`, `category` (SEC/PERF/TS/LOGIC/DEAD/ARCH/STATE/QUALITY/HOOKS/FETCH/AUTH/MOD/I18N/REDUX/TEST/FORM/NEXTJS/SWIFT/UIKIT/REALM/ALAMOFIRE/COMPOSE/HILT/COROUTINE/FLOW/ROOM), `title`, `file_pattern`, `code_pattern`, `fix_template`, `priority`, `severity`, `source` (`hybrid-audit` or `code-review`), `source_agent: "epost-code-reviewer"`, `source_report: "{report_path}"`, `first_detected_at: "{YYYY-MM-DDTHH:MM}"`
    - Append to `findings[]`
 4. Save updated JSON
 5. Log: "Persisted {N} code findings to `reports/known-findings/code.json`" in Methodology

@@ -9,7 +9,7 @@ disable-model-invocation: true
 
 Schema for `reports/known-findings/code.json` — persistence layer for SEC, PERF, TS, LOGIC, DEAD, ARCH, and STATE findings from code review and hybrid audit passes. Mirrors `reports/known-findings/ui-components.json` with code-review-specific categories.
 
-Cross-cutting rule IDs: SEC-001..008, PERF-001..008, TS-001..008, LOGIC-001..006, DEAD-001..003, ARCH-001..005, STATE-001..004, QUALITY-001..007, TEST-001. ePost web-specific: HOOKS-001..008, FETCH-001..006, AUTH-001..006, MOD-001..005, I18N-001..005, REDUX-001..006, FORM-001..005, NEXTJS-001..003
+Cross-cutting rule IDs: SEC-001..008, PERF-001..008, TS-001..008, LOGIC-001..006, DEAD-001..003, ARCH-001..005, STATE-001..004, QUALITY-001..007, TEST-001. ePost web-specific: HOOKS-001..008, FETCH-001..006, AUTH-001..006, MOD-001..005, I18N-001..005, REDUX-001..006, FORM-001..005, NEXTJS-001..003. iOS platform: SWIFT-001..008, UIKIT-001..006. iOS ePost-specific: REALM-001..003, ALAMOFIRE-001..003. Android platform: COMPOSE-001..008, HILT-001..005. Android ePost-specific: COROUTINE-001..004, FLOW-001..004, ROOM-001..004
 
 ## Empty Template (bootstrap)
 
@@ -89,6 +89,15 @@ Cross-cutting rule IDs: SEC-001..008, PERF-001..008, TS-001..008, LOGIC-001..006
 - `"FORM"` — React Hook Form + Zod form validation violations (ePost web — FORM-001..005)
 - `"NEXTJS"` — Next.js App Router pattern violations and migration warnings (ePost web — NEXTJS-001..003)
 - `"TEST"` — test coverage violations (changed logic without corresponding test changes)
+- `"SWIFT"` — Swift language safety (optionals, closures, concurrency, Codable — SWIFT-001..008)
+- `"UIKIT"` — UIKit/SwiftUI lifecycle, accessibility, design tokens (UIKIT-001..006)
+- `"REALM"` — RealmSwift thread safety, write transactions, live objects (ePost iOS — REALM-001..003)
+- `"ALAMOFIRE"` — Alamofire response validation, retry policy, cancellation (ePost iOS — ALAMOFIRE-001..003)
+- `"COMPOSE"` — Jetpack Compose recomposition, state hoisting, side effects (COMPOSE-001..008)
+- `"HILT"` — Hilt DI constructor injection, scopes, ViewModel annotation (HILT-001..005)
+- `"COROUTINE"` — Kotlin coroutine scope, dispatchers, cancellation handling (ePost Android — COROUTINE-001..004)
+- `"FLOW"` — Kotlin Flow lifecycle collection, StateFlow exposure, Result<T> (ePost Android — FLOW-001..004)
+- `"ROOM"` — Room DAO patterns, N+1 queries, transactions, reactive queries (ePost Android — ROOM-001..004)
 
 ### severity
 - `"critical"` — security risk, data loss, or breaking behaviour

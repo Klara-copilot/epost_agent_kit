@@ -94,12 +94,7 @@ If `$ARGUMENTS` starts with `--close --ui`: load `references/ui-close.md` and ex
 If `$ARGUMENTS` starts with `--close`: load `references/a11y-close.md` and execute inline.
 If `$ARGUMENTS` starts with `--code`: **dispatch epost-code-reviewer** via Agent tool with platform context:
 1. Detect platforms from files in scope (`.tsx`/`.ts`→web, `.java`→backend, `.swift`→ios, `.kt`/`.kts`→android)
-2. For web files, detect ePost-specific patterns:
-   - `caller/`, `_services/`, FetchBuilder import → `web-api-routes/references/code-review-rules.md`
-   - `auth/`, `session/`, feature-flag logic → `web-auth/references/code-review-rules.md`
-   - `_ui-models/`, `_services/`, `_hooks/`, `_actions/` → `web-modules/references/code-review-rules.md`
-   - `useTranslations`, `messages/` → `web-i18n/references/code-review-rules.md`
-3. Include in dispatch prompt: `Platform: {detected}. Platform rules: {platform-skill}/references/code-review-rules.md. ePost rules: {comma-separated ePost rule paths, or "none"}.`
+2. Include in dispatch prompt per `code-review/SKILL.md` Caller Protocol — the code-reviewer runs its own companion-file detection (steps 3b/3c/3d) based on actual file imports.
 If `$ARGUMENTS` starts with `--improvements`: run improvements inline — load `references/improvements.md` and execute.
 If auto-detected as **hybrid** (see Hybrid Detection below): run Hybrid Orchestration.
 Otherwise: continue to Auto-Detection.
@@ -134,7 +129,7 @@ session_folder = reports/{YYMMDD-HHMM}-{slug}-audit/
 5. **Dispatch epost-code-reviewer** via Agent tool:
    - Detect platforms from files in scope (`.tsx`/`.ts`→web, `.java`→backend, `.swift`→ios, `.kt`/`.kts`→android)
    - Pass: file list, `{session_folder}/muji-ui-audit.md` path (for dedup), SEC/PERF/TS/ARCH/STATE/LOGIC scope
-   - Include in prompt: `Platform: {detected}. Platform rules: {platform-skill}/references/code-review-rules.md`
+   - Include in prompt: `Platform: {detected}. Platform rules: {platform-skill}/references/code-review-rules.md` — code-reviewer's own detection (3b/3c/3d) loads all companion files
    - Output path: `{session_folder}/code-review-findings.md`
    - WAIT for completion
 6. **Merge reports** into `{session_folder}/report.md`:

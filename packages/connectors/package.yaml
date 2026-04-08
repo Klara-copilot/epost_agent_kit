@@ -10,7 +10,6 @@ provides:
   skills:
     - asana
     - slack
-    - asana-muji
 
 files:
   skills/: skills/
