@@ -1,6 +1,6 @@
 # Data Migration Reference
 
-Patterns for migrating prototype data layers (local state, localStorage, SQLite, mock data) into luz_next's typed, API-driven architecture.
+Patterns for migrating prototype data layers into luz_next's typed, API-driven architecture.
 
 ---
 
@@ -28,23 +28,31 @@ Canonical service file:
 
 ```ts
 // _services/letterService.ts
-import { FetchBuilder } from '@luz-next/shared/http';
-import { URLS } from '@luz-next/shared/constants';
+'use server';
+import { FetchBuilder } from '../service/fetch-builder';
+import { retrieveSessionData } from '../service/session-service';
+import { MY_SERVICE_API } from '@your-app/utils';
 import type { LetterDto } from '../_ui-models/LetterUiModel';
 
-export async function getLetters(token: string): Promise<LetterDto[]> {
-  return new FetchBuilder<LetterDto[]>()
-    .withUrl(URLS.letters.list)
-    .withBearerToken(token)
+export async function getLetters(): Promise<LetterDto[]> {
+  const { tenantId, authToken } = await retrieveSessionData();
+  const response = await new FetchBuilder<LetterDto[]>()
+    .withUrl(MY_SERVICE_API.LETTERS.LIST)
+    .withTenantId(tenantId)
+    .withBearerToken(authToken)
     .execute();
+  if (response.error || !response.result) return [];
+  return response.result;
 }
 ```
 
 Rules:
-- One service file per entity (`letterService.ts`, `contactService.ts`)
-- Return type is always a typed DTO — never `any`
-- URL constants live in `@luz-next/shared/constants` — never inline strings
-- Never call `fetch()` directly in components or hooks
+- Add `'use server'` at top — all service/caller files run server-side
+- Import `FetchBuilder` from `'../service/fetch-builder'` (relative, not package import)
+- Session via `retrieveSessionData()` — never pass token as parameter
+- Always check `response.error` — FetchBuilder never throws, errors are in `response.error`
+- URL constants from `@your-app/utils` (app-specific constants module)
+- One service file per entity; return type always typed DTO — never `any`. Never call `fetch()` directly.
 
 ---
 
@@ -52,22 +60,26 @@ Rules:
 
 ```ts
 // _hooks/useLetters.ts
-import { useState, useEffect } from 'react';
-import { useAuthToken } from '@luz-next/shared/auth';
+import { useState, useTransition } from 'react';
 import { getLetters } from '../_services/letterService';
 import type { LetterDto } from '../_ui-models/LetterUiModel';
 
 export function useLetters() {
   const [data, setData] = useState<LetterDto[]>([]);
-  const token = useAuthToken();
+  const [isPending, startTransition] = useTransition();
 
-  useEffect(() => {
-    getLetters(token).then(setData);
-  }, [token]);
+  function load() {
+    startTransition(async () => {
+      const result = await getLetters();
+      setData(result);
+    });
+  }
 
-  return { data };
+  return { data, isPending, load };
 }
 ```
+
+Prefer async server components for read-only fetching; use hooks only when client interactivity requires it.
 
 ---
 
@@ -97,17 +109,23 @@ When the luz backend endpoint does not exist yet:
 
 ```ts
 // _services/wizardService.ts
-import { FetchBuilder } from '@luz-next/shared/http';
+'use server';
+import { FetchBuilder } from '../service/fetch-builder';
+import { retrieveSessionData } from '../service/session-service';
 import type { WizardDto } from '../_ui-models/WizardUiModel';
 
-// TODO: endpoint pending backend implementation
+// TODO: replace with real endpoint when backend is ready
 const TODO_ENDPOINT = 'TODO:/api/wizard';
 
-export async function getWizardData(token: string): Promise<WizardDto> {
-  return new FetchBuilder<WizardDto>()
+export async function getWizardData(): Promise<WizardDto | null> {
+  const { tenantId, authToken } = await retrieveSessionData();
+  const response = await new FetchBuilder<WizardDto>()
     .withUrl(TODO_ENDPOINT)
-    .withBearerToken(token)
+    .withTenantId(tenantId)
+    .withBearerToken(authToken)
     .execute();
+  if (response.error || !response.result) return null;
+  return response.result;
 }
 ```
 
@@ -130,10 +148,10 @@ luz_next uses Redux Toolkit with a **dual-store pattern**: persisted store (surv
 | Persisted state (`zustand/middleware` persist) | Add slice to persisted store config |
 | Ephemeral UI state (modals, hover) | Add slice to ephemeral store config |
 
-**Decision rule — analyze store structure, don't do mechanical 1:1 mapping:**
-- Survives page reload (auth tokens, user prefs, drafts, session data) → **persisted store**
-- Session-only (open modals, hover state, transient form state) → **ephemeral store**
-- Group related state into domain slices (e.g. `letterSlice`, `composerSlice`) — not one slice per Zustand store
+Decision rule — analyze structure, no mechanical 1:1 mapping:
+- Survives reload (auth, prefs, drafts) → **persisted store**
+- Session-only (modals, hover, transient state) → **ephemeral store**
+- Group by domain: `letterSlice`, `composerSlice` — not one slice per Zustand store
 
 ---
 
@@ -178,7 +196,4 @@ export interface LetterUiModel extends LetterDto {
 
 ## 9. Auth
 
-- Token acquisition: `useAuthToken()` from `@luz-next/shared/auth` (NextAuth session)
-- Pass to every service call via `FetchBuilder.withBearerToken(token)`
-- Never hardcode tokens, never read from `localStorage` directly
-- Never expose tokens to server actions via client props — server actions access the session internally
+Session via `retrieveSessionData()` in every service file — never pass token as param, never hardcode, never read from `localStorage`. Server actions access session internally.

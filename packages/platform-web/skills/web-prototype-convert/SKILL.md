@@ -53,7 +53,7 @@ For each component, read live klara source before writing any code.
 | MEDIUM | `{name}.stories.tsx` only |
 | LOW | `{name}.tsx` + `{name}.stories.tsx` |
 
-Always do a first-encounter live read to validate mapping freshness.
+On first encounter of any component (per session), always live read regardless of confidence tier to validate freshness.
 - Live source: `libs/klara-theme/src/lib/components/{name}/`
 - `component-mapping.md` = vocabulary hints; live source = truth
 - Match tokens by semantic intent (see `token-mapping.md`)

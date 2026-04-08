@@ -109,7 +109,7 @@ import { Button } from '@luz-next/klara-theme';
 
 - `style={{ color: '#e53e3e' }}` → `mode="destructive"` on klara component (never copy hex values)
 - `style={{ borderRadius: '9999px' }}` → `radius="full"`
-- `style={{ padding: '16px' }}` → Tailwind `p-4`
+- `style={{ padding: '16px' }}` → klara `p-400` (never Tailwind `p-4` — klara uses 100/200/400 scale)
 - Always route colors through `token-mapping.md` intent flow — never hardcode hex/rgb
 
 ---
