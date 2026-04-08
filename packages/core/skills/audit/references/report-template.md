@@ -79,6 +79,29 @@ The following N findings are delegated to **epost-a11y-specialist**.
 
 ---
 
+## GA/GTM Tracking
+
+_(Include when web platform detected and GA check ran)_
+
+| File | Boundary | ga-data-group | Result |
+|------|----------|---------------|--------|
+| path/to/file.tsx | Dialog | ✓ present | PASS |
+| path/to/other.tsx | RightSidebar | ✗ missing | FAIL |
+
+### Findings
+✗ [file.tsx:L42] Missing ga-data-group on content wrapper inside <Dialog>
+   → Suggested value: `feature-name-dialog`
+
+### Required Actions
+- [ ] Add ga-data-group to file.tsx line 42
+- [ ] Confirm value with Data/Marketing before merging
+
+### Skip Log
+- libs/klara-theme/button.tsx — klara-theme (Rule 1 scope, not Rule 2)
+- apps/luz-epost/utils.tsx — no boundary component
+
+---
+
 ## Methodology
 
 | | |

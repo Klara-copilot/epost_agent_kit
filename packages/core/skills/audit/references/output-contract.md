@@ -12,6 +12,7 @@ Every audit — hybrid, standalone, or inline — writes to a session folder. **
 | Standalone UI audit | `reports/{YYMMDD-HHMM}-{slug}-ui-audit/` | epost-muji |
 | Standalone a11y audit | `reports/{YYMMDD-HHMM}-{slug}-a11y-audit/` | epost-a11y-specialist |
 | Inline code review | `reports/{YYMMDD-HHMM}-{slug}-code-review/` | epost-code-reviewer |
+| GA/GTM standalone audit | `reports/{YYMMDD-HHMM}-{slug}-ga-audit/` | main context (inline) |
 
 Where:
 - `{YYMMDD-HHMM}` = today's date and time (e.g. `260309-0521`)
@@ -34,6 +35,7 @@ Sub-agents do NOT create folders. They write to `output_path` provided by the ca
 | `report.md` | Orchestrator | Always | Main deliverable — merged findings, methodology, verdict |
 | `muji-ui-audit.md` | epost-muji | Hybrid only | Muji's UI audit pass |
 | `a11y-audit.md` | epost-a11y-specialist | When delegated | A11Y audit pass |
+| `ga-tracking.md` | Main context (inline) | Hybrid + --code web | GA/GTM tracking table + findings from Dev Interview Flow |
 | `session.json` | Orchestrator | Always | Machine-readable metadata (schema below) |
 
 **"Orchestrator"** = the agent that owns the session. In hybrid: code-reviewer. In standalone: whichever agent was invoked.
@@ -48,6 +50,7 @@ Sub-agents do NOT create folders. They write to `output_path` provided by the ca
 | Dispatch sub-agents | **YES** | no | no | no |
 | Write merged `report.md` | **YES** | no | no | no |
 | Write own sub-report | — | `code-review-findings.md` | `muji-ui-audit.md` | `a11y-audit.md` |
+| Write `ga-tracking.md` | **YES** (inline) | no | no | no |
 | Write `session.json` | **YES** | no | no | no |
 | Persist findings to `reports/known-findings/` | — | `code.json` | `ui-components.json` | `a11y.json` |
 | Update `reports/index.json` | **YES** | no | no | no |
