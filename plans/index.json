@@ -5,19 +5,9 @@
     "active": 57,
     "completed": 1,
     "archived": 1,
-    "total": 60
+    "total": 59
   },
   "plans": [
-    {
-      "id": "PLAN-0105",
-      "title": "Fix /docs --init index.json field population blockers",
-      "type": "implementation",
-      "status": "active",
-      "created": "2026-04-07",
-      "authors": ["epost-planner"],
-      "tags": ["docs", "skills", "kit", "index-json", "bug-fixes"],
-      "file": "plans/260407-0857-docs-init-fixes/plan.md"
-    },
     {
       "id": "PLAN-0104",
       "title": "iOS & Android Code Review Rule Expansion",

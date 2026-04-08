@@ -1,6 +1,6 @@
 ---
 title: Redesign web-prototype-convert skill with 4-phase agentic pipeline
-status: active
+status: done
 created: 2026-04-07
 updated: 2026-04-07
 effort: M
