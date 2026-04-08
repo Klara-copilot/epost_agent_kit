@@ -1,21 +1,57 @@
 {
-  "generated": "2026-04-07T08:40:19.113Z",
+  "generated": "2026-04-08T13:39:46.024Z",
   "summary": {
-    "total": 58,
-    "new": 58,
+    "total": 54,
+    "new": 54,
     "proposed": 0,
     "dismissed": 0,
     "bySkill": {
+      "knowledge": {
+        "total": 2,
+        "high": 0,
+        "medium": 2,
+        "low": 0
+      },
+      "loop": {
+        "total": 2,
+        "high": 0,
+        "medium": 2,
+        "low": 0
+      },
       "core": {
-        "total": 7,
+        "total": 6,
         "high": 0,
         "medium": 6,
-        "low": 1
+        "low": 0
       },
       "test": {
-        "total": 7,
-        "high": 2,
+        "total": 5,
+        "high": 0,
         "medium": 5,
+        "low": 0
+      },
+      "unknown": {
+        "total": 15,
+        "high": 0,
+        "medium": 14,
+        "low": 1
+      },
+      "docs": {
+        "total": 2,
+        "high": 0,
+        "medium": 2,
+        "low": 0
+      },
+      "cook": {
+        "total": 2,
+        "high": 0,
+        "medium": 0,
+        "low": 2
+      },
+      "fix": {
+        "total": 2,
+        "high": 0,
+        "medium": 2,
         "low": 0
       },
       "skill-discovery": {
@@ -25,42 +61,6 @@
         "low": 0
       },
       "plan": {
-        "total": 3,
-        "high": 0,
-        "medium": 1,
-        "low": 2
-      },
-      "review": {
-        "total": 2,
-        "high": 0,
-        "medium": 2,
-        "low": 0
-      },
-      "kit": {
-        "total": 2,
-        "high": 0,
-        "medium": 0,
-        "low": 2
-      },
-      "docs": {
-        "total": 3,
-        "high": 0,
-        "medium": 1,
-        "low": 2
-      },
-      "unknown": {
-        "total": 15,
-        "high": 5,
-        "medium": 9,
-        "low": 1
-      },
-      "loop": {
-        "total": 2,
-        "high": 0,
-        "medium": 1,
-        "low": 1
-      },
-      "clean-code": {
         "total": 1,
         "high": 0,
         "medium": 0,
@@ -69,10 +69,16 @@
       "security": {
         "total": 2,
         "high": 0,
-        "medium": 1,
+        "medium": 2,
+        "low": 0
+      },
+      "kit": {
+        "total": 1,
+        "high": 0,
+        "medium": 0,
         "low": 1
       },
-      "audit": {
+      "clean-code": {
         "total": 1,
         "high": 0,
         "medium": 0,
@@ -84,11 +90,11 @@
         "medium": 0,
         "low": 1
       },
-      "web-i18n": {
+      "simulator": {
         "total": 1,
         "high": 0,
-        "medium": 1,
-        "low": 0
+        "medium": 0,
+        "low": 1
       },
       "error-recovery": {
         "total": 1,
@@ -96,234 +102,47 @@
         "medium": 0,
         "low": 1
       },
-      "fix": {
+      "audit": {
         "total": 1,
         "high": 0,
         "medium": 0,
         "low": 1
       },
-      "knowledge": {
+      "web-i18n": {
+        "total": 2,
+        "high": 0,
+        "medium": 2,
+        "low": 0
+      },
+      "kit-verify": {
         "total": 1,
         "high": 0,
-        "medium": 1,
-        "low": 0
+        "medium": 0,
+        "low": 1
       },
       "kit-add-skill": {
         "total": 1,
         "high": 0,
         "medium": 0,
         "low": 1
-      },
-      "cook": {
-        "total": 2,
-        "high": 0,
-        "medium": 0,
-        "low": 2
       }
     },
     "byType": {
-      "journal-flag": 43,
-      "audit-failure": 14,
+      "journal-flag": 50,
+      "audit-failure": 3,
       "workaround": 1
     }
   },
   "signals": [
     {
-      "id": "sig-38125862",
-      "type": "journal-flag",
-      "confidence": "low",
-      "source": "docs/journal/kit-marketplace/260321-marketplace-phase1.md",
-      "excerpt": "- `src/types/epost-config.ts` existed from a prior session — no conflict, but worth checking before assuming files need creation\n- `npm run build` is blocked by the scout-block hook; used `npx tsc --noEmit` instead for type verification",
-      "targetSkill": "core",
-      "suggestedAction": "",
-      "detectedAt": "2026-03-24T00:13:43.325Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-824cd9f4",
+      "id": "sig-2efc4114",
       "type": "journal-flag",
       "confidence": "medium",
-      "source": "docs/journal/kit-marketplace/260323-marketplace-tui.md",
-      "excerpt": "- Two unused variables (`writeEpostConfig`, `bundles`, `state`) triggered strict TS6133 errors. Prefixed with `_` or removed import.\n- `npm run build` is blocked by scout-block.cjs hook matching \"build\" pattern — ran `npx tsc && npx tsc-alias` directly instead. Same output, no real issue.\n- 6 pre-ex",
-      "targetSkill": "test",
+      "source": "docs/journal/antigravity-converter/260406-antigravity-adapter.md",
+      "excerpt": "JSDoc block comment containing `*/SKILL.md` closed the `/* ... */` comment block early, causing 10+ TypeScript parse errors. Changed to `//` line comments. [knowledge skill should flag: avoid `*/` inside JSDoc comment blocks]\n\nModel mapping haiku/sonnet/opus → full IDs required because Antigravity Y",
+      "targetSkill": "knowledge",
       "suggestedAction": "",
-      "detectedAt": "2026-03-24T00:13:43.326Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-d4f061b4",
-      "type": "journal-flag",
-      "confidence": "medium",
-      "source": "docs/journal/kit-marketplace/260323-phase2-cli-commands.md",
-      "excerpt": "- `SHARED_AGENTS` was imported but unused in `add.ts` causing a TS6133 error — caught by typecheck before build.\n- Stash check showed 14 pre-existing test failures, not 6 — the stash inadvertently reverted the resolver test files from Phase 1, revealing they fixed some failures. Phase 2 net delta is",
-      "targetSkill": "test",
-      "suggestedAction": "",
-      "detectedAt": "2026-03-24T00:13:43.326Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-bb25c99d",
-      "type": "journal-flag",
-      "confidence": "medium",
-      "source": "docs/journal/kit-rationalization/260319-phase1-agent-deletion.md",
-      "excerpt": "- `plans/260318-1353-skill-discovery-superpower/phase-1-quick-fixes.md` references `epost-kit-designer` as a file to update (add `skills:` field). Pre-check flagged it. Closer reading: it's a file-path-as-target, not an agent dependency. Safe to delete — that task in phase-1 is now moot.",
-      "targetSkill": "skill-discovery",
-      "suggestedAction": "",
-      "detectedAt": "2026-03-24T00:13:43.326Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-227ef314",
-      "type": "journal-flag",
-      "confidence": "medium",
-      "source": "docs/journal/kit-rationalization/260320-prune-skills.md",
-      "excerpt": "- `epost-debugger` agent had `problem-solving` in its `skills:` list — would have caused a broken skill load on every debug session. Caught by grepping agent files for deleted skill names.\n- The `kit/references/add-agent.md`, `add-skill.md`, `add-hook.md`, and `optimize.md` files each had `requires:",
-      "targetSkill": "skill-discovery",
-      "suggestedAction": "",
-      "detectedAt": "2026-03-24T00:13:43.326Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-778f8bba",
-      "type": "audit-failure",
-      "confidence": "low",
-      "source": "reports/260311-2018-superpower-planning-research-epost-researcher.md",
-      "excerpt": "- Immediate execution without planning (create plan first)\n- Repeating failed actions (track attempts and vary approach)\n- Losing subagent findings (aggregate into top-level findings.md)\n\n### Templates & Scripts Available",
-      "targetSkill": "plan",
-      "suggestedAction": "",
-      "detectedAt": "2026-03-24T00:13:43.328Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-e89fe2ce",
-      "type": "audit-failure",
-      "confidence": "medium",
-      "source": "reports/260311-2018-superpower-planning-research-epost-researcher.md",
-      "excerpt": "- Verifies behavior against stated goals\n- Result: PASS or FAIL with specific issues\n\n**Stage 2: Code Quality Review**\n- Ensures technical excellence",
-      "targetSkill": "review",
-      "suggestedAction": "",
-      "detectedAt": "2026-03-24T00:13:43.328Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-9e0e6a66",
-      "type": "audit-failure",
-      "confidence": "medium",
-      "source": "reports/260311-2018-superpower-planning-research-epost-researcher.md",
-      "excerpt": "- Validates test coverage\n- Result: PASS or FAIL with specific issues\n\nBoth must show PASS in Task Status Dashboard—no exceptions.",
-      "targetSkill": "test",
-      "suggestedAction": "",
-      "detectedAt": "2026-03-24T00:13:43.328Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-808113f8",
-      "type": "audit-failure",
-      "confidence": "medium",
-      "source": "reports/260311-2018-superpower-planning-research-epost-researcher.md",
-      "excerpt": "5. **Cross-session findings**: How to migrate `.planning/findings.md` into permanent `docs/findings/` for reuse?\n6. **Spec vs quality trade-off**: Can a task PASS quality review and FAIL spec compliance? (Implies redesign needed)\n7. **Subagent context injection**: How detailed should `.planning/agen",
-      "targetSkill": "review",
-      "suggestedAction": "",
-      "detectedAt": "2026-03-24T00:13:43.328Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-ef1d60a1",
-      "type": "audit-failure",
-      "confidence": "low",
-      "source": "reports/260318-1024-skill-discovery-research-epost-researcher.md",
-      "excerpt": "- Composition via inheritance (extends) is the dominant pattern\n- **Critical warning**: \"performance degrades sharply beyond critical library sizes\" — there are scaling limits to skill libraries. The paper found phase transitions, suggesting 50-65 skills may be near an inflection point.\n\nepost_agent",
-      "targetSkill": "kit",
-      "suggestedAction": "",
-      "detectedAt": "2026-03-24T00:13:43.329Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-bc75a8a1",
-      "type": "audit-failure",
-      "confidence": "low",
-      "source": "reports/260323-2336-self-evolving-skill-loop-epost-researcher.md",
-      "excerpt": "3. **Persistent Learning**: Failed iterations improve the next cycle\n   - Visual: Skill library grows frame-by-frame across iterations\n   - Caption: \"Skills + agents + docs evolve each cycle\"",
-      "targetSkill": "docs",
-      "suggestedAction": "",
-      "detectedAt": "2026-03-24T00:13:43.332Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-82076adf",
-      "type": "audit-failure",
-      "confidence": "high",
-      "source": "reports/260323-2336-self-evolving-skill-loop-epost-researcher.md",
-      "excerpt": ">\n> Our system works the same way. Each task builds skill memory. Failed attempts teach the system what NOT to do. By iteration 100, it's not just executing tasks—it's evolved domain expertise specific to your codebase.\"\n\n**Why This Works:**\n- Everyone has felt skill mastery (sports, music, coding, ",
-      "targetSkill": "unknown",
-      "suggestedAction": "",
-      "detectedAt": "2026-03-24T00:13:43.332Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-4b0ce6fe",
-      "type": "audit-failure",
-      "confidence": "high",
-      "source": "reports/260323-2353-self-evolving-skill-loop-epost-researcher.md",
-      "excerpt": "**Model**: Agent that reflects on failed attempts and stores reflections in memory buffer.\n\n**Self-Improvement Mechanism**:\n- Agent attempts task",
-      "targetSkill": "unknown",
-      "suggestedAction": "",
-      "detectedAt": "2026-03-24T00:13:43.332Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-9073e844",
-      "type": "audit-failure",
-      "confidence": "high",
-      "source": "reports/260323-2353-self-evolving-skill-loop-epost-researcher.md",
-      "excerpt": "a. Create temp skill file with proposed change\n   b. Run last 5 tasks that failed on this skill\n   c. Count pass/fail rates: before vs after\n3. Gate decision:\n   - If pass_rate_after > pass_rate_before: APPROVE (automatic)",
-      "targetSkill": "unknown",
-      "suggestedAction": "",
-      "detectedAt": "2026-03-24T00:13:43.332Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-fd8db09b",
-      "type": "audit-failure",
-      "confidence": "medium",
-      "source": "reports/260323-2353-self-evolving-skill-loop-epost-researcher.md",
-      "excerpt": "2. **Quality Gate** (as described in Part 5)\n   - Test proposed change on past failed tasks\n   - Measure pass_rate improvement\n   - Auto-apply if improvement >= threshold (e.g., +10%)\n   - Reject if regression detected",
-      "targetSkill": "test",
-      "suggestedAction": "",
-      "detectedAt": "2026-03-24T00:13:43.332Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-9c1ba800",
-      "type": "journal-flag",
-      "confidence": "low",
-      "source": "docs/journal/core-skills/260327-clean-code-skill.md",
-      "excerpt": "- The skill-index.json was partially auto-updated (count bumped to 47, development-tools to 12) by an automated process before I could edit it — those values were already correct for a different skill addition. Had to verify the `analysis-reasoning` category count and `connectedSkills` separately.",
-      "targetSkill": "unknown",
-      "suggestedAction": "",
-      "detectedAt": "2026-03-27T01:04:54.735Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-90d247dc",
-      "type": "journal-flag",
-      "confidence": "medium",
-      "source": "docs/journal/kit/260327-tdd-skill.md",
-      "excerpt": "- skill-index.json path for core-local skills uses `tdd/SKILL.md` (relative), not `../../../.claude/skills/tdd/SKILL.md` — the index is generated output at `.claude/` level but source lives in `packages/core/skills/`. Used relative path matching the package structure.",
-      "targetSkill": "core",
-      "suggestedAction": "",
-      "detectedAt": "2026-03-27T01:04:54.741Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-095f15b8",
-      "type": "audit-failure",
-      "confidence": "high",
-      "source": "reports/260328-2006-claude-md-best-practices-epost-researcher.md",
-      "excerpt": "**Anti-pattern**: Kitchen-sink sessions that accumulate irrelevant context. After 2–3 failed corrections on the same issue, `/clear` and start fresh with a better prompt.\n\n#### Task Specification",
-      "targetSkill": "unknown",
-      "suggestedAction": "",
-      "detectedAt": "2026-03-28T13:11:00.966Z",
+      "detectedAt": "2026-04-08T01:45:51.270Z",
       "status": "new"
     },
     {
@@ -332,20 +151,20 @@
       "confidence": "medium",
       "source": "docs/journal/claudekit-adoption/260330-phase2-security-skills.md",
       "excerpt": "Nothing unexpected. Straightforward knowledge artifact creation — no runtime behavior to verify.",
-      "targetSkill": "unknown",
+      "targetSkill": "knowledge",
       "suggestedAction": "",
-      "detectedAt": "2026-03-30T04:57:49.465Z",
+      "detectedAt": "2026-04-08T01:45:51.272Z",
       "status": "new"
     },
     {
       "id": "sig-b1516d9a",
       "type": "journal-flag",
-      "confidence": "low",
+      "confidence": "medium",
       "source": "docs/journal/claudekit-adoption/260330-phase3-ai-tools.md",
       "excerpt": "- The `loop` skill's resumability depends on `loop-results.tsv` existing and being append-only. If someone deletes it mid-loop, the only fallback is parsing `git log` for `loop[n/N]:` prefixed commits. This is documented in `references/results-logging.md` but not enforced — [loop] should have a guar",
       "targetSkill": "loop",
       "suggestedAction": "",
-      "detectedAt": "2026-03-30T04:57:49.466Z",
+      "detectedAt": "2026-04-08T01:45:51.272Z",
       "status": "new"
     },
     {
@@ -356,7 +175,7 @@
       "excerpt": "Nothing material. The `.claude/` sync (copy from packages/) is manual — no build tool enforces it post-edit. If someone edits `packages/core/skills/git/SKILL.md` but forgets to copy to `.claude/skills/git/SKILL.md`, the live system lags until next `epost-kit init`. [kit skill should document this ri",
       "targetSkill": "core",
       "suggestedAction": "",
-      "detectedAt": "2026-03-30T04:57:49.466Z",
+      "detectedAt": "2026-04-08T01:45:51.272Z",
       "status": "new"
     },
     {
@@ -367,172 +186,18 @@
       "excerpt": "All changes are additive extensions to existing .md files — no test suite, no build step. The only risk was accidentally breaking existing section structure. Mitigated by reading each file before editing and updating section index line numbers in the navigation comment.",
       "targetSkill": "test",
       "suggestedAction": "",
-      "detectedAt": "2026-03-30T04:57:49.467Z",
+      "detectedAt": "2026-04-08T01:45:51.272Z",
       "status": "new"
     },
     {
-      "id": "sig-fb684c8b",
+      "id": "sig-9c1ba800",
       "type": "journal-flag",
       "confidence": "medium",
-      "source": "docs/journal/kit/260329-claudekit-adoption-phase1.md",
-      "excerpt": "- `ck-config-utils.cjs` and `hook-logger.cjs` imports in the source hook would have caused immediate runtime failure. The phase spec noted \"adapt from CK source\" but didn't flag the dep difference explicitly. [skill-discovery did not cover: hook dependency mapping between source and target kit]",
-      "targetSkill": "skill-discovery",
-      "suggestedAction": "",
-      "detectedAt": "2026-03-30T04:57:49.468Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-6a7be4f6",
-      "type": "journal-flag",
-      "confidence": "low",
-      "source": "docs/journal/skill-consolidation/260330-knowledge-unify.md",
-      "excerpt": "- Plan.md and phase-4.md contradicted each other on clean-code. The plan intro said \"clean-code stays separate\" but phase-4.1 listed it for removal from package.yaml. [plan skill] cross-references between plan phases created ambiguity that required judgment rather than mechanical execution.\n- `journ",
-      "targetSkill": "clean-code",
-      "suggestedAction": "",
-      "detectedAt": "2026-03-30T13:08:55.511Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-63f8ce0b",
-      "type": "journal-flag",
-      "confidence": "medium",
-      "source": "docs/journal/skill-consolidation/260330-phase1-merge-flag-skills.md",
-      "excerpt": "- `git/SKILL.md` needed two changes: both Step 0 `if` chain AND Aspect Files table. Easy to miss the second location if only scanning for the flag table. [core skill] does not cover \"parent skills may need updates in multiple sections\" — needed manual inspection of each parent's structure.",
-      "targetSkill": "core",
-      "suggestedAction": "",
-      "detectedAt": "2026-03-30T13:08:55.511Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-acd793b0",
-      "type": "journal-flag",
-      "confidence": "low",
-      "source": "docs/journal/kit/260330-epost-brainstormer.md",
-      "excerpt": "No near-misses. Phase 2 routing verification confirmed epost-planner nav header already had the brainstormer routing row at line 24 (no edit needed — plan correctly pre-verified this).",
-      "targetSkill": "plan",
-      "suggestedAction": "",
-      "detectedAt": "2026-03-30T16:13:10.966Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-34959cbb",
-      "type": "journal-flag",
-      "confidence": "low",
-      "source": "docs/journal/docs/260331-signal-based-kb-categories.md",
-      "excerpt": "Step numbering in Smart Init and Generation Mode diverged after insertions — the cross-references \"step 3.5\" and \"step 4\" in Smart Init pointed to the wrong steps in Generation Mode post-renumber. Caught and fixed manually. [docs skill] init.md's cross-references between modes are fragile when steps",
-      "targetSkill": "docs",
-      "suggestedAction": "",
-      "detectedAt": "2026-03-31T01:05:42.682Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-8fc26cda",
-      "type": "journal-flag",
-      "confidence": "medium",
-      "source": "docs/journal/docs-skill/260331-deps-schema-clarity.md",
-      "excerpt": "Nothing significant. Both files were already identical before the edit, confirmed by diff.",
+      "source": "docs/journal/core-skills/260327-clean-code-skill.md",
+      "excerpt": "- The skill-index.json was partially auto-updated (count bumped to 47, development-tools to 12) by an automated process before I could edit it — those values were already correct for a different skill addition. Had to verify the `analysis-reasoning` category count and `connectedSkills` separately.",
       "targetSkill": "unknown",
       "suggestedAction": "",
-      "detectedAt": "2026-03-31T01:22:41.653Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-341936fb",
-      "type": "journal-flag",
-      "confidence": "medium",
-      "source": "docs/journal/kit/260331-skill-creator-adoption.md",
-      "excerpt": "- raw.githubusercontent.com returned 503 — `gh api` with base64 decode was the reliable path. `skill-discovery` has no pattern for GitHub raw-fetch failures.",
-      "targetSkill": "skill-discovery",
-      "suggestedAction": "",
-      "detectedAt": "2026-03-31T02:48:36.344Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-9c6747f2",
-      "type": "journal-flag",
-      "confidence": "low",
-      "source": "docs/journal/kit/260331-whitelist-and-compliance.md",
-      "excerpt": "- The phase plan said to add the checklist to skill-development.md after the CSO section, but skill-development.md already referenced `references/description-validation-checklist.md` (line 109). Created both the inline summary section AND the reference file to be consistent with what was already doc",
-      "targetSkill": "security",
-      "suggestedAction": "",
-      "detectedAt": "2026-03-31T04:21:01.425Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-daece139",
-      "type": "journal-flag",
-      "confidence": "low",
-      "source": "docs/journal/skill-rationalization/260331-merge-review-into-audit.md",
-      "excerpt": "- review's `--improvements` mode ran inline (not dispatched to any agent) — easy to miss. Confirmed it was the only truly unique mode by comparing all four flag paths against audit's existing flags before deleting.",
-      "targetSkill": "audit",
-      "suggestedAction": "",
-      "detectedAt": "2026-03-31T05:09:39.003Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-cf8fc29d",
-      "type": "journal-flag",
-      "confidence": "low",
-      "source": "docs/journal/skill-creator-integration/260331-phase1-validation-gate.md",
-      "excerpt": "- `quick_validate.py` exits with code 1 for all failures — the exit code alone doesn't distinguish \"missing required field\" from \"unexpected key\". Had to parse stdout message text to classify level. [skill-creator SKILL.md] does not document this contract explicitly; it's an implementation detail of",
-      "targetSkill": "skill-creator",
-      "suggestedAction": "",
-      "detectedAt": "2026-03-31T05:58:01.302Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-ce2da0c3",
-      "type": "journal-flag",
-      "confidence": "medium",
-      "source": "docs/journal/skill-creator-integration/260331-phases2-4-eval-optimize-report-package.md",
-      "excerpt": "Python availability check needed to be in each script independently (not imported from skill-validate.cjs) because the bridge scripts live in `scripts/` not `hooks/lib/` — requiring across those directories without a shared module pattern would have created a fragile dependency. Kept `findPython()` ",
-      "targetSkill": "core",
-      "suggestedAction": "",
-      "detectedAt": "2026-03-31T05:58:01.302Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-9f1a0dab",
-      "type": "journal-flag",
-      "confidence": "medium",
-      "source": "docs/journal/web-i18n/260331-i18n-sheet-sync-commands.md",
-      "excerpt": "- Commands directory (`packages/platform-web/skills/web-i18n/commands/`) didn't exist yet — had to create it alongside scripts. The plan spec listed both paths but the directory was new.\n- The `.claude/commands/` directory also didn't exist — created alongside the mirror. If epost-kit init doesn't h",
-      "targetSkill": "plan",
-      "suggestedAction": "",
-      "detectedAt": "2026-03-31T07:50:05.245Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-a9b3c7f1",
-      "type": "journal-flag",
-      "confidence": "medium",
-      "source": "docs/journal/skill-evolution/260331-skill-description-fixes.md",
-      "excerpt": "- The `.claude/skills/*/SKILL.md` mirror files don't exist — only `evals/` subdirs are present per skill. Attempted to mirror SKILL.md changes there before discovering this. Only `skill-index.json` needed updating in `.claude/`.\n- Platform skills (android, ios, kit, simulator) are not registered in ",
-      "targetSkill": "core",
-      "suggestedAction": "",
-      "detectedAt": "2026-03-31T08:37:11.367Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-a37722ab",
-      "type": "journal-flag",
-      "confidence": "medium",
-      "source": "docs/journal/skill-description-enhancement/260331-phase2-platform-domain.md",
-      "excerpt": "Edit tool requires the file to be read in the same conversation batch before editing. With 23 files to update, the read-then-edit constraint meant careful sequencing was needed. No skill covered this constraint explicitly — it's a Claude Code tool behavior, not a domain pattern.",
-      "targetSkill": "unknown",
-      "suggestedAction": "",
-      "detectedAt": "2026-03-31T09:14:38.537Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-b637d9bd",
-      "type": "journal-flag",
-      "confidence": "medium",
-      "source": "docs/journal/skill-evolution/260331-skill-description-enhancement-phase1.md",
-      "excerpt": "- scout-block hook blocked bash one-liners containing \"build\", \"target\", \"coverage\" when writing an inline Node.js update script — worked around by writing a temp Python file and executing it. [scout-block] did not cover this pattern; the hook fires on the command text, not just file paths\n- `packag",
-      "targetSkill": "skill-discovery",
-      "suggestedAction": "",
-      "detectedAt": "2026-03-31T09:14:38.537Z",
+      "detectedAt": "2026-04-08T01:45:51.273Z",
       "status": "new"
     },
     {
@@ -543,205 +208,29 @@
       "excerpt": "Nothing notable — all three were clean additive changes with no conflicts.",
       "targetSkill": "unknown",
       "suggestedAction": "",
-      "detectedAt": "2026-03-31T10:12:53.828Z",
+      "detectedAt": "2026-04-08T01:45:51.273Z",
       "status": "new"
     },
     {
-      "id": "sig-21eb5d3a",
+      "id": "sig-34959cbb",
       "type": "journal-flag",
       "confidence": "medium",
-      "source": "docs/journal/web-i18n/260331-i18n-validate-docs.md",
-      "excerpt": "The original docs assumed `GOOGLE_SERVICE_ACCOUNT_KEY` was always required. This would mislead any developer trying to run `--validate` in a CI environment without write credentials. The distinction between public (CSV export) and authenticated (Sheets API) reads is critical and was absent from all ",
-      "targetSkill": "web-i18n",
-      "suggestedAction": "",
-      "detectedAt": "2026-03-31T13:51:26.498Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-0f63a7d4",
-      "type": "journal-flag",
-      "confidence": "medium",
-      "source": "docs/journal/kit-rationalization/260402-skill-discovery-simplification.md",
-      "excerpt": "The platform detection priority list (explicit hint > file extensions > CWD > project markers) was embedded in Step 1 and could have been lost. Verified it's not needed in the catalogue form — that logic belongs in individual agent system prompts, not in a reference file.",
-      "targetSkill": "unknown",
-      "suggestedAction": "",
-      "detectedAt": "2026-04-02T02:58:52.979Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-4fa8396f",
-      "type": "journal-flag",
-      "confidence": "medium",
-      "source": "docs/journal/kit-routing-redesign/260402-claude-md-routing-rewrite.md",
-      "excerpt": "Nothing significant. The phase spec was clear and the file was small enough to rewrite in one pass.",
-      "targetSkill": "unknown",
-      "suggestedAction": "",
-      "detectedAt": "2026-04-02T02:58:52.979Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-694dd08b",
-      "type": "audit-failure",
-      "confidence": "high",
-      "source": "reports/260402-1902-skill-gap-analysis-epost-researcher.md",
-      "excerpt": "**What it does:**\nAutonomous skill refinement based on failure pattern analysis. After N failed attempts on a skill:\n1. Detect most-common failure mode\n2. Generate candidate fix (rule addition, description clarification, reference link)\n3. A/B test on past failures: `pass_rate_after > pass_rate_befo",
-      "targetSkill": "test",
-      "suggestedAction": "",
-      "detectedAt": "2026-04-02T12:15:36.150Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-c7a8c6f3",
-      "type": "journal-flag",
-      "confidence": "low",
-      "source": "docs/journal/skill-evolution/260403-skill-quality-improvements.md",
-      "excerpt": "- Edit tool requires the file to have been read in the same conversation batch. Several edits failed with \"File has not been read yet\" — required re-read before each edit. This caused sequential bottlenecks where parallel edits were intended. [cook skill did not document this constraint explicitly —",
-      "targetSkill": "error-recovery",
-      "suggestedAction": "",
-      "detectedAt": "2026-04-03T05:20:58.549Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-e6761732",
-      "type": "journal-flag",
-      "confidence": "low",
-      "source": "docs/journal/kit/260403-kit-ide-snippets.md",
-      "excerpt": "- The Copilot fallback behavior (falls back to `claude_snippet` when `copilot_snippet` not declared) was a non-obvious detail from the CLI source — easy to miss if editing a new package's `package.yaml`. Captured in the pipeline table.",
-      "targetSkill": "kit",
-      "suggestedAction": "",
-      "detectedAt": "2026-04-03T13:23:42.075Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-9f6dbc66",
-      "type": "audit-failure",
-      "confidence": "high",
-      "source": "reports/260403-2021-kit-ide-snippets-epost-fullstack-developer.md",
-      "excerpt": "- Tests: 7 passed, 0 failed — see verify output above\n- Build: 0 errors\n- Acceptance criteria:\n  - [x] SKILL.md with CSO frontmatter description",
-      "targetSkill": "test",
-      "suggestedAction": "",
-      "detectedAt": "2026-04-03T13:23:42.110Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-4e18035e",
-      "type": "journal-flag",
-      "confidence": "medium",
-      "source": "docs/journal/understand-anything/260404-ua-patterns-reference.md",
-      "excerpt": "- Reference files overran the 1.5KB guideline. The guideline assumes minimal examples, but the phase spec required \"self-contained\" docs with ePost examples. The two goals are in slight tension. Resolved by keeping ePost application snippets concise (pseudocode, not full implementations).",
+      "source": "docs/journal/docs/260331-signal-based-kb-categories.md",
+      "excerpt": "Step numbering in Smart Init and Generation Mode diverged after insertions — the cross-references \"step 3.5\" and \"step 4\" in Smart Init pointed to the wrong steps in Generation Mode post-renumber. Caught and fixed manually. [docs skill] init.md's cross-references between modes are fragile when steps",
       "targetSkill": "docs",
       "suggestedAction": "",
-      "detectedAt": "2026-04-04T00:43:25.138Z",
+      "detectedAt": "2026-04-08T01:45:51.273Z",
       "status": "new"
     },
     {
-      "id": "sig-d470bf48",
+      "id": "sig-8fc26cda",
       "type": "journal-flag",
       "confidence": "medium",
-      "source": "docs/journal/understand-anything/260403-phase1-get-started-two-phase.md",
-      "excerpt": "SKILL.md was 310 lines before the edit — well above the 80-line guideline mentioned in the task spec. The task spec said \"keep SKILL.md under 80 lines\" but the existing file was already 310 lines. Applied YAGNI: added the new section without a full rewrite, since the file structure was clearly inten",
+      "source": "docs/journal/docs-skill/260331-deps-schema-clarity.md",
+      "excerpt": "Nothing significant. Both files were already identical before the edit, confirmed by diff.",
       "targetSkill": "unknown",
       "suggestedAction": "",
-      "detectedAt": "2026-04-04T00:50:48.815Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-e076b3e3",
-      "type": "journal-flag",
-      "confidence": "medium",
-      "source": "docs/journal/understand-anything/260404-artifact-persistence-and-fingerprinting.md",
-      "excerpt": "- The `audit/SKILL.md` fingerprint step was initially drafted to apply to all audit modes including security. Added explicit exception to avoid weakening the security posture — `core/rules/verification.md` principle: safety over speed.\n- `cook/SKILL.md` had existing Step 0 → 0b flow. Adding a third ",
-      "targetSkill": "security",
-      "suggestedAction": "",
-      "detectedAt": "2026-04-04T00:50:48.815Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-a178f2b9",
-      "type": "journal-flag",
-      "confidence": "medium",
-      "source": "docs/journal/knowledge-base/260404-frontend-api-discovery-schema.md",
-      "excerpt": "`init.md` line count was estimated at ~520 lines with the full algorithm inline. The phase-2 spec had a fallback rule for this exact case — extracting to a separate file. Followed the fallback without needing to improvise.",
-      "targetSkill": "unknown",
-      "suggestedAction": "",
-      "detectedAt": "2026-04-04T01:10:58.561Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-f4f4d133",
-      "type": "audit-failure",
-      "confidence": "high",
-      "source": "reports/260405-1805-audit-code-review-web-frontend-ux-evaluation-epost-researcher.md",
-      "excerpt": "```\n| SEC-001 | No SQL injection | critical | [PASS/FAIL] | [description] |\n| SEC-002 | No command injection | critical | [PASS/FAIL] | [description] |\n...\n```",
-      "targetSkill": "unknown",
-      "suggestedAction": "",
-      "detectedAt": "2026-04-05T11:10:35.731Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-4c61e228",
-      "type": "journal-flag",
-      "confidence": "medium",
-      "source": "docs/journal/skill-consolidation/260406-audit-review-phase5-entry-points.md",
-      "excerpt": "- The task spec specified `.epost-data/` paths for the dedup check, but the existing output-contract already established `reports/known-findings/` as the canonical location. Using `.epost-data/` would have created a contradiction. Always read the existing file before implementing additions to it.",
-      "targetSkill": "unknown",
-      "suggestedAction": "",
-      "detectedAt": "2026-04-05T23:30:52.675Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-1f13f2b1",
-      "type": "journal-flag",
-      "confidence": "medium",
-      "source": "docs/journal/ide-converter-perfection/260406-phases-1-2-copilot-cursor.md",
-      "excerpt": "- The HANDOFF_MAP was already in the codebase but tests hadn't been updated to reflect it. Running tests first would have caught this immediately without the manual test fix loop.\n- `generateMdcFile` import in `init.ts` became unused after replacing the cursor MDC block — TypeScript caught this clea",
-      "targetSkill": "loop",
-      "suggestedAction": "",
-      "detectedAt": "2026-04-06T03:17:44.021Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-0118d7c6",
-      "type": "journal-flag",
-      "confidence": "medium",
-      "source": "docs/journal/ide-converter-perfection/260406-snippet-pipeline.md",
-      "excerpt": "- Edit tool requires reading files in the same conversation \"batch\" — batch read via bash output doesn't satisfy the constraint. Had to read each package.yaml individually before editing. [core skill should note this edge case more explicitly]",
-      "targetSkill": "core",
-      "suggestedAction": "",
-      "detectedAt": "2026-04-06T03:17:44.022Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-bbae0ded",
-      "type": "journal-flag",
-      "confidence": "low",
-      "source": "docs/journal/ide-converter/260406-phase5-convert-target-verify.md",
-      "excerpt": "- `convert` was never wired in `cli.ts` — the command existed but was unreachable. Discovered during the adapter-wiring step. Added CLI registration as part of this phase.\n- `verify.ts` needed `readFile` and `readdir` imports added — the IDE check functions use them but the original file only import",
-      "targetSkill": "fix",
-      "suggestedAction": "",
-      "detectedAt": "2026-04-06T03:44:43.304Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-2efc4114",
-      "type": "journal-flag",
-      "confidence": "medium",
-      "source": "docs/journal/antigravity-converter/260406-antigravity-adapter.md",
-      "excerpt": "JSDoc block comment containing `*/SKILL.md` closed the `/* ... */` comment block early, causing 10+ TypeScript parse errors. Changed to `//` line comments. [knowledge skill should flag: avoid `*/` inside JSDoc comment blocks]\n\nModel mapping haiku/sonnet/opus → full IDs required because Antigravity Y",
-      "targetSkill": "knowledge",
-      "suggestedAction": "",
-      "detectedAt": "2026-04-06T10:20:59.219Z",
-      "status": "new"
-    },
-    {
-      "id": "sig-01e0959d",
-      "type": "journal-flag",
-      "confidence": "low",
-      "source": "docs/journal/web-skills/260406-web-skills-minor-fixes.md",
-      "excerpt": "- YAML connections structure mismatch — the plan spec contained invalid YAML syntax (`- domain-b2b` mixed under a keyed map). Caught during edit, fixed with valid `uses: [domain-b2b]` pattern. `[skill-creator]` / `[kit-add-skill]` connection spec should document all valid relation key names to preve",
-      "targetSkill": "kit-add-skill",
-      "suggestedAction": "",
-      "detectedAt": "2026-04-06T16:14:15.087Z",
+      "detectedAt": "2026-04-08T01:45:51.273Z",
       "status": "new"
     },
     {
@@ -752,7 +241,7 @@
       "excerpt": "- [docs] The `epost-kit init` interactive prompt would have blocked sync. Plan said \"run epost-kit init\" but the CLI exits on non-interactive stdin. Direct file copy was the right workaround — but [docs/cook] skill should mention this edge case for single-file syncs.",
       "targetSkill": "cook",
       "suggestedAction": "",
-      "detectedAt": "2026-04-07T08:31:05.739Z",
+      "detectedAt": "2026-04-08T01:45:51.274Z",
       "status": "new"
     },
     {
@@ -763,7 +252,480 @@
       "excerpt": "irect file copy was the right workaround — but [docs/cook] skill should mention this edge case for single-file syncs.",
       "targetSkill": "cook",
       "suggestedAction": "",
-      "detectedAt": "2026-04-07T08:31:05.739Z",
+      "detectedAt": "2026-04-08T01:45:51.274Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-bbae0ded",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/ide-converter/260406-phase5-convert-target-verify.md",
+      "excerpt": "- `convert` was never wired in `cli.ts` — the command existed but was unreachable. Discovered during the adapter-wiring step. Added CLI registration as part of this phase.\n- `verify.ts` needed `readFile` and `readdir` imports added — the IDE check functions use them but the original file only import",
+      "targetSkill": "fix",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.274Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-1f13f2b1",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/ide-converter-perfection/260406-phases-1-2-copilot-cursor.md",
+      "excerpt": "- The HANDOFF_MAP was already in the codebase but tests hadn't been updated to reflect it. Running tests first would have caught this immediately without the manual test fix loop.\n- `generateMdcFile` import in `init.ts` became unused after replacing the cursor MDC block — TypeScript caught this clea",
+      "targetSkill": "loop",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.274Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-0118d7c6",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/ide-converter-perfection/260406-snippet-pipeline.md",
+      "excerpt": "- Edit tool requires reading files in the same conversation \"batch\" — batch read via bash output doesn't satisfy the constraint. Had to read each package.yaml individually before editing. [core skill should note this edge case more explicitly]",
+      "targetSkill": "core",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.275Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-c48ca121",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/ios-android-code-review-expansion/260407-android-rules-expansion.md",
+      "excerpt": "- The LW count in the spec said \"LW: 8/13\" for the main file. Verified by counting: COMPOSE-001, 002, 004, 005, 007 (5) + HILT-001, 004, 005 (3) = 8 LW rules out of 13 total. Math checked out.\n- FLOW-004 spec said `high | LW` but FLOW-003 said `high | Escalated` — different severity/tier combos on s",
+      "targetSkill": "unknown",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.275Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-cd6e9e8c",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/ios-android-code-review-expansion/260407-ios-rules-phase1.md",
+      "excerpt": "The LW/Escalated table in the original file used `UIKIT-001–003` as LW=Yes, but the phase spec reclassified UIKIT-001 and UIKIT-002 as Escalated only and UIKIT-003 as LW. Applied the new classification correctly per phase spec.",
+      "targetSkill": "unknown",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.275Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-e6c24070",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/ios-android-code-review-expansion/260407-phase3-integration.md",
+      "excerpt": "Phase file had an inconsistency: the table example showed `FLOW-001..003` but the requirement text said `FLOW-001..004`. Used the spec text (4 rules) as authoritative since it was explicit.",
+      "targetSkill": "unknown",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.275Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-90d247dc",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/kit/260327-tdd-skill.md",
+      "excerpt": "- skill-index.json path for core-local skills uses `tdd/SKILL.md` (relative), not `../../../.claude/skills/tdd/SKILL.md` — the index is generated output at `.claude/` level but source lives in `packages/core/skills/`. Used relative path matching the package structure.",
+      "targetSkill": "core",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.275Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-fb684c8b",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/kit/260329-claudekit-adoption-phase1.md",
+      "excerpt": "- `ck-config-utils.cjs` and `hook-logger.cjs` imports in the source hook would have caused immediate runtime failure. The phase spec noted \"adapt from CK source\" but didn't flag the dep difference explicitly. [skill-discovery did not cover: hook dependency mapping between source and target kit]",
+      "targetSkill": "skill-discovery",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.275Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-acd793b0",
+      "type": "journal-flag",
+      "confidence": "low",
+      "source": "docs/journal/kit/260330-epost-brainstormer.md",
+      "excerpt": "No near-misses. Phase 2 routing verification confirmed epost-planner nav header already had the brainstormer routing row at line 24 (no edit needed — plan correctly pre-verified this).",
+      "targetSkill": "plan",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.276Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-341936fb",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/kit/260331-skill-creator-adoption.md",
+      "excerpt": "- raw.githubusercontent.com returned 503 — `gh api` with base64 decode was the reliable path. `skill-discovery` has no pattern for GitHub raw-fetch failures.",
+      "targetSkill": "skill-discovery",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.276Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-9c6747f2",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/kit/260331-whitelist-and-compliance.md",
+      "excerpt": "- The phase plan said to add the checklist to skill-development.md after the CSO section, but skill-development.md already referenced `references/description-validation-checklist.md` (line 109). Created both the inline summary section AND the reference file to be consistent with what was already doc",
+      "targetSkill": "security",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.276Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-e6761732",
+      "type": "journal-flag",
+      "confidence": "low",
+      "source": "docs/journal/kit/260403-kit-ide-snippets.md",
+      "excerpt": "- The Copilot fallback behavior (falls back to `claude_snippet` when `copilot_snippet` not declared) was a non-obvious detail from the CLI source — easy to miss if editing a new package's `package.yaml`. Captured in the pipeline table.",
+      "targetSkill": "kit",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.277Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-38125862",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/kit-marketplace/260321-marketplace-phase1.md",
+      "excerpt": "- `src/types/epost-config.ts` existed from a prior session — no conflict, but worth checking before assuming files need creation\n- `npm run build` is blocked by the scout-block hook; used `npx tsc --noEmit` instead for type verification",
+      "targetSkill": "core",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.277Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-824cd9f4",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/kit-marketplace/260323-marketplace-tui.md",
+      "excerpt": "- Two unused variables (`writeEpostConfig`, `bundles`, `state`) triggered strict TS6133 errors. Prefixed with `_` or removed import.\n- `npm run build` is blocked by scout-block.cjs hook matching \"build\" pattern — ran `npx tsc && npx tsc-alias` directly instead. Same output, no real issue.\n- 6 pre-ex",
+      "targetSkill": "test",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.277Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-d4f061b4",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/kit-marketplace/260323-phase2-cli-commands.md",
+      "excerpt": "- `SHARED_AGENTS` was imported but unused in `add.ts` causing a TS6133 error — caught by typecheck before build.\n- Stash check showed 14 pre-existing test failures, not 6 — the stash inadvertently reverted the resolver test files from Phase 1, revealing they fixed some failures. Phase 2 net delta is",
+      "targetSkill": "test",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.278Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-bb25c99d",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/kit-rationalization/260319-phase1-agent-deletion.md",
+      "excerpt": "- `plans/260318-1353-skill-discovery-superpower/phase-1-quick-fixes.md` references `epost-kit-designer` as a file to update (add `skills:` field). Pre-check flagged it. Closer reading: it's a file-path-as-target, not an agent dependency. Safe to delete — that task in phase-1 is now moot.",
+      "targetSkill": "skill-discovery",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.278Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-227ef314",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/kit-rationalization/260320-prune-skills.md",
+      "excerpt": "- `epost-debugger` agent had `problem-solving` in its `skills:` list — would have caused a broken skill load on every debug session. Caught by grepping agent files for deleted skill names.\n- The `kit/references/add-agent.md`, `add-skill.md`, `add-hook.md`, and `optimize.md` files each had `requires:",
+      "targetSkill": "skill-discovery",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.278Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-0f63a7d4",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/kit-rationalization/260402-skill-discovery-simplification.md",
+      "excerpt": "The platform detection priority list (explicit hint > file extensions > CWD > project markers) was embedded in Step 1 and could have been lost. Verified it's not needed in the catalogue form — that logic belongs in individual agent system prompts, not in a reference file.",
+      "targetSkill": "unknown",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.278Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-4fa8396f",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/kit-routing-redesign/260402-claude-md-routing-rewrite.md",
+      "excerpt": "Nothing significant. The phase spec was clear and the file was small enough to rewrite in one pass.",
+      "targetSkill": "unknown",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.279Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-a178f2b9",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/knowledge-base/260404-frontend-api-discovery-schema.md",
+      "excerpt": "`init.md` line count was estimated at ~520 lines with the full algorithm inline. The phase-2 spec had a fallback rule for this exact case — extracting to a separate file. Followed the fallback without needing to improvise.",
+      "targetSkill": "unknown",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.279Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-6a7be4f6",
+      "type": "journal-flag",
+      "confidence": "low",
+      "source": "docs/journal/skill-consolidation/260330-knowledge-unify.md",
+      "excerpt": "- Plan.md and phase-4.md contradicted each other on clean-code. The plan intro said \"clean-code stays separate\" but phase-4.1 listed it for removal from package.yaml. [plan skill] cross-references between plan phases created ambiguity that required judgment rather than mechanical execution.\n- `journ",
+      "targetSkill": "clean-code",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.279Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-63f8ce0b",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/skill-consolidation/260330-phase1-merge-flag-skills.md",
+      "excerpt": "- `git/SKILL.md` needed two changes: both Step 0 `if` chain AND Aspect Files table. Easy to miss the second location if only scanning for the flag table. [core skill] does not cover \"parent skills may need updates in multiple sections\" — needed manual inspection of each parent's structure.",
+      "targetSkill": "core",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.279Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-4c61e228",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/skill-consolidation/260406-audit-review-phase5-entry-points.md",
+      "excerpt": "- The task spec specified `.epost-data/` paths for the dedup check, but the existing output-contract already established `reports/known-findings/` as the canonical location. Using `.epost-data/` would have created a contradiction. Always read the existing file before implementing additions to it.",
+      "targetSkill": "unknown",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.280Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-cf8fc29d",
+      "type": "journal-flag",
+      "confidence": "low",
+      "source": "docs/journal/skill-creator-integration/260331-phase1-validation-gate.md",
+      "excerpt": "- `quick_validate.py` exits with code 1 for all failures — the exit code alone doesn't distinguish \"missing required field\" from \"unexpected key\". Had to parse stdout message text to classify level. [skill-creator SKILL.md] does not document this contract explicitly; it's an implementation detail of",
+      "targetSkill": "skill-creator",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.280Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-ce2da0c3",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/skill-creator-integration/260331-phases2-4-eval-optimize-report-package.md",
+      "excerpt": "Python availability check needed to be in each script independently (not imported from skill-validate.cjs) because the bridge scripts live in `scripts/` not `hooks/lib/` — requiring across those directories without a shared module pattern would have created a fragile dependency. Kept `findPython()` ",
+      "targetSkill": "core",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.280Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-a37722ab",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/skill-description-enhancement/260331-phase2-platform-domain.md",
+      "excerpt": "Edit tool requires the file to be read in the same conversation batch before editing. With 23 files to update, the read-then-edit constraint meant careful sequencing was needed. No skill covered this constraint explicitly — it's a Claude Code tool behavior, not a domain pattern.",
+      "targetSkill": "unknown",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.280Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-b637d9bd",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/skill-evolution/260331-skill-description-enhancement-phase1.md",
+      "excerpt": "- scout-block hook blocked bash one-liners containing \"build\", \"target\", \"coverage\" when writing an inline Node.js update script — worked around by writing a temp Python file and executing it. [scout-block] did not cover this pattern; the hook fires on the command text, not just file paths\n- `packag",
+      "targetSkill": "skill-discovery",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.281Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-a9b3c7f1",
+      "type": "journal-flag",
+      "confidence": "low",
+      "source": "docs/journal/skill-evolution/260331-skill-description-fixes.md",
+      "excerpt": "- The `.claude/skills/*/SKILL.md` mirror files don't exist — only `evals/` subdirs are present per skill. Attempted to mirror SKILL.md changes there before discovering this. Only `skill-index.json` needed updating in `.claude/`.\n- Platform skills (android, ios, kit, simulator) are not registered in ",
+      "targetSkill": "simulator",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.281Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-c7a8c6f3",
+      "type": "journal-flag",
+      "confidence": "low",
+      "source": "docs/journal/skill-evolution/260403-skill-quality-improvements.md",
+      "excerpt": "- Edit tool requires the file to have been read in the same conversation batch. Several edits failed with \"File has not been read yet\" — required re-read before each edit. This caused sequential bottlenecks where parallel edits were intended. [cook skill did not document this constraint explicitly —",
+      "targetSkill": "error-recovery",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.281Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-daece139",
+      "type": "journal-flag",
+      "confidence": "low",
+      "source": "docs/journal/skill-rationalization/260331-merge-review-into-audit.md",
+      "excerpt": "- review's `--improvements` mode ran inline (not dispatched to any agent) — easy to miss. Confirmed it was the only truly unique mode by comparing all four flag paths against audit's existing flags before deleting.",
+      "targetSkill": "audit",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.281Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-d470bf48",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/understand-anything/260403-phase1-get-started-two-phase.md",
+      "excerpt": "SKILL.md was 310 lines before the edit — well above the 80-line guideline mentioned in the task spec. The task spec said \"keep SKILL.md under 80 lines\" but the existing file was already 310 lines. Applied YAGNI: added the new section without a full rewrite, since the file structure was clearly inten",
+      "targetSkill": "unknown",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.281Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-e076b3e3",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/understand-anything/260404-artifact-persistence-and-fingerprinting.md",
+      "excerpt": "- The `audit/SKILL.md` fingerprint step was initially drafted to apply to all audit modes including security. Added explicit exception to avoid weakening the security posture — `core/rules/verification.md` principle: safety over speed.\n- `cook/SKILL.md` had existing Step 0 → 0b flow. Adding a third ",
+      "targetSkill": "security",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.282Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-4e18035e",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/understand-anything/260404-ua-patterns-reference.md",
+      "excerpt": "- Reference files overran the 1.5KB guideline. The guideline assumes minimal examples, but the phase spec required \"self-contained\" docs with ePost examples. The two goals are in slight tension. Resolved by keeping ePost application snippets concise (pseudocode, not full implementations).",
+      "targetSkill": "docs",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.282Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-9f1a0dab",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/web-i18n/260331-i18n-sheet-sync-commands.md",
+      "excerpt": "- Commands directory (`packages/platform-web/skills/web-i18n/commands/`) didn't exist yet — had to create it alongside scripts. The plan spec listed both paths but the directory was new.\n- The `.claude/commands/` directory also didn't exist — created alongside the mirror. If epost-kit init doesn't h",
+      "targetSkill": "web-i18n",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.282Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-21eb5d3a",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/web-i18n/260331-i18n-validate-docs.md",
+      "excerpt": "The original docs assumed `GOOGLE_SERVICE_ACCOUNT_KEY` was always required. This would mislead any developer trying to run `--validate` in a CI environment without write credentials. The distinction between public (CSV export) and authenticated (Sheets API) reads is critical and was absent from all ",
+      "targetSkill": "web-i18n",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.282Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-f0d00bb7",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/web-prototype-convert/260407-component-token-mapping.md",
+      "excerpt": "- Temptation to list all 67+ components individually would have exceeded 200 lines. Solved by grouping variants under shared role rows (\"one-of-N radio choice\" covers RadioGroup without needing sub-rows).\n- `token-mapping.md` pixel values in spacing table could become stale. Mitigated by marking the",
+      "targetSkill": "unknown",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.283Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-07954413",
+      "type": "journal-flag",
+      "confidence": "low",
+      "source": "docs/journal/web-prototype-convert/260407-eval-and-validation.md",
+      "excerpt": "- `kit-verify` script is at `.claude/scripts/verify.cjs`, not `packages/kit/scripts/kit-verify.cjs` as the task spec suggested — found by listing `.claude/scripts/`\n- `analysis-checklist.md` is at 191 lines, just under the 200-line cap. If it grows, it will need splitting.",
+      "targetSkill": "kit-verify",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.283Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-2cfb40cc",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/web-prototype-convert/260407-skill-core-and-analysis.md",
+      "excerpt": "- analysis-checklist.md initially hit 211 lines (cap: 200). Trimmed by collapsing `---` separators between sections and removing redundant step numbering prefixes. Content preserved fully.",
+      "targetSkill": "fix",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.283Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-c0ff3ccc",
+      "type": "journal-flag",
+      "confidence": "medium",
+      "source": "docs/journal/web-prototype-convert/260407-style-data-migration-references.md",
+      "excerpt": "- Phase file had detailed section-by-section requirements — skimming would have missed the \"stub pattern surfaces as 🟡\" requirement and the Zustand analysis guidance. Full read of phase file was essential before writing.",
+      "targetSkill": "unknown",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.283Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-01e0959d",
+      "type": "journal-flag",
+      "confidence": "low",
+      "source": "docs/journal/web-skills/260406-web-skills-minor-fixes.md",
+      "excerpt": "- YAML connections structure mismatch — the plan spec contained invalid YAML syntax (`- domain-b2b` mixed under a keyed map). Caught during edit, fixed with valid `uses: [domain-b2b]` pattern. `[skill-creator]` / `[kit-add-skill]` connection spec should document all valid relation key names to preve",
+      "targetSkill": "kit-add-skill",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.284Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-694dd08b",
+      "type": "audit-failure",
+      "confidence": "medium",
+      "source": "reports/260402-1902-skill-gap-analysis-epost-researcher.md",
+      "excerpt": "**What it does:**\nAutonomous skill refinement based on failure pattern analysis. After N failed attempts on a skill:\n1. Detect most-common failure mode\n2. Generate candidate fix (rule addition, description clarification, reference link)\n3. A/B test on past failures: `pass_rate_after > pass_rate_befo",
+      "targetSkill": "test",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.285Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-9f6dbc66",
+      "type": "audit-failure",
+      "confidence": "medium",
+      "source": "reports/260403-2021-kit-ide-snippets-epost-fullstack-developer.md",
+      "excerpt": "- Tests: 7 passed, 0 failed — see verify output above\n- Build: 0 errors\n- Acceptance criteria:\n  - [x] SKILL.md with CSO frontmatter description",
+      "targetSkill": "test",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.296Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-f4f4d133",
+      "type": "audit-failure",
+      "confidence": "low",
+      "source": "reports/260405-1805-audit-code-review-web-frontend-ux-evaluation-epost-researcher.md",
+      "excerpt": "```\n| SEC-001 | No SQL injection | critical | [PASS/FAIL] | [description] |\n| SEC-002 | No command injection | critical | [PASS/FAIL] | [description] |\n...\n```",
+      "targetSkill": "unknown",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-08T01:45:51.302Z",
       "status": "new"
     }
   ]

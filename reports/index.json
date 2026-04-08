@@ -3,10 +3,30 @@
   "updatedAt": "2026-04-07",
   "entries": [
     {
+      "id": "260407-1358-integration-epost-fullstack-developer",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "iOS/Android code review expansion — Phase 3 integration (wire 9 mobile categories into SKILL.md dispatch + schema)",
+      "verdict": "DONE",
+      "date": "2026-04-07",
+      "plan": "plans/260406-2347-ios-android-code-review-expansion",
+      "path": "plans/260406-2347-ios-android-code-review-expansion/reports/260407-1358-integration-epost-fullstack-developer.md"
+    },
+    {
+      "id": "260407-1354-ios-rules-expansion-epost-fullstack-developer",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "iOS code review rules expansion — Phase 1 (6→20 rules: SWIFT+UIKIT+REALM+ALAMOFIRE)",
+      "verdict": "DONE",
+      "date": "2026-04-07",
+      "plan": "plans/260406-2347-ios-android-code-review-expansion",
+      "path": "plans/260406-2347-ios-android-code-review-expansion/reports/260407-1354-ios-rules-expansion-epost-fullstack-developer.md"
+    },
+    {
       "id": "260407-0914-docs-init-fixes-phases-1-2-epost-fullstack-developer",
       "type": "implementation",
       "agent": "epost-fullstack-developer",
-      "title": "docs-init-fixes phases 1+2 — Strengthen Pre-Write Validation + ID/path guidance in init.md",
+      "title": "docs-init-fixes phases 1+2 \u2014 Strengthen Pre-Write Validation + ID/path guidance in init.md",
       "verdict": "DONE",
       "date": "2026-04-07",
       "plan": "plans/260407-0857-docs-init-fixes",
@@ -1126,6 +1146,26 @@
       "createdAt": "2026-03-31",
       "path": "Users/than/Projects/epost_agent_kit/plans/260331-1551-skill-description-enhancement/reports/260331-1610-phase2-platform-domain-epost-fullstack-developer.md",
       "plan": "plans/260331-1551-skill-description-enhancement"
+    },
+    {
+      "id": "260407-1337-docs-init-verify-epost-fullstack-developer",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "docs-init-fixes phase 3 \u2014 Verification: sync confirmed, jq checks pass, all 4 blockers addressed",
+      "verdict": "DONE",
+      "createdAt": "2026-04-07",
+      "path": "plans/260407-0857-docs-init-fixes/reports/260407-1337-docs-init-verify-epost-fullstack-developer.md",
+      "plan": "plans/260407-0857-docs-init-fixes"
+    },
+    {
+      "id": "260407-1337-web-prototype-convert-status-update-epost-fullstack-developer",
+      "type": "implementation",
+      "agent": "epost-fullstack-developer",
+      "title": "web-prototype-convert redesign \u2014 All 4 phases confirmed complete, plan closed",
+      "verdict": "DONE",
+      "createdAt": "2026-04-07",
+      "path": "reports/260407-1337-docs-init-fixes-epost-fullstack-developer.md",
+      "plan": "plans/260407-1240-web-prototype-convert-redesign"
     }
   ],
   "reports": [
