@@ -20,6 +20,7 @@ metadata:
   connections:
     enhances: [code-review, ui-lib-dev]
     requires: [knowledge]
+    optional: [web-analytic]
 ---
 
 # Audit — Unified Audit Command
