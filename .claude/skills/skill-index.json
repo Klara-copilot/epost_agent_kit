@@ -1,10 +1,10 @@
 {
-  "generated": "2026-04-06T03:40:54.864Z",
+  "generated": "2026-04-08T08:09:22.445Z",
   "version": "2.0.0",
-  "count": 81,
+  "count": 79,
   "categories": {
     "accessibility": 4,
-    "uncategorized": 39,
+    "uncategorized": 37,
     "workflow": 12,
     "backend": 2,
     "quality": 6,
@@ -859,7 +859,7 @@
         "enhances": [],
         "conflicts": []
       },
-      "size": 61832,
+      "size": 64997,
       "path": "docs/SKILL.md"
     },
     {
@@ -1213,43 +1213,6 @@
       },
       "size": 37159,
       "path": "ios-development/SKILL.md"
-    },
-    {
-      "name": "ios-rag",
-      "description": "(ePost) Use when searching existing patterns in the iOS Swift codebase — views, implementations, design token usage. Vector search over iOS code. NOT for implementing new code.",
-      "category": "uncategorized",
-      "tier": "discoverable",
-      "keywords": [
-        "rag",
-        "vector-search",
-        "ios",
-        "swift",
-        "swiftui",
-        "uikit",
-        "design-system"
-      ],
-      "platforms": [
-        "ios"
-      ],
-      "triggers": [
-        "search swift",
-        "find view",
-        "ios pattern",
-        "theme token"
-      ],
-      "agent-affinity": [
-        "epost-a11y-specialist",
-        "epost-muji",
-        "epost-fullstack-developer"
-      ],
-      "connections": {
-        "extends": [],
-        "requires": [],
-        "enhances": [],
-        "conflicts": []
-      },
-      "size": 13118,
-      "path": "ios-rag/SKILL.md"
     },
     {
       "name": "ios-testing",
@@ -2491,34 +2454,6 @@
       },
       "size": 47688,
       "path": "ui-lib-dev/SKILL.md"
-    },
-    {
-      "name": "understand-patterns",
-      "description": "(ePost) Use when designing multi-agent codebase analysis, incremental workflows, or cross-agent artifact sharing. Reference for Understand-Anything patterns: two-phase extraction, fan-in, artifact persistence.",
-      "category": "uncategorized",
-      "tier": "discoverable",
-      "keywords": [
-        "understand-anything",
-        "two-phase",
-        "artifact",
-        "fingerprint",
-        "fan-in",
-        "codebase-analysis",
-        "incremental"
-      ],
-      "platforms": [
-        "all"
-      ],
-      "triggers": [],
-      "agent-affinity": [],
-      "connections": {
-        "extends": [],
-        "requires": [],
-        "enhances": [],
-        "conflicts": []
-      },
-      "size": 13307,
-      "path": "understand-patterns/SKILL.md"
     },
     {
       "name": "web-a11y",

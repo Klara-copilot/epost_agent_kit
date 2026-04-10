@@ -1,28 +1,59 @@
 # i18n Patterns — next-intl Configuration
 
-## Full Env Vars (`.env.local`)
+## Configuration
 
-```bash
-# Required
-I18N_GOOGLE_SHEET_ID=<sheet-id>
-I18N_MESSAGES_DIR=<relative-path-to-messages-dir>
-I18N_LOCALES=en,de,fr,it
+All i18n settings go in `.epost-kit.json` at the project root (committed to git).
+Only `GOOGLE_SERVICE_ACCOUNT_KEY` stays in `.env.local` (gitignored).
 
-# Write ops only (--push)
-GOOGLE_SERVICE_ACCOUNT_KEY=<path-to-service-account-json>
+**`.epost-kit.json` — `i18n` section:**
 
-# Sheet structure
-I18N_RESULT_SHEET_TAB=Result
-I18N_KEY_SEPARATOR=::
-I18N_LOCALE_MAP=en:en,de:de,fr:fr,it:it   # Sheet column header → JSON filename
+```json
+{
+  "i18n": {
+    "googleSheetId": "1MYcD7ktAy1tx6bERwgWyp8OR-RIj8YSUNcXPwwiR_QQ",
+    "messagesDir": "<relative-path-to-messages-dir>",
+    "locales": ["en", "de", "fr", "it"],
 
-# Sheet mode (choose one)
-I18N_SHEET_MODE=tabs                        # "tabs" or "single"
-I18N_FALLBACK_SHEET_TAB=Common             # tabs mode: fallback tab
-# I18N_SHEET_TAB=Sheet1                    # single mode: tab name
-# I18N_PROJECT_COLUMN=PROJECT              # single mode: filter column
-# I18N_PROJECT_VALUE=my_project            # single mode: filter value
+    "resultSheetTab": "Result",
+    "keySeparator": "::",
+    "localeMap": "en:en,de_CH:de,fr_CH:fr,it_CH:it",
+
+    "sheetMode": "tabs",
+    "fallbackSheetTab": "Common"
+  }
+}
 ```
+
+**Single-tab mode extras** (add to `i18n` object):
+```json
+{
+  "sheetMode": "single",
+  "sheetTab": "Sheet1",
+  "projectColumn": "PROJECT",
+  "projectValue": "my_project"
+}
+```
+
+**`.env.local`** (gitignored — override for write ops):
+```bash
+GOOGLE_SERVICE_ACCOUNT_KEY=.secrets/google-sa.json
+```
+
+### Field Reference
+
+| Field | Required | Default | Notes |
+|-------|----------|---------|-------|
+| `googleSheetId` | Yes | — | Google Sheet ID |
+| `messagesDir` | Yes | — | Relative path to messages dir |
+| `locales` | Yes | — | Array or comma-string |
+| `localeMap` | No | — | Sheet column → JSON filename mapping |
+| `resultSheetTab` | No | `Result` | Tab containing translated values |
+| `keySeparator` | No | `::` | Key namespace separator |
+| `sheetMode` | No | `tabs` | `tabs` or `single` |
+| `fallbackSheetTab` | No | `Common` | tabs mode: fallback tab |
+| `sheetTab` | single mode | — | Tab name for single mode |
+| `projectColumn` | single mode | — | Filter column name |
+| `projectValue` | single mode | — | Filter value |
 
 ## next-intl Configuration
 
@@ -49,6 +80,8 @@ export default getRequestConfig(async ({ locale }) => {
 
 ## navigation.ts — Always Import From Here
 
+<!-- next-intl v3.15.0: createSharedPathnamesNavigation is deprecated in favor of createNavigation
+     but the project intentionally uses it for shared pathnames routing. Do not migrate without team decision. -->
 ```typescript
 import { createSharedPathnamesNavigation } from 'next-intl/navigation';
 
@@ -117,10 +150,28 @@ messages/
 
 | Script | Purpose |
 |--------|---------|
-| `env-config.cjs` | Read + validate `I18N_*` env vars from `.env.local` |
+| `env-config.cjs` | Read + validate i18n config from `.epost-kit.json` |
 | `sheets-client.cjs` | Google Sheets API auth, read, append, list tabs |
 | `key-converter.cjs` | `Namespace::Key` ↔ `{ Namespace: { Key: value } }` |
 | `tab-resolver.cjs` | Key namespace → sheet tab name (tabs mode) |
 | `validate.cjs` | Detect missing, orphaned, untranslated keys (read-only) |
 | `pull.cjs` | Fetch from sheet → write `messages/*.json` (read-only) |
 | `push.cjs` | Detect new code keys → append rows with EN pre-filled |
+
+---
+
+## Quick Reference
+
+### Translation Usage
+
+| Context | API |
+|---------|-----|
+| Server Components | `getTranslations('FeatureName')` (async) |
+| Client Components | `useTranslations('FeatureName.Dashboard')` |
+| Root Layout | `NextIntlClientProvider messages={await getMessages()}` |
+
+### Key Rules
+
+- Import navigation helpers from `navigation.ts` — never `next/link` or `next/navigation`
+- Always add translations to ALL locale files
+- Use dot notation for nested namespaces: `useTranslations('Feature.Sub')`

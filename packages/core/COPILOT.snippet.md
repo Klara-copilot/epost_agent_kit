@@ -2,7 +2,7 @@
 
 epost_agent_kit is a multi-agent development toolkit. Specialized agents handle planning, implementation, debugging, review, docs, and more. Each agent loads platform-specific knowledge on demand.
 
-In Copilot Chat, invoke agents with `@agent-name`. Agents can hand off to each other via handoff buttons — follow the suggested next step when prompted.
+In Copilot Chat, invoke agents with `@agent-name`. Agents can hand off to each other — follow the suggested next step when prompted.
 
 ---
 
@@ -38,7 +38,7 @@ When the user describes a task, suggest the right `@epost-{agent}` to invoke.
 
 ## UI Component Audit
 
-When the user asks to audit a UI component (e.g. "audit SmartLetterComposer", "review this component"), use `askQuestions` **before** delegating to `@epost-muji`:
+When the user asks to audit a UI component, use `askQuestions` **before** delegating to `@epost-muji`:
 
 ```
 askQuestions([
@@ -54,15 +54,23 @@ askQuestions([
 ])
 ```
 
-Then delegate with the answer included:
-- `@epost-muji Audit [ComponentName] --ui --[poc|beta|stable]`
+Then delegate: `@epost-muji Audit [ComponentName] --ui --[poc|beta|stable]`
 
-**Skip `askQuestions` if** the user already specified `--poc`, `--beta`, or `--stable` in their message.
+**Skip `askQuestions` if** the user already specified `--poc`, `--beta`, or `--stable`.
+
+---
+
+## Handoff Workflow
+
+Agents suggest next steps after completing their task. Follow the handoff:
+- Planner → `@epost-fullstack-developer` (implement the plan)
+- Developer → `@epost-code-reviewer` (review before commit)
+- Reviewer → `@epost-git-manager` (commit and push)
 
 ---
 
 ### Context Tips
 
 - Copilot instructions apply to Chat only, not inline autocomplete
-- Embed knowledge directly in prompts — external links may not be fetched
 - Each agent has its own prompt context; keep delegations focused (one task per agent)
+- Per-platform instructions auto-apply via scoped `.instructions.md` files in `.github/instructions/`

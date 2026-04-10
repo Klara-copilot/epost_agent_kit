@@ -7,8 +7,6 @@ disable-model-invocation: true
 
 # Web Modules Code Review Rules
 
-ePost-specific B2B module structure rules. Loaded by code-review skill when reviewing files inside a B2B module directory.
-
 **Scope**: Module scaffold order, directory conventions, layering, store scoping in ePost B2B modules.
 
 ---
@@ -16,6 +14,8 @@ ePost-specific B2B module structure rules. Loaded by code-review skill when revi
 ## MOD: B2B Module Structure
 
 **Scope**: ePost B2B module screens — Inbox, Monitoring, Composer, Smart Send, Archive, Contacts, Organization, Smart Letter.
+
+**Activation gate**: Skip MOD-001 (scaffold order) and MOD-003 (layering) for files in `_ui-models/` — those rules apply to components, hooks, and actions; data model files only need MOD-002 (directory placement).
 
 | Rule ID | Rule | Severity | Pass | Fail |
 |---------|------|----------|------|------|
@@ -35,7 +35,3 @@ ePost-specific B2B module structure rules. Loaded by code-review skill when revi
 | MOD-001–002, MOD-005 | — | Yes |
 
 **Lightweight**: Run on all module-directory files. **Escalated**: Activate on new module creation or full module integration PRs.
-
-## Extending
-
-Add rules following the ID pattern: `MOD-{NNN}`. Keep severity scale consistent with cross-cutting rules.

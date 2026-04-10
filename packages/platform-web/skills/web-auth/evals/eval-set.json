@@ -4,8 +4,12 @@
   {"query": "add Keycloak login to the app", "should_trigger": true},
   {"query": "the auth redirect is broken", "should_trigger": true},
   {"query": "enable the new-dashboard feature flag", "should_trigger": true},
+  {"query": "the session token is expiring — how does the 5-minute buffer refresh work?", "should_trigger": true},
+  {"query": "access the user session inside a Server Action (not a Server Component)", "should_trigger": true},
   {"query": "add a protected route component", "should_trigger": false},
   {"query": "implement role checks in the UI", "should_trigger": false},
   {"query": "set up OAuth in the Java backend", "should_trigger": false},
-  {"query": "write tests for the auth flow", "should_trigger": false}
+  {"query": "write tests for the auth flow", "should_trigger": false},
+  {"query": "translate this button label to Vietnamese", "should_trigger": false},
+  {"query": "write a Jest test for the login form submit handler", "should_trigger": false}
 ]

@@ -53,67 +53,8 @@ Comprehensive WCAG 2.1 AA accessibility rules for web development. Covers semant
 | `add_form_label` | `<input>` has no associated `<label>`, `aria-label`, or `aria-labelledby` |
 | `other_manual` | Complex widget, custom component, or context-dependent fix requiring manual review |
 
-## Quick Reference
-
-### Semantic HTML
-
-```html
-<!-- Prefer native elements -->
-<button onclick="save()">Save</button>        <!-- ✅ -->
-<div role="button" onclick="save()">Save</div> <!-- ❌ avoid -->
-
-<!-- Landmark structure -->
-<header>...</header>
-<nav aria-label="Primary">...</nav>
-<main>...</main>
-<aside>...</aside>
-<footer>...</footer>
-```
-
-### ARIA Labels
-
-```html
-<!-- When visible label is absent -->
-<button aria-label="Close dialog">✕</button>
-
-<!-- Link label from another element -->
-<h2 id="article-title">...</h2>
-<a aria-labelledby="article-title">Read more</a>
-
-<!-- Live region for dynamic content -->
-<div aria-live="polite" aria-atomic="true">Status updated</div>
-```
-
-### Keyboard Navigation
-
-```css
-/* Never suppress focus without replacement */
-:focus-visible {
-  outline: 2px solid #005fcc;
-  outline-offset: 2px;
-}
-```
-
-```js
-// tabIndex rules
-tabIndex={0}   // Natural keyboard order
-tabIndex={-1}  // Programmatic focus only, not in tab order
-// Never use positive tabIndex values
-```
-
-### React Patterns
-
-```jsx
-// Accessible icon button
-<button aria-label="Delete item" onClick={handleDelete}>
-  <TrashIcon aria-hidden="true" />
-</button>
-
-// Conditional ARIA state
-<button aria-expanded={isOpen} aria-controls="menu-id">
-  Menu
-</button>
-```
+See `references/web-aria.md` for ARIA label patterns and React patterns.
+See `references/web-keyboard-focus.md` for keyboard navigation and focus patterns.
 
 ## Testing Tools
 

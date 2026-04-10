@@ -63,7 +63,7 @@ For audit reports that include JSON: the `summary` object provides machine-reada
 
 | Report Type | Format | Source |
 |-------------|--------|--------|
-| Code review | `X.X/10` — breakdown: correctness, security, performance, tests, style | Reviewer judgment |
+| Code review | `X.X/10` — correctness (3pts), security (3pts), performance (2pts), tests (1pt), style (1pt); 1pt = full coverage, 0.5pt = partial, 0pt = missing | Reviewer judgment per rule categories |
 | UI audit (library) | `{PASS_COUNT}/{TOTAL_RULES}` | `audit-standards.md` rule count |
 | UI audit (consumer) | Per-section 0-10 scores | `audit-standards.md` consumer formulas |
 | A11y audit | WCAG level: A / AA / AAA conformance | Platform a11y rules |
@@ -108,7 +108,7 @@ See `audit/references/report-template.md § Verdict Formula` for severity thresh
 | epost-planner | `READY` `NEEDS-RESEARCH` `BLOCKED` |
 | epost-researcher | `ACTIONABLE` `INCONCLUSIVE` `NEEDS-MORE` |
 | epost-code-reviewer | `APPROVE` `FIX-AND-RESUBMIT` `REDESIGN` |
-| epost-muji | `APPROVE` `FIX-AND-RESUBMIT` `BLOCKED` |
+| epost-muji | `APPROVE` `FIX-AND-RESUBMIT` `REDESIGN` |
 | epost-a11y-specialist | `PASS` `FAIL` `FIX-AND-RESUBMIT` |
 | epost-tester | `PASS` `FAIL` `PARTIAL` |
 

@@ -68,9 +68,45 @@ Cross-cutting code review rules applicable to all platforms and languages. Platf
 | SEC | SEC-001–005 (surface scan) | + auth flow trace, SEC-006–008 | Always check |
 | LOGIC | LOGIC-001–003 | + race condition trace, LOGIC-004–006 | Always check |
 | DEAD | DEAD-001 | + unused exports, DEAD-002–003 | Escalated pass only for full check |
-| ARCH | ARCH-003 | + layer scan, ARCH-001–002, ARCH-004–005 | Multi-file or new module changes |
+| ARCH | ARCH-001–003 | + ARCH-004–005 | Multi-file or new module changes |
 
 **Rule**: Escalate to full audit when any Critical finding detected.
+
+## QUALITY: Code Quality, Reuse & OOP
+
+**Activation gate**: Apply when reviewing any implementation file — not config or boilerplate.
+
+| Rule ID | Rule | Severity | Pass | Fail |
+|---------|------|----------|------|------|
+| QUALITY-001 | No duplicate logic — identical or near-identical blocks extracted into a shared function | medium | Shared `formatDate(date)` utility used in 3+ places | Same 5-line date formatting block copy-pasted across 3 files |
+| QUALITY-002 | Functions do one thing — no function longer than 30 lines that mixes multiple concerns | medium | `validateUser(data)` only validates; caller handles saving | `saveAndValidateAndNotifyUser()` does all three in sequence |
+| QUALITY-003 | No magic numbers or magic strings — constants named and co-located | medium | `const MAX_RETRY = 3` defined once, imported where used | `if (retries > 3)` or `status === 'PENDING_REVIEW'` inline without named constant |
+| QUALITY-004 | Service/domain objects expose behavior, not raw data — no anemic models (skip for plain DTOs and data types) | medium | `orderService.calculateTotal(order)` — logic co-located with data | Same 5-line total calculation copy-pasted across 5+ callers; service is all getters/setters with zero logic |
+| QUALITY-005 | Prefer composition over inheritance — inheritance only for genuine "is-a" relationships | medium | `withAuth(Component)` HOC; inject `logger` as argument rather than subclassing | `class InboxService extends BaseService` when only one method differs; `class AdminPage extends BasePage` for middleware-only variation |
+| QUALITY-006 | Early return / guard clause pattern — happy path last, not nested | low | Guard returns at top, happy path flows naturally at the bottom | 4-level `if/else` nesting where early returns would flatten the logic |
+| QUALITY-007 | No function is a nesting maze — flag 3+ nesting levels or long `switch` with embedded `if/else` per case; extract to named helpers | medium | Guard clauses at top; complex branches extracted with descriptive names; single concern per function | 4-level nested `if` inside `for` inside `try/catch`; `switch` with 10 cases each containing `if/else` logic |
+
+## Mode Applicability (QUALITY)
+
+| Section | Lightweight | Escalated |
+|---------|-------------|-----------|
+| QUALITY | QUALITY-001, QUALITY-003 | + QUALITY-002, QUALITY-004–007 |
+
+## TEST: Test Coverage
+
+**Activation gate**: Apply when reviewing any PR that modifies logic files (not config, docs, or type-only changes).
+
+**Scope logic**: "Logic file" = any `.ts`, `.tsx`, `.java`, `.swift`, `.kt` file that is NOT a type definition (`*.d.ts`, `types.ts`), a config file, a translation file, or a pure re-export barrel (`index.ts` with only `export * from`). If ALL changed files are non-logic → skip TEST-001.
+
+| Rule ID | Rule | Severity | Pass | Fail |
+|---------|------|----------|------|------|
+| TEST-001 | Changed logic files have corresponding test changes — new functions need new tests, modified functions need updated tests | high | PR adds `calculateTotal()` in `order.ts` and adds `calculateTotal.test.ts` or updates existing test file | PR adds 3 new service methods with zero test file changes in the diff |
+
+## Mode Applicability (TEST)
+
+| Section | Lightweight | Escalated |
+|---------|-------------|-----------|
+| TEST | TEST-001 | — (same rule; escalated adds edge case coverage check) |
 
 ## Anti-Patterns
 

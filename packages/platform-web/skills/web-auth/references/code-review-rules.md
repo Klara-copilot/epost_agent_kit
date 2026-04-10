@@ -7,8 +7,6 @@ disable-model-invocation: true
 
 # Web Auth Code Review Rules
 
-ePost-specific authentication rules. Loaded by code-review skill when reviewing auth-related files or session usage.
-
 **Scope**: NextAuth session access, Keycloak JWT, provider nesting, feature flags, route protection in ePost web apps.
 
 ---
@@ -36,7 +34,3 @@ ePost-specific authentication rules. Loaded by code-review skill when reviewing 
 | AUTH-004–005 | — | Yes |
 
 **Lightweight**: Run on all files using session or auth imports. **Escalated**: Activate on auth flow changes or explicit `--deep` flag.
-
-## Extending
-
-Add rules following the ID pattern: `AUTH-{NNN}`. Keep severity scale consistent with cross-cutting rules.

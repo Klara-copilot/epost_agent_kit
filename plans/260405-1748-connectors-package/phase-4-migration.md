@@ -1,11 +1,11 @@
 ---
 phase: 4
-title: "Consolidate asana-muji — env vars + merge iOS/Android"
+title: "Remove asana-muji duplicates — replace with config"
 effort: 0.5h
 depends: [2]
 ---
 
-# Phase 4 — Consolidate asana-muji
+# Phase 4 — Remove asana-muji Duplicates
 
 ## Context
 
@@ -16,16 +16,11 @@ depends: [2]
 
 ## Overview
 
-The iOS and Android `asana-muji` skills are nearly identical — same 3-board workflow, same 3 workflow files, same MCP operations. The only differences are the project/section GIDs and the assignee GID.
+The generic `asana` skill (Phase 2) is fully config-driven — reads projects, templates, and workflow config from `.epost-kit.json`. `asana-muji` is therefore just MUJI's config, not a skill. No `asana-muji` skill needed.
 
-Instead of thin wrappers, the right model is:
-1. **One `asana-muji` skill** in `packages/connectors/skills/asana-muji/`
-2. **All GIDs from env vars** — any MUJI developer sets their own `.env.connectors` and the skill works
-3. **Delete** the platform-specific duplicates (`platform-ios/asana-muji`, `platform-android/asana-muji`)
+**New model**: delete both platform skills → teams use `asana` + their `.epost-kit.json`.
 
-No wrapper pattern needed. Generic connector (`asana`) + project skill (`asana-muji`) + env vars = full coverage for any dev.
-
-## epost-config.json (replaces all env var GIDs)
+## MUJI's .epost-kit.json config
 
 ```json
 {
@@ -52,43 +47,28 @@ No wrapper pattern needed. Generic connector (`asana`) + project skill (`asana-m
 
 **No user GID** — OAuth `assignee: "me"` handles identity.
 **No section GIDs** — fetched live from Asana MCP per project.
-**No `.env.connectors`** — OAuth credentials stored in system keychain via `claude mcp add`.
 
 ## Files to Create
 
-| File | Action |
-|------|--------|
-| `packages/connectors/skills/asana-muji/SKILL.md` | New — merged from iOS/Android, fully env-var driven |
-| `packages/connectors/skills/asana-muji/workflows/create-task.md` | Merged from iOS/Android |
-| `packages/connectors/skills/asana-muji/workflows/update-status.md` | Merged |
-| `packages/connectors/skills/asana-muji/workflows/my-tasks.md` | Merged |
-| `packages/connectors/skills/asana-muji/references/epost-config-example.md` | epost-config.json schema + example with real MUJI GIDs |
-| `packages/connectors/skills/asana-muji/evals/eval-set.json` | Basic trigger evals |
+| File | Purpose |
+|------|---------|
+| `packages/connectors/skills/asana/references/epost-kit-config-example.md` | MUJI's full config as example + instructions for finding GIDs in Asana URL |
 
 ## Files to Delete
 
 | File | Reason |
 |------|--------|
-| `packages/platform-ios/skills/asana-muji/` (entire dir) | Replaced by connectors version |
-| `packages/platform-android/skills/asana-muji/` (entire dir) | Replaced by connectors version |
+| `packages/platform-ios/skills/asana-muji/` (entire dir) | Replaced by `asana` skill + config |
+| `packages/platform-android/skills/asana-muji/` (entire dir) | Replaced by `asana` skill + config |
 
 ## Tasks
 
-- [ ] Write merged `SKILL.md` — same flags (create/status/my-tasks), reads `epost-config.json`
-- [ ] Write merged `workflows/create-task.md` — reads config for projects/templates; sections fetched live; `assignee: "me"`
-- [ ] Write merged `workflows/update-status.md` — fetches sections live from MCP, no GIDs in workflow
-- [ ] Write merged `workflows/my-tasks.md` — `assignee: "me"`, filters by configured projects
-- [ ] Write `references/epost-config-example.md` — full config schema with MUJI GIDs filled in as example, instructions for finding GIDs in Asana URL
+- [ ] Write `references/epost-kit-config-example.md` — MUJI config with real GIDs as example, instructions for finding GIDs in Asana URL
 - [ ] Delete `packages/platform-ios/skills/asana-muji/` (confirm with user first)
 - [ ] Delete `packages/platform-android/skills/asana-muji/` (confirm with user first)
-- [ ] Register `asana-muji` in `packages/connectors/package.yaml`
 
 ## Acceptance Criteria
 
-- [ ] One `asana-muji` skill in `connectors/`, zero duplicates
-- [ ] Zero hardcoded GIDs — all from `epost-config.json`
-- [ ] No user GID anywhere — `assignee: "me"` throughout
-- [ ] Sections fetched live — none stored in config or skill files
-- [ ] `references/epost-config-example.md` documents schema + how to find GIDs
+- [ ] Zero `asana-muji` skill files — only `asana` skill remains
+- [ ] `references/epost-kit-config-example.md` shows MUJI config with real GIDs
 - [ ] Old platform-specific skills deleted (after user confirmation)
-- [ ] Still works with flags: `create`, `status`, `my-tasks`

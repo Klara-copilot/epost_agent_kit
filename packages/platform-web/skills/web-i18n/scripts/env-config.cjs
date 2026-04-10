@@ -1,8 +1,13 @@
 /**
- * env-config.cjs — Read and validate I18N_* env vars
+ * env-config.cjs — Read i18n config from .epost-kit.json
  *
- * Reads from .env.local in cwd (or provided path), then falls back to process.env.
- * Returns a typed config object for all i18n settings.
+ * Config source priority (highest wins):
+ *   1. process.env  — CI / shell overrides
+ *   2. .env.local   — GOOGLE_SERVICE_ACCOUNT_KEY only (not committed)
+ *   3. .epost-kit.json `i18n` section — committed project defaults
+ *
+ * All i18n settings live in .epost-kit.json. Only the service account key
+ * (a secret) belongs in .env.local.
  */
 
 'use strict';
@@ -11,8 +16,26 @@ const fs = require('fs');
 const path = require('path');
 
 /**
+ * Load the `i18n` section from .epost-kit.json in cwd.
+ * Returns an empty object if the file or section is absent.
+ *
+ * @param {string} cwd
+ * @returns {Record<string, unknown>}
+ */
+function loadEpostKitI18n(cwd) {
+  const configPath = path.join(cwd, '.epost-kit.json');
+  if (!fs.existsSync(configPath)) return {};
+  try {
+    const raw = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+    return raw.i18n || {};
+  } catch {
+    return {};
+  }
+}
+
+/**
  * Parse a .env file into a key/value map.
- * Handles quoted values, ignores comments and blank lines.
+ * Used only to read GOOGLE_SERVICE_ACCOUNT_KEY from .env.local.
  *
  * @param {string} filePath
  * @returns {Record<string, string>}
@@ -32,7 +55,6 @@ function parseEnvFile(filePath) {
     const key = trimmed.slice(0, eqIdx).trim();
     let value = trimmed.slice(eqIdx + 1).trim();
 
-    // Strip surrounding quotes
     if (
       (value.startsWith('"') && value.endsWith('"')) ||
       (value.startsWith("'") && value.endsWith("'"))
@@ -47,75 +69,89 @@ function parseEnvFile(filePath) {
 }
 
 /**
- * Load I18N_* configuration from .env.local (or provided path) + process.env.
+ * Parse localeMap — accepts string ("en:en,de_CH:de") or object ({ en: 'en' }).
  *
- * @param {string} [envPath] - Path to env file. Defaults to cwd/.env.local
- * @returns {object} Merged config with I18N_* values
+ * @param {string|object|undefined} raw
+ * @returns {Record<string, string>}
  */
-function loadConfig(envPath) {
-  const envFile = envPath || path.join(process.cwd(), '.env.local');
-  const fileVars = parseEnvFile(envFile);
+function parseLocaleMap(raw) {
+  if (!raw) return {};
+  if (typeof raw === 'object') return raw;
+  return Object.fromEntries(
+    raw.split(',').map((pair) => {
+      const [col, file] = pair.trim().split(':');
+      return [col.trim(), file.trim()];
+    })
+  );
+}
 
-  // process.env takes priority (CI / shell overrides)
-  const merged = { ...fileVars, ...process.env };
+/**
+ * Load i18n configuration.
+ *
+ * @param {string} [cwd] - Project root. Defaults to process.cwd()
+ * @returns {object} Config object
+ */
+function loadConfig(cwd) {
+  const projectRoot = cwd || process.cwd();
+  const kit = loadEpostKitI18n(projectRoot);
 
-  /**
-   * Parse I18N_LOCALE_MAP="en:en,de:de,fr:fr,it:it"
-   * → { en: 'en', de: 'de', fr: 'fr', it: 'it' }
-   */
-  function parseLocaleMap(raw) {
-    if (!raw) return {};
-    return Object.fromEntries(
-      raw.split(',').map((pair) => {
-        const [col, file] = pair.trim().split(':');
-        return [col.trim(), file.trim()];
-      })
-    );
-  }
+  // Only read the service account key from .env.local / process.env
+  const envFile = parseEnvFile(path.join(projectRoot, '.env.local'));
+  const serviceAccountKeyPath =
+    process.env['GOOGLE_SERVICE_ACCOUNT_KEY'] ||
+    envFile['GOOGLE_SERVICE_ACCOUNT_KEY'] ||
+    kit.serviceAccountKeyPath ||
+    '';
+
+  // Locales: accept array or comma-string
+  const localesRaw = kit.locales;
+  const locales = Array.isArray(localesRaw)
+    ? localesRaw
+    : (localesRaw || '').split(',').map((l) => l.trim()).filter(Boolean);
 
   return {
     // Required
-    googleSheetId: merged['I18N_GOOGLE_SHEET_ID'] || '',
-    messagesDir: merged['I18N_MESSAGES_DIR'] || '',
-    locales: (merged['I18N_LOCALES'] || '').split(',').map((l) => l.trim()).filter(Boolean),
-    serviceAccountKeyPath: merged['GOOGLE_SERVICE_ACCOUNT_KEY'] || '',
+    googleSheetId: kit.googleSheetId || '',
+    messagesDir: kit.messagesDir || '',
+    locales,
+    serviceAccountKeyPath,
 
     // Sheet structure
-    resultSheetTab: merged['I18N_RESULT_SHEET_TAB'] || 'Result',
-    keySeparator: merged['I18N_KEY_SEPARATOR'] || '::',
-    localeMap: parseLocaleMap(merged['I18N_LOCALE_MAP']),
+    resultSheetTab: kit.resultSheetTab || 'Result',
+    keySeparator: kit.keySeparator || '::',
+    localeMap: parseLocaleMap(kit.localeMap),
 
     // Sheet mode
-    sheetMode: merged['I18N_SHEET_MODE'] || 'tabs',
-    fallbackSheetTab: merged['I18N_FALLBACK_SHEET_TAB'] || 'Common',
-    sheetTab: merged['I18N_SHEET_TAB'] || '',
-    projectColumn: merged['I18N_PROJECT_COLUMN'] || '',
-    projectValue: merged['I18N_PROJECT_VALUE'] || '',
+    sheetMode: kit.sheetMode || 'tabs',
+    fallbackSheetTab: kit.fallbackSheetTab || 'Common',
+    sheetTab: kit.sheetTab || '',
+    projectColumn: kit.projectColumn || '',
+    projectValue: kit.projectValue || '',
   };
 }
 
 /**
  * Validate that required config fields are present.
- * Throws with a descriptive message listing all missing vars.
+ * Throws with a descriptive message listing all missing fields.
  *
  * @param {object} config - From loadConfig()
- * @throws {Error} If required vars are missing
+ * @throws {Error} If required fields are missing
  */
 function validateConfig(config) {
   const missing = [];
 
-  if (!config.googleSheetId) missing.push('I18N_GOOGLE_SHEET_ID');
-  if (!config.messagesDir) missing.push('I18N_MESSAGES_DIR');
-  if (!config.locales.length) missing.push('I18N_LOCALES');
-  // GOOGLE_SERVICE_ACCOUNT_KEY only required for --push (write ops); --pull and --validate use public fetch
+  if (!config.googleSheetId) missing.push('i18n.googleSheetId');
+  if (!config.messagesDir) missing.push('i18n.messagesDir');
+  if (!config.locales.length) missing.push('i18n.locales');
+  // serviceAccountKeyPath only required for --push (write ops)
 
   if (config.sheetMode === 'single') {
-    if (!config.sheetTab) missing.push('I18N_SHEET_TAB');
+    if (!config.sheetTab) missing.push('i18n.sheetTab');
   }
 
   if (missing.length > 0) {
     throw new Error(
-      `Missing required i18n config vars:\n${missing.map((v) => `  - ${v}`).join('\n')}\n\nSet these in .env.local or as environment variables.`
+      `Missing required i18n config in .epost-kit.json:\n${missing.map((v) => `  - ${v}`).join('\n')}\n\nSet these fields in the "i18n" section of .epost-kit.json at the project root.\nHint: "messagesDir" is repo-specific — e.g. "apps/my-app/messages".`
     );
   }
 }

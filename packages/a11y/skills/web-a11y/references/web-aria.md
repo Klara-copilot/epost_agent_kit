@@ -414,3 +414,31 @@ function Modal({ isOpen, onClose, title, children }) {
 - [ ] Tabs use `role="tablist"`, `role="tab"`, `role="tabpanel"`
 - [ ] State attributes (`aria-expanded`, `aria-selected`) reflect current state
 - [ ] `aria-hidden="true"` on decorative SVGs and icons
+
+## Quick Reference
+
+```html
+<!-- When visible label is absent -->
+<button aria-label="Close dialog">✕</button>
+
+<!-- Link label from another element -->
+<h2 id="article-title">...</h2>
+<a aria-labelledby="article-title">Read more</a>
+
+<!-- Live region for dynamic content -->
+<div aria-live="polite" aria-atomic="true">Status updated</div>
+```
+
+### React Patterns
+
+```jsx
+<!-- Accessible icon button -->
+<button aria-label="Delete item" onClick={handleDelete}>
+  <TrashIcon aria-hidden="true" />
+</button>
+
+<!-- Conditional ARIA state -->
+<button aria-expanded={isOpen} aria-controls="menu-id">
+  Menu
+</button>
+```

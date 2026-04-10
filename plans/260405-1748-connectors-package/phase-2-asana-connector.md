@@ -39,7 +39,7 @@ Create the generic, config-driven Asana skill. Extracts reusable patterns from e
 - [ ] Write `SKILL.md`:
   - Frontmatter: name `asana`, description (trigger-only CSO), argument-hint, allowed-tools list
   - Flags: `--create`, `--update`, `--search`, `--my-tasks`
-  - Config source: reads `epost-config.json` connectors.asana block
+  - Config source: reads `.epost-kit.json` connectors.asana block
   - Safety rules (reference `connector-base.md`)
   - Workflow dispatch table (flag → workflow file)
   - No hardcoded GIDs anywhere
@@ -48,13 +48,13 @@ Create the generic, config-driven Asana skill. Extracts reusable patterns from e
   - OAuth flow: browser opens, user signs in, token stored in `~/.mcp-auth/`
   - Security: unique credentials per developer, never commit client secret
   - Verification steps: call get_me to confirm auth
-  - epost-config.json schema with examples
+  - .epost-kit.json schema with examples
 - [ ] Write `references/operations.md`:
   - **First**: verify V2 tool prefix via ToolSearch after registering V2 server
   - Document all available V2 tools with parameters
   - Group by: read, write, search operations
 - [ ] Write `workflows/create-task.md`:
-  - Read `epost-config.json` → `create_task.target` and `create_task.link_to`
+  - Read `.epost-kit.json` → `create_task.target` and `create_task.link_to`
   - Read `templates` from config → ask "which template?"
   - Template drives: name prefix, which fields to collect
   - Fetch sections for target project live via MCP (not from config)

@@ -1,13 +1,63 @@
 {
   "version": "1.0.0",
-  "updated": "2026-04-05",
+  "updated": "2026-04-07",
   "counts": {
-    "active": 51,
+    "active": 57,
     "completed": 1,
     "archived": 1,
-    "total": 54
+    "total": 59
   },
   "plans": [
+    {
+      "id": "PLAN-0104",
+      "title": "iOS & Android Code Review Rule Expansion",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-04-06",
+      "authors": ["epost-planner"],
+      "tags": ["code-review", "ios", "android", "realm", "alamofire", "coroutine", "flow", "room", "swift", "compose", "hilt"],
+      "file": "plans/260406-2347-ios-android-code-review-expansion/plan.md"
+    },
+    {
+      "id": "PLAN-0103",
+      "title": "Fix Web Platform Skill Audit Issues (excl. web-prototype-convert)",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-04-06",
+      "authors": ["epost-planner"],
+      "tags": ["web", "skills", "token-efficiency", "bug-fixes", "metadata", "audit-followup"],
+      "file": "plans/260406-2304-web-skills-minor-fixes/plan.md"
+    },
+    {
+      "id": "PLAN-0102",
+      "title": "Code Review Quality Gaps: Test Coverage, Complexity, Bundle Size, Regression Trends",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-04-06",
+      "authors": ["epost-planner"],
+      "tags": ["code-review", "test-coverage", "complexity", "bundle-size", "regression-trends", "quality"],
+      "file": "plans/260406-2039-code-review-quality-gaps/plan.md"
+    },
+    {
+      "id": "PLAN-0101",
+      "title": "Antigravity Converter — GEMINI.md + AGENTS.md Target",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-04-06",
+      "authors": ["epost-planner"],
+      "tags": ["antigravity", "converter", "gemini-md", "agents-md", "ide", "cli"],
+      "file": "plans/260406-1045-antigravity-converter/plan.md"
+    },
+    {
+      "id": "PLAN-0100",
+      "title": "Code Review Phase 2: ePost Stack-Specific Rules",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-04-06",
+      "authors": ["epost-planner"],
+      "tags": ["code-review", "epost-rules", "web", "fetchbuilder", "auth", "redux", "i18n", "modules"],
+      "file": "plans/260406-0903-code-review-epost-stack-rules/plan.md"
+    },
     {
       "id": "PLAN-0099",
       "title": "IDE Converter Perfection — Copilot, Cursor, JetBrains Full Parity",

@@ -53,23 +53,44 @@ For the selected skill:
 
 ## Step 4 — Format Output
 
+Wrap the ENTIRE output in a triple-backtick code fence. This makes it render as a monospace block in Slack and other chat tools — no markdown interpretation, clean visual separation.
+
+````
 ```
 💡 Did You Know? — <Skill Name>
 
-<Non-obvious insight — 3-5 lines max>
+<Hook sentence — what problem this solves or what most people miss. 1 line.>
+
+<2–3 lines of the actual insight. Specific. Actionable. No filler.>
 
 Example:
-  <concrete usage, command, or pattern>
+  <concrete invocation or pattern — indented 2 spaces>
 
-Go deeper: <references/filename.md or related skill>
+Go deeper: <references/filename.md> or combine with /<related-skill>
 
 ---
 /didyouknow <topic>  to search by topic  |  /didyouknow --all  to browse all skills
 ```
+````
+
+**For `--all` mode**, same wrapper:
+
+````
+```
+Kit Skills at a Glance
+
+[Category]
+  /<skill> — <one-liner: what it does, not what it is>
+  ...
+```
+````
 
 ## Rules
 
-- Max 5 lines in tip body — point to the skill for details, don't expand here
+- Always wrap full output in triple-backtick fence — never output raw markdown
+- Hook first — lead with the payoff, not the setup
+- One insight per tip — don't stack multiple tricks
+- Non-obvious only — skip primary purpose, surface flags/combos/constraints most users miss
 - Never invent capabilities — only surface what exists in the actual SKILL.md
-- Non-obvious only: skip the skill's primary purpose (user already knows that), surface what they'd miss
+- **Example: invocation MUST use `/<name>` exactly as it appears in `skill-index.json`** — never invent compound names (`/fix-ui`, `/debug-layout`) or flags that don't appear in the skill's documented `argument-hint`. If the insight doesn't map to a clean invocation, omit the Example line rather than fabricate one.
 - Topic match: partial word is fine (`form` matches `web-forms`, `forms`)

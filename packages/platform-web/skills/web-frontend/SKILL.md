@@ -49,17 +49,6 @@ Three hook types: utility (no state), effect with cleanup, context hook with gua
 
 See `references/react-patterns.md` for hook examples including `useImperativeHandle`, cleanup, and context guard patterns.
 
-## Build Commands
-
-```bash
-npm run dev          # Development server
-npm run build        # Production build
-npm run lint         # ESLint
-npx tsc --noEmit     # Type check
-npm test             # Unit tests (Jest + RTL)
-npx playwright test  # E2E tests
-```
-
 ## Sub-Skill Routing
 
 | Intent | Route |
@@ -89,8 +78,6 @@ npx playwright test  # E2E tests
 | `references/react-patterns.md` | Store setup, slice templates, hook examples, composition patterns |
 | `references/composition.md` | Compound components, state decoupling, children composition |
 | `references/render-optimization.md` | React.memo, derived state, transitions, lazy init |
-| `references/prototype.md` | Convert external prototypes/mockups to production code |
-| `references/rag.md` | Vector search for web codebase via MCP tools |
 | `references/typescript-standards.md` | Strict mode, no-any, Result pattern, immutability, null safety |
 
 ## Dependencies

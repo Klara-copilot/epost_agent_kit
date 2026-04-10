@@ -24,9 +24,17 @@ For klara-theme UI component rules (STRUCT/PROPS/TOKEN/BIZ), see `ui-lib-dev/ref
 | PERF-001 | No N+1 queries — related data loaded in batch or joined, not per-item | high | Single query with JOIN or batch fetch (`WHERE id IN (...)`) | Loop calling `findById(item.id)` for each item in a collection |
 | PERF-002 | No unbounded queries — all list/search queries have limit/pagination | high | `LIMIT`, `take`, `pageSize` applied; cursor or offset pagination | `findAll()` with no limit on potentially large datasets |
 | PERF-003 | Inefficient O(n²) or worse loops replaced with set/map lookups | medium | O(n) lookup structures for deduplication, membership tests | Nested loops for deduplication: `arr.forEach(x => result.filter(y => y.id === x.id))` |
-| PERF-004 | Expensive operations behind appropriate caching layer | medium | React Query cache, SWR, or memoization applied to expensive deterministic operations | `computeExpensiveReport(userId)` called on every render with no cache |
-| PERF-005 | Large library imports use named or path imports, not full barrel imports | medium | `import { specific } from 'lodash/specific'` | `import _ from 'lodash'` when only one utility is used |
-| PERF-006 | Heavy modules loaded lazily where applicable | low | `React.lazy()` + `Suspense` or dynamic `import()` for large optional features | Synchronous top-level import of large library only needed in one route |
+| PERF-004 | Expensive operations behind appropriate caching layer | medium | RTK Query cache, React.cache(), or useMemo applied to expensive deterministic operations | `computeExpensiveReport(userId)` called on every render with no cache |
+| PERF-005 | Large library imports use named/path imports, not full barrel — flag imports adding >20KB to initial bundle | medium | `import debounce from 'lodash/debounce'`; `import { format } from 'date-fns/format'` | `import _ from 'lodash'` (70KB); `import * as datefns from 'date-fns'` (35KB); `import moment from 'moment'` (67KB when date-fns suffices) |
+| PERF-006 | Modules >30KB loaded lazily when not needed on initial render — React.lazy + Suspense or dynamic import() | low | `const Chart = React.lazy(() => import('recharts'))` for chart widget only shown on dashboard tab | Top-level `import { LineChart } from 'recharts'` (45KB) on a page where chart is behind a tab; `import 'highlight.js'` (180KB) for optional code preview |
+| PERF-007 | Sequential `await` in loops replaced with `Promise.all` — don't serialize N independent async ops | medium | `await Promise.all(items.map(item => fetchDetail(item.id)))` | `for (const item of items) { item.detail = await fetchDetail(item.id) }` — N serial round trips; applies to API calls, file reads, any async op not DB-queried (DB covered by PERF-001) |
+| PERF-008 | Use `<Image>` from `next/image` instead of raw `<img>` — enables lazy loading, LCP optimization, automatic format conversion | medium | `import Image from 'next/image'; <Image src={url} alt="..." width={N} height={N} />` | `<img src={url} alt="..." />` in a Next.js component — skips image optimization pipeline, hurts LCP |
+
+<!-- Bundle size delta check (PERF-007) deferred.
+     Threshold for implementing: when CI pipeline reports bundle size per-PR,
+     or when a PR demonstrably adds >50KB to initial bundle despite PERF-005/006.
+     Current coverage: PERF-005 (import patterns) + PERF-006 (lazy loading) catch
+     the most common regressions without external tooling. -->
 
 ---
 
@@ -42,12 +50,16 @@ For klara-theme UI component rules (STRUCT/PROPS/TOKEN/BIZ), see `ui-lib-dev/ref
 | TS-004 | Generic constraints are as tight as the usage requires | medium | `<T extends Record<string, string>>` where only string-keyed objects make sense | `<T>` (unconstrained) used when caller intent clearly requires a narrower shape |
 | TS-005 | Non-null assertions (`!`) only when null is logically impossible and documented | high | `element!` annotated with comment explaining why null is impossible here | `userId!` used without comment on value that could plausibly be null/undefined |
 | TS-006 | No `strict: false` or `noImplicitAny: false` suppressions added to tsconfig | critical | `tsconfig.json` maintains strict mode settings; no per-file `// @ts-nocheck` except documented legacy files | New file adds `// @ts-nocheck` or tsconfig has strict checks disabled for a new path |
+| TS-007 | Components using hooks or browser APIs have `'use client'` directive — App Router runs files server-side by default | critical | `'use client'` at top of any file using `useState`, `useEffect`, `useRouter`, or DOM APIs | `useEffect` or `useRef` in a file without `'use client'` — crashes at runtime; App Router treats it as Server Component |
+| TS-008 | No hardcoded hex/rgb colors in `className` — use klara-theme token classes | medium | `className="bg-base-background text-base-foreground"` | `className="bg-[#1a2b3c]"` or `style={{ color: '#ff0000' }}` — bypasses design token system, breaks theming |
 
 ---
 
 ## STATE: State Management
 
-**Scope**: Redux slices, Zustand stores, React context, XState machines in web apps.
+**Scope**: RTK slices, React context, XState machines in web apps.
+
+**Activation gate**: Apply only when reviewing XState machine files or complex multi-step async flows with explicit states. Skip for standard RTK slice files — REDUX rules cover those.
 
 | Rule ID | Rule | Severity | Pass | Fail |
 |---------|------|----------|------|------|
@@ -73,17 +85,36 @@ For klara-theme UI component rules (STRUCT/PROPS/TOKEN/BIZ), see `ui-lib-dev/ref
 
 ---
 
+## HOOKS: React Hooks
+
+**Scope**: All React components and custom hooks in `.tsx`/`.ts` files.
+
+| Rule ID | Rule | Severity | Pass | Fail |
+|---------|------|----------|------|------|
+| HOOKS-001 | `useEffect` deps array is complete — all referenced variables listed | critical | `useEffect(() => { fetch(userId) }, [userId])` | `useEffect(() => { fetch(userId) }, [])` — `userId` missing, stale closure |
+| HOOKS-002 | Hooks called unconditionally at top level — never inside conditions, loops, or callbacks | critical | All `use*` calls at top of component/hook body | `if (isAdmin) { useAdminData() }` — violates Rules of Hooks, crashes on toggle |
+| HOOKS-003 | No derived state via `useState` + `useEffect` chain — use `useMemo` or compute inline | high | `const sorted = useMemo(() => list.sort(), [list])` | `useEffect(() => { setSorted(list.sort()) }, [list])` — extra render pass, hook cascade |
+| HOOKS-004 | `useEffect` with subscriptions/timers has cleanup return | high | `useEffect(() => { const id = setInterval(fn, 1s); return () => clearInterval(id) }, [])` | `useEffect(() => { setInterval(fn, 1000) }, [])` — timer leaks on unmount |
+| HOOKS-005 | `useCallback`/`useMemo` deps array is complete — same rule as HOOKS-001 | high | `useCallback((x) => fn(x, userId), [userId])` | `useCallback((x) => fn(x, userId), [])` — stale `userId` in memoized callback |
+| HOOKS-006 | No inline object/array literals in deps arrays — extract to ref or memo first | medium | `const opts = useMemo(() => ({ id }), [id]); useEffect(() => f(opts), [opts])` | `useEffect(() => f({ id }), [{ id }])` — `{}` !== `{}` causes infinite loop |
+| HOOKS-007 | Custom hook has single responsibility — one concern per hook | medium | `useInboxMessages()` fetches and returns messages only | `useInboxPage()` fetches, filters, sorts, tracks selection, and manages pagination |
+| HOOKS-008 | No `// eslint-disable-next-line react-hooks/exhaustive-deps` suppressions | critical | Deps array fixed; if suppression seems needed → restructure the effect | `// eslint-disable-next-line react-hooks/exhaustive-deps` above `useEffect` |
+
+---
+
 ## Lightweight vs Escalated
 
 | Rule IDs | Lightweight (default) | Escalated only |
 |----------|-----------------------|----------------|
 | PERF-001–002 | Yes | — |
-| PERF-003–006 | — | Yes |
-| TS-001–003 | Yes | — |
-| TS-004–006 | — | Yes |
+| PERF-003–008 | — | Yes |
+| TS-001–003, TS-007 | Yes | — |
+| TS-004–006, TS-008 | — | Yes |
 | STATE-001–002 | Yes | — |
 | STATE-003–004 | — | Yes |
 | REDUX-001–003 | Yes | — |
 | REDUX-004–006 | — | Yes |
+| HOOKS-001–002, HOOKS-008 | Yes | — |
+| HOOKS-003–007 | — | Yes |
 
 **Lightweight**: Run on all web file reviews. **Escalated**: Activate on critical findings, large PRs (10+ files), or explicit `--deep` flag.

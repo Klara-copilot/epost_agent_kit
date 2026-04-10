@@ -92,4 +92,5 @@ Kit Skills at a Glance
 - One insight per tip — don't stack multiple tricks
 - Non-obvious only — skip primary purpose, surface flags/combos/constraints most users miss
 - Never invent capabilities — only surface what exists in the actual SKILL.md
+- **Example: invocation MUST use `/<name>` exactly as it appears in `skill-index.json`** — never invent compound names (`/fix-ui`, `/debug-layout`) or flags that don't appear in the skill's documented `argument-hint`. If the insight doesn't map to a clean invocation, omit the Example line rather than fabricate one.
 - Topic match: partial word is fine (`form` matches `web-forms`, `forms`)

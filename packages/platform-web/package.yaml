@@ -20,6 +20,7 @@ provides:
     - web-ui-lib
     - web-forms
     - web-analytic
+    - web-prototype-convert
 files:
   skills/: skills/
 

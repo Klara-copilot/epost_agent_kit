@@ -6,15 +6,7 @@ Exits with code 1 if any **missing** keys found (CI gate). Read-only operation â
 
 ## Configuration
 
-Only 3 required env vars for validate (all read-only):
-
-```bash
-I18N_GOOGLE_SHEET_ID=<sheet-id>
-I18N_MESSAGES_DIR=<relative-path-to-messages-dir>
-I18N_LOCALES=en,de,fr,it
-```
-
-**Important**: `GOOGLE_SERVICE_ACCOUNT_KEY` is **not needed** for validate. Uses public CSV fetch.
+Config is loaded automatically from `.epost-kit.json` via `--cwd`. No `.env.local` needed â€” validate is read-only and uses public CSV fetch (no service account required).
 
 ## Steps
 
@@ -22,12 +14,12 @@ I18N_LOCALES=en,de,fr,it
 
 ```javascript
 const { loadConfig } = require('./scripts/env-config.cjs');
-const config = loadConfig();
-// Manually validate read-only vars only:
-if (!config.googleSheetId) throw new Error('I18N_GOOGLE_SHEET_ID required');
-if (!config.messagesDir) throw new Error('I18N_MESSAGES_DIR required');
-if (!config.locales || config.locales.length === 0) throw new Error('I18N_LOCALES required');
-// NOTE: GOOGLE_SERVICE_ACCOUNT_KEY not needed for --validate
+const config = loadConfig(projectRoot); // reads i18n.* from .epost-kit.json
+// Validate read-only required fields:
+if (!config.googleSheetId) throw new Error('i18n.googleSheetId required in .epost-kit.json');
+if (!config.messagesDir) throw new Error('i18n.messagesDir required in .epost-kit.json');
+if (!config.locales?.length) throw new Error('i18n.locales required in .epost-kit.json');
+// NOTE: serviceAccountKeyPath not needed for --validate (public CSV fetch)
 ```
 
 ### 2. Extract keys from codebase

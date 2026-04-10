@@ -8,7 +8,7 @@ description: "klara-theme integration patterns: theming, composition, state"
 ## Theme Provider Setup
 
 ```tsx
-import { ThemeProvider } from '@org/design-system';
+import { ThemeProvider } from '@luz-next/klara-theme';
 
 function App() {
   return (

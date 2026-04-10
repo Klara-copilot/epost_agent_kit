@@ -24,9 +24,9 @@ metadata:
 
 ## Execution
 
-Always pass `--cwd` pointing to the app directory containing `.env.local`.
+Always pass `--cwd` pointing to the app directory containing `.epost-kit.json`.
 
-**Detect app dir**: look for `apps/` subdirectory with `I18N_GOOGLE_SHEET_ID` in `.env.local`.
+**Detect app dir**: look for `apps/` subdirectory with `i18n.googleSheetId` in `.epost-kit.json`.
 
 | Invocation | Command |
 |------------|---------|
@@ -60,36 +60,34 @@ node .claude/skills/web-i18n/scripts/push.cjs --cwd <app-dir> [--tab X]
 - `references/push.md` — `--push` implementation steps
 - `references/validate.md` — `--validate` implementation steps
 
-### Required Env Vars (`.env.local`)
+### Configuration
 
-```bash
-I18N_GOOGLE_SHEET_ID=<sheet-id>
-I18N_MESSAGES_DIR=<relative-path>
-I18N_LOCALES=en,de,fr,it
-GOOGLE_SERVICE_ACCOUNT_KEY=<path>    # write ops only (--push)
-I18N_SHEET_MODE=tabs                 # "tabs" or "single"
-I18N_FALLBACK_SHEET_TAB=Common
+All i18n settings live in `.epost-kit.json` at the project root (committed). Only the service account secret stays in `.env.local` (gitignored).
+
+**`.epost-kit.json`** (committed):
+```json
+{
+  "i18n": {
+    "googleSheetId": "1MYcD7ktAy1tx6bERwgWyp8OR-RIj8YSUNcXPwwiR_QQ",
+    "messagesDir": "apps/my-app/messages",
+    "locales": ["en", "de", "fr", "it"],
+    "localeMap": "en:en,de_CH:de,fr_CH:fr,it_CH:it",
+    "sheetMode": "tabs",
+    "resultSheetTab": "Result",
+    "keySeparator": "::",
+    "fallbackSheetTab": "Common"
+  }
+}
 ```
 
-See `references/i18n-patterns.md` for full env var list and next-intl configuration.
+**`.env.local`** (gitignored — write ops only):
+```bash
+GOOGLE_SERVICE_ACCOUNT_KEY=.secrets/google-sa.json
+```
 
-## next-intl Quick Reference
+See `references/i18n-patterns.md` for full field reference and next-intl configuration.
 
-### Translation Usage
-
-| Context | API |
-|---------|-----|
-| Server Components | `getTranslations('FeatureName')` (async) |
-| Client Components | `useTranslations('FeatureName.Dashboard')` |
-| Root Layout | `NextIntlClientProvider messages={await getMessages()}` |
-
-### Key Rules
-
-- Import navigation helpers from `navigation.ts` — never `next/link` or `next/navigation`
-- Always add translations to ALL locale files
-- Use dot notation for nested namespaces: `useTranslations('Feature.Sub')`
-
-See `references/i18n-patterns.md` for full configuration, `i18n.ts`, `navigation.ts`, and namespace structure.
+See `references/i18n-patterns.md` for next-intl API patterns, full configuration, `i18n.ts`, `navigation.ts`, and namespace structure.
 
 ## References
 
