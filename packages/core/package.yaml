@@ -6,6 +6,9 @@ platforms: [all]
 
 dependencies: []
 
+optional-dependencies:
+  - platform-web   # For web-analytic GA check in audit
+
 provides:
   agents:
     - epost-planner
