@@ -17,7 +17,9 @@
       "WebFetch(domain:raw.githubusercontent.com)",
       "WebFetch(domain:sosumi.ai)",
       "WebFetch(domain:www.xcodebuildmcp.com)",
-      "WebFetch(domain:charleswiltgen.github.io)"
+      "WebFetch(domain:charleswiltgen.github.io)",
+      "WebFetch(domain:skillsmp.com)",
+      "WebFetch(domain:developers.google.com)"
     ]
   }
 }

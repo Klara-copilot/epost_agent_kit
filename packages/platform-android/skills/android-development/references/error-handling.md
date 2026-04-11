@@ -264,47 +264,25 @@ fun UserScreen(userId: String) {
 
 ## Logging Strategy
 
-Structure logging for debugging and crash reporting.
+Use Timber exclusively — **never `Log.d`, `Log.e`, `Log.w`, or `println()`** (LOGGING-001, CONV-0002).
 
 ```kotlin
-object Logger {
-    private const val TAG = "AppLogger"
-
-    fun d(message: String, tag: String = TAG) {
-        if (BuildConfig.DEBUG) {
-            Log.d(tag, message)
-        }
-    }
-
-    fun e(throwable: Throwable, message: String? = null, tag: String = TAG) {
-        Log.e(tag, message ?: throwable.message ?: "Unknown error", throwable)
-
-        // Send to crash reporting (Firebase Crashlytics, Sentry, etc.)
-        if (!BuildConfig.DEBUG) {
-            FirebaseCrashlytics.getInstance().apply {
-                message?.let { log(it) }
-                recordException(throwable)
-            }
-        }
-    }
-
-    fun w(message: String, tag: String = TAG) {
-        Log.w(tag, message)
-    }
-}
+import timber.log.Timber
 
 // Usage in repository
 suspend fun getUser(id: String): Result<User> {
     return try {
-        Logger.d("Fetching user: $id")
+        Timber.d("Fetching user: %s", id)
         val user = apiService.getUser(id)
-        Logger.d("User fetched successfully: ${user.email}")
         Result.Success(user.toDomain())
     } catch (e: Exception) {
-        Logger.e(e, "Failed to fetch user: $id")
+        Timber.e(e, "Failed to fetch user: %s", id)
         Result.Error(e.toDomainException())
     }
 }
+```
+
+Timber handles debug-only logging and crash reporting integration (Crashlytics, Sentry) via `Tree` implementations planted in `Application.onCreate()` — no manual `BuildConfig.DEBUG` checks needed in call sites.
 ```
 
 ## Validation Errors

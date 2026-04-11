@@ -9,7 +9,7 @@ disable-model-invocation: true
 
 Schema for `reports/known-findings/code.json` — persistence layer for SEC, PERF, TS, LOGIC, DEAD, ARCH, and STATE findings from code review and hybrid audit passes. Mirrors `reports/known-findings/ui-components.json` with code-review-specific categories.
 
-Cross-cutting rule IDs: SEC-001..008, PERF-001..008, TS-001..008, LOGIC-001..006, DEAD-001..003, ARCH-001..005, STATE-001..004, QUALITY-001..007, TEST-001. ePost web-specific: HOOKS-001..008, FETCH-001..006, AUTH-001..006, MOD-001..005, I18N-001..005, REDUX-001..006, FORM-001..005, NEXTJS-001..003. iOS platform: SWIFT-001..008, UIKIT-001..006. iOS ePost-specific: REALM-001..003, ALAMOFIRE-001..003. Android platform: COMPOSE-001..008, HILT-001..005. Android ePost-specific: COROUTINE-001..004, FLOW-001..004, ROOM-001..004
+Cross-cutting rule IDs: SEC-001..008, PERF-001..008, TS-001..008, LOGIC-001..006, DEAD-001..003, ARCH-001..005, STATE-001..004, QUALITY-001..007, TEST-001. ePost web-specific: HOOKS-001..008, FETCH-001..006, AUTH-001..006, MOD-001..005, I18N-001..005, REDUX-001..006, FORM-001..005, NEXTJS-001..003. iOS platform: SWIFT-001..008, UIKIT-001..006, MEMORY-001..004, CONCURRENCY-001..004. iOS ePost-specific: REALM-001..006, ALAMOFIRE-001..006. Android platform: COMPOSE-001..008, HILT-001..005, MEMORY-001..004, LOGGING-001. Android ePost-specific: COROUTINE-001..004, FLOW-001..005, ROOM-001..004
 
 ## Empty Template (bootstrap)
 
@@ -35,6 +35,10 @@ Cross-cutting rule IDs: SEC-001..008, PERF-001..008, TS-001..008, LOGIC-001..006
   "fix_template": "Use sessionStorage minimum; prefer server-proxy pattern so key never leaves server",
   "priority": 1,
   "severity": "critical",
+  "severity_score": 5,
+  "confidence": 0.8,
+  "confirmed_by": 2,
+  "confidence_source": "llm-2pass",
   "source": "hybrid-audit",
   "source_agent": "epost-code-reviewer",
   "source_report": "reports/260308-2249-smart-letter-composer-audit/report.md",
@@ -60,6 +64,10 @@ Cross-cutting rule IDs: SEC-001..008, PERF-001..008, TS-001..008, LOGIC-001..006
 | `fix_template` | `string` | How to fix it — template string or prose description |
 | `priority` | `integer` | Fix priority: 1 = highest, 5 = lowest |
 | `severity` | `string` | See Severity Enum below |
+| `severity_score` | `integer` | Numeric severity: 5 = critical, 4 = high, 3 = medium, 2 = low, 1 = informational |
+| `confidence` | `float` | 0.0–1.0 — how certain the finding is correct (see `confidence-scoring.md`) |
+| `confirmed_by` | `integer` | Number of independent passes that agreed (1–3) |
+| `confidence_source` | `string` | `"deterministic"` \| `"llm-1pass"` \| `"llm-2pass"` \| `"llm-2pass-conflict"` \| `"llm-3pass"` |
 | `source` | `string` | See Source Enum below |
 | `source_agent` | `string` | Agent that detected this finding (e.g. `epost-code-reviewer`) |
 | `source_report` | `string \| null` | Relative path to the report file that recorded this finding |
@@ -91,12 +99,15 @@ Cross-cutting rule IDs: SEC-001..008, PERF-001..008, TS-001..008, LOGIC-001..006
 - `"TEST"` — test coverage violations (changed logic without corresponding test changes)
 - `"SWIFT"` — Swift language safety (optionals, closures, concurrency, Codable — SWIFT-001..008)
 - `"UIKIT"` — UIKit/SwiftUI lifecycle, accessibility, design tokens (UIKIT-001..006)
-- `"REALM"` — RealmSwift thread safety, write transactions, live objects (ePost iOS — REALM-001..003)
-- `"ALAMOFIRE"` — Alamofire response validation, retry policy, cancellation (ePost iOS — ALAMOFIRE-001..003)
+- `"MEMORY"` — memory leaks and retain cycles: iOS (delegate cycles, NSTimer, Combine AnyCancellable, addChild lifecycle — MEMORY-001..004); Android (Activity/View in singletons, BroadcastReceiver, custom View listeners, Handler/Runnable — MEMORY-001..004)
+- `"CONCURRENCY"` — Swift 6 concurrency safety (actor isolation, @unchecked Sendable, Task capture, async let scope — iOS CONCURRENCY-001..004)
+- `"REALM"` — RealmSwift thread safety, write transactions, encryption, migration, live objects (ePost iOS — REALM-001..006)
+- `"ALAMOFIRE"` — Alamofire response validation, retry policy, SSL pinning, auth interception (ePost iOS — ALAMOFIRE-001..006)
 - `"COMPOSE"` — Jetpack Compose recomposition, state hoisting, side effects (COMPOSE-001..008)
 - `"HILT"` — Hilt DI constructor injection, scopes, ViewModel annotation (HILT-001..005)
+- `"LOGGING"` — logging convention violations: Timber required, Log.*/println() forbidden (ePost Android — LOGGING-001)
 - `"COROUTINE"` — Kotlin coroutine scope, dispatchers, cancellation handling (ePost Android — COROUTINE-001..004)
-- `"FLOW"` — Kotlin Flow lifecycle collection, StateFlow exposure, Result<T> (ePost Android — FLOW-001..004)
+- `"FLOW"` — Kotlin Flow lifecycle collection, StateFlow exposure, stateIn, Result<T> (ePost Android — FLOW-001..005)
 - `"ROOM"` — Room DAO patterns, N+1 queries, transactions, reactive queries (ePost Android — ROOM-001..004)
 
 ### severity

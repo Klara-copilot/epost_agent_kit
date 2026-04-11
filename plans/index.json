@@ -1,13 +1,23 @@
 {
   "version": "1.0.0",
-  "updated": "2026-04-07",
+  "updated": "2026-04-09",
   "counts": {
-    "active": 57,
+    "active": 58,
     "completed": 1,
     "archived": 1,
-    "total": 59
+    "total": 60
   },
   "plans": [
+    {
+      "id": "PLAN-0105",
+      "title": "Adopt external ai-multimodal skill into packages/core",
+      "type": "implementation",
+      "status": "active",
+      "created": "2026-04-09",
+      "authors": ["epost-planner"],
+      "tags": ["skill-adoption", "python", "gemini", "multimodal", "packages-core"],
+      "file": "plans/260409-1755-ai-multimodal-adoption/plan.md"
+    },
     {
       "id": "PLAN-0104",
       "title": "iOS & Android Code Review Rule Expansion",

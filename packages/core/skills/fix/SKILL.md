@@ -119,6 +119,28 @@ For cases where auto-detection isn't enough, use flags:
 - `/fix --ui` — UI component findings from `reports/known-findings/ui-components.json` (delegates to epost-muji)
 - `/fix --a11y` — accessibility findings from `reports/known-findings/a11y.json`
 
+## Confidence Metadata on Suggestions
+
+Every fix suggestion MUST include a confidence annotation so the caller can filter or prioritize.
+
+```
+Fix: [description of change]
+Confidence: 0.8 | Source: llm-2pass | Basis: reproduced locally + confirmed by second analysis pass
+```
+
+| Confidence | When to use |
+|------------|-------------|
+| 1.0 | Deterministic — compiler/linter error with a single correct fix |
+| 0.8 | High — root cause confirmed by tracing + reproduction; 2-pass validated |
+| 0.5 | Medium — plausible root cause, not yet reproduced; single-pass analysis |
+| 0.3 | Low — hypothesis only; no reproduction evidence |
+
+- If confidence < 0.5: state it as a hypothesis, not a fix
+- If confidence >= 0.8 and `confirmed_by >= 2`: mark as `[CONFIRMED]`
+- Use `source: "deterministic"` only when a compiler, type-checker, or linter tool produced the finding — not when the LLM deduced it
+
+See `code-review/references/confidence-scoring.md` for the shared schema.
+
 ## Status Tracking
 
 After fixing a bug, update `{plan_dir}/status.md` if the fix relates to an active plan:

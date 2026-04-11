@@ -138,14 +138,11 @@ session_folder = reports/{YYMMDD-HHMM}-{slug}-audit/
    - `## A11Y Audit` (if ran) — link to `a11y-audit.md`
    - `## Code Review` — code-reviewer findings inline
    - Methodology section
-6.5. **Run build verification**:
-   ```bash
-   node .claude/hooks/lib/build-gate.cjs
-   ```
-   Append `## Build Verification` section to `{session_folder}/report.md`:
-   - Exit 0: `Build verification: ✓ PASS ({platform}, {duration_ms}ms)`
-   - Exit 1: `Build verification: ✗ FAIL — {error excerpt}` (advisory — does not block report)
-   - Exit 0 (no command): `Build verification: skipped (no build command detected)`
+6.5. **Run build verification** — platform-aware:
+   - **iOS**: Follow `references/ios-build-verification.md` — XcodeBuildMCP if available, shell fallback otherwise
+   - **Android**: Follow `references/android-build-verification.md` — replicant-mcp if available, Gradle fallback otherwise
+   - **Other platforms**: `node .claude/hooks/lib/build-gate.cjs`
+   Append `## Build Verification` section to `{session_folder}/report.md` (advisory — does not block report verdict).
 7. **Write session.json** per `references/session-json-schema.md`
 8. **Update reports/index.json** per `docs/references/index-protocol.md`
 
@@ -160,7 +157,7 @@ For non-hybrid dispatches (`--ui`, `--code`, `--a11y`):
 3. Fill all `{placeholders}` — include `Output path: {session_folder}/{filename}`
 4. Dispatch via **Agent tool** to the specialist agent
 5. **Wait** for specialist report
-6. Run build verification: `node .claude/hooks/lib/build-gate.cjs` — append `## Build Verification` to report (advisory)
+6. Run build verification — iOS: `references/ios-build-verification.md`; Android: `references/android-build-verification.md`; other: `node .claude/hooks/lib/build-gate.cjs` — append `## Build Verification` to report (advisory)
 7. Write `session.json` and update `reports/index.json`
 
 **Output contract**: `references/output-contract.md` is the single source of truth for paths and responsibilities.

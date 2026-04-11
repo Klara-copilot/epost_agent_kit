@@ -1,13 +1,11 @@
-{
-  "skill": "asana-muji",
-  "version": "1.0.0",
-  "evals": [
-    {
-      "id": "eval-001",
-      "description": "TODO: Add eval description",
-      "input": "TODO: Add test input",
-      "expected": "TODO: Add expected behavior",
-      "status": "stub"
-    }
-  ]
-}
+[
+  {"query": "create an Asana task for the new letter card component", "should_trigger": true},
+  {"query": "update the status of the EpostButton task to done", "should_trigger": true},
+  {"query": "show my Asana tasks", "should_trigger": true},
+  {"query": "move the token update task to in progress", "should_trigger": true},
+  {"query": "what tasks are assigned to me in Asana", "should_trigger": true},
+  {"query": "add a Jetpack Compose screen for inbox", "should_trigger": false},
+  {"query": "fix the Android crash in notification service", "should_trigger": false},
+  {"query": "review my Kotlin code", "should_trigger": false},
+  {"query": "commit and push my changes", "should_trigger": false}
+]

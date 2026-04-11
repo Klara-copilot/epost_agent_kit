@@ -302,80 +302,11 @@ fun CustomButton(
 }
 ```
 
-## Material 3 Patterns
+## Testing
 
-### Theme Usage
+For Compose testing patterns (semantics, matchers, Hilt test modules, flow testing), see `android-testing` skill.
 
-```kotlin
-@Composable
-fun ThemedContent() {
-    // Use theme colors
-    Surface(
-        color = MaterialTheme.colorScheme.surface,
-        contentColor = MaterialTheme.colorScheme.onSurface
-    ) {
-        Text(
-            text = "Themed text",
-            style = MaterialTheme.typography.bodyLarge,
-            color = MaterialTheme.colorScheme.primary
-        )
-    }
-}
-```
-
-### Dynamic Colors (Android 12+)
-
-```kotlin
-@Composable
-fun App() {
-    val dynamicColor = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
-    val colorScheme = when {
-        dynamicColor && isSystemInDarkTheme() ->
-            dynamicDarkColorScheme(LocalContext.current)
-        dynamicColor && !isSystemInDarkTheme() ->
-            dynamicLightColorScheme(LocalContext.current)
-        isSystemInDarkTheme() -> darkColorScheme()
-        else -> lightColorScheme()
-    }
-
-    MaterialTheme(colorScheme = colorScheme) {
-        Content()
-    }
-}
-```
-
-## Testing Considerations
-
-### Write Testable Composables
-
-```kotlin
-// ✅ Testable: Pure function with hoisted state
-@Composable
-fun Counter(
-    count: Int,
-    onIncrement: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Button(
-        onClick = onIncrement,
-        modifier = modifier
-    ) {
-        Text("Count: $count")
-    }
-}
-
-// Test
-@Test
-fun counterDisplaysCorrectValue() {
-    composeTestRule.setContent {
-        Counter(count = 5, onIncrement = {})
-    }
-
-    composeTestRule
-        .onNodeWithText("Count: 5")
-        .assertExists()
-}
-```
+Core principle: hoist state so composables are pure functions — then testing is straightforward.
 
 ## Common Anti-Patterns
 

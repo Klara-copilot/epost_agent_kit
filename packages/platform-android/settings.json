@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "replicant": {
+      "command": "npx",
+      "args": ["replicant-mcp"]
+    },
+    "google-developer-knowledge": {
+      "httpUrl": "https://developerknowledge.googleapis.com/mcp",
+      "headers": {
+        "X-Goog-Api-Key": "YOUR_GOOGLE_API_KEY"
+      }
+    }
+  }
+}

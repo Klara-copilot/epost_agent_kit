@@ -95,6 +95,33 @@ File: .epost-cache/traces/{YYMMDD-HHMM}-{slug}.json
 
 See `core/references/artifact-persistence-protocol.md` for envelope format and cleanup rules.
 
+## Confidence Metadata on Hypotheses
+
+Every root cause hypothesis and fix recommendation MUST carry a confidence annotation.
+
+```
+Hypothesis: [description]
+Confidence: 0.5 | Source: llm-1pass | Basis: matches symptoms, not yet reproduced
+```
+
+```
+Root cause confirmed: [description]
+Confidence: 0.8 | Source: llm-2pass | Basis: reproduced + stack trace pinpoints line 45
+```
+
+| Confidence | When to use |
+|------------|-------------|
+| 1.0 | Deterministic — tool output (compiler error, linter, assertion) |
+| 0.8 | Confirmed — reproduced + 2-pass analysis agrees |
+| 0.5 | Plausible — fits symptoms, not yet reproduced |
+| 0.3 | Speculative — early hypothesis, limited evidence |
+
+- Escalate to user if no hypothesis reaches >= 0.5 after 3 attempts
+- A 0.3 hypothesis should be explicitly labeled "(speculative — verify before applying fix)"
+- Promote 0.5 → 0.8 only after local reproduction confirms the root cause
+
+See `code-review/references/confidence-scoring.md` for the shared schema.
+
 ## Status Tracking
 
 After diagnosing, update `{plan_dir}/status.md` if diagnosing relates to an active plan:

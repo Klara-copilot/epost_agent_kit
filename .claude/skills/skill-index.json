@@ -1,10 +1,10 @@
 {
-  "generated": "2026-04-08T08:09:22.445Z",
+  "generated": "2026-04-11T00:08:54.021Z",
   "version": "2.0.0",
-  "count": 79,
+  "count": 80,
   "categories": {
     "accessibility": 4,
-    "uncategorized": 37,
+    "uncategorized": 38,
     "workflow": 12,
     "backend": 2,
     "quality": 6,
@@ -827,7 +827,7 @@
         "enhances": [],
         "conflicts": []
       },
-      "size": 2749,
+      "size": 3462,
       "path": "didyouknow/SKILL.md"
     },
     {
@@ -1799,6 +1799,26 @@
       },
       "size": 15666,
       "path": "loop/SKILL.md"
+    },
+    {
+      "name": "media-ai",
+      "description": "Use when: analyzing audio/video files, processing images or screenshots, extracting data from PDFs, generating images from text prompts, or implementing multimodal AI features. Powered by Google Gemini API — audio up to 9.5h, video up to 6h, documents up to 1,000 pages, image generation, OCR, transcription with timestamps. Supports Gemini 2.5/2.0 with up to 2M token context.",
+      "category": "uncategorized",
+      "tier": "discoverable",
+      "keywords": [],
+      "platforms": [
+        "all"
+      ],
+      "triggers": [],
+      "agent-affinity": [],
+      "connections": {
+        "extends": [],
+        "requires": [],
+        "enhances": [],
+        "conflicts": []
+      },
+      "size": 55207,
+      "path": "media-ai/SKILL.md"
     },
     {
       "name": "multi-tenancy",

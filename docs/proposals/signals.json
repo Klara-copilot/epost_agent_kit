@@ -1,8 +1,8 @@
 {
-  "generated": "2026-04-08T13:39:46.024Z",
+  "generated": "2026-04-11T04:03:56.086Z",
   "summary": {
-    "total": 54,
-    "new": 54,
+    "total": 57,
+    "new": 57,
     "proposed": 0,
     "dismissed": 0,
     "bySkill": {
@@ -125,10 +125,28 @@
         "high": 0,
         "medium": 0,
         "low": 1
+      },
+      "ai-multimodal": {
+        "total": 1,
+        "high": 0,
+        "medium": 0,
+        "low": 1
+      },
+      "git": {
+        "total": 1,
+        "high": 0,
+        "medium": 0,
+        "low": 1
+      },
+      "code-review": {
+        "total": 1,
+        "high": 0,
+        "medium": 0,
+        "low": 1
       }
     },
     "byType": {
-      "journal-flag": 50,
+      "journal-flag": 53,
       "audit-failure": 3,
       "workaround": 1
     }
@@ -726,6 +744,39 @@
       "targetSkill": "unknown",
       "suggestedAction": "",
       "detectedAt": "2026-04-08T01:45:51.302Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-4ec29e6f",
+      "type": "journal-flag",
+      "confidence": "low",
+      "source": "docs/journal/ai-multimodal-adoption/260409-adopt-ai-multimodal.md",
+      "excerpt": "- `generate-skill-index.cjs` scans `.claude/skills/`, not `packages/` — the plan's Phase 4 success criterion (\"skill-index.json contains ai-multimodal\") would fail silently if you only install to `packages/`. The cook skill should document this gap: after installing a new skill into `packages/`, alw",
+      "targetSkill": "ai-multimodal",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-09T13:57:04.632Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-4fe5a84a",
+      "type": "journal-flag",
+      "confidence": "low",
+      "source": "docs/journal/scheduled-code-review/260411-branch-scan-phase3.md",
+      "excerpt": "- `git branch -r --format` emits a bare `origin` line (not `origin/{branch}`) — had to add it to exclusions after seeing it appear in dry-run output.\n- `main` vs `master` as default branch — only `main` was in the initial exclusion set; `master` was missing until dry-run surfaced it.",
+      "targetSkill": "git",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-11T00:14:04.379Z",
+      "status": "new"
+    },
+    {
+      "id": "sig-0e6e7c43",
+      "type": "journal-flag",
+      "confidence": "low",
+      "source": "docs/journal/scheduled-code-review/260411-confidence-engine.md",
+      "excerpt": "The plan phase file specified `report-template.md` as a target but the actual file had a minimal structure (just a section list). Needed to add the new columns with conditional omission note — otherwise reviewers would add the columns even for deterministic-only reviews and make reports noisy. [code",
+      "targetSkill": "code-review",
+      "suggestedAction": "",
+      "detectedAt": "2026-04-11T00:14:04.379Z",
       "status": "new"
     }
   ]

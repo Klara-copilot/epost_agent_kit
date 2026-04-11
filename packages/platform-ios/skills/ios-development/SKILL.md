@@ -39,35 +39,37 @@ Reference: `ios/development/references/development.md`
 ### 2. Build & Simulator Management
 Reference: `ios/development/references/build.md` | `ios/development/references/simulator.md`
 
-- Xcode project configuration
-- Build settings and schemes
+- Build commands (simulator + device)
+- XcodeBuildMCP tool reference table (full API)
+- Build settings (Debug/Release)
+- Code signing error fixes
 - Swift Package Manager
-- Dependency management (SPM, CocoaPods)
-- Asset catalogs and resources
-- Code signing and provisioning
-- Build optimization
-- Simulator management (xcrun simctl + XcodeBuildMCP)
-- Common build errors and fixes
-- MCP tool patterns (discover_projs, list_schemes, build_sim, etc.)
+- Build optimization (benchmark → hotspots → settings audit → verify)
+- Common build errors
 
 ### 3. Testing Strategies
-Reference: `ios/development/references/tester.md`
+Reference: `ios/development/references/tester.md` (quick reference — full patterns in `ios-testing` skill)
 
-- XCTest patterns (unit tests)
-- XCUITest patterns (UI tests)
-- Mock dependencies setup
-- Given-When-Then structure
-- Async/await testing
-- Coverage goals and reporting
-- Test organization
-- Accessibility identifiers for UI testing
-- MCP test automation (test_sim, test_device)
+- XCTest Given-When-Then pattern
+- Async testing
+- Accessibility identifiers (required for UI tests)
+- Running tests via MCP + CLI
+- Coverage goals (80%/75%/90%)
 
-## XcodeBuildMCP Integration
+## MCP Integrations
 
-When XcodeBuildMCP is available, this skill provides autonomous Xcode operations:
+Two MCP servers ship with this package (auto-configured via `settings.json`):
 
-### MCP Capabilities
+| MCP | Type | Role |
+|-----|------|------|
+| `XcodeBuildMCP` | local | Build, test, simulator control, UI automation |
+| `sosumi` | remote | Apple docs → AI-readable Markdown |
+
+**sosumi** converts Apple Developer docs, HIG, and WWDC sessions to Markdown so AI can read them. Use it to fetch current Swift/SwiftUI/UIKit API docs before implementing.
+
+**Xcode 26+ users**: Xcode 26 includes native Claude Code integration (Coding Assistant). No separate setup needed — Claude Code connects via MCP automatically when Xcode 26 is installed.
+
+### XcodeBuildMCP Capabilities
 - **Project Discovery**: Auto-discover projects and schemes
 - **Build Automation**: Build for simulator, device, or macOS
 - **Simulator Management**: Boot, install, launch, stop apps
@@ -77,8 +79,12 @@ When XcodeBuildMCP is available, this skill provides autonomous Xcode operations
 - **Environment Validation**: Run diagnostics
 
 ### Prerequisites
-- macOS 14.5+ with Xcode 16.x+
-- XcodeBuildMCP server: `claude mcp add XcodeBuildMCP npx xcodebuildmcp@latest`
+- macOS 14.5+ with Xcode 16.x+ (or Xcode 26+ for native integration)
+- XcodeBuildMCP and sosumi are pre-configured — no manual install after `epost-kit init`
+
+## Companion Skill Suite
+
+**Axiom** (optional) — 175 battle-tested Claude Code skills for xOS (iOS/iPadOS/watchOS/tvOS) by Charles Wiltgen. Strong coverage of Swift 6 strict concurrency, memory leak diagnosis, and WWDC 2025 patterns. Install separately from [CharlesWiltgen/Axiom](https://github.com/CharlesWiltgen/Axiom) if your project needs deep xOS coverage beyond this skill.
 
 ## Key Conventions
 
@@ -115,7 +121,7 @@ xcodebuild -project MyApp.xcodeproj -scheme MyApp -sdk iphonesimulator build
 
 ## References
 
-- `references/development.md` — @Observable, NavigationStack, Actor, MVVM, networking, persistence patterns
-- `references/build.md` — Xcode config, SPM, code signing, MCP build workflow examples
-- `references/simulator.md` — Simulator management via xcrun simctl + XcodeBuildMCP
-- `references/tester.md` — XCTest/XCUITest/Swift Testing patterns, mock setup, coverage
+- `references/development.md` — Swift 6 concurrency, @Observable, MVVM, networking, debugging patterns
+- `references/build.md` — XcodeBuildMCP tool table, build commands, build settings, optimization workflow
+- `references/simulator.md` — Simulator management (xcrun simctl + XcodeBuildMCP quick ref)
+- `references/tester.md` — XCTest quick reference; full patterns in `ios-testing` skill

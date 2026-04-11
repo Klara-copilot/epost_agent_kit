@@ -1,0 +1,14 @@
+[
+  {"query": "transcribe this audio file", "should_trigger": true},
+  {"query": "analyze this video and summarize key points", "should_trigger": true},
+  {"query": "extract text from this PDF", "should_trigger": true},
+  {"query": "describe what's in this image", "should_trigger": true},
+  {"query": "generate an image of a sunset over the ocean", "should_trigger": true},
+  {"query": "process this YouTube video", "should_trigger": true},
+  {"query": "extract table data from this document", "should_trigger": true},
+  {"query": "transcribe and translate this audio", "should_trigger": true},
+  {"query": "fix this TypeScript error", "should_trigger": false},
+  {"query": "review my pull request", "should_trigger": false},
+  {"query": "write unit tests for this component", "should_trigger": false},
+  {"query": "deploy the app to production", "should_trigger": false}
+]

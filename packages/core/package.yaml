@@ -47,6 +47,7 @@ provides:
     - find-skill
     - whatsnew
     - didyouknow
+    - media-ai
 scripts:
   - verify.cjs
   - get-active-plan.cjs

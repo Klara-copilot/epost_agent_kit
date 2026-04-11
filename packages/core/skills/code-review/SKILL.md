@@ -152,12 +152,16 @@ Cross-cutting rules are in `references/code-review-standards.md`. Platform rules
 | Backend | CDI | CDI-001..004 | CDI/EJB injection, scope patterns |
 | iOS | SWIFT | SWIFT-001..008 | Swift optionals, closures, concurrency, Codable |
 | iOS | UIKIT | UIKIT-001..006 | UIKit/SwiftUI lifecycle, a11y, design tokens |
-| iOS (ePost) | REALM | REALM-001..003 | RealmSwift thread safety, write transactions, live objects |
-| iOS (ePost) | ALAMOFIRE | ALAMOFIRE-001..003 | Alamofire response validation, retry policy, cancellation |
+| iOS | MEMORY | MEMORY-001..004 | Retain cycles, delegate weak refs, NSTimer, Combine AnyCancellable, addChild lifecycle |
+| iOS | CONCURRENCY | CONCURRENCY-001..004 | Swift 6 actor isolation, @unchecked Sendable, Task capture, async let scope |
+| iOS (ePost) | REALM | REALM-001..006 | RealmSwift thread safety, write transactions, encryption, migration, live objects |
+| iOS (ePost) | ALAMOFIRE | ALAMOFIRE-001..006 | Alamofire response validation, retry policy, SSL pinning, auth interception |
 | Android | COMPOSE | COMPOSE-001..008 | Jetpack Compose recomposition, state hoisting, side effects |
 | Android | HILT | HILT-001..005 | Hilt DI correctness, scopes, ViewModel annotation |
+| Android | MEMORY | MEMORY-001..004 | Context leaks, singleton Activity refs, BroadcastReceiver symmetry, View listener cleanup |
+| Android | LOGGING | LOGGING-001 | Timber required, Log.*/println() forbidden (ePost CONV-0002) |
 | Android (ePost) | COROUTINE | COROUTINE-001..004 | Coroutine scope, dispatchers, cancellation handling |
-| Android (ePost) | FLOW | FLOW-001..004 | StateFlow collection, lifecycle, MutableStateFlow exposure |
+| Android (ePost) | FLOW | FLOW-001..005 | StateFlow collection, lifecycle, stateIn, MutableStateFlow exposure, Result<T> |
 | Android (ePost) | ROOM | ROOM-001..004 | Room N+1, transactions, reactive queries, SQL injection |
 
 ### Severity Classification
@@ -165,6 +169,29 @@ Cross-cutting rules are in `references/code-review-standards.md`. Platform rules
 - **High**: Performance issues, type safety violations, missing error handling
 - **Medium**: Code smells, maintainability issues, documentation gaps
 - **Low**: Style inconsistencies, minor optimizations
+
+### Confidence Scoring
+
+Every finding MUST carry `(severity_score, confidence, confirmed_by, confidence_source)`. See `references/confidence-scoring.md` for full spec.
+
+**Assignment summary:**
+
+| Source | `confidence` | `confirmed_by` |
+|--------|-------------|----------------|
+| Deterministic / lint / AST | 1.0 | 1 |
+| LLM single-pass | 0.5 | 1 |
+| LLM 2-pass consensus | 0.8 | 2 |
+| LLM 3-pass consensus | 0.95 | 3 |
+| LLM 2-pass conflict | 0.3 | 1 |
+
+**2-pass rule**: Run a second pass (independent prompt framing) for any finding with `severity >= 4`. Skip pass 2 for `severity < 4` (token cost). If pass 2 confirms → `confidence: 0.8`; if not → demote to `confidence: 0.3` (informational only).
+
+**Context scope injection** (required): inject `Language`, `Framework`, `Platform` into every LLM review prompt.
+
+**Filter thresholds** (used by PR gate and branch scan):
+- **Blocking**: `confidence >= 0.8 AND severity_score >= 4 AND confirmed_by >= 2`
+- **Informational**: `confidence >= 0.5 AND severity_score >= 2`
+- **Dropped**: below informational
 
 ### Escalation Signals (Reviewer Reporting)
 
@@ -234,7 +261,7 @@ Write `{session_folder}/session.json` per `audit/references/session-json-schema.
 
 Ownership per `audit/references/output-contract.md`: code-reviewer → `.epost-data/code/`, muji → `.epost-data/ui/`, a11y → `.epost-data/a11y/`.
 
-Persist SEC/PERF/TS/LOGIC/DEAD/ARCH/STATE/QUALITY/HOOKS/FETCH/AUTH/MOD/I18N/REDUX/TEST/FORM/NEXTJS/SWIFT/UIKIT/REALM/ALAMOFIRE/COMPOSE/HILT/COROUTINE/FLOW/ROOM findings (critical, high, medium) to `reports/known-findings/code.json`:
+Persist SEC/PERF/TS/LOGIC/DEAD/ARCH/STATE/QUALITY/HOOKS/FETCH/AUTH/MOD/I18N/REDUX/TEST/FORM/NEXTJS/SWIFT/UIKIT/MEMORY/CONCURRENCY/REALM/ALAMOFIRE/COMPOSE/HILT/LOGGING/COROUTINE/FLOW/ROOM findings (critical, high, medium) to `reports/known-findings/code.json`:
 
 1. Check if `reports/known-findings/code.json` exists
    - If not: `mkdir -p .epost-data/code/` then create it with `{ "schemaVersion": "1.0.0", "lastUpdated": "{today}", "findings": [] }`
@@ -242,7 +269,7 @@ Persist SEC/PERF/TS/LOGIC/DEAD/ARCH/STATE/QUALITY/HOOKS/FETCH/AUTH/MOD/I18N/REDU
 2b. **Surface recurring rules**: after pre-scan, if any `rule_id` has 3+ open entries in DB (escalated) or 5+ (lightweight), include in report's Regression Trends section with count and file patterns.
 3. For each NEW finding (severity critical/high/medium) not already open in DB:
    - Auto-increment `id` from `max(existing_ids) + 1` (start at 1 for empty)
-   - Map: `module`, `rule_id`, `category` (SEC/PERF/TS/LOGIC/DEAD/ARCH/STATE/QUALITY/HOOKS/FETCH/AUTH/MOD/I18N/REDUX/TEST/FORM/NEXTJS/SWIFT/UIKIT/REALM/ALAMOFIRE/COMPOSE/HILT/COROUTINE/FLOW/ROOM), `title`, `file_pattern`, `code_pattern`, `fix_template`, `priority`, `severity`, `source` (`hybrid-audit` or `code-review`), `source_agent: "epost-code-reviewer"`, `source_report: "{report_path}"`, `first_detected_at: "{YYYY-MM-DDTHH:MM}"`
+   - Map: `module`, `rule_id`, `category` (SEC/PERF/TS/LOGIC/DEAD/ARCH/STATE/QUALITY/HOOKS/FETCH/AUTH/MOD/I18N/REDUX/TEST/FORM/NEXTJS/SWIFT/UIKIT/MEMORY/CONCURRENCY/REALM/ALAMOFIRE/COMPOSE/HILT/LOGGING/COROUTINE/FLOW/ROOM), `title`, `file_pattern`, `code_pattern`, `fix_template`, `priority`, `severity`, `severity_score` (5=critical, 4=high, 3=medium, 2=low, 1=informational), `confidence`, `confirmed_by`, `confidence_source`, `source` (`hybrid-audit` or `code-review`), `source_agent: "epost-code-reviewer"`, `source_report: "{report_path}"`, `first_detected_at: "{YYYY-MM-DDTHH:MM}"`
    - Append to `findings[]`
 4. Save updated JSON
 5. Log: "Persisted {N} code findings to `reports/known-findings/code.json`" in Methodology
@@ -269,6 +296,44 @@ Key requirements:
 
   > `FIX-AND-RESUBMIT` = fix issues and re-request review. Never use `FIX-AND-REAUDIT` in code-review reports.
 - Unresolved questions footer always present
+
+## Branch Scan Mode
+
+Daily non-blocking scan of all active branches vs `main`. Runs automatically via cron — not invoked interactively.
+
+**Script**: `packages/core/scripts/branch-scan-digest.cjs`
+**Protocol**: `references/branch-scan.md`
+**Digest template**: `references/slack-digest-template.md`
+
+### How it works
+
+1. Discovers all remote branches with activity in the last 7 days
+2. Skips `kb` branch (hardcoded — not configurable)
+3. Diffs each branch against `main`, runs confidence-filtered review
+4. Loads `reports/branch-scan-history.json` to compute trend (new/resolved/unchanged per branch)
+5. Posts a Slack digest to `REVIEW_SLACK_CHANNEL`
+6. Appends run to history (rolling 30 runs max)
+
+### Filter
+
+Uses informational threshold (not blocking):
+```
+confidence >= 0.5 AND severity >= 2
+```
+
+### Cron setup (after deploy)
+
+```
+/schedule create "branch health scan" --cron "0 7 * * 1-5" --action "node packages/core/scripts/branch-scan-digest.cjs"
+```
+
+### Dry run
+
+```bash
+node packages/core/scripts/branch-scan-digest.cjs --dry-run
+```
+
+Prints what would be scanned and previews the Slack digest without posting.
 
 ### Related Skills
 - `knowledge` — activated on Critical escalation

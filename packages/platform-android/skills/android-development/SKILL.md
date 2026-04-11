@@ -90,6 +90,29 @@ Min SDK: API 24 (Android 7.0) | Target: API 34+
 - **Utilities**: 95%+ (pure functions)
 - **UI**: 70%+ (composables)
 
+## MCP Integrations
+
+Two MCP servers ship with this package (auto-configured via `settings.json`):
+
+| MCP | Type | Role |
+|-----|------|------|
+| `replicant` | local (`npx`) | Build, test, emulator control, UI automation (accessibility-first) |
+| `google-developer-knowledge` | remote (API key required) | Android/Firebase/Google docs → AI-readable |
+
+**replicant-mcp** is the Android equivalent of XcodeBuildMCP — build debug APK, run unit tests, control emulator. Run `mcp__replicant__doctor` to verify setup.
+
+**Google Developer Knowledge MCP** requires a Google API key. To activate:
+1. Get a key at `https://developers.google.com/knowledge/mcp`
+2. Replace `YOUR_GOOGLE_API_KEY` in `.claude/settings.json` under `mcpServers.google-developer-knowledge.headers`
+
+## Companion Skill Suite
+
+**claude-android-ninja** (optional) — Kotlin/Compose best practices skill by Drjacky. Covers modular architecture, Navigation3, Hilt/Room testing, Play Vitals, and Gradle optimization. Install via:
+```bash
+npx openskills install drjacky/claude-android-ninja
+```
+Or manually copy to `.claude/skills/`. Complements this skill with deeper pattern guidance.
+
 ## Sub-Skill Routing
 
 When this skill is active and user intent matches a sub-skill, delegate:

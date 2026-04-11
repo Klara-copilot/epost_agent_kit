@@ -45,18 +45,48 @@ Swift / SwiftUI+UIKit iOS code review rules. Loaded by code-review skill when re
 
 ---
 
+---
+
+## MEMORY: Memory Management
+
+**Scope**: Retain cycles, resource cleanup, subscription lifetime — UIKit and SwiftUI.
+
+| Rule ID | Rule | Severity | Pass | Fail |
+|---------|------|----------|------|------|
+| MEMORY-001 | Delegate properties declared `weak` — strong delegate creates retain cycle between parent and child | high | `weak var delegate: LetterDelegate?` | `var delegate: LetterDelegate?` — strong reference traps both objects in memory |
+| MEMORY-002 | `NSTimer`/`CADisplayLink` uses `[weak self]` in block and `invalidate()` called in `deinit` | high | `timer = Timer.scheduledTimer(…) { [weak self] _ in … }; deinit { timer?.invalidate() }` | `Timer.scheduledTimer(withTimeInterval:repeats:block:)` with strong self capture, no `invalidate()` in deinit |
+| MEMORY-003 | Combine `sink` stored in `Set<AnyCancellable>` or named `AnyCancellable` property — never discarded in local scope | high | `publisher.sink { … }.store(in: &cancellables)` | `publisher.sink { … }` result discarded — subscription cancelled immediately, no events received |
+| MEMORY-004 | Child VCs added via `addChild(_:)` have corresponding `removeFromParent()` before deallocation | medium | `addChild(child); child.didMove(toParent: self)` paired with `child.willMove(toParent: nil); child.removeFromParent()` on dismissal | `addChild(child)` without `removeFromParent()` — child VC retained by parent indefinitely |
+
+---
+
+## CONCURRENCY: Swift Concurrency Safety
+
+**Scope**: Swift 6 concurrency — Task capture, Sendable conformance, actor isolation, async scope. LW rules are grep-matchable; Escalated rules require cross-file analysis.
+
+| Rule ID | Rule | Severity | Pass | Fail |
+|---------|------|----------|------|------|
+| CONCURRENCY-001 | `@MainActor`-isolated property not mutated from non-isolated async context without explicit actor hop | critical | `await MainActor.run { self.state = newValue }` when called from background Task | `self.state = newValue` assigned directly inside `Task { }` when `state` is `@MainActor`-isolated |
+| CONCURRENCY-002 | `@unchecked Sendable` conformances have a comment explaining why manual synchronisation is safe | high | `// Thread-safe: all access guarded by NSLock\nstruct Cache: @unchecked Sendable` | `extension Cache: @unchecked Sendable {}` — silent suppression with no evidence of safety |
+| CONCURRENCY-003 | `Task { }` in VC/VM capturing `self` uses `[weak self]` guard-let pattern | high | `Task { [weak self] in guard let self else { return }; await self.load() }` | `Task { await self.load() }` — holds strong reference across suspension points, delays dealloc |
+| CONCURRENCY-004 | `async let` bindings awaited before enclosing scope exits — structured concurrency boundary not violated | medium | `async let user = fetchUser(); async let posts = fetchPosts(); let (u, p) = try await (user, posts); return Result(u, p)` | `async let x = fetch(); return x` without `await` — violates structured concurrency, child task orphaned |
+
+---
+
 ## Lightweight vs Escalated
 
 | Rule IDs | Lightweight (default) | Escalated only |
 |----------|-----------------------|----------------|
 | SWIFT-001–005 | Yes | — |
 | SWIFT-006–008 | — | Yes |
-| UIKIT-001 | — | Yes |
-| UIKIT-002 | — | Yes |
 | UIKIT-003, UIKIT-005, UIKIT-006 | Yes | — |
-| UIKIT-004 | — | Yes |
+| UIKIT-001, UIKIT-002, UIKIT-004 | — | Yes |
+| MEMORY-001, MEMORY-002, MEMORY-003 | Yes | — |
+| MEMORY-004 | — | Yes |
+| CONCURRENCY-002, CONCURRENCY-003 | Yes | — |
+| CONCURRENCY-001, CONCURRENCY-004 | — | Yes |
 
-**Lightweight**: Run on all Swift file reviews (10 of 14 rules). **Escalated**: Activate on large PRs (10+ files) or explicit `--deep` flag (4 of 14 rules). See also REALM and ALAMOFIRE companion files.
+**Lightweight**: Run on all Swift file reviews (13 of 22 rules). **Escalated**: Activate on large PRs (10+ files) or explicit `--deep` flag (9 of 22 rules). See also REALM and ALAMOFIRE companion files.
 
 ## Extending
 

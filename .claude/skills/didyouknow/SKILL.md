@@ -53,41 +53,33 @@ For the selected skill:
 
 ## Step 4 — Format Output
 
-Wrap the ENTIRE output in a triple-backtick code fence. This makes it render as a monospace block in Slack and other chat tools — no markdown interpretation, clean visual separation.
+Use Slack mrkdwn formatting (*bold*, _italic_, `code`). Do NOT wrap in a code fence — that strips all mrkdwn rendering.
 
-````
 ```
-💡 Did You Know? — <Skill Name>
+💡 *Did You Know?* — *<Skill Name>*
 
 <Hook sentence — what problem this solves or what most people miss. 1 line.>
 
 <2–3 lines of the actual insight. Specific. Actionable. No filler.>
 
-Example:
-  <concrete invocation or pattern — indented 2 spaces>
+Example: `<concrete invocation or pattern>`
 
-Go deeper: <references/filename.md> or combine with /<related-skill>
-
----
-/didyouknow <topic>  to search by topic  |  /didyouknow --all  to browse all skills
+_Go deeper:_ `<references/filename.md>` or combine with `/<related-skill>`
 ```
-````
 
-**For `--all` mode**, same wrapper:
+**For `--all` mode**:
 
-````
 ```
-Kit Skills at a Glance
+*Kit Skills at a Glance*
 
-[Category]
-  /<skill> — <one-liner: what it does, not what it is>
-  ...
+*[Category]*
+• `/<skill>` — <one-liner: what it does, not what it is>
+...
 ```
-````
 
 ## Rules
 
-- Always wrap full output in triple-backtick fence — never output raw markdown
+- Use Slack mrkdwn (*bold*, _italic_, `code`) — never wrap in a code fence
 - Hook first — lead with the payoff, not the setup
 - One insight per tip — don't stack multiple tricks
 - Non-obvious only — skip primary purpose, surface flags/combos/constraints most users miss
