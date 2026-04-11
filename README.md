@@ -1,6 +1,6 @@
 # epost_agent_kit
 
-A multi-agent development toolkit for Claude Code — 10 specialized agents, 51 skills, one install command.
+A multi-agent development toolkit for Claude Code — 11 specialized agents, 80 skills, one install command.
 
 ## What It Does
 
@@ -11,9 +11,9 @@ A multi-agent development toolkit for Claude Code — 10 specialized agents, 51 
 
 ## Quick Start
 
-```bash
-npm install -g epost-agent-kit-cli
+> **Install the CLI first** — see [epost-agent-kit-cli](https://github.com/Klara-copilot/epost-agent-kit-cli) for installation instructions and the latest CLI docs.
 
+```bash
 # Web + backend stack
 epost-kit init --profile web-fullstack
 
@@ -110,8 +110,8 @@ STRIDE threat model + OWASP Top 10 scan on the current diff or named feature.
 |---------|--------|
 | `core` | cook, fix, plan, debug, test, review, docs, git, security, error-recovery, clean-code, tdd, journal, get-started, skill-discovery, subagent-driven-development |
 | `platform-web` | web-frontend, web-nextjs, web-api-routes, web-i18n, web-auth, web-testing, web-modules, web-a11y, web-ui-lib |
-| `platform-ios` | ios-development, ios-ui-lib, ios-a11y, ios-rag, simulator |
-| `platform-android` | android-development, android-ui-lib, android-a11y |
+| `platform-ios` | ios-development, ios-testing, ios-ui-lib, ios-a11y, simulator |
+| `platform-android` | android-development, android-testing, android-ui-lib, android-a11y |
 | `platform-backend` | backend-javaee, backend-databases |
 | `a11y` | a11y (cross-platform WCAG foundation) |
 | `design-system` | figma, design-tokens, ui-lib-dev, launchpad |

@@ -6,6 +6,34 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### iOS Platform (`platform-ios`)
+
+- **MCP servers**: Added XcodeBuildMCP (local) and sosumi (remote Apple docs → Markdown) via `settings.json` — auto-configured on `epost-kit init`
+- **New skill**: `ios-testing` — XCTest, XCUITest, Swift Testing (@Test/#expect), snapshot testing, flakiness fixes
+- **Code review rules expanded**: Added MEMORY-001..004 (retain cycles, NSTimer, Combine, addChild) and CONCURRENCY-001..004 (Swift 6 actor isolation, @unchecked Sendable, Task capture, async let scope)
+- **RealmSwift rules**: 3 → 6 rules — added REALM-004 (encryption key from Keychain), REALM-005 (schema migration block), REALM-006 (notification token as instance property)
+- **Alamofire rules**: 3 → 6 rules — added ALAMOFIRE-004 (SSL pinning via ServerTrustManager), ALAMOFIRE-005 (auth token via RequestInterceptor), ALAMOFIRE-006 (multipart uploads)
+- **Build optimization**: AvdLee-inspired 4-step workflow (benchmark → hotspots → settings audit → verify) in `build.md`
+- **Skill token efficiency**: `build.md` 559 → 150 lines, `development.md` 432 → 137 lines, `tester.md` 445 → 95 lines (73% combined reduction)
+
+### Android Platform (`platform-android`)
+
+- **MCP servers**: Added replicant-mcp (build/test/emulator control) and Google Developer Knowledge MCP (placeholder API key) via `settings.json`
+- **New skill**: `android-testing` — Compose UI Testing, Hilt @TestInstallIn, Turbine Flow testing, MockK, Room in-memory
+- **Code review rules expanded**: Added MEMORY-001..004 (Context leaks, BroadcastReceiver symmetry, View listener cleanup, Handler/Runnable) and LOGGING-001 (Timber required — Log.*/println() forbidden, CONV-0002)
+- **Flow rules**: 4 → 5 rules — added FLOW-005 (stateIn with WhileSubscribed(5000) pattern)
+- **Bug fix**: `error-handling.md` logging strategy replaced `Log.*` calls with Timber (was inconsistent with LOGGING-001/CONV-0002)
+- **Skill optimization**: `compose-best-practices.md` 444 → 375 lines (removed generic Material 3/Dynamic Colors sections)
+
+### Core
+
+- **Code review schema**: Added MEMORY, CONCURRENCY, LOGGING category enums to `code-known-findings-schema.md`; updated REALM (001..006), ALAMOFIRE (001..006), FLOW (001..005) rule ranges
+- **Audit skill**: Added iOS/Android build verification references (Step 6.5 in hybrid orchestration + single-agent delegation) — MCP-first with shell fallback
+- **Build verification**: New `ios-build-verification.md` (XcodeBuildMCP → build-gate.cjs fallback) and `android-build-verification.md` (replicant-mcp → Gradle fallback)
+- **Confidence scoring**: Two-pass LLM rule for findings with severity ≥ 4; confidence matrix (1.0/0.5/0.8/0.95/0.3) across 5 finding sources
+- **Branch scan system**: `branch-scan-digest.cjs` — multi-repo support, periodic Slack digests, per-repo channel routing
+- **media-ai skill**: Adopted from ai-multimodal — Gemini 2.5/2.0 multimodal processing, 5 reference guides, Python scripts
+
 ## [2.1.0] - 2026-04-02
 
 ### Architecture
