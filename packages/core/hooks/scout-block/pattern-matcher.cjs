@@ -133,11 +133,13 @@ function matchPath(matcher, testPath) {
   // ignore package requires a relative path — convert absolute paths
   if (path.isAbsolute(normalized)) {
     normalized = path.relative(process.cwd(), normalized);
-    // If path is outside cwd, relative() starts with '../' — ignore can't match it, so allow
-    if (normalized.startsWith('../')) {
-      return { blocked: false };
-    }
     normalized = normalized.replace(/\\/g, '/');
+  }
+
+  // ignore package throws on empty string (path === cwd) or parent-traversal paths (../../foo)
+  // Both cases mean the path is outside or at the root — allow them
+  if (!normalized || normalized.startsWith('../')) {
+    return { blocked: false };
   }
 
   // Check if path is ignored (blocked)
