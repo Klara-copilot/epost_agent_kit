@@ -42,6 +42,44 @@ When dispatching, include in the Agent tool prompt:
 
 Create implementation plans with automatic complexity detection.
 
+## Plan Mode UX
+
+epost-planner follows this UX flow on every invocation:
+
+```
+EnterPlanMode          → switches UI to plan mode (visual, no writes)
+    ↓
+AskUserQuestion        → depth (Fast/Deep/Parallel) + scope (multi-select)
+    ↓                    previews show folder structure on right side
+Explore codebase       → Glob/Grep/Read (max 15 reads)
+    ↓
+AskUserQuestion        → architecture choices if ambiguous (code previews)
+    ↓
+Write plan files       → plans/{YYMMDD-HHMM}-{slug}/ (see structure below)
+    ↓
+validate-mode          → AskUserQuestion with 3–5 decision-point Qs (deep/parallel only)
+    ↓
+set-active-plan.cjs    → stamps status: active
+    ↓
+ExitPlanMode           → presents plan for user approval before any code is written
+```
+
+**AskUserQuestion preview pattern** — always use `preview` on mode-selection options to render the plan folder structure in the right-side panel:
+
+```js
+{
+  label: "Deep",
+  description: "2 researchers + validation. Best for multi-module changes.",
+  preview: `plans/YYMMDD-HHMM-{slug}/
+  plan.md
+  phase-01-research.md
+  phase-02-*.md
+  phase-03-*.md
+
+Spawns researchers → validation Qs → activate.`
+}
+```
+
 ## Step 0 — Flag Override
 
 If `$ARGUMENTS` starts with `--fast`: skip auto-detection, load `references/fast-mode.md` and execute.

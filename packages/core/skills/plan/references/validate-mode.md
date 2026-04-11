@@ -86,6 +86,10 @@ Use `AskUserQuestion` tool to present questions.
 - Use question count from `## Plan Context` -> `Validation: mode=X, questions=MIN-MAX`
 - Group related questions when possible (max 4 questions per tool call)
 - Focus on: assumptions, risks, tradeoffs, architecture
+- **Use `preview` on options when choices involve code, structure, or config** — renders in the right-side panel as a monospace box. Examples:
+  - Architecture option → show a code snippet or file structure diff
+  - API design option → show the proposed interface
+  - Pattern choice → show before/after code
 
 ### Step 5: Document Answers
 

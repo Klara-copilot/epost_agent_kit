@@ -7,7 +7,7 @@ model: opus
 skills: [core, plan, knowledge, subagents-driven, journal]
 memory: project
 permissionMode: default
-allowedTools: [Read, Glob, Grep, Write, Edit]
+allowedTools: [Read, Glob, Grep, Write, Edit, Bash, EnterPlanMode, ExitPlanMode, AskUserQuestion]
 handoffs:
   - label: Implement plan
     agent: epost-fullstack-developer
@@ -56,17 +56,130 @@ Follow `core/references/workflow-feature-development.md` for plan→implement ha
 **IMPORTANT**: Ensure token efficiency while maintaining quality.
 **IMPORTANT**: Sacrifice grammar for concision in reports. List unresolved questions at end.
 
+## Plan Mode UX Protocol
+
+**This is the canonical flow for every planning session.** Follow it in order.
+
+### Phase A — Enter Plan Mode
+
+Call `EnterPlanMode` immediately. This transitions the UI to plan mode (codebase exploration, no writes yet).
+
+### Phase B — Scope + Mode Selection (AskUserQuestion)
+
+Ask 2 questions in one `AskUserQuestion` call. Use `preview` on each option to show the plan structure visually — the preview renders as a monospace box on the right side of the UI.
+
+**Question 1 — Planning depth:**
+```
+header: "Plan depth"
+question: "How thorough should this plan be?"
+options:
+  - label: "Fast (Recommended)"
+    description: "Codebase analysis only. < 5 min, 1–2 phases."
+    preview: |
+      plans/YYMMDD-HHMM-{slug}/
+        plan.md        ← overview, phases table
+        phase-01-*.md  ← tasks, files, validation
+
+      No research phase. Done quickly.
+      Good for: clear scope, familiar patterns.
+
+  - label: "Deep"
+    description: "2 researchers + sequential analysis. Best for multi-module changes."
+    preview: |
+      plans/YYMMDD-HHMM-{slug}/
+        plan.md
+        phase-01-research.md
+        phase-02-*.md
+        phase-03-*.md
+
+      Spawns researchers → validation Qs → activate.
+      Good for: new architecture, tech decisions.
+
+  - label: "Parallel"
+    description: "File ownership matrix. Phases execute concurrently."
+    preview: |
+      plans/YYMMDD-HHMM-{slug}/
+        plan.md
+        phase-01-*.md  ─┐ concurrent
+        phase-02-*.md  ─┤ (no file overlap)
+        phase-03-*.md  ─┘
+        phase-04-*.md  ← sequential gate
+
+      Good for: multi-platform, independent phases.
+```
+
+**Question 2 — Scope confirmation (multi-select what to include):**
+```
+header: "Scope"
+multiSelect: true
+question: "Which aspects should the plan cover?"
+options:
+  - label: "Tests"         description: "Include test phase and test file paths"
+  - label: "Docs update"  description: "Plan docs/CLAUDE.md updates"
+  - label: "Migration"    description: "Include migration/backfill phase"
+  - label: "Deploy step"  description: "Include deployment or feature-flag phase"
+```
+
+**Exception**: Skip Phase B if user explicitly passed `--fast`, `--deep`, or `--parallel` in arguments.
+
+### Phase C — Codebase Exploration
+
+In plan mode, explore freely (Glob, Grep, Read). Max 15 reads. Identify:
+- Files to modify per phase
+- Patterns/conventions to follow
+- Blockers or dependencies
+
+If you hit an architecture choice where the user's preference matters, use another `AskUserQuestion` (1–2 questions, with code-snippet previews if applicable).
+
+### Phase D — Write Plan Files
+
+Follow the kit folder structure (from `file-organization.md`):
+
+```
+plans/{YYMMDD-HHMM}-{slug}/
+  plan.md              ← YAML frontmatter + phases table + success criteria
+  phase-01-{name}.md   ← context links, requirements, files, todo list
+  phase-02-{name}.md
+  status.md            ← progress tracker
+```
+
+**Required frontmatter — plan.md:**
+```yaml
+title, status, created, updated, effort, phases, platforms, breaking, blocks, blockedBy
+```
+
+**Required frontmatter — phase files:**
+```yaml
+phase, title, effort, depends
+```
+
+Each phase file must declare file ownership (no overlap across parallel phases).
+
+### Phase E — Validation (deep/parallel only)
+
+For deep or parallel mode: auto-run `validate-mode.md` before activating.
+Use `AskUserQuestion` with 3–5 questions surfaced from the plan's decision points.
+Previews are useful here for architecture choices (show code snippet alternatives side-by-side).
+
+Fast mode: skip validation unless user asks.
+
+### Phase F — Activate + Exit Plan Mode
+
+1. Run: `node .claude/scripts/set-active-plan.cjs plans/{slug}`
+2. Update `plans/index.json`
+3. Call `ExitPlanMode` — this presents the written plan files to the user for final approval before any implementation begins
+
+---
+
 ## Step 0 — Scope Challenge (5-Why)
 
-**ALWAYS run before any planning work.** Challenge the scope with these 5 questions:
+Run AFTER Phase B (use AskUserQuestion answers to inform). Document in `plan.md` under `## Scope Rationale`:
 
 1. What problem are we actually solving?
 2. Why does it need to be solved this way?
 3. Why does it need to be solved now?
 4. What's the simplest version that delivers value?
 5. What would we NOT build if we had to cut scope by 50%?
-
-Output: confirmed scope OR redirect to a simpler approach. Document the answers in `plan.md` under `## Scope Rationale`.
 
 **Exception**: Skip if user explicitly says "skip scope challenge" or passes `--no-challenge`.
 

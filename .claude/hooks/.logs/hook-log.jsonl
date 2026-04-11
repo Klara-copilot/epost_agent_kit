@@ -37,3 +37,7 @@
 >>>>>>> Stashed changes
 {"ts":"2026-04-08T01:45:13.283Z","hook":"scout-block","status":"crash","error":"path must not be empty"}
 {"ts":"2026-04-09T19:05:27.866Z","hook":"scout-block","status":"crash","error":"path must not be empty"}
+{"ts":"2026-04-11T05:26:21.072Z","hook":"scout-block","status":"crash","error":"path must not be empty"}
+{"ts":"2026-04-11T05:26:27.604Z","hook":"scout-block","status":"crash","error":"path must not be empty"}
+{"ts":"2026-04-11T06:01:11.199Z","hook":"scout-block","status":"crash","error":"path should be a `path.relative()`d string, but got \"../../../../dashboard:\""}
+{"ts":"2026-04-11T06:01:39.144Z","hook":"scout-block","status":"crash","error":"path should be a `path.relative()`d string, but got \"..\""}
